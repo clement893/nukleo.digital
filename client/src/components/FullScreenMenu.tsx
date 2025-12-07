@@ -2,6 +2,7 @@ import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link, useLocation } from 'wouter';
 import { useEffect } from 'react';
+import { useSound } from '@/hooks/useSound';
 
 interface FullScreenMenuProps {
   isOpen: boolean;
@@ -10,6 +11,7 @@ interface FullScreenMenuProps {
 
 export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps) {
   const [location] = useLocation();
+  const { playHover, playClick } = useSound();
   
   const navItems = [
     { number: '01', label: 'Manifesto', path: '/manifesto' },
@@ -142,10 +144,12 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
                 <Link
                   href={item.path}
                   onClick={() => {
+                    playClick();
                     setTimeout(onClose, 300);
                   }}
                 >
                   <div
+                    onMouseEnter={playHover}
                     className="
                       w-full group 
                       flex items-center gap-4 md:gap-6 

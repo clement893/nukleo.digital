@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import FullScreenMenu from './FullScreenMenu';
+import { useSound } from '@/hooks/useSound';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { playHover, playClick } = useSound();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,6 +49,8 @@ export default function Header() {
             {/* Right: CTA + Burger Menu */}
             <div className="flex items-center gap-4">
               <Button
+                onClick={playClick}
+                onMouseEnter={playHover}
                 className="
                   rounded-full 
                   px-6 md:px-8 
@@ -67,7 +71,8 @@ export default function Header() {
 
               {/* Burger Menu Button */}
               <button
-                onClick={() => setIsMenuOpen(true)}
+                onClick={() => { playClick(); setIsMenuOpen(true); }}
+                onMouseEnter={playHover}
                 className="text-white hover:bg-white/10 transition-colors p-2 rounded-lg"
                 aria-label="Open menu"
               >

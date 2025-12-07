@@ -3,6 +3,7 @@ import { ChevronDown } from 'lucide-react';
 import { Link } from 'wouter';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { useSound } from '@/hooks/useSound';
 
 interface FAQItem {
   question: string;
@@ -122,6 +123,7 @@ const faqs: FAQItem[] = [
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>("Tous");
+  const { playHover, playClick } = useSound();
 
   // Extract unique categories
   const categories = Array.from(new Set(faqs.map(f => f.category)));
@@ -159,7 +161,8 @@ export default function FAQ() {
         <div className="container">
           <div className="flex flex-wrap gap-3">
             <button
-              onClick={() => setSelectedCategory("Tous")}
+              onClick={() => { playHover(); setSelectedCategory("Tous"); }}
+              onMouseEnter={playHover}
               className={`px-6 py-2 rounded-full font-mono text-sm transition-all ${
                 selectedCategory === "Tous"
                   ? "bg-accent text-white"
@@ -171,7 +174,8 @@ export default function FAQ() {
             {categories.map((category) => (
               <button
                 key={category}
-                onClick={() => setSelectedCategory(category)}
+                onClick={() => { playHover(); setSelectedCategory(category); }}
+                onMouseEnter={playHover}
                 className={`px-6 py-2 rounded-full font-mono text-sm transition-all ${
                   selectedCategory === category
                     ? "bg-accent text-white"
@@ -196,7 +200,8 @@ export default function FAQ() {
               >
                 {/* Question Button */}
                 <button
-                  onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                  onClick={() => { playClick(); setOpenIndex(openIndex === index ? null : index); }}
+                  onMouseEnter={playHover}
                   className="w-full px-8 py-6 flex items-start justify-between text-left group"
                 >
                   <div className="flex-1 pr-6">

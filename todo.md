@@ -160,3 +160,13 @@
 - [x] Implémenter les accordéons interactifs (collapse/expand)
 - [x] Ajouter le SEO et structured data
 - [x] Tester tous les filtres et interactions
+
+## Système de Sons Interactifs (Web Audio API)
+- [x] Créer le hook useSound avec playHover et playClick
+- [x] Ajouter sons sur Header (bouton Start Project)
+- [x] Ajouter sons sur Menu fullscreen (items navigation)
+- [x] Ajouter sons sur Home (bouton Watch Reel, capability cards)
+- [x] Ajouter sons sur Projects (filtres, project cards)
+- [x] Ajouter sons sur Contact/Leo (avatar, quick replies, envoi message)
+- [x] Ajouter sons sur FAQ (filtres, accordéons)
+- [x] Tester tous les sons sur toutes les pages

@@ -1,6 +1,9 @@
 import { Globe, Layers, Zap, BarChart3 } from 'lucide-react';
+import { useSound } from '@/hooks/useSound';
 
 export default function CapabilitiesSection() {
+  const { playHover, playClick } = useSound();
+  
   const capabilities = [
     {
       icon: Globe,
@@ -50,6 +53,8 @@ export default function CapabilitiesSection() {
             return (
               <div
                 key={index}
+                onClick={playClick}
+                onMouseEnter={playHover}
                 className="group p-6 sm:p-8 glass transition-all duration-500 cursor-pointer h-full rounded-2xl sm:rounded-3xl"
               >
                 <div className="relative z-10 mb-6 text-accent transition-colors duration-300">

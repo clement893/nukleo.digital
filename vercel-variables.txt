@@ -1,0 +1,15 @@
+DATABASE_URL=mysql://yK33XAHqfEovshw.be4b3946a246:2YEX6QZG07xTEu2ykS0w@gateway02.us-east-1.prod.aws.tidbcloud.com:4000/fXnGt4rfsHAy5LdzFDZGVg?ssl={"rejectUnauthorized":true}
+JWT_SECRET=kpmaoxnGEQnhXvMDvdx9gy
+VITE_APP_ID=fXnGt4rfsHAy5LdzFDZGVg
+OAUTH_SERVER_URL=https://api.manus.im
+VITE_OAUTH_PORTAL_URL=https://manus.im
+OWNER_OPEN_ID=CtHWXCTTRnU3WWdn2GyK2Z
+OWNER_NAME=Clément Roy
+BUILT_IN_FORGE_API_URL=https://forge.manus.ai
+BUILT_IN_FORGE_API_KEY=T7jANxwq64zbFxY7oe5Ec3
+VITE_FRONTEND_FORGE_API_KEY=HtZGXpv4HyC3NWDEEsRqSu
+VITE_FRONTEND_FORGE_API_URL=https://forge.manus.ai
+VITE_ANALYTICS_ENDPOINT=https://manus-analytics.com
+VITE_ANALYTICS_WEBSITE_ID=2be4b861-34b7-42ee-bd6f-5e9970cc0f23
+VITE_APP_LOGO=https://files.manuscdn.com/user_upload_by_module/web_dev_logo/110203185/TKCtAybKBDflmBlr.png
+VITE_APP_TITLE=Nukleo Digital

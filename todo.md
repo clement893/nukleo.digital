@@ -1,12 +1,12 @@
 # Nukleo Digital - Liste des fonctionnalités
 
 ## Site d'agence
-- [ ] Page d'accueil avec présentation de l'agence
-- [ ] Section services offerts
+- [x] Page d'accueil avec présentation de l'agence
+- [x] Section services offerts
 - [ ] Section portfolio/projets
-- [ ] Section à propos de l'équipe
+- [x] Section à propos de l'équipe
 - [ ] Section contact avec formulaire
-- [ ] Design moderne et responsive
+- [x] Design moderne et responsive
 
 ## Espace client connecté
 - [ ] Authentification utilisateur (login/logout)
@@ -23,10 +23,10 @@
 - [ ] Historique des interactions
 
 ## Infrastructure
-- [ ] Configuration Git et GitHub
+- [x] Configuration Git et GitHub
 - [ ] Déploiement sur Vercel
 - [ ] Variables d'environnement configurées
 - [ ] Pipeline CI/CD opérationnel
 
 ## Corrections techniques
-- [ ] Corriger la configuration vercel.json pour le déploiement
+- [x] Corriger la configuration vercel.json pour le déploiement

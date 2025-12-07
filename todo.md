@@ -32,4 +32,8 @@
 - [x] Corriger la configuration vercel.json pour le déploiement
 
 ## Problèmes à corriger
-- [ ] Corriger le build Vercel qui affiche le code source au lieu du site
+- [x] Corriger le build Vercel qui affiche le code source au lieu du site
+
+## Améliorations design
+- [x] Ajouter le logo Nukleo officiel
+- [x] Recréer le menu de navigation comme sur nukleo.digital

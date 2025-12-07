@@ -6,13 +6,13 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
-    { label: '01 Manifesto', href: '#manifesto' },
-    { label: '02 Projects', href: '#projects' },
-    { label: '03 About', href: '#about' },
-    { label: '04 Expertise', href: '#expertise' },
-    { label: '05 Resources', href: '#resources' },
-    { label: '06 FAQ', href: '#faq' },
-    { label: '07 Contact', href: '#contact' },
+    { label: '01', sublabel: 'Manifesto', href: '#manifesto' },
+    { label: '02', sublabel: 'Projects', href: '#projects' },
+    { label: '03', sublabel: 'About', href: '#about' },
+    { label: '04', sublabel: 'Expertise', href: '#expertise' },
+    { label: '05', sublabel: 'Resources', href: '#resources' },
+    { label: '06', sublabel: 'FAQ', href: '#faq' },
+    { label: '07', sublabel: 'Contact', href: '#contact' },
   ];
 
   return (
@@ -20,8 +20,12 @@ export default function Header() {
       <div className="container">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="/" className="text-2xl font-bold text-white font-['Space_Grotesk']">
-            nukleo.
+          <a href="/" className="flex items-center">
+            <img 
+              src="/nukleo-logo.png" 
+              alt="Nukleo" 
+              className="h-8 w-auto"
+            />
           </a>
 
           {/* Desktop Navigation */}
@@ -30,9 +34,10 @@ export default function Header() {
               <a
                 key={item.href}
                 href={item.href}
-                className="text-sm font-medium text-white/80 hover:text-white transition-colors duration-300"
+                className="flex items-baseline gap-2 text-sm font-medium text-white/80 hover:text-white transition-colors duration-300"
               >
-                {item.label}
+                <span className="text-xs text-white/60">{item.label}</span>
+                <span>{item.sublabel}</span>
               </a>
             ))}
           </nav>
@@ -62,10 +67,11 @@ export default function Header() {
                 <a
                   key={item.href}
                   href={item.href}
-                  className="text-sm font-medium text-white/80 hover:text-white transition-colors"
+                  className="flex items-baseline gap-2 text-sm font-medium text-white/80 hover:text-white transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  {item.label}
+                  <span className="text-xs text-white/60">{item.label}</span>
+                  <span>{item.sublabel}</span>
                 </a>
               ))}
               <Button className="mt-4 rounded-full bg-white text-purple-900 hover:bg-white/90 font-bold">

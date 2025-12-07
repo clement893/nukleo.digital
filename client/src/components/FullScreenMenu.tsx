@@ -21,7 +21,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-gradient-to-br from-purple-900 via-purple-800 to-purple-900 animate-in fade-in duration-500">
+    <div className="fixed inset-0 z-50 bg-gradient-to-br from-purple-900/95 via-purple-800/95 to-purple-900/95 backdrop-blur-xl animate-in fade-in duration-500">
       {/* Header */}
       <div className="absolute top-0 left-0 right-0 z-10">
         <div className="container">

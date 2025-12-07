@@ -40,3 +40,6 @@
 
 ## Menu plein écran
 - [x] Créer un menu overlay plein écran avec animations fluides
+
+## Effets visuels
+- [x] Ajouter un effet de flou backdrop sur le contenu derrière le menu

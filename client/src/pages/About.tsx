@@ -1,178 +1,214 @@
-import { Users, Target, Zap, Globe } from 'lucide-react';
-import PageLayout from '@/components/PageLayout';
+import PageLayout from "@/components/PageLayout";
+
+const teamMembers = [
+  {
+    name: "Clément",
+    role: "FOUNDER & CEO",
+    image: "/team/Clement.jpg",
+    description: "Clément is the core of our team. He connects every part of a project with atomic precision."
+  },
+  {
+    name: "Alexei",
+    role: "DIRECTOR OF WEB SERVICES",
+    image: "/team/Alexei.png",
+    description: "With his strong background in data analysis, Alexei contributes to all your projects with expertise."
+  },
+  {
+    name: "Antoine",
+    role: "CHIEF FINANCIAL OFFICER (CFO)",
+    image: "/team/Antoine.jpg",
+    description: "Trust Antoine to find the most effective solution to make your experience as efficient as possible."
+  },
+  {
+    name: "Séverine",
+    role: "EXECUTIVE ASSISTANT",
+    image: "/team/Severine.jpg",
+    description: "Dedicated and altruistic, Séverine ensures smooth operations and exceptional support."
+  },
+  {
+    name: "Omar",
+    role: "MARKETING, COMMUNICATIONS AND DATA LEAD",
+    image: "/team/Omar.png",
+    description: "Combining a solid background in marketing with advanced skills in data management."
+  },
+  {
+    name: "Timothé",
+    role: "DEVELOPER",
+    image: "/team/Timothe.jpg",
+    description: "Timothé ensures the rigorous functionality of every project with precision."
+  },
+  {
+    name: "Hind",
+    role: "AI DEVELOPER",
+    image: "/team/Hind.jpg",
+    description: "Hind specializes in developing artificial intelligence solutions that automate and optimize processes."
+  },
+  {
+    name: "Sarah",
+    role: "WEB DEVELOPER",
+    image: "/team/Sarah.jpg",
+    description: "Sarah's passion for web development drives her to create exceptional digital experiences."
+  },
+  {
+    name: "Meriem",
+    role: "DATA ANALYST",
+    image: "/team/Meriem.jpg",
+    description: "Organized and proactive, Meriem ensures every message stays consistent as Marketing Coordinator."
+  },
+  {
+    name: "Camille",
+    role: "GRAPHIC DESIGNER",
+    image: "/team/Camille.png",
+    description: "Creative since childhood, Camille brings visual concepts to life with artistic precision."
+  },
+  {
+    name: "Maxime",
+    role: "MARKETING & COMMUNICATIONS COORDINATOR",
+    image: "/team/Maxime.png",
+    description: "Maxime coordinates marketing strategies and communications to amplify your brand presence."
+  },
+  {
+    name: "Jean-François",
+    role: "DEVELOPER",
+    image: "/team/Jean-Francois.png",
+    description: "A full-stack developer combining creativity and precision, Jean-François enjoys turning concepts into functional solutions."
+  },
+  {
+    name: "Margaux",
+    role: "TEAM MEMBER",
+    image: "/team/Margaux.jpg",
+    description: "Margaux contributes her expertise to drive projects forward with dedication."
+  },
+  {
+    name: "Marie-Claire",
+    role: "UX DESIGNER",
+    image: "https://via.placeholder.com/400x400/8B5CF6/FFFFFF?text=MC",
+    description: "Curious and attentive, Marie-Claire crafts user experiences that delight and engage."
+  },
+  {
+    name: "Ricardo",
+    role: "DEVELOPER",
+    image: "https://via.placeholder.com/400x400/8B5CF6/FFFFFF?text=R",
+    description: "Driven by rigor and curiosity, Ricardo is a versatile developer who turns ideas into reality."
+  }
+];
 
 export default function About() {
-  const values = [
-    {
-      icon: Target,
-      title: 'Mission-Driven',
-      description: 'We exist to help organizations harness the full potential of AI and become leaders in their industries.',
-    },
-    {
-      icon: Zap,
-      title: 'Innovation First',
-      description: 'We push boundaries and explore emerging technologies to deliver cutting-edge solutions.',
-    },
-    {
-      icon: Users,
-      title: 'Partnership Approach',
-      description: 'Your success is our success. We work alongside you as strategic partners, not just vendors.',
-    },
-    {
-      icon: Globe,
-      title: 'Global Impact',
-      description: 'From Montréal to Halifax and beyond, we help organizations worldwide transform through AI.',
-    },
-  ];
-
   return (
     <PageLayout>
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">
-        <div className="container">
-          <span className="font-mono text-accent text-sm mb-8 block uppercase tracking-widest">
-            03 — ABOUT
-          </span>
-
-          <h1 className="text-white mb-8">
-            ARCHITECTS<br />
-            OF THE FUTURE
-          </h1>
-
-          <p className="text-white/75 text-lg lg:text-xl leading-relaxed max-w-3xl">
-            We are a team of strategists, engineers, and creators united by a singular vision: to help organizations thrive in the age of artificial intelligence.
-          </p>
-        </div>
-      </section>
-
-      {/* Story Section */}
-      <section className="py-16 lg:py-24">
-        <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-            <div>
-              <h2 className="text-white mb-6">
-                OUR<br />
-                STORY
-              </h2>
-              <p className="text-white/75 text-base lg:text-lg leading-relaxed mb-6">
-                Founded in 2024, Nukleo emerged from a simple observation: while everyone talks about AI, few organizations truly understand how to integrate it at scale.
-              </p>
-              <p className="text-white/75 text-base lg:text-lg leading-relaxed">
-                We built Nukleo to bridge that gap—combining deep technical expertise with strategic vision to help leaders move from experimentation to transformation.
-              </p>
-            </div>
-
-            <div className="glass rounded-3xl p-8 lg:p-12">
-              <div className="space-y-8">
-                <div>
-                  <div className="text-accent text-4xl lg:text-5xl font-bold mb-2">50+</div>
-                  <div className="text-white/75 text-sm uppercase tracking-wider">Projects Delivered</div>
-                </div>
-                <div>
-                  <div className="text-accent text-4xl lg:text-5xl font-bold mb-2">$200M+</div>
-                  <div className="text-white/75 text-sm uppercase tracking-wider">Value Generated</div>
-                </div>
-                <div>
-                  <div className="text-accent text-4xl lg:text-5xl font-bold mb-2">95%</div>
-                  <div className="text-white/75 text-sm uppercase tracking-wider">Client Satisfaction</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Values Section */}
-      <section className="py-16 lg:py-24">
-        <div className="container">
-          <div className="mb-16">
-            <h2 className="text-white mb-6">
-              OUR<br />
-              VALUES
-            </h2>
-            <p className="text-white/75 text-lg lg:text-xl leading-relaxed max-w-3xl">
-              The principles that guide everything we do.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {values.map((value, index) => {
-              const Icon = value.icon;
-              return (
-                <div
-                  key={index}
-                  className="glass rounded-3xl p-8 lg:p-10 transition-all duration-500"
-                >
-                  <div className="mb-6 w-16 h-16 bg-accent/20 flex items-center justify-center rounded-full">
-                    <Icon className="w-8 h-8 text-accent" />
-                  </div>
-
-                  <h3 className="text-2xl font-bold text-white mb-4">
-                    {value.title}
-                  </h3>
-
-                  <p className="text-white/75 text-base leading-relaxed">
-                    {value.description}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <section className="py-16 lg:py-24">
-        <div className="container">
+      <div className="min-h-screen bg-gradient-to-br from-violet-950 via-fuchsia-950 to-rose-950">
+        {/* Hero Section */}
+        <section className="container mx-auto px-4 pt-32 pb-20">
           <div className="text-center mb-16">
-            <h2 className="text-white mb-6">
-              THE<br />
-              TEAM
-            </h2>
-            <p className="text-white/75 text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto">
-              A multidisciplinary team of experts in AI, strategy, engineering, and design.
-            </p>
+            <p className="text-violet-300 uppercase tracking-widest text-sm mb-4">À PROPOS DE NOUS</p>
+            <h1 className="text-6xl md:text-8xl font-bold mb-8">
+              <span className="text-white">Strategy.</span>
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-400">Creativity.</span>
+              <br />
+              <span className="text-white">Technology.</span>
+            </h1>
           </div>
+        </section>
 
-          <div className="glass rounded-3xl p-12 lg:p-16 text-center">
-            <p className="text-white/75 text-lg leading-relaxed max-w-3xl mx-auto">
-              Our team brings together decades of combined experience from leading tech companies, consulting firms, and innovative startups. We're engineers who understand business, strategists who code, and creators who think in systems.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Locations */}
-      <section className="py-16 lg:py-24">
-        <div className="container">
-          <div className="mb-16">
-            <h2 className="text-white mb-6">
-              WHERE WE<br />
-              OPERATE
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="glass rounded-3xl p-8 lg:p-10">
-              <h3 className="text-2xl font-bold text-white mb-4">Montréal</h3>
-              <p className="text-white/75 mb-4">
-                7236 Rue Waverly<br />
-                Montréal, QC H2R 0C2
+        {/* Manifesto Section */}
+        <section className="container mx-auto px-4 py-20">
+          <p className="text-violet-300 uppercase tracking-widest text-sm mb-12 text-center">MANIFESTO</p>
+          
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold text-fuchsia-400 mb-4">Nukleo Spirit</h3>
+              <p className="text-gray-300 leading-relaxed">
+                At <strong>Nukleo</strong>, we believe technology should drive growth, not slow it down.
+                We turn digital tools into real performance powerhouses that are smart, human, and results-focused.
               </p>
             </div>
 
-            <div className="glass rounded-3xl p-8 lg:p-10">
-              <h3 className="text-2xl font-bold text-white mb-4">Halifax</h3>
-              <p className="text-white/75 mb-4">
-                1800 Argyle St Unit 801<br />
-                Halifax, NS B3J 3N8
+            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold text-fuchsia-400 mb-4">Our Approach</h3>
+              <p className="text-gray-300 leading-relaxed">
+                We're a passionate, curious team that loves solving problems creatively.
+                From strategy to design, from development to launch, we bring together all the right skills to move your project forward and make it shine.
+              </p>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold text-fuchsia-400 mb-4">What Sets Us Apart</h3>
+              <p className="text-gray-300 leading-relaxed">
+                No jargon. No chaos.
+                Just true partners who listen, guide, and deliver.
+                We don't just take on a project, we build lasting collaborations that make a real impact.
               </p>
             </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+
+        {/* Team Section */}
+        <section className="container mx-auto px-4 py-20">
+          <p className="text-violet-300 uppercase tracking-widest text-sm mb-12 text-center">OUR TEAM</p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+            {teamMembers.map((member, index) => (
+              <div 
+                key={index}
+                className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300"
+              >
+                <div className="aspect-square rounded-xl overflow-hidden mb-4">
+                  <img 
+                    src={member.image} 
+                    alt={member.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-1">{member.name}</h3>
+                <p className="text-fuchsia-400 text-sm font-semibold mb-3 uppercase tracking-wide">{member.role}</p>
+                <p className="text-gray-400 text-sm leading-relaxed">{member.description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Offices Section */}
+        <section className="container mx-auto px-4 py-20">
+          <p className="text-violet-300 uppercase tracking-widest text-sm mb-12 text-center">OUR OFFICES</p>
+          
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
+              <h3 className="text-3xl font-bold text-white mb-4">MONTRÉAL</h3>
+              <p className="text-gray-300 mb-6">
+                Au coeur de la Petite Italie, on se fera un plaisir de se rencontrer au Marché Jean Talon pour discuter !
+              </p>
+              <p className="text-gray-400 mb-6">
+                7236 Rue Waverly Montréal<br />
+                QC H2R 0C2
+              </p>
+              <a 
+                href="/contact" 
+                className="inline-block px-6 py-3 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-fuchsia-500/50 transition-all duration-300"
+              >
+                Let's talk
+              </a>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
+              <h3 className="text-3xl font-bold text-white mb-4">HALIFAX</h3>
+              <p className="text-gray-300 mb-6">
+                Au cœur du centre-ville d'Halifax, nous serions heureux de vous rencontrer au bord de l'eau pour discuter !
+              </p>
+              <p className="text-gray-400 mb-6">
+                1800 Argyle St Unit 801 Halifax<br />
+                NS B3J 3N8
+              </p>
+              <a 
+                href="/contact" 
+                className="inline-block px-6 py-3 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-fuchsia-500/50 transition-all duration-300"
+              >
+                Let's talk
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
     </PageLayout>
   );
 }

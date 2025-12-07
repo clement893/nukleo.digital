@@ -80,3 +80,6 @@
 
 ## Header sur toutes les pages
 - [x] Ajouter le Header sur toutes les sous-pages (Projects, About, Expertise, Resources, FAQ, Contact)
+
+## Équipe
+- [x] Ajouter les photos et informations de l'équipe sur la page About

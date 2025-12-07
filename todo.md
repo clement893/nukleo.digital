@@ -145,3 +145,10 @@
 - [x] Convertir Light, Regular, Medium, Bold (+ italiques) en WOFF2
 - [x] Mettre à jour les @font-face pour utiliser WOFF2 en priorité
 - [x] Tester le chargement et vérifier les performances
+
+## Section Trinity (Page d'accueil)
+- [x] Créer les styles CSS (gradients, animations breathe, mesh-float, depth-layer)
+- [x] Implémenter la structure JSX avec grille 3 colonnes
+- [x] Ajouter les 3 cartes services (AI Lab, Strategic Bureau, Creative Studio)
+- [x] Implémenter les effets hover (bordures, icônes, translations)
+- [x] Tester tous les effets et animations

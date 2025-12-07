@@ -1,5 +1,5 @@
-import { Layers, BarChart3, Globe } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Layers, BarChart3, Globe, ArrowRight } from 'lucide-react';
+import { Link } from 'wouter';
 
 export default function TrinitySection() {
   const services = [
@@ -8,74 +8,85 @@ export default function TrinitySection() {
       icon: Layers,
       title: 'The AI Lab',
       description: 'Building the robust and flexible technological foundation. Intelligent data platforms and custom autonomous agents.',
+      link: '/services/ai-lab',
     },
     {
       number: '02',
       icon: BarChart3,
       title: 'Strategic Bureau',
       description: 'Defining strategy, driving transformation, and measuring impact. Charting your path to AI leadership.',
+      link: '/services/strategic-bureau',
     },
     {
       number: '03',
       icon: Globe,
       title: 'Creative Studio',
       description: 'Augmented content creation at scale. Personalized, dynamic, and continuously optimized brand experiences.',
+      link: '/services/creative-studio',
     },
   ];
 
   return (
-    <section id="trinity" className="py-24 lg:py-32 relative" style={{
-      background: 'linear-gradient(135deg, oklch(0.40 0.20 280) 0%, oklch(0.50 0.22 300) 100%)'
-    }}>
-      <div className="container">
+    <section className="py-40 bg-gradient-deep-purple text-white relative overflow-hidden gradient-mesh">
+      {/* Grid Pattern Overlay */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-5 invert" />
+
+      <div className="container relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-white mb-6">
+        <div className="flex justify-between items-end mb-24 border-b border-black/10 pb-8">
+          <h2 className="text-8xl font-heading font-bold tracking-tighter">
             THE<br />
             TRINITY
           </h2>
 
-          <p className="text-white/75 text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto">
+          <p className="text-xl max-w-sm font-light text-white/80 pb-2">
             Three specialized divisions acting as the pillars of your transformation.
           </p>
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 border-l border-black/10">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
               <div
                 key={index}
-                className="group p-8 lg:p-10 glass-strong rounded-3xl transition-all duration-500"
+                className="border-r border-b border-black/10 p-8 sm:p-10 lg:p-16 group hover:border-accent transition-colors duration-500 h-full flex flex-col justify-between min-h-[500px] sm:min-h-[600px] relative breathe depth-layer-1"
               >
-                {/* Number */}
-                <div className="text-accent/40 text-sm font-mono mb-6 tracking-widest">
-                  {service.number}
+                {/* Background Icon (appears on hover) */}
+                <div className="absolute top-10 right-10 opacity-0 group-hover:opacity-20 transition-opacity duration-500">
+                  <Icon className="w-40 h-40 stroke-1 text-white/10" />
                 </div>
 
-                {/* Icon */}
-                <div className="mb-8 w-16 h-16 bg-accent/20 flex items-center justify-center rounded-full">
-                  <Icon className="w-8 h-8 text-accent" />
+                <div>
+                  {/* Number */}
+                  <span className="font-mono text-sm mb-8 block opacity-50">
+                    {service.number}
+                  </span>
+
+                  {/* Icon Badge */}
+                  <div className="w-16 h-16 border border-black/20 group-hover:border-white/20 rounded-full flex items-center justify-center mb-12 transition-colors">
+                    <Icon className="w-8 h-8 opacity-100 group-hover:text-accent transition-colors" />
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-4xl font-heading font-bold mb-6 text-white">
+                    {service.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-lg opacity-60 leading-relaxed mb-12 group-hover:opacity-80">
+                    {service.description}
+                  </p>
                 </div>
 
-                {/* Title */}
-                <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">
-                  {service.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-white/75 text-base leading-relaxed mb-8">
-                  {service.description}
-                </p>
-
-                {/* CTA */}
-                <Button
-                  variant="ghost"
-                  className="text-accent hover:text-accent/80 p-0 h-auto font-medium"
+                {/* Link */}
+                <Link 
+                  href={service.link}
+                  className="inline-flex items-center font-bold text-lg group-hover:translate-x-2 transition-transform relative z-10"
                 >
-                  Explore →
-                </Button>
+                  Explore <ArrowRight className="ml-2 w-5 h-5" />
+                </Link>
               </div>
             );
           })}

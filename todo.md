@@ -91,3 +91,8 @@
 - [x] Connecter Léo à l'API LLM pour des réponses intelligentes
 - [x] Implémenter l'historique de conversation
 - [x] Tester le chatbot avec des questions réelles
+
+## Correction routing Vercel
+- [x] Corriger le problème 404 sur /leo en production
+- [x] Vérifier la configuration vercel.json pour le routing SPA
+- [ ] Tester toutes les routes en production

@@ -152,3 +152,11 @@
 - [x] Ajouter les 3 cartes services (AI Lab, Strategic Bureau, Creative Studio)
 - [x] Implémenter les effets hover (bordures, icônes, translations)
 - [x] Tester tous les effets et animations
+
+## Page FAQ
+- [x] Extraire les 19 questions/réponses de la documentation
+- [x] Créer la structure de la page (Hero, Filtres, Accordéons, CTA)
+- [x] Implémenter la logique de filtrage par catégorie
+- [x] Implémenter les accordéons interactifs (collapse/expand)
+- [x] Ajouter le SEO et structured data
+- [x] Tester tous les filtres et interactions

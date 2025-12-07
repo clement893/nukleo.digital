@@ -47,3 +47,6 @@
 ## Simplification header
 - [x] Mettre le menu burger visible en tout temps (desktop et mobile)
 - [x] Retirer le badge "SYSTEM ONLINE" du Hero
+
+## Design header
+- [x] Retirer la bordure noire en bas du header

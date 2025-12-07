@@ -33,7 +33,7 @@ export default function ManifestoSection() {
           {/* Right: Manifesto Cards */}
           <div className="space-y-6">
             {/* Card 1 */}
-            <div className="group relative p-8 lg:p-12 glass rounded-3xl parallax-float">
+            <div className="group relative p-8 lg:p-12 glass rounded-3xl">
               <div className="absolute top-0 right-0 p-8 opacity-20 group-hover:opacity-100 transition-opacity duration-500">
                 <Zap className="w-16 h-16 lg:w-24 lg:h-24 text-accent stroke-1" />
               </div>
@@ -52,7 +52,7 @@ export default function ManifestoSection() {
             </div>
 
             {/* Card 2 */}
-            <div className="group relative p-8 lg:p-12 glass rounded-3xl parallax-float-delayed">
+            <div className="group relative p-8 lg:p-12 glass rounded-3xl">
               <div className="absolute top-0 right-0 p-8 opacity-20 group-hover:opacity-100 transition-opacity duration-500">
                 <Settings className="w-16 h-16 lg:w-24 lg:h-24 text-accent stroke-1" />
               </div>

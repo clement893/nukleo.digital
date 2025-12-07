@@ -50,9 +50,9 @@ export default function CapabilitiesSection() {
             return (
               <div
                 key={index}
-                className="group p-6 sm:p-8 glass transition-all duration-500 cursor-pointer h-full rounded-2xl sm:rounded-3xl parallax-float-delayed"
+                className="group p-6 sm:p-8 glass transition-all duration-500 cursor-pointer h-full rounded-2xl sm:rounded-3xl"
               >
-                <div className="relative z-10 mb-6 text-accent group-hover:scale-110 transition-transform duration-500">
+                <div className="relative z-10 mb-6 text-accent transition-colors duration-300">
                   <Icon className="w-10 h-10 stroke-1" />
                 </div>
 

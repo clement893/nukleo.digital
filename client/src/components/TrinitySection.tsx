@@ -47,7 +47,7 @@ export default function TrinitySection() {
             return (
               <div
                 key={index}
-                className="group p-8 lg:p-10 glass-strong rounded-3xl breathe transition-all duration-500"
+                className="group p-8 lg:p-10 glass-strong rounded-3xl transition-all duration-500"
               >
                 {/* Number */}
                 <div className="text-accent/40 text-sm font-mono mb-6 tracking-widest">

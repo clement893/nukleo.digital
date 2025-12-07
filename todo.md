@@ -60,3 +60,6 @@
 
 ## Logo
 - [x] Changer le logo en blanc pour meilleure visibilité
+
+## Animations
+- [x] Retirer les animations de mouvement sur les cartes

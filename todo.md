@@ -101,3 +101,8 @@
 - [x] Créer la page Manifesto avec contenu inspirant
 - [x] Ajouter la route /manifesto dans App.tsx
 - [x] Mettre à jour le lien dans le menu
+
+## Amélioration intégration Léo
+- [x] Analyser le style de la page contact nukleo.digital
+- [x] Refondre la page Léo avec meilleure intégration visuelle
+- [x] Tester la nouvelle version

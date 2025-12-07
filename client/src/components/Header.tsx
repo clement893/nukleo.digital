@@ -1,14 +1,30 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import FullScreenMenu from './FullScreenMenu';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-40 bg-background/95 backdrop-blur-md">
+      <header 
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+          isScrolled 
+            ? 'bg-background/80 backdrop-blur-xl border-b border-white/20' 
+            : 'bg-background/95 backdrop-blur-md'
+        }`}
+      >
         <div className="container">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}

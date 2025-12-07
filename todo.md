@@ -50,3 +50,6 @@
 
 ## Design header
 - [x] Retirer la bordure noire en bas du header
+
+## Effet glassmorphisme
+- [x] Ajouter un effet glass au header lors du scroll (bordure + fond opaque)

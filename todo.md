@@ -112,3 +112,8 @@
 - [x] Configurer les @font-face dans le CSS
 - [x] Mettre à jour la configuration Tailwind
 - [x] Tester sur toutes les pages
+
+## Intégration base de connaissances IA pour Léo
+- [x] Lire et analyser la base de connaissances
+- [x] Intégrer dans le prompt système de Léo
+- [x] Tester avec des questions techniques

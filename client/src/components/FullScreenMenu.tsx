@@ -1,5 +1,6 @@
 import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'wouter';
 
 interface FullScreenMenuProps {
   isOpen: boolean;
@@ -65,7 +66,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
                 className="animate-in slide-in-from-left duration-700"
                 style={{ animationDelay: `${index * 50}ms` }}
               >
-                <a
+                <Link
                   href={item.href}
                   onClick={onClose}
                   className="group flex items-baseline gap-6 text-white hover:text-white/80 transition-all duration-300"
@@ -76,7 +77,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
                   <span className="text-4xl lg:text-6xl xl:text-7xl font-bold tracking-tight group-hover:translate-x-4 transition-transform duration-300">
                     {item.label}
                   </span>
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

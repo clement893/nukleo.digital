@@ -71,3 +71,9 @@
 - [x] Créer la page Resources avec ressources et articles
 - [x] Créer la page FAQ avec questions fréquentes
 - [x] Créer la page Contact avec formulaire de contact
+
+## Texture de grain
+- [x] Ajouter l'overlay de grain fractal à 15% d'opacité sur tout le site
+
+## Navigation
+- [x] Corriger les liens du menu pour connecter toutes les pages

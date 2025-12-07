@@ -41,6 +41,23 @@
   font-display: swap;
 }
 
+/* Custom Cursor Glow Effect */
+.cursor-glow {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(
+    circle, 
+    rgba(255, 255, 255, 0.03) 0%, 
+    transparent 70%
+  );
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+  mix-blend-mode: screen;
+}
+
 @import "tailwindcss";
 
 @theme {

@@ -117,3 +117,9 @@
 - [x] Lire et analyser la base de connaissances
 - [x] Intégrer dans le prompt système de Léo
 - [x] Tester avec des questions techniques
+
+## Effet curseur personnalisé (Custom Cursor)
+- [x] Créer le composant CustomCursor.tsx
+- [x] Ajouter les styles CSS pour le halo lumineux
+- [x] Intégrer dans App.tsx
+- [x] Tester l'effet sur desktop

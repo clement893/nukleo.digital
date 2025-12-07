@@ -57,3 +57,6 @@
 ## Correction header
 - [x] Rendre le header transparent au départ (sans fond noir)
 - [x] Ajouter des coins arrondis au header au scroll
+
+## Logo
+- [x] Changer le logo en blanc pour meilleure visibilité

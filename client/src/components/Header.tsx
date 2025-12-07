@@ -30,11 +30,11 @@ export default function Header() {
             <div className="flex items-center justify-between h-16">
               {/* Logo */}
               <a href="/" className="flex items-center">
-                <img 
-                  src="/nukleo-logo.png" 
-                  alt="Nukleo" 
-                  className="h-8 w-auto"
-                />
+              <img 
+                src="/nukleo-logo.png" 
+                alt="Nukleo" 
+                className="h-8 w-auto brightness-0 invert"
+              />
               </a>
 
               {/* Right: CTA + Burger Menu */}

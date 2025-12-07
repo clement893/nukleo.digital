@@ -9,7 +9,7 @@ interface FullScreenMenuProps {
 
 export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps) {
   const navItems = [
-    { number: '01', label: 'Manifesto', href: '/' },
+    { number: '01', label: 'Manifesto', href: '/manifesto' },
     { number: '02', label: 'Projects', href: '/projects' },
     { number: '03', label: 'About', href: '/about' },
     { number: '04', label: 'Expertise', href: '/expertise' },

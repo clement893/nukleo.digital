@@ -12,6 +12,7 @@ import Resources from "./pages/Resources";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
 import Leo from "./pages/Leo";
+import Manifesto from "./pages/Manifesto";
 
 function Router() {
   return (
@@ -24,6 +25,7 @@ function Router() {
       <Route path={"/faq"} component={FAQ} />
       <Route path={"/contact"} component={Contact} />
       <Route path={"/leo"} component={Leo} />
+      <Route path={"/manifesto"} component={Manifesto} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>

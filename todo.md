@@ -96,3 +96,8 @@
 - [x] Corriger le problème 404 sur /leo en production
 - [x] Vérifier la configuration vercel.json pour le routing SPA
 - [ ] Tester toutes les routes en production
+
+## Page Manifesto
+- [x] Créer la page Manifesto avec contenu inspirant
+- [x] Ajouter la route /manifesto dans App.tsx
+- [x] Mettre à jour le lien dans le menu

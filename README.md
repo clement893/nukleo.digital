@@ -1,6 +1,7 @@
 # Nukleo Digital
 
-Site d'agence professionnelle avec espace client connecté et application de gestion de projets.
+> Site d'agence professionnelle avec espace client connecté et application de gestion de projets.
+> Dernière mise à jour: Décembre 2024
 
 ## Stack Technique
 

@@ -83,3 +83,11 @@
 
 ## Équipe
 - [x] Ajouter les photos et informations de l'équipe sur la page About
+
+## Chatbot Léo
+- [x] Analyser le brief de Léo
+- [x] Créer la page Léo avec interface de chat intégrée harmonieusement
+- [x] Ajouter Léo au menu de navigation
+- [x] Connecter Léo à l'API LLM pour des réponses intelligentes
+- [x] Implémenter l'historique de conversation
+- [x] Tester le chatbot avec des questions réelles

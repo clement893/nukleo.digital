@@ -16,7 +16,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
     { number: '05', label: 'Resources', href: '/resources' },
     { number: '06', label: 'FAQ', href: '/faq' },
     { number: '07', label: 'Contact', href: '/contact' },
-    { number: '08', label: 'Art & Culture', href: '#art-culture' },
+    { number: '08', label: 'Léo AI', href: '/leo' },
   ];
 
   if (!isOpen) return null;

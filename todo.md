@@ -27,3 +27,6 @@
 - [ ] Déploiement sur Vercel
 - [ ] Variables d'environnement configurées
 - [ ] Pipeline CI/CD opérationnel
+
+## Corrections techniques
+- [ ] Corriger la configuration vercel.json pour le déploiement

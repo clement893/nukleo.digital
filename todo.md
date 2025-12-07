@@ -53,3 +53,7 @@
 
 ## Effet glassmorphisme
 - [x] Ajouter un effet glass au header lors du scroll (bordure + fond opaque)
+
+## Correction header
+- [x] Rendre le header transparent au départ (sans fond noir)
+- [x] Ajouter des coins arrondis au header au scroll

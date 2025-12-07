@@ -37,3 +37,6 @@
 ## Améliorations design
 - [x] Ajouter le logo Nukleo officiel
 - [x] Recréer le menu de navigation comme sur nukleo.digital
+
+## Menu plein écran
+- [x] Créer un menu overlay plein écran avec animations fluides

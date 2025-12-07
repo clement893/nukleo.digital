@@ -1,5 +1,46 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
 
+/* Aktiv Grotesk Font Family */
+@font-face {
+  font-family: 'Aktiv Grotesk';
+  src: url('/fonts/AktivGrotesk-Hairline.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aktiv Grotesk';
+  src: url('/fonts/AktivGrotesk-BoldItalic.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aktiv Grotesk';
+  src: url('/fonts/AktivGrotesk-XBoldItalic.otf') format('opentype');
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aktiv Grotesk';
+  src: url('/fonts/AktivGrotesk-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Aktiv Grotesk';
+  src: url('/fonts/AktivGrotesk-BlackItalic.otf') format('opentype');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
 @import "tailwindcss";
 
 @theme {
@@ -29,7 +70,7 @@
 
   body {
     @apply text-foreground antialiased;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Aktiv Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     position: relative;
     min-height: 100vh;
     background: linear-gradient(

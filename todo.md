@@ -106,3 +106,9 @@
 - [x] Analyser le style de la page contact nukleo.digital
 - [x] Refondre la page Léo avec meilleure intégration visuelle
 - [x] Tester la nouvelle version
+
+## Intégration police Aktiv Grotesk
+- [x] Copier les fichiers de police dans le projet
+- [x] Configurer les @font-face dans le CSS
+- [x] Mettre à jour la configuration Tailwind
+- [x] Tester sur toutes les pages

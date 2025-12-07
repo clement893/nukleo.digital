@@ -8,13 +8,13 @@ interface FullScreenMenuProps {
 
 export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps) {
   const navItems = [
-    { number: '01', label: 'Manifesto', href: '#manifesto' },
-    { number: '02', label: 'Projects', href: '#projects' },
-    { number: '03', label: 'About', href: '#about' },
-    { number: '04', label: 'Expertise', href: '#expertise' },
-    { number: '05', label: 'Resources', href: '#resources' },
-    { number: '06', label: 'FAQ', href: '#faq' },
-    { number: '07', label: 'Contact', href: '#contact' },
+    { number: '01', label: 'Manifesto', href: '/' },
+    { number: '02', label: 'Projects', href: '/projects' },
+    { number: '03', label: 'About', href: '/about' },
+    { number: '04', label: 'Expertise', href: '/expertise' },
+    { number: '05', label: 'Resources', href: '/resources' },
+    { number: '06', label: 'FAQ', href: '/faq' },
+    { number: '07', label: 'Contact', href: '/contact' },
     { number: '08', label: 'Art & Culture', href: '#art-culture' },
   ];
 

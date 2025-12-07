@@ -63,3 +63,11 @@
 
 ## Animations
 - [x] Retirer les animations de mouvement sur les cartes
+
+## Création des pages
+- [x] Créer la page Projects avec galerie de projets
+- [x] Créer la page About avec présentation de l'équipe
+- [x] Créer la page Expertise avec domaines d'expertise
+- [x] Créer la page Resources avec ressources et articles
+- [x] Créer la page FAQ avec questions fréquentes
+- [x] Créer la page Contact avec formulaire de contact

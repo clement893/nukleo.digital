@@ -131,3 +131,11 @@
 - [x] Ajouter les blobs animés dans le menu fullscreen
 - [x] Implémenter les animations échelonnées des items de menu
 - [x] Tester tous les effets
+
+## Modification système typographique
+- [x] Ajouter les fichiers WOFF2 manquants (Light, Regular, Medium, Bold)
+- [x] Mettre à jour les @font-face avec tous les poids et font-display: swap
+- [x] Configurer JetBrains Mono via Google Fonts CDN
+- [x] Mettre à jour les variables CSS (--font-sans, --font-heading, --font-mono)
+- [x] Appliquer la hiérarchie typographique (300 Light, 400 Regular, 500 Medium, 700 Bold)
+- [x] Tester sur toutes les pages

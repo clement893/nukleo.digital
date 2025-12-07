@@ -77,3 +77,6 @@
 
 ## Navigation
 - [x] Corriger les liens du menu pour connecter toutes les pages
+
+## Header sur toutes les pages
+- [x] Ajouter le Header sur toutes les sous-pages (Projects, About, Expertise, Resources, FAQ, Contact)

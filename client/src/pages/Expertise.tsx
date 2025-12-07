@@ -1,4 +1,5 @@
 import { Brain, Code, Palette, TrendingUp, Database, Sparkles } from 'lucide-react';
+import PageLayout from '@/components/PageLayout';
 
 export default function Expertise() {
   const expertiseAreas = [
@@ -71,6 +72,7 @@ export default function Expertise() {
   ];
 
   return (
+    <PageLayout>
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">
@@ -190,5 +192,6 @@ export default function Expertise() {
         </div>
       </section>
     </div>
+    </PageLayout>
   );
 }

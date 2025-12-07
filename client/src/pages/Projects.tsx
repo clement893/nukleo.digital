@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ArrowRight, Filter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import PageLayout from '@/components/PageLayout';
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -47,6 +48,7 @@ export default function Projects() {
     : projects.filter(p => p.category === activeFilter);
 
   return (
+    <PageLayout>
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">
@@ -172,5 +174,6 @@ export default function Projects() {
         </div>
       </section>
     </div>
+    </PageLayout>
   );
 }

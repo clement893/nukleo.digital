@@ -139,3 +139,9 @@
 - [x] Mettre à jour les variables CSS (--font-sans, --font-heading, --font-mono)
 - [x] Appliquer la hiérarchie typographique (300 Light, 400 Regular, 500 Medium, 700 Bold)
 - [x] Tester sur toutes les pages
+
+## Conversion polices en WOFF2
+- [x] Installer fonttools pour conversion OTF → WOFF2
+- [x] Convertir Light, Regular, Medium, Bold (+ italiques) en WOFF2
+- [x] Mettre à jour les @font-face pour utiliser WOFF2 en priorité
+- [x] Tester le chargement et vérifier les performances

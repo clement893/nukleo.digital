@@ -18,42 +18,61 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-40 px-4 pt-4">
+      <header 
+        className={`
+          fixed top-0 left-0 right-0 z-40
+          transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]
+          ${isScrolled ? 'px-6 md:px-12 pt-4' : 'px-6 md:px-12 pt-8'}
+        `}
+      >
         <div 
-          className={`transition-all duration-300 ${
-            isScrolled 
-              ? 'bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl' 
+          className={`
+            transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]
+            ${isScrolled 
+              ? 'glass-dark rounded-full px-8 py-4' 
               : 'bg-transparent'
-          }`}
+            }
+          `}
         >
-          <div className="container">
-            <div className="flex items-center justify-between h-16">
-              {/* Logo */}
-              <a href="/" className="flex items-center">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <a href="/" className="flex items-center group cursor-pointer">
               <img 
                 src="/nukleo-logo.png" 
                 alt="Nukleo" 
-                className="h-8 w-auto brightness-0 invert"
+                className="h-8 w-auto object-contain brightness-0 invert"
               />
-              </a>
+            </a>
 
-              {/* Right: CTA + Burger Menu */}
-              <div className="flex items-center gap-4">
-                <Button
-                  className="rounded-full bg-white text-purple-900 hover:bg-white/90 font-bold px-6 text-sm uppercase tracking-wide"
-                >
-                  START PROJECT
-                </Button>
+            {/* Right: CTA + Burger Menu */}
+            <div className="flex items-center gap-4">
+              <Button
+                className="
+                  rounded-full 
+                  px-6 md:px-8 
+                  py-4 md:py-6 
+                  bg-white 
+                  text-purple-900 
+                  hover:bg-white/90 
+                  transition-all duration-500 
+                  font-bold 
+                  tracking-wider 
+                  uppercase 
+                  text-xs
+                  hover:scale-110
+                "
+              >
+                Start Project
+              </Button>
 
-                {/* Burger Menu Button (Always Visible) */}
-                <button
-                  onClick={() => setIsMenuOpen(true)}
-                  className="text-white p-2 hover:bg-white/10 rounded-lg transition-colors"
-                  aria-label="Open menu"
-                >
-                  <Menu className="w-6 h-6" />
-                </button>
-              </div>
+              {/* Burger Menu Button */}
+              <button
+                onClick={() => setIsMenuOpen(true)}
+                className="text-white hover:bg-white/10 transition-colors p-2 rounded-lg"
+                aria-label="Open menu"
+              >
+                <Menu className="w-6 h-6" />
+              </button>
             </div>
           </div>
         </div>

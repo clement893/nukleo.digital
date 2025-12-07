@@ -123,3 +123,11 @@
 - [x] Ajouter les styles CSS pour le halo lumineux
 - [x] Intégrer dans App.tsx
 - [x] Tester l'effet sur desktop
+
+## Correction curseur et effets menu/header
+- [x] Corriger l'effet de curseur qui n'apparaît pas
+- [x] Augmenter l'opacité du halo à 5-6%
+- [x] Implémenter le header avec glassmorphisme et transition scroll
+- [x] Ajouter les blobs animés dans le menu fullscreen
+- [x] Implémenter les animations échelonnées des items de menu
+- [x] Tester tous les effets

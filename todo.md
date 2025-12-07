@@ -43,3 +43,7 @@
 
 ## Effets visuels
 - [x] Ajouter un effet de flou backdrop sur le contenu derrière le menu
+
+## Simplification header
+- [x] Mettre le menu burger visible en tout temps (desktop et mobile)
+- [x] Retirer le badge "SYSTEM ONLINE" du Hero

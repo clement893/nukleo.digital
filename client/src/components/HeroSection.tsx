@@ -8,14 +8,6 @@ export default function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left: Main Title */}
           <div className="lg:col-span-7">
-            {/* System Online Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8">
-              <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-              <span className="text-xs font-mono text-white/80 uppercase tracking-widest">
-                SYSTEM ONLINE
-              </span>
-            </div>
-
             {/* Main Heading */}
             <h1 className="text-white mb-12">
               ARCHITECTS<br />

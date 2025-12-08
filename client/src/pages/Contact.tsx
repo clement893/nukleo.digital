@@ -50,8 +50,8 @@ export default function Contact() {
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">
         <div className="container">
-          <span className="font-mono text-accent text-sm mb-8 block uppercase tracking-widest">
-            07 — CONTACT
+          <span className="font-mono text-accent text-sm mb-8 block tracking-widest">
+            07 — Contact
           </span>
 
           <h1 className="text-white mb-8">

@@ -530,3 +530,8 @@
 - [x] Ajouter lien stratégique "See all testimonials" dans le carrousel
 - [x] Ajouter liens stratégiques vers /testimonials dans d'autres sections
 - [x] Tester le carrousel et la navigation
+
+## Retirer les titres ALL CAPS
+- [x] Identifier tous les badges et titres en majuscules
+- [x] Remplacer par Title Case ou Sentence case
+- [x] Tester le rendu sur toutes les pages

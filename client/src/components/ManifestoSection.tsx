@@ -7,8 +7,8 @@ export default function ManifestoSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Left: Title and Description */}
           <div>
-            <span className="font-mono text-accent text-sm mb-8 block uppercase tracking-widest">
-              01 — MANIFESTO
+            <span className="font-mono text-accent text-sm mb-8 block tracking-widest">
+              01 — Manifesto
             </span>
 
             <h2 className="text-white mb-8">

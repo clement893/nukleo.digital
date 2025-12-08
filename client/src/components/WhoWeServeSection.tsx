@@ -27,7 +27,7 @@ export default function WhoWeServeSection() {
       <div className="container relative z-10">
         {/* Section Header */}
         <div className="text-center mb-20">
-          <p className="text-sm font-mono uppercase tracking-widest text-purple-400 mb-4">
+          <p className="text-sm font-mono tracking-widest text-purple-400 mb-4">
             Champions of Smaller Organizations
           </p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">

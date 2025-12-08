@@ -32,8 +32,8 @@ export default function CapabilitiesSection() {
       <div className="container">
         {/* Section Header */}
         <div className="mb-16">
-          <span className="font-mono text-accent text-sm mb-8 block uppercase tracking-widest">
-            CAPABILITIES
+          <span className="font-mono text-accent text-sm mb-8 block tracking-widest">
+            Capabilities
           </span>
 
           <h2 className="text-white mb-6">

@@ -53,8 +53,8 @@ export default function Projects() {
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">
         <div className="container">
-          <span className="font-mono text-accent text-sm mb-8 block uppercase tracking-widest">
-            02 — PROJECTS
+          <span className="font-mono text-accent text-sm mb-8 block tracking-widest">
+            02 — Projects
           </span>
 
           <h1 className="text-white mb-8">
@@ -108,7 +108,7 @@ export default function Projects() {
                 {/* Project Content */}
                 <div className="p-8">
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="text-accent text-sm font-mono uppercase tracking-wider">
+                    <span className="text-accent text-sm font-mono tracking-wider">
                       {project.category}
                     </span>
                   </div>
@@ -125,15 +125,15 @@ export default function Projects() {
                   <div className="grid grid-cols-3 gap-4 mb-6 pb-6 border-b border-white/10">
                     <div>
                       <div className="text-accent text-2xl font-bold mb-1">{project.metrics.roi}</div>
-                      <div className="text-white/50 text-xs uppercase tracking-wider">ROI Increase</div>
+                      <div className="text-white/50 text-xs tracking-wider">ROI Increase</div>
                     </div>
                     <div>
                       <div className="text-accent text-2xl font-bold mb-1">{project.metrics.time}</div>
-                      <div className="text-white/50 text-xs uppercase tracking-wider">Time Saved</div>
+                      <div className="text-white/50 text-xs tracking-wider">Time Saved</div>
                     </div>
                     <div>
                       <div className="text-accent text-2xl font-bold mb-1">{project.metrics.output}</div>
-                      <div className="text-white/50 text-xs uppercase tracking-wider">Output Boost</div>
+                      <div className="text-white/50 text-xs tracking-wider">Output Boost</div>
                     </div>
                   </div>
 
@@ -166,9 +166,9 @@ export default function Projects() {
 
             <Button
               size="lg"
-              className="rounded-full text-lg px-10 py-8 bg-white text-purple-900 hover:bg-white/90 transition-all duration-500 font-bold tracking-wider uppercase shimmer"
+              className="rounded-full text-lg px-10 py-8 bg-white text-purple-900 hover:bg-white/90 transition-all duration-500 font-bold tracking-wider shimmer"
             >
-              START YOUR TRANSFORMATION
+              Start Your Transformation
             </Button>
           </div>
         </div>

@@ -44,7 +44,7 @@ export default function Header() {
                 alt="Nukleo" 
                 className="h-8 w-auto object-contain brightness-0 invert mb-1"
               />
-              <span className="text-[10px] text-white/60 font-medium tracking-wider uppercase">
+              <span className="text-[10px] text-white/60 font-medium tracking-wider">
                 Choose Intelligence
               </span>
             </a>
@@ -64,7 +64,6 @@ export default function Header() {
                   transition-all duration-500 
                   font-bold 
                   tracking-wider 
-                  uppercase 
                   text-xs
                   hover:scale-110
                   flex items-center gap-2

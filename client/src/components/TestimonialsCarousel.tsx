@@ -49,7 +49,7 @@ export default function TestimonialsCarousel() {
         {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-block px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-6">
-            <span className="text-sm font-mono text-white/70">CLIENT SUCCESS STORIES</span>
+            <span className="text-sm font-mono text-white/70">Client Success Stories</span>
           </div>
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
             What Our Clients Say

@@ -77,8 +77,8 @@ export default function Expertise() {
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">
         <div className="container">
-          <span className="font-mono text-accent text-sm mb-8 block uppercase tracking-widest">
-            04 — EXPERTISE
+          <span className="font-mono text-accent text-sm mb-8 block tracking-widest">
+            04 — Expertise
           </span>
 
           <h1 className="text-white mb-8">
@@ -184,9 +184,9 @@ export default function Expertise() {
 
             <a
               href="/contact"
-              className="inline-flex items-center gap-2 rounded-full text-lg px-10 py-6 bg-white text-purple-900 hover:bg-white/90 transition-all duration-500 font-bold tracking-wider uppercase"
+              className="inline-flex items-center gap-2 rounded-full text-lg px-10 py-6 bg-white text-purple-900 hover:bg-white/90 transition-all duration-500 font-bold tracking-wider"
             >
-              GET IN TOUCH
+              Get in Touch
               <img src="/arrow-brand.png" alt="" className="w-5 h-5 opacity-60" />
             </a>
           </div>

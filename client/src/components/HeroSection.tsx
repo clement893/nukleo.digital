@@ -77,9 +77,9 @@ export default function HeroSection() {
               <Button
                 onClick={playClick}
                 onMouseEnter={playHover}
-                className="relative rounded-full text-lg px-12 py-8 bg-white text-purple-900 hover:bg-white transition-all duration-500 font-bold tracking-wider uppercase hover:scale-110 hover:shadow-2xl hover:shadow-purple-500/50 group overflow-hidden"
+                className="relative rounded-full text-lg px-12 py-8 bg-white text-purple-900 hover:bg-white transition-all duration-500 font-bold tracking-wider hover:scale-110 hover:shadow-2xl hover:shadow-purple-500/50 group overflow-hidden"
               >
-                <span className="relative z-10">START YOUR TRANSFORMATION</span>
+                <span className="relative z-10">Start Your Transformation</span>
                 {/* Shimmer effect */}
                 <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
               </Button>
@@ -94,8 +94,8 @@ export default function HeroSection() {
                   {/* Pulse ring */}
                   <span className="absolute inset-0 rounded-full border-2 border-white/50 animate-ping" />
                 </div>
-                <span className="text-base font-mono uppercase tracking-widest text-white/90 group-hover:text-white transition-colors font-semibold">
-                  WATCH REEL
+                <span className="text-base font-mono tracking-widest text-white/90 group-hover:text-white transition-colors font-semibold">
+                  Watch Reel
                 </span>
               </button>
             </div>

@@ -47,7 +47,7 @@ export default function Footer() {
 
           {/* Navigation */}
           <div className="lg:col-span-2">
-            <h3 className="text-sm font-bold uppercase tracking-wider mb-4">NAVIGATION</h3>
+            <h3 className="text-sm font-bold tracking-wider mb-4">Navigation</h3>
             <ul className="space-y-3">
               {navigation.map((item) => (
                 <li key={item.href}>
@@ -64,7 +64,7 @@ export default function Footer() {
 
           {/* Services */}
           <div className="lg:col-span-3">
-            <h3 className="text-sm font-bold uppercase tracking-wider mb-4">SERVICES</h3>
+            <h3 className="text-sm font-bold tracking-wider mb-4">Services</h3>
             <ul className="space-y-3">
               {services.map((item) => (
                 <li key={item.href}>
@@ -81,7 +81,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div className="lg:col-span-3">
-            <h3 className="text-sm font-bold uppercase tracking-wider mb-4">CONTACT</h3>
+            <h3 className="text-sm font-bold tracking-wider mb-4">Contact</h3>
             <div className="space-y-4 text-sm">
               <div>
                 <div className="text-white font-medium mb-1">Montréal</div>

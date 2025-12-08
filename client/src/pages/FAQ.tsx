@@ -146,7 +146,7 @@ export default function FAQ() {
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">
         <div className="container">
-          <span className="font-mono text-accent text-sm mb-8 block uppercase tracking-widest">
+          <span className="font-mono text-accent text-sm mb-8 block tracking-widest">
             FAQ
           </span>
 
@@ -175,7 +175,7 @@ export default function FAQ() {
                   setSelectedCategory(category);
                 }}
                 onMouseEnter={playHover}
-                className={`px-6 py-3 rounded-full font-mono text-sm uppercase tracking-wider transition-all duration-300 ${
+                className={`px-6 py-3 rounded-full font-mono text-sm tracking-wider transition-all duration-300 ${
                   selectedCategory === category
                     ? 'bg-accent text-white'
                     : 'bg-white/5 text-white/70 hover:bg-white/10'
@@ -206,7 +206,7 @@ export default function FAQ() {
                   className="w-full px-8 py-6 flex items-center justify-between text-left"
                 >
                   <div className="flex-1 pr-4">
-                    <span className="font-mono text-accent text-xs uppercase tracking-wider block mb-2">
+                    <span className="font-mono text-accent text-xs tracking-wider block mb-2">
                       {faq.category}
                     </span>
                     <h3 className="text-xl font-bold text-white">

@@ -105,7 +105,6 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
                 transition-all duration-500 
                 font-bold 
                 tracking-wider 
-                uppercase 
                 text-xs
                 hover:scale-110
                 flex items-center gap-2

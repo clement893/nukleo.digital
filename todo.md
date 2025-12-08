@@ -170,3 +170,10 @@
 - [x] Ajouter sons sur Contact/Leo (avatar, quick replies, envoi message)
 - [x] Ajouter sons sur FAQ (filtres, accordéons)
 - [x] Tester tous les sons sur toutes les pages
+
+## Animation Titre Hero "ARCHITECTS OF YOUR AI FUTURE"
+- [x] Restructurer le titre en 3 spans avec classes hover-distort
+- [x] Ajouter les animations d'entrée (fade-in + slide-in 1s)
+- [x] Implémenter l'effet hover distortion (skew -10deg + translate 10px)
+- [x] Ajouter le glow violet-rose sur "AI FUTURE"
+- [x] Tester les animations sur desktop et mobile

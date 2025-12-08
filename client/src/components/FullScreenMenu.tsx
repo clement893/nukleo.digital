@@ -96,25 +96,27 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
 
           {/* Close Button and CTA */}
           <div className="flex items-center gap-4">
-            <Button
-              className="
-                rounded-full 
-                px-6 md:px-8 
-                py-4 md:py-6 
-                bg-white 
-                text-purple-900 
-                hover:bg-white/90 
-                transition-all duration-500 
-                font-bold 
-                tracking-wider 
-                text-xs
-                hover:scale-110
-                flex items-center gap-2
-              "
-              onClick={onClose}
-            >
-              Start Project
-            </Button>
+            <Link href="/start-project">
+              <Button
+                className="
+                  rounded-full 
+                  px-6 md:px-8 
+                  py-4 md:py-6 
+                  bg-white 
+                  text-purple-900 
+                  hover:bg-white/90 
+                  transition-all duration-500 
+                  font-bold 
+                  tracking-wider 
+                  text-xs
+                  hover:scale-110
+                  flex items-center gap-2
+                "
+                onClick={onClose}
+              >
+                Start Project
+              </Button>
+            </Link>
             <button
               onClick={onClose}
               className="text-white hover:bg-white/10 transition-colors p-2 rounded-lg"

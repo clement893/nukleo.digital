@@ -719,3 +719,10 @@
 - [x] Revenir à la liste simple et compacte (01-07)
 - [x] Garder les animations et le design actuel
 - [x] Tester que le menu est moins long verticalement
+
+## Page Start Project
+- [x] Créer la page StartProject.tsx avec formulaire de contact
+- [x] Ajouter les champs: nom, email, entreprise, type de projet, budget, description
+- [x] Ajouter la route /start-project dans App.tsx
+- [x] Mettre à jour le lien du bouton "Start Project" dans Header et FullScreenMenu
+- [x] Tester le formulaire et la navigation

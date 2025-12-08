@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'wouter';
 import FullScreenMenu from './FullScreenMenu';
 import { useSound } from '@/hooks/useSound';
 
@@ -54,26 +55,28 @@ export default function Header() {
 
             {/* Right: CTA + Burger Menu */}
             <div className="flex items-center gap-4">
-              <Button
-                onClick={playClick}
-                onMouseEnter={playHover}
-                className="
-                  rounded-full 
-                  px-6 md:px-8 
-                  py-4 md:py-6 
-                  bg-white 
-                  text-purple-900 
-                  hover:bg-white/90 
-                  transition-all duration-500 
-                  font-bold 
-                  tracking-wider 
-                  text-xs
-                  hover:scale-110
-                  flex items-center gap-2
-                "
-              >
-                Start Project
-              </Button>
+              <Link href="/start-project">
+                <Button
+                  onClick={playClick}
+                  onMouseEnter={playHover}
+                  className="
+                    rounded-full 
+                    px-6 md:px-8 
+                    py-4 md:py-6 
+                    bg-white 
+                    text-purple-900 
+                    hover:bg-white/90 
+                    transition-all duration-500 
+                    font-bold 
+                    tracking-wider 
+                    text-xs
+                    hover:scale-110
+                    flex items-center gap-2
+                  "
+                >
+                  Start Project
+                </Button>
+              </Link>
 
               {/* Burger Menu Button */}
               <button

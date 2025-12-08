@@ -679,3 +679,9 @@
 - [x] Adapter le curseur flèche selon le thème (invert sur dark, normal sur light)
 - [x] Ajouter transition smooth entre les thèmes (0.5s ease)
 - [x] Tester sur toutes les pages
+
+## Restauration curseur halo lumineux
+- [x] Supprimer le curseur flèche arrow-brand.png
+- [x] Restaurer le CustomCursor avec halo lumineux original
+- [x] Restaurer les styles CSS du curseur halo (gradient violet avec pulse)
+- [x] Tester sur toutes les pages

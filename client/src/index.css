@@ -156,52 +156,29 @@
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
-/* Custom Cursor Arrow Effect */
-.cursor-arrow {
-  width: 16px;
-  height: 16px;
+/* Custom Cursor Glow Effect */
+.cursor-glow {
   position: fixed;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.6) 0%, rgba(139, 92, 246, 0.3) 40%, transparent 70%);
   pointer-events: none;
-  z-index: 9999;
   transform: translate(-50%, -50%);
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease, filter 0.5s ease;
-  opacity: 0.9;
+  z-index: 9999;
+  transition: width 0.3s ease, height 0.3s ease;
+  mix-blend-mode: screen;
+  animation: pulse-glow 2s ease-in-out infinite;
 }
 
-/* Dark theme - flèche blanche */
-[data-theme="dark"] .cursor-arrow,
-body:not([data-theme]) .cursor-arrow {
-  filter: invert(1) brightness(1.2);
-}
-
-/* Light theme - flèche violette normale */
-[data-theme="light"] .cursor-arrow {
-  filter: none;
-  opacity: 0.8;
-}
-
-/* Hover state - Scale up + Rotate */
-.cursor-arrow--hover {
-  transform: translate(-50%, -50%) scale(2) rotate(45deg);
-  opacity: 1;
-}
-
-/* Click state - Pulse effect */
-.cursor-arrow--click {
-  animation: cursor-pulse 0.3s ease-out;
-}
-
-@keyframes cursor-pulse {
-  0% {
-    transform: translate(-50%, -50%) scale(2) rotate(45deg);
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1);
   }
   50% {
-    transform: translate(-50%, -50%) scale(2.5) rotate(45deg);
-    opacity: 0.6;
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(2) rotate(45deg);
-    opacity: 1;
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.1);
   }
 }
 

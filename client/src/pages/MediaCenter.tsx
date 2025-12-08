@@ -1,7 +1,10 @@
 import { Download, ExternalLink, Mail, Calendar, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { trpc } from '@/lib/trpc';
 
 export default function MediaCenter() {
+  const { data: mediaAssets, isLoading } = trpc.mediaAssets.list.useQuery();
+
   const pressReleases = [
     {
       date: '2024-12-01',
@@ -20,34 +23,6 @@ export default function MediaCenter() {
       title: 'Partnership with Leading Healthcare Provider Announced',
       excerpt: 'Collaboration aims to revolutionize patient care through intelligent AI integration.',
       link: '#',
-    },
-  ];
-
-  const mediaKit = [
-    {
-      name: 'Company Logo (PNG)',
-      size: '2.4 MB',
-      icon: FileText,
-    },
-    {
-      name: 'Company Logo (SVG)',
-      size: '156 KB',
-      icon: FileText,
-    },
-    {
-      name: 'Brand Guidelines',
-      size: '8.2 MB',
-      icon: FileText,
-    },
-    {
-      name: 'Executive Photos',
-      size: '15.6 MB',
-      icon: FileText,
-    },
-    {
-      name: 'Product Screenshots',
-      size: '22.1 MB',
-      icon: FileText,
     },
   ];
 
@@ -71,6 +46,16 @@ export default function MediaCenter() {
       link: '#',
     },
   ];
+
+  // Format file size
+  const formatFileSize = (bytes: number) => {
+    if (bytes >= 1024 * 1024) {
+      return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+    } else if (bytes >= 1024) {
+      return `${(bytes / 1024).toFixed(0)} KB`;
+    }
+    return `${bytes} B`;
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-950 via-purple-900 to-purple-950">
@@ -157,27 +142,36 @@ export default function MediaCenter() {
                 Download our brand assets, logos, and company information for media use.
               </p>
 
-              <div className="grid md:grid-cols-2 gap-4">
-                {mediaKit.map((item, index) => (
-                  <button
-                    key={index}
-                    className="flex items-center justify-between p-6 bg-white/5 rounded-xl border border-white/10 hover:border-accent/50 hover:bg-white/10 transition-all duration-300 group"
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-lg bg-accent/20 flex items-center justify-center group-hover:bg-accent/30 transition-colors">
-                        <item.icon className="w-6 h-6 text-accent" />
+              {isLoading ? (
+                <div className="text-center py-12">
+                  <div className="inline-block w-8 h-8 border-4 border-accent border-t-transparent rounded-full animate-spin"></div>
+                  <p className="text-white/50 mt-4">Loading media assets...</p>
+                </div>
+              ) : (
+                <div className="grid md:grid-cols-2 gap-4">
+                  {mediaAssets?.map((asset) => (
+                    <a
+                      key={asset.id}
+                      href={asset.url}
+                      download={asset.name}
+                      className="flex items-center justify-between p-6 bg-white/5 rounded-xl border border-white/10 hover:border-accent/50 hover:bg-white/10 transition-all duration-300 group"
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-lg bg-accent/20 flex items-center justify-center group-hover:bg-accent/30 transition-colors">
+                          <FileText className="w-6 h-6 text-accent" />
+                        </div>
+                        <div className="text-left">
+                          <p className="text-white font-semibold group-hover:text-accent transition-colors">
+                            {asset.name}
+                          </p>
+                          <p className="text-white/50 text-sm">{formatFileSize(asset.size)}</p>
+                        </div>
                       </div>
-                      <div className="text-left">
-                        <p className="text-white font-semibold group-hover:text-accent transition-colors">
-                          {item.name}
-                        </p>
-                        <p className="text-white/50 text-sm">{item.size}</p>
-                      </div>
-                    </div>
-                    <Download className="w-5 h-5 text-white/50 group-hover:text-accent transition-colors" />
-                  </button>
-                ))}
-              </div>
+                      <Download className="w-5 h-5 text-white/50 group-hover:text-accent transition-colors" />
+                    </a>
+                  ))}
+                </div>
+              )}
 
               <div className="mt-8 pt-8 border-t border-white/10">
                 <Button className="w-full bg-gradient-to-r from-accent to-pink-500 hover:from-accent/90 hover:to-pink-500/90 text-white font-semibold py-6 text-lg">

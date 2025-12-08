@@ -6,12 +6,14 @@ import { invokeLLM } from "./_core/llm";
 import { z } from "zod";
 import { assessmentRouter } from "./routers/assessment";
 import { contactRouter } from "./routers/contact";
+import { mediaAssetsRouter } from "./routers/mediaAssets";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
   system: systemRouter,
   assessment: assessmentRouter,
   contact: contactRouter,
+  mediaAssets: mediaAssetsRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {

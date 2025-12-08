@@ -90,3 +90,21 @@ export async function getUserByOpenId(openId: string) {
 }
 
 // TODO: add feature queries here as your schema grows.
+
+// Media Assets queries
+export async function getAllMediaAssets() {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get media assets: database not available");
+    return [];
+  }
+
+  try {
+    const { mediaAssets } = await import("../drizzle/schema");
+    const result = await db.select().from(mediaAssets);
+    return result;
+  } catch (error) {
+    console.error("[Database] Error fetching media assets:", error);
+    return [];
+  }
+}

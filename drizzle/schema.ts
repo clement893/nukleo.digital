@@ -70,3 +70,19 @@ export const aiAssessments = mysqlTable("ai_assessments", {
 
 export type AiAssessment = typeof aiAssessments.$inferSelect;
 export type InsertAiAssessment = typeof aiAssessments.$inferInsert;
+
+// Media Assets table for Media Center
+export const mediaAssets = mysqlTable("media_assets", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  fileKey: varchar("fileKey", { length: 512 }).notNull(),
+  url: varchar("url", { length: 1024 }).notNull(),
+  size: int("size").notNull(), // in bytes
+  mimeType: varchar("mimeType", { length: 100 }).notNull(),
+  category: varchar("category", { length: 50 }).notNull(), // 'logo', 'brand', 'photo', 'screenshot'
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type MediaAsset = typeof mediaAssets.$inferSelect;
+export type InsertMediaAsset = typeof mediaAssets.$inferInsert;

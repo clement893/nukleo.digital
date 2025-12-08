@@ -735,3 +735,11 @@
 - [x] Ajouter section Press Contact (press@nukleo.digital)
 - [x] Ajouter la route /media dans App.tsx
 - [x] Ajouter le lien "Media" dans le menu de navigation (item 06)
+
+## Connexion Media Kit avec vrais fichiers
+- [x] Créer le schéma de table media_assets en base de données (id, name, file_key, url, size, mime_type, category)
+- [x] Créer les assets du Media Kit avec script seed (5 assets: logos PNG/SVG, brand guidelines, photos, screenshots)
+- [x] Insérer les assets en base de données via script seed-media-assets.mjs
+- [x] Créer les procédures tRPC pour récupérer les assets (mediaAssets.list)
+- [x] Mettre à jour MediaCenter.tsx pour utiliser les vrais fichiers via tRPC
+- [x] Tester les téléchargements

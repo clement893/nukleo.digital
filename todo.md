@@ -685,3 +685,10 @@
 - [x] Restaurer le CustomCursor avec halo lumineux original
 - [x] Restaurer les styles CSS du curseur halo (gradient violet avec pulse)
 - [x] Tester sur toutes les pages
+
+## Correction halo lumineux (paramètres originaux)
+- [x] Corriger le CustomCursor avec hidden state (mouseenter/mouseleave)
+- [x] Changer la taille du halo de 40px à 400px
+- [x] Changer le gradient de violet 60% à blanc 3% opacité
+- [x] Supprimer l'animation pulse
+- [x] Tester sur desktop uniquement (hidden md:block)

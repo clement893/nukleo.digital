@@ -517,3 +517,7 @@
 - [x] Ajouter la route /testimonials dans App.tsx
 - [x] Ajouter le lien dans la navigation
 - [x] Tester le rendu
+
+## Increase Grain Texture Intensity
+- [x] Augmenter l'opacité de la texture grain dans index.css
+- [x] Tester le rendu

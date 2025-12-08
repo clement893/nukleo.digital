@@ -4,79 +4,79 @@ const teamMembers = [
   {
     name: "Clément",
     role: "FOUNDER & CEO",
-    image: "/team/Clement.jpg",
+    image: "/team/Clement.webp",
     description: "Clément is the core of our team. He connects every part of a project with atomic precision."
   },
   {
     name: "Alexei",
     role: "DIRECTOR OF WEB SERVICES",
-    image: "/team/Alexei.png",
+    image: "/team/Alexei.webp",
     description: "With his strong background in data analysis, Alexei contributes to all your projects with expertise."
   },
   {
     name: "Antoine",
     role: "CHIEF FINANCIAL OFFICER (CFO)",
-    image: "/team/Antoine.jpg",
+    image: "/team/Antoine.webp",
     description: "Trust Antoine to find the most effective solution to make your experience as efficient as possible."
   },
   {
     name: "Séverine",
     role: "EXECUTIVE ASSISTANT",
-    image: "/team/Severine.jpg",
+    image: "/team/Severine.webp",
     description: "Dedicated and altruistic, Séverine ensures smooth operations and exceptional support."
   },
   {
     name: "Omar",
     role: "MARKETING, COMMUNICATIONS AND DATA LEAD",
-    image: "/team/Omar.png",
+    image: "/team/Omar.webp",
     description: "Combining a solid background in marketing with advanced skills in data management."
   },
   {
     name: "Timothé",
     role: "DEVELOPER",
-    image: "/team/Timothe.jpg",
+    image: "/team/Timothe.webp",
     description: "Timothé ensures the rigorous functionality of every project with precision."
   },
   {
     name: "Hind",
     role: "AI DEVELOPER",
-    image: "/team/Hind.jpg",
+    image: "/team/Hind.webp",
     description: "Hind specializes in developing artificial intelligence solutions that automate and optimize processes."
   },
   {
     name: "Sarah",
     role: "WEB DEVELOPER",
-    image: "/team/Sarah.jpg",
+    image: "/team/Sarah.webp",
     description: "Sarah's passion for web development drives her to create exceptional digital experiences."
   },
   {
     name: "Meriem",
     role: "DATA ANALYST",
-    image: "/team/Meriem.jpg",
+    image: "/team/Meriem.webp",
     description: "Organized and proactive, Meriem ensures every message stays consistent as Marketing Coordinator."
   },
   {
     name: "Camille",
     role: "GRAPHIC DESIGNER",
-    image: "/team/Camille.png",
+    image: "/team/Camille.webp",
     description: "Creative since childhood, Camille brings visual concepts to life with artistic precision."
   },
   {
     name: "Maxime",
     role: "MARKETING & COMMUNICATIONS COORDINATOR",
-    image: "/team/Maxime.png",
+    image: "/team/Maxime.webp",
     description: "Maxime coordinates marketing strategies and communications to amplify your brand presence."
   },
   {
     name: "Jean-François",
     role: "DEVELOPER",
-    image: "/team/Jean-Francois.png",
+    image: "/team/Jean-Francois.webp",
     description: "A full-stack developer combining creativity and precision, Jean-François enjoys turning concepts into functional solutions."
   },
   {
     name: "Margaux",
     role: "TEAM MEMBER",
-    image: "/team/Margaux.jpg",
+    image: "/team/Margaux.webp",
     description: "Margaux contributes her expertise to drive projects forward with dedication."
   },
   {
@@ -157,6 +157,9 @@ export default function About() {
                   <img 
                     src={member.image} 
                     alt={member.name}
+                    width="400"
+                    height="400"
+                    loading="lazy"
                     className="w-full h-full object-cover"
                   />
                 </div>

@@ -566,3 +566,9 @@
 ## Augmenter grain et retirer flèches
 - [x] Augmenter l'opacité de la texture grain (0.35 → 0.45)
 - [x] Retirer les flèches (ArrowRight, arrow-brand.png) de tous les boutons
+
+## Optimiser les images du site
+- [x] Identifier toutes les images utilisées dans le site (15 images)
+- [x] Convertir les images PNG/JPG en format WebP (15 fichiers .webp créés)
+- [x] Ajouter lazy-loading sur toutes les balises <img> (sauf LoadingScreen)
+- [x] Ajouter attributs width/height pour éviter layout shift

@@ -86,8 +86,11 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
           {/* Logo */}
           <a href="/" className="flex items-center group cursor-pointer" onClick={onClose}>
             <img 
-              src="/nukleo-logo.png" 
+              src="/nukleo-logo.webp" 
               alt="Nukleo" 
+              width="120"
+              height="32"
+              loading="lazy"
               className="h-8 w-auto object-contain brightness-0 invert"
             />
           </a>

@@ -40,8 +40,11 @@ export default function Header() {
             {/* Logo */}
             <a href="/" className="flex flex-col group cursor-pointer">
               <img 
-                src="/nukleo-logo.png" 
+                src="/nukleo-logo.webp" 
                 alt="Nukleo" 
+                width="120"
+                height="32"
+                loading="lazy"
                 className="h-8 w-auto object-contain brightness-0 invert mb-1"
               />
               <span className="text-[10px] text-white/60 font-medium tracking-wider">

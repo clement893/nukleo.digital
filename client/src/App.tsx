@@ -20,10 +20,13 @@ import DigitalPlatforms from "./pages/services/DigitalPlatforms";
 import IntelligentOperations from "./pages/services/IntelligentOperations";
 import Glossary from "./pages/Glossary";
 import GlossaryTerm from "./pages/GlossaryTerm";
+import ScrollToTop from "./components/ScrollToTop";
 
 function Router() {
   return (
-    <Switch>
+    <>
+      <ScrollToTop />
+      <Switch>
       <Route path={"/"} component={Home} />
       <Route path={"/projects"} component={Projects} />
       <Route path={"/about"} component={About} />
@@ -42,7 +45,8 @@ function Router() {
       <Route path={"/glossary/:termId"} component={GlossaryTerm} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
-    </Switch>
+      </Switch>
+    </>
   );
 }
 

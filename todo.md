@@ -352,3 +352,7 @@
 - [x] Ajouter les sections : définition, exemples business, FAQ, ressources, termes connexes
 - [x] Implémenter le système de bookmarks (localStorage)
 - [x] Tester la recherche, les filtres, et la navigation
+
+## Navigation Scroll Fix
+- [x] Ajouter un composant ScrollToTop pour scroller vers le haut lors des changements de route
+- [x] Tester la navigation entre pages

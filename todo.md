@@ -670,3 +670,12 @@
 - [x] Ajouter filter: invert(1) + brightness(1.2) pour rendre la flèche blanche
 - [x] Tester sur fond clair et fond foncé
 - [x] Vérifier que l'image arrow-brand.png se charge correctement
+
+## Dark/Light Mode Toggle
+- [x] Créer ThemeContext avec useState et localStorage persistence (déjà existant)
+- [x] Activer le hook useTheme dans main.tsx avec switchable=true
+- [x] Ajouter le toggle switch (soleil/lune) dans le Header
+- [x] Définir les couleurs du thème clair (gradient bleu/violet/rose pastel)
+- [x] Adapter le curseur flèche selon le thème (invert sur dark, normal sur light)
+- [x] Ajouter transition smooth entre les thèmes (0.5s ease)
+- [x] Tester sur toutes les pages

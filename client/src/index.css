@@ -164,9 +164,20 @@
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease, filter 0.5s ease;
   opacity: 0.9;
+}
+
+/* Dark theme - flèche blanche */
+[data-theme="dark"] .cursor-arrow,
+body:not([data-theme]) .cursor-arrow {
   filter: invert(1) brightness(1.2);
+}
+
+/* Light theme - flèche violette normale */
+[data-theme="light"] .cursor-arrow {
+  filter: none;
+  opacity: 0.8;
 }
 
 /* Hover state - Scale up + Rotate */
@@ -242,6 +253,12 @@
     font-family: var(--font-sans);
     position: relative;
     min-height: 100vh;
+    transition: background 0.5s ease;
+  }
+
+  /* Dark theme (default) */
+  [data-theme="dark"] body,
+  body:not([data-theme]) body {
     background: linear-gradient(
       135deg,
       #1e3a8a 0%,      /* bleu navy */
@@ -253,6 +270,35 @@
       #991b1b 100%     /* rouge bordeaux */
     );
     background-attachment: fixed;
+  }
+
+  /* Light theme */
+  [data-theme="light"] body {
+    background: linear-gradient(
+      135deg,
+      #f0f9ff 0%,      /* bleu très clair */
+      #e0e7ff 20%,     /* indigo clair */
+      #ede9fe 35%,     /* violet clair */
+      #f5f3ff 50%,     /* violet très clair */
+      #faf5ff 65%,     /* violet pastel */
+      #fef2f2 85%,     /* rose clair */
+      #fff1f2 100%     /* rose très clair */
+    );
+    background-attachment: fixed;
+  }
+
+  /* Ajuster les couleurs de texte en mode clair */
+  [data-theme="light"] body {
+    color: #1e293b;
+  }
+
+  [data-theme="light"] h1,
+  [data-theme="light"] h2,
+  [data-theme="light"] h3,
+  [data-theme="light"] h4,
+  [data-theme="light"] h5,
+  [data-theme="light"] h6 {
+    color: #0f172a;
   }
 
   /* Grain texture overlay */

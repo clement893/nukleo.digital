@@ -594,3 +594,11 @@
 - [x] Créer page /clients complète avec détails sur chaque client
 - [x] Ajouter lien "Nos Clients" dans le Footer
 - [x] Ajouter route /clients dans App.tsx
+
+## Phase 1 SEO : Fondations Techniques (Semaine 1-2)
+- [x] Créer sitemap.xml dynamique avec toutes les pages (20 URLs)
+- [x] Créer robots.txt optimisé
+- [x] Ajouter headers Cache-Control pour assets statiques (_headers file)
+- [x] Précharger les fonts critiques (Aktiv Grotesk Regular, Medium, Bold)
+- [x] Préparer configuration GA4 (tracking ID, objectifs) - Guide créé
+- [x] Préparer instructions Search Console (vérification propriété, soumission sitemap) - Guide créé

@@ -11,6 +11,7 @@ export default function Footer() {
     { label: 'Resources', href: '/resources' },
     { label: 'FAQ', href: '/faq' },
     { label: 'Contact', href: '/contact' },
+    { label: 'Media', href: '/media' },
   ];
 
   const services = [

@@ -743,3 +743,9 @@
 - [x] Créer les procédures tRPC pour récupérer les assets (mediaAssets.list)
 - [x] Mettre à jour MediaCenter.tsx pour utiliser les vrais fichiers via tRPC
 - [x] Tester les téléchargements
+
+## Déplacement lien Media vers Footer
+- [x] Retirer "Media" du menu principal (FullScreenMenu) et renumber les items
+- [x] Ajouter "Media" dans le Footer uniquement (section navigation)
+- [x] Corriger l'affichage du Header/menu sur la page Media Center (ajout Header + Footer)
+- [x] Tester la navigation

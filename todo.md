@@ -653,3 +653,9 @@
 - [x] Ajouter la flèche en background pattern du Footer
 - [x] Remplacer le curseur personnalisé (halo lumineux) par la flèche arrow-brand.png
 - [x] Tester l'apparence sur toutes les pages
+
+## Animations curseur contextuelles
+- [x] Implémenter scale 1.5x au hover sur liens/boutons
+- [x] Ajouter rotation 45° sur éléments cliquables
+- [x] Créer pulse effect pendant le clic
+- [x] Tester les animations sur toutes les pages

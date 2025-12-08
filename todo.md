@@ -493,3 +493,8 @@
 - [x] Modifier LoadingScreen pour utiliser sessionStorage
 - [x] L'animation ne doit s'afficher qu'une fois par session
 - [x] Tester le comportement
+
+## Remove Pink Colors from /expertise
+- [x] Identifier toutes les couleurs roses dans Expertise.tsx
+- [x] Remplacer par rouge bordeaux et violet bleué
+- [x] Tester le rendu de la page

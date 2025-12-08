@@ -749,3 +749,9 @@
 - [x] Ajouter "Media" dans le Footer uniquement (section navigation)
 - [x] Corriger l'affichage du Header/menu sur la page Media Center (ajout Header + Footer)
 - [x] Tester la navigation
+
+## Bug curseur halo disparu (encore)
+- [x] Diagnostiquer pourquoi le curseur a disparu à nouveau (opacité trop faible)
+- [x] Vérifier les styles CSS du curseur (OK)
+- [x] Augmenter l'opacité de 8% à 20% au centre, 8% à 50%
+- [x] Tester la visibilité sur desktop

@@ -279,3 +279,7 @@
 
 ## Translation Fix
 - [x] Traduire la page Manifesto en anglais
+
+## Leo AI English Prompt
+- [x] Traduire le système prompt de Leo en anglais
+- [x] Tester les réponses de Leo

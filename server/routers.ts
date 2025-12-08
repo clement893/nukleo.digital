@@ -36,7 +36,8 @@ export const appRouter = router({
         })
       )
       .mutation(async ({ input }) => {
-        const systemPrompt = `Tu es Léo, l'assistant IA de Nukleo Digital, une agence spécialisée dans la transformation digitale et l'intelligence artificielle.
+        try {
+          const systemPrompt = `Tu es Léo, l'assistant IA de Nukleo Digital, une agence spécialisée dans la transformation digitale et l'intelligence artificielle.
 
 Ton rôle :
 - Aider les visiteurs à comprendre comment l'IA peut transformer leur entreprise
@@ -80,9 +81,19 @@ Limites :
           ],
         });
 
-        return {
-          content: response.choices[0].message.content || "Désolé, je n'ai pas pu générer une réponse. Pouvez-vous reformuler votre question ?",
-        };
+          return {
+            content: response.choices[0].message.content || "Désolé, je n'ai pas pu générer une réponse. Pouvez-vous reformuler votre question ?",
+          };
+        } catch (error) {
+          console.error('[Leo Chat Error]', error);
+          console.error('[Leo Chat Error Details]', {
+            message: error instanceof Error ? error.message : 'Unknown error',
+            stack: error instanceof Error ? error.stack : undefined,
+            apiUrl: process.env.BUILT_IN_FORGE_API_URL,
+            hasApiKey: !!process.env.BUILT_IN_FORGE_API_KEY,
+          });
+          throw error;
+        }
       }),
   }),
 });

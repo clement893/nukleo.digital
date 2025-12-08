@@ -259,9 +259,12 @@
 - [x] Tester tous les formulaires
 
 ## Chatbot Fix
-- [ ] Investiguer l'erreur de connexion du chatbot Leo AI
+- [x] Investiguer l'erreur frontend avec console navigateur
+- [x] Vérifier les logs réseau tRPC
+- [x] Ajouter les variables d'environnement sur Vercel
+- [x] Ajouter des logs détaillés pour le débogage
 - [ ] Corriger le problème de connexion
-- [ ] Tester le chatbot
+- [ ] Tester le chatbot en production
 
 ## Menu Update
 - [x] Remettre Leo AI dans le menu (remplacer AI Readiness)

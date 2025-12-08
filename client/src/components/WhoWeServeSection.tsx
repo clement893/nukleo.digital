@@ -1,30 +1,24 @@
-import { Rocket, Building2, Building, Landmark } from 'lucide-react';
+import { Rocket, Building2, Heart } from 'lucide-react';
 
 export default function WhoWeServeSection() {
   const segments = [
     {
       icon: Rocket,
       title: 'Startups & Scale-ups',
-      description: 'Accelerate your growth with AI-powered automation, intelligent product features, and data-driven decision making from day one.',
-      highlights: ['Rapid prototyping', 'Scalable architecture', 'Product-market fit optimization']
+      description: 'Launch faster and scale smarter with AI-powered automation, intelligent features, and data-driven insights that give you a competitive edge from day one.',
+      highlights: ['Rapid MVP development', 'Scalable AI architecture', 'Growth acceleration']
     },
     {
       icon: Building2,
-      title: 'SMBs & Mid-Market',
-      description: 'Transform your operations with practical AI solutions that deliver measurable ROI, from customer service automation to predictive analytics.',
-      highlights: ['Cost-effective solutions', 'Quick implementation', 'Proven ROI']
+      title: 'SMBs',
+      description: 'Transform your business with practical, cost-effective AI solutions that deliver real ROI—from automating repetitive tasks to unlocking customer insights.',
+      highlights: ['Affordable AI solutions', 'Quick wins & fast ROI', 'No enterprise complexity']
     },
     {
-      icon: Building,
-      title: 'Enterprises & Fortune 500',
-      description: 'Drive enterprise-wide AI transformation with strategic roadmaps, governance frameworks, and large-scale implementation expertise.',
-      highlights: ['Enterprise architecture', 'Change management', 'Compliance & security']
-    },
-    {
-      icon: Landmark,
-      title: 'Governments & Institutions',
-      description: 'Modernize public services with responsible AI, ensuring transparency, accessibility, and citizen-centric innovation at scale.',
-      highlights: ['Public sector expertise', 'Ethical AI frameworks', 'Digital transformation']
+      icon: Heart,
+      title: 'Non-Profits',
+      description: 'Amplify your impact with AI tools that help you serve more people, operate more efficiently, and tell your story more powerfully—without breaking the budget.',
+      highlights: ['Mission-driven AI', 'Donor engagement tools', 'Operational efficiency']
     }
   ];
 
@@ -34,18 +28,18 @@ export default function WhoWeServeSection() {
         {/* Section Header */}
         <div className="text-center mb-20">
           <p className="text-sm font-mono uppercase tracking-widest text-purple-400 mb-4">
-            Global Reach
+            Champions of Smaller Organizations
           </p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
             Who We Serve
           </h2>
           <p className="text-xl text-white/70 max-w-3xl mx-auto">
-            From ambitious startups to global enterprises, we partner with organizations of all sizes to unlock the transformative power of artificial intelligence.
+            We're here to help <span className="text-white font-bold">EVERYONE</span> transform. Big tech has AI—now it's your turn. We bring enterprise-grade AI to startups, SMBs, and non-profits who refuse to be left behind.
           </p>
         </div>
 
         {/* Segments Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {segments.map((segment, index) => {
             const Icon = segment.icon;
             return (
@@ -88,7 +82,7 @@ export default function WhoWeServeSection() {
         {/* Bottom CTA */}
         <div className="text-center mt-16">
           <p className="text-white/60 mb-6">
-            No matter your size or sector, we have the expertise to guide your AI transformation journey.
+            You don't need a Fortune 500 budget to access world-class AI. Let's level the playing field together.
           </p>
           <a
             href="/contact"

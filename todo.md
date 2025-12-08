@@ -504,3 +504,9 @@
 - [x] Intégrer dans la navigation avec hover background léger
 - [x] Ajouter à la fin des boutons CTA (Start Project, Get in Touch)
 - [x] Tester le rendu
+
+## Update Who We Serve Section
+- [x] Remplacer les catégories actuelles par Startups & Scale-ups, SMBs, Non-profits
+- [x] Mettre l'accent sur "champion des petites organisations"
+- [x] Ajouter le message "We help EVERYONE transform"
+- [x] Tester le rendu

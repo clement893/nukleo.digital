@@ -481,3 +481,10 @@
 - [x] Supprimer la carte de droite avec description et statistiques
 - [x] Ajuster le layout du Hero
 - [x] Tester le rendu
+
+## Rework Gradients with Grain Texture
+- [x] Analyser les références de gradients fournis
+- [x] Créer le nouveau système de gradients diagonaux
+- [x] Appliquer les gradients sur toutes les sections
+- [x] Ajouter la texture grain CSS
+- [x] Tester le rendu sur toutes les pages

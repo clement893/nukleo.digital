@@ -664,3 +664,9 @@
 - [x] Réduire la taille du curseur de 32px à 16px (taille curseur standard)
 - [x] Ajuster les animations hover/click pour la nouvelle taille (scale 2x au hover, 2.5x au click)
 - [x] Tester la visibilité sur tous les backgrounds
+
+## Bug curseur invisible
+- [x] Diagnostiquer pourquoi le curseur flèche n'apparaît pas (problème de contraste violet sur violet)
+- [x] Ajouter filter: invert(1) + brightness(1.2) pour rendre la flèche blanche
+- [x] Tester sur fond clair et fond foncé
+- [x] Vérifier que l'image arrow-brand.png se charge correctement

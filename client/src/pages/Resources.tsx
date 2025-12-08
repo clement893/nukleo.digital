@@ -1,6 +1,6 @@
 import { BookOpen, FileText, Video, Download } from 'lucide-react';
 import PageLayout from '@/components/PageLayout';
-import TrendRadar from '@/components/TrendRadar';
+
 
 export default function Resources() {
   const resources = [
@@ -61,8 +61,39 @@ export default function Resources() {
         </div>
       </section>
 
-      {/* AI Trend Radar */}
-      <TrendRadar />
+      {/* AI Trend Radar CTA */}
+      <section className="pb-16">
+        <div className="container">
+          <div className="glass rounded-3xl p-12 lg:p-16 relative overflow-hidden group hover:bg-white/10 transition-all duration-500">
+            {/* Background gradient */}
+            <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            <div className="relative z-10">
+              <span className="font-mono text-accent text-sm mb-4 block uppercase tracking-widest">
+                AI TREND RADAR
+              </span>
+              
+              <h2 className="text-3xl lg:text-5xl font-bold text-white mb-6">
+                CARTOGRAPHIE<br />
+                TECHNOLOGIQUE IA
+              </h2>
+              
+              <p className="text-white/75 text-lg mb-8 max-w-2xl">
+                Visualisation interactive des technologies IA émergentes et établies. 
+                Mise à jour mensuelle pour guider vos décisions d'investissement technologique.
+              </p>
+              
+              <a
+                href="/radar"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-white rounded-full font-medium hover:bg-accent/90 transition-all duration-300"
+              >
+                Explorer le Radar
+                <span>→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Categories */}
       <section className="pb-12">

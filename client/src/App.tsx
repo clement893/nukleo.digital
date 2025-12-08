@@ -13,6 +13,7 @@ import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
 import Leo from "./pages/Leo";
 import Manifesto from "./pages/Manifesto";
+import Radar from "./pages/Radar";
 
 function Router() {
   return (
@@ -26,6 +27,7 @@ function Router() {
       <Route path={"/contact"} component={Contact} />
       <Route path={"/leo"} component={Leo} />
       <Route path={"/manifesto"} component={Manifesto} />
+      <Route path={"/radar"} component={Radar} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>

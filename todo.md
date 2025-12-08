@@ -186,3 +186,9 @@
 - [x] Ajouter les interactions (hover, click, filtres)
 - [x] Intégrer dans la page Resources au-dessus des filtres d'articles
 - [x] Tester toutes les interactions
+
+## Déplacement AI Trend Radar vers page dédiée
+- [x] Créer la page Radar.tsx avec TrendRadar
+- [x] Ajouter la route /radar dans App.tsx
+- [x] Remplacer le radar dans Resources par un CTA vers /radar
+- [x] Tester la navigation et déployer

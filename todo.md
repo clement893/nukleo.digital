@@ -377,3 +377,9 @@
 - [x] Créer les pages manquantes (privacy, terms, cookies)
 - [x] Router toutes les pages dans App.tsx
 - [ ] Connecter les 4 boutons CTA des outils interactifs (AI Readiness, Radar, Glossary, ROI Calculator)
+
+## Hero Section Enhancement
+- [x] Rendre le hero beaucoup plus impactant et dramatique
+- [x] Ajouter des animations spectaculaires (texte, background, effets)
+- [x] Augmenter la présence visuelle pour "crier fort"
+- [x] Tester l'impact visuel final

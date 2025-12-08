@@ -707,3 +707,9 @@
 - [x] Supprimer les styles CSS du thème clair
 - [x] Garder uniquement le thème dark par défaut
 - [x] Tester que le site reste en dark mode
+
+## Bug curseur halo absent
+- [x] Vérifier que CustomCursor est bien importé dans App.tsx (OK)
+- [x] Vérifier les styles CSS du curseur (OK)
+- [x] Augmenter l'opacité de 3% à 8% avec gradient progressif
+- [x] Tester la visibilité sur desktop

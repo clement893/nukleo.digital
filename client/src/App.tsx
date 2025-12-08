@@ -14,6 +14,7 @@ import Contact from "./pages/Contact";
 import Leo from "./pages/Leo";
 import Manifesto from "./pages/Manifesto";
 import Radar from "./pages/Radar";
+import AIReadinessAssessment from "./pages/AIReadinessAssessment";
 
 function Router() {
   return (
@@ -28,6 +29,7 @@ function Router() {
       <Route path={"/leo"} component={Leo} />
       <Route path={"/manifesto"} component={Manifesto} />
       <Route path={"/radar"} component={Radar} />
+      <Route path={"/ai-readiness"} component={AIReadinessAssessment} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>

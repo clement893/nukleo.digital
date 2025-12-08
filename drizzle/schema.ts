@@ -25,4 +25,48 @@ export const users = mysqlTable("users", {
 export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 
-// TODO: Add your tables here
+// AI Readiness Assessment table
+export const aiAssessments = mysqlTable("ai_assessments", {
+  id: int("id").autoincrement().primaryKey(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+
+  // User Info
+  firstName: varchar("firstName", { length: 100 }).notNull(),
+  lastName: varchar("lastName", { length: 100 }).notNull(),
+  email: varchar("email", { length: 255 }).notNull(),
+  company: varchar("company", { length: 255 }).notNull(),
+  jobTitle: varchar("jobTitle", { length: 100 }),
+  phone: varchar("phone", { length: 50 }),
+
+  // Context
+  companySize: varchar("companySize", { length: 50 }),
+  industry: varchar("industry", { length: 100 }),
+
+  // Scores
+  globalScore: int("globalScore").notNull(),
+  strategyScore: int("strategyScore").notNull(),
+  dataScore: int("dataScore").notNull(),
+  technologyScore: int("technologyScore").notNull(),
+  talentScore: int("talentScore").notNull(),
+  governanceScore: int("governanceScore").notNull(),
+  cultureScore: int("cultureScore").notNull(),
+  maturityLevel: varchar("maturityLevel", { length: 50 }).notNull(),
+
+  // Responses (JSON)
+  responses: text("responses").notNull(),
+
+  // Tracking
+  pdfDownloaded: int("pdfDownloaded").default(0).notNull(),
+  pdfDownloadedAt: timestamp("pdfDownloadedAt"),
+  consultationRequested: int("consultationRequested").default(0).notNull(),
+  consultationRequestedAt: timestamp("consultationRequestedAt"),
+
+  // Marketing
+  utmSource: varchar("utmSource", { length: 100 }),
+  utmMedium: varchar("utmMedium", { length: 100 }),
+  utmCampaign: varchar("utmCampaign", { length: 100 }),
+});
+
+export type AiAssessment = typeof aiAssessments.$inferSelect;
+export type InsertAiAssessment = typeof aiAssessments.$inferInsert;

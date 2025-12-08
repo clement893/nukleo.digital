@@ -1,0 +1,216 @@
+import { useState } from 'react';
+import { QUESTIONS } from '@/lib/assessment/questions';
+import { calculateScores, AssessmentResults } from '@/lib/assessment/scoring';
+import AssessmentIntro from '@/components/assessment/AssessmentIntro';
+import QuestionCard from '@/components/assessment/QuestionCard';
+import ProgressBar from '@/components/assessment/ProgressBar';
+import ResultsRadar from '@/components/assessment/ResultsRadar';
+import ResultsSummary from '@/components/assessment/ResultsSummary';
+import EmailCaptureModal, { EmailCaptureData } from '@/components/assessment/EmailCaptureModal';
+import { ArrowLeft, ArrowRight, Download, CheckCircle } from 'lucide-react';
+import { useSound } from '@/hooks/useSound';
+import { trpc } from '@/lib/trpc';
+
+type AssessmentState = 'intro' | 'quiz' | 'results';
+
+export default function AIReadinessAssessment() {
+  const [state, setState] = useState<AssessmentState>('intro');
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [answers, setAnswers] = useState<Record<number, number>>({});
+  const [results, setResults] = useState<AssessmentResults | null>(null);
+  const [showEmailModal, setShowEmailModal] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
+  const { playClick } = useSound();
+
+  const saveAssessment = trpc.assessment.save.useMutation();
+
+  const handleEmailSubmit = async (data: EmailCaptureData) => {
+    if (!results) return;
+
+    try {
+      // Find dimension scores by dimension name
+      const getDimensionScore = (dimension: string) => {
+        const dim = results.dimensionScores.find(d => d.dimension === dimension);
+        return dim?.score ?? 0;
+      };
+
+      await saveAssessment.mutateAsync({
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        company: data.company,
+        jobTitle: data.jobTitle,
+        phone: data.phone,
+        companySize: data.companySize,
+        industry: data.industry,
+        globalScore: results.globalScore,
+        strategyScore: getDimensionScore('strategy'),
+        dataScore: getDimensionScore('data'),
+        technologyScore: getDimensionScore('technology'),
+        talentScore: getDimensionScore('talent'),
+        governanceScore: getDimensionScore('governance'),
+        cultureScore: getDimensionScore('culture'),
+        maturityLevel: results.maturityLevel,
+        answers: answers,
+      });
+
+      setIsSaved(true);
+      setShowEmailModal(false);
+      playClick();
+    } catch (error) {
+      console.error('Failed to save assessment:', error);
+      alert('Failed to save assessment. Please try again.');
+    }
+  };
+
+  const currentQuestion = QUESTIONS[currentQuestionIndex];
+  const totalQuestions = QUESTIONS.length;
+  const isLastQuestion = currentQuestionIndex === totalQuestions - 1;
+  const canGoNext = answers[currentQuestion.id] !== undefined;
+
+  const handleStart = () => {
+    setState('quiz');
+  };
+
+  const handleSelectOption = (points: number) => {
+    setAnswers(prev => ({
+      ...prev,
+      [currentQuestion.id]: points,
+    }));
+  };
+
+  const handleNext = () => {
+    playClick();
+    
+    if (isLastQuestion) {
+      // Calculate scores and show results
+      const assessmentResults = calculateScores(answers);
+      setResults(assessmentResults);
+      setState('results');
+    } else {
+      setCurrentQuestionIndex(prev => prev + 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const handlePrevious = () => {
+    playClick();
+    
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(prev => prev - 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-violet-950/20 to-slate-950 pt-32 pb-20 px-4">
+      <div className="container">
+        {state === 'intro' && (
+          <AssessmentIntro onStart={handleStart} />
+        )}
+
+        {state === 'quiz' && (
+          <div className="w-full max-w-4xl mx-auto">
+            <ProgressBar 
+              current={currentQuestionIndex + 1} 
+              total={totalQuestions} 
+            />
+
+            <QuestionCard
+              question={currentQuestion}
+              selectedOption={answers[currentQuestion.id] ?? null}
+              onSelectOption={handleSelectOption}
+            />
+
+            {/* Navigation Buttons */}
+            <div className="flex items-center justify-between mt-12">
+              <button
+                onClick={handlePrevious}
+                disabled={currentQuestionIndex === 0}
+                className="group inline-flex items-center gap-2 px-6 py-3 bg-white/5 backdrop-blur-xl border border-white/10 text-white font-medium rounded-full hover:bg-white/10 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-300"
+              >
+                <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+                Previous
+              </button>
+
+              <button
+                onClick={handleNext}
+                disabled={!canGoNext}
+                className="group inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-violet-500 to-rose-500 text-white font-bold rounded-full hover:shadow-[0_0_40px_rgba(139,92,246,0.5)] disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-300"
+              >
+                {isLastQuestion ? 'View Results' : 'Next'}
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
+          </div>
+        )}
+
+        {state === 'results' && results && (
+          <div className="w-full max-w-6xl mx-auto">
+            {/* Header */}
+            <div className="text-center mb-12">
+              <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4">
+                Your AI Readiness Report
+              </h2>
+              <p className="text-xl text-white/70">
+                Here's your comprehensive assessment across 6 key dimensions
+              </p>
+            </div>
+
+            {/* Results Grid */}
+            <div className="grid lg:grid-cols-2 gap-8 mb-12">
+              {/* Left: Summary */}
+              <div>
+                <ResultsSummary results={results} />
+              </div>
+
+              {/* Right: Radar Chart */}
+              <div>
+                <ResultsRadar dimensionScores={results.dimensionScores} />
+              </div>
+            </div>
+
+            {/* CTA Section */}
+            <div className="p-8 bg-gradient-to-r from-violet-500/10 to-rose-500/10 backdrop-blur-xl border border-white/10 rounded-2xl text-center">
+              <h3 className="text-2xl font-bold text-white mb-4">
+                Ready for Your Detailed Roadmap?
+              </h3>
+              <p className="text-white/70 mb-6 max-w-2xl mx-auto">
+                Get a comprehensive PDF report with personalized recommendations, 
+                implementation timeline, and next steps tailored to your maturity level.
+              </p>
+              {!isSaved ? (
+                <button
+                  onClick={() => {
+                    playClick();
+                    setShowEmailModal(true);
+                  }}
+                  className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-violet-500 to-rose-500 text-white font-bold rounded-full hover:shadow-[0_0_40px_rgba(139,92,246,0.5)] transition-all duration-300"
+                >
+                  <Download className="w-5 h-5" />
+                  Get Your Full Report
+                </button>
+              ) : (
+                <div className="inline-flex items-center gap-3 px-8 py-4 bg-green-500/20 border border-green-500/30 text-green-400 font-bold rounded-full">
+                  <CheckCircle className="w-5 h-5" />
+                  Report Saved! Check your email.
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Email Capture Modal */}
+        {showEmailModal && (
+          <EmailCaptureModal
+            onSubmit={handleEmailSubmit}
+            onClose={() => {
+              setShowEmailModal(false);
+              playClick();
+            }}
+          />
+        )}
+      </div>
+    </div>
+  );
+}

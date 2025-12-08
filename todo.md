@@ -203,3 +203,46 @@
 - [x] Traduire FullScreenMenu.tsx (items de navigation)
 - [x] Traduire les données JSON (radar-2024-12.json)
 - [ ] Tester toutes les pages et vérifier la cohérence
+
+## AI Readiness Assessment Tool
+- [x] Phase 1: Quiz interactif avec 20 questions
+  - [x] Créer la structure de données des questions (6 dimensions)
+  - [x] Créer la page AIReadinessAssessment.tsx
+  - [x] Créer le composant AssessmentIntro.tsx
+  - [x] Créer le composant QuestionCard.tsx
+  - [x] Créer le composant ProgressBar.tsx
+  - [x] Implémenter la navigation entre questions
+  - [x] Ajouter la route /ai-readiness dans App.tsx
+- [x] Phase 2: Algorithme de scoring et radar chart
+  - [x] Créer l'algorithme de scoring par dimension
+  - [x] Calculer le score global et niveau de maturité
+  - [x] Créer le composant ResultsRadar.tsx avec Recharts
+  - [x] Créer le composant ResultsSummary.tsx
+- [x] Phase 3: Capture email et base de données
+  - [x] Créer le composant EmailCaptureModal.tsx
+  - [x] Créer le schéma database ai_assessments
+  - [x] Créer les endpoints tRPC pour sauvegarder
+  - [x] Intégrer le modal dans AIReadinessAssessment.tsx
+- [ ] Phase 4: Génération PDF
+  - [ ] Installer jsPDF et html2canvas
+  - [ ] Créer le générateur PDF avec 7 pages
+  - [ ] Capturer le radar chart en image
+  - [ ] Générer les recommandations personnalisées
+- [ ] Phase 5: Automation SendGrid
+  - [ ] Configurer SendGrid API
+  - [ ] Créer les templates d'emails (3 emails)
+  - [ ] Implémenter l'envoi automatique du rapport
+  - [ ] Configurer les emails de follow-up (J+3, J+7)
+- [ ] Phase 6: Tests et déploiement
+  - [ ] Tester le flow complet
+  - [ ] Vérifier la génération PDF
+  - [ ] Tester l'envoi d'emails
+  - [ ] Push to GitHub et déploiement Vercel
+
+## SendGrid Email Integration
+- [x] Installer @sendgrid/mail
+- [x] Configurer les secrets SendGrid (API key, from email, from name)
+- [x] Créer le helper sendEmail dans server/_core/sendgrid.ts
+- [x] Créer le template HTML d'email avec scores et dimensions
+- [x] Intégrer l'envoi d'email dans assessment.save
+- [x] Tester l'envoi d'email avec vitest

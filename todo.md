@@ -393,3 +393,6 @@
 - [x] Unifier les fonds Hero, Manifesto, Who We Serve sur même gradient violet
 - [x] Remplacer l'orbe rose par un orbe rouge bordeaux
 - [x] Tester le rendu final
+
+## Remove Global Badge
+- [x] Retirer le badge "Global AI Transformation Partner" du hero

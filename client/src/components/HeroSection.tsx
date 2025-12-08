@@ -69,17 +69,6 @@ export default function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left: Main Title */}
           <div className="lg:col-span-7">
-            {/* Badge */}
-            <div className="mb-8 animate-in fade-in slide-in-from-bottom-10 duration-700">
-              <span className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 text-white text-sm font-mono uppercase tracking-widest">
-                <span className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-purple-500"></span>
-                </span>
-                Global AI Transformation Partner
-              </span>
-            </div>
-
             {/* Main Heading with Stagger Animations */}
             <h1 className="
               text-[4rem] sm:text-[6rem] md:text-[8rem] lg:text-[10rem] 

@@ -498,3 +498,9 @@
 - [x] Identifier toutes les couleurs roses dans Expertise.tsx
 - [x] Remplacer par rouge bordeaux et violet bleué
 - [x] Tester le rendu de la page
+
+## Integrate Double Arrow Brand Asset
+- [x] Copier l'asset flèche dans client/public
+- [x] Intégrer dans la navigation avec hover background léger
+- [x] Ajouter à la fin des boutons CTA (Start Project, Get in Touch)
+- [x] Tester le rendu

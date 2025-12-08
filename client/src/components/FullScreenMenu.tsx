@@ -109,10 +109,12 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
                 uppercase 
                 text-xs
                 hover:scale-110
+                flex items-center gap-2
               "
               onClick={onClose}
             >
               Start Project
+              <img src="/arrow-brand.png" alt="" className="w-4 h-4 opacity-60" />
             </Button>
             <button
               onClick={onClose}
@@ -158,7 +160,16 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
                       hover:bg-white/10 
                       transition-all duration-500
                       cursor-pointer
+                      relative
+                      overflow-hidden
                     "
+                    style={{
+                      backgroundImage: 'url(/arrow-brand.png)',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: 'right center',
+                      backgroundSize: '80px auto',
+                      backgroundBlendMode: 'overlay',
+                    }}
                   >
                     <span 
                       className="

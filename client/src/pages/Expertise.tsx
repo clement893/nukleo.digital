@@ -184,9 +184,10 @@ export default function Expertise() {
 
             <a
               href="/contact"
-              className="inline-block rounded-full text-lg px-10 py-6 bg-white text-purple-900 hover:bg-white/90 transition-all duration-500 font-bold tracking-wider uppercase"
+              className="inline-flex items-center gap-2 rounded-full text-lg px-10 py-6 bg-white text-purple-900 hover:bg-white/90 transition-all duration-500 font-bold tracking-wider uppercase"
             >
               GET IN TOUCH
+              <img src="/arrow-brand.png" alt="" className="w-5 h-5 opacity-60" />
             </a>
           </div>
         </div>

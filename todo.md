@@ -342,3 +342,13 @@
 - [x] Créer la grille Resources avec articles sur fond blanc
 - [x] Créer la section CTA Newsletter sur gradient
 - [x] Tester toutes les sections et transitions
+
+## AI Glossary Implementation
+- [x] Créer la structure de données JSON pour les termes
+- [x] Écrire les 24 termes prioritaires avec contenu complet (définitions, exemples, FAQ)
+- [x] Créer la page principale /glossary avec hero, recherche, filtres
+- [x] Implémenter la grille de cartes de termes
+- [x] Créer le composant de page de détail /glossary/[term-slug]
+- [x] Ajouter les sections : définition, exemples business, FAQ, ressources, termes connexes
+- [x] Implémenter le système de bookmarks (localStorage)
+- [x] Tester la recherche, les filtres, et la navigation

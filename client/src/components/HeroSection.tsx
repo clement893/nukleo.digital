@@ -35,11 +35,11 @@ export default function HeroSection() {
               hover-distort
             ">
               <span className="inline-block animate-in fade-in slide-in-from-left-20 duration-700">
-                ARCHITECTS
+                Architects
               </span>
               <br />
               <span className="inline-block animate-in fade-in slide-in-from-left-20 duration-700 delay-100">
-                OF YOUR
+                of Your
               </span>
               {' '}
               <span 

@@ -55,8 +55,8 @@ export default function Contact() {
           </span>
 
           <h1 className="text-white mb-8">
-            LET'S START<br />
-            YOUR TRANSFORMATION
+            Let's Start<br />
+            Your Transformation
           </h1>
 
           <p className="text-white/75 text-lg lg:text-xl leading-relaxed max-w-3xl">

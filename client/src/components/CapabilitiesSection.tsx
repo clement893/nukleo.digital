@@ -37,8 +37,8 @@ export default function CapabilitiesSection() {
           </span>
 
           <h2 className="text-white mb-6">
-            AI-NATIVE<br />
-            INFRASTRUCTURE
+            AI-Native<br />
+            Infrastructure
           </h2>
 
           <p className="text-white/75 text-lg lg:text-xl leading-relaxed max-w-3xl">

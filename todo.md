@@ -535,3 +535,8 @@
 - [x] Identifier tous les badges et titres en majuscules
 - [x] Remplacer par Title Case ou Sentence case
 - [x] Tester le rendu sur toutes les pages
+
+## Retirer ALL CAPS des grands titres H1/H2
+- [x] Identifier tous les H1/H2 en majuscules
+- [x] Remplacer par Title Case
+- [x] Tester le rendu

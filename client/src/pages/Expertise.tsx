@@ -82,8 +82,8 @@ export default function Expertise() {
           </span>
 
           <h1 className="text-white mb-8">
-            DEEP<br />
-            EXPERTISE
+            Deep<br />
+            Expertise
           </h1>
 
           <p className="text-white/75 text-lg lg:text-xl leading-relaxed max-w-3xl">
@@ -174,8 +174,8 @@ export default function Expertise() {
         <div className="container">
           <div className="glass rounded-3xl p-12 lg:p-16 text-center">
             <h2 className="text-white mb-6">
-              LET'S BUILD<br />
-              TOGETHER
+              Let's Build<br />
+              Together
             </h2>
 
             <p className="text-white/75 text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto mb-8">

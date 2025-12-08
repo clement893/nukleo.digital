@@ -6,8 +6,8 @@ export default function CTASection() {
       <div className="container relative z-10">
         <div className="text-center max-w-4xl mx-auto">
           <h2 className="text-white mb-8">
-            READY TO<br />
-            ASCEND?
+            Ready to<br />
+            Ascend?
           </h2>
 
           <p className="text-white/75 text-lg lg:text-xl leading-relaxed mb-12">

@@ -58,8 +58,8 @@ export default function Projects() {
           </span>
 
           <h1 className="text-white mb-8">
-            TRANSFORMATIONS<br />
-            IN ACTION
+            Transformations<br />
+            in Action
           </h1>
 
           <p className="text-white/75 text-lg lg:text-xl leading-relaxed max-w-3xl">
@@ -156,8 +156,8 @@ export default function Projects() {
         <div className="container">
           <div className="glass rounded-3xl p-12 lg:p-16 text-center">
             <h2 className="text-white mb-6">
-              READY TO<br />
-              TRANSFORM?
+              Ready to<br />
+              Transform?
             </h2>
 
             <p className="text-white/75 text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto mb-8">

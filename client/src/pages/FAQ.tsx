@@ -151,9 +151,9 @@ export default function FAQ() {
           </span>
 
           <h1 className="text-5xl lg:text-6xl font-bold text-white mb-8">
-            EVERYTHING YOU NEED<br />
-            TO KNOW ABOUT<br />
-            AGENTIC AI
+            Everything You Need<br />
+            to Know About<br />
+            Agentic AI
           </h1>
 
           <p className="text-white/75 text-lg lg:text-xl leading-relaxed max-w-3xl">

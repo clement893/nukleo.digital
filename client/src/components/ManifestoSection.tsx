@@ -12,9 +12,9 @@ export default function ManifestoSection() {
             </span>
 
             <h2 className="text-white mb-8">
-              MOVE FROM<br />
-              <span className="text-white/40">PILOT TO</span><br />
-              SCALE.
+              Move From<br />
+              <span className="text-white/40">Pilot to</span><br />
+              Scale.
             </h2>
 
             <p className="text-white/75 text-lg leading-relaxed mb-8">

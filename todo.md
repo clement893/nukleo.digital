@@ -700,3 +700,10 @@
 - [x] Appliquer parallax aux CTAs (vitesse 0.7x - premier plan)
 - [x] Optimiser les performances (requestAnimationFrame + passive listener)
 - [x] Tester sur desktop et mobile
+
+## Suppression toggle dark/light mode
+- [x] Retirer le bouton toggle (soleil/lune) du Header
+- [x] Désactiver switchable=true dans ThemeProvider (main.tsx)
+- [x] Supprimer les styles CSS du thème clair
+- [x] Garder uniquement le thème dark par défaut
+- [x] Tester que le site reste en dark mode

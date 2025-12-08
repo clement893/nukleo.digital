@@ -1,15 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Menu, Sun, Moon } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import FullScreenMenu from './FullScreenMenu';
 import { useSound } from '@/hooks/useSound';
-import { useTheme } from '@/contexts/ThemeContext';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { playHover, playClick } = useSound();
-  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,32 +52,8 @@ export default function Header() {
               </span>
             </a>
 
-            {/* Right: Theme Toggle + CTA + Burger Menu */}
+            {/* Right: CTA + Burger Menu */}
             <div className="flex items-center gap-4">
-              {/* Theme Toggle */}
-              <button
-                onClick={() => { playClick(); toggleTheme?.(); }}
-                onMouseEnter={playHover}
-                className="
-                  w-10 h-10 md:w-12 md:h-12
-                  rounded-full
-                  bg-white/10
-                  hover:bg-white/20
-                  backdrop-blur-sm
-                  flex items-center justify-center
-                  transition-all duration-500
-                  hover:scale-110
-                  group
-                "
-                aria-label="Toggle theme"
-              >
-                {theme === 'dark' ? (
-                  <Sun className="w-5 h-5 text-white group-hover:rotate-90 transition-transform duration-500" />
-                ) : (
-                  <Moon className="w-5 h-5 text-purple-900 group-hover:-rotate-12 transition-transform duration-500" />
-                )}
-              </button>
-
               <Button
                 onClick={playClick}
                 onMouseEnter={playHover}

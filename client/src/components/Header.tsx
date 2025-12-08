@@ -44,7 +44,7 @@ export default function Header() {
                 alt="Nukleo" 
                 width="120"
                 height="32"
-                loading="lazy"
+                fetchPriority="high"
                 className="h-8 w-auto object-contain brightness-0 invert mb-1"
               />
               <span className="text-[10px] text-white/60 font-medium tracking-wider">

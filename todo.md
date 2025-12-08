@@ -635,3 +635,16 @@
 - [x] Configurer Google Analytics 4 (composant créé, TODO: remplacer G-XXXXXXXXXX par vrai ID)
 - [ ] Ajouter attributs ARIA sur composants interactifs
 - [ ] Implémenter headers de sécurité (Content-Security-Policy, X-Frame-Options, etc.)
+
+## Navigation Optimisée (Recommandations Stratégiques)
+- [x] Restructurer le menu fullscreen avec regroupement par intention (DISCOVER, WORK, ENGAGE)
+- [x] Tester la nouvelle organisation de navigation
+- [x] Vérifier que tous les liens fonctionnent correctement
+
+## Core Web Vitals Optimization
+- [x] Optimiser le préchargement des fonts critiques (preload + font-display: swap)
+- [x] Ajouter lazy-loading sur toutes les images below-the-fold
+- [x] Optimiser les images critiques (hero, logos) avec fetchPriority="high"
+- [x] Minifier et compresser les assets CSS/JS (vite.config.ts)
+- [ ] Tester le score Lighthouse Performance (objectif 90+)
+- [ ] Mesurer LCP, FID, CLS et optimiser si nécessaire

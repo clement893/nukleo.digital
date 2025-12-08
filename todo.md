@@ -572,3 +572,8 @@
 - [x] Convertir les images PNG/JPG en format WebP (15 fichiers .webp créés)
 - [x] Ajouter lazy-loading sur toutes les balises <img> (sauf LoadingScreen)
 - [x] Ajouter attributs width/height pour éviter layout shift
+
+## Créer section Featured Clients
+- [x] Créer le composant ClientLogos.tsx
+- [x] Intégrer la section sur la homepage après le Hero
+- [x] Ajouter effet grayscale → couleur au survol (effet hover avec gradient)

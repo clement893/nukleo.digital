@@ -8,6 +8,7 @@ import CapabilitiesSection from '@/components/CapabilitiesSection';
 import TrinitySection from '@/components/TrinitySection';
 import CTASection from '@/components/CTASection';
 import TestimonialsCarousel from '@/components/TestimonialsCarousel';
+import ClientLogos from '@/components/ClientLogos';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -53,6 +54,7 @@ export default function Home() {
           
           <div className="relative z-10">
             <HeroSection />
+            <ClientLogos />
             <ManifestoSection />
             <WhoWeServeSection />
             <CapabilitiesSection />

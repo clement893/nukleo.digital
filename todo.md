@@ -476,3 +476,8 @@
 - [x] Créer le composant LoadingScreen avec logo et slogan
 - [x] Intégrer l'animation dans App.tsx
 - [x] Tester l'animation de chargement
+
+## Remove Hero Stats Card
+- [x] Supprimer la carte de droite avec description et statistiques
+- [x] Ajuster le layout du Hero
+- [x] Tester le rendu

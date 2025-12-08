@@ -22,9 +22,9 @@ export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20">
       <div className="container relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start lg:items-center">
-          {/* Left: Main Title */}
-          <div className="lg:col-span-8">
+        <div className="flex items-center justify-center">
+          {/* Main Title */}
+          <div className="max-w-5xl">
             {/* Main Heading with Stagger Animations */}
             <h1 className="
               text-[4rem] sm:text-[6rem] md:text-[8rem] lg:text-[10rem] 
@@ -98,36 +98,6 @@ export default function HeroSection() {
                   WATCH REEL
                 </span>
               </button>
-            </div>
-          </div>
-
-          {/* Right: Description with Glass Card */}
-          <div className="lg:col-span-4 animate-in fade-in slide-in-from-right-20 duration-700 delay-600">
-            <div className="relative p-8 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-500 group">
-              {/* Glow effect */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" />
-              
-              <div className="relative z-10">
-                <p className="text-xl text-white/90 leading-relaxed font-light mb-6">
-                  We transform organizations with AI-powered solutions that drive growth, efficiency, and innovation.
-                </p>
-                
-                {/* Stats */}
-                <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/10">
-                  <div>
-                    <div className="text-3xl font-bold text-white mb-1">500+</div>
-                    <div className="text-sm text-white/60 uppercase tracking-wide">Projects</div>
-                  </div>
-                  <div>
-                    <div className="text-3xl font-bold text-white mb-1">95%</div>
-                    <div className="text-sm text-white/60 uppercase tracking-wide">Satisfaction</div>
-                  </div>
-                  <div>
-                    <div className="text-3xl font-bold text-white mb-1">50M+</div>
-                    <div className="text-sm text-white/60 uppercase tracking-wide">ROI</div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

@@ -333,3 +333,12 @@
 - [x] Retirer le texte superflu du hero (simplifier la description)
 - [x] Améliorer le gradient sur "AI FUTURE" pour le rendre plus distinctif
 - [x] Tester l'apparence du hero simplifié
+
+## Resources Page Refonte
+- [x] Analyser la page Resources actuelle
+- [x] Créer le Hero Section avec titre massif "RESOURCES" et badge animé
+- [x] Créer la section Interactive Tools avec 4 cartes glassmorphisme (AI Readiness, Radar, Glossary, ROI Calculator)
+- [x] Créer la section Filter sur fond blanc avec boutons pilules
+- [x] Créer la grille Resources avec articles sur fond blanc
+- [x] Créer la section CTA Newsletter sur gradient
+- [x] Tester toutes les sections et transitions

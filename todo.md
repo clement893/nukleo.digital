@@ -540,3 +540,7 @@
 - [x] Identifier tous les H1/H2 en majuscules
 - [x] Remplacer par Title Case
 - [x] Tester le rendu
+
+## Corriger "THE TRINITY" en ALL CAPS
+- [x] Localiser "THE TRINITY"
+- [x] Remplacer par "The Trinity"

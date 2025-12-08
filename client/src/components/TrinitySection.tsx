@@ -35,8 +35,8 @@ export default function TrinitySection() {
         {/* Section Header */}
         <div className="flex justify-between items-end mb-24 border-b border-black/10 pb-8">
           <h2 className="text-8xl font-heading font-bold tracking-tighter">
-            THE<br />
-            TRINITY
+            The<br />
+            Trinity
           </h2>
 
           <p className="text-xl max-w-sm font-light text-white/80 pb-2">

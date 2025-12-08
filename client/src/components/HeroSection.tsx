@@ -45,7 +45,7 @@ export default function HeroSection() {
           }}
         />
         <div 
-          className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-pink-500/15 rounded-full blur-[120px] animate-pulse"
+          className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-pink-500/30 rounded-full blur-[120px] animate-pulse"
           style={{
             transform: `translate(${-mousePosition.x * 0.03}px, ${-mousePosition.y * 0.03}px)`,
             animation: 'pulse 5s ease-in-out infinite 1s'
@@ -103,7 +103,7 @@ export default function HeroSection() {
               </span>
               <br />
               <span 
-                className="inline-block animate-in fade-in slide-in-from-left-20 duration-700 delay-300 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent hover:scale-110 transition-transform relative"
+                className="inline-block animate-in fade-in slide-in-from-left-20 duration-700 delay-300 bg-gradient-to-r from-cyan-400 via-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent hover:scale-110 transition-transform relative"
                 style={{
                   textShadow: 'none',
                   backgroundSize: '200% auto',
@@ -112,7 +112,7 @@ export default function HeroSection() {
               >
                 FUTURE
                 {/* Glowing underline */}
-                <span className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 blur-xl opacity-50 animate-pulse" />
+                <span className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 blur-xl opacity-50 animate-pulse" />
               </span>
             </h1>
 

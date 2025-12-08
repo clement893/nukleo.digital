@@ -7,6 +7,7 @@ import WhoWeServeSection from '@/components/WhoWeServeSection';
 import CapabilitiesSection from '@/components/CapabilitiesSection';
 import TrinitySection from '@/components/TrinitySection';
 import CTASection from '@/components/CTASection';
+import TestimonialsCarousel from '@/components/TestimonialsCarousel';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -59,6 +60,7 @@ export default function Home() {
         </div>
         
         <TrinitySection />
+        <TestimonialsCarousel />
         <CTASection />
       </main>
       <Footer />

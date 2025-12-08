@@ -521,3 +521,12 @@
 ## Increase Grain Texture Intensity
 - [x] Augmenter l'opacité de la texture grain dans index.css
 - [x] Tester le rendu
+
+## Repositionner Testimonials
+- [x] Retirer "Testimonials" du FullScreenMenu
+- [x] Mettre à jour la page Testimonials avec les vrais témoignages du CSV (12 clients)
+- [x] Créer le composant TestimonialsCarousel.tsx
+- [x] Intégrer le carrousel en bas de Home.tsx (avant le footer)
+- [x] Ajouter lien stratégique "See all testimonials" dans le carrousel
+- [x] Ajouter liens stratégiques vers /testimonials dans d'autres sections
+- [x] Tester le carrousel et la navigation

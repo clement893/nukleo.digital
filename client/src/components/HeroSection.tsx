@@ -43,20 +43,14 @@ export default function HeroSection() {
               </span>
               {' '}
               <span 
-                className="inline-block animate-in fade-in slide-in-from-left-20 duration-700 delay-200"
-              >
-                AI
-              </span>
-              <br />
-              <span 
-                className="inline-block animate-in fade-in slide-in-from-left-20 duration-700 delay-300 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent hover:scale-110 transition-transform relative"
+                className="inline-block animate-in fade-in slide-in-from-left-20 duration-700 delay-200 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent hover:scale-110 transition-transform relative"
                 style={{
                   textShadow: 'none',
                   backgroundSize: '200% auto',
                   animation: 'gradient-shift 3s ease infinite'
                 }}
               >
-                FUTURE
+                AI Future
                 {/* Glowing underline */}
                 <span className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 blur-xl opacity-50 animate-pulse" />
               </span>

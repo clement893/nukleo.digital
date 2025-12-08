@@ -544,3 +544,8 @@
 ## Corriger "THE TRINITY" en ALL CAPS
 - [x] Localiser "THE TRINITY"
 - [x] Remplacer par "The Trinity"
+
+## Modifier le titre Hero "AI Future"
+- [x] Mettre "AI Future" sur la même ligne (retirer le <br />)
+- [x] Retirer les majuscules : "AI Future" au lieu de "AI FUTURE"
+- [x] Appliquer le dégradé sur les deux mots "AI Future"

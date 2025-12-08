@@ -1,5 +1,6 @@
 import { BookOpen, FileText, Video, Download } from 'lucide-react';
 import PageLayout from '@/components/PageLayout';
+import TrendRadar from '@/components/TrendRadar';
 
 export default function Resources() {
   const resources = [
@@ -59,6 +60,9 @@ export default function Resources() {
           </p>
         </div>
       </section>
+
+      {/* AI Trend Radar */}
+      <TrendRadar />
 
       {/* Categories */}
       <section className="pb-12">

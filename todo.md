@@ -177,3 +177,12 @@
 - [x] Implémenter l'effet hover distortion (skew -10deg + translate 10px)
 - [x] Ajouter le glow violet-rose sur "AI FUTURE"
 - [x] Tester les animations sur desktop et mobile
+
+## AI Trend Radar (Page Resources)
+- [x] Lire et analyser le brief complet (19 pages)
+- [x] Créer la structure de données JSON (8 technologies initiales)
+- [x] Implémenter le composant RadarChart avec Recharts
+- [x] Créer TechnologyBubble, TechnologyDetailPanel, QuadrantLegend
+- [x] Ajouter les interactions (hover, click, filtres)
+- [x] Intégrer dans la page Resources au-dessus des filtres d'articles
+- [x] Tester toutes les interactions

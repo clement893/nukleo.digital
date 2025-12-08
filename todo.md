@@ -272,3 +272,7 @@
 ## Vercel Timeout Fix
 - [x] Créer vercel.json avec configuration timeout 60s
 - [ ] Tester Leo après redéploiement
+
+## AI Readiness Page Fix
+- [x] Ajouter le header avec logo et menu sur la page AI Readiness
+- [ ] Tester la navigation

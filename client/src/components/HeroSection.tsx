@@ -8,10 +8,8 @@ export default function HeroSection() {
   const { playHover, playClick } = useSound();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   
-  // Parallax effects avec vitesses différentes pour créer de la profondeur
+  // Parallax effect uniquement sur le titre principal
   const titleOffset = useParallax(0.3);  // Titre principal - lent (arrière-plan)
-  const sloganOffset = useParallax(0.5); // Slogan - moyen
-  const ctaOffset = useParallax(0.7);    // CTAs - rapide (premier plan)
   
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -68,24 +66,21 @@ export default function HeroSection() {
 
             {/* Slogan */}
             <p 
-              className="text-3xl md:text-4xl text-white font-semibold mb-6 max-w-2xl animate-in fade-in slide-in-from-bottom-10 duration-700 delay-350 tracking-tight transition-transform duration-75 ease-out"
-              style={{ transform: `translateY(${sloganOffset}px)` }}
+              className="text-3xl md:text-4xl text-white font-semibold mb-6 max-w-2xl animate-in fade-in slide-in-from-bottom-10 duration-700 delay-350 tracking-tight"
             >
               Choose Nukleo, Choose Intelligence
             </p>
 
             {/* Subtitle */}
             <p 
-              className="text-xl text-white/70 leading-relaxed font-light mb-12 max-w-2xl animate-in fade-in slide-in-from-bottom-10 duration-700 delay-400 transition-transform duration-75 ease-out"
-              style={{ transform: `translateY(${sloganOffset}px)` }}
+              className="text-xl text-white/70 leading-relaxed font-light mb-12 max-w-2xl animate-in fade-in slide-in-from-bottom-10 duration-700 delay-400"
             >
               Serving startups, SMBs, enterprises, and governments worldwide
             </p>
 
             {/* CTAs */}
             <div 
-              className="flex flex-col sm:flex-row items-start sm:items-center gap-6 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-500 transition-transform duration-75 ease-out"
-              style={{ transform: `translateY(${ctaOffset}px)` }}
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-6 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-500"
             >
               <Button
                 onClick={playClick}

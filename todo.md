@@ -755,3 +755,9 @@
 - [x] Vérifier les styles CSS du curseur (OK)
 - [x] Augmenter l'opacité de 8% à 20% au centre, 8% à 50%
 - [x] Tester la visibilité sur desktop
+
+## Suppression parallax sur boutons et slogan
+- [x] Retirer l'effet parallax sur les boutons CTA
+- [x] Retirer l'effet parallax sur le slogan "Choose Nukleo, Choose Intelligence" et subtitle
+- [x] Garder uniquement le parallax sur le titre principal "Architects of Your AI Future"
+- [x] Tester l'effet

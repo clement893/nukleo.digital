@@ -406,3 +406,7 @@
 - [x] Étendre le fond unifié pour inclure la section Capabilities
 - [x] Retirer le fond propre de Capabilities (déjà sans fond)
 - [x] Tester le rendu final
+
+## Gradient Sandwich
+- [x] Créer un gradient qui évolue : rouge haut gauche → bleu milieu → rouge bas droite
+- [x] Tester le rendu du gradient progressif

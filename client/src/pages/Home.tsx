@@ -24,7 +24,14 @@ export default function Home() {
         {/* First 3 sections with unified hero background */}
         <div className="relative">
           {/* Unified Background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-950 via-purple-900 to-[rgb(107,23,22)]">
+          <div className="absolute inset-0" style={{
+            background: `
+              radial-gradient(ellipse 1200px 800px at 0% 0%, rgb(107,23,22) 0%, transparent 50%),
+              radial-gradient(ellipse 1400px 1000px at 50% 50%, rgb(59,130,246) 0%, transparent 60%),
+              radial-gradient(ellipse 1200px 800px at 100% 100%, rgb(107,23,22) 0%, transparent 50%),
+              linear-gradient(135deg, rgb(30,20,60) 0%, rgb(20,15,50) 100%)
+            `
+          }}>
             {/* Grid Pattern */}
             <div 
               className="absolute inset-0 opacity-10"
@@ -37,10 +44,10 @@ export default function Home() {
               }}
             />
             
-            {/* Animated Gradient Orbs */}
-            <div className="absolute top-0 left-0 w-[800px] h-[800px] bg-purple-500/30 rounded-full blur-[120px] animate-pulse" />
-            <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[rgb(107,23,22)]/15 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }} />
-            <div className="absolute top-1/2 left-1/2 w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '2s' }} />
+            {/* Animated Gradient Orbs - Sandwich Effect */}
+            <div className="absolute top-0 left-0 w-[800px] h-[800px] bg-red-600/15 rounded-full blur-[150px] animate-pulse" />
+            <div className="absolute top-1/2 left-1/2 w-[900px] h-[900px] bg-blue-500/20 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }} />
+            <div className="absolute bottom-0 right-0 w-[800px] h-[800px] bg-red-600/15 rounded-full blur-[150px] animate-pulse" style={{ animationDelay: '2s' }} />
           </div>
           
           <div className="relative z-10">

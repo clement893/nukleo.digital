@@ -461,3 +461,8 @@
 - [x] Identifier tous les gradients qui tirent vers le rose
 - [x] Remplacer par rouge bordeaux → violet bleué (comme homepage)
 - [x] Tester toutes les pages
+
+## Fix Hero Stats Overlap
+- [x] Corriger le chevauchement des statistiques sur le titre Hero
+- [x] Ajuster le layout pour éviter l'empiètement
+- [x] Tester le rendu

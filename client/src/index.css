@@ -174,16 +174,7 @@
   mix-blend-mode: screen;
 }
 
-/* Hide default cursor on desktop */
-@media (min-width: 768px) {
-  body {
-    cursor: none;
-  }
-  
-  a, button, [role="button"] {
-    cursor: none;
-  }
-}
+/* Curseur système visible + effet halo en arrière-plan */
 
 @import "tailwindcss";
 

@@ -761,3 +761,8 @@
 - [x] Retirer l'effet parallax sur le slogan "Choose Nukleo, Choose Intelligence" et subtitle
 - [x] Garder uniquement le parallax sur le titre principal "Architects of Your AI Future"
 - [x] Tester l'effet
+
+## Désactivation curseur personnalisé + effet halo
+- [x] Retirer `cursor: none` du CSS pour afficher le curseur système
+- [x] Garder le composant CustomCursor pour l'effet halo en arrière-plan
+- [x] Tester que le curseur système est visible + halo suit la souris

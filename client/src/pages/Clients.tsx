@@ -105,8 +105,8 @@ export default function Clients() {
     <PageLayout>
       <SEO 
         title="Our Clients | Trusted by Industry Leaders"
-        description="Discover how we've helped museums, legal firms, healthcare providers, e-commerce platforms, and more transform their operations with AI. 12+ trusted clients across 8+ industries."
-        keywords="AI clients, case studies, client success stories, AI transformation, industry leaders, AI consulting clients"
+        description="Trusted by 12+ industry leaders: MBAM, Summit Law, Affilia, GoCoupons & more. See how we transformed operations across 8+ industries with AI. View case studies."
+        keywords="AI clients, AI case studies, industry leaders AI, AI transformation success stories, AI portfolio"
       />
       
       <div className="min-h-screen bg-gradient-to-br from-violet-950 via-fuchsia-950 to-rose-950">

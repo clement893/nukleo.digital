@@ -1,10 +1,19 @@
 import { useState } from 'react';
+import SEO from '@/components/SEO';
 import { Link } from 'wouter';
 import { Menu, X, Target, TrendingUp, Users, Lightbulb, CheckCircle, ArrowRight } from 'lucide-react';
 import FullScreenMenu from '@/components/FullScreenMenu';
 
 export default function AIStrategyMarketing() {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const seoContent = (
+    <SEO 
+      title="AI Strategy & Marketing Services | Transform Your Growth"
+      description="AI-powered marketing transformation: Strategic planning, customer intelligence, personalized campaigns & ROI optimization. Drive 340% growth with data-driven AI solutions."
+      keywords="AI marketing strategy, AI-powered marketing, customer intelligence, personalized campaigns, ROI optimization, AI transformation"
+    />
+  );
 
   const services = [
     {
@@ -40,6 +49,7 @@ export default function AIStrategyMarketing() {
 
   return (
     <>
+      {seoContent}
       <FullScreenMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
       
       {/* Header */}

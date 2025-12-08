@@ -1,5 +1,6 @@
 import { Brain, Code, Palette, TrendingUp, Database, Sparkles } from 'lucide-react';
 import PageLayout from '@/components/PageLayout';
+import SEO from '@/components/SEO';
 
 export default function Expertise() {
   const expertiseAreas = [
@@ -73,6 +74,11 @@ export default function Expertise() {
 
   return (
     <PageLayout>
+      <SEO 
+        title="Our AI Expertise | Agentic AI, Platforms & Strategy"
+        description="Discover our AI expertise: Agentic AI systems, AI-native platforms, transformation strategy, creative studio & intelligent data. Proven 4-phase methodology for success."
+        keywords="AI expertise, agentic AI systems, AI-native platforms, AI transformation strategy, AI methodology"
+      />
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">

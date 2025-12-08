@@ -3,6 +3,7 @@ import { Mail, MapPin, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import PageLayout from '@/components/PageLayout';
 import { trpc } from '@/lib/trpc';
+import SEO from '@/components/SEO';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -46,6 +47,11 @@ export default function Contact() {
 
   return (
     <PageLayout>
+      <SEO 
+        title="Contact Nukleo Digital | Start Your AI Transformation"
+        description="Ready to transform with AI? Contact Nukleo Digital for expert consultation. Offices in Montréal & Halifax. Get tailored AI solutions for your business today."
+        keywords="contact AI agency, AI consultation, Montréal AI services, Halifax AI agency, AI transformation contact"
+      />
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">

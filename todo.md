@@ -602,3 +602,11 @@
 - [x] Précharger les fonts critiques (Aktiv Grotesk Regular, Medium, Bold)
 - [x] Préparer configuration GA4 (tracking ID, objectifs) - Guide créé
 - [x] Préparer instructions Search Console (vérification propriété, soumission sitemap) - Guide créé
+
+## Phase 2 SEO : Optimisation On-Page (Semaine 3-4)
+- [x] Rédiger meta descriptions pour les 10 pages prioritaires (document créé)
+- [x] Implémenter les meta descriptions dans le code (10 pages complétées)
+- [ ] Auditer et corriger la hiérarchie H1-H6
+- [ ] Ajouter balises Open Graph (og:title, og:description, og:image)
+- [ ] Ajouter balises Twitter Cards
+- [ ] Enrichir le markup Schema.org (Service, Review, FAQPage)

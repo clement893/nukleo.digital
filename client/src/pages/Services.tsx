@@ -1,4 +1,5 @@
 import { Layers, BarChart3, Globe, Zap, Target, Users, Brain, Code, Workflow, MessageSquare, TrendingUp, Shield } from 'lucide-react';
+import SEO from '@/components/SEO';
 import { Link } from 'wouter';
 import PageLayout from '../components/PageLayout';
 
@@ -89,6 +90,11 @@ export default function Services() {
 
   return (
     <PageLayout>
+      <SEO 
+        title="AI Services | Strategy, Platforms & Intelligent Operations"
+        description="Comprehensive AI services: Strategy & Marketing, Digital Platforms, Intelligent Operations. 12 specialized solutions to accelerate your AI transformation. Explore now."
+        keywords="AI services, AI strategy, digital platforms, intelligent operations, AI transformation"
+      />
       <div className="min-h-screen pt-24 pb-20 px-4">
         {/* Hero Section */}
         <div className="max-w-6xl mx-auto mb-20">

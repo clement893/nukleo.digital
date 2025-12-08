@@ -1,10 +1,19 @@
 import { useState } from 'react';
+import SEO from '@/components/SEO';
 import { Link } from 'wouter';
 import { Menu, Code, Zap, Shield, Layers, CheckCircle, ArrowRight } from 'lucide-react';
 import FullScreenMenu from '@/components/FullScreenMenu';
 
 export default function DigitalPlatforms() {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const seoContent = (
+    <SEO 
+      title="AI-Native Digital Platforms | Build Intelligent Systems"
+      description="Build AI-native digital platforms that scale. Custom development, intelligent automation & seamless integration. Transform your operations with cutting-edge technology."
+      keywords="AI-native platforms, intelligent automation, custom AI development, seamless integration, AI platform development"
+    />
+  );
 
   const services = [
     {
@@ -40,6 +49,7 @@ export default function DigitalPlatforms() {
 
   return (
     <>
+      {seoContent}
       <FullScreenMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
       
       {/* Header */}

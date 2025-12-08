@@ -1,10 +1,19 @@
 import { useState } from 'react';
+import SEO from '@/components/SEO';
 import { Link } from 'wouter';
 import { Menu, Settings, BarChart3, Workflow, Bot, CheckCircle, ArrowRight } from 'lucide-react';
 import FullScreenMenu from '@/components/FullScreenMenu';
 
 export default function IntelligentOperations() {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const seoContent = (
+    <SEO 
+      title="Intelligent Operations | AI Automation & Optimization"
+      description="Automate and optimize operations with AI. Process automation, predictive analytics & intelligent workflows. Reduce costs by 60% while improving efficiency. Learn how."
+      keywords="AI automation, intelligent operations, process automation, predictive analytics, intelligent workflows, operations optimization"
+    />
+  );
 
   const services = [
     {
@@ -40,6 +49,7 @@ export default function IntelligentOperations() {
 
   return (
     <>
+      {seoContent}
       <FullScreenMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
       
       {/* Header */}

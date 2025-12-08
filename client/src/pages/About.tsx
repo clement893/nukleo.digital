@@ -1,4 +1,5 @@
 import PageLayout from "@/components/PageLayout";
+import SEO from '@/components/SEO';
 
 const teamMembers = [
   {
@@ -96,6 +97,11 @@ const teamMembers = [
 export default function About() {
   return (
     <PageLayout>
+      <SEO 
+        title="About Nukleo Digital | AI Transformation Experts"
+        description="Meet the Nukleo Digital team: 15+ AI experts transforming businesses across Canada. Based in Montréal & Halifax, we deliver cutting-edge AI solutions since 2020."
+        keywords="AI experts, AI transformation team, AI consulting experts, Montréal AI agency, Halifax AI services"
+      />
       <div className="min-h-screen bg-gradient-to-br from-violet-950 via-fuchsia-950 to-rose-950">
         {/* Hero Section */}
         <section className="container mx-auto px-4 pt-32 pb-20">

@@ -322,3 +322,9 @@
 - [x] Réduire l'intensité du gradient rose en bas à droite
 - [x] Retirer tout texte rose (remplacer par blanc/violet)
 - [x] Tester l'apparence du footer
+
+## Global Positioning Updates
+- [x] Modifier le titre du Radar (SMB → Global AI Technology Radar)
+- [x] Ajouter sous-titre global dans le hero
+- [x] Créer section "Who We Serve" avec 4 segments (Startups, SMBs, Enterprises, Governments)
+- [x] Tester tous les changements

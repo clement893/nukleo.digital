@@ -549,3 +549,8 @@
 - [x] Mettre "AI Future" sur la même ligne (retirer le <br />)
 - [x] Retirer les majuscules : "AI Future" au lieu de "AI FUTURE"
 - [x] Appliquer le dégradé sur les deux mots "AI Future"
+
+## Retirer la couleur rose dans "Ready to Scale" (page Manifesto)
+- [x] Localiser la couleur rose dans la page Manifesto
+- [x] Remplacer par une couleur cohérente avec le design
+- [x] Corriger les ALL CAPS restants (MANIFESTO, MOVE FROM, PILOT TO, SCALE)

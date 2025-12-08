@@ -7,14 +7,14 @@ export default function Manifesto() {
         {/* Hero Section */}
         <div className="max-w-6xl mx-auto mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-8">
-            <span className="text-sm font-medium text-white/90">01 — MANIFESTO</span>
+            <span className="text-sm font-medium text-white/90">01 — Manifesto</span>
           </div>
           
           <h1 className="text-6xl md:text-8xl font-bold text-white mb-8 leading-tight">
-            MOVE FROM<br />
-            PILOT TO<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[oklch(0.85_0.15_300)] via-[oklch(0.85_0.15_320)] to-[oklch(0.85_0.15_340)]">
-              SCALE.
+            Move From<br />
+            Pilot to<br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">
+              Scale.
             </span>
           </h1>
           
@@ -62,7 +62,7 @@ export default function Manifesto() {
                   </ul>
                 </div>
                 <div className="space-y-3">
-                  <h3 className="text-xl font-semibold text-[oklch(0.85_0.15_320)]">Now</h3>
+                  <h3 className="text-xl font-semibold text-accent">Now</h3>
                   <ul className="space-y-2 text-white/80">
                     <li>• Autonomous agents</li>
                     <li>• Intelligent automation</li>
@@ -130,7 +130,7 @@ export default function Manifesto() {
           </section>
 
           {/* Section 5 - Call to Action */}
-          <section className="bg-gradient-to-r from-[oklch(0.85_0.15_300)] via-[oklch(0.85_0.15_320)] to-[oklch(0.85_0.15_340)] rounded-3xl p-8 md:p-12 text-center">
+          <section className="bg-gradient-to-r from-purple-900/50 via-purple-800/50 to-purple-700/50 rounded-3xl p-8 md:p-12 text-center border border-white/10">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Ready to Scale?
             </h2>
@@ -138,13 +138,13 @@ export default function Manifesto() {
               The era of agentic marketing is here. Define your roadmap to become 
               an AI-native leader.
             </p>
-            <button className="bg-white text-[oklch(0.35_0.15_300)] px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/90 transition-all hover:scale-105">
-              START YOUR TRANSFORMATION
+            <button className="bg-white text-purple-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/90 transition-all hover:scale-105">
+              Start Your Transformation
             </button>
           </section>
 
           {/* Section 6 - Quote */}
-          <section className="border-l-4 border-[oklch(0.85_0.15_320)] pl-8 py-4">
+          <section className="border-l-4 border-accent pl-8 py-4">
             <blockquote className="text-2xl md:text-3xl font-light text-white/80 italic leading-relaxed">
               "The future belongs to those who build tomorrow's systems today."
             </blockquote>

@@ -410,3 +410,20 @@
 ## Gradient Sandwich
 - [x] Créer un gradient qui évolue : rouge haut gauche → bleu milieu → rouge bas droite
 - [x] Tester le rendu du gradient progressif
+
+## Adjust Gradient Colors
+- [x] Analyser nukleo.com/en pour extraire les couleurs exactes
+- [x] Ajuster le gradient sandwich avec les couleurs de nukleo.com
+- [ ] Tester le rendu final
+
+## Separate Hero & Sections Gradients
+- [x] Séparer le Hero avec son propre gradient rouge→violet bleué
+- [x] Créer un gradient miroir violet bleué→rouge pour les sections suivantes
+- [x] S'assurer que le violet tend vers le bleu (pas le rose)
+- [ ] Tester les deux gradients
+
+## Separate Hero & Sections Gradients
+- [x] Séparer le Hero avec son propre gradient rouge→violet bleué
+- [x] Créer un gradient miroir violet bleué→rouge pour les sections suivantes
+- [x] S'assurer que le violet tend vers le bleu (pas le rose)
+- [x] Tester les deux gradients

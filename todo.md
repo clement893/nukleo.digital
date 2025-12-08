@@ -554,3 +554,6 @@
 - [x] Localiser la couleur rose dans la page Manifesto
 - [x] Remplacer par une couleur cohérente avec le design
 - [x] Corriger les ALL CAPS restants (MANIFESTO, MOVE FROM, PILOT TO, SCALE)
+
+## Retirer l'animation de zoom sur "AI Future"
+- [x] Retirer hover:scale-110 du titre Hero

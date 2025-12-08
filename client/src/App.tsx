@@ -15,6 +15,9 @@ import Leo from "./pages/Leo";
 import Manifesto from "./pages/Manifesto";
 import { RadarNew as Radar } from "./pages/RadarNew";
 import AIReadinessAssessment from "./pages/AIReadinessAssessment";
+import AIStrategyMarketing from "./pages/services/AIStrategyMarketing";
+import DigitalPlatforms from "./pages/services/DigitalPlatforms";
+import IntelligentOperations from "./pages/services/IntelligentOperations";
 
 function Router() {
   return (
@@ -30,6 +33,9 @@ function Router() {
       <Route path={"/manifesto"} component={Manifesto} />
       <Route path={"/radar"} component={Radar} />
       <Route path={"/ai-readiness"} component={AIReadinessAssessment} />
+      <Route path={"/services/ai-strategy-marketing"} component={AIStrategyMarketing} />
+      <Route path={"/services/digital-platforms"} component={DigitalPlatforms} />
+      <Route path={"/services/intelligent-operations"} component={IntelligentOperations} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>

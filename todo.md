@@ -305,3 +305,11 @@
 - [x] Déboguer le modal email capture qui n'apparaît pas
 - [ ] Vérifier l'envoi d'email après soumission
 - [ ] Tester le flow complet
+
+## Trinity Department Pages
+- [x] Créer la page AI Strategy & Marketing (/services/ai-strategy-marketing)
+- [x] Créer la page Digital Platforms (/services/digital-platforms)
+- [x] Créer la page Intelligent Operations (/services/intelligent-operations)
+- [x] Ajouter les liens depuis la homepage (TrinitySection)
+- [x] Ajouter les liens dans le menu FullScreenMenu
+- [ ] Tester toutes les pages

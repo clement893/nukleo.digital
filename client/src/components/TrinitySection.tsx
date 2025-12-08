@@ -6,23 +6,23 @@ export default function TrinitySection() {
     {
       number: '01',
       icon: Layers,
-      title: 'The AI Lab',
-      description: 'Building the robust and flexible technological foundation. Intelligent data platforms and custom autonomous agents.',
-      link: '/services/ai-lab',
+      title: 'AI Strategy & Marketing',
+      description: 'Transform your business vision into actionable AI strategies that drive growth, enhance customer experiences, and position you as a market leader.',
+      link: '/services/ai-strategy-marketing',
     },
     {
       number: '02',
       icon: BarChart3,
-      title: 'Strategic Bureau',
-      description: 'Defining strategy, driving transformation, and measuring impact. Charting your path to AI leadership.',
-      link: '/services/strategic-bureau',
+      title: 'Digital Platforms',
+      description: 'Build intelligent, scalable platforms that transform how you operate, engage customers, and deliver value in the AI era.',
+      link: '/services/digital-platforms',
     },
     {
       number: '03',
       icon: Globe,
-      title: 'Creative Studio',
-      description: 'Augmented content creation at scale. Personalized, dynamic, and continuously optimized brand experiences.',
-      link: '/services/creative-studio',
+      title: 'Intelligent Operations',
+      description: 'Optimize your operations with AI-powered automation and intelligence that drives efficiency, reduces costs, and scales with your growth.',
+      link: '/services/intelligent-operations',
     },
   ];
 

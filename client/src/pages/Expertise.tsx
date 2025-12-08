@@ -78,6 +78,7 @@ export default function Expertise() {
         title="Our AI Expertise | Agentic AI, Platforms & Strategy"
         description="Discover our AI expertise: Agentic AI systems, AI-native platforms, transformation strategy, creative studio & intelligent data. Proven 4-phase methodology for success."
         keywords="AI expertise, agentic AI systems, AI-native platforms, AI transformation strategy, AI methodology"
+        ogImage="/og-expertise.jpg"
       />
     <div className="min-h-screen">
       {/* Hero Section */}

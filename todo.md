@@ -616,3 +616,9 @@
 - [x] Créer une image Open Graph par défaut (1200x630px) - og-image.jpg créée
 - [x] Mettre à jour toutes les pages avec les nouvelles props (16/25 pages avec SEO)
 - [x] Tester le rendu avec Facebook Sharing Debugger et Twitter Card Validator (prêt pour test)
+
+## Créer images Open Graph personnalisées
+- [x] Créer og-services.jpg (1200x630px) - 24.6 KB
+- [x] Créer og-about.jpg (1200x630px) - 23.7 KB
+- [x] Créer og-expertise.jpg (1200x630px) - 27.7 KB
+- [x] Mettre à jour les pages avec les nouvelles images OG (Services, About, Expertise)

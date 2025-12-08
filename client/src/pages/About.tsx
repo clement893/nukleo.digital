@@ -101,6 +101,7 @@ export default function About() {
         title="About Nukleo Digital | AI Transformation Experts"
         description="Meet the Nukleo Digital team: 15+ AI experts transforming businesses across Canada. Based in Montréal & Halifax, we deliver cutting-edge AI solutions since 2020."
         keywords="AI experts, AI transformation team, AI consulting experts, Montréal AI agency, Halifax AI services"
+        ogImage="/og-about.jpg"
       />
       <div className="min-h-screen bg-gradient-to-br from-violet-950 via-fuchsia-950 to-rose-950">
         {/* Hero Section */}

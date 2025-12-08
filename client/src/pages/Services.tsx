@@ -94,6 +94,7 @@ export default function Services() {
         title="AI Services | Strategy, Platforms & Intelligent Operations"
         description="Comprehensive AI services: Strategy & Marketing, Digital Platforms, Intelligent Operations. 12 specialized solutions to accelerate your AI transformation. Explore now."
         keywords="AI services, AI strategy, digital platforms, intelligent operations, AI transformation"
+        ogImage="/og-services.jpg"
       />
       <div className="min-h-screen pt-24 pb-20 px-4">
         {/* Hero Section */}

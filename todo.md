@@ -659,3 +659,8 @@
 - [x] Ajouter rotation 45° sur éléments cliquables
 - [x] Créer pulse effect pendant le clic
 - [x] Tester les animations sur toutes les pages
+
+## Ajustement taille curseur
+- [x] Réduire la taille du curseur de 32px à 16px (taille curseur standard)
+- [x] Ajuster les animations hover/click pour la nouvelle taille (scale 2x au hover, 2.5x au click)
+- [x] Tester la visibilité sur tous les backgrounds

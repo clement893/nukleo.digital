@@ -442,3 +442,7 @@
 - [x] Réduire l'intensité du bleu au centre du gradient sandwich
 - [x] Rendre le bleu plus sombre et discret
 - [x] Tester le rendu final
+
+## Restore Hero Title Hover Animation
+- [x] Restaurer l'animation hover-distort sur le titre Hero (skew à droite)
+- [x] Tester l'animation au hover

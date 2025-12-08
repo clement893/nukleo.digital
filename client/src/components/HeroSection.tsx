@@ -33,16 +33,16 @@ export default function HeroSection() {
               leading-[0.85]
               font-black
             ">
-              <span className="inline-block animate-in fade-in slide-in-from-left-20 duration-700 hover:scale-105 transition-transform">
+              <span className="inline-block animate-in fade-in slide-in-from-left-20 duration-700 hover-distort">
                 ARCHITECTS
               </span>
               <br />
-              <span className="inline-block animate-in fade-in slide-in-from-left-20 duration-700 delay-100 hover:scale-105 transition-transform">
+              <span className="inline-block animate-in fade-in slide-in-from-left-20 duration-700 delay-100 hover-distort">
                 OF YOUR
               </span>
               {' '}
               <span 
-                className="inline-block animate-in fade-in slide-in-from-left-20 duration-700 delay-200 hover:scale-105 transition-transform"
+                className="inline-block animate-in fade-in slide-in-from-left-20 duration-700 delay-200 hover-distort"
               >
                 AI
               </span>

@@ -726,3 +726,12 @@
 - [x] Ajouter la route /start-project dans App.tsx
 - [x] Mettre à jour le lien du bouton "Start Project" dans Header et FullScreenMenu
 - [x] Tester le formulaire et la navigation
+
+## Page Media Center (Presse)
+- [x] Créer la page MediaCenter.tsx avec sections: communiqués, kit média, couverture
+- [x] Ajouter section Press Releases avec liste de communiqués (3 exemples)
+- [x] Ajouter section Media Kit avec assets téléchargeables (logos, photos, guidelines)
+- [x] Ajouter section Media Coverage avec articles/mentions (TechCrunch, Forbes, VentureBeat)
+- [x] Ajouter section Press Contact (press@nukleo.digital)
+- [x] Ajouter la route /media dans App.tsx
+- [x] Ajouter le lien "Media" dans le menu de navigation (item 06)

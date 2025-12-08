@@ -19,8 +19,9 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
     { number: '03', label: 'Projects', path: '/projects' },
     { number: '04', label: 'About', path: '/about' },
     { number: '05', label: 'Resources', path: '/resources' },
-    { number: '06', label: 'FAQ', path: '/faq' },
-    { number: '07', label: 'Contact', path: '/contact' },
+    { number: '06', label: 'Media', path: '/media' },
+    { number: '07', label: 'FAQ', path: '/faq' },
+    { number: '08', label: 'Contact', path: '/contact' },
   ];
 
   useEffect(() => {

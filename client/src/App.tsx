@@ -29,6 +29,7 @@ import Testimonials from "./pages/Testimonials";
 import Services from "./pages/Services";
 import Clients from "./pages/Clients";
 import StartProject from "./pages/StartProject";
+import MediaCenter from "./pages/MediaCenter";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 
 function Router() {
@@ -46,6 +47,7 @@ function Router() {
       <Route path={"/faq"} component={FAQ} />
       <Route path={"/contact"} component={Contact} />
       <Route path={"/start-project"} component={StartProject} />
+      <Route path={"/media"} component={MediaCenter} />
       <Route path={"/leo"} component={Leo} />
       <Route path={"/manifesto"} component={Manifesto} />
       <Route path={"/radar"} component={Radar} />

@@ -1,8 +1,49 @@
-import { MapPin, Mail, Phone, Send } from 'lucide-react';
+import { useState } from 'react';
+import { Mail, MapPin, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import PageLayout from '@/components/PageLayout';
+import { trpc } from '@/lib/trpc';
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    company: '',
+    message: '',
+  });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const sendMessage = trpc.contact.send.useMutation();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    try {
+      await sendMessage.mutateAsync(formData);
+      setIsSubmitted(true);
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        company: '',
+        message: '',
+      });
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => setIsSubmitted(false), 5000);
+    } catch (error) {
+      console.error('Failed to send message:', error);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
   return (
     <PageLayout>
     <div className="min-h-screen">
@@ -34,7 +75,23 @@ export default function Contact() {
                 Send us a message
               </h2>
 
-              <form className="space-y-6">
+              {isSubmitted && (
+                <div className="mb-6 p-4 bg-green-500/20 border border-green-500/50 rounded-xl">
+                  <p className="text-green-400 font-medium">
+                    ✓ Message sent successfully! We'll get back to you within 24 hours.
+                  </p>
+                </div>
+              )}
+
+              {sendMessage.error && (
+                <div className="mb-6 p-4 bg-red-500/20 border border-red-500/50 rounded-xl">
+                  <p className="text-red-400 font-medium">
+                    ✗ Failed to send message. Please try again.
+                  </p>
+                </div>
+              )}
+
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-white/75 text-sm mb-2">
@@ -42,6 +99,10 @@ export default function Contact() {
                     </label>
                     <input
                       type="text"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleChange}
+                      required
                       className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/40 focus:outline-none focus:border-accent transition-colors"
                       placeholder="John"
                     />
@@ -52,6 +113,10 @@ export default function Contact() {
                     </label>
                     <input
                       type="text"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleChange}
+                      required
                       className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/40 focus:outline-none focus:border-accent transition-colors"
                       placeholder="Doe"
                     />
@@ -64,6 +129,10 @@ export default function Contact() {
                   </label>
                   <input
                     type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
                     className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/40 focus:outline-none focus:border-accent transition-colors"
                     placeholder="john@company.com"
                   />
@@ -75,6 +144,10 @@ export default function Contact() {
                   </label>
                   <input
                     type="text"
+                    name="company"
+                    value={formData.company}
+                    onChange={handleChange}
+                    required
                     className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/40 focus:outline-none focus:border-accent transition-colors"
                     placeholder="Your Company"
                   />
@@ -85,6 +158,10 @@ export default function Contact() {
                     Message
                   </label>
                   <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
                     rows={6}
                     className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/40 focus:outline-none focus:border-accent transition-colors resize-none"
                     placeholder="Tell us about your project..."
@@ -93,40 +170,36 @@ export default function Contact() {
 
                 <Button
                   type="submit"
-                  className="w-full rounded-full py-6 bg-accent text-white hover:bg-accent/90 transition-colors font-medium text-lg"
+                  disabled={sendMessage.isPending}
+                  className="w-full py-6 text-base"
                 >
-                  <Send className="w-5 h-5 mr-2" />
-                  Send Message
+                  {sendMessage.isPending ? 'Sending...' : 'Send Message'}
                 </Button>
               </form>
             </div>
 
-            {/* Contact Information */}
+            {/* Contact Info */}
             <div className="space-y-8">
-              {/* Locations */}
-              <div className="glass rounded-3xl p-8 lg:p-10">
-                <div className="flex items-start gap-4 mb-6">
-                  <div className="w-12 h-12 bg-accent/20 flex items-center justify-center rounded-full flex-shrink-0">
-                    <MapPin className="w-6 h-6 text-accent" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white mb-4">Our Offices</h3>
-                  </div>
+              {/* Offices */}
+              <div className="glass rounded-3xl p-8 lg:p-12">
+                <div className="flex items-center gap-3 mb-6">
+                  <MapPin className="w-6 h-6 text-accent" />
+                  <h3 className="text-xl font-bold text-white">Our Offices</h3>
                 </div>
 
                 <div className="space-y-6">
                   <div>
-                    <h4 className="text-white font-semibold mb-2">Montréal</h4>
+                    <h4 className="text-lg font-semibold text-white mb-2">Montréal</h4>
                     <p className="text-white/75 text-sm">
-                      7236 Rue Waverly<br />
+                      7236 Rue Waverly Montréal<br />
                       Montréal, QC H2R 0C2
                     </p>
                   </div>
 
                   <div>
-                    <h4 className="text-white font-semibold mb-2">Halifax</h4>
+                    <h4 className="text-lg font-semibold text-white mb-2">Halifax</h4>
                     <p className="text-white/75 text-sm">
-                      1800 Argyle St Unit 801<br />
+                      1800 Argyle St Unit 801 Halifax<br />
                       Halifax, NS B3J 3N8
                     </p>
                   </div>
@@ -134,39 +207,31 @@ export default function Contact() {
               </div>
 
               {/* Email */}
-              <div className="glass rounded-3xl p-8 lg:p-10">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-accent/20 flex items-center justify-center rounded-full flex-shrink-0">
-                    <Mail className="w-6 h-6 text-accent" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white mb-2">Email</h3>
-                    <a
-                      href="mailto:hello@nukleo.ai"
-                      className="text-white/75 hover:text-accent transition-colors"
-                    >
-                      hello@nukleo.ai
-                    </a>
-                  </div>
+              <div className="glass rounded-3xl p-8 lg:p-12">
+                <div className="flex items-center gap-3 mb-4">
+                  <Mail className="w-6 h-6 text-accent" />
+                  <h3 className="text-xl font-bold text-white">Email</h3>
                 </div>
+                <a
+                  href="mailto:hello@nukleo.ai"
+                  className="text-white/75 hover:text-accent transition-colors text-lg"
+                >
+                  hello@nukleo.ai
+                </a>
               </div>
 
               {/* Phone */}
-              <div className="glass rounded-3xl p-8 lg:p-10">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-accent/20 flex items-center justify-center rounded-full flex-shrink-0">
-                    <Phone className="w-6 h-6 text-accent" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white mb-2">Phone</h3>
-                    <a
-                      href="tel:+15147771234"
-                      className="text-white/75 hover:text-accent transition-colors"
-                    >
-                      +1 (514) 777-1234
-                    </a>
-                  </div>
+              <div className="glass rounded-3xl p-8 lg:p-12">
+                <div className="flex items-center gap-3 mb-4">
+                  <Phone className="w-6 h-6 text-accent" />
+                  <h3 className="text-xl font-bold text-white">Phone</h3>
                 </div>
+                <a
+                  href="tel:+15147771234"
+                  className="text-white/75 hover:text-accent transition-colors text-lg"
+                >
+                  +1 (514) 777-1234
+                </a>
               </div>
             </div>
           </div>

@@ -1,9 +1,30 @@
 import { BookOpen, FileText, Video, Download } from 'lucide-react';
 import PageLayout from '@/components/PageLayout';
+import { useState } from 'react';
+import { trpc } from '@/lib/trpc';
 
 
 export default function Resources() {
-  const resources = [
+  const [email, setEmail] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const subscribe = trpc.contact.subscribe.useMutation();
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    try {
+      await subscribe.mutateAsync({ email });
+      setIsSubmitted(true);
+      setEmail('');
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => setIsSubmitted(false), 5000);
+    } catch (error) {
+      console.error('Failed to subscribe:', error);
+    }
+  };
+
+  const sources = [
     {
       type: 'Guide',
       icon: BookOpen,
@@ -61,35 +82,68 @@ export default function Resources() {
         </div>
       </section>
 
-      {/* AI Trend Radar CTA */}
+      {/* Featured Tools Section */}
       <section className="pb-16">
         <div className="container">
-          <div className="glass rounded-3xl p-12 lg:p-16 relative overflow-hidden group hover:bg-white/10 transition-all duration-500">
-            {/* Background gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            
-            <div className="relative z-10">
-              <span className="font-mono text-accent text-sm mb-4 block uppercase tracking-widest">
-                AI TREND RADAR
-              </span>
+          <div className="grid lg:grid-cols-2 gap-8">
+            {/* AI Trend Radar */}
+            <div className="glass rounded-3xl p-12 lg:p-16 relative overflow-hidden group hover:bg-white/10 transition-all duration-500">
+              {/* Background gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
-              <h2 className="text-3xl lg:text-5xl font-bold text-white mb-6">
-                AI TECHNOLOGY<br />
-                MAPPING
-              </h2>
+              <div className="relative z-10">
+                <span className="font-mono text-accent text-sm mb-4 block uppercase tracking-widest">
+                  AI TREND RADAR
+                </span>
+                
+                <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
+                  AI TECHNOLOGY<br />
+                  MAPPING
+                </h2>
+                
+                <p className="text-white/75 text-base mb-8">
+                  Interactive visualization of emerging and established AI technologies. 
+                  Monthly updates to guide your technology investment decisions.
+                </p>
+                
+                <a
+                  href="/radar"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-white rounded-full font-medium hover:bg-accent/90 transition-all duration-300"
+                >
+                  Explore the Radar
+                  <span>→</span>
+                </a>
+              </div>
+            </div>
+
+            {/* AI Readiness Assessment */}
+            <div className="glass rounded-3xl p-12 lg:p-16 relative overflow-hidden group hover:bg-white/10 transition-all duration-500">
+              {/* Background gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-violet-500/20 via-transparent to-rose-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
-              <p className="text-white/75 text-lg mb-8 max-w-2xl">
-                Interactive visualization of emerging and established AI technologies. 
-                Monthly updates to guide your technology investment decisions.
-              </p>
-              
-              <a
-                href="/radar"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-white rounded-full font-medium hover:bg-accent/90 transition-all duration-300"
-              >
-                Explore the Radar
-                <span>→</span>
-              </a>
+              <div className="relative z-10">
+                <span className="font-mono text-accent text-sm mb-4 block uppercase tracking-widest">
+                  FREE ASSESSMENT
+                </span>
+                
+                <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
+                  AI READINESS<br />
+                  ASSESSMENT
+                </h2>
+                
+                <p className="text-white/75 text-base mb-8">
+                  Evaluate your organization's AI maturity across 6 key dimensions. 
+                  Get personalized recommendations and a comprehensive report.
+                </p>
+                
+                <a
+                  href="/ai-readiness"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-violet-500 to-rose-500 text-white rounded-full font-medium hover:shadow-[0_0_40px_rgba(139,92,246,0.5)] transition-all duration-300"
+                >
+                  Start Assessment
+                  <span>→</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -115,7 +169,7 @@ export default function Resources() {
       <section className="pb-24 lg:pb-32">
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {resources.map((resource, index) => {
+            {sources.map((resource, index) => {
               const Icon = resource.icon;
               return (
                 <div
@@ -171,16 +225,39 @@ export default function Resources() {
               Subscribe to receive our latest insights, technical guides, and industry analysis.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
+            {isSubmitted && (
+              <div className="mb-6 p-4 bg-green-500/20 border border-green-500/50 rounded-xl max-w-xl mx-auto">
+                <p className="text-green-400 font-medium text-center">
+                  ✓ Successfully subscribed! Check your email for confirmation.
+                </p>
+              </div>
+            )}
+
+            {subscribe.error && (
+              <div className="mb-6 p-4 bg-red-500/20 border border-red-500/50 rounded-xl max-w-xl mx-auto">
+                <p className="text-red-400 font-medium text-center">
+                  ✗ Failed to subscribe. Please try again.
+                </p>
+              </div>
+            )}
+
+            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
               <input
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
                 placeholder="Enter your email"
                 className="flex-1 px-6 py-4 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:border-accent transition-colors"
               />
-              <button className="px-8 py-4 rounded-full bg-accent text-white font-medium hover:bg-accent/90 transition-colors">
-                Subscribe
+              <button 
+                type="submit"
+                disabled={subscribe.isPending}
+                className="px-8 py-4 rounded-full bg-accent text-white font-medium hover:bg-accent/90 transition-colors disabled:opacity-50"
+              >
+                {subscribe.isPending ? 'Subscribing...' : 'Subscribe'}
               </button>
-            </div>
+            </form>
           </div>
         </div>
       </section>

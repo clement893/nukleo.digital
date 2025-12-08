@@ -100,7 +100,7 @@ export default function About() {
         {/* Hero Section */}
         <section className="container mx-auto px-4 pt-32 pb-20">
           <div className="text-center mb-16">
-            <p className="text-violet-300 uppercase tracking-widest text-sm mb-4">À PROPOS DE NOUS</p>
+            <p className="text-violet-300 uppercase tracking-widest text-sm mb-4">ABOUT US</p>
             <h1 className="text-6xl md:text-8xl font-bold mb-8">
               <span className="text-white">Strategy.</span>
               <br />
@@ -176,7 +176,7 @@ export default function About() {
             <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
               <h3 className="text-3xl font-bold text-white mb-4">MONTRÉAL</h3>
               <p className="text-gray-300 mb-6">
-                Au coeur de la Petite Italie, on se fera un plaisir de se rencontrer au Marché Jean Talon pour discuter !
+                In the heart of Little Italy, we'd be delighted to meet at Jean Talon Market to discuss!
               </p>
               <p className="text-gray-400 mb-6">
                 7236 Rue Waverly Montréal<br />
@@ -193,7 +193,7 @@ export default function About() {
             <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
               <h3 className="text-3xl font-bold text-white mb-4">HALIFAX</h3>
               <p className="text-gray-300 mb-6">
-                Au cœur du centre-ville d'Halifax, nous serions heureux de vous rencontrer au bord de l'eau pour discuter !
+                In the heart of downtown Halifax, we'd be happy to meet by the waterfront to discuss!
               </p>
               <p className="text-gray-400 mb-6">
                 1800 Argyle St Unit 801 Halifax<br />

@@ -246,3 +246,14 @@
 - [x] Créer le template HTML d'email avec scores et dimensions
 - [x] Intégrer l'envoi d'email dans assessment.save
 - [x] Tester l'envoi d'email avec vitest
+
+## Navigation & UX Improvements
+- [x] Ajouter AI Readiness Assessment dans la page Resources
+
+## Site Review Fixes
+- [x] Traduire la page About en anglais (titre et bureaux)
+- [x] Créer le backend du formulaire Contact (tRPC + SendGrid)
+- [x] Rendre la newsletter fonctionnelle (tRPC + SendGrid)
+- [x] Retirer Leo AI du menu (404)
+- [x] Ajouter AI Readiness Assessment dans le menu principal
+- [x] Tester tous les formulaires

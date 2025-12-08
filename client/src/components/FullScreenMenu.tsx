@@ -21,7 +21,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
     { number: '05', label: 'Resources', path: '/resources' },
     { number: '06', label: 'FAQ', path: '/faq' },
     { number: '07', label: 'Contact', path: '/contact' },
-    { number: '08', label: 'Leo AI', path: '/leo' },
+    { number: '08', label: 'AI Readiness', path: '/ai-readiness' },
   ];
 
   // Fermeture avec touche Escape

@@ -19,8 +19,8 @@ export default function Manifesto() {
           </h1>
           
           <p className="text-2xl text-white/70 max-w-3xl leading-relaxed">
-            Le fossé se creuse. Pendant que certains expérimentent, les leaders réarchitecturent 
-            l'ensemble de leurs opérations autour de l'IA agentique.
+            The gap is widening. While some experiment, leaders are rearchitecting 
+            their entire operations around agentic AI.
           </p>
         </div>
 
@@ -28,47 +28,46 @@ export default function Manifesto() {
         <div className="max-w-4xl mx-auto space-y-16">
           {/* Section 1 */}
           <section className="space-y-6">
-            <h2 className="text-4xl font-bold text-white">L'ère de l'expérimentation est révolue</h2>
+            <h2 className="text-4xl font-bold text-white">The Era of Experimentation is Over</h2>
             <div className="space-y-4 text-lg text-white/70 leading-relaxed">
               <p>
-                Nous avons passé les deux dernières années à tester des chatbots, à générer du contenu 
-                et à explorer les possibilités de l'IA. Ces expérimentations ont été précieuses, mais 
-                elles ne suffisent plus.
+                We've spent the past two years testing chatbots, generating content, 
+                and exploring AI possibilities. These experiments have been valuable, but 
+                they're no longer enough.
               </p>
               <p>
-                Aujourd'hui, la question n'est plus "Comment puis-je utiliser l'IA ?" mais 
-                "Comment puis-je réinventer mon organisation autour de l'IA ?"
+                Today, the question is no longer "How can I use AI?" but 
+                "How can I reinvent my organization around AI?"
               </p>
             </div>
           </section>
 
           {/* Section 2 */}
           <section className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 md:p-12">
-            <h2 className="text-4xl font-bold text-white mb-6">Le nouveau paradigme</h2>
+            <h2 className="text-4xl font-bold text-white mb-6">The New Paradigm</h2>
             <div className="space-y-6 text-lg text-white/70 leading-relaxed">
               <p>
-                L'IA agentique représente un changement fondamental dans la façon dont nous concevons 
-                le travail. Il ne s'agit plus d'outils que nous utilisons, mais d'agents autonomes qui 
-                collaborent avec nous, apprennent de nous, et exécutent des tâches complexes de manière 
-                indépendante.
+                Agentic AI represents a fundamental shift in how we conceive work. It's no longer 
+                about tools we use, but autonomous agents that collaborate with us, learn from us, 
+                and execute complex tasks independently.
               </p>
               <div className="grid md:grid-cols-2 gap-6 mt-8">
                 <div className="space-y-3">
-                  <h3 className="text-xl font-semibold text-white">Avant</h3>
+                  <h3 className="text-xl font-semibold text-white">Before</h3>
                   <ul className="space-y-2 text-white/60">
-                    <li>• Outils passifs</li>
-                    <li>• Processus manuels</li>
-                    <li>• Décisions humaines uniquement</li>
-                    <li>• Échelle limitée</li>
+                    <li>• Passive tools</li>
+                    <li>• Manual processes</li>
+                    <li>• Human-only decisions</li>
+                    <li>• Limited scale</li>
                   </ul>
                 </div>
                 <div className="space-y-3">
-                  <h3 className="text-xl font-semibold text-[oklch(0.85_0.15_320)]">Maintenant</h3>
+                  <h3 className="text-xl font-semibold text-[oklch(0.85_0.15_320)]">Now</h3>
                   <ul className="space-y-2 text-white/80">
-                    <li>• Agents autonomes</li>
-                    <li>• Automatisation intelligente</li>
-                    <li>• Décisions augmentées par l'IA</li>
-                    <li>• Échelle exponentielle</li>
+                    <li>• Autonomous agents</li>
+                    <li>• Intelligent automation</li>
+                    <li>• AI-augmented decisions</li>
+                    <li>• Exponential scale</li>
                   </ul>
                 </div>
               </div>
@@ -77,46 +76,46 @@ export default function Manifesto() {
 
           {/* Section 3 */}
           <section className="space-y-6">
-            <h2 className="text-4xl font-bold text-white">Notre vision</h2>
+            <h2 className="text-4xl font-bold text-white">Our Vision</h2>
             <div className="space-y-4 text-lg text-white/70 leading-relaxed">
               <p>
-                Chez Nukleo Digital, nous croyons que chaque organisation peut devenir un leader de l'IA. 
-                Notre mission est de vous accompagner dans cette transformation, pas à pas, de l'expérimentation 
-                à l'industrialisation.
+                At Nukleo Digital, we believe every organization can become an AI leader. 
+                Our mission is to guide you through this transformation, step by step, from experimentation 
+                to industrialization.
               </p>
               <p>
-                Nous ne construisons pas simplement des sites web ou des applications. Nous créons des 
-                écosystèmes intelligents où chaque point de contact digital est alimenté par des agents 
-                autonomes qui optimisent, apprennent et s'adaptent en temps réel.
+                We don't simply build websites or applications. We create intelligent 
+                ecosystems where every digital touchpoint is powered by autonomous agents 
+                that optimize, learn, and adapt in real-time.
               </p>
             </div>
           </section>
 
           {/* Section 4 - Principles */}
           <section className="space-y-8">
-            <h2 className="text-4xl font-bold text-white">Nos principes</h2>
+            <h2 className="text-4xl font-bold text-white">Our Principles</h2>
             <div className="grid gap-6">
               <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all">
-                <h3 className="text-2xl font-semibold text-white mb-3">1. Leader, pas suiveur</h3>
+                <h3 className="text-2xl font-semibold text-white mb-3">1. Leader, Not Follower</h3>
                 <p className="text-white/70">
-                  Intégrez des capacités d'IA agentique qui peuvent tripler votre ROI, votre vitesse 
-                  et votre volume de production.
+                  Integrate agentic AI capabilities that can triple your ROI, speed, 
+                  and production volume.
                 </p>
               </div>
               
               <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all">
-                <h3 className="text-2xl font-semibold text-white mb-3">2. Opérations réinventées</h3>
+                <h3 className="text-2xl font-semibold text-white mb-3">2. Reinvented Operations</h3>
                 <p className="text-white/70">
-                  Réarchitecturez vos workflows autour d'agents intelligents qui automatisent et 
-                  optimisent en continu.
+                  Rearchitect your workflows around intelligent agents that automate and 
+                  continuously optimize.
                 </p>
               </div>
               
               <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all">
-                <h3 className="text-2xl font-semibold text-white mb-3">3. Échelle sans limites</h3>
+                <h3 className="text-2xl font-semibold text-white mb-3">3. Limitless Scale</h3>
                 <p className="text-white/70">
-                  Créez des systèmes qui grandissent avec vous, sans les contraintes traditionnelles 
-                  de ressources humaines ou de temps.
+                  Create systems that grow with you, without traditional constraints 
+                  of human resources or time.
                 </p>
               </div>
               

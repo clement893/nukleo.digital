@@ -276,3 +276,6 @@
 ## AI Readiness Page Fix
 - [x] Ajouter le header avec logo et menu sur la page AI Readiness
 - [ ] Tester la navigation
+
+## Translation Fix
+- [x] Traduire la page Manifesto en anglais

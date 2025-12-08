@@ -294,3 +294,8 @@
 - [x] Ajouter les interactions (hover, click, scroll)
 - [x] Ajouter la section CTA finale
 - [x] Tester le responsive
+
+## AI Readiness Assessment Fixes
+- [x] Corriger la couleur du header (noir → transparent) sur la page AI Readiness
+- [x] Implémenter l'auto-avancement à la question suivante au clic sur une réponse
+- [x] Tester les corrections

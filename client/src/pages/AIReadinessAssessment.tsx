@@ -82,6 +82,19 @@ export default function AIReadinessAssessment() {
       ...prev,
       [currentQuestion.id]: points,
     }));
+    
+    // Auto-advance to next question after 300ms
+    setTimeout(() => {
+      if (isLastQuestion) {
+        const assessmentResults = calculateScores({ ...answers, [currentQuestion.id]: points });
+        setResults(assessmentResults);
+        setState('results');
+      } else {
+        setCurrentQuestionIndex(prev => prev + 1);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      playClick();
+    }, 300);
   };
 
   const handleNext = () => {
@@ -110,7 +123,7 @@ export default function AIReadinessAssessment() {
   return (
     <>
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-white/5">
+      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b border-white/5">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
           <Link href="/">
             <a className="text-2xl font-bold text-white hover:text-violet-400 transition-colors">

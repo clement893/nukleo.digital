@@ -83,7 +83,7 @@ export default function AIReadinessAssessment() {
       [currentQuestion.id]: points,
     }));
     
-    // Auto-advance to next question after 300ms
+    // Auto-advance to next question after 1500ms
     setTimeout(() => {
       if (isLastQuestion) {
         const assessmentResults = calculateScores({ ...answers, [currentQuestion.id]: points });
@@ -94,7 +94,7 @@ export default function AIReadinessAssessment() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
       playClick();
-    }, 300);
+    }, 1500);
   };
 
   const handleNext = () => {
@@ -238,19 +238,19 @@ export default function AIReadinessAssessment() {
             </div>
           </div>
         )}
-
-        {/* Email Capture Modal */}
-        {showEmailModal && (
-          <EmailCaptureModal
-            onSubmit={handleEmailSubmit}
-            onClose={() => {
-              setShowEmailModal(false);
-              playClick();
-            }}
-          />
-        )}
       </div>
     </div>
+
+    {/* Email Capture Modal - Outside main container for proper z-index */}
+    {showEmailModal && (
+      <EmailCaptureModal
+        onSubmit={handleEmailSubmit}
+        onClose={() => {
+          setShowEmailModal(false);
+          playClick();
+        }}
+      />
+    )}
     </>
   );
 }

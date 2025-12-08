@@ -299,3 +299,9 @@
 - [x] Corriger la couleur du header (noir → transparent) sur la page AI Readiness
 - [x] Implémenter l'auto-avancement à la question suivante au clic sur une réponse
 - [x] Tester les corrections
+
+## AI Readiness Assessment - Email Capture Fix
+- [x] Augmenter le délai d'auto-avancement (300ms → 1500ms)
+- [x] Déboguer le modal email capture qui n'apparaît pas
+- [ ] Vérifier l'envoi d'email après soumission
+- [ ] Tester le flow complet

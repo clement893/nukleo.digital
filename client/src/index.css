@@ -183,7 +183,7 @@
 
   /* OKLCH Color System - Nukleo Design */
   --color-primary: oklch(0.65 0.25 290);
-  --color-accent: oklch(0.70 0.22 330);
+  --color-accent: oklch(1 0 0);
   --color-background: oklch(0.12 0.02 290);
   --color-foreground: oklch(0.98 0 0);
   --color-muted: oklch(0.60 0.02 290);

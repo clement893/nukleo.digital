@@ -383,3 +383,7 @@
 - [x] Ajouter des animations spectaculaires (texte, background, effets)
 - [x] Augmenter la présence visuelle pour "crier fort"
 - [x] Tester l'impact visuel final
+
+## Accent Color Change
+- [x] Remplacer la couleur d'accent rose par blanc pur dans index.css
+- [x] Tester tous les éléments utilisant la couleur accent

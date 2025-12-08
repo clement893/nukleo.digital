@@ -577,3 +577,20 @@
 - [x] Créer le composant ClientLogos.tsx
 - [x] Intégrer la section sur la homepage après le Hero
 - [x] Ajouter effet grayscale → couleur au survol (effet hover avec gradient)
+
+## Optimisation SEO
+- [ ] Analyser l'état actuel du SEO (meta tags, structure, contenu)
+- [ ] Ajouter meta descriptions personnalisées pour chaque page
+- [ ] Optimiser les balises H1-H6 pour la hiérarchie sémantique
+- [ ] Créer sitemap.xml
+- [ ] Créer robots.txt
+- [ ] Ajouter balises Open Graph pour réseaux sociaux
+- [ ] Optimiser les URLs (slugs descriptifs)
+- [ ] Ajouter schema.org markup pour rich snippets
+
+## Repositionner logos clients et créer page dédiée
+- [x] Transformer ClientLogos en carrousel subtil avec auto-scroll
+- [x] Déplacer ClientLogos en bas de homepage (avant Footer)
+- [x] Créer page /clients complète avec détails sur chaque client
+- [x] Ajouter lien "Nos Clients" dans le Footer
+- [x] Ajouter route /clients dans App.tsx

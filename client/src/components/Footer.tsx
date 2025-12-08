@@ -7,6 +7,7 @@ export default function Footer() {
     { label: 'Manifesto', href: '/manifesto' },
     { label: 'About', href: '/about' },
     { label: 'Expertise', href: '/expertise' },
+    { label: 'Clients', href: '/clients' },
     { label: 'Resources', href: '/resources' },
     { label: 'FAQ', href: '/faq' },
     { label: 'Contact', href: '/contact' },

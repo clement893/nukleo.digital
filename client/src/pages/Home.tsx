@@ -54,7 +54,6 @@ export default function Home() {
           
           <div className="relative z-10">
             <HeroSection />
-            <ClientLogos />
             <ManifestoSection />
             <WhoWeServeSection />
             <CapabilitiesSection />
@@ -64,6 +63,7 @@ export default function Home() {
         <TrinitySection />
         <TestimonialsCarousel />
         <CTASection />
+        <ClientLogos />
       </main>
       <Footer />
     </div>

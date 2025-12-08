@@ -766,3 +766,9 @@
 - [x] Retirer `cursor: none` du CSS pour afficher le curseur système
 - [x] Garder le composant CustomCursor pour l'effet halo en arrière-plan
 - [x] Tester que le curseur système est visible + halo suit la souris
+
+## Correction animations disparues
+- [x] Retirer le parallax du titre "Architects of Your AI Future"
+- [x] Restaurer l'animation slide-in du titre (animate-in fade-in slide-in-from-left-20)
+- [x] Restaurer l'animation de loading du site (PageLoader avec spinner 1.5s)
+- [x] Tester toutes les animations

@@ -1,15 +1,14 @@
 import { Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useSound } from '@/hooks/useSound';
-import { useParallax } from '@/hooks/useParallax';
+
 import { useEffect, useState } from 'react';
 
 export default function HeroSection() {
   const { playHover, playClick } = useSound();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   
-  // Parallax effect uniquement sur le titre principal
-  const titleOffset = useParallax(0.3);  // Titre principal - lent (arrière-plan)
+
   
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -40,7 +39,7 @@ export default function HeroSection() {
                 hover-distort
                 transition-transform duration-75 ease-out
               "
-              style={{ transform: `translateY(${titleOffset}px)` }}
+
             >
               <span className="inline-block animate-in fade-in slide-in-from-left-20 duration-700">
                 Architects

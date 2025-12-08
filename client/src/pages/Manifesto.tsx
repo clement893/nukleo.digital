@@ -121,10 +121,10 @@ export default function Manifesto() {
               </div>
               
               <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all">
-                <h3 className="text-2xl font-semibold text-white mb-3">4. Humain au centre</h3>
+                <h3 className="text-2xl font-semibold text-white mb-3">4. Human-Centered</h3>
                 <p className="text-white/70">
-                  L'IA ne remplace pas l'humain, elle l'augmente. Nos solutions libèrent votre équipe 
-                  pour se concentrer sur ce qui compte vraiment : la stratégie, la créativité et l'innovation.
+                  AI doesn't replace humans, it augments them. Our solutions free your team 
+                  to focus on what truly matters: strategy, creativity, and innovation.
                 </p>
               </div>
             </div>
@@ -133,23 +133,23 @@ export default function Manifesto() {
           {/* Section 5 - Call to Action */}
           <section className="bg-gradient-to-r from-[oklch(0.85_0.15_300)] via-[oklch(0.85_0.15_320)] to-[oklch(0.85_0.15_340)] rounded-3xl p-8 md:p-12 text-center">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Prêt à passer à l'échelle ?
+              Ready to Scale?
             </h2>
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              L'ère du marketing agentique est là. Définissez votre feuille de route pour devenir 
-              un leader natif de l'IA.
+              The era of agentic marketing is here. Define your roadmap to become 
+              an AI-native leader.
             </p>
             <button className="bg-white text-[oklch(0.35_0.15_300)] px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/90 transition-all hover:scale-105">
-              DÉMARRER VOTRE TRANSFORMATION
+              START YOUR TRANSFORMATION
             </button>
           </section>
 
           {/* Section 6 - Quote */}
           <section className="border-l-4 border-[oklch(0.85_0.15_320)] pl-8 py-4">
             <blockquote className="text-2xl md:text-3xl font-light text-white/80 italic leading-relaxed">
-              "L'avenir appartient à ceux qui construisent aujourd'hui les systèmes de demain."
+              "The future belongs to those who build tomorrow's systems today."
             </blockquote>
-            <p className="text-white/60 mt-4">— L'équipe Nukleo Digital</p>
+            <p className="text-white/60 mt-4">— The Nukleo Digital Team</p>
           </section>
         </div>
       </div>

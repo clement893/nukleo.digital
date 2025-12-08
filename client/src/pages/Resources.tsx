@@ -74,20 +74,20 @@ export default function Resources() {
               </span>
               
               <h2 className="text-3xl lg:text-5xl font-bold text-white mb-6">
-                CARTOGRAPHIE<br />
-                TECHNOLOGIQUE IA
+                AI TECHNOLOGY<br />
+                MAPPING
               </h2>
               
               <p className="text-white/75 text-lg mb-8 max-w-2xl">
-                Visualisation interactive des technologies IA émergentes et établies. 
-                Mise à jour mensuelle pour guider vos décisions d'investissement technologique.
+                Interactive visualization of emerging and established AI technologies. 
+                Monthly updates to guide your technology investment decisions.
               </p>
               
               <a
                 href="/radar"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-white rounded-full font-medium hover:bg-accent/90 transition-all duration-300"
               >
-                Explorer le Radar
+                Explore the Radar
                 <span>→</span>
               </a>
             </div>

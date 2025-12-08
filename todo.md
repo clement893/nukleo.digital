@@ -192,3 +192,14 @@
 - [x] Ajouter la route /radar dans App.tsx
 - [x] Remplacer le radar dans Resources par un CTA vers /radar
 - [x] Tester la navigation et déployer
+
+## Traduction complète du site en anglais
+- [ ] Identifier toutes les pages avec contenu français
+- [x] Traduire Leo.tsx (chatbot en anglais) - Déjà en anglais
+- [x] Traduire FAQ.tsx (19 questions/réponses)
+- [x] Traduire Manifesto.tsx
+- [x] Traduire Radar.tsx et TrendRadar.tsx
+- [x] Traduire Resources.tsx
+- [x] Traduire FullScreenMenu.tsx (items de navigation)
+- [x] Traduire les données JSON (radar-2024-12.json)
+- [ ] Tester toutes les pages et vérifier la cohérence

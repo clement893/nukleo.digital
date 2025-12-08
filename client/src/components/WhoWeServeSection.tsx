@@ -29,10 +29,7 @@ export default function WhoWeServeSection() {
   ];
 
   return (
-    <section className="relative py-32 overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-purple-950/50 via-purple-900/30 to-transparent"></div>
-      
+    <section className="relative py-32">
       <div className="container relative z-10">
         {/* Section Header */}
         <div className="text-center mb-20">

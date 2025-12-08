@@ -396,3 +396,8 @@
 
 ## Remove Global Badge
 - [x] Retirer le badge "Global AI Transformation Partner" du hero
+
+## Extend Hero Background
+- [x] Étendre le fond du hero aux sections Manifesto et Who We Serve
+- [x] Créer une continuité visuelle forte sur les 3 premiers blocs
+- [x] Tester le rendu final

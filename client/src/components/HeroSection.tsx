@@ -62,8 +62,13 @@ export default function HeroSection() {
               </span>
             </h1>
 
+            {/* Slogan */}
+            <p className="text-3xl md:text-4xl text-white font-semibold mb-6 max-w-2xl animate-in fade-in slide-in-from-bottom-10 duration-700 delay-350 tracking-tight">
+              Choose Nukleo, Choose Intelligence
+            </p>
+
             {/* Subtitle */}
-            <p className="text-2xl text-white/90 leading-relaxed font-light mb-12 max-w-2xl animate-in fade-in slide-in-from-bottom-10 duration-700 delay-400 italic">
+            <p className="text-xl text-white/70 leading-relaxed font-light mb-12 max-w-2xl animate-in fade-in slide-in-from-bottom-10 duration-700 delay-400">
               Serving startups, SMBs, enterprises, and governments worldwide
             </p>
 

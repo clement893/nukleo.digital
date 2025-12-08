@@ -38,12 +38,15 @@ export default function Header() {
         >
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <a href="/" className="flex items-center group cursor-pointer">
+            <a href="/" className="flex flex-col group cursor-pointer">
               <img 
                 src="/nukleo-logo.png" 
                 alt="Nukleo" 
-                className="h-8 w-auto object-contain brightness-0 invert"
+                className="h-8 w-auto object-contain brightness-0 invert mb-1"
               />
+              <span className="text-[10px] text-white/60 font-medium tracking-wider uppercase">
+                Choose Intelligence
+              </span>
             </a>
 
             {/* Right: CTA + Burger Menu */}

@@ -466,3 +466,8 @@
 - [x] Corriger le chevauchement des statistiques sur le titre Hero
 - [x] Ajuster le layout pour éviter l'empiètement
 - [x] Tester le rendu
+
+## Add "Choose Nukleo, Choose Intelligence" Slogan
+- [x] Ajouter le slogan dans le Hero
+- [x] Ajouter le slogan dans la navigation
+- [x] Tester le rendu

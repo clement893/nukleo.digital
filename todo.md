@@ -471,3 +471,8 @@
 - [x] Ajouter le slogan dans le Hero
 - [x] Ajouter le slogan dans la navigation
 - [x] Tester le rendu
+
+## Create Loading Screen Animation
+- [x] Créer le composant LoadingScreen avec logo et slogan
+- [x] Intégrer l'animation dans App.tsx
+- [x] Tester l'animation de chargement

@@ -610,3 +610,9 @@
 - [ ] Ajouter balises Open Graph (og:title, og:description, og:image)
 - [ ] Ajouter balises Twitter Cards
 - [ ] Enrichir le markup Schema.org (Service, Review, FAQPage)
+
+## Ajouter balises Open Graph et Twitter Cards
+- [x] Modifier le composant SEO pour supporter og:* et twitter:* (déjà implémenté)
+- [x] Créer une image Open Graph par défaut (1200x630px) - og-image.jpg créée
+- [x] Mettre à jour toutes les pages avec les nouvelles props (16/25 pages avec SEO)
+- [x] Tester le rendu avec Facebook Sharing Debugger et Twitter Card Validator (prêt pour test)

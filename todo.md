@@ -268,3 +268,7 @@
 
 ## Menu Update
 - [x] Remettre Leo AI dans le menu (remplacer AI Readiness)
+
+## Vercel Timeout Fix
+- [x] Créer vercel.json avec configuration timeout 60s
+- [ ] Tester Leo après redéploiement

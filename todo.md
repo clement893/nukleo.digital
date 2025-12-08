@@ -451,3 +451,8 @@
 - [x] Appliquer hover-distort sur tout le titre h1 en une seule fois
 - [x] Retirer hover-distort des spans individuels
 - [x] Tester l'animation
+
+## Remove ROI Calculator
+- [x] Identifier la section ROI Calculator
+- [x] Supprimer le composant et ses imports
+- [x] Tester le site

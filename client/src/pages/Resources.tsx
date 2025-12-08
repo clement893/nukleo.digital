@@ -50,14 +50,6 @@ export default function Resources() {
       tags: ['100+ Terms', 'Real Examples', 'Searchable'],
       link: '/glossary',
       buttonText: 'Browse Glossary'
-    },
-    {
-      badge: 'Calculation Tool',
-      title: 'ROI Calculator',
-      description: 'Calculate the potential return on investment for your AI initiatives. Data-driven projections based on industry benchmarks.',
-      tags: ['Custom Scenarios', 'Industry Data', 'PDF Export'],
-      link: '/roi-calculator',
-      buttonText: 'Calculate ROI'
     }
   ];
 

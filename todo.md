@@ -313,3 +313,7 @@
 - [x] Ajouter les liens depuis la homepage (TrinitySection)
 - [x] Ajouter les liens dans le menu FullScreenMenu
 - [ ] Tester toutes les pages
+
+## Remove Trinity from Menu
+- [x] Retirer les 3 pages Trinity du menu FullScreenMenu
+- [x] Garder seulement les liens depuis la homepage

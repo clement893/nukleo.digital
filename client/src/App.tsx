@@ -13,7 +13,7 @@ import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
 import Leo from "./pages/Leo";
 import Manifesto from "./pages/Manifesto";
-import Radar from "./pages/Radar";
+import { RadarNew as Radar } from "./pages/RadarNew";
 import AIReadinessAssessment from "./pages/AIReadinessAssessment";
 
 function Router() {

@@ -283,3 +283,14 @@
 ## Leo AI English Prompt
 - [x] Traduire le système prompt de Leo en anglais
 - [x] Tester les réponses de Leo
+
+## Radar Page Rebuild
+- [x] Créer la structure de données des 10 technologies
+- [x] Créer le hero section avec badge et légende maturité
+- [x] Créer la section filtres sticky (catégorie + maturité)
+- [x] Créer la visualisation radar interactive avec dots positionnés
+- [x] Créer les cartes technologies avec métriques ROI
+- [x] Implémenter la logique de filtrage dynamique
+- [x] Ajouter les interactions (hover, click, scroll)
+- [x] Ajouter la section CTA finale
+- [x] Tester le responsive

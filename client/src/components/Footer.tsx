@@ -22,8 +22,20 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-black text-white py-16 lg:py-24">
-      <div className="container">
+    <footer 
+      className="bg-black text-white py-16 lg:py-24 relative overflow-hidden"
+      style={{
+        backgroundImage: 'url(/arrow-brand.png)',
+        backgroundSize: '80px 80px',
+        backgroundRepeat: 'repeat',
+        backgroundPosition: 'center',
+        backgroundBlendMode: 'overlay',
+        opacity: 0.95
+      }}
+    >
+      {/* Overlay pour atténuer le pattern */}
+      <div className="absolute inset-0 bg-black/60 pointer-events-none" />
+      <div className="container relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
           {/* Logo and Description */}
           <div className="lg:col-span-4">

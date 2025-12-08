@@ -17,10 +17,14 @@ export default function CustomCursor() {
 
   return (
     <div 
-      className="cursor-glow"
+      className="cursor-arrow"
       style={{ 
         left: `${position.x}px`, 
-        top: `${position.y}px` 
+        top: `${position.y}px`,
+        backgroundImage: 'url(/arrow-brand.png)',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
       }}
     />
   );

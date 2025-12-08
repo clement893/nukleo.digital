@@ -648,3 +648,8 @@
 - [x] Minifier et compresser les assets CSS/JS (vite.config.ts)
 - [ ] Tester le score Lighthouse Performance (objectif 90+)
 - [ ] Mesurer LCP, FID, CLS et optimiser si nécessaire
+
+## Intégration flèche arrow-brand en background
+- [x] Ajouter la flèche en background pattern du Footer
+- [x] Remplacer le curseur personnalisé (halo lumineux) par la flèche arrow-brand.png
+- [x] Tester l'apparence sur toutes les pages

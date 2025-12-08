@@ -456,3 +456,8 @@
 - [x] Identifier la section ROI Calculator
 - [x] Supprimer le composant et ses imports
 - [x] Tester le site
+
+## Replace Pink Gradients Site-Wide
+- [x] Identifier tous les gradients qui tirent vers le rose
+- [x] Remplacer par rouge bordeaux → violet bleué (comme homepage)
+- [x] Tester toutes les pages

@@ -144,11 +144,11 @@ export default function Resources() {
         </section>
 
         {/* Interactive Tools Section */}
-        <section className="py-20 bg-gradient-to-br from-purple-900 via-purple-800 to-pink-900 relative overflow-hidden">
+        <section className="py-20 bg-gradient-to-br from-purple-900 via-purple-800 to-purple-950 relative overflow-hidden">
           {/* Animated blobs */}
           <div className="absolute inset-0 opacity-20">
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500 rounded-full blur-3xl animate-pulse" />
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-pink-500 rounded-full blur-3xl animate-pulse delay-1000" />
+            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600 rounded-full blur-3xl animate-pulse delay-1000" />
           </div>
 
           <div className="container relative z-10">
@@ -271,11 +271,11 @@ export default function Resources() {
         </section>
 
         {/* CTA Newsletter Section (Gradient) */}
-        <section className="py-32 bg-gradient-to-br from-purple-900 via-purple-800 to-pink-900 relative overflow-hidden">
+        <section className="py-32 bg-gradient-to-br from-purple-900 via-purple-800 to-purple-950 relative overflow-hidden">
           {/* Animated blobs */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-1/3 left-1/3 w-96 h-96 bg-purple-400 rounded-full blur-3xl animate-pulse" />
-            <div className="absolute bottom-1/3 right-1/3 w-96 h-96 bg-pink-400 rounded-full blur-3xl animate-pulse delay-700" />
+            <div className="absolute bottom-1/3 right-1/3 w-96 h-96 bg-purple-500 rounded-full blur-3xl animate-pulse delay-700" />
           </div>
 
           <div className="container relative z-10">

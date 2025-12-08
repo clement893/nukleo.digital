@@ -49,7 +49,7 @@ export default function HeroSection() {
               </span>
               <br />
               <span 
-                className="inline-block animate-in fade-in slide-in-from-left-20 duration-700 delay-300 bg-gradient-to-r from-cyan-400 via-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent hover:scale-110 transition-transform relative"
+                className="inline-block animate-in fade-in slide-in-from-left-20 duration-700 delay-300 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent hover:scale-110 transition-transform relative"
                 style={{
                   textShadow: 'none',
                   backgroundSize: '200% auto',
@@ -100,7 +100,7 @@ export default function HeroSection() {
           <div className="lg:col-span-5 animate-in fade-in slide-in-from-right-20 duration-700 delay-600">
             <div className="relative p-8 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-500 group">
               {/* Glow effect */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" />
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" />
               
               <div className="relative z-10">
                 <p className="text-xl text-white/90 leading-relaxed font-light mb-6">

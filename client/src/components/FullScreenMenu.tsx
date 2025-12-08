@@ -50,7 +50,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
     <div 
       className={`
         fixed inset-0 z-40 
-        bg-gradient-to-br from-purple-900 via-purple-800 to-pink-900 
+        bg-gradient-to-br from-purple-900 via-purple-800 to-purple-950 
         transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]
         ${isOpen ? 'opacity-100' : 'opacity-0'}
       `}
@@ -73,7 +73,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
         className={`
           absolute bottom-1/4 right-1/4 
           w-96 h-96 
-          bg-pink-500 
+          bg-purple-600 
           rounded-full blur-3xl 
           opacity-30 
           transition-all duration-1000 delay-200

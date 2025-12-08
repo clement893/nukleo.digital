@@ -79,7 +79,7 @@ export default function WhoWeServeSection() {
                 </ul>
 
                 {/* Hover gradient overlay */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-purple-500/0 via-purple-500/0 to-purple-500/0 group-hover:from-purple-500/5 group-hover:via-purple-500/0 group-hover:to-pink-500/5 transition-all duration-500 pointer-events-none"></div>
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-purple-500/0 via-purple-500/0 to-purple-500/0 group-hover:from-purple-500/5 group-hover:via-purple-500/0 group-hover:to-blue-500/5 transition-all duration-500 pointer-events-none"></div>
               </div>
             );
           })}

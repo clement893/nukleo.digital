@@ -772,3 +772,8 @@
 - [x] Restaurer l'animation slide-in du titre (animate-in fade-in slide-in-from-left-20)
 - [x] Restaurer l'animation de loading du site (PageLoader avec spinner 1.5s)
 - [x] Tester toutes les animations
+
+## Augmentation opacité grain +10%
+- [x] Augmenter l'opacité de la texture grain de 0.45 à 0.55 (+10%)
+- [x] Tester la visibilité sur toutes les pages
+- [ ] Push GitHub

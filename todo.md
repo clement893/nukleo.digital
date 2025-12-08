@@ -387,3 +387,9 @@
 ## Accent Color Change
 - [x] Remplacer la couleur d'accent rose par blanc pur dans index.css
 - [x] Tester tous les éléments utilisant la couleur accent
+
+## Homepage Fond Unifié & Orbe Rouge
+- [x] Analyser nukleo.com pour identifier la teinte de rouge exacte (rgb(107,23,22))
+- [x] Unifier les fonds Hero, Manifesto, Who We Serve sur même gradient violet
+- [x] Remplacer l'orbe rose par un orbe rouge bordeaux
+- [x] Tester le rendu final

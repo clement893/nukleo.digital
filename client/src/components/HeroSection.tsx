@@ -22,7 +22,7 @@ export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
       {/* Animated Background with Parallax */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-950 via-purple-900 to-pink-950">
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-950 via-purple-900 to-[rgb(107,23,22)]">
         {/* Grid Pattern */}
         <div 
           className="absolute inset-0 opacity-20"
@@ -45,7 +45,7 @@ export default function HeroSection() {
           }}
         />
         <div 
-          className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-pink-500/30 rounded-full blur-[120px] animate-pulse"
+          className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[rgb(107,23,22)]/15 rounded-full blur-[120px] animate-pulse"
           style={{
             transform: `translate(${-mousePosition.x * 0.03}px, ${-mousePosition.y * 0.03}px)`,
             animation: 'pulse 5s ease-in-out infinite 1s'

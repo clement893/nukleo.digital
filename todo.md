@@ -692,3 +692,11 @@
 - [x] Changer le gradient de violet 60% à blanc 3% opacité
 - [x] Supprimer l'animation pulse
 - [x] Tester sur desktop uniquement (hidden md:block)
+
+## Effet parallax subtil sur hero
+- [x] Créer le hook useParallax avec scroll listener et requestAnimationFrame
+- [x] Appliquer parallax au titre principal (vitesse 0.3x - arrière-plan)
+- [x] Appliquer parallax au slogan et subtitle (vitesse 0.5x - moyen)
+- [x] Appliquer parallax aux CTAs (vitesse 0.7x - premier plan)
+- [x] Optimiser les performances (requestAnimationFrame + passive listener)
+- [x] Tester sur desktop et mobile

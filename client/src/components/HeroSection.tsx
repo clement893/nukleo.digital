@@ -1,11 +1,17 @@
 import { Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useSound } from '@/hooks/useSound';
+import { useParallax } from '@/hooks/useParallax';
 import { useEffect, useState } from 'react';
 
 export default function HeroSection() {
   const { playHover, playClick } = useSound();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  
+  // Parallax effects avec vitesses différentes pour créer de la profondeur
+  const titleOffset = useParallax(0.3);  // Titre principal - lent (arrière-plan)
+  const sloganOffset = useParallax(0.5); // Slogan - moyen
+  const ctaOffset = useParallax(0.7);    // CTAs - rapide (premier plan)
   
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -26,14 +32,18 @@ export default function HeroSection() {
           {/* Main Title */}
           <div className="max-w-5xl">
             {/* Main Heading with Stagger Animations */}
-            <h1 className="
-              text-[4rem] sm:text-[6rem] md:text-[8rem] lg:text-[10rem] 
-              text-white 
-              mb-12
-              leading-[0.85]
-              font-black
-              hover-distort
-            ">
+            <h1 
+              className="
+                text-[4rem] sm:text-[6rem] md:text-[8rem] lg:text-[10rem] 
+                text-white 
+                mb-12
+                leading-[0.85]
+                font-black
+                hover-distort
+                transition-transform duration-75 ease-out
+              "
+              style={{ transform: `translateY(${titleOffset}px)` }}
+            >
               <span className="inline-block animate-in fade-in slide-in-from-left-20 duration-700">
                 Architects
               </span>
@@ -57,17 +67,26 @@ export default function HeroSection() {
             </h1>
 
             {/* Slogan */}
-            <p className="text-3xl md:text-4xl text-white font-semibold mb-6 max-w-2xl animate-in fade-in slide-in-from-bottom-10 duration-700 delay-350 tracking-tight">
+            <p 
+              className="text-3xl md:text-4xl text-white font-semibold mb-6 max-w-2xl animate-in fade-in slide-in-from-bottom-10 duration-700 delay-350 tracking-tight transition-transform duration-75 ease-out"
+              style={{ transform: `translateY(${sloganOffset}px)` }}
+            >
               Choose Nukleo, Choose Intelligence
             </p>
 
             {/* Subtitle */}
-            <p className="text-xl text-white/70 leading-relaxed font-light mb-12 max-w-2xl animate-in fade-in slide-in-from-bottom-10 duration-700 delay-400">
+            <p 
+              className="text-xl text-white/70 leading-relaxed font-light mb-12 max-w-2xl animate-in fade-in slide-in-from-bottom-10 duration-700 delay-400 transition-transform duration-75 ease-out"
+              style={{ transform: `translateY(${sloganOffset}px)` }}
+            >
               Serving startups, SMBs, enterprises, and governments worldwide
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-500">
+            <div 
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-6 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-500 transition-transform duration-75 ease-out"
+              style={{ transform: `translateY(${ctaOffset}px)` }}
+            >
               <Button
                 onClick={playClick}
                 onMouseEnter={playHover}

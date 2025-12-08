@@ -437,3 +437,8 @@
 - [x] Remettre le gradient sandwich unifié sur les 4 sections (Hero, Manifesto, Who We Serve, Capabilities)
 - [x] Gradient : rouge bordeaux (haut-gauche) → violet bleué (milieu) → rouge bordeaux (bas-droite)
 - [x] Tester le rendu final
+
+## Reduce Blue Intensity in Gradient
+- [x] Réduire l'intensité du bleu au centre du gradient sandwich
+- [x] Rendre le bleu plus sombre et discret
+- [x] Tester le rendu final

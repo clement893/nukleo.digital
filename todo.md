@@ -622,3 +622,8 @@
 - [x] Créer og-about.jpg (1200x630px) - 23.7 KB
 - [x] Créer og-expertise.jpg (1200x630px) - 27.7 KB
 - [x] Mettre à jour les pages avec les nouvelles images OG (Services, About, Expertise)
+
+## Meta descriptions pour toutes les pages
+- [x] Identifier les pages sans meta descriptions (9 pages: FAQ, Projects, Manifesto, AIReadinessAssessment, Leo, Radar, RadarNew, NotFound, ComponentShowcase)
+- [x] Rédiger meta descriptions pour toutes les pages restantes (9 pages)
+- [x] Implémenter dans le code (9 pages complétées: FAQ, Projects, Manifesto, AIReadinessAssessment, Leo, Radar, RadarNew, NotFound, ComponentShowcase)

@@ -1,3 +1,4 @@
+import SEO from '@/components/SEO';
 import { useState, useRef, useEffect } from 'react';
 import { Send, Mic } from 'lucide-react';
 import { Button } from '@/components/ui/button';

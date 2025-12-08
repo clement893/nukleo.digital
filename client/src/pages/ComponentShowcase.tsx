@@ -1,3 +1,4 @@
+import SEO from '@/components/SEO';
 import {
   Accordion,
   AccordionContent,
@@ -227,7 +228,14 @@ export default function ComponentsShowcase() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <>
+      <SEO 
+        title="Component Showcase | Nukleo Digital Design System"
+        description="Internal component showcase for Nukleo Digital design system. View UI components, patterns & design tokens."
+        keywords="component showcase, design system, UI components"
+        noindex={true}
+      />
+      <div className="min-h-screen bg-background text-foreground">
       <main className="container max-w-6xl mx-auto">
         <div className="space-y-2 justify-between flex">
           <h2 className="text-3xl font-bold tracking-tight mb-6">
@@ -1433,5 +1441,6 @@ export default function ComponentsShowcase() {
         </div>
       </footer>
     </div>
+    </>
   );
 }

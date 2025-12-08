@@ -1,8 +1,14 @@
+import SEO from '@/components/SEO';
 import PageLayout from '../components/PageLayout';
 
 export default function Manifesto() {
   return (
     <PageLayout>
+      <SEO 
+        title="Our Manifesto | Move From Pilot to Scale"
+        description="Discover the Nukleo manifesto: our vision for AI transformation that moves beyond pilots to production-ready, scalable solutions. Read our approach to AI success."
+        keywords="AI transformation manifesto, AI vision, AI philosophy, AI approach, scaling AI solutions"
+      />
       <div className="min-h-screen pt-24 pb-20 px-4">
         {/* Hero Section */}
         <div className="max-w-6xl mx-auto mb-20">

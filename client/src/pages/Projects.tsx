@@ -1,3 +1,4 @@
+import SEO from '@/components/SEO';
 import { useState } from 'react';
 import { Filter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -49,6 +50,11 @@ export default function Projects() {
 
   return (
     <PageLayout>
+      <SEO 
+        title="AI Transformation Projects | Success Stories & Case Studies"
+        description="Explore our AI transformation projects: real results across healthcare, finance, retail & government. See how we deliver measurable ROI. View case studies now."
+        keywords="AI transformation projects, AI case studies, AI success stories, AI implementation examples, AI project portfolio"
+      />
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">

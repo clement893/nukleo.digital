@@ -4,6 +4,7 @@ import { Link } from 'wouter';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useSound } from '@/hooks/useSound';
+import SEO from '@/components/SEO';
 
 interface FAQItem {
   question: string;
@@ -141,6 +142,11 @@ export default function FAQ() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#1a0b2e] via-[#2d1b4e] to-[#1a0b2e]">
+      <SEO 
+        title="AI Transformation FAQ | Common Questions Answered"
+        description="Get answers to common AI transformation questions: implementation timeline, ROI expectations, team requirements, security & more. Expert insights from Nukleo Digital."
+        keywords="AI transformation FAQ, AI implementation questions, AI ROI, AI security, AI consulting FAQ"
+      />
       <Header />
       
       {/* Hero Section */}

@@ -1,3 +1,4 @@
+import SEO from '@/components/SEO';
 import { useState } from "react";
 import { RadarHero } from "../components/radar/RadarHero";
 import { FilterSection } from "../components/radar/FilterSection";

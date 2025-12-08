@@ -1,3 +1,4 @@
+import SEO from '@/components/SEO';
 import PageLayout from '@/components/PageLayout';
 import TrendRadar from '@/components/TrendRadar';
 

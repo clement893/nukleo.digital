@@ -1,3 +1,4 @@
+import SEO from '@/components/SEO';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle, Home } from "lucide-react";
@@ -11,7 +12,13 @@ export default function NotFound() {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
+    <>
+      <SEO 
+        title="Page Not Found | Nukleo Digital"
+        description="The page you're looking for doesn't exist. Explore our AI services, expertise, case studies & resources to find what you need."
+        keywords="404 error, page not found, Nukleo Digital"
+      />
+      <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
       <Card className="w-full max-w-lg mx-4 shadow-lg border-0 bg-white/80 backdrop-blur-sm">
         <CardContent className="pt-8 pb-8 text-center">
           <div className="flex justify-center mb-6">
@@ -48,5 +55,6 @@ export default function NotFound() {
         </CardContent>
       </Card>
     </div>
+    </>
   );
 }

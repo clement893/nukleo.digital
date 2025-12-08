@@ -1,3 +1,4 @@
+import SEO from '@/components/SEO';
 import { useState } from 'react';
 import { QUESTIONS } from '@/lib/assessment/questions';
 import { calculateScores, AssessmentResults } from '@/lib/assessment/scoring';
@@ -122,6 +123,12 @@ export default function AIReadinessAssessment() {
 
   return (
     <>
+      <SEO 
+        title="Free AI Readiness Assessment | Evaluate Your AI Potential"
+        description="Take our free 5-minute AI readiness assessment. Get personalized insights on your organization's AI maturity, gaps & opportunities. Start your AI journey today."
+        keywords="AI readiness assessment, AI maturity assessment, AI evaluation, AI readiness score, free AI assessment"
+      />
+
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b border-white/5">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">

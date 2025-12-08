@@ -786,4 +786,9 @@
 - [x] Créer la page Arts & Culture avec contenu approprié
 - [x] Ajouter la route /arts-culture dans App.tsx
 - [x] Ajouter Arts & Culture au menu FullScreenMenu (item 08)
+- [x] Push GitHub
+
+## Correction logo LoadingScreen
+- [x] Remplacer le logo sur l'écran de chargement par le logo Nukleo 2025
+- [x] Tester l'affichage au chargement
 - [ ] Push GitHub

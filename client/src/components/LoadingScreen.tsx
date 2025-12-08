@@ -37,11 +37,11 @@ export default function LoadingScreen() {
         {/* Logo with pulse animation */}
         <div className="relative">
           <img 
-            src="/nukleo-logo.webp" 
+            src="/nukleo-logo-2025.png" 
             alt="Nukleo" 
-            width="240"
-            height="64"
-            className="h-16 w-auto object-contain brightness-0 invert animate-pulse"
+            width="400"
+            height="100"
+            className="h-20 w-auto object-contain animate-pulse"
           />
           {/* Glow effect */}
           <div className="absolute inset-0 blur-2xl bg-white/30 animate-pulse" />

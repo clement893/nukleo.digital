@@ -47,10 +47,10 @@ export default function Home() {
             <HeroSection />
             <ManifestoSection />
             <WhoWeServeSection />
+            <CapabilitiesSection />
           </div>
         </div>
         
-        <CapabilitiesSection />
         <TrinitySection />
         <CTASection />
       </main>

@@ -401,3 +401,8 @@
 - [x] Étendre le fond du hero aux sections Manifesto et Who We Serve
 - [x] Créer une continuité visuelle forte sur les 3 premiers blocs
 - [x] Tester le rendu final
+
+## Extend Background to Capabilities
+- [x] Étendre le fond unifié pour inclure la section Capabilities
+- [x] Retirer le fond propre de Capabilities (déjà sans fond)
+- [x] Tester le rendu final

@@ -446,3 +446,8 @@
 ## Restore Hero Title Hover Animation
 - [x] Restaurer l'animation hover-distort sur le titre Hero (skew à droite)
 - [x] Tester l'animation au hover
+
+## Apply Hover-Distort to Entire Title
+- [x] Appliquer hover-distort sur tout le titre h1 en une seule fois
+- [x] Retirer hover-distort des spans individuels
+- [x] Tester l'animation

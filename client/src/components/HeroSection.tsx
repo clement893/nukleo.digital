@@ -32,17 +32,18 @@ export default function HeroSection() {
               mb-12
               leading-[0.85]
               font-black
+              hover-distort
             ">
-              <span className="inline-block animate-in fade-in slide-in-from-left-20 duration-700 hover-distort">
+              <span className="inline-block animate-in fade-in slide-in-from-left-20 duration-700">
                 ARCHITECTS
               </span>
               <br />
-              <span className="inline-block animate-in fade-in slide-in-from-left-20 duration-700 delay-100 hover-distort">
+              <span className="inline-block animate-in fade-in slide-in-from-left-20 duration-700 delay-100">
                 OF YOUR
               </span>
               {' '}
               <span 
-                className="inline-block animate-in fade-in slide-in-from-left-20 duration-700 delay-200 hover-distort"
+                className="inline-block animate-in fade-in slide-in-from-left-20 duration-700 delay-200"
               >
                 AI
               </span>

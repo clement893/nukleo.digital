@@ -1,0 +1,121 @@
+import { useEffect } from 'react';
+import { useLocation } from 'wouter';
+
+interface SEOProps {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  article?: {
+    publishedTime?: string;
+    modifiedTime?: string;
+    author?: string;
+    section?: string;
+    tags?: string[];
+  };
+  noindex?: boolean;
+}
+
+const DEFAULT_SEO = {
+  title: 'Nukleo Digital | AI Transformation Agency | Agentic AI Solutions',
+  description: 'Transform your business with AI-powered solutions. We help startups, SMBs, enterprises, and governments unlock the power of artificial intelligence through strategic consulting, intelligent platforms, and automated operations.',
+  keywords: 'AI transformation, artificial intelligence consulting, agentic AI, AI strategy, machine learning, AI automation, digital transformation, AI agency, enterprise AI, AI solutions',
+  ogImage: 'https://nukleo.digital/og-image.jpg',
+  siteUrl: 'https://nukleo.digital',
+  siteName: 'Nukleo Digital',
+  twitterHandle: '@nukleodigital',
+};
+
+export default function SEO({
+  title,
+  description = DEFAULT_SEO.description,
+  keywords = DEFAULT_SEO.keywords,
+  ogImage = DEFAULT_SEO.ogImage,
+  ogType = 'website',
+  article,
+  noindex = false,
+}: SEOProps) {
+  const [location] = useLocation();
+  
+  const fullTitle = title ? `${title} | Nukleo Digital` : DEFAULT_SEO.title;
+  const canonicalUrl = `${DEFAULT_SEO.siteUrl}${location}`;
+
+  useEffect(() => {
+    // Update document title
+    document.title = fullTitle;
+
+    // Update or create meta tags
+    const updateMetaTag = (name: string, content: string, property = false) => {
+      const attribute = property ? 'property' : 'name';
+      let element = document.querySelector(`meta[${attribute}="${name}"]`);
+      
+      if (!element) {
+        element = document.createElement('meta');
+        element.setAttribute(attribute, name);
+        document.head.appendChild(element);
+      }
+      
+      element.setAttribute('content', content);
+    };
+
+    // Basic meta tags
+    updateMetaTag('description', description);
+    updateMetaTag('keywords', keywords);
+    
+    // Robots
+    if (noindex) {
+      updateMetaTag('robots', 'noindex, nofollow');
+    } else {
+      updateMetaTag('robots', 'index, follow');
+    }
+
+    // Open Graph
+    updateMetaTag('og:title', fullTitle, true);
+    updateMetaTag('og:description', description, true);
+    updateMetaTag('og:image', ogImage, true);
+    updateMetaTag('og:url', canonicalUrl, true);
+    updateMetaTag('og:type', ogType, true);
+    updateMetaTag('og:site_name', DEFAULT_SEO.siteName, true);
+
+    // Article-specific OG tags
+    if (article && ogType === 'article') {
+      if (article.publishedTime) {
+        updateMetaTag('article:published_time', article.publishedTime, true);
+      }
+      if (article.modifiedTime) {
+        updateMetaTag('article:modified_time', article.modifiedTime, true);
+      }
+      if (article.author) {
+        updateMetaTag('article:author', article.author, true);
+      }
+      if (article.section) {
+        updateMetaTag('article:section', article.section, true);
+      }
+      if (article.tags) {
+        article.tags.forEach(tag => {
+          updateMetaTag('article:tag', tag, true);
+        });
+      }
+    }
+
+    // Twitter Card
+    updateMetaTag('twitter:card', 'summary_large_image');
+    updateMetaTag('twitter:site', DEFAULT_SEO.twitterHandle);
+    updateMetaTag('twitter:title', fullTitle);
+    updateMetaTag('twitter:description', description);
+    updateMetaTag('twitter:image', ogImage);
+
+    // Canonical URL
+    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.rel = 'canonical';
+      document.head.appendChild(canonical);
+    }
+    canonical.href = canonicalUrl;
+
+  }, [fullTitle, description, keywords, ogImage, ogType, canonicalUrl, article, noindex]);
+
+  return null;
+}

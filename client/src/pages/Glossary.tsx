@@ -1,6 +1,8 @@
 import { Search, Filter, Bookmark, TrendingUp } from 'lucide-react';
 import PageLayout from '@/components/PageLayout';
 import { useState, useMemo } from 'react';
+import SEO from '@/components/SEO';
+import StructuredData from '@/components/StructuredData';
 import { Link } from 'wouter';
 import { allTerms, categories, difficulties } from '@/data/glossary';
 import { Button } from '@/components/ui/button';
@@ -53,8 +55,27 @@ export default function Glossary() {
 
   const trendingTerms = ['gpt', 'rag', 'fine-tuning', 'ai-agent'];
 
+  const glossarySchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'AI Glossary & Knowledge Base',
+    description: 'Comprehensive AI terminology glossary with 24+ terms covering machine learning, NLP, generative AI, and more. From beginner to advanced.',
+    url: 'https://nukleo.digital/glossary',
+    numberOfItems: allTerms.length,
+    about: {
+      '@type': 'Thing',
+      name: 'Artificial Intelligence',
+    },
+  };
+
   return (
     <PageLayout>
+      <SEO 
+        title="AI Glossary & Knowledge Base | 24+ AI Terms Explained"
+        description="Comprehensive AI terminology glossary covering machine learning, NLP, generative AI, computer vision, and AI ethics. From beginner to advanced with real-world examples."
+        keywords="AI glossary, artificial intelligence terms, machine learning glossary, AI terminology, NLP terms, generative AI, deep learning, AI dictionary, AI definitions, AI knowledge base"
+      />
+      <StructuredData data={glossarySchema} />
       <div className="min-h-screen">
         {/* Hero Section */}
         <section className="relative min-h-[60vh] flex flex-col justify-center pt-32 pb-20 overflow-hidden">

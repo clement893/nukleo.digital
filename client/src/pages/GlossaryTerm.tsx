@@ -1,6 +1,8 @@
 import { useRoute, Link } from 'wouter';
 import PageLayout from '@/components/PageLayout';
 import { allTerms } from '@/data/glossary';
+import SEO from '@/components/SEO';
+import StructuredData, { createArticleSchema, createFAQSchema, createBreadcrumbSchema } from '@/components/StructuredData';
 import { ArrowLeft, Bookmark, Share2, ExternalLink, Lightbulb, HelpCircle, BookOpen } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
@@ -57,6 +59,29 @@ export default function GlossaryTerm() {
     );
   }
 
+  // Structured data schemas
+  const articleSchema = createArticleSchema({
+    title: term.term,
+    description: term.shortDefinition,
+    url: `https://nukleo.digital/glossary/${term.id}`,
+    datePublished: '2024-01-01',
+    dateModified: new Date().toISOString(),
+    keywords: [term.term, term.category, 'AI', 'artificial intelligence', ...term.relatedTerms],
+  });
+
+  const faqSchema = createFAQSchema(
+    term.faq.map(f => ({
+      question: f.question,
+      answer: f.answer,
+    }))
+  );
+
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: 'Home', url: 'https://nukleo.digital' },
+    { name: 'Glossary', url: 'https://nukleo.digital/glossary' },
+    { name: term.term, url: `https://nukleo.digital/glossary/${term.id}` },
+  ]);
+
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case 'beginner': return 'bg-green-100 text-green-700 border-green-200';
@@ -81,6 +106,21 @@ export default function GlossaryTerm() {
 
   return (
     <PageLayout>
+      <SEO 
+        title={`${term.term} | AI Glossary`}
+        description={term.shortDefinition}
+        keywords={`${term.term}, ${term.category}, AI terminology, artificial intelligence, machine learning, ${term.relatedTerms.join(', ')}`}
+        ogType="article"
+        article={{
+          publishedTime: '2024-01-01T00:00:00Z',
+          modifiedTime: new Date().toISOString(),
+          section: term.category,
+          tags: [term.term, term.category, term.difficulty],
+        }}
+      />
+      <StructuredData data={articleSchema} />
+      <StructuredData data={faqSchema} />
+      <StructuredData data={breadcrumbSchema} />
       <div className="min-h-screen">
         {/* Header Section */}
         <section className="relative pt-32 pb-16 overflow-hidden">

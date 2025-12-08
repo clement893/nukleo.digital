@@ -356,3 +356,12 @@
 ## Navigation Scroll Fix
 - [x] Ajouter un composant ScrollToTop pour scroller vers le haut lors des changements de route
 - [x] Tester la navigation entre pages
+
+## SEO Optimization
+- [x] Créer un composant SEO avec meta tags dynamiques (title, description, OG, Twitter)
+- [x] Implémenter Schema.org JSON-LD pour Organization et WebSite
+- [x] Ajouter structured data pour les pages de glossaire (Article, FAQPage, Breadcrumb)
+- [x] Créer sitemap.xml dynamique (38 URLs)
+- [x] Créer robots.txt optimisé
+- [x] Ajouter canonical URLs
+- [x] Tester le SEO (meta tags, structured data, sitemap)

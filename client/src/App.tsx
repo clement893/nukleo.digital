@@ -26,6 +26,7 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Cookies from "./pages/Cookies";
 import Testimonials from "./pages/Testimonials";
+import Services from "./pages/Services";
 
 function Router() {
   return (
@@ -36,6 +37,7 @@ function Router() {
       <Route path={"/projects"} component={Projects} />
       <Route path={"/about"} component={About} />
       <Route path={"/expertise"} component={Expertise} />
+      <Route path={"/services"} component={Services} />
       <Route path={"/resources"} component={Resources} />
       <Route path={"/faq"} component={FAQ} />
       <Route path={"/contact"} component={Contact} />

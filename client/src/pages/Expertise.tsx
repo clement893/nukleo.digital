@@ -182,13 +182,22 @@ export default function Expertise() {
               Ready to leverage our expertise for your AI transformation?
             </p>
 
-            <a
-              href="/contact"
-              className="inline-flex items-center gap-2 rounded-full text-lg px-10 py-6 bg-white text-purple-900 hover:bg-white/90 transition-all duration-500 font-bold tracking-wider"
-            >
-              Get in Touch
-              <img src="/arrow-brand.png" alt="" className="w-5 h-5 opacity-60" />
-            </a>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a
+                href="/services"
+                className="inline-flex items-center gap-2 rounded-full text-lg px-10 py-6 bg-accent/10 border border-accent/30 text-white hover:bg-accent/20 transition-all duration-500 font-bold tracking-wider"
+              >
+                View All Services
+                <img src="/arrow-brand.png" alt="" className="w-5 h-5 opacity-60" />
+              </a>
+              <a
+                href="/contact"
+                className="inline-flex items-center gap-2 rounded-full text-lg px-10 py-6 bg-white text-purple-900 hover:bg-white/90 transition-all duration-500 font-bold tracking-wider"
+              >
+                Get in Touch
+                <img src="/arrow-brand.png" alt="" className="w-5 h-5 opacity-60" />
+              </a>
+            </div>
           </div>
         </div>
       </section>

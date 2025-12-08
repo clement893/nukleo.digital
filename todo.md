@@ -557,3 +557,8 @@
 
 ## Retirer l'animation de zoom sur "AI Future"
 - [x] Retirer hover:scale-110 du titre Hero
+
+## Créer une page Services complète
+- [x] Créer la page Services.tsx avec tous les services
+- [x] Ajouter un lien "View All Services" dans la page Expertise
+- [x] Ajouter la route /services dans App.tsx

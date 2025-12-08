@@ -28,6 +28,7 @@ import Cookies from "./pages/Cookies";
 import Testimonials from "./pages/Testimonials";
 import Services from "./pages/Services";
 import Clients from "./pages/Clients";
+import GoogleAnalytics from "./components/GoogleAnalytics";
 
 function Router() {
   return (
@@ -68,6 +69,7 @@ function App() {
     <ErrorBoundary>
       <ThemeProvider defaultTheme="dark">
         <TooltipProvider>
+          <GoogleAnalytics />
           <LoadingScreen />
           <CustomCursor />
           <Router />

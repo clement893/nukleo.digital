@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useSound } from '@/hooks/useSound';
 import SEO from '@/components/SEO';
+import StructuredData, { createFAQSchema } from '@/components/StructuredData';
 
 interface FAQItem {
   question: string;
@@ -147,6 +148,7 @@ export default function FAQ() {
         description="Get answers to common AI transformation questions: implementation timeline, ROI expectations, team requirements, security & more. Expert insights from Nukleo Digital."
         keywords="AI transformation FAQ, AI implementation questions, AI ROI, AI security, AI consulting FAQ"
       />
+      <StructuredData data={createFAQSchema(faqs.map(faq => ({ question: faq.question, answer: faq.answer })))} />
       <Header />
       
       {/* Hero Section */}

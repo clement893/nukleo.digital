@@ -141,3 +141,74 @@ export function createBreadcrumbSchema(items: Array<{ name: string; url: string 
     })),
   };
 }
+
+export const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: 'AI Transformation Services',
+  provider: {
+    '@type': 'Organization',
+    name: 'Nukleo Digital',
+  },
+  areaServed: 'Worldwide',
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'AI Services',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'AI Strategy & Marketing',
+          description: 'Strategic AI consulting, market research, positioning, and go-to-market planning for AI products and services.',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Digital Platforms',
+          description: 'Custom web and mobile applications, API development, cloud infrastructure, and scalable digital solutions.',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Intelligent Operations',
+          description: 'Process automation, workflow optimization, AI-powered analytics, and operational intelligence.',
+        },
+      },
+    ],
+  },
+};
+
+export function createReviewSchema(reviews: Array<{ author: string; rating: number; text: string; date?: string }>) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Nukleo Digital',
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1),
+      bestRating: '5',
+      worstRating: '1',
+      ratingCount: reviews.length.toString(),
+    },
+    review: reviews.map(review => ({
+      '@type': 'Review',
+      author: {
+        '@type': 'Person',
+        name: review.author,
+      },
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: review.rating.toString(),
+        bestRating: '5',
+        worstRating: '1',
+      },
+      reviewBody: review.text,
+      datePublished: review.date || new Date().toISOString(),
+    })),
+  };
+}

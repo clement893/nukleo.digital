@@ -627,3 +627,11 @@
 - [x] Identifier les pages sans meta descriptions (9 pages: FAQ, Projects, Manifesto, AIReadinessAssessment, Leo, Radar, RadarNew, NotFound, ComponentShowcase)
 - [x] Rédiger meta descriptions pour toutes les pages restantes (9 pages)
 - [x] Implémenter dans le code (9 pages complétées: FAQ, Projects, Manifesto, AIReadinessAssessment, Leo, Radar, RadarNew, NotFound, ComponentShowcase)
+
+## Priorités Critiques (Audit)
+- [x] Créer favicon complet (favicon.ico, apple-touch-icon.png, 16x16, 32x32, 192x192, 512x512)
+- [x] Créer manifest.json (PWA)
+- [x] Implémenter Schema.org JSON-LD (Organization, Service, Review, FAQPage)
+- [x] Configurer Google Analytics 4 (composant créé, TODO: remplacer G-XXXXXXXXXX par vrai ID)
+- [ ] Ajouter attributs ARIA sur composants interactifs
+- [ ] Implémenter headers de sécurité (Content-Security-Policy, X-Frame-Options, etc.)

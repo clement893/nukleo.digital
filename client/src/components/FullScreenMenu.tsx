@@ -13,32 +13,14 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
   const [location] = useLocation();
   const { playHover, playClick } = useSound();
   
-  const navSections = [
-    {
-      title: 'Discover',
-      items: [
-        { number: '01', label: 'Expertise', path: '/expertise' },
-        { number: '02', label: 'Resources', path: '/resources' },
-        { number: '03', label: 'About', path: '/about' },
-        { number: '04', label: 'Manifesto', path: '/manifesto' },
-      ]
-    },
-    {
-      title: 'Work',
-      items: [
-        { number: '05', label: 'Projects', path: '/projects' },
-        { number: '06', label: 'Clients', path: '/clients' },
-      ]
-    },
-    {
-      title: 'Engage',
-      items: [
-        { number: '07', label: 'Contact', path: '/contact' },
-        { number: '08', label: 'AI Assessment', path: '/ai-readiness' },
-        { number: '09', label: 'FAQ', path: '/faq' },
-        { number: '10', label: 'Leo AI', path: '/leo' },
-      ]
-    }
+  const navItems = [
+    { number: '01', label: 'Home', path: '/' },
+    { number: '02', label: 'Expertise', path: '/expertise' },
+    { number: '03', label: 'Projects', path: '/projects' },
+    { number: '04', label: 'About', path: '/about' },
+    { number: '05', label: 'Resources', path: '/resources' },
+    { number: '06', label: 'FAQ', path: '/faq' },
+    { number: '07', label: 'Contact', path: '/contact' },
   ];
 
   useEffect(() => {
@@ -147,33 +129,8 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
       {/* Menu Content */}
       <div className="h-full flex items-center justify-center relative z-10">
         <nav className="container px-6 md:px-12">
-          <div className="space-y-8 md:space-y-12">
-            {navSections.map((section, sectionIdx) => {
-              const baseDelay = sectionIdx * 150;
-              return (
-                <div key={section.title}>
-                  {/* Section Title */}
-                  <h3 
-                    className={`
-                      text-xs md:text-sm 
-                      font-mono 
-                      text-accent 
-                      opacity-60 
-                      mb-3 md:mb-4 
-                      px-4 md:px-6
-                      transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]
-                      ${isOpen ? 'translate-x-0 opacity-60' : 'translate-x-20 opacity-0'}
-                    `}
-                    style={{ 
-                      transitionDelay: isOpen ? `${baseDelay}ms` : "0ms" 
-                    }}
-                  >
-                    {section.title}
-                  </h3>
-                  
-                  {/* Section Items */}
-                  <ul className="space-y-2 md:space-y-3">
-                    {section.items.map((item, itemIdx) => (
+          <ul className="space-y-2 md:space-y-3 max-w-2xl mx-auto">
+            {navItems.map((item, itemIdx) => (
                       <li
                         key={item.path}
                         className={`
@@ -182,7 +139,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
                           ${isOpen ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'}
                         `}
                         style={{ 
-                          transitionDelay: isOpen ? `${baseDelay + (itemIdx + 1) * 50}ms` : "0ms" 
+                          transitionDelay: isOpen ? `${itemIdx * 50}ms` : "0ms" 
                         }}
                       >
                         <Link
@@ -236,13 +193,9 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
                             )}
                           </div>
                         </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              );
-            })}
-          </div>
+              </li>
+            ))}
+          </ul>
         </nav>
       </div>
 

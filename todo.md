@@ -713,3 +713,9 @@
 - [x] Vérifier les styles CSS du curseur (OK)
 - [x] Augmenter l'opacité de 3% à 8% avec gradient progressif
 - [x] Tester la visibilité sur desktop
+
+## Simplification menu fullscreen
+- [x] Retirer les sections DISCOVER, WORK, ENGAGE
+- [x] Revenir à la liste simple et compacte (01-07)
+- [x] Garder les animations et le design actuel
+- [x] Tester que le menu est moins long verticalement

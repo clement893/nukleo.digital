@@ -21,10 +21,16 @@ export default function Home() {
       <StructuredData data={websiteSchema} />
       <Header />
       <main>
-        {/* Hero with its own gradient */}
+        {/* First 4 sections with unified sandwich gradient */}
         <div className="relative">
+          {/* Unified Background with Sandwich Effect */}
           <div className="absolute inset-0" style={{
-            background: 'linear-gradient(129deg, rgb(107, 23, 22) -8.84%, rgb(82, 61, 203) 106.82%)'
+            background: `
+              radial-gradient(ellipse 1200px 800px at 0% 0%, rgb(107,23,22) 0%, transparent 50%),
+              radial-gradient(ellipse 1400px 1000px at 50% 50%, rgb(59,130,246) 0%, transparent 60%),
+              radial-gradient(ellipse 1200px 800px at 100% 100%, rgb(107,23,22) 0%, transparent 50%),
+              linear-gradient(135deg, rgb(82,61,203) 0%, rgb(30,20,60) 100%)
+            `
           }}>
             {/* Grid Pattern */}
             <div 
@@ -37,30 +43,15 @@ export default function Home() {
                 backgroundSize: '50px 50px'
               }}
             />
+            
+            {/* Animated Gradient Orbs - Sandwich Effect */}
+            <div className="absolute top-0 left-0 w-[800px] h-[800px] bg-red-600/15 rounded-full blur-[150px] animate-pulse" />
+            <div className="absolute top-1/2 left-1/2 w-[900px] h-[900px] bg-blue-500/20 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }} />
+            <div className="absolute bottom-0 right-0 w-[800px] h-[800px] bg-red-600/15 rounded-full blur-[150px] animate-pulse" style={{ animationDelay: '2s' }} />
           </div>
+          
           <div className="relative z-10">
             <HeroSection />
-          </div>
-        </div>
-        
-        {/* Following sections with mirrored gradient */}
-        <div className="relative">
-          <div className="absolute inset-0" style={{
-            background: 'linear-gradient(129deg, rgb(82, 61, 203) -8.84%, rgb(107, 23, 22) 106.82%)'
-          }}>
-            {/* Grid Pattern */}
-            <div 
-              className="absolute inset-0 opacity-10"
-              style={{
-                backgroundImage: `
-                  linear-gradient(rgba(139, 92, 246, 0.3) 1px, transparent 1px),
-                  linear-gradient(90deg, rgba(139, 92, 246, 0.3) 1px, transparent 1px)
-                `,
-                backgroundSize: '50px 50px'
-              }}
-            />
-          </div>
-          <div className="relative z-10">
             <ManifestoSection />
             <WhoWeServeSection />
             <CapabilitiesSection />

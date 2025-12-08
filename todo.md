@@ -427,3 +427,13 @@
 - [x] Créer un gradient miroir violet bleué→rouge pour les sections suivantes
 - [x] S'assurer que le violet tend vers le bleu (pas le rose)
 - [x] Tester les deux gradients
+
+## Fix Capabilities Section Pink Colors
+- [x] Analyser la section Capabilities et identifier les couleurs roses
+- [x] Ajuster le gradient pour éliminer les tons roses et rester dans rouge bordeaux → violet bleué
+- [ ] Tester le rendu final
+
+## Restore Sandwich Gradient
+- [x] Remettre le gradient sandwich unifié sur les 4 sections (Hero, Manifesto, Who We Serve, Capabilities)
+- [x] Gradient : rouge bordeaux (haut-gauche) → violet bleué (milieu) → rouge bordeaux (bas-droite)
+- [x] Tester le rendu final

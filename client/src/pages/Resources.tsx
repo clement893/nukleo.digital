@@ -1,6 +1,7 @@
 import { Filter, ArrowRight } from 'lucide-react';
 import PageLayout from '@/components/PageLayout';
 import { useState } from 'react';
+import SEO from '@/components/SEO';
 import { trpc } from '@/lib/trpc';
 import { Button } from '@/components/ui/button';
 import { Link } from 'wouter';
@@ -119,6 +120,11 @@ export default function Resources() {
 
   return (
     <PageLayout>
+      <SEO 
+        title="Resources | AI Insights, Guides & Research"
+        description="Insights, guides, and research from the frontlines of AI transformation. Stay ahead with expert analysis, practical frameworks, and interactive tools."
+        keywords="AI resources, AI guides, AI research, AI insights, AI tools, AI readiness assessment, AI trend radar, AI glossary, ROI calculator, AI transformation"
+      />
       <div className="min-h-screen">
         {/* Hero Section */}
         <section className="relative min-h-[60vh] flex flex-col justify-center pt-32 pb-20 overflow-hidden">

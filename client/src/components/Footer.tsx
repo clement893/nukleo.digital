@@ -4,20 +4,20 @@ import { Input } from '@/components/ui/input';
 
 export default function Footer() {
   const navigation = [
-    { label: 'Manifesto', href: '#manifesto' },
-    { label: 'About', href: '#about' },
-    { label: 'Expertise', href: '#expertise' },
-    { label: 'Resources', href: '#resources' },
-    { label: 'FAQ', href: '#faq' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Manifesto', href: '/manifesto' },
+    { label: 'About', href: '/about' },
+    { label: 'Expertise', href: '/expertise' },
+    { label: 'Resources', href: '/resources' },
+    { label: 'FAQ', href: '/faq' },
+    { label: 'Contact', href: '/contact' },
   ];
 
   const services = [
-    { label: 'Agentic AI Systems', href: '#' },
-    { label: 'AI-Native Platforms', href: '#' },
-    { label: 'Transformation Strategy', href: '#' },
-    { label: 'Creative Studio', href: '#' },
-    { label: 'AI Consulting', href: '#' },
+    { label: 'Agentic AI Systems', href: '/services/agentic-ai' },
+    { label: 'AI-Native Platforms', href: '/services/digital-platforms' },
+    { label: 'Transformation Strategy', href: '/services/ai-strategy-marketing' },
+    { label: 'Creative Studio', href: '/services/creative-studio' },
+    { label: 'AI Consulting', href: '/services/intelligent-operations' },
   ];
 
   return (
@@ -98,11 +98,11 @@ export default function Footer() {
                 </div>
               </div>
               <a
-                href="mailto:hello@nukleo.com"
+                href="mailto:hello@nukleo.digital"
                 className="flex items-center gap-2 text-violet-400 hover:text-white transition-colors"
               >
                 <Mail className="w-4 h-4" />
-                hello@nukleo.com
+                hello@nukleo.digital
               </a>
             </div>
           </div>
@@ -132,9 +132,9 @@ export default function Footer() {
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/60">
           <div>© 2025 Nukleo. All rights reserved.</div>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-white transition-colors">Cookie Policy</a>
+            <a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="/terms" className="hover:text-white transition-colors">Terms of Service</a>
+            <a href="/cookies" className="hover:text-white transition-colors">Cookie Policy</a>
           </div>
         </div>
       </div>

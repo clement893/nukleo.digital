@@ -22,7 +22,7 @@ export default function ManifestoSection() {
             </p>
 
             <a
-              href="#"
+              href="/manifesto"
               className="inline-flex items-center gap-2 text-accent hover:text-accent/80 transition-colors font-medium"
             >
               Read the full manifesto

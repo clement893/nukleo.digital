@@ -21,6 +21,9 @@ import IntelligentOperations from "./pages/services/IntelligentOperations";
 import Glossary from "./pages/Glossary";
 import GlossaryTerm from "./pages/GlossaryTerm";
 import ScrollToTop from "./components/ScrollToTop";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
+import Cookies from "./pages/Cookies";
 
 function Router() {
   return (
@@ -43,6 +46,9 @@ function Router() {
       <Route path={"/services/intelligent-operations"} component={IntelligentOperations} />
       <Route path={"/glossary"} component={Glossary} />
       <Route path={"/glossary/:termId"} component={GlossaryTerm} />
+      <Route path={"/privacy"} component={Privacy} />
+      <Route path={"/terms"} component={Terms} />
+      <Route path={"/cookies"} component={Cookies} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
       </Switch>

@@ -365,3 +365,15 @@
 - [x] Créer robots.txt optimisé
 - [x] Ajouter canonical URLs
 - [x] Tester le SEO (meta tags, structured data, sitemap)
+
+## Site Audit & Bug Fixes
+- [x] Auditer tous les liens de navigation (header, footer, pages)
+- [x] Vérifier les erreurs console JavaScript
+- [x] Identifier les bugs visuels et problèmes de responsive
+- [x] Corriger les 12 liens vides de la homepage
+- [x] Corriger l'email footer (nukleo.com → nukleo.digital)
+- [x] Fixer les liens footer (ancres → URLs)
+- [x] Ajouter SEO sur la page Resources
+- [x] Créer les pages manquantes (privacy, terms, cookies)
+- [x] Router toutes les pages dans App.tsx
+- [ ] Connecter les 4 boutons CTA des outils interactifs (AI Readiness, Radar, Glossary, ROI Calculator)

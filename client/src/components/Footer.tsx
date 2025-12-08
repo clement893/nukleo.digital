@@ -99,7 +99,7 @@ export default function Footer() {
               </div>
               <a
                 href="mailto:hello@nukleo.com"
-                className="flex items-center gap-2 text-accent hover:text-accent/80 transition-colors"
+                className="flex items-center gap-2 text-violet-400 hover:text-white transition-colors"
               >
                 <Mail className="w-4 h-4" />
                 hello@nukleo.com
@@ -121,7 +121,7 @@ export default function Footer() {
                 placeholder="Enter your email"
                 className="bg-white/10 border-white/20 text-white placeholder:text-white/40"
               />
-              <Button className="bg-accent hover:bg-accent/90 text-white px-8">
+              <Button className="bg-violet-600 hover:bg-violet-700 text-white px-8">
                 Subscribe
               </Button>
             </form>

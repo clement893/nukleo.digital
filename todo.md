@@ -317,3 +317,8 @@
 ## Remove Trinity from Menu
 - [x] Retirer les 3 pages Trinity du menu FullScreenMenu
 - [x] Garder seulement les liens depuis la homepage
+
+## Footer Component Fixes
+- [x] Réduire l'intensité du gradient rose en bas à droite
+- [x] Retirer tout texte rose (remplacer par blanc/violet)
+- [x] Tester l'apparence du footer

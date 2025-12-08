@@ -70,7 +70,6 @@ export default function Header() {
                 "
               >
                 Start Project
-                <img src="/arrow-brand.png" alt="" className="w-4 h-4 opacity-60" />
               </Button>
 
               {/* Burger Menu Button */}

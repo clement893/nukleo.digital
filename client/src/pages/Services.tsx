@@ -1,4 +1,4 @@
-import { ArrowRight, Layers, BarChart3, Globe, Zap, Target, Users, Brain, Code, Workflow, MessageSquare, TrendingUp, Shield } from 'lucide-react';
+import { Layers, BarChart3, Globe, Zap, Target, Users, Brain, Code, Workflow, MessageSquare, TrendingUp, Shield } from 'lucide-react';
 import { Link } from 'wouter';
 import PageLayout from '../components/PageLayout';
 
@@ -171,7 +171,6 @@ export default function Services() {
             <Link href="/contact">
               <button className="bg-white text-purple-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/90 transition-all hover:scale-105 inline-flex items-center gap-2">
                 Start Your Transformation
-                <ArrowRight className="w-5 h-5" />
               </button>
             </Link>
           </div>

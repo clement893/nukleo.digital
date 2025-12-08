@@ -1,4 +1,4 @@
-import { ArrowRight, Target, TrendingUp, FileCheck, Zap } from 'lucide-react';
+import { Target, TrendingUp, FileCheck, Zap } from 'lucide-react';
 import { useSound } from '@/hooks/useSound';
 
 interface AssessmentIntroProps {
@@ -64,7 +64,6 @@ export default function AssessmentIntro({ onStart }: AssessmentIntroProps) {
           className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-violet-500 to-rose-500 text-white font-bold rounded-full hover:shadow-[0_0_40px_rgba(139,92,246,0.5)] transition-all duration-300"
         >
           Start Assessment
-          <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
         </button>
       </div>
 

@@ -1,4 +1,4 @@
-import { Filter, ArrowRight } from 'lucide-react';
+import { Filter } from 'lucide-react';
 import PageLayout from '@/components/PageLayout';
 import { useState } from 'react';
 import SEO from '@/components/SEO';
@@ -199,7 +199,6 @@ export default function Resources() {
                   <Link href={tool.link}>
                     <Button className="bg-white text-purple-900 hover:bg-white/90 text-base px-6 py-6 rounded-full font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 w-full">
                       {tool.buttonText}
-                      <ArrowRight className="w-5 h-5 ml-2" />
                     </Button>
                   </Link>
                 </div>

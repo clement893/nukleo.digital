@@ -112,7 +112,6 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
               onClick={onClose}
             >
               Start Project
-              <img src="/arrow-brand.png" alt="" className="w-4 h-4 opacity-60" />
             </Button>
             <button
               onClick={onClose}
@@ -161,13 +160,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
                       relative
                       overflow-hidden
                     "
-                    style={{
-                      backgroundImage: 'url(/arrow-brand.png)',
-                      backgroundRepeat: 'no-repeat',
-                      backgroundPosition: 'right center',
-                      backgroundSize: '80px auto',
-                      backgroundBlendMode: 'overlay',
-                    }}
+
                   >
                     <span 
                       className="

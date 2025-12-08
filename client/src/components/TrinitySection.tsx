@@ -1,4 +1,4 @@
-import { Layers, BarChart3, Globe, ArrowRight } from 'lucide-react';
+import { Layers, BarChart3, Globe } from 'lucide-react';
 import { Link } from 'wouter';
 
 export default function TrinitySection() {
@@ -85,7 +85,7 @@ export default function TrinitySection() {
                   href={service.link}
                   className="inline-flex items-center font-bold text-lg group-hover:translate-x-2 transition-transform relative z-10"
                 >
-                  Explore <ArrowRight className="ml-2 w-5 h-5" />
+                  Explore
                 </Link>
               </div>
             );

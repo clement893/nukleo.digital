@@ -562,3 +562,7 @@
 - [x] Créer la page Services.tsx avec tous les services
 - [x] Ajouter un lien "View All Services" dans la page Expertise
 - [x] Ajouter la route /services dans App.tsx
+
+## Augmenter grain et retirer flèches
+- [x] Augmenter l'opacité de la texture grain (0.35 → 0.45)
+- [x] Retirer les flèches (ArrowRight, arrow-brand.png) de tous les boutons

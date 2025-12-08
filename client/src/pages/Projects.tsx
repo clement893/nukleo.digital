@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRight, Filter } from 'lucide-react';
+import { Filter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import PageLayout from '@/components/PageLayout';
 
@@ -142,7 +142,6 @@ export default function Projects() {
                     className="text-accent hover:text-accent/80 p-0 h-auto font-medium group/btn"
                   >
                     View Case Study
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                   </Button>
                 </div>
               </div>

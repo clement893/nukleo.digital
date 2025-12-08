@@ -1,16 +1,25 @@
 import { useEffect, useState } from 'react';
 
 export default function LoadingScreen() {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(() => {
+    // Check if loading screen has already been shown in this session
+    const hasShown = sessionStorage.getItem('loadingScreenShown');
+    return !hasShown;
+  });
 
   useEffect(() => {
+    if (!isVisible) return;
+
+    // Mark as shown in sessionStorage
+    sessionStorage.setItem('loadingScreenShown', 'true');
+
     // Hide loading screen after 2 seconds
     const timer = setTimeout(() => {
       setIsVisible(false);
     }, 2000);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [isVisible]);
 
   if (!isVisible) return null;
 

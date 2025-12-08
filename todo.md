@@ -488,3 +488,8 @@
 - [x] Appliquer les gradients sur toutes les sections
 - [x] Ajouter la texture grain CSS
 - [x] Tester le rendu sur toutes les pages
+
+## Fix LoadingScreen to Show Only Once
+- [x] Modifier LoadingScreen pour utiliser sessionStorage
+- [x] L'animation ne doit s'afficher qu'une fois par session
+- [x] Tester le comportement

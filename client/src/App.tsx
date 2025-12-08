@@ -25,6 +25,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Cookies from "./pages/Cookies";
+import Testimonials from "./pages/Testimonials";
 
 function Router() {
   return (
@@ -50,6 +51,7 @@ function Router() {
       <Route path={"/privacy"} component={Privacy} />
       <Route path={"/terms"} component={Terms} />
       <Route path={"/cookies"} component={Cookies} />
+      <Route path={"/testimonials"} component={Testimonials} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
       </Switch>

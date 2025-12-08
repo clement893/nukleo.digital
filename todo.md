@@ -510,3 +510,10 @@
 - [x] Mettre l'accent sur "champion des petites organisations"
 - [x] Ajouter le message "We help EVERYONE transform"
 - [x] Tester le rendu
+
+## Create Testimonials Page
+- [x] Extraire les témoignages de nukleo.com/en
+- [x] Créer la page Testimonials.tsx avec design professionnel
+- [x] Ajouter la route /testimonials dans App.tsx
+- [x] Ajouter le lien dans la navigation
+- [x] Tester le rendu

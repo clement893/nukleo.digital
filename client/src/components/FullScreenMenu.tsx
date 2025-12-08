@@ -18,10 +18,11 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
     { number: '02', label: 'Projects', path: '/projects' },
     { number: '03', label: 'About', path: '/about' },
     { number: '04', label: 'Expertise', path: '/expertise' },
-    { number: '05', label: 'Resources', path: '/resources' },
-    { number: '06', label: 'FAQ', path: '/faq' },
-    { number: '07', label: 'Contact', path: '/contact' },
-    { number: '08', label: 'Leo AI', path: '/leo' },
+    { number: '05', label: 'Testimonials', path: '/testimonials' },
+    { number: '06', label: 'Resources', path: '/resources' },
+    { number: '07', label: 'FAQ', path: '/faq' },
+    { number: '08', label: 'Contact', path: '/contact' },
+    { number: '09', label: 'Leo AI', path: '/leo' },
   ];
 
   // Fermeture avec touche Escape

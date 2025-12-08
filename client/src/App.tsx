@@ -31,6 +31,7 @@ import Services from "./pages/Services";
 import Clients from "./pages/Clients";
 import StartProject from "./pages/StartProject";
 import MediaCenter from "./pages/MediaCenter";
+import ArtsCulture from "./pages/ArtsCulture";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 
 function Router() {
@@ -62,6 +63,7 @@ function Router() {
       <Route path={"/terms"} component={Terms} />
       <Route path={"/cookies"} component={Cookies} />
       <Route path={"/testimonials"} component={Testimonials} />
+      <Route path={"/arts-culture"} component={ArtsCulture} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
       </Switch>

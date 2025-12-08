@@ -776,4 +776,14 @@
 ## Augmentation opacité grain +10%
 - [x] Augmenter l'opacité de la texture grain de 0.45 à 0.55 (+10%)
 - [x] Tester la visibilité sur toutes les pages
+- [x] Push GitHub
+
+## Réduction intensité halo curseur
+- [x] Réduire l'opacité du halo lumineux de 20%/8% à 10%/4%
+- [x] Tester la nouvelle intensité sur desktop
+
+## Ajout page Arts & Culture
+- [x] Créer la page Arts & Culture avec contenu approprié
+- [x] Ajouter la route /arts-culture dans App.tsx
+- [x] Ajouter Arts & Culture au menu FullScreenMenu (item 08)
 - [ ] Push GitHub

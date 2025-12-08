@@ -383,3 +383,7 @@
 - [x] Ajouter des animations spectaculaires (texte, background, effets)
 - [x] Augmenter la présence visuelle pour "crier fort"
 - [x] Tester l'impact visuel final
+
+## Hero Color Adjustments
+- [x] Retirer le rose du gradient du texte "FUTURE"
+- [x] Réduire l'intensité de l'orbe rose en bas à droite du background

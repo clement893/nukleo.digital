@@ -257,3 +257,11 @@
 - [x] Retirer Leo AI du menu (404)
 - [x] Ajouter AI Readiness Assessment dans le menu principal
 - [x] Tester tous les formulaires
+
+## Chatbot Fix
+- [ ] Investiguer l'erreur de connexion du chatbot Leo AI
+- [ ] Corriger le problème de connexion
+- [ ] Tester le chatbot
+
+## Menu Update
+- [x] Remettre Leo AI dans le menu (remplacer AI Readiness)

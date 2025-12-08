@@ -328,3 +328,8 @@
 - [x] Ajouter sous-titre global dans le hero
 - [x] Créer section "Who We Serve" avec 4 segments (Startups, SMBs, Enterprises, Governments)
 - [x] Tester tous les changements
+
+## Hero Section Simplification
+- [x] Retirer le texte superflu du hero (simplifier la description)
+- [x] Améliorer le gradient sur "AI FUTURE" pour le rendre plus distinctif
+- [x] Tester l'apparence du hero simplifié

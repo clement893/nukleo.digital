@@ -26,18 +26,15 @@ export default function HeroSection() {
               <span className="inline-block hover-distort">OF YOUR</span>
               {' '}
               <span 
-                className="inline-block hover-distort" 
-                style={{
-                  textShadow: '0 0 80px rgba(139, 92, 246, 0.8), 0 0 40px rgba(236, 72, 153, 0.6)'
-                }}
+                className="inline-block hover-distort"
               >
                 AI
               </span>
               <br />
               <span 
-                className="inline-block hover-distort" 
+                className="inline-block hover-distort bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent"
                 style={{
-                  textShadow: '0 0 80px rgba(139, 92, 246, 0.8), 0 0 40px rgba(236, 72, 153, 0.6)'
+                  textShadow: 'none'
                 }}
               >
                 FUTURE
@@ -71,17 +68,9 @@ export default function HeroSection() {
 
           {/* Right: Description */}
           <div className="lg:col-span-5 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-200">
-            <div className="space-y-4">
-              <p className="text-sm font-mono uppercase tracking-widest text-purple-400 mb-3">
-                Global AI Transformation Partner
-              </p>
-              <p className="text-xl text-white/75 leading-relaxed font-light">
-                We transform your marketing, platforms, and operations to make you thrive in the age of artificial intelligence.
-              </p>
-              <p className="text-base text-white/60 font-light italic">
-                Serving startups, SMBs, enterprises, and governments worldwide
-              </p>
-            </div>
+            <p className="text-xl text-white/75 leading-relaxed font-light">
+              We transform organizations with AI-powered solutions that drive growth, efficiency, and innovation.
+            </p>
           </div>
         </div>
       </div>

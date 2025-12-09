@@ -1055,7 +1055,7 @@
 - [ ] Push GitHub
 
 ## Corriger la numérotation du menu fullscreen
-- [ ] Vérifier l'ordre actuel des items dans le menu
-- [ ] Corriger les numéros pour qu'ils correspondent à l'ordre réel (Expertise = 01, Projects = 02, etc.)
-- [ ] Tester le menu
-- [ ] Créer un checkpoint
+- [x] Vérifier l'ordre actuel des items dans le menu
+- [x] Corriger les numéros pour qu'ils correspondent à l'ordre réel (Expertise = 01, Projects = 02, etc.)
+- [x] Tester le menu
+- [x] Créer un checkpoint

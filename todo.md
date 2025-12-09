@@ -1052,10 +1052,18 @@
 - [x] Diagnostiquer le problème de z-index/overlay
 - [x] Corriger la cliquabilité des boutons (z-index z-10 → z-50)
 - [x] Tester les boutons
-- [ ] Push GitHub
+- [x] Push GitHub
 
 ## Corriger la numérotation du menu fullscreen
 - [x] Vérifier l'ordre actuel des items dans le menu
 - [x] Corriger les numéros pour qu'ils correspondent à l'ordre réel (Expertise = 01, Projects = 02, etc.)
 - [x] Tester le menu
 - [x] Créer un checkpoint
+
+## Corriger LinkedIn et email dans le menu fullscreen
+- [x] Rendre le lien LinkedIn cliquable vers https://www.linkedin.com/company/nukleo-group
+- [x] Retirer le numéro de téléphone
+- [x] Ajouter l'email hello@nukleo.com
+- [x] Tester les liens
+- [ ] Créer un checkpoint
+- [ ] Push GitHub

@@ -216,16 +216,10 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div className="flex gap-6">
             <a 
-              href="mailto:hello@nukleo.ai" 
+              href="mailto:hello@nukleo.com" 
               className="text-white/60 text-sm hover:text-white transition-colors"
             >
-              hello@nukleo.ai
-            </a>
-            <a 
-              href="tel:+15147771234" 
-              className="text-white/60 text-sm hover:text-white transition-colors"
-            >
-              +1 (514) 777-1234
+              hello@nukleo.com
             </a>
           </div>
           <div className="flex gap-6">

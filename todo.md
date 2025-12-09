@@ -1221,8 +1221,8 @@
 - [x] Créer la page /terms-of-service (conditions d'utilisation)
 - [x] Créer la page /cookie-policy (politique des cookies)
 - [x] Ajouter les routes dans App.tsx
-- [ ] Créer un checkpoint
-- [ ] Push GitHub
+- [x] Créer un checkpoint
+- [x] Push GitHub
 
 ## Connecter tous les CTA vides
 - [x] Auditer toutes les pages pour identifier les liens vides (href="#", href="", onClick vide)
@@ -1230,15 +1230,28 @@
 - [x] Connecter les CTA sur les pages de services (AI Lab, Strategic Bureau, Creative Studio) - Déjà connectés
 - [x] Connecter les CTA sur les autres pages (Projects, MediaCenter, CTASection)
 - [x] Vérifier que tous les boutons "Learn More", "Explore", "Get Started" pointent vers des destinations valides
-- [ ] Créer un checkpoint
-- [ ] Push GitHub
+- [x] Créer un checkpoint
+- [x] Push GitHub
 
 ## Modifier le titre du Hero
 - [x] Changer le titre principal pour "Join the AI Revolution"
 - [x] Changer le sous-titre pour "Start your transformation journey"
-- [ ] Créer un checkpoint
-- [ ] Push GitHub
+- [x] Créer un checkpoint
+- [x] Push GitHub
 
 ## Modifier le sous-titre du Hero
 - [x] Changer le sous-titre pour "Start your transformation journey with us."
+- [x] Créer un checkpoint
+- [x] Push GitHub
+
+## Système d'onboarding des employés
+- [x] Créer le schéma de base de données (table onboarding_progress)
+- [x] Créer les procédures tRPC (getProgress, updateProgress, completeOnboarding)
+- [x] Créer le composant OnboardingFlow avec multi-étapes
+- [x] Créer les étapes personnalisées selon le rôle (admin vs user)
+- [x] Intégrer les politiques internes (privacy, terms, cookies)
+- [x] Ajouter la logique de redirection après signup
+- [x] Permettre de sauter/reprendre l'onboarding
+- [ ] Tester le flux complet
 - [ ] Créer un checkpoint
+- [ ] Push GitHub

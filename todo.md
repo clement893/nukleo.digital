@@ -1195,5 +1195,13 @@
 - [x] Lire et analyser le fichier CSV des témoignages
 - [x] Traduire les témoignages du français vers l'anglais (déjà traduits dans le CSV)
 - [x] Intégrer les témoignages dans le site (12 témoignages réels)
+- [x] Créer un checkpoint
+- [x] Push GitHub (déjà dans le checkpoint)
+
+## Intégrer LEO sur la page d'accueil
+- [x] Créer un composant ChatWidget flottant (bouton + fenêtre de chat)
+- [x] Réutiliser la logique de chat de la page /leo (avatars émotionnels, typing effect, localStorage)
+- [x] Ajouter le widget en bas à droite de la page d'accueil
+- [x] Ajouter des animations d'apparition et de fermeture (slide-in, hover effects)
 - [ ] Créer un checkpoint
 - [ ] Push GitHub

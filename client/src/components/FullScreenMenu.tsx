@@ -20,7 +20,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
     { number: '04', label: 'Resources', path: '/resources' },
     { number: '05', label: 'FAQ', path: '/faq' },
     { number: '06', label: 'Contact', path: '/contact' },
-    { number: '07', label: 'Talk to Leo', path: '/talk-to-leo' },
+    { number: '07', label: 'Talk to Leo', path: '/leo' },
     { number: '08', label: 'Arts & Culture', path: '/arts-culture' },
   ];
 
@@ -97,7 +97,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
 
           {/* Close Button and CTA */}
           <div className="flex items-center gap-4">
-            <Link href="/start-project">
+            <Link href="/contact">
               <Button
                 className="
                   rounded-full 
@@ -113,7 +113,10 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
                   hover:scale-[1.045]
                   flex items-center gap-2
                 "
-                onClick={onClose}
+                onClick={() => {
+                  playClick();
+                  setTimeout(onClose, 300);
+                }}
               >
                 Start Project
               </Button>

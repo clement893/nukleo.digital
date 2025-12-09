@@ -1038,4 +1038,12 @@
 - [x] Créer/mettre à jour la page About avec les 15 employés
 - [x] Ajouter les liens LinkedIn de chaque employé à côté de leur bio
 - [x] Tester la page About et les liens
+- [x] Push GitHub
+
+## Corriger bugs menu FullScreen
+- [x] Faire pointer "Talk to Leo" vers /leo
+- [x] Corriger le bouton X pour fermer le menu (ajout import X)
+- [x] Corriger le bouton "Start Project" (navigation vers /contact)
+- [x] Vérifier que seul LinkedIn est affiché dans les liens sociaux
+- [x] Tester le menu
 - [ ] Push GitHub

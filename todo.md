@@ -901,4 +901,14 @@
 - [x] Améliorer la présentation visuelle (timeline verticale, quotes, badges)
 - [x] Ajouter des éléments émotionnels et humains (emojis, quotes, storytelling)
 - [x] Tester le nouveau storytelling (parfait ! Histoire en 4 actes très engageante)
+- [x] Push GitHub
+
+## Design plus humain et moins AI-generated
+- [x] Simplifier les effets visuels (retiré gradients arc-en-ciel, blur excessifs)
+- [x] Réduire la palette de couleurs (blanc/gris avec touches subtiles)
+- [x] Améliorer la typographie (hiérarchie claire, espacements généreux)
+- [x] Simplifier les badges ACT (design minimal, juste texte + numéro)
+- [x] Rendre les cards plus minimalistes (bg-white/5, border simple)
+- [x] Améliorer la timeline (numérotation simple, focus sur contenu)
+- [x] Tester le nouveau design plus crafté (beaucoup plus humain et professionnel !)
 - [ ] Push GitHub

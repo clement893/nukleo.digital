@@ -1255,3 +1255,13 @@
 - [ ] Tester le flux complet
 - [ ] Créer un checkpoint
 - [ ] Push GitHub
+
+## Retirer le système d'onboarding
+- [x] Supprimer les composants OnboardingFlow et OnboardingWrapper
+- [x] Retirer la route /onboarding de App.tsx
+- [x] Supprimer le router onboarding du backend
+- [x] Supprimer les fonctions DB d'onboarding
+- [x] Supprimer la table onboarding_progress du schéma
+- [x] Pousser les changements de schéma (pnpm db:push)
+- [ ] Créer un checkpoint
+- [ ] Push GitHub

@@ -86,19 +86,3 @@ export const mediaAssets = mysqlTable("media_assets", {
 
 export type MediaAsset = typeof mediaAssets.$inferSelect;
 export type InsertMediaAsset = typeof mediaAssets.$inferInsert;
-
-// Onboarding Progress table
-export const onboardingProgress = mysqlTable("onboarding_progress", {
-  id: int("id").autoincrement().primaryKey(),
-  userId: int("userId").notNull(),
-  currentStep: int("currentStep").default(0).notNull(), // 0-based step index
-  completedSteps: text("completedSteps").notNull(), // JSON array of completed step indices
-  isCompleted: int("isCompleted").default(0).notNull(), // 0 or 1 (boolean)
-  skipped: int("skipped").default(0).notNull(), // 0 or 1 (boolean)
-  createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
-  completedAt: timestamp("completedAt"),
-});
-
-export type OnboardingProgress = typeof onboardingProgress.$inferSelect;
-export type InsertOnboardingProgress = typeof onboardingProgress.$inferInsert;

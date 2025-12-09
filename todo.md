@@ -967,4 +967,12 @@
 - [x] Ajouter effet glassmorphism++ au hover (blur, transparence, reflets)
 - [x] Appliquer sur toutes les cards (Manifesto, WhoWeServe, Capabilities, Trinity)
 - [x] Tester les effets
+- [x] Push GitHub
+
+## Mise à jour Hero Option 3
+- [x] Changer titre : "AI That Actually Transforms Business."
+- [x] Retirer "Choose Intelligence"
+- [x] Nouveau subtitle : "Join the leaders who've moved beyond chatbots—we build intelligent systems that triple ROI, speed, and output."
+- [x] Nouveau CTA : "Join the Leaders"
+- [x] Tester le nouveau Hero
 - [ ] Push GitHub

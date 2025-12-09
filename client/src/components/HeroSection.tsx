@@ -43,13 +43,13 @@ export default function HeroSection() {
 
             >
               <span className="inline-block animate-in fade-in slide-in-from-left-20 duration-1000">
-                Architects
+                AI That
               </span>
               <br />
               <span className="inline-block animate-in fade-in slide-in-from-left-20 duration-1000 delay-200">
-                of Your
+                Actually
               </span>
-              {' '}
+              <br />
               <span 
                 className="inline-block animate-in fade-in slide-in-from-left-20 duration-1000 delay-300 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent relative"
                 style={{
@@ -58,24 +58,23 @@ export default function HeroSection() {
                   animation: 'gradient-shift 6s ease infinite'
                 }}
               >
-                AI Future
+                Transforms
+              </span>
+              {' '}
+              <span 
+                className="inline-block animate-in fade-in slide-in-from-left-20 duration-1000 delay-400 relative"
+              >
+                Business.
                 {/* Glowing underline */}
                 <span className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 blur-xl opacity-50 animate-pulse" />
               </span>
             </h1>
 
-            {/* Slogan */}
-            <p 
-              className="text-2xl sm:text-3xl md:text-4xl text-white font-semibold mb-4 sm:mb-6 max-w-2xl animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-500 tracking-tight"
-            >
-              Choose Intelligence
-            </p>
-
             {/* Subtitle */}
             <p 
-              className="text-lg sm:text-xl text-white/70 leading-relaxed font-light mb-8 sm:mb-12 max-w-2xl animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-700"
+              className="text-lg sm:text-xl text-white/70 leading-relaxed font-light mb-8 sm:mb-12 max-w-2xl animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-600"
             >
-              Serving startups, SMBs, enterprises, and governments worldwide
+              Join the leaders who've moved beyond chatbots—we build intelligent systems that triple ROI, speed, and output.
             </p>
 
             {/* CTAs */}
@@ -87,7 +86,7 @@ export default function HeroSection() {
                 onMouseEnter={playHover}
                 className="relative rounded-full text-base sm:text-lg px-8 sm:px-12 py-6 sm:py-8 bg-white text-purple-900 hover:bg-white transition-all duration-500 font-bold tracking-wider hover:scale-110 hover:shadow-2xl hover:shadow-purple-500/50 group overflow-hidden w-full sm:w-auto"
               >
-                <span className="relative z-10">Start Your Transformation</span>
+                <span className="relative z-10">Join the Leaders</span>
                 {/* Shimmer effect */}
                 <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
               </Button>

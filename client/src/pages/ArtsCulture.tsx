@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { ArrowRight, Heart, DollarSign, Users, Megaphone, Sparkles, Award, TrendingUp, Quote } from "lucide-react";
+import { ArrowRight, Heart, DollarSign, Users, Megaphone, Sparkles, Award, TrendingUp, Quote, Zap, Target } from "lucide-react";
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -8,6 +8,7 @@ import SEO from "@/components/SEO";
 export default function ArtsCulture() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [scrollY, setScrollY] = useState(0);
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -165,18 +166,23 @@ export default function ArtsCulture() {
         <section className="relative pt-32 pb-20 px-4">
           <div className="container mx-auto max-w-5xl">
             <div className="text-center mb-16 animate-fade-in">
-              <div className="inline-flex items-center gap-2 mb-8 px-5 py-2 rounded-full bg-white/5 border border-white/10">
-                <Sparkles className="w-4 h-4 text-white/60" />
+              <div className="inline-flex items-center gap-2 mb-8 px-5 py-2 rounded-full bg-white/5 border border-white/10 group hover:border-white/20 transition-colors cursor-default">
+                <Sparkles className="w-4 h-4 text-white/60 group-hover:animate-spin" />
                 <span className="text-xs font-mono tracking-wider text-white/60">NUKLEO.ART</span>
               </div>
               
               <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
                 Culture is Our{' '}
-                <span className="text-white/90">Heartbeat</span>
+                <span className="relative inline-block">
+                  <span className="text-white/90">Heartbeat</span>
+                  <svg className="absolute -bottom-2 left-0 w-full h-3" viewBox="0 0 200 10" preserveAspectRatio="none">
+                    <path d="M0,5 Q50,0 100,5 T200,5" stroke="currentColor" strokeWidth="2" fill="none" className="text-white/30" />
+                  </svg>
+                </span>
               </h1>
               
               <p className="text-xl text-white/60 max-w-2xl mx-auto leading-relaxed">
-                A story of commitment, action, and impact
+                A story of <span className="italic text-white/80">commitment</span>, <span className="italic text-white/80">action</span>, and <span className="italic text-white/80">impact</span>
               </p>
             </div>
           </div>
@@ -185,12 +191,15 @@ export default function ArtsCulture() {
         {/* ACT 1: THE CHALLENGE */}
         <section className="relative py-20 px-4">
           <div className="container mx-auto max-w-5xl">
-            <div className="mb-16 text-center">
+            <div className="mb-16 text-center relative">
+              {/* Sharp geometric accent */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-12 bg-gradient-to-b from-white/0 to-white/20" />
+              
               <div className="inline-block mb-4">
                 <span className="text-sm font-mono tracking-wider text-white/40">ACT I</span>
               </div>
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                The Challenge
+                The <span className="font-light italic">Challenge</span>
               </h2>
               <p className="text-lg text-white/60 max-w-2xl mx-auto">
                 Culture is facing unprecedented challenges
@@ -198,28 +207,59 @@ export default function ArtsCulture() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 mb-12">
-              <div className="bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-white/20 transition-colors">
-                <div className="text-4xl mb-4">📉</div>
-                <h3 className="text-xl font-semibold mb-3">Budget Cuts</h3>
+              <div 
+                className="group relative bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-red-400/30 transition-all duration-300 cursor-default overflow-hidden"
+                onMouseEnter={() => setHoveredCard(1)}
+                onMouseLeave={() => setHoveredCard(null)}
+              >
+                {/* Sharp corner accent */}
+                <div className="absolute top-0 right-0 w-16 h-16 overflow-hidden">
+                  <div className="absolute top-0 right-0 w-full h-full bg-red-400/10 transform rotate-45 translate-x-8 -translate-y-8 group-hover:translate-x-4 group-hover:-translate-y-4 transition-transform duration-300" />
+                </div>
+                
+                <div className="text-4xl mb-4 inline-block group-hover:animate-bounce">📉</div>
+                <h3 className="text-xl font-semibold mb-3 group-hover:text-red-300 transition-colors">Budget Cuts</h3>
                 <p className="text-white/70 leading-relaxed">
-                  Drastic funding reductions are forcing artists and cultural institutions to make impossible choices between survival and creation.
+                  Drastic funding reductions are forcing artists and cultural institutions to make <span className="text-white/90 font-medium">impossible choices</span> between survival and creation.
                 </p>
+                
+                {/* Reveal on hover */}
+                <div className={`mt-4 text-sm text-red-300/80 italic transition-opacity duration-300 ${hoveredCard === 1 ? 'opacity-100' : 'opacity-0'}`}>
+                  → This needs to change
+                </div>
               </div>
 
-              <div className="bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-white/20 transition-colors">
-                <div className="text-4xl mb-4">⚠️</div>
-                <h3 className="text-xl font-semibold mb-3">Precarious Conditions</h3>
+              <div 
+                className="group relative bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-orange-400/30 transition-all duration-300 cursor-default overflow-hidden"
+                onMouseEnter={() => setHoveredCard(2)}
+                onMouseLeave={() => setHoveredCard(null)}
+              >
+                {/* Sharp corner accent */}
+                <div className="absolute top-0 right-0 w-16 h-16 overflow-hidden">
+                  <div className="absolute top-0 right-0 w-full h-full bg-orange-400/10 transform rotate-45 translate-x-8 -translate-y-8 group-hover:translate-x-4 group-hover:-translate-y-4 transition-transform duration-300" />
+                </div>
+                
+                <div className="text-4xl mb-4 inline-block group-hover:animate-bounce">⚠️</div>
+                <h3 className="text-xl font-semibold mb-3 group-hover:text-orange-300 transition-colors">Precarious Conditions</h3>
                 <p className="text-white/70 leading-relaxed">
-                  Artists face unstable income, lack of benefits, and uncertain futures—making it harder to focus on what they do best: creating.
+                  Artists face unstable income, lack of benefits, and uncertain futures—making it harder to focus on what they do best: <span className="text-white/90 font-medium">creating</span>.
                 </p>
+                
+                {/* Reveal on hover */}
+                <div className={`mt-4 text-sm text-orange-300/80 italic transition-opacity duration-300 ${hoveredCard === 2 ? 'opacity-100' : 'opacity-0'}`}>
+                  → Artists deserve better
+                </div>
               </div>
             </div>
 
             {/* Quote Block */}
-            <div className="bg-white/5 rounded-2xl p-10 border border-white/10">
-              <Quote className="w-8 h-8 text-white/30 mb-4" />
+            <div className="relative group bg-white/5 rounded-2xl p-10 border border-white/10 hover:border-white/20 transition-colors cursor-default">
+              {/* Diagonal accent line */}
+              <div className="absolute top-0 left-0 w-24 h-1 bg-gradient-to-r from-red-400/50 to-transparent" />
+              
+              <Quote className="w-8 h-8 text-white/30 mb-4 group-hover:text-white/40 transition-colors" />
               <p className="text-xl text-white/90 leading-relaxed italic">
-                "The fragility of Quebec's cultural sector requires concrete efforts to ensure its accessibility and encourage its innovation."
+                "The fragility of Quebec's cultural sector requires <span className="font-semibold not-italic text-white">concrete efforts</span> to ensure its accessibility and encourage its innovation."
               </p>
             </div>
           </div>
@@ -228,49 +268,60 @@ export default function ArtsCulture() {
         {/* ACT 2: OUR BELIEF */}
         <section className="relative py-20 px-4">
           <div className="container mx-auto max-w-5xl">
-            <div className="mb-16 text-center">
+            <div className="mb-16 text-center relative">
+              {/* Sharp geometric accent */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-12 bg-gradient-to-b from-white/0 to-white/20" />
+              
               <div className="inline-block mb-4">
                 <span className="text-sm font-mono tracking-wider text-white/40">ACT II</span>
               </div>
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                Our Belief
+                Our <span className="font-light italic">Belief</span>
               </h2>
               <p className="text-lg text-white/60 max-w-2xl mx-auto">
-                At Nukleo, we believe culture is the beating heart of society—enriching minds, nourishing lives, and strengthening communities.
+                At Nukleo, we believe culture is the <span className="text-white/80 font-medium">beating heart</span> of society
               </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-6 mb-12">
-              <div className="bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-white/20 transition-colors">
-                <div className="text-4xl mb-4">🏛️</div>
-                <h3 className="text-xl font-semibold mb-3">Heritage</h3>
+              <div className="group relative bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-purple-400/30 transition-all duration-300 cursor-default">
+                <div className="absolute top-4 right-4 w-8 h-8 border-t border-r border-white/10 group-hover:border-purple-400/30 transition-colors" />
+                
+                <div className="text-4xl mb-4 inline-block group-hover:scale-110 transition-transform">🏛️</div>
+                <h3 className="text-xl font-semibold mb-3 group-hover:text-purple-300 transition-colors">Heritage</h3>
                 <p className="text-white/70 leading-relaxed">
-                  Culture preserves our history and identity for future generations.
+                  Culture preserves our <span className="text-white/90">history</span> and <span className="text-white/90">identity</span> for future generations.
                 </p>
               </div>
 
-              <div className="bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-white/20 transition-colors">
-                <div className="text-4xl mb-4">💡</div>
-                <h3 className="text-xl font-semibold mb-3">Creativity</h3>
+              <div className="group relative bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-pink-400/30 transition-all duration-300 cursor-default">
+                <div className="absolute top-4 right-4 w-8 h-8 border-t border-r border-white/10 group-hover:border-pink-400/30 transition-colors" />
+                
+                <div className="text-4xl mb-4 inline-block group-hover:scale-110 transition-transform">💡</div>
+                <h3 className="text-xl font-semibold mb-3 group-hover:text-pink-300 transition-colors">Creativity</h3>
                 <p className="text-white/70 leading-relaxed">
-                  Culture inspires education and stimulates innovation.
+                  Culture inspires <span className="text-white/90">education</span> and stimulates <span className="text-white/90">innovation</span>.
                 </p>
               </div>
 
-              <div className="bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-white/20 transition-colors">
-                <div className="text-4xl mb-4">🤝</div>
-                <h3 className="text-xl font-semibold mb-3">Community</h3>
+              <div className="group relative bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-blue-400/30 transition-all duration-300 cursor-default">
+                <div className="absolute top-4 right-4 w-8 h-8 border-t border-r border-white/10 group-hover:border-blue-400/30 transition-colors" />
+                
+                <div className="text-4xl mb-4 inline-block group-hover:scale-110 transition-transform">🤝</div>
+                <h3 className="text-xl font-semibold mb-3 group-hover:text-blue-300 transition-colors">Community</h3>
                 <p className="text-white/70 leading-relaxed">
-                  Culture creates connections and fosters belonging.
+                  Culture creates <span className="text-white/90">connections</span> and fosters <span className="text-white/90">belonging</span>.
                 </p>
               </div>
             </div>
 
             {/* Quote Block */}
-            <div className="bg-white/5 rounded-2xl p-10 border border-white/10">
-              <Quote className="w-8 h-8 text-white/30 mb-4" />
+            <div className="relative group bg-white/5 rounded-2xl p-10 border border-white/10 hover:border-white/20 transition-colors cursor-default">
+              <div className="absolute top-0 left-0 w-24 h-1 bg-gradient-to-r from-purple-400/50 to-transparent" />
+              
+              <Quote className="w-8 h-8 text-white/30 mb-4 group-hover:text-white/40 transition-colors" />
               <p className="text-xl text-white/90 leading-relaxed italic">
-                "We believe it is imperative to direct our investments with discernment to strengthen our cultural growth, as the cultural sector is an economic driver and a pillar of our collective identity."
+                "We believe it is imperative to direct our investments with <span className="font-semibold not-italic text-white">discernment</span> to strengthen our cultural growth, as the cultural sector is an <span className="font-semibold not-italic text-white">economic driver</span> and a pillar of our collective identity."
               </p>
             </div>
           </div>
@@ -279,107 +330,139 @@ export default function ArtsCulture() {
         {/* ACT 3: OUR ACTION */}
         <section className="relative py-20 px-4">
           <div className="container mx-auto max-w-5xl">
-            <div className="mb-16 text-center">
-              <div className="inline-block mb-4">
+            <div className="mb-16 text-center relative">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-12 bg-gradient-to-b from-white/0 to-white/20" />
+              
+              <div className="inline-flex items-center gap-2 mb-4">
                 <span className="text-sm font-mono tracking-wider text-white/40">ACT III</span>
+                <Zap className="w-4 h-4 text-yellow-400/60 animate-pulse" />
               </div>
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                Our Action
+                Our <span className="font-light italic">Action</span>
               </h2>
               <p className="text-lg text-white/60 max-w-2xl mx-auto">
-                We don't just talk about supporting culture—we act on it every day.
+                We don't just <span className="line-through text-white/40">talk</span> about supporting culture—we <span className="text-white/80 font-semibold">act</span> on it every day.
               </p>
             </div>
 
             {/* Timeline */}
-            <div className="space-y-12">
+            <div className="space-y-8">
               {/* Commitment 1 */}
-              <div className="relative pl-12 md:pl-0">
-                <div className="absolute left-0 top-2 w-8 h-8 rounded-full bg-white/10 border-2 border-white/30 flex items-center justify-center md:hidden">
+              <div className="group relative pl-12 md:pl-0">
+                <div className="absolute left-0 top-2 w-8 h-8 rounded-full bg-white/10 border-2 border-white/30 flex items-center justify-center md:hidden group-hover:scale-110 transition-transform">
                   <span className="text-xs font-mono text-white/60">01</span>
                 </div>
-                <div className="bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-white/20 transition-colors">
-                  <div className="flex items-start gap-6">
-                    <div className="hidden md:flex flex-shrink-0 w-12 h-12 rounded-xl bg-white/10 items-center justify-center">
-                      <DollarSign className="w-6 h-6" />
+                <div className="relative bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-green-400/30 transition-all duration-300 overflow-hidden">
+                  {/* Diagonal accent */}
+                  <div className="absolute top-0 right-0 w-32 h-32 overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute top-0 right-0 w-full h-full bg-green-400/5 transform rotate-45 translate-x-16 -translate-y-16" />
+                  </div>
+                  
+                  <div className="flex items-start gap-6 relative z-10">
+                    <div className="hidden md:flex flex-shrink-0 w-12 h-12 rounded-xl bg-white/10 items-center justify-center group-hover:bg-green-400/10 transition-colors">
+                      <DollarSign className="w-6 h-6 group-hover:scale-110 transition-transform" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-3">
                         <span className="hidden md:inline text-sm font-mono text-white/40">01</span>
-                        <h3 className="text-2xl font-semibold">Affordable Pricing</h3>
+                        <h3 className="text-2xl font-semibold group-hover:text-green-300 transition-colors">Affordable Pricing</h3>
                       </div>
                       <p className="text-white/70 leading-relaxed">
-                        We offer <strong className="text-white/90">40% discount</strong> on our services for cultural organizations, making digital transformation accessible to those who need it most.
+                        We offer <span className="inline-flex items-baseline gap-1"><strong className="text-3xl font-bold text-green-300">40%</strong><span className="text-white/90">discount</span></span> on our services for cultural organizations, making digital transformation accessible to those who need it most.
                       </p>
+                      <div className="mt-4 text-sm text-green-300/60 italic group-hover:text-green-300/80 transition-colors">
+                        → Because access shouldn't be a barrier
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Commitment 2 */}
-              <div className="relative pl-12 md:pl-0">
-                <div className="absolute left-0 top-2 w-8 h-8 rounded-full bg-white/10 border-2 border-white/30 flex items-center justify-center md:hidden">
+              <div className="group relative pl-12 md:pl-0">
+                <div className="absolute left-0 top-2 w-8 h-8 rounded-full bg-white/10 border-2 border-white/30 flex items-center justify-center md:hidden group-hover:scale-110 transition-transform">
                   <span className="text-xs font-mono text-white/60">02</span>
                 </div>
-                <div className="bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-white/20 transition-colors">
-                  <div className="flex items-start gap-6">
-                    <div className="hidden md:flex flex-shrink-0 w-12 h-12 rounded-xl bg-white/10 items-center justify-center">
-                      <Heart className="w-6 h-6" />
+                <div className="relative bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-red-400/30 transition-all duration-300 overflow-hidden">
+                  <div className="absolute top-0 right-0 w-32 h-32 overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute top-0 right-0 w-full h-full bg-red-400/5 transform rotate-45 translate-x-16 -translate-y-16" />
+                  </div>
+                  
+                  <div className="flex items-start gap-6 relative z-10">
+                    <div className="hidden md:flex flex-shrink-0 w-12 h-12 rounded-xl bg-white/10 items-center justify-center group-hover:bg-red-400/10 transition-colors">
+                      <Heart className="w-6 h-6 group-hover:scale-110 group-hover:animate-pulse transition-transform" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-3">
                         <span className="hidden md:inline text-sm font-mono text-white/40">02</span>
-                        <h3 className="text-2xl font-semibold">Financial Support</h3>
+                        <h3 className="text-2xl font-semibold group-hover:text-red-300 transition-colors">Financial Support</h3>
                       </div>
                       <p className="text-white/70 leading-relaxed">
-                        We dedicate <strong className="text-white/90">1% of our annual revenue</strong> as direct donations to cultural organizations, and mobilize other entrepreneurs to join us.
+                        We dedicate <span className="inline-flex items-baseline gap-1"><strong className="text-3xl font-bold text-red-300">1%</strong><span className="text-white/90">of our annual revenue</span></span> as direct donations to cultural organizations, and mobilize other entrepreneurs to join us.
                       </p>
+                      <div className="mt-4 text-sm text-red-300/60 italic group-hover:text-red-300/80 transition-colors">
+                        → Small percentage, big impact
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Commitment 3 */}
-              <div className="relative pl-12 md:pl-0">
-                <div className="absolute left-0 top-2 w-8 h-8 rounded-full bg-white/10 border-2 border-white/30 flex items-center justify-center md:hidden">
+              <div className="group relative pl-12 md:pl-0">
+                <div className="absolute left-0 top-2 w-8 h-8 rounded-full bg-white/10 border-2 border-white/30 flex items-center justify-center md:hidden group-hover:scale-110 transition-transform">
                   <span className="text-xs font-mono text-white/60">03</span>
                 </div>
-                <div className="bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-white/20 transition-colors">
-                  <div className="flex items-start gap-6">
-                    <div className="hidden md:flex flex-shrink-0 w-12 h-12 rounded-xl bg-white/10 items-center justify-center">
-                      <Users className="w-6 h-6" />
+                <div className="relative bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-blue-400/30 transition-all duration-300 overflow-hidden">
+                  <div className="absolute top-0 right-0 w-32 h-32 overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute top-0 right-0 w-full h-full bg-blue-400/5 transform rotate-45 translate-x-16 -translate-y-16" />
+                  </div>
+                  
+                  <div className="flex items-start gap-6 relative z-10">
+                    <div className="hidden md:flex flex-shrink-0 w-12 h-12 rounded-xl bg-white/10 items-center justify-center group-hover:bg-blue-400/10 transition-colors">
+                      <Users className="w-6 h-6 group-hover:scale-110 transition-transform" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-3">
                         <span className="hidden md:inline text-sm font-mono text-white/40">03</span>
-                        <h3 className="text-2xl font-semibold">Live Culture</h3>
+                        <h3 className="text-2xl font-semibold group-hover:text-blue-300 transition-colors">Live Culture</h3>
                       </div>
                       <p className="text-white/70 leading-relaxed">
-                        Each team member receives <strong className="text-white/90">$350 annually</strong> for Canadian cultural outings. Because supporting culture starts with experiencing it.
+                        Each team member receives <span className="inline-flex items-baseline gap-1"><strong className="text-3xl font-bold text-blue-300">$350</strong><span className="text-white/90">annually</span></span> for Canadian cultural outings. Because supporting culture starts with <span className="text-white/90 font-medium">experiencing</span> it.
                       </p>
+                      <div className="mt-4 text-sm text-blue-300/60 italic group-hover:text-blue-300/80 transition-colors">
+                        → Practice what we preach
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Commitment 4 */}
-              <div className="relative pl-12 md:pl-0">
-                <div className="absolute left-0 top-2 w-8 h-8 rounded-full bg-white/10 border-2 border-white/30 flex items-center justify-center md:hidden">
+              <div className="group relative pl-12 md:pl-0">
+                <div className="absolute left-0 top-2 w-8 h-8 rounded-full bg-white/10 border-2 border-white/30 flex items-center justify-center md:hidden group-hover:scale-110 transition-transform">
                   <span className="text-xs font-mono text-white/60">04</span>
                 </div>
-                <div className="bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-white/20 transition-colors">
-                  <div className="flex items-start gap-6">
-                    <div className="hidden md:flex flex-shrink-0 w-12 h-12 rounded-xl bg-white/10 items-center justify-center">
-                      <Megaphone className="w-6 h-6" />
+                <div className="relative bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-purple-400/30 transition-all duration-300 overflow-hidden">
+                  <div className="absolute top-0 right-0 w-32 h-32 overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute top-0 right-0 w-full h-full bg-purple-400/5 transform rotate-45 translate-x-16 -translate-y-16" />
+                  </div>
+                  
+                  <div className="flex items-start gap-6 relative z-10">
+                    <div className="hidden md:flex flex-shrink-0 w-12 h-12 rounded-xl bg-white/10 items-center justify-center group-hover:bg-purple-400/10 transition-colors">
+                      <Megaphone className="w-6 h-6 group-hover:scale-110 transition-transform" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-3">
                         <span className="hidden md:inline text-sm font-mono text-white/40">04</span>
-                        <h3 className="text-2xl font-semibold">Raise Awareness</h3>
+                        <h3 className="text-2xl font-semibold group-hover:text-purple-300 transition-colors">Raise Awareness</h3>
                       </div>
                       <p className="text-white/70 leading-relaxed">
-                        We actively promote arts and culture within our company, among partners, and in our community—staying informed and engaged with contemporary cultural issues.
+                        We actively promote arts and culture within our company, among partners, and in our community—staying <span className="text-white/90 font-medium">informed</span> and <span className="text-white/90 font-medium">engaged</span> with contemporary cultural issues.
                       </p>
+                      <div className="mt-4 text-sm text-purple-300/60 italic group-hover:text-purple-300/80 transition-colors">
+                        → Amplify the voices that matter
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -391,58 +474,74 @@ export default function ArtsCulture() {
         {/* ACT 4: THE IMPACT */}
         <section className="relative py-20 px-4">
           <div className="container mx-auto max-w-5xl">
-            <div className="mb-16 text-center">
-              <div className="inline-block mb-4">
+            <div className="mb-16 text-center relative">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-12 bg-gradient-to-b from-white/0 to-white/20" />
+              
+              <div className="inline-flex items-center gap-2 mb-4">
                 <span className="text-sm font-mono tracking-wider text-white/40">ACT IV</span>
+                <Target className="w-4 h-4 text-green-400/60" />
               </div>
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                The Impact
+                The <span className="font-light italic">Impact</span>
               </h2>
               <p className="text-lg text-white/60 max-w-2xl mx-auto">
-                Join us in making a real difference
+                Join us in making a <span className="text-white/80 font-semibold">real</span> difference
               </p>
             </div>
 
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-              <div className="text-center p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-colors">
-                <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-white/10 flex items-center justify-center">
-                  <Award className="w-6 h-6" />
+              <div className="group text-center p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-green-400/30 transition-all duration-300 cursor-default relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-16 h-16 overflow-hidden">
+                  <div className="absolute top-0 right-0 w-full h-full bg-green-400/10 transform rotate-45 translate-x-8 -translate-y-8 group-hover:translate-x-4 group-hover:-translate-y-4 transition-transform duration-300" />
                 </div>
-                <div className="text-4xl font-bold mb-2">40%</div>
+                <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-green-400/10 transition-colors">
+                  <Award className="w-6 h-6 group-hover:scale-110 transition-transform" />
+                </div>
+                <div className="text-5xl font-bold mb-2 group-hover:text-green-300 transition-colors">40%</div>
                 <div className="text-white/60 text-sm">Discount for cultural projects</div>
               </div>
               
-              <div className="text-center p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-colors">
-                <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-white/10 flex items-center justify-center">
-                  <Heart className="w-6 h-6" />
+              <div className="group text-center p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-red-400/30 transition-all duration-300 cursor-default relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-16 h-16 overflow-hidden">
+                  <div className="absolute top-0 right-0 w-full h-full bg-red-400/10 transform rotate-45 translate-x-8 -translate-y-8 group-hover:translate-x-4 group-hover:-translate-y-4 transition-transform duration-300" />
                 </div>
-                <div className="text-4xl font-bold mb-2">1%</div>
+                <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-red-400/10 transition-colors">
+                  <Heart className="w-6 h-6 group-hover:scale-110 group-hover:animate-pulse transition-transform" />
+                </div>
+                <div className="text-5xl font-bold mb-2 group-hover:text-red-300 transition-colors">1%</div>
                 <div className="text-white/60 text-sm">Of annual revenue as donations</div>
               </div>
               
-              <div className="text-center p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-colors">
-                <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-white/10 flex items-center justify-center">
-                  <TrendingUp className="w-6 h-6" />
+              <div className="group text-center p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-blue-400/30 transition-all duration-300 cursor-default relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-16 h-16 overflow-hidden">
+                  <div className="absolute top-0 right-0 w-full h-full bg-blue-400/10 transform rotate-45 translate-x-8 -translate-y-8 group-hover:translate-x-4 group-hover:-translate-y-4 transition-transform duration-300" />
                 </div>
-                <div className="text-4xl font-bold mb-2">$350</div>
+                <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-blue-400/10 transition-colors">
+                  <TrendingUp className="w-6 h-6 group-hover:scale-110 transition-transform" />
+                </div>
+                <div className="text-5xl font-bold mb-2 group-hover:text-blue-300 transition-colors">$350</div>
                 <div className="text-white/60 text-sm">Per employee for culture</div>
               </div>
             </div>
 
             {/* CTA */}
-            <div className="bg-white/5 rounded-2xl p-12 border border-white/10 text-center">
-              <Sparkles className="w-10 h-10 mx-auto mb-6 text-white/60" />
+            <div className="relative group bg-white/5 rounded-2xl p-12 border border-white/10 hover:border-white/20 transition-colors text-center overflow-hidden">
+              {/* Animated corner accents */}
+              <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-white/20 group-hover:border-white/40 transition-colors" />
+              <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-white/20 group-hover:border-white/40 transition-colors" />
+              
+              <Sparkles className="w-10 h-10 mx-auto mb-6 text-white/60 group-hover:animate-spin" />
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Let's grow culture together
+                Let's grow culture <span className="font-light italic">together</span>
               </h2>
               <p className="text-lg text-white/60 mb-8 max-w-2xl mx-auto leading-relaxed">
                 Whether you're an artist, cultural organization, or fellow entrepreneur—join us in making a real difference.
               </p>
               <Link href="/contact">
-                <button className="bg-white text-[rgb(107,23,22)] px-8 py-4 rounded-full font-semibold hover:bg-white/90 transition-colors inline-flex items-center gap-2">
+                <button className="group/btn bg-white text-[rgb(107,23,22)] px-8 py-4 rounded-full font-semibold hover:bg-white/90 transition-all inline-flex items-center gap-2 hover:gap-3">
                   <span>Start the Conversation</span>
-                  <ArrowRight className="w-5 h-5" />
+                  <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
                 </button>
               </Link>
             </div>

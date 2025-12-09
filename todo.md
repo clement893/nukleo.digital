@@ -912,3 +912,12 @@
 - [x] Améliorer la timeline (numérotation simple, focus sur contenu)
 - [x] Tester le nouveau design plus crafté (beaucoup plus humain et professionnel !)
 - [ ] Push GitHub
+
+## Ajouter personnalité clever/intelligent/sharp/cute
+- [x] Ajouter des micro-interactions intelligentes (hover reveals, animated corners)
+- [x] Ajouter des détails visuels sharp (diagonal accents, corner borders, geometric shapes)
+- [x] Ajouter des éléments cute (emoji animations bounce, pulse hearts)
+- [x] Améliorer le copywriting (punchy phrases, italics, line-through, bold numbers)
+- [x] Ajouter des easter eggs (hover reveals, animated accents)
+- [x] Tester la nouvelle personnalité (parfait ! Beaucoup plus de caractère !)
+- [ ] Push GitHub

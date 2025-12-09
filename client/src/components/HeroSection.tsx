@@ -8,15 +8,7 @@ export default function HeroSection() {
   const { playHover, playClick } = useSound();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   
-  // Generate floating particles
-  const particles = Array.from({ length: 30 }, (_, i) => ({
-    id: i,
-    size: Math.random() * 4 + 2,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    duration: Math.random() * 20 + 10,
-    delay: Math.random() * 5,
-  }));
+
   
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -32,24 +24,6 @@ export default function HeroSection() {
   
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20">
-      {/* Floating Particles */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {particles.map((particle) => (
-          <div
-            key={particle.id}
-            className="absolute rounded-full bg-white/20"
-            style={{
-              width: `${particle.size}px`,
-              height: `${particle.size}px`,
-              left: `${particle.x}%`,
-              top: `${particle.y}%`,
-              animation: `float ${particle.duration}s infinite ease-in-out`,
-              animationDelay: `${particle.delay}s`,
-            }}
-          />
-        ))}
-      </div>
-
       {/* Rotating Hexagons */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div 
@@ -201,13 +175,6 @@ export default function HeroSection() {
         @keyframes gradient-shift {
           0%, 100% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
-        }
-        
-        @keyframes float {
-          0%, 100% { transform: translateY(0) translateX(0); }
-          25% { transform: translateY(-20px) translateX(10px); }
-          50% { transform: translateY(-10px) translateX(-10px); }
-          75% { transform: translateY(-30px) translateX(5px); }
         }
         
         @keyframes spin {

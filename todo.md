@@ -938,10 +938,15 @@
 ## Réduire intensité du rouge bordeaux
 - [x] Réduire l'intensité du rouge bordeaux dans le gradient
 - [x] Tester le nouveau gradient
-- [ ] Push GitHub
+- [x] Push GitHub
 
 ## Ajouter particules + hexagones au Hero (style Arts & Culture)
 - [x] Ajouter les particules flottantes au Hero
 - [x] Ajouter les hexagones rotatifs au Hero
 - [x] Tester le Hero funky
+- [x] Push GitHub
+
+## Retirer les particules (garder uniquement hexagones)
+- [x] Retirer les particules flottantes du Hero
+- [x] Tester le Hero avec hexagones uniquement
 - [ ] Push GitHub

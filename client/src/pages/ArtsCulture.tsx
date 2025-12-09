@@ -287,7 +287,7 @@ export default function ArtsCulture() {
               <div className="group relative bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-purple-400/30 transition-all duration-300 cursor-default">
                 <div className="absolute top-4 right-4 w-8 h-8 border-t border-r border-white/10 group-hover:border-purple-400/30 transition-colors" />
                 
-                <div className="text-4xl mb-4 inline-block group-hover:scale-110 transition-transform">🏛️</div>
+                <div className="text-4xl mb-4 inline-block group-hover:scale-[1.045] transition-transform">🏛️</div>
                 <h3 className="text-xl font-semibold mb-3 group-hover:text-purple-300 transition-colors">Heritage</h3>
                 <p className="text-white/70 leading-relaxed">
                   Culture preserves our <span className="text-white/90">history</span> and <span className="text-white/90">identity</span> for future generations.
@@ -297,7 +297,7 @@ export default function ArtsCulture() {
               <div className="group relative bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-pink-400/30 transition-all duration-300 cursor-default">
                 <div className="absolute top-4 right-4 w-8 h-8 border-t border-r border-white/10 group-hover:border-pink-400/30 transition-colors" />
                 
-                <div className="text-4xl mb-4 inline-block group-hover:scale-110 transition-transform">💡</div>
+                <div className="text-4xl mb-4 inline-block group-hover:scale-[1.045] transition-transform">💡</div>
                 <h3 className="text-xl font-semibold mb-3 group-hover:text-pink-300 transition-colors">Creativity</h3>
                 <p className="text-white/70 leading-relaxed">
                   Culture inspires <span className="text-white/90">education</span> and stimulates <span className="text-white/90">innovation</span>.
@@ -307,7 +307,7 @@ export default function ArtsCulture() {
               <div className="group relative bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-blue-400/30 transition-all duration-300 cursor-default">
                 <div className="absolute top-4 right-4 w-8 h-8 border-t border-r border-white/10 group-hover:border-blue-400/30 transition-colors" />
                 
-                <div className="text-4xl mb-4 inline-block group-hover:scale-110 transition-transform">🤝</div>
+                <div className="text-4xl mb-4 inline-block group-hover:scale-[1.045] transition-transform">🤝</div>
                 <h3 className="text-xl font-semibold mb-3 group-hover:text-blue-300 transition-colors">Community</h3>
                 <p className="text-white/70 leading-relaxed">
                   Culture creates <span className="text-white/90">connections</span> and fosters <span className="text-white/90">belonging</span>.
@@ -349,7 +349,7 @@ export default function ArtsCulture() {
             <div className="space-y-8">
               {/* Commitment 1 */}
               <div className="group relative pl-12 md:pl-0">
-                <div className="absolute left-0 top-2 w-8 h-8 rounded-full bg-white/10 border-2 border-white/30 flex items-center justify-center md:hidden group-hover:scale-110 transition-transform">
+                <div className="absolute left-0 top-2 w-8 h-8 rounded-full bg-white/10 border-2 border-white/30 flex items-center justify-center md:hidden group-hover:scale-[1.045] transition-transform">
                   <span className="text-xs font-mono text-white/60">01</span>
                 </div>
                 <div className="relative bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-green-400/30 transition-all duration-300 overflow-hidden">
@@ -360,7 +360,7 @@ export default function ArtsCulture() {
                   
                   <div className="flex items-start gap-6 relative z-10">
                     <div className="hidden md:flex flex-shrink-0 w-12 h-12 rounded-xl bg-white/10 items-center justify-center group-hover:bg-green-400/10 transition-colors">
-                      <DollarSign className="w-6 h-6 group-hover:scale-110 transition-transform" />
+                      <DollarSign className="w-6 h-6 group-hover:scale-[1.045] transition-transform" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-3">
@@ -380,7 +380,7 @@ export default function ArtsCulture() {
 
               {/* Commitment 2 */}
               <div className="group relative pl-12 md:pl-0">
-                <div className="absolute left-0 top-2 w-8 h-8 rounded-full bg-white/10 border-2 border-white/30 flex items-center justify-center md:hidden group-hover:scale-110 transition-transform">
+                <div className="absolute left-0 top-2 w-8 h-8 rounded-full bg-white/10 border-2 border-white/30 flex items-center justify-center md:hidden group-hover:scale-[1.045] transition-transform">
                   <span className="text-xs font-mono text-white/60">02</span>
                 </div>
                 <div className="relative bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-red-400/30 transition-all duration-300 overflow-hidden">
@@ -390,7 +390,7 @@ export default function ArtsCulture() {
                   
                   <div className="flex items-start gap-6 relative z-10">
                     <div className="hidden md:flex flex-shrink-0 w-12 h-12 rounded-xl bg-white/10 items-center justify-center group-hover:bg-red-400/10 transition-colors">
-                      <Heart className="w-6 h-6 group-hover:scale-110 group-hover:animate-pulse transition-transform" />
+                      <Heart className="w-6 h-6 group-hover:scale-[1.045] group-hover:animate-pulse transition-transform" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-3">
@@ -410,7 +410,7 @@ export default function ArtsCulture() {
 
               {/* Commitment 3 */}
               <div className="group relative pl-12 md:pl-0">
-                <div className="absolute left-0 top-2 w-8 h-8 rounded-full bg-white/10 border-2 border-white/30 flex items-center justify-center md:hidden group-hover:scale-110 transition-transform">
+                <div className="absolute left-0 top-2 w-8 h-8 rounded-full bg-white/10 border-2 border-white/30 flex items-center justify-center md:hidden group-hover:scale-[1.045] transition-transform">
                   <span className="text-xs font-mono text-white/60">03</span>
                 </div>
                 <div className="relative bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-blue-400/30 transition-all duration-300 overflow-hidden">
@@ -420,7 +420,7 @@ export default function ArtsCulture() {
                   
                   <div className="flex items-start gap-6 relative z-10">
                     <div className="hidden md:flex flex-shrink-0 w-12 h-12 rounded-xl bg-white/10 items-center justify-center group-hover:bg-blue-400/10 transition-colors">
-                      <Users className="w-6 h-6 group-hover:scale-110 transition-transform" />
+                      <Users className="w-6 h-6 group-hover:scale-[1.045] transition-transform" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-3">
@@ -440,7 +440,7 @@ export default function ArtsCulture() {
 
               {/* Commitment 4 */}
               <div className="group relative pl-12 md:pl-0">
-                <div className="absolute left-0 top-2 w-8 h-8 rounded-full bg-white/10 border-2 border-white/30 flex items-center justify-center md:hidden group-hover:scale-110 transition-transform">
+                <div className="absolute left-0 top-2 w-8 h-8 rounded-full bg-white/10 border-2 border-white/30 flex items-center justify-center md:hidden group-hover:scale-[1.045] transition-transform">
                   <span className="text-xs font-mono text-white/60">04</span>
                 </div>
                 <div className="relative bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-purple-400/30 transition-all duration-300 overflow-hidden">
@@ -450,7 +450,7 @@ export default function ArtsCulture() {
                   
                   <div className="flex items-start gap-6 relative z-10">
                     <div className="hidden md:flex flex-shrink-0 w-12 h-12 rounded-xl bg-white/10 items-center justify-center group-hover:bg-purple-400/10 transition-colors">
-                      <Megaphone className="w-6 h-6 group-hover:scale-110 transition-transform" />
+                      <Megaphone className="w-6 h-6 group-hover:scale-[1.045] transition-transform" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-3">
@@ -496,7 +496,7 @@ export default function ArtsCulture() {
                   <div className="absolute top-0 right-0 w-full h-full bg-green-400/10 transform rotate-45 translate-x-8 -translate-y-8 group-hover:translate-x-4 group-hover:-translate-y-4 transition-transform duration-300" />
                 </div>
                 <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-green-400/10 transition-colors">
-                  <Award className="w-6 h-6 group-hover:scale-110 transition-transform" />
+                  <Award className="w-6 h-6 group-hover:scale-[1.045] transition-transform" />
                 </div>
                 <div className="text-5xl font-bold mb-2 group-hover:text-green-300 transition-colors">40%</div>
                 <div className="text-white/60 text-sm">Discount for cultural projects</div>
@@ -507,7 +507,7 @@ export default function ArtsCulture() {
                   <div className="absolute top-0 right-0 w-full h-full bg-red-400/10 transform rotate-45 translate-x-8 -translate-y-8 group-hover:translate-x-4 group-hover:-translate-y-4 transition-transform duration-300" />
                 </div>
                 <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-red-400/10 transition-colors">
-                  <Heart className="w-6 h-6 group-hover:scale-110 group-hover:animate-pulse transition-transform" />
+                  <Heart className="w-6 h-6 group-hover:scale-[1.045] group-hover:animate-pulse transition-transform" />
                 </div>
                 <div className="text-5xl font-bold mb-2 group-hover:text-red-300 transition-colors">1%</div>
                 <div className="text-white/60 text-sm">Of annual revenue as donations</div>
@@ -518,7 +518,7 @@ export default function ArtsCulture() {
                   <div className="absolute top-0 right-0 w-full h-full bg-blue-400/10 transform rotate-45 translate-x-8 -translate-y-8 group-hover:translate-x-4 group-hover:-translate-y-4 transition-transform duration-300" />
                 </div>
                 <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-blue-400/10 transition-colors">
-                  <TrendingUp className="w-6 h-6 group-hover:scale-110 transition-transform" />
+                  <TrendingUp className="w-6 h-6 group-hover:scale-[1.045] transition-transform" />
                 </div>
                 <div className="text-5xl font-bold mb-2 group-hover:text-blue-300 transition-colors">$350</div>
                 <div className="text-white/60 text-sm">Per employee for culture</div>

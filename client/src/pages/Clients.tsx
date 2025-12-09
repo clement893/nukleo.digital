@@ -230,7 +230,7 @@ export default function Clients() {
             </p>
             <a
               href="/contact"
-              className="inline-block bg-white text-purple-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/90 transition-all hover:scale-105"
+              className="inline-block bg-white text-purple-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/90 transition-all hover:scale-[1.022]"
             >
               Start Your Transformation
             </a>

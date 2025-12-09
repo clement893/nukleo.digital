@@ -70,7 +70,7 @@ export default function Header() {
                     font-bold 
                     tracking-wider 
                     text-xs
-                    hover:scale-110
+                    hover:scale-[1.045]
                     flex items-center gap-2
                   "
                 >

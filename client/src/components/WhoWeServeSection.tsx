@@ -45,7 +45,7 @@ export default function WhoWeServeSection() {
             return (
               <div
                 key={index}
-                className="group relative p-6 sm:p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-500/50 transition-all duration-500 overflow-hidden hover:scale-[1.02] hover:shadow-2xl hover:shadow-purple-500/20"
+                className="group relative p-6 sm:p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-500/50 transition-all duration-500 overflow-hidden hover:scale-[1.009] hover:shadow-xl hover:shadow-purple-500/10"
               >
                 {/* Glassmorphism overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
@@ -90,7 +90,7 @@ export default function WhoWeServeSection() {
           </p>
           <a
             href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-purple-600 hover:bg-purple-500 text-white font-semibold transition-all duration-300 hover:scale-105"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-purple-600 hover:bg-purple-500 text-white font-semibold transition-all duration-300 hover:scale-[1.022]"
           >
             Discuss Your Project
             <span className="text-lg">→</span>

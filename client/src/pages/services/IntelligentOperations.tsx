@@ -109,7 +109,7 @@ export default function IntelligentOperations() {
                     key={index}
                     className="group p-8 bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10 rounded-2xl hover:border-violet-500/50 transition-all duration-300"
                   >
-                    <div className="w-14 h-14 bg-gradient-to-r from-violet-500 to-rose-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <div className="w-14 h-14 bg-gradient-to-r from-violet-500 to-rose-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-[1.045] transition-transform">
                       <Icon className="w-7 h-7 text-white" />
                     </div>
                     <h3 className="text-xl font-bold text-white mb-3">{service.title}</h3>

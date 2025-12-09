@@ -117,7 +117,7 @@ export default function TestimonialsCarousel() {
                   border border-white/20
                   flex items-center justify-center
                   transition-all duration-300
-                  hover:scale-110
+                  hover:scale-[1.045]
                 "
                 aria-label="Previous testimonial"
               >
@@ -152,7 +152,7 @@ export default function TestimonialsCarousel() {
                   border border-white/20
                   flex items-center justify-center
                   transition-all duration-300
-                  hover:scale-110
+                  hover:scale-[1.045]
                 "
                 aria-label="Next testimonial"
               >

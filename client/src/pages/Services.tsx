@@ -176,7 +176,7 @@ export default function Services() {
               Let's discuss how our AI services can transform your business and accelerate your growth.
             </p>
             <Link href="/contact">
-              <button className="bg-white text-purple-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/90 transition-all hover:scale-105 inline-flex items-center gap-2">
+              <button className="bg-white text-purple-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/90 transition-all hover:scale-[1.022] inline-flex items-center gap-2">
                 Start Your Transformation
               </button>
             </Link>

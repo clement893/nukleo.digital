@@ -197,7 +197,7 @@ export default function Resources() {
 
                   {/* CTA Button */}
                   <Link href={tool.link}>
-                    <Button className="bg-white text-purple-900 hover:bg-white/90 text-base px-6 py-6 rounded-full font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 w-full">
+                    <Button className="bg-white text-purple-900 hover:bg-white/90 text-base px-6 py-6 rounded-full font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[1.022] w-full">
                       {tool.buttonText}
                     </Button>
                   </Link>
@@ -315,7 +315,7 @@ export default function Resources() {
                 <button 
                   type="submit"
                   disabled={subscribe.isPending}
-                  className="px-10 py-5 rounded-full bg-white text-purple-900 font-bold hover:bg-white/90 transition-all duration-300 hover:scale-105 shadow-2xl text-lg disabled:opacity-50"
+                  className="px-10 py-5 rounded-full bg-white text-purple-900 font-bold hover:bg-white/90 transition-all duration-300 hover:scale-[1.022] shadow-2xl text-lg disabled:opacity-50"
                 >
                   {subscribe.isPending ? 'Subscribing...' : 'Subscribe'}
                 </button>

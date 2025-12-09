@@ -115,7 +115,7 @@ export default function Testimonials() {
                   font-bold
                   hover:bg-white/90
                   transition-all duration-300
-                  hover:scale-105
+                  hover:scale-[1.022]
                 "
               >
                 Start Your Project

@@ -69,7 +69,7 @@ export function RadarVisualization({ technologies, onTechClick }: RadarVisualiza
           <div
             className={`w-3 h-3 rounded-full border-2 border-white ${getDotColor(
               tech.maturityColor
-            )} transition-all duration-300 group-hover:scale-150 group-hover:shadow-lg`}
+            )} transition-all duration-300 group-hover:scale-[1.225] group-hover:shadow-lg`}
           ></div>
 
           {/* Tooltip */}

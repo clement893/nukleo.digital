@@ -21,7 +21,7 @@ export function RadarHero() {
         </p>
 
         {/* Bouton Latest AI News */}
-        <button className="inline-flex items-center gap-2 px-6 py-3 mb-12 bg-white text-purple-900 font-semibold rounded-full hover:bg-white/95 transition-all duration-300 hover:scale-105 shadow-lg">
+        <button className="inline-flex items-center gap-2 px-6 py-3 mb-12 bg-white text-purple-900 font-semibold rounded-full hover:bg-white/95 transition-all duration-300 hover:scale-[1.022] shadow-lg">
           📰 Latest AI News & Trends
         </button>
 

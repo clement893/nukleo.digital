@@ -63,7 +63,7 @@ export default function HeroSection() {
               <Button
                 onClick={playClick}
                 onMouseEnter={playHover}
-                className="relative rounded-full text-base sm:text-lg px-8 sm:px-12 py-6 sm:py-8 bg-white text-purple-900 hover:bg-white transition-all duration-500 font-bold tracking-wider hover:scale-110 hover:shadow-2xl hover:shadow-purple-500/50 group overflow-hidden w-full sm:w-auto"
+                className="relative rounded-full text-base sm:text-lg px-8 sm:px-12 py-6 sm:py-8 bg-white text-purple-900 hover:bg-white transition-all duration-500 font-bold tracking-wider hover:scale-[1.045] hover:shadow-xl hover:shadow-purple-500/25 group overflow-hidden w-full sm:w-auto"
               >
                 <span className="relative z-10">Join the Leaders</span>
                 {/* Shimmer effect */}

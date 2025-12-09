@@ -15,7 +15,7 @@ export default function CTASection() {
           </p>
 
           <Button
-            className="rounded-full text-lg px-10 py-8 bg-white text-purple-900 hover:bg-white/90 transition-all duration-500 font-bold tracking-wider hover:scale-105 shimmer"
+            className="rounded-full text-lg px-10 py-8 bg-white text-purple-900 hover:bg-white/90 transition-all duration-500 font-bold tracking-wider hover:scale-[1.022] shimmer"
           >
             Start Your Transformation
           </Button>

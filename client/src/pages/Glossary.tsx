@@ -300,7 +300,7 @@ export default function Glossary() {
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/ai-readiness">
-                  <Button className="bg-white text-purple-900 hover:bg-white/90 text-lg px-10 py-7 rounded-full font-bold shadow-2xl hover:scale-105 transition-all duration-300">
+                  <Button className="bg-white text-purple-900 hover:bg-white/90 text-lg px-10 py-7 rounded-full font-bold shadow-2xl hover:scale-[1.022] transition-all duration-300">
                     Take AI Readiness Assessment
                   </Button>
                 </Link>

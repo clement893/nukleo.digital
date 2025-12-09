@@ -989,4 +989,12 @@
 - [x] Identifier tous les éléments roses dans Creative Studio
 - [x] Remplacer par des couleurs cohérentes (purple/blue)
 - [x] Tester les pages services
+- [x] Push GitHub
+
+## Réduire intensité animations hover (-55%)
+- [x] Réduire scale hover (1.02 → 1.009, 1.1 → 1.045)
+- [x] Réduire shadow intensity (opacity, blur)
+- [x] Réduire glow effects
+- [x] Appliquer sur toutes les cards et boutons
+- [x] Tester les animations
 - [ ] Push GitHub

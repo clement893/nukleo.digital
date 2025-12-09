@@ -144,7 +144,7 @@ export default function Manifesto() {
               The era of agentic marketing is here. Define your roadmap to become 
               an AI-native leader.
             </p>
-            <button className="bg-white text-purple-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/90 transition-all hover:scale-105">
+            <button className="bg-white text-purple-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/90 transition-all hover:scale-[1.022]">
               Start Your Transformation
             </button>
           </section>

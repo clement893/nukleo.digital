@@ -95,7 +95,7 @@ export default function Studio() {
                       key={index}
                       className="p-10 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm hover:border-accent/50 transition-all duration-300 group"
                     >
-                      <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-accent/20 to-blue-600/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                      <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-accent/20 to-blue-600/20 flex items-center justify-center mb-6 group-hover:scale-[1.045] transition-transform">
                         <Icon className="w-8 h-8 text-accent" />
                       </div>
                       
@@ -224,7 +224,7 @@ export default function Studio() {
               </p>
               <a 
                 href="/contact" 
-                className="inline-block px-8 py-4 bg-white text-purple-950 font-bold rounded-full hover:bg-white/90 transition-all duration-300 hover:scale-105"
+                className="inline-block px-8 py-4 bg-white text-purple-950 font-bold rounded-full hover:bg-white/90 transition-all duration-300 hover:scale-[1.022]"
               >
                 Let's Create Together
               </a>

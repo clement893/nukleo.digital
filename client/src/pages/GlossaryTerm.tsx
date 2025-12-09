@@ -325,7 +325,7 @@ export default function GlossaryTerm() {
                 Let's discuss how this technology can drive growth for your organization.
               </p>
               <Link href="/contact">
-                <Button className="bg-white text-purple-900 hover:bg-white/90 text-lg px-10 py-6 rounded-full font-bold shadow-2xl hover:scale-105 transition-all duration-300">
+                <Button className="bg-white text-purple-900 hover:bg-white/90 text-lg px-10 py-6 rounded-full font-bold shadow-2xl hover:scale-[1.022] transition-all duration-300">
                   Discuss Your Project
                 </Button>
               </Link>

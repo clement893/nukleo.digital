@@ -1173,5 +1173,13 @@
 - [x] Ajouter un toggle Expert/Standard dans le header (🔬 Expert / 💡 Standard)
 - [x] Sauvegarder la préférence dans localStorage
 - [x] Adapter les suggestions selon le mode sélectionné
+- [x] Créer un checkpoint
+- [x] Push GitHub
+
+## Créer variations émotionnelles de l'avatar LEO
+- [x] Générer 5 avatars avec différentes émotions (happy, thinking, surprised, confused, excited)
+- [x] Analyser le contexte de la conversation pour détecter l'émotion appropriée (regex matching)
+- [x] Afficher l'avatar correspondant à l'émotion détectée
+- [x] Ajouter des transitions fluides entre les émotions (transition-all duration-300)
 - [ ] Créer un checkpoint
 - [ ] Push GitHub

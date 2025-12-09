@@ -44,6 +44,51 @@ export default function Leo() {
   const [showSuggestions, setShowSuggestions] = useState(true);
   const [typingText, setTypingText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [currentEmotion, setCurrentEmotion] = useState<'default' | 'happy' | 'thinking' | 'surprised' | 'confused' | 'excited'>('default');
+
+  // Detect emotion from message content
+  const detectEmotion = (content: string): 'default' | 'happy' | 'thinking' | 'surprised' | 'confused' | 'excited' => {
+    const lowerContent = content.toLowerCase();
+    
+    // Excited: achievements, success, great results
+    if (lowerContent.match(/(excellent|amazing|fantastic|great|perfect|wonderful|awesome|brilliant)/)) {
+      return 'excited';
+    }
+    
+    // Happy: positive outcomes, solutions
+    if (lowerContent.match(/(yes|sure|happy|glad|pleased|delighted|good|nice)/)) {
+      return 'happy';
+    }
+    
+    // Surprised: unexpected info, interesting facts
+    if (lowerContent.match(/(wow|really|interesting|surprising|unexpected|actually|indeed)/)) {
+      return 'surprised';
+    }
+    
+    // Confused: questions, uncertainties
+    if (lowerContent.match(/(\?|confused|unclear|not sure|maybe|perhaps|possibly|hmm)/)) {
+      return 'confused';
+    }
+    
+    // Thinking: analysis, consideration, complex topics
+    if (lowerContent.match(/(consider|analyze|think|evaluate|assess|review|examine|let me|let's)/)) {
+      return 'thinking';
+    }
+    
+    return 'default';
+  };
+
+  // Avatar mapping
+  const getAvatarSrc = (emotion: typeof currentEmotion): string => {
+    switch (emotion) {
+      case 'happy': return '/leo-avatar-happy.png';
+      case 'thinking': return '/leo-avatar-thinking.png';
+      case 'surprised': return '/leo-avatar-surprised.png';
+      case 'confused': return '/leo-avatar-confused.png';
+      case 'excited': return '/leo-avatar-excited.png';
+      default: return '/leo-avatar.png';
+    }
+  };
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatMutation = trpc.leo.chat.useMutation();
 
@@ -250,6 +295,10 @@ export default function Leo() {
 
       const fullText = typeof response.content === 'string' ? response.content : JSON.stringify(response.content);
       
+      // Detect emotion from response
+      const detectedEmotion = detectEmotion(fullText);
+      setCurrentEmotion(detectedEmotion);
+      
       // Simulate typing effect
       setIsTyping(true);
       setTypingText('');
@@ -378,9 +427,9 @@ export default function Leo() {
               {message.role === 'assistant' && (
                 <div className="flex-shrink-0">
                   <img 
-                    src="/leo-avatar.png" 
+                    src={getAvatarSrc(index === messages.length - 1 ? currentEmotion : 'default')} 
                     alt="Leo" 
-                    className="w-12 h-12 object-contain animate-pulse-subtle"
+                    className="w-12 h-12 object-contain animate-pulse-subtle transition-all duration-300"
                   />
                 </div>
               )}
@@ -421,9 +470,9 @@ export default function Leo() {
             <div className="flex gap-4 justify-start">
               <div className="flex-shrink-0">
                 <img 
-                  src="/leo-avatar.png" 
+                  src={getAvatarSrc('thinking')} 
                   alt="Leo" 
-                  className="w-12 h-12 object-contain animate-pulse-subtle"
+                  className="w-12 h-12 object-contain animate-pulse-subtle transition-all duration-300"
                 />
               </div>
               <div className="flex flex-col items-start">
@@ -444,9 +493,9 @@ export default function Leo() {
             <div className="flex gap-4 justify-start">
               <div className="flex-shrink-0">
                 <img 
-                  src="/leo-avatar.png" 
+                  src={getAvatarSrc(currentEmotion)} 
                   alt="Leo" 
-                  className="w-12 h-12 object-contain animate-pulse-subtle"
+                  className="w-12 h-12 object-contain animate-pulse-subtle transition-all duration-300"
                 />
               </div>
               <div className="flex flex-col items-start max-w-[70%]">

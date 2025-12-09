@@ -37,24 +37,20 @@ export default function HeroSection() {
                 font-bold leading-[0.9] tracking-tighter text-white mb-6 sm:mb-8 italic
               "
             >
-              AI That
-              <br />
-              Actually
+              Join the
               <br />
               <span 
                 className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent"
               >
-                Transforms
+                AI Revolution
               </span>
-              {' '}
-              Business.
             </h1>
 
             {/* Subtitle */}
             <p 
               className="text-lg sm:text-xl text-white/70 leading-relaxed font-light mb-8 sm:mb-12 max-w-2xl animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-600"
             >
-              Join the leaders who've moved beyond chatbots—we build intelligent systems that triple ROI, speed, and output.
+              Start your transformation journey.
             </p>
 
             {/* CTAs */}

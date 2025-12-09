@@ -1232,3 +1232,9 @@
 - [x] Vérifier que tous les boutons "Learn More", "Explore", "Get Started" pointent vers des destinations valides
 - [ ] Créer un checkpoint
 - [ ] Push GitHub
+
+## Modifier le titre du Hero
+- [x] Changer le titre principal pour "Join the AI Revolution"
+- [x] Changer le sous-titre pour "Start your transformation journey"
+- [ ] Créer un checkpoint
+- [ ] Push GitHub

@@ -1,4 +1,4 @@
-import { Play } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import { useSound } from '@/hooks/useSound';
 
@@ -90,32 +90,12 @@ export default function HeroSection() {
                 {/* Shimmer effect */}
                 <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
               </Button>
-
-              <button 
-                onClick={playClick}
-                onMouseEnter={playHover}
-                className="flex items-center gap-4 group cursor-pointer"
-              >
-                <div className="relative w-16 h-16 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center group-hover:bg-white/20 group-hover:scale-110 transition-all duration-500">
-                  <Play className="w-5 h-5 text-white ml-1 fill-white group-hover:scale-125 transition-transform duration-500" />
-                  {/* Pulse ring */}
-                  <span className="absolute inset-0 rounded-full border-2 border-white/50 animate-ping" />
-                </div>
-                <span className="text-base font-mono tracking-widest text-white/90 group-hover:text-white transition-colors font-semibold">
-                  Watch Reel
-                </span>
-              </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 rounded-full border-2 border-white/30 flex items-start justify-center p-2">
-          <div className="w-1 h-2 bg-white/50 rounded-full animate-pulse" />
-        </div>
-      </div>
+
 
       <style>{`
         @keyframes gradient-shift {

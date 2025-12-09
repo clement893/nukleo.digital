@@ -920,4 +920,10 @@
 - [x] Améliorer le copywriting (punchy phrases, italics, line-through, bold numbers)
 - [x] Ajouter des easter eggs (hover reveals, animated accents)
 - [x] Tester la nouvelle personnalité (parfait ! Beaucoup plus de caractère !)
+- [x] Push GitHub
+
+## Retirer éléments Hero (Watch Reel + Scroll indicator)
+- [x] Retirer le bouton "Watch Reel" de la section Hero
+- [x] Retirer l'indicateur de scroll (souris) de la section Hero
+- [x] Tester le Hero simplifié
 - [ ] Push GitHub

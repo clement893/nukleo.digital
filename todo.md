@@ -885,4 +885,12 @@
 - [x] Ajouter des effets glitch sur les titres principaux
 - [x] Ajouter des anneaux concentriques animés (ping effect)
 - [x] Tester le funkybness extrême (ultra dynamique avec tous les effets !)
+- [x] Push GitHub
+
+## Tone down animations et couleurs page Arts & Culture
+- [x] Garder le fond funky (particules, hexagones)
+- [x] Simplifier les animations des cartes (hover scale-105, translate-y-2)
+- [x] Réduire l'intensité des couleurs (opacity plus basse, effets subtils)
+- [x] Retirer les effets trop agressifs (glitch, scanning lines, anneaux rotatifs)
+- [x] Tester le nouveau look plus subtil (beaucoup mieux, équilibré !)
 - [ ] Push GitHub

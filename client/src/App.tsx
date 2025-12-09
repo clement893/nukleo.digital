@@ -35,6 +35,9 @@ import ArtsCulture from "./pages/ArtsCulture";
 import Lab from "./pages/Lab";
 import Bureau from "./pages/Bureau";
 import Studio from "./pages/Studio";
+import AILabService from "./pages/services/AILab";
+import StrategicBureauService from "./pages/services/StrategicBureau";
+import CreativeStudioService from "./pages/services/CreativeStudio";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 
 function Router() {
@@ -60,6 +63,9 @@ function Router() {
       <Route path={"/services/ai-strategy-marketing"} component={AIStrategyMarketing} />
       <Route path={"/services/digital-platforms"} component={DigitalPlatforms} />
       <Route path={"/services/intelligent-operations"} component={IntelligentOperations} />
+      <Route path={"/services/ai-lab"} component={AILabService} />
+      <Route path={"/services/strategic-bureau"} component={StrategicBureauService} />
+      <Route path={"/services/creative-studio"} component={CreativeStudioService} />
       <Route path={"/glossary"} component={Glossary} />
       <Route path={"/glossary/:termId"} component={GlossaryTerm} />
       <Route path={"/privacy"} component={Privacy} />

@@ -826,4 +826,13 @@
 - [x] Retirer l'import LoadingScreen de App.tsx
 - [x] Retirer le composant <LoadingScreen /> de App.tsx
 - [x] Tester le chargement du site
+- [x] Push GitHub
+
+## Création sous-pages services pour les 3 départements
+- [x] Créer /services/ai-lab avec détails complets du Lab
+- [x] Créer /services/strategic-bureau avec détails complets du Bureau
+- [x] Créer /services/creative-studio avec détails complets du Studio
+- [x] Ajouter les routes dans App.tsx
+- [x] Mettre à jour les liens dans TrinitySection
+- [x] Tester la navigation
 - [ ] Push GitHub

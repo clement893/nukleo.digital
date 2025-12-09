@@ -10,7 +10,7 @@ export default function TrinitySection() {
       title: 'The AI Lab',
       subtitle: 'Technology Foundation',
       description: 'Building the robust and flexible technological foundation for AI integration. From intelligent data platforms to custom AI agents and intelligent process automation.',
-      link: '/lab',
+      link: '/services/ai-lab',
     },
     {
       number: '02',
@@ -19,7 +19,7 @@ export default function TrinitySection() {
       title: 'The Strategic Bureau',
       subtitle: 'Transformation Orchestration',
       description: 'Defining strategy, driving transformation, and measuring AI impact. From maturity audits to agentic transformation strategy and AI governance.',
-      link: '/bureau',
+      link: '/services/strategic-bureau',
     },
     {
       number: '03',
@@ -28,7 +28,7 @@ export default function TrinitySection() {
       title: 'The Creative Studio',
       subtitle: 'Augmented Content & Experiences',
       description: 'Using AI to create brand experiences and content at unparalleled scale and relevance. From augmented content creation to agentic marketing campaigns.',
-      link: '/studio',
+      link: '/services/creative-studio',
     },
   ];
 

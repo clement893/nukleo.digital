@@ -1053,3 +1053,9 @@
 - [x] Corriger la cliquabilité des boutons (z-index z-10 → z-50)
 - [x] Tester les boutons
 - [ ] Push GitHub
+
+## Corriger la numérotation du menu fullscreen
+- [ ] Vérifier l'ordre actuel des items dans le menu
+- [ ] Corriger les numéros pour qu'ils correspondent à l'ordre réel (Expertise = 01, Projects = 02, etc.)
+- [ ] Tester le menu
+- [ ] Créer un checkpoint

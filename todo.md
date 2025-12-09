@@ -975,4 +975,10 @@
 - [x] Nouveau subtitle : "Join the leaders who've moved beyond chatbots—we build intelligent systems that triple ROI, speed, and output."
 - [x] Nouveau CTA : "Join the Leaders"
 - [x] Tester le nouveau Hero
+- [x] Push GitHub
+
+## Titre Hero en italic sans animations
+- [x] Mettre tout le titre en italic
+- [x] Retirer toutes les animations du titre (fade-in, slide-in)
+- [x] Tester le nouveau design
 - [ ] Push GitHub

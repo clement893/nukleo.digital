@@ -29,45 +29,24 @@ export default function HeroSection() {
         <div className="flex items-center justify-center">
           {/* Main Title */}
           <div className="max-w-5xl">
-            {/* Main Heading with Stagger Animations */}
+            {/* Main Heading */}
             <h1 
               className="
-                text-[3rem] sm:text-[4rem] md:text-[6rem] lg:text-[8rem] xl:text-[10rem] 
-                text-white 
-                mb-8 sm:mb-12
-                leading-[0.9] sm:leading-[0.85]
-                font-black
-                hover-distort
-                transition-transform duration-75 ease-out
+                text-[3rem] sm:text-[5rem] md:text-[7rem] lg:text-[10rem] 
+                font-bold leading-[0.9] tracking-tighter text-white mb-6 sm:mb-8 italic
               "
-
             >
-              <span className="inline-block animate-in fade-in slide-in-from-left-20 duration-1000">
-                AI That
-              </span>
+              AI That
               <br />
-              <span className="inline-block animate-in fade-in slide-in-from-left-20 duration-1000 delay-200">
-                Actually
-              </span>
+              Actually
               <br />
               <span 
-                className="inline-block animate-in fade-in slide-in-from-left-20 duration-1000 delay-300 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent relative"
-                style={{
-                  textShadow: 'none',
-                  backgroundSize: '200% auto',
-                  animation: 'gradient-shift 6s ease infinite'
-                }}
+                className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent"
               >
                 Transforms
               </span>
               {' '}
-              <span 
-                className="inline-block animate-in fade-in slide-in-from-left-20 duration-1000 delay-400 relative"
-              >
-                Business.
-                {/* Glowing underline */}
-                <span className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 blur-xl opacity-50 animate-pulse" />
-              </span>
+              Business.
             </h1>
 
             {/* Subtitle */}

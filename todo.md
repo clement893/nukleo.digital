@@ -1188,5 +1188,12 @@
 - [x] Ajouter des animations CSS spécifiques pour chaque émotion (bounce, shake, glow, etc.)
 - [x] Créer des animations au hover pour l'interactivité (glow effect)
 - [x] Optimiser les transitions entre émotions (duration-300)
+- [x] Créer un checkpoint
+- [x] Push GitHub
+
+## Intégrer les vrais témoignages depuis CSV
+- [x] Lire et analyser le fichier CSV des témoignages
+- [x] Traduire les témoignages du français vers l'anglais (déjà traduits dans le CSV)
+- [x] Intégrer les témoignages dans le site (12 témoignages réels)
 - [ ] Créer un checkpoint
 - [ ] Push GitHub

@@ -36,24 +36,24 @@ export const testimonials: Testimonial[] = [
     text: "Humankind Recruitment have partnered with the team at Nucleus on the digital transformation of our marketing capabilities and innovative product development. Their creative ideas and ability to find solutions have been a hugely positive experience. They're extremely personable to work with but what really stands out is their commitment to creative thinking on products that have the potential to disrupt. I'd recommend Nucleus to anyone looking for a passionate and technical partner."
   },
   {
+    client: "MatchStick Theatre",
+    contact: "Chelsea Dickie",
+    title: "Managing Director of Matchstick Theatre",
+    company: "Matchstick",
+    text: "Working with the team at Nucleus Strategie was amazing. We did a full top-to-bottom website transformation with them, and the entire process was clear, collaborative, and exciting. They kept in touch with us every step of the way, and were so caring if we needed extra help or questions for the function of our site. They also worked so fast!! We came in with a need for a very fast turnaround, and they delivered an amazing website on time and under budget. We are so incredibly excited and happy with the end result. We love our new website and are so thankful for the whole team who helped us build it!!"
+  },
+  {
     client: "MBAM Foundation",
     contact: "Daly Anne Zogbo",
     title: "Director of Annual Giving, Montreal Museum of Fine Arts Foundation",
-    company: "MBAM Foundation",
+    company: "Fondation du MBAM",
     text: "As soon as the Nucleus Stratégie team began their mandate with the MBAM Foundation, we were delighted by their comprehensive management and transparency throughout the process. Everything was clear and explicit, structured and efficient. All deadlines were met, and the openness and availability of everyone involved made all the difference. The new visual identity proposed by Nucleus Stratégie for the Contre-Jour events of the Cercle des Jeunes Philanthropes and the Perspectives evenings of the Cercle des Anges of the Montreal Museum of Fine Arts Foundation had a decisive impact. It brought a refreshing and renewed perspective to our approach to these two types of events that we regularly organize. I highly recommend Nucleus Stratégie, which stands out for its undeniable efficiency and remarkable generosity. As a client, we were free to express our opinions on the delivered product at every stage of the process."
-  },
-  {
-    client: "MatchStick Theatre",
-    contact: "Chelsea Dickie",
-    title: "Managing Director",
-    company: "MatchStick Theatre",
-    text: "Working with the team at Nucleus Strategie was amazing. We did a full top-to-bottom website transformation with them, and the entire process was clear, collaborative, and exciting. They kept in touch with us every step of the way, and were so caring if we needed extra help or questions for the function of our site. They also worked so fast!! We came in with a need for a very fast turnaround, and they delivered an amazing website on time and under budget. We are so incredibly excited and happy with the end result. We love our new website and are so thankful for the whole team who helped us build it!!"
   },
   {
     client: "Recrute Action",
     contact: "Domenic Calcara",
     title: "CEO",
-    company: "Recrute Action",
+    company: "Recrute action",
     text: "Working with the Nucleus team was an exceptional experience from start to finish. From the very first discussions, I could tell they understood not only our technical needs but also our business vision and brand identity. Their approach is strategic, human, and creative all at once. They managed to modernize our website while staying true to our culture, tone, and target audience. The result? A professional, high-performing site that truly reflects who we are. Thank you to the entire team for your attentiveness, precision, and attention to detail. You managed to make a process that's often complex feel simple, seamless, and even enjoyable. I wholeheartedly recommend Nucleus to any business looking for a website that matches its ambitions."
   },
   {
@@ -64,7 +64,7 @@ export const testimonials: Testimonial[] = [
     text: "I always enjoy working with Clément and the team at Nukleo. They are curious, responsive, strategic and efficient problem solvers. And they have a lot of integrity. As a technology and digital transformation partner, we consider the nucleo team a big asset for Spruce."
   },
   {
-    client: "SSCO / Succès Scolaire",
+    client: "Succès Scolaire",
     contact: "Félix Morin",
     title: "President",
     company: "Succès Scolaire",
@@ -87,7 +87,7 @@ export const testimonials: Testimonial[] = [
   {
     client: "Ukko Solutions",
     contact: "Charles Gagné-Bourque",
-    title: "Co-Founder",
+    title: "Co-Founder of UkkoSolutions",
     company: "Ukko Solutions",
     text: "I was truly impressed by the responsiveness and proactiveness of the Nucleus team, who adapted seamlessly to the tight deadlines set by my team. Their work, of exceptional quality, is built on a structured and iterative approach. What I particularly appreciated was how they kept me involved at every stage, allowing me to track progress and provide feedback quickly. The entire process was smooth and enjoyable from start to finish!"
   }

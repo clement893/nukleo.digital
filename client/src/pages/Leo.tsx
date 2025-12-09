@@ -47,12 +47,69 @@ export default function Leo() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatMutation = trpc.leo.chat.useMutation();
 
-  const suggestions = [
-    "How can AI transform my business operations?",
-    "What's the ROI timeline for AI implementation?",
-    "Help me build an AI strategy roadmap",
-    "What are the best AI use cases for my industry?",
-  ];
+  // Contextual suggestion categories
+  const suggestionCategories = {
+    initial: [
+      "How can AI transform my business operations?",
+      "What's the ROI timeline for AI implementation?",
+      "Help me build an AI strategy roadmap",
+      "What are the best AI use cases for my industry?",
+    ],
+    strategy: [
+      "How do I create a phased AI implementation plan?",
+      "What are the key success factors for AI transformation?",
+      "How should I structure my AI team?",
+      "What's the typical timeline for AI adoption?",
+    ],
+    implementation: [
+      "What technology stack should I choose for AI?",
+      "How do I ensure data quality for AI models?",
+      "What are common pitfalls in AI implementation?",
+      "How do I integrate AI with existing systems?",
+    ],
+    roi: [
+      "How long until I see ROI from AI investments?",
+      "What metrics should I track for AI success?",
+      "How do I calculate the business value of AI?",
+      "What are realistic cost expectations for AI projects?",
+    ],
+    team: [
+      "What skills do I need to hire for AI projects?",
+      "How do I upskill my existing team for AI?",
+      "Should I build in-house or partner for AI?",
+      "How do I create an AI-first culture?",
+    ],
+  };
+
+  // Determine context based on conversation
+  const getContextualSuggestions = (): string[] => {
+    if (messages.length <= 1) return suggestionCategories.initial;
+
+    const lastMessages = messages.slice(-3).map(m => m.content.toLowerCase()).join(' ');
+
+    if (lastMessages.includes('roi') || lastMessages.includes('cost') || lastMessages.includes('budget') || lastMessages.includes('value')) {
+      return suggestionCategories.roi;
+    }
+    if (lastMessages.includes('team') || lastMessages.includes('hire') || lastMessages.includes('skill') || lastMessages.includes('people')) {
+      return suggestionCategories.team;
+    }
+    if (lastMessages.includes('implement') || lastMessages.includes('build') || lastMessages.includes('develop') || lastMessages.includes('technology')) {
+      return suggestionCategories.implementation;
+    }
+    if (lastMessages.includes('strategy') || lastMessages.includes('plan') || lastMessages.includes('roadmap') || lastMessages.includes('approach')) {
+      return suggestionCategories.strategy;
+    }
+
+    return suggestionCategories.initial;
+  };
+
+  const [suggestions, setSuggestions] = useState<string[]>(getContextualSuggestions());
+
+  // Update suggestions when messages change
+  useEffect(() => {
+    const newSuggestions = getContextualSuggestions();
+    setSuggestions(newSuggestions);
+  }, [messages]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -73,7 +130,7 @@ export default function Leo() {
 
   const handleSuggestionClick = (suggestion: string) => {
     setInput(suggestion);
-    setShowSuggestions(false);
+    // Don't hide suggestions, let them update contextually
   };
 
   const handleNewChat = () => {
@@ -104,6 +161,7 @@ export default function Leo() {
     setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
+    // Temporarily hide suggestions while loading
     setShowSuggestions(false);
 
     try {
@@ -136,6 +194,8 @@ export default function Leo() {
           };
           setMessages((prev) => [...prev, assistantMessage]);
           setTypingText('');
+          // Show suggestions again after response is complete
+          setShowSuggestions(true);
         }
       }, 30); // 30ms per character for realistic typing speed
     } catch (error) {
@@ -146,6 +206,7 @@ export default function Leo() {
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, errorMessage]);
+      setShowSuggestions(true);
     } finally {
       setIsLoading(false);
     }

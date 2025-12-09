@@ -1157,5 +1157,13 @@
 - [x] Charger l'historique depuis localStorage au démarrage
 - [x] Ajouter un bouton "New Chat" pour effacer l'historique
 - [x] Gérer la limite de taille du localStorage (via try/catch)
+- [x] Créer un checkpoint
+- [x] Push GitHub
+
+## Améliorer suggestions contextuelles dynamiques pour LEO
+- [x] Créer différentes catégories de suggestions (Initial, Strategy, Implementation, ROI, Team)
+- [x] Analyser le contexte de la conversation pour déterminer la catégorie (keywords matching)
+- [x] Afficher des suggestions pertinentes basées sur le sujet en cours
+- [x] Mettre à jour les suggestions après chaque réponse de LEO
 - [ ] Créer un checkpoint
 - [ ] Push GitHub

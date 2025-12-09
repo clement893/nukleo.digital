@@ -45,8 +45,12 @@ export default function WhoWeServeSection() {
             return (
               <div
                 key={index}
-                className="group relative p-6 sm:p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-500/50 transition-all duration-500"
+                className="group relative p-6 sm:p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-500/50 transition-all duration-500 overflow-hidden hover:scale-[1.02] hover:shadow-2xl hover:shadow-purple-500/20"
               >
+                {/* Glassmorphism overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                <div className="absolute inset-0 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                
                 {/* Icon Badge */}
                 <div className="w-16 h-16 rounded-full bg-purple-900/30 backdrop-blur-sm border border-white/10 flex items-center justify-center mb-6 group-hover:bg-purple-500/20 group-hover:border-purple-500/50 transition-all duration-500">
                   <Icon className="w-8 h-8 text-purple-400 group-hover:text-purple-300 transition-colors duration-500" />

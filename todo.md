@@ -961,4 +961,10 @@
 - [x] Optimiser le Hero pour mobile (tailles de texte, espacements)
 - [x] Optimiser les sections pour mobile (responsive, touch targets)
 - [x] Tester sur mobile
+- [x] Push GitHub
+
+## Effet glassmorphism++ sur cards
+- [x] Ajouter effet glassmorphism++ au hover (blur, transparence, reflets)
+- [x] Appliquer sur toutes les cards (Manifesto, WhoWeServe, Capabilities, Trinity)
+- [x] Tester les effets
 - [ ] Push GitHub

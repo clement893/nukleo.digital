@@ -57,8 +57,12 @@ export default function TrinitySection() {
             return (
               <div
                 key={index}
-                className="border-r border-b border-black/10 p-8 sm:p-10 lg:p-16 group hover:border-accent transition-colors duration-500 h-full flex flex-col justify-between min-h-[500px] sm:min-h-[600px] relative breathe depth-layer-1"
+                className="border-r border-b border-black/10 p-8 sm:p-10 lg:p-16 group hover:border-accent transition-all duration-500 h-full flex flex-col justify-between min-h-[500px] sm:min-h-[600px] relative breathe depth-layer-1 overflow-hidden hover:scale-[1.02] hover:shadow-2xl hover:shadow-purple-500/20"
               >
+                {/* Glassmorphism overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                <div className="absolute inset-0 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                
                 {/* Background Icon (appears on hover) */}
                 <div className="absolute top-10 right-10 opacity-0 group-hover:opacity-20 transition-opacity duration-500">
                   <Icon className="w-40 h-40 stroke-1 text-white/10" />

@@ -50,7 +50,7 @@ export default function HeroSection() {
             <p 
               className="text-lg sm:text-xl text-white/70 leading-relaxed font-light mb-8 sm:mb-12 max-w-2xl animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-600"
             >
-              Start your transformation journey.
+              Start your transformation journey with us.
             </p>
 
             {/* CTAs */}

@@ -1238,3 +1238,7 @@
 - [x] Changer le sous-titre pour "Start your transformation journey"
 - [ ] Créer un checkpoint
 - [ ] Push GitHub
+
+## Modifier le sous-titre du Hero
+- [x] Changer le sous-titre pour "Start your transformation journey with us."
+- [ ] Créer un checkpoint

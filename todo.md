@@ -1073,5 +1073,12 @@
 - [x] Ajouter les liens de navigation utiles (Home, Expertise, Projects, Contact)
 - [x] Intégrer dans App.tsx comme route par défaut
 - [x] Tester la page 404
+- [x] Créer un checkpoint
+- [x] Push GitHub
+
+## Corriger LinkedIn dans Contact et rediriger Join the Leaders
+- [x] Rendre le lien LinkedIn cliquable dans Contact.tsx (déjà fonctionnel dans Footer)
+- [x] Rediriger "Join the Leaders" vers /start-project dans HeroSection.tsx
+- [x] Tester les liens
 - [ ] Créer un checkpoint
 - [ ] Push GitHub

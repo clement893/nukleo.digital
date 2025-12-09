@@ -1,6 +1,7 @@
 
 import { Button } from '@/components/ui/button';
 import { useSound } from '@/hooks/useSound';
+import { Link } from 'wouter';
 
 import { useEffect, useState } from 'react';
 
@@ -60,15 +61,17 @@ export default function HeroSection() {
             <div 
               className="flex flex-col sm:flex-row items-start sm:items-center gap-6 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-900"
             >
-              <Button
-                onClick={playClick}
-                onMouseEnter={playHover}
-                className="relative rounded-full text-base sm:text-lg px-8 sm:px-12 py-6 sm:py-8 bg-white text-purple-900 hover:bg-white transition-all duration-500 font-bold tracking-wider hover:scale-[1.045] hover:shadow-xl hover:shadow-purple-500/25 group overflow-hidden w-full sm:w-auto"
-              >
-                <span className="relative z-10">Join the Leaders</span>
-                {/* Shimmer effect */}
-                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
-              </Button>
+              <Link href="/start-project">
+                <Button
+                  onClick={playClick}
+                  onMouseEnter={playHover}
+                  className="relative rounded-full text-base sm:text-lg px-8 sm:px-12 py-6 sm:py-8 bg-white text-purple-900 hover:bg-white transition-all duration-500 font-bold tracking-wider hover:scale-[1.045] hover:shadow-xl hover:shadow-purple-500/25 group overflow-hidden w-full sm:w-auto"
+                >
+                  <span className="relative z-10">Join the Leaders</span>
+                  {/* Shimmer effect */}
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

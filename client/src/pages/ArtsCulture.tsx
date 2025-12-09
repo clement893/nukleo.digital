@@ -27,6 +27,16 @@ export default function ArtsCulture() {
     };
   }, []);
 
+  // Generate floating particles
+  const particles = Array.from({ length: 30 }, (_, i) => ({
+    id: i,
+    size: Math.random() * 4 + 2,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    duration: Math.random() * 20 + 10,
+    delay: Math.random() * 5,
+  }));
+
   return (
     <>
       <SEO 
@@ -35,8 +45,128 @@ export default function ArtsCulture() {
         keywords="arts and culture, cultural support, artist support, cultural innovation, Nukleo commitment"
       />
       
-      <div className="min-h-screen bg-gradient-to-br from-[rgb(107,23,22)] via-[rgb(40,60,120)] to-[rgb(107,23,22)] text-white overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-[rgb(107,23,22)] via-[rgb(40,60,120)] to-[rgb(107,23,22)] text-white overflow-hidden relative">
         <div className="grain-overlay" />
+        
+        {/* Floating Particles */}
+        <div className="fixed inset-0 pointer-events-none overflow-hidden">
+          {particles.map((particle) => (
+            <div
+              key={particle.id}
+              className="absolute rounded-full bg-white/20"
+              style={{
+                width: `${particle.size}px`,
+                height: `${particle.size}px`,
+                left: `${particle.x}%`,
+                top: `${particle.y}%`,
+                animation: `float ${particle.duration}s infinite ease-in-out`,
+                animationDelay: `${particle.delay}s`,
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Rotating Hexagons */}
+        <div className="fixed inset-0 pointer-events-none overflow-hidden">
+          <div 
+            className="absolute w-64 h-64 opacity-10"
+            style={{
+              top: '20%',
+              left: '10%',
+              animation: 'spin 20s linear infinite',
+            }}
+          >
+            <svg viewBox="0 0 100 100" className="w-full h-full">
+              <polygon
+                points="50 1 95 25 95 75 50 99 5 75 5 25"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1"
+                className="text-purple-400"
+              />
+              <polygon
+                points="50 10 85 30 85 70 50 90 15 70 15 30"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1"
+                className="text-pink-400"
+              />
+            </svg>
+          </div>
+
+          <div 
+            className="absolute w-48 h-48 opacity-10"
+            style={{
+              top: '60%',
+              right: '15%',
+              animation: 'spin 15s linear infinite reverse',
+            }}
+          >
+            <svg viewBox="0 0 100 100" className="w-full h-full">
+              <polygon
+                points="50 1 95 25 95 75 50 99 5 75 5 25"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1"
+                className="text-blue-400"
+              />
+            </svg>
+          </div>
+
+          <div 
+            className="absolute w-56 h-56 opacity-10"
+            style={{
+              bottom: '10%',
+              left: '50%',
+              animation: 'spin 25s linear infinite',
+            }}
+          >
+            <svg viewBox="0 0 100 100" className="w-full h-full">
+              <polygon
+                points="50 1 95 25 95 75 50 99 5 75 5 25"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1"
+                className="text-orange-400"
+              />
+              <polygon
+                points="50 15 80 32 80 68 50 85 20 68 20 32"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1"
+                className="text-yellow-400"
+              />
+            </svg>
+          </div>
+        </div>
+
+        {/* Concentric Rings */}
+        <div className="fixed inset-0 pointer-events-none overflow-hidden">
+          <div 
+            className="absolute w-96 h-96 rounded-full border-2 border-purple-500/20"
+            style={{
+              top: '30%',
+              right: '20%',
+              animation: 'ping 3s cubic-bezier(0, 0, 0.2, 1) infinite',
+            }}
+          />
+          <div 
+            className="absolute w-80 h-80 rounded-full border-2 border-pink-500/20"
+            style={{
+              top: '30%',
+              right: '20%',
+              animation: 'ping 3s cubic-bezier(0, 0, 0.2, 1) infinite 1s',
+            }}
+          />
+          <div 
+            className="absolute w-64 h-64 rounded-full border-2 border-blue-500/20"
+            style={{
+              top: '30%',
+              right: '20%',
+              animation: 'ping 3s cubic-bezier(0, 0, 0.2, 1) infinite 2s',
+            }}
+          />
+        </div>
         
         {/* Funky animated background elements */}
         <div className="fixed inset-0 pointer-events-none">
@@ -67,7 +197,7 @@ export default function ArtsCulture() {
         
         <Header />
 
-        {/* Hero Section - Funky */}
+        {/* Hero Section - Ultra Funky with Glitch */}
         <section className="relative pt-32 pb-20 px-4">
           <div className="container mx-auto max-w-6xl">
             <div className="text-center mb-16 animate-fade-in">
@@ -77,11 +207,18 @@ export default function ArtsCulture() {
                 <Sparkles className="w-5 h-5 text-yellow-400 animate-spin" style={{ animationDuration: '3s', animationDirection: 'reverse' }} />
               </div>
               
-              <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight hover:scale-105 transition-transform duration-500">
+              <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight hover:scale-105 transition-transform duration-500 relative group">
                 Our{' '}
                 <span className="relative inline-block">
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 animate-gradient hover:animate-pulse">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 animate-gradient relative">
                     Manifest
+                    {/* Glitch effect */}
+                    <span className="absolute inset-0 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 opacity-70 group-hover:animate-glitch-1" style={{ textShadow: '-2px 0 #ff00de' }}>
+                      Manifest
+                    </span>
+                    <span className="absolute inset-0 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 opacity-70 group-hover:animate-glitch-2" style={{ textShadow: '2px 0 #00fff9' }}>
+                      Manifest
+                    </span>
                   </span>
                   <div className="absolute -inset-2 bg-gradient-to-r from-purple-600/30 to-pink-600/30 blur-2xl -z-10 animate-pulse" />
                 </span>
@@ -99,29 +236,40 @@ export default function ArtsCulture() {
           </div>
         </section>
 
-        {/* Stats Section - Funky */}
+        {/* Stats Section - Ultra Funky */}
         <section className="relative py-16 px-4">
           <div className="container mx-auto max-w-6xl">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="text-center p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/15 hover:rotate-2 hover:scale-110 transition-all duration-500 group">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center group-hover:rotate-180 transition-transform duration-700">
+              <div className="text-center p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/15 hover:rotate-2 hover:scale-110 transition-all duration-500 group relative overflow-hidden">
+                {/* Animated border */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ padding: '2px', mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)', maskComposite: 'exclude' }} />
+                
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center group-hover:rotate-180 transition-transform duration-700 relative">
                   <Award className="w-8 h-8" />
+                  {/* Rotating ring */}
+                  <div className="absolute inset-0 rounded-full border-2 border-dashed border-white/30 animate-spin" style={{ animationDuration: '4s' }} />
                 </div>
                 <div className="text-5xl font-bold mb-2 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent group-hover:scale-125 transition-transform">40%</div>
                 <div className="text-white/70 group-hover:text-white transition-colors">Discount for cultural projects</div>
               </div>
               
-              <div className="text-center p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/15 hover:-rotate-2 hover:scale-110 transition-all duration-500 group">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-pink-500 to-orange-500 flex items-center justify-center group-hover:rotate-180 transition-transform duration-700">
+              <div className="text-center p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/15 hover:-rotate-2 hover:scale-110 transition-all duration-500 group relative overflow-hidden">
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-pink-500 via-orange-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ padding: '2px', mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)', maskComposite: 'exclude' }} />
+                
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-pink-500 to-orange-500 flex items-center justify-center group-hover:rotate-180 transition-transform duration-700 relative">
                   <Heart className="w-8 h-8 group-hover:animate-pulse" />
+                  <div className="absolute inset-0 rounded-full border-2 border-dashed border-white/30 animate-spin" style={{ animationDuration: '4s', animationDirection: 'reverse' }} />
                 </div>
                 <div className="text-5xl font-bold mb-2 bg-gradient-to-r from-pink-400 to-orange-400 bg-clip-text text-transparent group-hover:scale-125 transition-transform">1%</div>
                 <div className="text-white/70 group-hover:text-white transition-colors">Of annual revenue as donations</div>
               </div>
               
-              <div className="text-center p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/15 hover:rotate-2 hover:scale-110 transition-all duration-500 group">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center group-hover:rotate-180 transition-transform duration-700">
+              <div className="text-center p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/15 hover:rotate-2 hover:scale-110 transition-all duration-500 group relative overflow-hidden">
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ padding: '2px', mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)', maskComposite: 'exclude' }} />
+                
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center group-hover:rotate-180 transition-transform duration-700 relative">
                   <TrendingUp className="w-8 h-8" />
+                  <div className="absolute inset-0 rounded-full border-2 border-dashed border-white/30 animate-spin" style={{ animationDuration: '4s' }} />
                 </div>
                 <div className="text-5xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent group-hover:scale-125 transition-transform">$350</div>
                 <div className="text-white/70 group-hover:text-white transition-colors">Per employee for culture</div>
@@ -133,16 +281,21 @@ export default function ArtsCulture() {
         {/* Main Content Section */}
         <section className="relative py-20 px-4">
           <div className="container mx-auto max-w-6xl">
-            {/* Intro - Funky */}
+            {/* Intro - Ultra Funky */}
             <div className="relative mb-24">
               <div className="absolute -inset-4 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-3xl blur-2xl animate-pulse" />
-              <div className="relative bg-white/10 backdrop-blur-md rounded-3xl p-12 border border-white/20 hover:border-white/40 hover:scale-105 transition-all duration-700">
+              <div className="relative bg-white/10 backdrop-blur-md rounded-3xl p-12 border border-white/20 hover:border-white/40 hover:scale-105 transition-all duration-700 overflow-hidden group">
+                {/* Animated corner accents */}
+                <div className="absolute top-0 left-0 w-20 h-20 border-t-2 border-l-2 border-purple-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute bottom-0 right-0 w-20 h-20 border-b-2 border-r-2 border-pink-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
                 <div className="flex items-start gap-6">
-                  <div className="flex-shrink-0 w-20 h-20 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center hover:rotate-12 transition-transform duration-500">
+                  <div className="flex-shrink-0 w-20 h-20 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center hover:rotate-12 transition-transform duration-500 relative">
                     <Heart className="w-10 h-10 animate-pulse" />
+                    <div className="absolute inset-0 rounded-2xl border-2 border-dashed border-white/30 animate-spin" style={{ animationDuration: '6s' }} />
                   </div>
                   <div>
-                    <h2 className="text-4xl font-bold mb-6 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-purple-400 hover:to-pink-400 transition-all duration-300">
+                    <h2 className="text-4xl font-bold mb-6 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-purple-400 hover:to-pink-400 transition-all duration-300 relative group">
                       Supporting arts and culture, a heartfelt commitment
                     </h2>
                     <p className="text-xl text-white/80 leading-relaxed hover:text-white transition-colors duration-300">
@@ -153,20 +306,33 @@ export default function ArtsCulture() {
               </div>
             </div>
 
-            {/* Why Arts & Culture - Funky cards */}
+            {/* Why Arts & Culture - Ultra Funky cards */}
             <div className="mb-24">
-              <h2 className="text-5xl font-bold mb-12 text-center hover:scale-110 transition-transform duration-500">
-                Why arts and culture?
+              <h2 className="text-5xl font-bold mb-12 text-center hover:scale-110 transition-transform duration-500 relative group inline-block w-full">
+                <span className="relative">
+                  Why arts and culture?
+                  {/* Glitch effect on hover */}
+                  <span className="absolute inset-0 opacity-0 group-hover:opacity-70 group-hover:animate-glitch-1" style={{ textShadow: '-2px 0 #ff00de' }}>
+                    Why arts and culture?
+                  </span>
+                  <span className="absolute inset-0 opacity-0 group-hover:opacity-70 group-hover:animate-glitch-2" style={{ textShadow: '2px 0 #00fff9' }}>
+                    Why arts and culture?
+                  </span>
+                </span>
               </h2>
               
               <div className="grid md:grid-cols-3 gap-8">
                 <div className="group relative hover:-translate-y-4 transition-all duration-500">
                   <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-3xl blur opacity-25 group-hover:opacity-75 transition duration-500 animate-pulse" />
-                  <div className="relative bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10 group-hover:bg-white/15 group-hover:rotate-3 transition-all duration-500 h-full">
-                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center mb-6 group-hover:rotate-180 transition-transform duration-700">
+                  <div className="relative bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10 group-hover:bg-white/15 group-hover:rotate-3 transition-all duration-500 h-full overflow-hidden">
+                    {/* Scanning line effect */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-scan" />
+                    
+                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center mb-6 group-hover:rotate-180 transition-transform duration-700 relative">
                       <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                       </svg>
+                      <div className="absolute inset-0 rounded-xl border-2 border-dashed border-white/30 animate-spin" style={{ animationDuration: '5s' }} />
                     </div>
                     <h3 className="text-2xl font-bold mb-4 group-hover:text-purple-300 transition-colors">Heritage & Identity</h3>
                     <p className="text-white/70 leading-relaxed group-hover:text-white transition-colors">
@@ -177,11 +343,14 @@ export default function ArtsCulture() {
 
                 <div className="group relative hover:-translate-y-4 transition-all duration-500">
                   <div className="absolute -inset-1 bg-gradient-to-r from-pink-600 to-purple-600 rounded-3xl blur opacity-25 group-hover:opacity-75 transition duration-500 animate-pulse" style={{ animationDelay: '0.5s' }} />
-                  <div className="relative bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10 group-hover:bg-white/15 group-hover:-rotate-3 transition-all duration-500 h-full">
-                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-pink-500 to-purple-500 flex items-center justify-center mb-6 group-hover:rotate-180 transition-transform duration-700">
+                  <div className="relative bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10 group-hover:bg-white/15 group-hover:-rotate-3 transition-all duration-500 h-full overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-scan" style={{ animationDelay: '0.5s' }} />
+                    
+                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-pink-500 to-purple-500 flex items-center justify-center mb-6 group-hover:rotate-180 transition-transform duration-700 relative">
                       <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                       </svg>
+                      <div className="absolute inset-0 rounded-xl border-2 border-dashed border-white/30 animate-spin" style={{ animationDuration: '5s', animationDirection: 'reverse' }} />
                     </div>
                     <h3 className="text-2xl font-bold mb-4 group-hover:text-pink-300 transition-colors">Education & Creativity</h3>
                     <p className="text-white/70 leading-relaxed group-hover:text-white transition-colors">
@@ -192,9 +361,12 @@ export default function ArtsCulture() {
 
                 <div className="group relative hover:-translate-y-4 transition-all duration-500">
                   <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-3xl blur opacity-25 group-hover:opacity-75 transition duration-500 animate-pulse" style={{ animationDelay: '1s' }} />
-                  <div className="relative bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10 group-hover:bg-white/15 group-hover:rotate-3 transition-all duration-500 h-full">
-                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-6 group-hover:rotate-180 transition-transform duration-700">
+                  <div className="relative bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10 group-hover:bg-white/15 group-hover:rotate-3 transition-all duration-500 h-full overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-scan" style={{ animationDelay: '1s' }} />
+                    
+                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-6 group-hover:rotate-180 transition-transform duration-700 relative">
                       <Users className="w-7 h-7" />
+                      <div className="absolute inset-0 rounded-xl border-2 border-dashed border-white/30 animate-spin" style={{ animationDuration: '5s' }} />
                     </div>
                     <h3 className="text-2xl font-bold mb-4 group-hover:text-blue-300 transition-colors">Community & Connection</h3>
                     <p className="text-white/70 leading-relaxed group-hover:text-white transition-colors">
@@ -205,21 +377,27 @@ export default function ArtsCulture() {
               </div>
             </div>
 
-            {/* Context Section - Funky */}
+            {/* Context Section - Ultra Funky */}
             <div className="mb-24">
-              <div className="relative hover:scale-105 transition-transform duration-700">
+              <div className="relative hover:scale-105 transition-transform duration-700 group">
                 <div className="absolute -inset-4 bg-gradient-to-r from-orange-600/20 to-red-600/20 rounded-3xl blur-2xl animate-pulse" />
-                <div className="relative bg-white/5 backdrop-blur-md rounded-3xl p-12 border border-orange-500/20 hover:border-orange-500/40 transition-all duration-500">
-                  <div className="flex items-start gap-6 mb-8">
-                    <div className="flex-shrink-0 w-16 h-16 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center hover:rotate-12 transition-transform duration-500">
+                <div className="relative bg-white/5 backdrop-blur-md rounded-3xl p-12 border border-orange-500/20 hover:border-orange-500/40 transition-all duration-500 overflow-hidden">
+                  {/* Animated grid background */}
+                  <div className="absolute inset-0 opacity-5">
+                    <div className="absolute inset-0" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
+                  </div>
+                  
+                  <div className="flex items-start gap-6 mb-8 relative z-10">
+                    <div className="flex-shrink-0 w-16 h-16 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center hover:rotate-12 transition-transform duration-500 relative">
                       <TrendingUp className="w-8 h-8" />
+                      <div className="absolute inset-0 rounded-xl border-2 border-dashed border-white/30 animate-spin" style={{ animationDuration: '6s' }} />
                     </div>
                     <h2 className="text-4xl font-bold hover:text-orange-300 transition-colors duration-300">
                       The importance of supporting culture in Quebec today
                     </h2>
                   </div>
                   
-                  <div className="space-y-6 text-lg text-white/80 leading-relaxed pl-22 hover:text-white transition-colors duration-300">
+                  <div className="space-y-6 text-lg text-white/80 leading-relaxed pl-22 hover:text-white transition-colors duration-300 relative z-10">
                     <p>
                       Budget cuts and precarious working conditions in the cultural sector have created major challenges for artists and institutions. The fragility of Quebec's cultural sector requires concrete efforts to ensure its accessibility and encourage its innovation.
                     </p>
@@ -231,11 +409,20 @@ export default function ArtsCulture() {
               </div>
             </div>
 
-            {/* Our Commitments - Funky */}
+            {/* Our Commitments - Ultra Funky */}
             <div className="mb-24">
               <div className="text-center mb-16">
-                <h2 className="text-6xl font-bold mb-6 hover:scale-110 transition-transform duration-500 inline-block">
-                  Our Commitments
+                <h2 className="text-6xl font-bold mb-6 hover:scale-110 transition-transform duration-500 inline-block relative group">
+                  <span className="relative">
+                    Our Commitments
+                    {/* Glitch effect */}
+                    <span className="absolute inset-0 opacity-0 group-hover:opacity-70 group-hover:animate-glitch-1" style={{ textShadow: '-2px 0 #ff00de' }}>
+                      Our Commitments
+                    </span>
+                    <span className="absolute inset-0 opacity-0 group-hover:opacity-70 group-hover:animate-glitch-2" style={{ textShadow: '2px 0 #00fff9' }}>
+                      Our Commitments
+                    </span>
+                  </span>
                 </h2>
                 <p className="text-xl text-white/70 max-w-2xl mx-auto hover:text-white transition-colors duration-300">
                   Four concrete commitments to actively support the cultural ecosystem
@@ -246,10 +433,13 @@ export default function ArtsCulture() {
                 {/* Commitment 1 */}
                 <div className="group relative hover:-translate-y-4 hover:rotate-1 transition-all duration-500">
                   <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl blur opacity-25 group-hover:opacity-100 transition duration-500" />
-                  <div className="relative bg-white/10 backdrop-blur-md rounded-3xl p-10 border border-white/20 group-hover:border-white/60 transition-all duration-300 h-full">
+                  <div className="relative bg-white/10 backdrop-blur-md rounded-3xl p-10 border border-white/20 group-hover:border-white/60 transition-all duration-300 h-full overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-scan" />
+                    
                     <div className="flex items-center gap-4 mb-6">
-                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center group-hover:rotate-180 transition-transform duration-700">
+                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center group-hover:rotate-180 transition-transform duration-700 relative">
                         <DollarSign className="w-8 h-8" />
+                        <div className="absolute inset-0 rounded-2xl border-2 border-dashed border-white/30 animate-spin" style={{ animationDuration: '6s' }} />
                       </div>
                       <div>
                         <div className="text-sm font-mono text-purple-300 mb-1 group-hover:scale-125 transition-transform inline-block">01</div>
@@ -269,10 +459,13 @@ export default function ArtsCulture() {
                 {/* Commitment 2 */}
                 <div className="group relative hover:-translate-y-4 hover:-rotate-1 transition-all duration-500">
                   <div className="absolute -inset-1 bg-gradient-to-r from-pink-600 to-orange-600 rounded-3xl blur opacity-25 group-hover:opacity-100 transition duration-500" />
-                  <div className="relative bg-white/10 backdrop-blur-md rounded-3xl p-10 border border-white/20 group-hover:border-white/60 transition-all duration-300 h-full">
+                  <div className="relative bg-white/10 backdrop-blur-md rounded-3xl p-10 border border-white/20 group-hover:border-white/60 transition-all duration-300 h-full overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-scan" style={{ animationDelay: '0.3s' }} />
+                    
                     <div className="flex items-center gap-4 mb-6">
-                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500 to-orange-500 flex items-center justify-center group-hover:rotate-180 transition-transform duration-700">
+                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500 to-orange-500 flex items-center justify-center group-hover:rotate-180 transition-transform duration-700 relative">
                         <Heart className="w-8 h-8 group-hover:animate-pulse" />
+                        <div className="absolute inset-0 rounded-2xl border-2 border-dashed border-white/30 animate-spin" style={{ animationDuration: '6s', animationDirection: 'reverse' }} />
                       </div>
                       <div>
                         <div className="text-sm font-mono text-pink-300 mb-1 group-hover:scale-125 transition-transform inline-block">02</div>
@@ -292,10 +485,13 @@ export default function ArtsCulture() {
                 {/* Commitment 3 */}
                 <div className="group relative hover:-translate-y-4 hover:rotate-1 transition-all duration-500">
                   <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl blur opacity-25 group-hover:opacity-100 transition duration-500" />
-                  <div className="relative bg-white/10 backdrop-blur-md rounded-3xl p-10 border border-white/20 group-hover:border-white/60 transition-all duration-300 h-full">
+                  <div className="relative bg-white/10 backdrop-blur-md rounded-3xl p-10 border border-white/20 group-hover:border-white/60 transition-all duration-300 h-full overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-scan" style={{ animationDelay: '0.6s' }} />
+                    
                     <div className="flex items-center gap-4 mb-6">
-                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center group-hover:rotate-180 transition-transform duration-700">
+                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center group-hover:rotate-180 transition-transform duration-700 relative">
                         <Users className="w-8 h-8" />
+                        <div className="absolute inset-0 rounded-2xl border-2 border-dashed border-white/30 animate-spin" style={{ animationDuration: '6s' }} />
                       </div>
                       <div>
                         <div className="text-sm font-mono text-blue-300 mb-1 group-hover:scale-125 transition-transform inline-block">03</div>
@@ -314,10 +510,13 @@ export default function ArtsCulture() {
                 {/* Commitment 4 */}
                 <div className="group relative hover:-translate-y-4 hover:-rotate-1 transition-all duration-500">
                   <div className="absolute -inset-1 bg-gradient-to-r from-green-600 to-teal-600 rounded-3xl blur opacity-25 group-hover:opacity-100 transition duration-500" />
-                  <div className="relative bg-white/10 backdrop-blur-md rounded-3xl p-10 border border-white/20 group-hover:border-white/60 transition-all duration-300 h-full">
+                  <div className="relative bg-white/10 backdrop-blur-md rounded-3xl p-10 border border-white/20 group-hover:border-white/60 transition-all duration-300 h-full overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-scan" style={{ animationDelay: '0.9s' }} />
+                    
                     <div className="flex items-center gap-4 mb-6">
-                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center group-hover:rotate-180 transition-transform duration-700">
+                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500 to-teal-500 flex items-center justify-center group-hover:rotate-180 transition-transform duration-700 relative">
                         <Megaphone className="w-8 h-8" />
+                        <div className="absolute inset-0 rounded-2xl border-2 border-dashed border-white/30 animate-spin" style={{ animationDuration: '6s', animationDirection: 'reverse' }} />
                       </div>
                       <div>
                         <div className="text-sm font-mono text-green-300 mb-1 group-hover:scale-125 transition-transform inline-block">04</div>
@@ -336,7 +535,7 @@ export default function ArtsCulture() {
             </div>
 
             {/* CTA Section - Ultra Funky */}
-            <div className="relative hover:scale-105 transition-transform duration-700">
+            <div className="relative hover:scale-105 transition-transform duration-700 group">
               <div className="absolute -inset-4 bg-gradient-to-r from-purple-600/30 to-pink-600/30 rounded-3xl blur-3xl animate-pulse" />
               <div className="relative bg-gradient-to-r from-purple-600/20 to-pink-600/20 backdrop-blur-md rounded-3xl p-16 border border-white/30 hover:border-white/60 text-center overflow-hidden transition-all duration-500">
                 {/* Decorative elements */}
@@ -344,19 +543,43 @@ export default function ArtsCulture() {
                 <div className="absolute bottom-0 right-0 w-40 h-40 bg-pink-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-yellow-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
                 
+                {/* Rotating hexagon */}
+                <div className="absolute top-10 right-10 w-32 h-32 opacity-20 animate-spin" style={{ animationDuration: '20s' }}>
+                  <svg viewBox="0 0 100 100" className="w-full h-full">
+                    <polygon
+                      points="50 1 95 25 95 75 50 99 5 75 5 25"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1"
+                      className="text-white"
+                    />
+                  </svg>
+                </div>
+                
                 <div className="relative z-10">
                   <Sparkles className="w-12 h-12 mx-auto mb-6 text-yellow-400 animate-bounce" />
-                  <h2 className="text-5xl font-bold mb-6 hover:scale-110 transition-transform duration-500 inline-block">
-                    Let's grow culture together
+                  <h2 className="text-5xl font-bold mb-6 hover:scale-110 transition-transform duration-500 inline-block relative">
+                    <span className="relative">
+                      Let's grow culture together
+                      {/* Subtle glitch on hover */}
+                      <span className="absolute inset-0 opacity-0 group-hover:opacity-50 group-hover:animate-glitch-1" style={{ textShadow: '-1px 0 #ff00de' }}>
+                        Let's grow culture together
+                      </span>
+                      <span className="absolute inset-0 opacity-0 group-hover:opacity-50 group-hover:animate-glitch-2" style={{ textShadow: '1px 0 #00fff9' }}>
+                        Let's grow culture together
+                      </span>
+                    </span>
                   </h2>
                   <p className="text-2xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed hover:text-white transition-colors duration-300">
                     Join us in our commitment to support arts and culture. Together, we can make a difference.
                   </p>
                   <Link href="/contact">
-                    <button className="group relative bg-white text-purple-900 px-10 py-5 rounded-full font-bold text-xl hover:bg-white/90 transition-all duration-300 inline-flex items-center gap-3 hover:scale-110 hover:shadow-2xl hover:rotate-2">
-                      <span>Contact Us</span>
-                      <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
-                      <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full blur opacity-30 group-hover:opacity-75 transition duration-300 -z-10 animate-pulse" />
+                    <button className="group/btn relative bg-white text-purple-900 px-10 py-5 rounded-full font-bold text-xl hover:bg-white/90 transition-all duration-300 inline-flex items-center gap-3 hover:scale-110 hover:shadow-2xl hover:rotate-2 overflow-hidden">
+                      <span className="relative z-10">Contact Us</span>
+                      <ArrowRight className="w-6 h-6 group-hover/btn:translate-x-2 transition-transform relative z-10" />
+                      <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full blur opacity-30 group-hover/btn:opacity-75 transition duration-300 -z-10 animate-pulse" />
+                      {/* Shimmer effect */}
+                      <div className="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                     </button>
                   </Link>
                 </div>
@@ -367,6 +590,68 @@ export default function ArtsCulture() {
 
         <Footer />
       </div>
+
+      <style>{`
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0) translateX(0);
+          }
+          25% {
+            transform: translateY(-20px) translateX(10px);
+          }
+          50% {
+            transform: translateY(-40px) translateX(-10px);
+          }
+          75% {
+            transform: translateY(-20px) translateX(10px);
+          }
+        }
+
+        @keyframes scan {
+          0% {
+            transform: translateY(-100%);
+          }
+          100% {
+            transform: translateY(100%);
+          }
+        }
+
+        @keyframes glitch-1 {
+          0%, 100% {
+            transform: translate(0);
+          }
+          33% {
+            transform: translate(-2px, 2px);
+          }
+          66% {
+            transform: translate(2px, -2px);
+          }
+        }
+
+        @keyframes glitch-2 {
+          0%, 100% {
+            transform: translate(0);
+          }
+          33% {
+            transform: translate(2px, -2px);
+          }
+          66% {
+            transform: translate(-2px, 2px);
+          }
+        }
+
+        .animate-scan {
+          animation: scan 2s linear;
+        }
+
+        .animate-glitch-1 {
+          animation: glitch-1 0.3s infinite;
+        }
+
+        .animate-glitch-2 {
+          animation: glitch-2 0.3s infinite;
+        }
+      `}</style>
     </>
   );
 }

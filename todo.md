@@ -877,4 +877,12 @@
 - [x] Ajouter des animations funky et audacieuses (rotate, scale, translate)
 - [x] Ajouter des effets visuels créatifs (parallax mouse, scroll effects, bounce)
 - [x] Tester la page en anglais avec effets funky (super dynamique !)
+- [x] Push GitHub
+
+## Funkybness extrême page Arts & Culture (niveau loader)
+- [x] Ajouter des hexagones rotatifs en background (3 hexagones animés)
+- [x] Ajouter des particules flottantes animées (30 particules)
+- [x] Ajouter des effets glitch sur les titres principaux
+- [x] Ajouter des anneaux concentriques animés (ping effect)
+- [x] Tester le funkybness extrême (ultra dynamique avec tous les effets !)
 - [ ] Push GitHub

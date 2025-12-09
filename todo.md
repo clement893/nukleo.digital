@@ -835,4 +835,11 @@
 - [x] Ajouter les routes dans App.tsx
 - [x] Mettre à jour les liens dans TrinitySection
 - [x] Tester la navigation
+- [x] Push GitHub
+
+## Vérification et suppression définitive loading screen
+- [x] Vérifier App.tsx pour toute référence à LoadingScreen (déjà retiré)
+- [x] Chercher dans tous les fichiers pour d'autres références
+- [x] Supprimer le fichier LoadingScreen.tsx complètement
+- [x] Tester le site (loading screen a bien disparu)
 - [ ] Push GitHub

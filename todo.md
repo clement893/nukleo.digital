@@ -949,4 +949,10 @@
 ## Retirer les particules (garder uniquement hexagones)
 - [x] Retirer les particules flottantes du Hero
 - [x] Tester le Hero avec hexagones uniquement
+- [x] Push GitHub
+
+## Retirer hexagones + modifier slogan
+- [x] Retirer les hexagones du Hero
+- [x] Modifier le slogan : "Choose Intelligence" uniquement (retirer "Choose Nukleo")
+- [x] Tester le Hero minimaliste
 - [ ] Push GitHub

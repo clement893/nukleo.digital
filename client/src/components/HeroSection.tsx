@@ -24,79 +24,6 @@ export default function HeroSection() {
   
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20">
-      {/* Rotating Hexagons */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div 
-          className="absolute w-64 h-64 opacity-10"
-          style={{
-            top: '20%',
-            left: '10%',
-            animation: 'spin 20s linear infinite',
-          }}
-        >
-          <svg viewBox="0 0 100 100" className="w-full h-full">
-            <polygon
-              points="50 1 95 25 95 75 50 99 5 75 5 25"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1"
-              className="text-purple-400"
-            />
-            <polygon
-              points="50 10 85 30 85 70 50 90 15 70 15 30"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1"
-              className="text-blue-400"
-            />
-          </svg>
-        </div>
-
-        <div 
-          className="absolute w-48 h-48 opacity-10"
-          style={{
-            top: '60%',
-            right: '15%',
-            animation: 'spin 15s linear infinite reverse',
-          }}
-        >
-          <svg viewBox="0 0 100 100" className="w-full h-full">
-            <polygon
-              points="50 1 95 25 95 75 50 99 5 75 5 25"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1"
-              className="text-cyan-400"
-            />
-          </svg>
-        </div>
-
-        <div 
-          className="absolute w-56 h-56 opacity-10"
-          style={{
-            bottom: '10%',
-            left: '50%',
-            animation: 'spin 25s linear infinite',
-          }}
-        >
-          <svg viewBox="0 0 100 100" className="w-full h-full">
-            <polygon
-              points="50 1 95 25 95 75 50 99 5 75 5 25"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1"
-              className="text-purple-400"
-            />
-            <polygon
-              points="50 10 85 30 85 70 50 90 15 70 15 30"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1"
-              className="text-pink-400"
-            />
-          </svg>
-        </div>
-      </div>
 
       <div className="container relative z-10">
         <div className="flex items-center justify-center">
@@ -141,7 +68,7 @@ export default function HeroSection() {
             <p 
               className="text-3xl md:text-4xl text-white font-semibold mb-6 max-w-2xl animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-500 tracking-tight"
             >
-              Choose Nukleo, Choose Intelligence
+              Choose Intelligence
             </p>
 
             {/* Subtitle */}
@@ -175,11 +102,6 @@ export default function HeroSection() {
         @keyframes gradient-shift {
           0%, 100% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
-        }
-        
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
         }
       `}</style>
     </section>

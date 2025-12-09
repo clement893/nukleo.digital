@@ -1003,4 +1003,11 @@
 - [x] Trouver le bouton "Discuss Your Project"
 - [x] Changer les couleurs pour correspondre aux autres boutons (bg-white text-purple-900)
 - [x] Tester le bouton
+- [x] Push GitHub
+
+## Ajouter Creative Studio sur page services
+- [x] Analyser nukleo.com pour comprendre le Creative Studio
+- [x] Vérifier la page services actuelle
+- [x] Ajouter le Creative Studio à la liste des services
+- [x] Tester la page services
 - [ ] Push GitHub

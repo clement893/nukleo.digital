@@ -1,4 +1,4 @@
-import { Layers, BarChart3, Globe, Zap, Target, Users, Brain, Code, Workflow, MessageSquare, TrendingUp, Shield } from 'lucide-react';
+import { Layers, BarChart3, Globe, Zap, Target, Users, Brain, Code, Workflow, MessageSquare, TrendingUp, Shield, Palette, Sparkles, Camera, PenTool } from 'lucide-react';
 import SEO from '@/components/SEO';
 import { Link } from 'wouter';
 import PageLayout from '../components/PageLayout';
@@ -6,9 +6,11 @@ import PageLayout from '../components/PageLayout';
 export default function Services() {
   const services = [
     {
-      category: 'AI Strategy & Marketing',
+      category: 'The Bureau',
+      subtitle: 'Strategic Headquarters',
       icon: Layers,
-      description: 'Transform your business vision into actionable AI strategies that drive growth, enhance customer experiences, and position you as a market leader.',
+      description: 'Your strategic headquarters. Here, we transform data into decisions, insights into actions, and opportunities into measurable results. Our Strategic Bureau orchestrates your digital success with precision, agility, and an obsession for ROI.',
+      link: '/services/strategic-bureau',
       services: [
         {
           icon: Target,
@@ -33,9 +35,11 @@ export default function Services() {
       ],
     },
     {
-      category: 'Digital Platforms',
+      category: 'The Lab',
+      subtitle: 'Innovation Laboratory',
       icon: BarChart3,
-      description: 'Build intelligent, scalable platforms that transform how you operate, engage customers, and deliver value in the AI era.',
+      description: 'Welcome to our innovation laboratory. Here, we transform cutting-edge technologies into tangible competitive advantages. Web development, custom platforms, e-commerce, AI, automation—we build the solutions that propel your growth and give you a head start.',
+      link: '/services/ai-lab',
       services: [
         {
           icon: Code,
@@ -60,29 +64,31 @@ export default function Services() {
       ],
     },
     {
-      category: 'Intelligent Operations',
-      icon: Globe,
-      description: 'Optimize your operations with AI-powered automation and intelligence that drives efficiency, reduces costs, and scales with your growth.',
+      category: 'The Studio',
+      subtitle: 'Creative Workshop',
+      icon: Palette,
+      description: 'Welcome to the workshop where ideas become reality. Our Creative Studio fuses strategy and creativity to create brand experiences that captivate, designs that convert, and campaigns that leave a mark. We don\'t just create beautiful, we create beautiful that performs.',
+      link: '/services/creative-studio',
       services: [
         {
-          icon: Workflow,
-          title: 'Process Automation',
-          description: 'Automate repetitive tasks and complex workflows with intelligent agents that learn and adapt over time.',
+          icon: Sparkles,
+          title: 'Brand Identity & Strategy',
+          description: 'Craft compelling brand identities that resonate with your audience and differentiate you in the market.',
         },
         {
-          icon: Brain,
-          title: 'Data Intelligence',
-          description: 'Transform raw data into actionable insights with AI-powered analytics, visualization, and reporting.',
+          icon: PenTool,
+          title: 'UI/UX Design',
+          description: 'Design stunning interfaces that blend aesthetics with functionality, creating experiences users love.',
         },
         {
-          icon: Zap,
-          title: 'System Integration',
-          description: 'Connect disparate systems and create unified data flows with intelligent middleware and orchestration.',
+          icon: Camera,
+          title: 'Content Creation',
+          description: 'Produce high-impact visual and written content that tells your story and drives engagement.',
         },
         {
           icon: TrendingUp,
-          title: 'Performance Optimization',
-          description: 'Continuously monitor, analyze, and optimize your operations with AI-driven recommendations and automation.',
+          title: 'Campaign Design',
+          description: 'Design integrated marketing campaigns that capture attention and deliver measurable results.',
         },
       ],
     },
@@ -103,16 +109,16 @@ export default function Services() {
             <span className="text-sm font-medium text-white/90">Our Services</span>
           </div>
           
-          <h1 className="text-6xl md:text-8xl font-bold text-white mb-8 leading-tight">
-            Comprehensive
+          <h1 className="text-6xl md:text-8xl font-bold text-white mb-8 leading-tight italic">
+            We are by your side
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">
-              AI Solutions
+              to help you grow.
             </span>
           </h1>
           
           <p className="text-2xl text-white/70 max-w-3xl leading-relaxed">
-            From strategy to execution, we deliver end-to-end AI services that transform your business operations and accelerate growth.
+            Three specialized studios working in harmony to transform your vision into reality. From strategy to creativity, from innovation to execution.
           </p>
         </div>
 
@@ -128,12 +134,25 @@ export default function Services() {
                     <CategoryIcon className="w-8 h-8 text-accent" />
                   </div>
                   <div className="flex-1">
-                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">
                       {category.category}
                     </h2>
+                    {category.subtitle && (
+                      <p className="text-lg text-accent/80 mb-4 font-medium">
+                        {category.subtitle}
+                      </p>
+                    )}
                     <p className="text-xl text-white/70 leading-relaxed max-w-3xl">
                       {category.description}
                     </p>
+                    {category.link && (
+                      <Link href={category.link}>
+                        <button className="mt-6 text-accent hover:text-accent/80 font-semibold inline-flex items-center gap-2 transition-colors">
+                          Explore {category.category}
+                          <span className="text-xl">→</span>
+                        </button>
+                      </Link>
+                    )}
                   </div>
                 </div>
 

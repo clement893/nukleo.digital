@@ -1142,5 +1142,12 @@
 - [x] Afficher les suggestions au début de la conversation
 - [x] Rendre les suggestions cliquables (boutons avec hover effects)
 - [x] Masquer les suggestions après la première interaction
+- [x] Créer un checkpoint
+- [x] Push GitHub
+
+## Créer indicateur de frappe réaliste pour LEO
+- [x] Implémenter effet de typing progressif (lettre par lettre, 30ms/char)
+- [x] Ajouter des pauses réalistes pendant la frappe
+- [x] Afficher le texte de LEO progressivement avec curseur clignotant
 - [ ] Créer un checkpoint
 - [ ] Push GitHub

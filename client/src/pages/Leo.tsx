@@ -28,6 +28,8 @@ export default function Leo() {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
+  const [typingText, setTypingText] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatMutation = trpc.leo.chat.useMutation();
 
@@ -73,13 +75,30 @@ export default function Leo() {
         })),
       });
 
-      const assistantMessage: Message = {
-        role: 'assistant',
-        content: typeof response.content === 'string' ? response.content : JSON.stringify(response.content),
-        timestamp: new Date(),
-      };
-
-      setMessages((prev) => [...prev, assistantMessage]);
+      const fullText = typeof response.content === 'string' ? response.content : JSON.stringify(response.content);
+      
+      // Simulate typing effect
+      setIsTyping(true);
+      setTypingText('');
+      
+      let currentIndex = 0;
+      const typingInterval = setInterval(() => {
+        if (currentIndex < fullText.length) {
+          setTypingText(fullText.slice(0, currentIndex + 1));
+          currentIndex++;
+        } else {
+          clearInterval(typingInterval);
+          setIsTyping(false);
+          
+          const assistantMessage: Message = {
+            role: 'assistant',
+            content: fullText,
+            timestamp: new Date(),
+          };
+          setMessages((prev) => [...prev, assistantMessage]);
+          setTypingText('');
+        }
+      }, 30); // 30ms per character for realistic typing speed
     } catch (error) {
       console.error('Error sending message:', error);
       const errorMessage: Message = {
@@ -204,7 +223,8 @@ export default function Leo() {
             </div>
           ))}
 
-          {isLoading && (
+          {/* Typing indicator while loading */}
+          {isLoading && !isTyping && (
             <div className="flex gap-4 justify-start">
               <div className="flex-shrink-0">
                 <img 
@@ -221,6 +241,28 @@ export default function Leo() {
                     <div className="w-2 h-2 rounded-full bg-white/60 animate-bounce" style={{ animationDelay: '150ms' }} />
                     <div className="w-2 h-2 rounded-full bg-white/60 animate-bounce" style={{ animationDelay: '300ms' }} />
                   </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Typing effect */}
+          {isTyping && typingText && (
+            <div className="flex gap-4 justify-start">
+              <div className="flex-shrink-0">
+                <img 
+                  src="/leo-avatar.png" 
+                  alt="Leo" 
+                  className="w-12 h-12 object-contain animate-pulse-subtle"
+                />
+              </div>
+              <div className="flex flex-col items-start max-w-[70%]">
+                <span className="text-xs text-white/40 uppercase tracking-wider mb-2">LEO</span>
+                <div className="px-6 py-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-white">
+                  <p className="text-base leading-relaxed whitespace-pre-wrap">
+                    {typingText}
+                    <span className="inline-block w-0.5 h-4 bg-white/60 ml-0.5 animate-pulse" />
+                  </p>
                 </div>
               </div>
             </div>

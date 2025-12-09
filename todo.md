@@ -926,4 +926,11 @@
 - [x] Retirer le bouton "Watch Reel" de la section Hero
 - [x] Retirer l'indicateur de scroll (souris) de la section Hero
 - [x] Tester le Hero simplifié
+- [x] Push GitHub
+
+## Améliorer animations et fond Hero
+- [x] Ralentir les animations du Hero (plus smooth)
+- [x] Ajuster le fond pour être plus proche de Arts & Culture
+- [x] Réduire l'intensité des couleurs (retirer les pics)
+- [x] Tester le nouveau Hero
 - [ ] Push GitHub

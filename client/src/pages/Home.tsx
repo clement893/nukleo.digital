@@ -25,14 +25,9 @@ export default function Home() {
       <main>
         {/* First 4 sections with unified sandwich gradient */}
         <div className="relative">
-          {/* Unified Background with Sandwich Effect */}
+          {/* Unified Background - Style Arts & Culture */}
           <div className="absolute inset-0" style={{
-            background: `
-              radial-gradient(ellipse 1200px 800px at 0% 0%, rgb(107,23,22) 0%, transparent 50%),
-              radial-gradient(ellipse 1400px 1000px at 50% 50%, rgb(40,60,120) 0%, transparent 60%),
-              radial-gradient(ellipse 1200px 800px at 100% 100%, rgb(107,23,22) 0%, transparent 50%),
-              linear-gradient(135deg, rgb(82,61,203) 0%, rgb(30,20,60) 100%)
-            `
+            background: `linear-gradient(135deg, rgb(107,23,22) 0%, rgb(40,60,120) 50%, rgb(107,23,22) 100%)`
           }}>
             {/* Grid Pattern */}
             <div 
@@ -46,10 +41,10 @@ export default function Home() {
               }}
             />
             
-            {/* Animated Gradient Orbs - Sandwich Effect */}
-            <div className="absolute top-0 left-0 w-[800px] h-[800px] bg-red-600/15 rounded-full blur-[150px] animate-pulse" />
-            <div className="absolute top-1/2 left-1/2 w-[900px] h-[900px] bg-blue-900/15 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }} />
-            <div className="absolute bottom-0 right-0 w-[800px] h-[800px] bg-red-600/15 rounded-full blur-[150px] animate-pulse" style={{ animationDelay: '2s' }} />
+            {/* Animated Gradient Orbs - Réduites en intensité */}
+            <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-red-900/10 rounded-full blur-[120px] animate-pulse" style={{ animationDuration: '4s' }} />
+            <div className="absolute top-1/2 left-1/2 w-[700px] h-[700px] bg-blue-900/8 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '2s', animationDuration: '5s' }} />
+            <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-red-900/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '3s', animationDuration: '4s' }} />
           </div>
           
           <div className="relative z-10">

@@ -41,20 +41,20 @@ export default function HeroSection() {
               "
 
             >
-              <span className="inline-block animate-in fade-in slide-in-from-left-20 duration-700">
+              <span className="inline-block animate-in fade-in slide-in-from-left-20 duration-1000">
                 Architects
               </span>
               <br />
-              <span className="inline-block animate-in fade-in slide-in-from-left-20 duration-700 delay-100">
+              <span className="inline-block animate-in fade-in slide-in-from-left-20 duration-1000 delay-200">
                 of Your
               </span>
               {' '}
               <span 
-                className="inline-block animate-in fade-in slide-in-from-left-20 duration-700 delay-200 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent relative"
+                className="inline-block animate-in fade-in slide-in-from-left-20 duration-1000 delay-300 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent relative"
                 style={{
                   textShadow: 'none',
                   backgroundSize: '200% auto',
-                  animation: 'gradient-shift 3s ease infinite'
+                  animation: 'gradient-shift 6s ease infinite'
                 }}
               >
                 AI Future
@@ -65,21 +65,21 @@ export default function HeroSection() {
 
             {/* Slogan */}
             <p 
-              className="text-3xl md:text-4xl text-white font-semibold mb-6 max-w-2xl animate-in fade-in slide-in-from-bottom-10 duration-700 delay-350 tracking-tight"
+              className="text-3xl md:text-4xl text-white font-semibold mb-6 max-w-2xl animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-500 tracking-tight"
             >
               Choose Nukleo, Choose Intelligence
             </p>
 
             {/* Subtitle */}
             <p 
-              className="text-xl text-white/70 leading-relaxed font-light mb-12 max-w-2xl animate-in fade-in slide-in-from-bottom-10 duration-700 delay-400"
+              className="text-xl text-white/70 leading-relaxed font-light mb-12 max-w-2xl animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-700"
             >
               Serving startups, SMBs, enterprises, and governments worldwide
             </p>
 
             {/* CTAs */}
             <div 
-              className="flex flex-col sm:flex-row items-start sm:items-center gap-6 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-500"
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-6 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-900"
             >
               <Button
                 onClick={playClick}

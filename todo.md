@@ -997,4 +997,10 @@
 - [x] Réduire glow effects
 - [x] Appliquer sur toutes les cards et boutons
 - [x] Tester les animations
+- [x] Push GitHub
+
+## Mettre bouton "Discuss Your Project" en blanc
+- [x] Trouver le bouton "Discuss Your Project"
+- [x] Changer les couleurs pour correspondre aux autres boutons (bg-white text-purple-900)
+- [x] Tester le bouton
 - [ ] Push GitHub

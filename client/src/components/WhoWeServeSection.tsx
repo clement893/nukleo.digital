@@ -90,7 +90,7 @@ export default function WhoWeServeSection() {
           </p>
           <a
             href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-purple-600 hover:bg-purple-500 text-white font-semibold transition-all duration-300 hover:scale-[1.022]"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white hover:bg-white/90 text-purple-900 font-semibold transition-all duration-300 hover:scale-[1.022]"
           >
             Discuss Your Project
             <span className="text-lg">→</span>

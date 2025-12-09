@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { ArrowRight, Heart, DollarSign, Users, Megaphone, Sparkles, Award, TrendingUp } from "lucide-react";
+import { ArrowRight, Heart, DollarSign, Users, Megaphone, Sparkles, Award, TrendingUp, Quote, Zap, Target } from "lucide-react";
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -48,7 +48,7 @@ export default function ArtsCulture() {
       <div className="min-h-screen bg-gradient-to-br from-[rgb(107,23,22)] via-[rgb(40,60,120)] to-[rgb(107,23,22)] text-white overflow-hidden relative">
         <div className="grain-overlay" />
         
-        {/* Floating Particles - KEPT */}
+        {/* Floating Particles */}
         <div className="fixed inset-0 pointer-events-none overflow-hidden">
           {particles.map((particle) => (
             <div
@@ -66,7 +66,7 @@ export default function ArtsCulture() {
           ))}
         </div>
 
-        {/* Rotating Hexagons - KEPT */}
+        {/* Rotating Hexagons */}
         <div className="fixed inset-0 pointer-events-none overflow-hidden">
           <div 
             className="absolute w-64 h-64 opacity-10"
@@ -161,7 +161,7 @@ export default function ArtsCulture() {
         
         <Header />
 
-        {/* Hero Section - Simplified */}
+        {/* Hero Section */}
         <section className="relative pt-32 pb-20 px-4">
           <div className="container mx-auto max-w-6xl">
             <div className="text-center mb-16 animate-fade-in">
@@ -172,9 +172,9 @@ export default function ArtsCulture() {
               </div>
               
               <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight hover:scale-105 transition-transform duration-300">
-                Our{' '}
+                Culture is{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 animate-gradient">
-                  Manifest
+                  Our Heartbeat
                 </span>
               </h1>
               
@@ -184,16 +184,285 @@ export default function ArtsCulture() {
                   transform: `translateY(${scrollY * 0.1}px)`,
                 }}
               >
-                A heartfelt commitment to culture
+                A story of commitment, action, and impact
               </p>
             </div>
           </div>
         </section>
 
-        {/* Stats Section - Simplified */}
-        <section className="relative py-16 px-4">
+        {/* ACT 1: THE CHALLENGE */}
+        <section className="relative py-20 px-4">
           <div className="container mx-auto max-w-6xl">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="mb-12 text-center">
+              <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-red-500/20 border border-red-400/30 mb-6">
+                <Zap className="w-5 h-5 text-red-400" />
+                <span className="text-sm font-mono tracking-wider text-red-300">ACT I: THE CHALLENGE</span>
+              </div>
+              <h2 className="text-5xl md:text-6xl font-bold mb-6">
+                Culture is in{' '}
+                <span className="text-red-400">Crisis</span>
+              </h2>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 mb-16">
+              <div className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-red-600/20 to-orange-600/20 rounded-3xl blur opacity-0 group-hover:opacity-100 transition duration-300" />
+                <div className="relative bg-white/5 backdrop-blur-sm rounded-3xl p-10 border border-red-500/20 hover:border-red-500/40 transition-all duration-300 h-full">
+                  <div className="text-6xl font-bold text-red-400 mb-4">📉</div>
+                  <h3 className="text-2xl font-bold mb-4">Budget Cuts</h3>
+                  <p className="text-white/80 leading-relaxed">
+                    Drastic funding reductions are forcing artists and cultural institutions to make impossible choices between survival and creation.
+                  </p>
+                </div>
+              </div>
+
+              <div className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-orange-600/20 to-yellow-600/20 rounded-3xl blur opacity-0 group-hover:opacity-100 transition duration-300" />
+                <div className="relative bg-white/5 backdrop-blur-sm rounded-3xl p-10 border border-orange-500/20 hover:border-orange-500/40 transition-all duration-300 h-full">
+                  <div className="text-6xl font-bold text-orange-400 mb-4">⚠️</div>
+                  <h3 className="text-2xl font-bold mb-4">Precarious Conditions</h3>
+                  <p className="text-white/80 leading-relaxed">
+                    Artists face unstable income, lack of benefits, and uncertain futures—making it harder to focus on what they do best: creating.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Quote Block */}
+            <div className="relative group hover:-translate-y-2 transition-all duration-300">
+              <div className="absolute -inset-4 bg-gradient-to-r from-red-600/10 to-orange-600/10 rounded-3xl blur-2xl" />
+              <div className="relative bg-white/10 backdrop-blur-md rounded-3xl p-12 border border-red-500/30 hover:border-red-500/50 transition-all duration-300">
+                <Quote className="w-12 h-12 text-red-400 mb-6 opacity-50" />
+                <p className="text-2xl md:text-3xl font-light text-white/90 leading-relaxed italic mb-6">
+                  "The fragility of Quebec's cultural sector requires concrete efforts to ensure its accessibility and encourage its innovation."
+                </p>
+                <div className="h-1 w-24 bg-gradient-to-r from-red-400 to-orange-400 rounded-full" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ACT 2: OUR BELIEF */}
+        <section className="relative py-20 px-4">
+          <div className="container mx-auto max-w-6xl">
+            <div className="mb-12 text-center">
+              <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-purple-500/20 border border-purple-400/30 mb-6">
+                <Heart className="w-5 h-5 text-purple-400" />
+                <span className="text-sm font-mono tracking-wider text-purple-300">ACT II: OUR BELIEF</span>
+              </div>
+              <h2 className="text-5xl md:text-6xl font-bold mb-6">
+                Culture is{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
+                  Essential
+                </span>
+              </h2>
+              <p className="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
+                At Nukleo, we believe culture is the beating heart of society—enriching minds, nourishing lives, and strengthening communities.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 mb-16">
+              <div className="group relative hover:-translate-y-2 transition-all duration-300">
+                <div className="absolute -inset-1 bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-3xl blur opacity-0 group-hover:opacity-100 transition duration-300" />
+                <div className="relative bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10 group-hover:bg-white/10 transition-all duration-300 h-full">
+                  <div className="text-5xl mb-6">🏛️</div>
+                  <h3 className="text-2xl font-bold mb-4 group-hover:text-purple-300 transition-colors">Heritage</h3>
+                  <p className="text-white/70 leading-relaxed group-hover:text-white transition-colors">
+                    Culture preserves our history and identity for future generations.
+                  </p>
+                </div>
+              </div>
+
+              <div className="group relative hover:-translate-y-2 transition-all duration-300">
+                <div className="absolute -inset-1 bg-gradient-to-r from-pink-600/20 to-purple-600/20 rounded-3xl blur opacity-0 group-hover:opacity-100 transition duration-300" />
+                <div className="relative bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10 group-hover:bg-white/10 transition-all duration-300 h-full">
+                  <div className="text-5xl mb-6">💡</div>
+                  <h3 className="text-2xl font-bold mb-4 group-hover:text-pink-300 transition-colors">Creativity</h3>
+                  <p className="text-white/70 leading-relaxed group-hover:text-white transition-colors">
+                    Culture inspires education and stimulates innovation.
+                  </p>
+                </div>
+              </div>
+
+              <div className="group relative hover:-translate-y-2 transition-all duration-300">
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-600/20 to-cyan-600/20 rounded-3xl blur opacity-0 group-hover:opacity-100 transition duration-300" />
+                <div className="relative bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10 group-hover:bg-white/10 transition-all duration-300 h-full">
+                  <div className="text-5xl mb-6">🤝</div>
+                  <h3 className="text-2xl font-bold mb-4 group-hover:text-blue-300 transition-colors">Community</h3>
+                  <p className="text-white/70 leading-relaxed group-hover:text-white transition-colors">
+                    Culture creates connections and fosters belonging.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Quote Block */}
+            <div className="relative group hover:-translate-y-2 transition-all duration-300">
+              <div className="absolute -inset-4 bg-gradient-to-r from-purple-600/10 to-pink-600/10 rounded-3xl blur-2xl" />
+              <div className="relative bg-white/10 backdrop-blur-md rounded-3xl p-12 border border-purple-500/30 hover:border-purple-500/50 transition-all duration-300">
+                <Quote className="w-12 h-12 text-purple-400 mb-6 opacity-50" />
+                <p className="text-2xl md:text-3xl font-light text-white/90 leading-relaxed italic mb-6">
+                  "We believe it is imperative to direct our investments with discernment to strengthen our cultural growth, as the cultural sector is an economic driver and a pillar of our collective identity."
+                </p>
+                <div className="h-1 w-24 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ACT 3: OUR ACTION */}
+        <section className="relative py-20 px-4">
+          <div className="container mx-auto max-w-6xl">
+            <div className="mb-16 text-center">
+              <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-green-500/20 border border-green-400/30 mb-6">
+                <Target className="w-5 h-5 text-green-400" />
+                <span className="text-sm font-mono tracking-wider text-green-300">ACT III: OUR ACTION</span>
+              </div>
+              <h2 className="text-5xl md:text-6xl font-bold mb-6">
+                Four{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-teal-400">
+                  Concrete Commitments
+                </span>
+              </h2>
+              <p className="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
+                We don't just talk about supporting culture—we act on it every day.
+              </p>
+            </div>
+
+            {/* Timeline */}
+            <div className="relative">
+              {/* Vertical Line */}
+              <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-500 via-pink-500 to-green-500" />
+
+              {/* Commitment 1 */}
+              <div className="relative mb-16 md:grid md:grid-cols-2 md:gap-16">
+                <div className="md:text-right mb-8 md:mb-0">
+                  <div className="inline-block md:float-right">
+                    <div className="relative group">
+                      <div className="absolute -inset-1 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-3xl blur opacity-0 group-hover:opacity-100 transition duration-300" />
+                      <div className="relative bg-white/10 backdrop-blur-md rounded-3xl p-10 border border-white/20 group-hover:border-white/40 transition-all duration-300">
+                        <div className="flex items-center gap-4 mb-6 md:flex-row-reverse md:justify-end">
+                          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500/50 to-pink-500/50 flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
+                            <DollarSign className="w-8 h-8" />
+                          </div>
+                          <div>
+                            <div className="text-sm font-mono text-purple-300 mb-1">01</div>
+                            <h3 className="text-2xl font-bold">Affordable Pricing</h3>
+                          </div>
+                        </div>
+                        <p className="text-white/80 leading-relaxed mb-4">
+                          We offer <strong className="text-purple-300">40% discount</strong> on our services for cultural organizations, making digital transformation accessible to those who need it most.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <div className="absolute left-8 md:left-1/2 w-6 h-6 -ml-3 rounded-full bg-purple-500 border-4 border-[rgb(107,23,22)] z-10" />
+                </div>
+              </div>
+
+              {/* Commitment 2 */}
+              <div className="relative mb-16 md:grid md:grid-cols-2 md:gap-16">
+                <div className="md:col-start-2">
+                  <div className="relative group">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-pink-600/20 to-orange-600/20 rounded-3xl blur opacity-0 group-hover:opacity-100 transition duration-300" />
+                    <div className="relative bg-white/10 backdrop-blur-md rounded-3xl p-10 border border-white/20 group-hover:border-white/40 transition-all duration-300">
+                      <div className="flex items-center gap-4 mb-6">
+                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500/50 to-orange-500/50 flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
+                          <Heart className="w-8 h-8" />
+                        </div>
+                        <div>
+                          <div className="text-sm font-mono text-pink-300 mb-1">02</div>
+                          <h3 className="text-2xl font-bold">Financial Support</h3>
+                        </div>
+                      </div>
+                      <p className="text-white/80 leading-relaxed mb-4">
+                        We dedicate <strong className="text-pink-300">1% of our annual revenue</strong> as direct donations to cultural organizations, and mobilize other entrepreneurs to join us.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <div className="absolute left-8 md:left-1/2 w-6 h-6 -ml-3 rounded-full bg-pink-500 border-4 border-[rgb(107,23,22)] z-10" />
+                </div>
+              </div>
+
+              {/* Commitment 3 */}
+              <div className="relative mb-16 md:grid md:grid-cols-2 md:gap-16">
+                <div className="md:text-right mb-8 md:mb-0">
+                  <div className="inline-block md:float-right">
+                    <div className="relative group">
+                      <div className="absolute -inset-1 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-3xl blur opacity-0 group-hover:opacity-100 transition duration-300" />
+                      <div className="relative bg-white/10 backdrop-blur-md rounded-3xl p-10 border border-white/20 group-hover:border-white/40 transition-all duration-300">
+                        <div className="flex items-center gap-4 mb-6 md:flex-row-reverse md:justify-end">
+                          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500/50 to-purple-500/50 flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
+                            <Users className="w-8 h-8" />
+                          </div>
+                          <div>
+                            <div className="text-sm font-mono text-blue-300 mb-1">03</div>
+                            <h3 className="text-2xl font-bold">Live Culture</h3>
+                          </div>
+                        </div>
+                        <p className="text-white/80 leading-relaxed mb-4">
+                          Each team member receives <strong className="text-blue-300">$350 annually</strong> for Canadian cultural outings. Because supporting culture starts with experiencing it.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <div className="absolute left-8 md:left-1/2 w-6 h-6 -ml-3 rounded-full bg-blue-500 border-4 border-[rgb(107,23,22)] z-10" />
+                </div>
+              </div>
+
+              {/* Commitment 4 */}
+              <div className="relative md:grid md:grid-cols-2 md:gap-16">
+                <div className="md:col-start-2">
+                  <div className="relative group">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-green-600/20 to-teal-600/20 rounded-3xl blur opacity-0 group-hover:opacity-100 transition duration-300" />
+                    <div className="relative bg-white/10 backdrop-blur-md rounded-3xl p-10 border border-white/20 group-hover:border-white/40 transition-all duration-300">
+                      <div className="flex items-center gap-4 mb-6">
+                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500/50 to-teal-500/50 flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
+                          <Megaphone className="w-8 h-8" />
+                        </div>
+                        <div>
+                          <div className="text-sm font-mono text-green-300 mb-1">04</div>
+                          <h3 className="text-2xl font-bold">Raise Awareness</h3>
+                        </div>
+                      </div>
+                      <p className="text-white/80 leading-relaxed mb-4">
+                        We actively promote arts and culture within our company, among partners, and in our community—staying informed and engaged with contemporary cultural issues.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <div className="absolute left-8 md:left-1/2 w-6 h-6 -ml-3 rounded-full bg-green-500 border-4 border-[rgb(107,23,22)] z-10" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ACT 4: THE IMPACT */}
+        <section className="relative py-20 px-4">
+          <div className="container mx-auto max-w-6xl">
+            <div className="mb-16 text-center">
+              <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-yellow-500/20 border border-yellow-400/30 mb-6">
+                <Sparkles className="w-5 h-5 text-yellow-400" />
+                <span className="text-sm font-mono tracking-wider text-yellow-300">ACT IV: THE IMPACT</span>
+              </div>
+              <h2 className="text-5xl md:text-6xl font-bold mb-6">
+                Join the{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-400">
+                  Movement
+                </span>
+              </h2>
+            </div>
+
+            {/* Stats Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
               <div className="text-center p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:scale-105 transition-all duration-300 group">
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-500/50 to-pink-500/50 flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
                   <Award className="w-8 h-8" />
@@ -218,215 +487,8 @@ export default function ArtsCulture() {
                 <div className="text-white/70 group-hover:text-white transition-colors">Per employee for culture</div>
               </div>
             </div>
-          </div>
-        </section>
 
-        {/* Main Content Section */}
-        <section className="relative py-20 px-4">
-          <div className="container mx-auto max-w-6xl">
-            {/* Intro - Simplified */}
-            <div className="relative mb-24">
-              <div className="absolute -inset-4 bg-gradient-to-r from-purple-600/10 to-pink-600/10 rounded-3xl blur-2xl" />
-              <div className="relative bg-white/10 backdrop-blur-md rounded-3xl p-12 border border-white/20 hover:border-white/30 hover:scale-102 transition-all duration-300 group">
-                <div className="flex items-start gap-6">
-                  <div className="flex-shrink-0 w-20 h-20 rounded-2xl bg-gradient-to-br from-purple-500/50 to-pink-500/50 flex items-center justify-center hover:rotate-6 transition-transform duration-300">
-                    <Heart className="w-10 h-10" />
-                  </div>
-                  <div>
-                    <h2 className="text-4xl font-bold mb-6 hover:text-purple-300 transition-colors duration-300">
-                      Supporting arts and culture, a heartfelt commitment
-                    </h2>
-                    <p className="text-xl text-white/80 leading-relaxed hover:text-white transition-colors duration-300">
-                      At Nukleo, we firmly believe that the arts and culture industry is the beating heart of our society. It enriches our minds, nourishes our lives, and strengthens our sense of community. As actors in digital transformation, we recognize the importance of investing in cultural innovation and supporting the artists, institutions, and initiatives that shape our world with creativity and passion.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Why Arts & Culture - Simplified */}
-            <div className="mb-24">
-              <h2 className="text-5xl font-bold mb-12 text-center hover:scale-105 transition-transform duration-300">
-                Why arts and culture?
-              </h2>
-              
-              <div className="grid md:grid-cols-3 gap-8">
-                <div className="group relative hover:-translate-y-2 transition-all duration-300">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-3xl blur opacity-0 group-hover:opacity-100 transition duration-300" />
-                  <div className="relative bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10 group-hover:bg-white/10 transition-all duration-300 h-full">
-                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500/50 to-blue-500/50 flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform duration-300">
-                      <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                      </svg>
-                    </div>
-                    <h3 className="text-2xl font-bold mb-4 group-hover:text-purple-300 transition-colors">Heritage & Identity</h3>
-                    <p className="text-white/70 leading-relaxed group-hover:text-white transition-colors">
-                      Culture is the reflection of our history and identity. It preserves our heritage for future generations.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="group relative hover:-translate-y-2 transition-all duration-300">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-pink-600/20 to-purple-600/20 rounded-3xl blur opacity-0 group-hover:opacity-100 transition duration-300" />
-                  <div className="relative bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10 group-hover:bg-white/10 transition-all duration-300 h-full">
-                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-pink-500/50 to-purple-500/50 flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform duration-300">
-                      <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                      </svg>
-                    </div>
-                    <h3 className="text-2xl font-bold mb-4 group-hover:text-pink-300 transition-colors">Education & Creativity</h3>
-                    <p className="text-white/70 leading-relaxed group-hover:text-white transition-colors">
-                      Culture inspires and contributes to our education. It nourishes our curiosity and stimulates our creativity.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="group relative hover:-translate-y-2 transition-all duration-300">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-600/20 to-cyan-600/20 rounded-3xl blur opacity-0 group-hover:opacity-100 transition duration-300" />
-                  <div className="relative bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10 group-hover:bg-white/10 transition-all duration-300 h-full">
-                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500/50 to-cyan-500/50 flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform duration-300">
-                      <Users className="w-7 h-7" />
-                    </div>
-                    <h3 className="text-2xl font-bold mb-4 group-hover:text-blue-300 transition-colors">Community & Connection</h3>
-                    <p className="text-white/70 leading-relaxed group-hover:text-white transition-colors">
-                      Culture creates connections between individuals and fosters a sense of belonging and inclusion.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Context Section - Simplified */}
-            <div className="mb-24">
-              <div className="relative hover:scale-102 transition-transform duration-300 group">
-                <div className="absolute -inset-4 bg-gradient-to-r from-orange-600/10 to-red-600/10 rounded-3xl blur-2xl" />
-                <div className="relative bg-white/5 backdrop-blur-md rounded-3xl p-12 border border-orange-500/20 hover:border-orange-500/30 transition-all duration-300">
-                  <div className="flex items-start gap-6 mb-8">
-                    <div className="flex-shrink-0 w-16 h-16 rounded-xl bg-gradient-to-br from-orange-500/50 to-red-500/50 flex items-center justify-center hover:rotate-6 transition-transform duration-300">
-                      <TrendingUp className="w-8 h-8" />
-                    </div>
-                    <h2 className="text-4xl font-bold hover:text-orange-300 transition-colors duration-300">
-                      The importance of supporting culture in Quebec today
-                    </h2>
-                  </div>
-                  
-                  <div className="space-y-6 text-lg text-white/80 leading-relaxed pl-22 hover:text-white transition-colors duration-300">
-                    <p>
-                      Budget cuts and precarious working conditions in the cultural sector have created major challenges for artists and institutions. The fragility of Quebec's cultural sector requires concrete efforts to ensure its accessibility and encourage its innovation.
-                    </p>
-                    <p className="text-white/90 font-medium">
-                      In this context, our commitment to supporting arts and culture is essential. At Nukleo, we believe it is imperative to direct our investments with discernment to strengthen our cultural growth, as we firmly believe that the cultural sector is an economic driver and a pillar of our collective identity.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Our Commitments - Simplified */}
-            <div className="mb-24">
-              <div className="text-center mb-16">
-                <h2 className="text-6xl font-bold mb-6 hover:scale-105 transition-transform duration-300 inline-block">
-                  Our Commitments
-                </h2>
-                <p className="text-xl text-white/70 max-w-2xl mx-auto hover:text-white transition-colors duration-300">
-                  Four concrete commitments to actively support the cultural ecosystem
-                </p>
-              </div>
-              
-              <div className="grid md:grid-cols-2 gap-8">
-                {/* Commitment 1 */}
-                <div className="group relative hover:-translate-y-2 transition-all duration-300">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-3xl blur opacity-0 group-hover:opacity-100 transition duration-300" />
-                  <div className="relative bg-white/10 backdrop-blur-md rounded-3xl p-10 border border-white/20 group-hover:border-white/40 transition-all duration-300 h-full">
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500/50 to-pink-500/50 flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
-                        <DollarSign className="w-8 h-8" />
-                      </div>
-                      <div>
-                        <div className="text-sm font-mono text-purple-300 mb-1">01</div>
-                        <h3 className="text-2xl font-bold group-hover:text-purple-300 transition-colors">Offer Affordable Pricing</h3>
-                      </div>
-                    </div>
-                    <p className="text-white/80 leading-relaxed mb-4 group-hover:text-white transition-colors">
-                      Aware of the financial challenges many cultural organizations face, we offer reduced rates for our services. Nukleo is committed to meeting the growing needs of the arts industry by providing accessible and tailored solutions.
-                    </p>
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/20 border border-purple-400/30">
-                      <span className="text-purple-300 font-bold text-2xl">40%</span>
-                      <span className="text-white/90">discount on cultural projects</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Commitment 2 */}
-                <div className="group relative hover:-translate-y-2 transition-all duration-300">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-pink-600/20 to-orange-600/20 rounded-3xl blur opacity-0 group-hover:opacity-100 transition duration-300" />
-                  <div className="relative bg-white/10 backdrop-blur-md rounded-3xl p-10 border border-white/20 group-hover:border-white/40 transition-all duration-300 h-full">
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500/50 to-orange-500/50 flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
-                        <Heart className="w-8 h-8" />
-                      </div>
-                      <div>
-                        <div className="text-sm font-mono text-pink-300 mb-1">02</div>
-                        <h3 className="text-2xl font-bold group-hover:text-pink-300 transition-colors">Provide Financial Support</h3>
-                      </div>
-                    </div>
-                    <p className="text-white/80 leading-relaxed mb-4 group-hover:text-white transition-colors">
-                      We commit to dedicating 1% of our annual revenue as direct donations to cultural organizations. Beyond this, we organize initiatives that mobilize investments from other entrepreneurs who share our passion for arts and culture.
-                    </p>
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-pink-500/20 border border-pink-400/30">
-                      <span className="text-pink-300 font-bold text-2xl">1%</span>
-                      <span className="text-white/90">of annual revenue</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Commitment 3 */}
-                <div className="group relative hover:-translate-y-2 transition-all duration-300">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-3xl blur opacity-0 group-hover:opacity-100 transition duration-300" />
-                  <div className="relative bg-white/10 backdrop-blur-md rounded-3xl p-10 border border-white/20 group-hover:border-white/40 transition-all duration-300 h-full">
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500/50 to-purple-500/50 flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
-                        <Users className="w-8 h-8" />
-                      </div>
-                      <div>
-                        <div className="text-sm font-mono text-blue-300 mb-1">03</div>
-                        <h3 className="text-2xl font-bold group-hover:text-blue-300 transition-colors">Live and Breathe Culture</h3>
-                      </div>
-                    </div>
-                    <p className="text-white/80 leading-relaxed mb-4 group-hover:text-white transition-colors">
-                      At Nukleo, each team member has an annual budget of $350 dedicated to Canadian cultural outings. Shows, exhibitions, concerts, festivals: we encourage our team to immerse themselves in the cultural richness around us.
-                    </p>
-                    <p className="text-white/90 font-medium italic text-lg">
-                      Because supporting culture starts with experiencing it.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Commitment 4 */}
-                <div className="group relative hover:-translate-y-2 transition-all duration-300">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-green-600/20 to-teal-600/20 rounded-3xl blur opacity-0 group-hover:opacity-100 transition duration-300" />
-                  <div className="relative bg-white/10 backdrop-blur-md rounded-3xl p-10 border border-white/20 group-hover:border-white/40 transition-all duration-300 h-full">
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500/50 to-teal-500/50 flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
-                        <Megaphone className="w-8 h-8" />
-                      </div>
-                      <div>
-                        <div className="text-sm font-mono text-green-300 mb-1">04</div>
-                        <h3 className="text-2xl font-bold group-hover:text-green-300 transition-colors">Raise Awareness & Promote</h3>
-                      </div>
-                    </div>
-                    <p className="text-white/80 leading-relaxed mb-4 group-hover:text-white transition-colors">
-                      We recognize the importance of culture and invite our community to actively invest in it. As cultural actors, we stay informed about contemporary issues and actively participate in cultural exchanges and initiatives.
-                    </p>
-                    <p className="text-white/90 font-medium">
-                      We are committed to promoting arts and culture both within our company and among our partners and clients.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* CTA Section - Simplified */}
+            {/* CTA */}
             <div className="relative hover:scale-102 transition-transform duration-300 group">
               <div className="absolute -inset-4 bg-gradient-to-r from-purple-600/20 to-pink-600/20 rounded-3xl blur-3xl" />
               <div className="relative bg-gradient-to-r from-purple-600/20 to-pink-600/20 backdrop-blur-md rounded-3xl p-16 border border-white/30 hover:border-white/50 text-center transition-all duration-300">
@@ -435,11 +497,11 @@ export default function ArtsCulture() {
                   Let's grow culture together
                 </h2>
                 <p className="text-2xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed hover:text-white transition-colors duration-300">
-                  Join us in our commitment to support arts and culture. Together, we can make a difference.
+                  Whether you're an artist, cultural organization, or fellow entrepreneur—join us in making a real difference.
                 </p>
                 <Link href="/contact">
                   <button className="group/btn relative bg-white text-purple-900 px-10 py-5 rounded-full font-bold text-xl hover:bg-white/90 transition-all duration-300 inline-flex items-center gap-3 hover:scale-105 hover:shadow-2xl">
-                    <span>Contact Us</span>
+                    <span>Start the Conversation</span>
                     <ArrowRight className="w-6 h-6 group-hover/btn:translate-x-2 transition-transform" />
                   </button>
                 </Link>

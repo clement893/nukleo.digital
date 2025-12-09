@@ -893,4 +893,12 @@
 - [x] Réduire l'intensité des couleurs (opacity plus basse, effets subtils)
 - [x] Retirer les effets trop agressifs (glitch, scanning lines, anneaux rotatifs)
 - [x] Tester le nouveau look plus subtil (beaucoup mieux, équilibré !)
+- [x] Push GitHub
+
+## Storytelling page Arts & Culture
+- [x] Restructurer le contenu avec une narration progressive (4 actes)
+- [x] Créer un flow narratif : problème → vision → action → impact
+- [x] Améliorer la présentation visuelle (timeline verticale, quotes, badges)
+- [x] Ajouter des éléments émotionnels et humains (emojis, quotes, storytelling)
+- [x] Tester le nouveau storytelling (parfait ! Histoire en 4 actes très engageante)
 - [ ] Push GitHub

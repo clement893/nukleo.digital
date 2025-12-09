@@ -842,4 +842,11 @@
 - [x] Chercher dans tous les fichiers pour d'autres références
 - [x] Supprimer le fichier LoadingScreen.tsx complètement
 - [x] Tester le site (loading screen a bien disparu)
+- [x] Push GitHub
+
+## Suppression définitive du PageLoader (vraie source du loading)
+- [x] Vérifier App.tsx - ligne 92 contient <PageLoader />
+- [x] Retirer <PageLoader /> de App.tsx
+- [x] Retirer l'import PageLoader
+- [x] Tester le site (plus de loading screen !)
 - [ ] Push GitHub

@@ -1046,4 +1046,10 @@
 - [x] Corriger le bouton "Start Project" (navigation vers /contact)
 - [x] Vérifier que seul LinkedIn est affiché dans les liens sociaux
 - [x] Tester le menu
+- [x] Push GitHub
+
+## Corriger boutons X et Start Project non cliquables
+- [x] Diagnostiquer le problème de z-index/overlay
+- [x] Corriger la cliquabilité des boutons (z-index z-10 → z-50)
+- [x] Tester les boutons
 - [ ] Push GitHub

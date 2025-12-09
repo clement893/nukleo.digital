@@ -81,7 +81,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
       />
 
       {/* Header */}
-      <div className="absolute top-0 left-0 right-0 z-10 px-6 md:px-12 pt-8">
+      <div className="absolute top-0 left-0 right-0 z-50 px-6 md:px-12 pt-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a href="/" className="flex items-center group cursor-pointer" onClick={onClose}>

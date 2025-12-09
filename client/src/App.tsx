@@ -3,7 +3,7 @@ import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import CustomCursor from "./components/CustomCursor";
-
+import ModernLoader from "./components/ModernLoader";
 import { ThemeProvider } from "./contexts/ThemeContext";
 
 import Home from "./pages/Home";
@@ -89,6 +89,7 @@ function App() {
       <ThemeProvider defaultTheme="dark">
         <TooltipProvider>
           <GoogleAnalytics />
+          <ModernLoader />
           <CustomCursor />
           <Router />
         </TooltipProvider>

@@ -849,4 +849,11 @@
 - [x] Retirer <PageLoader /> de App.tsx
 - [x] Retirer l'import PageLoader
 - [x] Tester le site (plus de loading screen !)
+- [x] Push GitHub
+
+## Création loader dynamique moderne et edgy
+- [x] Créer le composant ModernLoader avec animations
+- [x] Design : gradient animé, particules, effet glitch, hexagone rotatif
+- [x] Intégrer dans App.tsx
+- [x] Tester l'affichage et les animations (fonctionne parfaitement)
 - [ ] Push GitHub

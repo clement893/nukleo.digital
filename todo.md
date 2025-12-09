@@ -1181,5 +1181,12 @@
 - [x] Analyser le contexte de la conversation pour détecter l'émotion appropriée (regex matching)
 - [x] Afficher l'avatar correspondant à l'émotion détectée
 - [x] Ajouter des transitions fluides entre les émotions (transition-all duration-300)
+- [x] Créer un checkpoint
+- [x] Push GitHub
+
+## Améliorer animations des avatars LEO
+- [x] Ajouter des animations CSS spécifiques pour chaque émotion (bounce, shake, glow, etc.)
+- [x] Créer des animations au hover pour l'interactivité (glow effect)
+- [x] Optimiser les transitions entre émotions (duration-300)
 - [ ] Créer un checkpoint
 - [ ] Push GitHub

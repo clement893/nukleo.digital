@@ -429,7 +429,9 @@ export default function Leo() {
                   <img 
                     src={getAvatarSrc(index === messages.length - 1 ? currentEmotion : 'default')} 
                     alt="Leo" 
-                    className="w-12 h-12 object-contain animate-pulse-subtle transition-all duration-300"
+                    className={`w-12 h-12 object-contain transition-all duration-300 ${
+                      index === messages.length - 1 ? `avatar-${currentEmotion}` : 'avatar-default'
+                    }`}
                   />
                 </div>
               )}
@@ -472,7 +474,7 @@ export default function Leo() {
                 <img 
                   src={getAvatarSrc('thinking')} 
                   alt="Leo" 
-                  className="w-12 h-12 object-contain animate-pulse-subtle transition-all duration-300"
+                  className="w-12 h-12 object-contain avatar-thinking transition-all duration-300"
                 />
               </div>
               <div className="flex flex-col items-start">
@@ -495,7 +497,7 @@ export default function Leo() {
                 <img 
                   src={getAvatarSrc(currentEmotion)} 
                   alt="Leo" 
-                  className="w-12 h-12 object-contain animate-pulse-subtle transition-all duration-300"
+                  className={`w-12 h-12 object-contain transition-all duration-300 avatar-${currentEmotion}`}
                 />
               </div>
               <div className="flex flex-col items-start max-w-[70%]">

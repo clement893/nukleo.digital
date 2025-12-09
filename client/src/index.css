@@ -484,4 +484,69 @@
       filter: drop-shadow(0 0 12px rgba(139, 92, 246, 0.6)) drop-shadow(0 0 24px rgba(236, 72, 153, 0.5));
     }
   }
+
+  /* Animations for LEO avatar emotions */
+  @keyframes avatar-happy {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.1) rotate(-5deg); }
+    75% { transform: scale(1.1) rotate(5deg); }
+  }
+
+  @keyframes avatar-thinking {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-4px) rotate(3deg); }
+  }
+
+  @keyframes avatar-surprised {
+    0%, 100% { transform: scale(1); }
+    10% { transform: scale(1.2); }
+    20% { transform: scale(0.95); }
+    30% { transform: scale(1.1); }
+  }
+
+  @keyframes avatar-confused {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-8deg); }
+    75% { transform: rotate(8deg); }
+  }
+
+  @keyframes avatar-excited {
+    0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
+    25% { transform: translateY(-8px) scale(1.15) rotate(-10deg); }
+    50% { transform: translateY(-4px) scale(1.1) rotate(0deg); }
+    75% { transform: translateY(-8px) scale(1.15) rotate(10deg); }
+  }
+
+  @keyframes avatar-glow {
+    0%, 100% {
+      filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.5)) drop-shadow(0 0 20px rgba(236, 72, 153, 0.4));
+    }
+    50% {
+      filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.8)) drop-shadow(0 0 30px rgba(236, 72, 153, 0.6));
+    }
+  }
+
+  .avatar-happy {
+    animation: avatar-happy 1.5s ease-in-out infinite, avatar-glow 2s ease-in-out infinite;
+  }
+
+  .avatar-thinking {
+    animation: avatar-thinking 2s ease-in-out infinite, avatar-glow 3s ease-in-out infinite;
+  }
+
+  .avatar-surprised {
+    animation: avatar-surprised 0.6s ease-out, avatar-glow 1.5s ease-in-out infinite;
+  }
+
+  .avatar-confused {
+    animation: avatar-confused 1.5s ease-in-out infinite, avatar-glow 2.5s ease-in-out infinite;
+  }
+
+  .avatar-excited {
+    animation: avatar-excited 1s ease-in-out infinite, avatar-glow 1.5s ease-in-out infinite;
+  }
+
+  .avatar-default {
+    animation: pulse-subtle 3s ease-in-out infinite;
+  }
 }

@@ -1,28 +1,34 @@
-import { Layers, BarChart3, Globe } from 'lucide-react';
+import { Cpu, Compass, Sparkles } from 'lucide-react';
 import { Link } from 'wouter';
 
 export default function TrinitySection() {
-  const services = [
+  const departments = [
     {
       number: '01',
-      icon: Layers,
-      title: 'AI Strategy & Marketing',
-      description: 'Transform your business vision into actionable AI strategies that drive growth, enhance customer experiences, and position you as a market leader.',
-      link: '/services/ai-strategy-marketing',
+      icon: Cpu,
+      name: 'Lab',
+      title: 'The AI Lab',
+      subtitle: 'Technology Foundation',
+      description: 'Building the robust and flexible technological foundation for AI integration. From intelligent data platforms to custom AI agents and intelligent process automation.',
+      link: '/lab',
     },
     {
       number: '02',
-      icon: BarChart3,
-      title: 'Digital Platforms',
-      description: 'Build intelligent, scalable platforms that transform how you operate, engage customers, and deliver value in the AI era.',
-      link: '/services/digital-platforms',
+      icon: Compass,
+      name: 'Bureau',
+      title: 'The Strategic Bureau',
+      subtitle: 'Transformation Orchestration',
+      description: 'Defining strategy, driving transformation, and measuring AI impact. From maturity audits to agentic transformation strategy and AI governance.',
+      link: '/bureau',
     },
     {
       number: '03',
-      icon: Globe,
-      title: 'Intelligent Operations',
-      description: 'Optimize your operations with AI-powered automation and intelligence that drives efficiency, reduces costs, and scales with your growth.',
-      link: '/services/intelligent-operations',
+      icon: Sparkles,
+      name: 'Studio',
+      title: 'The Creative Studio',
+      subtitle: 'Augmented Content & Experiences',
+      description: 'Using AI to create brand experiences and content at unparalleled scale and relevance. From augmented content creation to agentic marketing campaigns.',
+      link: '/studio',
     },
   ];
 
@@ -44,10 +50,10 @@ export default function TrinitySection() {
           </p>
         </div>
 
-        {/* Services Grid */}
+        {/* Departments Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 border-l border-black/10">
-          {services.map((service, index) => {
-            const Icon = service.icon;
+          {departments.map((dept, index) => {
+            const Icon = dept.icon;
             return (
               <div
                 key={index}
@@ -59,10 +65,15 @@ export default function TrinitySection() {
                 </div>
 
                 <div>
-                  {/* Number */}
-                  <span className="font-mono text-sm mb-8 block opacity-50">
-                    {service.number}
-                  </span>
+                  {/* Number & Name */}
+                  <div className="flex items-center gap-3 mb-8">
+                    <span className="font-mono text-sm opacity-50">
+                      {dept.number}
+                    </span>
+                    <span className="text-sm font-bold tracking-wider opacity-50">
+                      {dept.name.toUpperCase()}
+                    </span>
+                  </div>
 
                   {/* Icon Badge */}
                   <div className="w-16 h-16 border border-black/20 group-hover:border-white/20 rounded-full flex items-center justify-center mb-12 transition-colors">
@@ -70,22 +81,27 @@ export default function TrinitySection() {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-4xl font-heading font-bold mb-6 text-white">
-                    {service.title}
+                  <h3 className="text-4xl font-heading font-bold mb-2 text-white">
+                    {dept.title}
                   </h3>
+                  
+                  {/* Subtitle */}
+                  <p className="text-lg font-medium mb-6 text-accent">
+                    {dept.subtitle}
+                  </p>
 
                   {/* Description */}
                   <p className="text-lg opacity-60 leading-relaxed mb-12 group-hover:opacity-80">
-                    {service.description}
+                    {dept.description}
                   </p>
                 </div>
 
                 {/* Link */}
                 <Link 
-                  href={service.link}
+                  href={dept.link}
                   className="inline-flex items-center font-bold text-lg group-hover:translate-x-2 transition-transform relative z-10"
                 >
-                  Explore
+                  Explore {dept.name}
                 </Link>
               </div>
             );

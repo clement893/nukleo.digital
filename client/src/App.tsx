@@ -32,6 +32,9 @@ import Clients from "./pages/Clients";
 import StartProject from "./pages/StartProject";
 import MediaCenter from "./pages/MediaCenter";
 import ArtsCulture from "./pages/ArtsCulture";
+import Lab from "./pages/Lab";
+import Bureau from "./pages/Bureau";
+import Studio from "./pages/Studio";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 
 function Router() {
@@ -64,6 +67,9 @@ function Router() {
       <Route path={"/cookies"} component={Cookies} />
       <Route path={"/testimonials"} component={Testimonials} />
       <Route path={"/arts-culture"} component={ArtsCulture} />
+      <Route path={"/lab"} component={Lab} />
+      <Route path={"/bureau"} component={Bureau} />
+      <Route path={"/studio"} component={Studio} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
       </Switch>

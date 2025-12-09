@@ -802,4 +802,14 @@
 - [x] Réduire l'opacité du grain de 0.55 à 0.50 (-5%)
 - [x] Améliorer le contraste des labels (white/75 → white/90 + font-medium)
 - [x] Améliorer le contraste des placeholders (white/40 → white/50)
+- [x] Push GitHub
+
+## Restructuration Trinity - 3 Départements
+- [x] Mettre à jour la section Trinity sur Home.tsx avec les 3 départements
+  - Lab: The AI Lab - Technology Foundation
+  - Bureau: The Strategic Bureau - Transformation Orchestration  
+  - Studio: The Creative Studio - Augmented Content & Experiences
+- [x] Créer les pages dédiées Lab.tsx, Bureau.tsx, Studio.tsx
+- [x] Ajouter les routes dans App.tsx
+- [x] Tester l'affichage et la navigation
 - [ ] Push GitHub

@@ -1149,5 +1149,13 @@
 - [x] Implémenter effet de typing progressif (lettre par lettre, 30ms/char)
 - [x] Ajouter des pauses réalistes pendant la frappe
 - [x] Afficher le texte de LEO progressivement avec curseur clignotant
+- [x] Créer un checkpoint
+- [x] Push GitHub
+
+## Implémenter sauvegarde automatique des conversations LEO
+- [x] Sauvegarder les messages dans localStorage à chaque nouveau message
+- [x] Charger l'historique depuis localStorage au démarrage
+- [x] Ajouter un bouton "New Chat" pour effacer l'historique
+- [x] Gérer la limite de taille du localStorage (via try/catch)
 - [ ] Créer un checkpoint
 - [ ] Push GitHub

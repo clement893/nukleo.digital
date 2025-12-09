@@ -13,18 +13,32 @@ interface Message {
 }
 
 export default function Leo() {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      role: 'assistant',
-      content: "Hi! 👋 I'm Leo, Nukleo's AI assistant.",
-      timestamp: new Date(),
-    },
-    {
-      role: 'assistant',
-      content: "I'm here to help architect your AI transformation. To begin, what should I call you?",
-      timestamp: new Date(),
-    },
-  ]);
+  // Load messages from localStorage on mount
+  const loadMessages = (): Message[] => {
+    try {
+      const saved = localStorage.getItem('leo-chat-history');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        // Convert timestamp strings back to Date objects
+        return parsed.map((msg: any) => ({
+          ...msg,
+          timestamp: new Date(msg.timestamp),
+        }));
+      }
+    } catch (error) {
+      console.error('Error loading chat history:', error);
+    }
+    // Return default welcome message if no history
+    return [
+      {
+        role: 'assistant',
+        content: "I'm here to help architect your AI transformation. To begin, what should I call you?",
+        timestamp: new Date(),
+      },
+    ];
+  };
+
+  const [messages, setMessages] = useState<Message[]>(loadMessages);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
@@ -44,6 +58,15 @@ export default function Leo() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  // Save messages to localStorage whenever they change
+  useEffect(() => {
+    try {
+      localStorage.setItem('leo-chat-history', JSON.stringify(messages));
+    } catch (error) {
+      console.error('Error saving chat history:', error);
+    }
+  }, [messages]);
+
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
@@ -51,6 +74,22 @@ export default function Leo() {
   const handleSuggestionClick = (suggestion: string) => {
     setInput(suggestion);
     setShowSuggestions(false);
+  };
+
+  const handleNewChat = () => {
+    const defaultMessages: Message[] = [
+      {
+        role: 'assistant',
+        content: "I'm here to help architect your AI transformation. To begin, what should I call you?",
+        timestamp: new Date(),
+      },
+    ];
+    setMessages(defaultMessages);
+    setShowSuggestions(true);
+    setInput('');
+    setIsLoading(false);
+    setIsTyping(false);
+    setTypingText('');
   };
 
   const handleSend = async () => {
@@ -136,6 +175,13 @@ export default function Leo() {
 
             {/* Right side */}
             <div className="flex items-center gap-4">
+              <Button
+                onClick={handleNewChat}
+                variant="outline"
+                className="bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white"
+              >
+                New Chat
+              </Button>
               <Button
                 className="rounded-full bg-white text-purple-900 hover:bg-white/90 font-bold px-6"
               >

@@ -1203,5 +1203,13 @@
 - [x] Réutiliser la logique de chat de la page /leo (avatars émotionnels, typing effect, localStorage)
 - [x] Ajouter le widget en bas à droite de la page d'accueil
 - [x] Ajouter des animations d'apparition et de fermeture (slide-in, hover effects)
+- [x] Créer un checkpoint
+- [x] Push GitHub (déjà dans le checkpoint)
+
+## Ajouter badge de notification sur LEO widget
+- [x] Créer un badge de notification avec compteur (badge rouge avec "1")
+- [x] Afficher automatiquement un message d'accueil après 5 secondes (bulle avec avatar)
+- [x] Le badge disparaît quand l'utilisateur ouvre le chat ou ferme la bulle
+- [x] Sauvegarder l'état dans localStorage pour ne pas réafficher le badge
 - [ ] Créer un checkpoint
 - [ ] Push GitHub

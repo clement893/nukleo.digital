@@ -15,6 +15,7 @@ export default function LeoChatWidget() {
   const [isTyping, setIsTyping] = useState(false);
   const [typingText, setTypingText] = useState('');
   const [currentEmotion, setCurrentEmotion] = useState<'happy' | 'thinking' | 'surprised' | 'confused' | 'excited'>('happy');
+  const [showBadge, setShowBadge] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatMutation = trpc.leo.chat.useMutation();
 
@@ -24,6 +25,16 @@ export default function LeoChatWidget() {
       const saved = localStorage.getItem('leo_widget_messages');
       if (saved) {
         setMessages(JSON.parse(saved));
+      }
+      
+      // Vérifier si le badge a déjà été affiché
+      const badgeShown = localStorage.getItem('leo_badge_shown');
+      if (!badgeShown) {
+        // Afficher le badge après 5 secondes
+        const timer = setTimeout(() => {
+          setShowBadge(true);
+        }, 5000);
+        return () => clearTimeout(timer);
       }
     } catch (e) {
       console.error('Failed to load messages:', e);
@@ -130,18 +141,58 @@ export default function LeoChatWidget() {
     <>
       {/* Bouton flottant */}
       {!isOpen && (
-        <button
-          onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-50 w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 via-pink-500 to-cyan-400 shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center group"
-          aria-label="Chat with LEO"
-        >
-          <img
-            src="/leo-avatar-happy.png"
-            alt="LEO"
-            className="w-12 h-12 rounded-full animate-pulse-subtle"
-          />
-          <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
-        </button>
+        <div className="fixed bottom-6 right-6 z-50">
+          <button
+            onClick={() => {
+              setIsOpen(true);
+              setShowBadge(false);
+              localStorage.setItem('leo_badge_shown', 'true');
+            }}
+            className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 via-pink-500 to-cyan-400 shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center group"
+            aria-label="Chat with LEO"
+          >
+            <img
+              src="/leo-avatar-happy.png"
+              alt="LEO"
+              className="w-12 h-12 rounded-full animate-pulse-subtle"
+            />
+            <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
+            
+            {/* Badge de notification */}
+            {showBadge && (
+              <div className="absolute -top-2 -left-2 bg-red-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center animate-bounce">
+                1
+              </div>
+            )}
+          </button>
+          
+          {/* Message d'accueil */}
+          {showBadge && (
+            <div className="absolute bottom-20 right-0 bg-white text-gray-800 rounded-2xl shadow-2xl p-4 max-w-[280px] animate-in slide-in-from-bottom-4 duration-300">
+              <div className="flex items-start gap-3">
+                <img
+                  src="/leo-avatar-happy.png"
+                  alt="LEO"
+                  className="w-10 h-10 rounded-full flex-shrink-0"
+                />
+                <div>
+                  <p className="font-bold text-sm mb-1">👋 Hi! I'm LEO</p>
+                  <p className="text-xs text-gray-600">Need help with AI transformation? I'm here to assist you!</p>
+                </div>
+                <button
+                  onClick={() => {
+                    setShowBadge(false);
+                    localStorage.setItem('leo_badge_shown', 'true');
+                  }}
+                  className="text-gray-400 hover:text-gray-600 transition-colors"
+                  aria-label="Close notification"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
       )}
 
       {/* Fenêtre de chat */}

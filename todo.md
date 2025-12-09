@@ -1134,5 +1134,13 @@
 - [x] Créer une animation de pulsation douce
 - [x] Ajouter un effet de glow subtil (drop-shadow violet-rose)
 - [x] Appliquer l'animation à l'avatar dans Leo.tsx
+- [x] Créer un checkpoint
+- [x] Push GitHub
+
+## Ajouter suggestions de questions cliquables pour LEO
+- [x] Créer une liste de suggestions pertinentes (4 questions AI/business)
+- [x] Afficher les suggestions au début de la conversation
+- [x] Rendre les suggestions cliquables (boutons avec hover effects)
+- [x] Masquer les suggestions après la première interaction
 - [ ] Créer un checkpoint
 - [ ] Push GitHub

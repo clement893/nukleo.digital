@@ -27,8 +27,16 @@ export default function Leo() {
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatMutation = trpc.leo.chat.useMutation();
+
+  const suggestions = [
+    "How can AI transform my business operations?",
+    "What's the ROI timeline for AI implementation?",
+    "Help me build an AI strategy roadmap",
+    "What are the best AI use cases for my industry?",
+  ];
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -37,6 +45,11 @@ export default function Leo() {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  const handleSuggestionClick = (suggestion: string) => {
+    setInput(suggestion);
+    setShowSuggestions(false);
+  };
 
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
@@ -50,6 +63,7 @@ export default function Leo() {
     setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
+    setShowSuggestions(false);
 
     try {
       const response = await chatMutation.mutateAsync({
@@ -208,6 +222,26 @@ export default function Leo() {
                     <div className="w-2 h-2 rounded-full bg-white/60 animate-bounce" style={{ animationDelay: '300ms' }} />
                   </div>
                 </div>
+              </div>
+            </div>
+          )}
+
+          {/* Suggestions */}
+          {showSuggestions && messages.length === 2 && (
+            <div className="mt-8 space-y-4">
+              <p className="text-sm text-white/60 text-center">Or choose a topic to get started:</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {suggestions.map((suggestion, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleSuggestionClick(suggestion)}
+                    className="px-6 py-4 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all text-left text-white/80 hover:text-white text-sm group"
+                  >
+                    <span className="block group-hover:translate-x-1 transition-transform">
+                      {suggestion}
+                    </span>
+                  </button>
+                ))}
               </div>
             </div>
           )}

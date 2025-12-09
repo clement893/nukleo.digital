@@ -1,5 +1,5 @@
 import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/NotFound";
+import NotFound404 from "@/pages/NotFound404";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import CustomCursor from "./components/CustomCursor";
@@ -76,8 +76,8 @@ function Router() {
       <Route path={"/lab"} component={Lab} />
       <Route path={"/bureau"} component={Bureau} />
       <Route path={"/studio"} component={Studio} />
-      <Route path={"/404"} component={NotFound} />
-      <Route component={NotFound} />
+      <Route path={"/404"} component={NotFound404} />
+      <Route component={NotFound404} />
       </Switch>
     </>
   );

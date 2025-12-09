@@ -1065,5 +1065,13 @@
 - [x] Retirer le numéro de téléphone
 - [x] Ajouter l'email hello@nukleo.com
 - [x] Tester les liens
+- [x] Créer un checkpoint
+- [x] Push GitHub
+
+## Créer une page 404 personnalisée
+- [x] Créer le composant NotFound404.tsx avec design Nukleo
+- [x] Ajouter les liens de navigation utiles (Home, Expertise, Projects, Contact)
+- [x] Intégrer dans App.tsx comme route par défaut
+- [x] Tester la page 404
 - [ ] Créer un checkpoint
 - [ ] Push GitHub

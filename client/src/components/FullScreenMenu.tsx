@@ -14,14 +14,13 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
   const { playHover, playClick } = useSound();
   
   const navItems = [
-    { number: '01', label: 'Home', path: '/' },
-    { number: '02', label: 'Expertise', path: '/expertise' },
-    { number: '03', label: 'Projects', path: '/projects' },
-    { number: '04', label: 'About', path: '/about' },
-    { number: '05', label: 'Resources', path: '/resources' },
-    { number: '06', label: 'FAQ', path: '/faq' },
-    { number: '07', label: 'Contact', path: '/contact' },
-    { number: '08', label: 'Arts & Culture', path: '/arts-culture' },
+    { number: '01', label: 'Expertise', path: '/expertise' },
+    { number: '02', label: 'Projects', path: '/projects' },
+    { number: '03', label: 'About', path: '/about' },
+    { number: '04', label: 'Resources', path: '/resources' },
+    { number: '05', label: 'FAQ', path: '/faq' },
+    { number: '06', label: 'Contact', path: '/contact' },
+    { number: '07', label: 'Arts & Culture', path: '/arts-culture' },
   ];
 
   useEffect(() => {

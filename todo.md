@@ -1019,4 +1019,10 @@
 - [x] Traduire StrategicBureau.tsx en anglais
 - [x] Traduire CreativeStudio.tsx en anglais
 - [x] Tester les pages
+- [x] Push GitHub
+
+## Retirer "Home" du menu de navigation
+- [x] Retirer "Home" du menu Header
+- [x] Vérifier que le logo reste cliquable vers /
+- [x] Tester la navigation
 - [ ] Push GitHub

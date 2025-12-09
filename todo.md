@@ -1211,5 +1211,15 @@
 - [x] Afficher automatiquement un message d'accueil après 5 secondes (bulle avec avatar)
 - [x] Le badge disparaît quand l'utilisateur ouvre le chat ou ferme la bulle
 - [x] Sauvegarder l'état dans localStorage pour ne pas réafficher le badge
+- [x] Créer un checkpoint
+- [x] Push GitHub (déjà dans le checkpoint)
+
+## Créer les pages manquantes
+- [x] Créer la page /clients avec logos et études de cas (déjà existante)
+- [x] Créer la page /media pour presse et actualités
+- [x] Créer la page /privacy-policy (politique de confidentialité)
+- [x] Créer la page /terms-of-service (conditions d'utilisation)
+- [x] Créer la page /cookie-policy (politique des cookies)
+- [x] Ajouter les routes dans App.tsx
 - [ ] Créer un checkpoint
 - [ ] Push GitHub

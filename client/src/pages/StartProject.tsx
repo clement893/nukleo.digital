@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { trpc } from '@/lib/trpc';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
@@ -22,30 +23,31 @@ export default function StartProject() {
     description: '',
   });
   const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+
+  const submitProject = trpc.startProject.submit.useMutation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setLoading(false);
-    setSubmitted(true);
-    
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({
-        name: '',
-        email: '',
-        company: '',
-        projectType: '',
-        budget: '',
-        description: '',
-      });
-    }, 3000);
+    try {
+      await submitProject.mutateAsync(formData);
+      setSubmitted(true);
+      
+      // Reset form after 3 seconds
+      setTimeout(() => {
+        setSubmitted(false);
+        setFormData({
+          name: '',
+          email: '',
+          company: '',
+          projectType: '',
+          budget: '',
+          description: '',
+        });
+      }, 3000);
+    } catch (error) {
+      console.error('Failed to submit project:', error);
+    }
   };
 
   const handleChange = (field: string, value: string) => {
@@ -194,10 +196,10 @@ export default function StartProject() {
                 {/* Submit Button */}
                 <Button
                   type="submit"
-                  disabled={loading}
+                  disabled={submitProject.isPending}
                   className="w-full bg-gradient-to-r from-accent to-pink-500 hover:from-accent/90 hover:to-pink-500/90 text-white font-semibold py-6 text-lg group"
                 >
-                  {loading ? (
+                  {submitProject.isPending ? (
                     'Sending...'
                   ) : (
                     <>

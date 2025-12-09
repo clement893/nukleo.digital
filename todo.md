@@ -1080,5 +1080,14 @@
 - [x] Rendre le lien LinkedIn cliquable dans Contact.tsx (déjà fonctionnel dans Footer)
 - [x] Rediriger "Join the Leaders" vers /start-project dans HeroSection.tsx
 - [x] Tester les liens
+- [x] Créer un checkpoint
+- [x] Push GitHub
+
+## Configurer SendGrid pour formulaire Start Project
+- [x] Vérifier la configuration SendGrid existante
+- [x] Créer le helper d'envoi d'emails avec SendGrid (déjà existant)
+- [x] Implémenter l'envoi à clement@nukleo.com (notification admin)
+- [x] Implémenter l'envoi au client (confirmation)
+- [x] Tester l'envoi d'emails (tests vitest passés)
 - [ ] Créer un checkpoint
 - [ ] Push GitHub

@@ -1127,5 +1127,12 @@
 - [x] Corriger la couleur du logo (blanc avec brightness-0 invert)
 - [x] Créer un avatar cute pour LEO
 - [x] Intégrer l'avatar dans la page
+- [x] Créer un checkpoint
+- [x] Push GitHub
+
+## Ajouter animation subtile à l'avatar LEO
+- [x] Créer une animation de pulsation douce
+- [x] Ajouter un effet de glow subtil (drop-shadow violet-rose)
+- [x] Appliquer l'animation à l'avatar dans Leo.tsx
 - [ ] Créer un checkpoint
 - [ ] Push GitHub

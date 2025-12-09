@@ -154,7 +154,7 @@ export default function Leo() {
                   <img 
                     src="/leo-avatar.png" 
                     alt="Leo" 
-                    className="w-12 h-12 object-contain"
+                    className="w-12 h-12 object-contain animate-pulse-subtle"
                   />
                 </div>
               )}
@@ -196,7 +196,7 @@ export default function Leo() {
                 <img 
                   src="/leo-avatar.png" 
                   alt="Leo" 
-                  className="w-12 h-12 object-contain"
+                  className="w-12 h-12 object-contain animate-pulse-subtle"
                 />
               </div>
               <div className="flex flex-col items-start">

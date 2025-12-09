@@ -856,4 +856,10 @@
 - [x] Design : gradient animé, particules, effet glitch, hexagone rotatif
 - [x] Intégrer dans App.tsx
 - [x] Tester l'affichage et les animations (fonctionne parfaitement)
+- [x] Push GitHub
+
+## Mise à jour contenu Arts & Culture
+- [x] Récupérer le contenu de https://nukleo.com/en/art
+- [x] Mettre à jour la page ArtsCulture.tsx avec le vrai contenu
+- [x] Tester l'affichage (page fonctionne correctement)
 - [ ] Push GitHub

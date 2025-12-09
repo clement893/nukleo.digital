@@ -143,12 +143,14 @@ export default function Projects() {
                     </div>
                   </div>
 
-                  <Button
-                    variant="ghost"
-                    className="text-accent hover:text-accent/80 p-0 h-auto font-medium group/btn"
-                  >
-                    View Case Study
-                  </Button>
+                  <a href="/contact">
+                    <Button
+                      variant="ghost"
+                      className="text-accent hover:text-accent/80 p-0 h-auto font-medium group/btn"
+                    >
+                      View Case Study
+                    </Button>
+                  </a>
                 </div>
               </div>
             ))}
@@ -169,12 +171,14 @@ export default function Projects() {
               Let's discuss how we can architect your AI-powered future.
             </p>
 
-            <Button
-              size="lg"
-              className="rounded-full text-lg px-10 py-8 bg-white text-purple-900 hover:bg-white/90 transition-all duration-500 font-bold tracking-wider shimmer"
-            >
-              Start Your Transformation
-            </Button>
+            <a href="/start-project">
+              <Button
+                size="lg"
+                className="rounded-full text-lg px-10 py-8 bg-white text-purple-900 hover:bg-white/90 transition-all duration-500 font-bold tracking-wider shimmer"
+              >
+                Start Your Transformation
+              </Button>
+            </a>
           </div>
         </div>
       </section>

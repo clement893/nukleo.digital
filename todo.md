@@ -1223,3 +1223,12 @@
 - [x] Ajouter les routes dans App.tsx
 - [ ] Créer un checkpoint
 - [ ] Push GitHub
+
+## Connecter tous les CTA vides
+- [x] Auditer toutes les pages pour identifier les liens vides (href="#", href="", onClick vide)
+- [x] Connecter les CTA sur la page d'accueil (Home) - Déjà connectés
+- [x] Connecter les CTA sur les pages de services (AI Lab, Strategic Bureau, Creative Studio) - Déjà connectés
+- [x] Connecter les CTA sur les autres pages (Projects, MediaCenter, CTASection)
+- [x] Vérifier que tous les boutons "Learn More", "Explore", "Get Started" pointent vers des destinations valides
+- [ ] Créer un checkpoint
+- [ ] Push GitHub

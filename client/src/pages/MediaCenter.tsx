@@ -12,19 +12,19 @@ export default function MediaCenter() {
       date: '2024-12-01',
       title: 'Nukleo Digital Launches Revolutionary Agentic AI Platform',
       excerpt: 'New platform enables enterprises to deploy autonomous AI agents that transform business operations.',
-      link: '#',
+      link: '/contact',
     },
     {
       date: '2024-11-15',
       title: 'Nukleo Digital Secures $10M Series A Funding',
       excerpt: 'Investment will accelerate AI strategy consulting services and expand global reach.',
-      link: '#',
+      link: '/contact',
     },
     {
       date: '2024-10-20',
       title: 'Partnership with Leading Healthcare Provider Announced',
       excerpt: 'Collaboration aims to revolutionize patient care through intelligent AI integration.',
-      link: '#',
+      link: '/contact',
     },
   ];
 
@@ -33,19 +33,19 @@ export default function MediaCenter() {
       outlet: 'TechCrunch',
       title: 'How Nukleo Digital is Redefining AI Strategy for Enterprises',
       date: '2024-11-28',
-      link: '#',
+      link: '/contact',
     },
     {
       outlet: 'Forbes',
       title: 'The Future of Agentic AI: An Interview with Nukleo Digital',
       date: '2024-11-10',
-      link: '#',
+      link: '/contact',
     },
     {
       outlet: 'VentureBeat',
       title: 'Nukleo Digital\'s Approach to Intelligent Operations',
       date: '2024-10-25',
-      link: '#',
+      link: '/contact',
     },
   ];
 

@@ -226,14 +226,13 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
             </a>
           </div>
           <div className="flex gap-6">
-            <a href="#" className="text-white/60 text-sm hover:text-white transition-colors">
+            <a 
+              href="https://www.linkedin.com/company/nukleo-group" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-white/60 text-sm hover:text-white transition-colors"
+            >
               LinkedIn
-            </a>
-            <a href="#" className="text-white/60 text-sm hover:text-white transition-colors">
-              Twitter
-            </a>
-            <a href="#" className="text-white/60 text-sm hover:text-white transition-colors">
-              Instagram
             </a>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { Linkedin, Twitter, Github, Mail } from 'lucide-react';
+import { Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
@@ -47,14 +47,13 @@ export default function Footer() {
               Architects of your AI future. We transform your marketing, platforms, and operations to help you thrive in the age of artificial intelligence.
             </p>
             <div className="flex items-center gap-4">
-              <a href="#" className="text-white/60 hover:text-white transition-colors">
+              <a 
+                href="https://www.linkedin.com/company/nukleo-group" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-white/60 hover:text-white transition-colors"
+              >
                 <Linkedin className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-white/60 hover:text-white transition-colors">
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a href="#" className="text-white/60 hover:text-white transition-colors">
-                <Github className="w-5 h-5" />
               </a>
             </div>
           </div>

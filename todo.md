@@ -1030,4 +1030,12 @@
 ## Ajouter "Talk to Leo" au menu
 - [x] Ajouter "Talk to Leo" dans le menu de navigation
 - [x] Tester le menu
+- [x] Push GitHub
+
+## Ajouter LinkedIn Nukleo + employés
+- [x] Ajouter LinkedIn de Nukleo Group dans le footer
+- [x] Ajouter LinkedIn de Nukleo Group dans le menu
+- [x] Créer/mettre à jour la page About avec les 15 employés
+- [x] Ajouter les liens LinkedIn de chaque employé à côté de leur bio
+- [x] Tester la page About et les liens
 - [ ] Push GitHub

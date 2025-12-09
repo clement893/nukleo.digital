@@ -1,96 +1,112 @@
 import PageLayout from "@/components/PageLayout";
 import SEO from '@/components/SEO';
+import { Linkedin } from 'lucide-react';
 
 const teamMembers = [
   {
     name: "Clément",
     role: "FOUNDER & CEO",
     image: "/team/Clement.webp",
-    description: "Clément is the core of our team. He connects every part of a project with atomic precision."
+    description: "Clément is the core of our team. He connects every part of a project with atomic precision.",
+    linkedin: "https://www.linkedin.com/in/clement-roy/"
   },
   {
     name: "Alexei",
     role: "DIRECTOR OF WEB SERVICES",
     image: "/team/Alexei.webp",
-    description: "With his strong background in data analysis, Alexei contributes to all your projects with expertise."
+    description: "With his strong background in data analysis, Alexei contributes to all your projects with expertise.",
+    linkedin: "https://www.linkedin.com/in/alexei-bissonnette-9aa38a23a/"
   },
   {
     name: "Antoine",
     role: "CHIEF FINANCIAL OFFICER (CFO)",
     image: "/team/Antoine.webp",
-    description: "Trust Antoine to find the most effective solution to make your experience as efficient as possible."
-  },
-  {
-    name: "Séverine",
-    role: "EXECUTIVE ASSISTANT",
-    image: "/team/Severine.webp",
-    description: "Dedicated and altruistic, Séverine ensures smooth operations and exceptional support."
-  },
-  {
-    name: "Omar",
-    role: "MARKETING, COMMUNICATIONS AND DATA LEAD",
-    image: "/team/Omar.webp",
-    description: "Combining a solid background in marketing with advanced skills in data management."
-  },
-  {
-    name: "Timothé",
-    role: "DEVELOPER",
-    image: "/team/Timothe.webp",
-    description: "Timothé ensures the rigorous functionality of every project with precision."
-  },
-  {
-    name: "Hind",
-    role: "AI DEVELOPER",
-    image: "/team/Hind.webp",
-    description: "Hind specializes in developing artificial intelligence solutions that automate and optimize processes."
-  },
-  {
-    name: "Sarah",
-    role: "WEB DEVELOPER",
-    image: "/team/Sarah.webp",
-    description: "Sarah's passion for web development drives her to create exceptional digital experiences."
-  },
-  {
-    name: "Meriem",
-    role: "DATA ANALYST",
-    image: "/team/Meriem.webp",
-    description: "Organized and proactive, Meriem ensures every message stays consistent as Marketing Coordinator."
-  },
-  {
-    name: "Camille",
-    role: "GRAPHIC DESIGNER",
-    image: "/team/Camille.webp",
-    description: "Creative since childhood, Camille brings visual concepts to life with artistic precision."
-  },
-  {
-    name: "Maxime",
-    role: "MARKETING & COMMUNICATIONS COORDINATOR",
-    image: "/team/Maxime.webp",
-    description: "Maxime coordinates marketing strategies and communications to amplify your brand presence."
-  },
-  {
-    name: "Jean-François",
-    role: "DEVELOPER",
-    image: "/team/Jean-Francois.webp",
-    description: "A full-stack developer combining creativity and precision, Jean-François enjoys turning concepts into functional solutions."
+    description: "Trust Antoine to find the most effective solution to make your experience as efficient as possible.",
+    linkedin: "https://www.linkedin.com/in/antoine-doray-55b77b192/"
   },
   {
     name: "Margaux",
     role: "TEAM MEMBER",
     image: "/team/Margaux.webp",
-    description: "Margaux contributes her expertise to drive projects forward with dedication."
+    description: "Margaux contributes her expertise to drive projects forward with dedication.",
+    linkedin: "https://www.linkedin.com/in/margaux-goethals-8407a5128/"
   },
   {
-    name: "Marie-Claire",
-    role: "UX DESIGNER",
-    image: "https://via.placeholder.com/400x400/8B5CF6/FFFFFF?text=MC",
-    description: "Curious and attentive, Marie-Claire crafts user experiences that delight and engage."
+    name: "Camille",
+    role: "GRAPHIC DESIGNER",
+    image: "/team/Camille.webp",
+    description: "Creative since childhood, Camille brings visual concepts to life with artistic precision.",
+    linkedin: "https://www.linkedin.com/in/camillegauthier226/"
+  },
+  {
+    name: "Timothé",
+    role: "DEVELOPER",
+    image: "/team/Timothe.webp",
+    description: "Timothé ensures the rigorous functionality of every project with precision.",
+    linkedin: "https://www.linkedin.com/in/timothe-lac/"
+  },
+  {
+    name: "Sarah",
+    role: "WEB DEVELOPER",
+    image: "/team/Sarah.webp",
+    description: "Sarah's passion for web development drives her to create exceptional digital experiences.",
+    linkedin: "https://www.linkedin.com/in/sarah-katerji/"
+  },
+  {
+    name: "Séverine",
+    role: "EXECUTIVE ASSISTANT",
+    image: "/team/Severine.webp",
+    description: "Dedicated and altruistic, Séverine ensures smooth operations and exceptional support.",
+    linkedin: "https://www.linkedin.com/in/s%C3%A9verine-dimambro/"
+  },
+  {
+    name: "Maxime",
+    role: "MARKETING & COMMUNICATIONS COORDINATOR",
+    image: "/team/Maxime.webp",
+    description: "Maxime coordinates marketing strategies and communications to amplify your brand presence.",
+    linkedin: "https://www.linkedin.com/in/maxime-besnier/"
+  },
+  {
+    name: "Meriem",
+    role: "DATA ANALYST",
+    image: "/team/Meriem.webp",
+    description: "Organized and proactive, Meriem ensures every message stays consistent as Marketing Coordinator.",
+    linkedin: "https://www.linkedin.com/in/meriem-kouidri16/"
+  },
+  {
+    name: "Jean-François",
+    role: "DEVELOPER",
+    image: "/team/Jean-Francois.webp",
+    description: "A full-stack developer combining creativity and precision, Jean-François enjoys turning concepts into functional solutions.",
+    linkedin: "https://www.linkedin.com/in/jeffldev/"
+  },
+  {
+    name: "Hind",
+    role: "AI DEVELOPER",
+    image: "/team/Hind.webp",
+    description: "Hind specializes in developing artificial intelligence solutions that automate and optimize processes.",
+    linkedin: "https://www.linkedin.com/in/hind-djebien-767288195/"
+  },
+  {
+    name: "Omar",
+    role: "MARKETING, COMMUNICATIONS AND DATA LEAD",
+    image: "/team/Omar.webp",
+    description: "Combining a solid background in marketing with advanced skills in data management.",
+    linkedin: "https://www.linkedin.com/in/omarhamdi/"
   },
   {
     name: "Ricardo",
     role: "DEVELOPER",
     image: "https://via.placeholder.com/400x400/8B5CF6/FFFFFF?text=R",
-    description: "Driven by rigor and curiosity, Ricardo is a versatile developer who turns ideas into reality."
+    description: "Driven by rigor and curiosity, Ricardo is a versatile developer who turns ideas into reality.",
+    linkedin: "https://www.linkedin.com/in/ricardo-wierzynski/"
+  },
+  {
+    name: "Marie-Claire",
+    role: "UX DESIGNER",
+    image: "https://via.placeholder.com/400x400/8B5CF6/FFFFFF?text=MC",
+    description: "Curious and attentive, Marie-Claire crafts user experiences that delight and engage.",
+    linkedin: "https://www.linkedin.com/in/marieclairelajeunesse/"
   }
 ];
 
@@ -158,7 +174,7 @@ export default function About() {
             {teamMembers.map((member, index) => (
               <div 
                 key={index}
-                className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300"
+                className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 group"
               >
                 <div className="aspect-square rounded-xl overflow-hidden mb-4">
                   <img 
@@ -170,7 +186,18 @@ export default function About() {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-1">{member.name}</h3>
+                <div className="flex items-start justify-between mb-1">
+                  <h3 className="text-xl font-bold text-white">{member.name}</h3>
+                  <a 
+                    href={member.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-violet-400 hover:text-white transition-colors"
+                    aria-label={`${member.name}'s LinkedIn profile`}
+                  >
+                    <Linkedin className="w-5 h-5" />
+                  </a>
+                </div>
                 <p className="text-fuchsia-400 text-sm font-semibold mb-3 uppercase tracking-wide">{member.role}</p>
                 <p className="text-gray-400 text-sm leading-relaxed">{member.description}</p>
               </div>

@@ -159,7 +159,7 @@ export default function Bureau() {
                 </div>
 
                 <div className="relative pl-16">
-                  <div className="absolute left-0 top-0 w-12 h-12 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center">
+                  <div className="absolute left-0 top-0 w-12 h-12 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center">
                     <span className="text-white font-bold">4</span>
                   </div>
                   <div>

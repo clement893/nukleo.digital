@@ -95,7 +95,7 @@ export default function Studio() {
                       key={index}
                       className="p-10 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm hover:border-accent/50 transition-all duration-300 group"
                     >
-                      <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-accent/20 to-pink-600/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                      <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-accent/20 to-blue-600/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                         <Icon className="w-8 h-8 text-accent" />
                       </div>
                       
@@ -211,7 +211,7 @@ export default function Studio() {
 
         {/* CTA Section */}
         <section className="py-32 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-950 via-pink-950 to-purple-950 opacity-50" />
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-950 via-blue-950 to-purple-950 opacity-50" />
           
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto text-center">

@@ -981,4 +981,12 @@
 - [x] Mettre tout le titre en italic
 - [x] Retirer toutes les animations du titre (fade-in, slide-in)
 - [x] Tester le nouveau design
+- [x] Push GitHub
+
+## Retirer le rose/pink des pages services
+- [x] Identifier tous les éléments roses dans Strategic Bureau
+- [x] Identifier tous les éléments roses dans AI Lab
+- [x] Identifier tous les éléments roses dans Creative Studio
+- [x] Remplacer par des couleurs cohérentes (purple/blue)
+- [x] Tester les pages services
 - [ ] Push GitHub

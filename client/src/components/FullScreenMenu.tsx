@@ -20,7 +20,8 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
     { number: '04', label: 'Resources', path: '/resources' },
     { number: '05', label: 'FAQ', path: '/faq' },
     { number: '06', label: 'Contact', path: '/contact' },
-    { number: '07', label: 'Arts & Culture', path: '/arts-culture' },
+    { number: '07', label: 'Talk to Leo', path: '/talk-to-leo' },
+    { number: '08', label: 'Arts & Culture', path: '/arts-culture' },
   ];
 
   useEffect(() => {

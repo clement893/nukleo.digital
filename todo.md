@@ -1025,4 +1025,9 @@
 - [x] Retirer "Home" du menu Header
 - [x] Vérifier que le logo reste cliquable vers /
 - [x] Tester la navigation
+- [x] Push GitHub
+
+## Ajouter "Talk to Leo" au menu
+- [x] Ajouter "Talk to Leo" dans le menu de navigation
+- [x] Tester le menu
 - [ ] Push GitHub

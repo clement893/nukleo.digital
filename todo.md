@@ -791,4 +791,15 @@
 ## Correction logo LoadingScreen
 - [x] Remplacer le logo sur l'écran de chargement par le logo Nukleo 2025
 - [x] Tester l'affichage au chargement
+- [x] Push GitHub
+
+## Correction logo LoadingScreen (encore)
+- [x] Vérifier pourquoi l'ancien logo apparaît encore (fichier était en WebP, pas PNG)
+- [x] Corriger le cache ou le chemin du logo (changé en .webp)
+- [x] Tester le loading screen
+
+## Réduction grain et ajustement contraste Contact
+- [x] Réduire l'opacité du grain de 0.55 à 0.50 (-5%)
+- [x] Améliorer le contraste des labels (white/75 → white/90 + font-medium)
+- [x] Améliorer le contraste des placeholders (white/40 → white/50)
 - [ ] Push GitHub

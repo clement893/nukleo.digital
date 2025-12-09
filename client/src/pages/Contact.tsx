@@ -100,7 +100,7 @@ export default function Contact() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-white/75 text-sm mb-2">
+                    <label className="block text-white/90 text-sm mb-2 font-medium">
                       First Name
                     </label>
                     <input
@@ -109,12 +109,12 @@ export default function Contact() {
                       value={formData.firstName}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/40 focus:outline-none focus:border-accent transition-colors"
+                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/50 focus:outline-none focus:border-accent transition-colors"
                       placeholder="John"
                     />
                   </div>
                   <div>
-                    <label className="block text-white/75 text-sm mb-2">
+                    <label className="block text-white/90 text-sm mb-2 font-medium">
                       Last Name
                     </label>
                     <input
@@ -123,14 +123,14 @@ export default function Contact() {
                       value={formData.lastName}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/40 focus:outline-none focus:border-accent transition-colors"
+                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/50 focus:outline-none focus:border-accent transition-colors"
                       placeholder="Doe"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-white/75 text-sm mb-2">
+                  <label className="block text-white/90 text-sm mb-2 font-medium">
                     Email
                   </label>
                   <input
@@ -139,13 +139,13 @@ export default function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/40 focus:outline-none focus:border-accent transition-colors"
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/50 focus:outline-none focus:border-accent transition-colors"
                     placeholder="john@company.com"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-white/75 text-sm mb-2">
+                  <label className="block text-white/90 text-sm mb-2 font-medium">
                     Company
                   </label>
                   <input
@@ -154,13 +154,13 @@ export default function Contact() {
                     value={formData.company}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/40 focus:outline-none focus:border-accent transition-colors"
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/50 focus:outline-none focus:border-accent transition-colors"
                     placeholder="Your Company"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-white/75 text-sm mb-2">
+                  <label className="block text-white/90 text-sm mb-2 font-medium">
                     Message
                   </label>
                   <textarea
@@ -169,7 +169,7 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/40 focus:outline-none focus:border-accent transition-colors resize-none"
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/50 focus:outline-none focus:border-accent transition-colors resize-none"
                     placeholder="Tell us about your project..."
                   />
                 </div>

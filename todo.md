@@ -1165,5 +1165,13 @@
 - [x] Analyser le contexte de la conversation pour déterminer la catégorie (keywords matching)
 - [x] Afficher des suggestions pertinentes basées sur le sujet en cours
 - [x] Mettre à jour les suggestions après chaque réponse de LEO
+- [x] Créer un checkpoint
+- [x] Push GitHub
+
+## Créer mode Expert pour LEO
+- [x] Créer des catégories de suggestions Expert (techniques et approfondies)
+- [x] Ajouter un toggle Expert/Standard dans le header (🔬 Expert / 💡 Standard)
+- [x] Sauvegarder la préférence dans localStorage
+- [x] Adapter les suggestions selon le mode sélectionné
 - [ ] Créer un checkpoint
 - [ ] Push GitHub

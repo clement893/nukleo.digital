@@ -103,13 +103,89 @@ export default function Leo() {
     return suggestionCategories.initial;
   };
 
-  const [suggestions, setSuggestions] = useState<string[]>(getContextualSuggestions());
+  // Load expert mode preference from localStorage
+  const [isExpertMode, setIsExpertMode] = useState<boolean>(() => {
+    try {
+      const saved = localStorage.getItem('leo-expert-mode');
+      return saved === 'true';
+    } catch {
+      return false;
+    }
+  });
 
-  // Update suggestions when messages change
+  // Save expert mode preference
   useEffect(() => {
-    const newSuggestions = getContextualSuggestions();
+    try {
+      localStorage.setItem('leo-expert-mode', String(isExpertMode));
+    } catch (error) {
+      console.error('Error saving expert mode preference:', error);
+    }
+  }, [isExpertMode]);
+
+  // Expert mode suggestion categories (more technical)
+  const expertSuggestionCategories = {
+    initial: [
+      "What's your approach to MLOps and model governance?",
+      "How do you architect multi-agent AI systems?",
+      "What's your framework for AI risk assessment and mitigation?",
+      "How do you handle data drift and model retraining pipelines?",
+    ],
+    strategy: [
+      "What's your methodology for AI maturity assessment?",
+      "How do you design federated learning architectures?",
+      "What's your approach to AI ethics frameworks and bias detection?",
+      "How do you structure center of excellence for AI?",
+    ],
+    implementation: [
+      "What's your tech stack for real-time inference at scale?",
+      "How do you implement model versioning and A/B testing?",
+      "What's your approach to feature engineering automation?",
+      "How do you handle model explainability and interpretability?",
+    ],
+    roi: [
+      "How do you calculate TCO for AI infrastructure?",
+      "What metrics do you use for model performance vs business KPIs?",
+      "How do you quantify the value of data quality improvements?",
+      "What's your framework for AI investment portfolio optimization?",
+    ],
+    team: [
+      "What's your hiring framework for ML engineers vs data scientists?",
+      "How do you structure AI teams (centralized vs embedded)?",
+      "What certifications and skills matter for AI practitioners?",
+      "How do you build internal AI communities of practice?",
+    ],
+  };
+
+  const getContextualSuggestionsForMode = (expertMode: boolean): string[] => {
+    const categories = expertMode ? expertSuggestionCategories : suggestionCategories;
+    
+    if (messages.length <= 1) return categories.initial;
+
+    const lastMessages = messages.slice(-3).map(m => m.content.toLowerCase()).join(' ');
+
+    if (lastMessages.includes('roi') || lastMessages.includes('cost') || lastMessages.includes('budget') || lastMessages.includes('value')) {
+      return categories.roi;
+    }
+    if (lastMessages.includes('team') || lastMessages.includes('hire') || lastMessages.includes('skill') || lastMessages.includes('people')) {
+      return categories.team;
+    }
+    if (lastMessages.includes('implement') || lastMessages.includes('build') || lastMessages.includes('develop') || lastMessages.includes('technology')) {
+      return categories.implementation;
+    }
+    if (lastMessages.includes('strategy') || lastMessages.includes('plan') || lastMessages.includes('roadmap') || lastMessages.includes('approach')) {
+      return categories.strategy;
+    }
+
+    return categories.initial;
+  };
+
+  const [suggestions, setSuggestions] = useState<string[]>(getContextualSuggestionsForMode(isExpertMode));
+
+  // Update suggestions when messages or expert mode change
+  useEffect(() => {
+    const newSuggestions = getContextualSuggestionsForMode(isExpertMode);
     setSuggestions(newSuggestions);
-  }, [messages]);
+  }, [messages, isExpertMode]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -236,6 +312,16 @@ export default function Leo() {
 
             {/* Right side */}
             <div className="flex items-center gap-4">
+              {/* Expert Mode Toggle */}
+              <button
+                onClick={() => setIsExpertMode(!isExpertMode)}
+                className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all"
+                title={isExpertMode ? "Switch to Standard Mode" : "Switch to Expert Mode"}
+              >
+                <span className="text-xs font-medium">
+                  {isExpertMode ? '🔬 Expert' : '💡 Standard'}
+                </span>
+              </button>
               <Button
                 onClick={handleNewChat}
                 variant="outline"

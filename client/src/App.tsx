@@ -5,7 +5,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import CustomCursor from "./components/CustomCursor";
 import PageLoader from "./components/PageLoader";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import LoadingScreen from "./components/LoadingScreen";
+
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
 import About from "./pages/About";
@@ -84,7 +84,7 @@ function App() {
         <TooltipProvider>
           <GoogleAnalytics />
           <PageLoader />
-          <LoadingScreen />
+
           <CustomCursor />
           <Router />
         </TooltipProvider>

@@ -812,4 +812,18 @@
 - [x] Créer les pages dédiées Lab.tsx, Bureau.tsx, Studio.tsx
 - [x] Ajouter les routes dans App.tsx
 - [x] Tester l'affichage et la navigation
+- [x] Push GitHub
+
+## Correction définitive logo LoadingScreen
+- [x] Vérifier l'existence du fichier nukleo-logo-2025.webp dans public/
+- [x] Copier le bon logo depuis /home/ubuntu/upload/ (fichier était en WebP, pas PNG)
+- [x] Ajouter un cache-buster au nom du fichier (nukleo-logo-2025-v2.webp)
+- [x] Mettre à jour LoadingScreen.tsx avec le nouveau chemin
+- [ ] Tester le loading screen
+- [ ] Push GitHub
+
+## Suppression du loading screen
+- [x] Retirer l'import LoadingScreen de App.tsx
+- [x] Retirer le composant <LoadingScreen /> de App.tsx
+- [x] Tester le chargement du site
 - [ ] Push GitHub

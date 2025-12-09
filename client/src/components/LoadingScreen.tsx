@@ -37,7 +37,7 @@ export default function LoadingScreen() {
         {/* Logo with pulse animation */}
         <div className="relative">
           <img 
-            src="/nukleo-logo-2025.webp" 
+            src="/nukleo-logo-2025-v2.webp" 
             alt="Nukleo" 
             width="400"
             height="100"

@@ -955,4 +955,10 @@
 - [x] Retirer les hexagones du Hero
 - [x] Modifier le slogan : "Choose Intelligence" uniquement (retirer "Choose Nukleo")
 - [x] Tester le Hero minimaliste
+- [x] Push GitHub
+
+## Optimisation mobile
+- [x] Optimiser le Hero pour mobile (tailles de texte, espacements)
+- [x] Optimiser les sections pour mobile (responsive, touch targets)
+- [x] Tester sur mobile
 - [ ] Push GitHub

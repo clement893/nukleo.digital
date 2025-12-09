@@ -23,19 +23,19 @@ export default function HeroSection() {
   }, []);
   
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-20">
+    <section className="relative min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6">
 
-      <div className="container relative z-10">
+      <div className="container relative z-10 px-4 sm:px-6">
         <div className="flex items-center justify-center">
           {/* Main Title */}
           <div className="max-w-5xl">
             {/* Main Heading with Stagger Animations */}
             <h1 
               className="
-                text-[4rem] sm:text-[6rem] md:text-[8rem] lg:text-[10rem] 
+                text-[3rem] sm:text-[4rem] md:text-[6rem] lg:text-[8rem] xl:text-[10rem] 
                 text-white 
-                mb-12
-                leading-[0.85]
+                mb-8 sm:mb-12
+                leading-[0.9] sm:leading-[0.85]
                 font-black
                 hover-distort
                 transition-transform duration-75 ease-out
@@ -66,14 +66,14 @@ export default function HeroSection() {
 
             {/* Slogan */}
             <p 
-              className="text-3xl md:text-4xl text-white font-semibold mb-6 max-w-2xl animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-500 tracking-tight"
+              className="text-2xl sm:text-3xl md:text-4xl text-white font-semibold mb-4 sm:mb-6 max-w-2xl animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-500 tracking-tight"
             >
               Choose Intelligence
             </p>
 
             {/* Subtitle */}
             <p 
-              className="text-xl text-white/70 leading-relaxed font-light mb-12 max-w-2xl animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-700"
+              className="text-lg sm:text-xl text-white/70 leading-relaxed font-light mb-8 sm:mb-12 max-w-2xl animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-700"
             >
               Serving startups, SMBs, enterprises, and governments worldwide
             </p>
@@ -85,7 +85,7 @@ export default function HeroSection() {
               <Button
                 onClick={playClick}
                 onMouseEnter={playHover}
-                className="relative rounded-full text-lg px-12 py-8 bg-white text-purple-900 hover:bg-white transition-all duration-500 font-bold tracking-wider hover:scale-110 hover:shadow-2xl hover:shadow-purple-500/50 group overflow-hidden"
+                className="relative rounded-full text-base sm:text-lg px-8 sm:px-12 py-6 sm:py-8 bg-white text-purple-900 hover:bg-white transition-all duration-500 font-bold tracking-wider hover:scale-110 hover:shadow-2xl hover:shadow-purple-500/50 group overflow-hidden w-full sm:w-auto"
               >
                 <span className="relative z-10">Start Your Transformation</span>
                 {/* Shimmer effect */}

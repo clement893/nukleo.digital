@@ -28,20 +28,20 @@ export default function CapabilitiesSection() {
   ];
 
   return (
-    <section id="capabilities" className="py-24 lg:py-32">
+    <section id="capabilities" className="py-16 sm:py-20 lg:py-32">
       <div className="container">
         {/* Section Header */}
-        <div className="mb-16">
+        <div className="mb-10 sm:mb-12 lg:mb-16">
           <span className="font-mono text-accent text-sm mb-8 block tracking-widest">
             Capabilities
           </span>
 
-          <h2 className="text-white mb-6">
+          <h2 className="text-white mb-4 sm:mb-6 text-4xl sm:text-5xl lg:text-6xl">
             AI-Native<br />
             Infrastructure
           </h2>
 
-          <p className="text-white/75 text-lg lg:text-xl leading-relaxed max-w-3xl">
+          <p className="text-white/75 text-base sm:text-lg lg:text-xl leading-relaxed max-w-3xl">
             We don't just build websites or apps. We engineer intelligent ecosystems where every digital touchpoint is powered by autonomous agents.
           </p>
         </div>

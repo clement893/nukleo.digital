@@ -23,29 +23,29 @@ export default function WhoWeServeSection() {
   ];
 
   return (
-    <section className="relative py-32">
+    <section className="relative py-16 sm:py-20 lg:py-32">
       <div className="container relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
           <p className="text-sm font-mono tracking-widest text-purple-400 mb-4">
             Champions of Smaller Organizations
           </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
             Who We Serve
           </h2>
-          <p className="text-xl text-white/70 max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg lg:text-xl text-white/70 max-w-3xl mx-auto px-4">
             We're here to help <span className="text-white font-bold">EVERYONE</span> transform. Big tech has AI—now it's your turn. We bring enterprise-grade AI to startups, SMBs, and non-profits who refuse to be left behind.
           </p>
         </div>
 
         {/* Segments Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {segments.map((segment, index) => {
             const Icon = segment.icon;
             return (
               <div
                 key={index}
-                className="group relative p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-500/50 transition-all duration-500"
+                className="group relative p-6 sm:p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-500/50 transition-all duration-500"
               >
                 {/* Icon Badge */}
                 <div className="w-16 h-16 rounded-full bg-purple-900/30 backdrop-blur-sm border border-white/10 flex items-center justify-center mb-6 group-hover:bg-purple-500/20 group-hover:border-purple-500/50 transition-all duration-500">

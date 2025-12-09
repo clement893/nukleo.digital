@@ -933,4 +933,15 @@
 - [x] Ajuster le fond pour être plus proche de Arts & Culture
 - [x] Réduire l'intensité des couleurs (retirer les pics)
 - [x] Tester le nouveau Hero
+- [x] Push GitHub
+
+## Réduire intensité du rouge bordeaux
+- [x] Réduire l'intensité du rouge bordeaux dans le gradient
+- [x] Tester le nouveau gradient
+- [ ] Push GitHub
+
+## Ajouter particules + hexagones au Hero (style Arts & Culture)
+- [x] Ajouter les particules flottantes au Hero
+- [x] Ajouter les hexagones rotatifs au Hero
+- [x] Tester le Hero funky
 - [ ] Push GitHub

@@ -27,7 +27,7 @@ export default function Home() {
         <div className="relative">
           {/* Unified Background - Style Arts & Culture */}
           <div className="absolute inset-0" style={{
-            background: `linear-gradient(135deg, rgb(107,23,22) 0%, rgb(40,60,120) 50%, rgb(107,23,22) 100%)`
+            background: `linear-gradient(135deg, rgb(60,15,15) 0%, rgb(40,60,120) 50%, rgb(60,15,15) 100%)`
           }}>
             {/* Grid Pattern */}
             <div 

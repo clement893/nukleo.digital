@@ -8,7 +8,15 @@ export default function HeroSection() {
   const { playHover, playClick } = useSound();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   
-
+  // Generate floating particles
+  const particles = Array.from({ length: 30 }, (_, i) => ({
+    id: i,
+    size: Math.random() * 4 + 2,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    duration: Math.random() * 20 + 10,
+    delay: Math.random() * 5,
+  }));
   
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -24,6 +32,98 @@ export default function HeroSection() {
   
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20">
+      {/* Floating Particles */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {particles.map((particle) => (
+          <div
+            key={particle.id}
+            className="absolute rounded-full bg-white/20"
+            style={{
+              width: `${particle.size}px`,
+              height: `${particle.size}px`,
+              left: `${particle.x}%`,
+              top: `${particle.y}%`,
+              animation: `float ${particle.duration}s infinite ease-in-out`,
+              animationDelay: `${particle.delay}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Rotating Hexagons */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div 
+          className="absolute w-64 h-64 opacity-10"
+          style={{
+            top: '20%',
+            left: '10%',
+            animation: 'spin 20s linear infinite',
+          }}
+        >
+          <svg viewBox="0 0 100 100" className="w-full h-full">
+            <polygon
+              points="50 1 95 25 95 75 50 99 5 75 5 25"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1"
+              className="text-purple-400"
+            />
+            <polygon
+              points="50 10 85 30 85 70 50 90 15 70 15 30"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1"
+              className="text-blue-400"
+            />
+          </svg>
+        </div>
+
+        <div 
+          className="absolute w-48 h-48 opacity-10"
+          style={{
+            top: '60%',
+            right: '15%',
+            animation: 'spin 15s linear infinite reverse',
+          }}
+        >
+          <svg viewBox="0 0 100 100" className="w-full h-full">
+            <polygon
+              points="50 1 95 25 95 75 50 99 5 75 5 25"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1"
+              className="text-cyan-400"
+            />
+          </svg>
+        </div>
+
+        <div 
+          className="absolute w-56 h-56 opacity-10"
+          style={{
+            bottom: '10%',
+            left: '50%',
+            animation: 'spin 25s linear infinite',
+          }}
+        >
+          <svg viewBox="0 0 100 100" className="w-full h-full">
+            <polygon
+              points="50 1 95 25 95 75 50 99 5 75 5 25"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1"
+              className="text-purple-400"
+            />
+            <polygon
+              points="50 10 85 30 85 70 50 90 15 70 15 30"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1"
+              className="text-pink-400"
+            />
+          </svg>
+        </div>
+      </div>
+
       <div className="container relative z-10">
         <div className="flex items-center justify-center">
           {/* Main Title */}
@@ -103,13 +203,16 @@ export default function HeroSection() {
           50% { background-position: 100% 50%; }
         }
         
-        @keyframes scan {
-          0% { transform: translateY(-100%); }
-          100% { transform: translateY(100%); }
+        @keyframes float {
+          0%, 100% { transform: translateY(0) translateX(0); }
+          25% { transform: translateY(-20px) translateX(10px); }
+          50% { transform: translateY(-10px) translateX(-10px); }
+          75% { transform: translateY(-30px) translateX(5px); }
         }
         
-        .animate-scan {
-          animation: scan 8s linear infinite;
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
       `}</style>
     </section>

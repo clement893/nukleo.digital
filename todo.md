@@ -1010,4 +1010,13 @@
 - [x] Vérifier la page services actuelle
 - [x] Ajouter le Creative Studio à la liste des services
 - [x] Tester la page services
+- [x] Push GitHub
+
+## Corriger favicon et traduire pages services
+- [x] Mettre à jour le favicon
+- [x] Traduire Bureau.tsx en anglais (déjà en anglais)
+- [x] Traduire AILab.tsx en anglais
+- [x] Traduire StrategicBureau.tsx en anglais
+- [x] Traduire CreativeStudio.tsx en anglais
+- [x] Tester les pages
 - [ ] Push GitHub

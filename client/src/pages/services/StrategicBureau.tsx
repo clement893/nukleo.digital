@@ -33,7 +33,7 @@ export default function StrategicBureauService() {
           <div className="flex flex-wrap gap-4">
             <Link href="/contact">
               <Button size="lg" className="bg-purple-500 hover:bg-purple-600 text-white">
-                Démarrer votre transformation
+                Start Your Transformation
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
@@ -49,39 +49,39 @@ export default function StrategicBureauService() {
       {/* Core Services */}
       <section className="py-20 px-4 bg-black/20">
         <div className="container max-w-6xl">
-          <h2 className="text-4xl font-bold text-white mb-12">Services Stratégiques</h2>
+          <h2 className="text-4xl font-bold text-white mb-12">Strategic Services</h2>
           
           <div className="grid md:grid-cols-2 gap-8">
             {[
               {
                 icon: Target,
                 title: "AI Strategy & Roadmap",
-                description: "Définition de votre vision AI, identification des opportunités à fort impact et construction d'une roadmap de transformation pragmatique et mesurable."
+                description: "Definition of your AI vision, identification of high-impact opportunities, and construction of a pragmatic and measurable transformation roadmap."
               },
               {
                 icon: BarChart3,
                 title: "Business Case & ROI",
-                description: "Analyse approfondie du ROI potentiel, modélisation financière et construction de business cases solides pour sécuriser l'investissement."
+                description: "In-depth ROI analysis, financial modeling, and construction of solid business cases to secure investment."
               },
               {
                 icon: Users,
                 title: "Change Management",
-                description: "Accompagnement de vos équipes dans l'adoption de l'AI, formation, gestion du changement et création d'une culture data-driven."
+                description: "Support for your teams in AI adoption, training, change management, and creation of a data-driven culture."
               },
               {
                 icon: FileCheck,
                 title: "Governance & Compliance",
-                description: "Mise en place de frameworks de gouvernance AI, politiques d'utilisation éthique et conformité réglementaire (GDPR, AI Act)."
+                description: "Implementation of AI governance frameworks, ethical use policies, and regulatory compliance (GDPR, AI Act)."
               },
               {
                 icon: TrendingUp,
                 title: "Performance Tracking",
-                description: "Définition de KPIs pertinents, mise en place de dashboards de suivi et optimisation continue basée sur les données."
+                description: "Definition of relevant KPIs, implementation of tracking dashboards, and continuous data-driven optimization."
               },
               {
                 icon: Shield,
                 title: "Risk Management",
-                description: "Identification et mitigation des risques liés à l'AI (biais, sécurité, dépendance) avec des stratégies de contingence robustes."
+                description: "Identification and mitigation of AI-related risks (bias, security, dependency) with robust contingency strategies."
               }
             ].map((service, index) => (
               <div key={index} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6 hover:bg-white/10 transition-colors">
@@ -99,14 +99,14 @@ export default function StrategicBureauService() {
         <div className="container max-w-6xl">
           <h2 className="text-4xl font-bold text-white mb-6">Framework de Transformation</h2>
           <p className="text-white/70 mb-12 max-w-3xl">
-            Notre méthodologie éprouvée pour orchestrer des transformations AI réussies, de la vision à l'impact.
+            Our proven methodology for orchestrating successful AI transformations, from vision to impact.
           </p>
           
           <div className="grid md:grid-cols-4 gap-6">
             {[
               {
                 phase: "Discover",
-                description: "Audit de maturité AI, identification des opportunités et alignement avec la stratégie business"
+                description: "AI maturity audit, opportunity identification, and alignment with business strategy"
               },
               {
                 phase: "Define",
@@ -232,7 +232,7 @@ export default function StrategicBureauService() {
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/contact">
               <Button size="lg" className="bg-purple-500 hover:bg-purple-600 text-white">
-                Planifier un diagnostic stratégique
+                Schedule a Diagnostic stratégique
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>

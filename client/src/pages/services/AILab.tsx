@@ -34,7 +34,7 @@ export default function AILabService() {
           <div className="flex flex-wrap gap-4">
             <Link href="/contact">
               <Button size="lg" className="bg-cyan-500 hover:bg-cyan-600 text-white">
-                Démarrer un projet
+                Start a Project
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
@@ -50,39 +50,39 @@ export default function AILabService() {
       {/* Core Capabilities */}
       <section className="py-20 px-4 bg-black/20">
         <div className="container max-w-6xl">
-          <h2 className="text-4xl font-bold text-white mb-12">Capacités Techniques</h2>
+          <h2 className="text-4xl font-bold text-white mb-12">Technical Capabilities</h2>
           
           <div className="grid md:grid-cols-2 gap-8">
             {[
               {
                 icon: Brain,
                 title: "AI Agents & Automation",
-                description: "Développement d'agents intelligents autonomes capables d'exécuter des tâches complexes, d'apprendre et de s'adapter à votre environnement métier."
+                description: "Development of autonomous intelligent agents capable of executing complex tasks, learning, and adapting to your business environment."
               },
               {
                 icon: Database,
                 title: "Data Platforms & Pipelines",
-                description: "Architecture et implémentation de plateformes de données modernes avec pipelines ETL/ELT, data lakes et data warehouses optimisés."
+                description: "Architecture and implementation of modern data platforms with ETL/ELT pipelines, data lakes, and optimized data warehouses."
               },
               {
                 icon: Network,
                 title: "API & Integration",
-                description: "Conception et développement d'APIs robustes et d'intégrations système pour connecter vos outils et données de manière fluide."
+                description: "Design and development of robust APIs and system integrations to seamlessly connect your tools and data."
               },
               {
                 icon: Code2,
                 title: "Custom AI Models",
-                description: "Fine-tuning et déploiement de modèles AI personnalisés adaptés à vos cas d'usage spécifiques et vos données propriétaires."
+                description: "Fine-tuning and deployment of custom AI models tailored to your specific use cases and proprietary data."
               },
               {
                 icon: Zap,
                 title: "Performance Optimization",
-                description: "Optimisation des performances, scalabilité et réduction des coûts d'infrastructure pour vos systèmes AI et data."
+                description: "Performance optimization, scalability, and infrastructure cost reduction for your AI and data systems."
               },
               {
                 icon: Shield,
                 title: "Security & Compliance",
-                description: "Implémentation de mesures de sécurité robustes et conformité aux réglementations (GDPR, SOC2, ISO) pour vos systèmes AI."
+                description: "Implementation of robust security measures and regulatory compliance (GDPR, SOC2, ISO) for your AI systems."
               }
             ].map((capability, index) => (
               <div key={index} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6 hover:bg-white/10 transition-colors">
@@ -100,7 +100,7 @@ export default function AILabService() {
         <div className="container max-w-6xl">
           <h2 className="text-4xl font-bold text-white mb-6">Stack Technologique</h2>
           <p className="text-white/70 mb-12 max-w-3xl">
-            Nous utilisons les technologies les plus avancées et éprouvées pour construire des solutions robustes et scalables.
+            We use the most advanced and proven technologies to build robust and scalable solutions.
           </p>
           
           <div className="grid md:grid-cols-3 gap-8">
@@ -155,22 +155,22 @@ export default function AILabService() {
               {
                 step: "02",
                 title: "Proof of Concept",
-                description: "Développement rapide d'un POC pour valider la faisabilité technique et démontrer la valeur avant l'investissement complet."
+                description: "Rapid POC development to validate technical feasibility and demonstrate value before full investment."
               },
               {
                 step: "03",
                 title: "Development & Integration",
-                description: "Développement itératif avec intégration continue dans vos systèmes existants, tests rigoureux et documentation complète."
+                description: "Iterative development with continuous integration into your existing systems, rigorous testing, and complete documentation."
               },
               {
                 step: "04",
                 title: "Deployment & Optimization",
-                description: "Déploiement en production avec monitoring, optimisation des performances et formation de vos équipes techniques."
+                description: "Production deployment with monitoring, performance optimization, and training for your technical teams."
               },
               {
                 step: "05",
                 title: "Support & Evolution",
-                description: "Support technique continu, maintenance proactive et évolution de la solution selon vos besoins changeants."
+                description: "Continuous technical support, proactive maintenance, and solution evolution according to your changing needs."
               }
             ].map((phase, index) => (
               <div key={index} className="flex gap-6 items-start">
@@ -189,10 +189,10 @@ export default function AILabService() {
       <section className="py-20 px-4">
         <div className="container max-w-4xl text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Prêt à construire votre infrastructure AI ?
+            Ready to build your AI infrastructure?
           </h2>
           <p className="text-xl text-white/70 mb-8">
-            Discutons de vos besoins techniques et concevons ensemble la solution adaptée à vos ambitions.
+            Let's discuss your technical needs and design the solution tailored to your ambitions together.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/contact">
@@ -203,7 +203,7 @@ export default function AILabService() {
             </Link>
             <Link href="/projects">
               <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
-                Voir nos réalisations
+                View Our Work
               </Button>
             </Link>
           </div>

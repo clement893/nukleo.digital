@@ -26,20 +26,20 @@ export default function CreativeStudioService() {
           </h1>
           
           <p className="text-xl text-white/80 max-w-3xl mb-8">
-            Nous créons du contenu et des expériences augmentées par l'AI. Du marketing agentique aux 
+            We create AI-augmented content and experiences. Du marketing agentique aux 
             campagnes multicanales intelligentes, nous amplifions votre impact créatif avec la puissance de l'intelligence artificielle.
           </p>
           
           <div className="flex flex-wrap gap-4">
             <Link href="/contact">
               <Button size="lg" className="bg-pink-500 hover:bg-pink-600 text-white">
-                Lancer une campagne
+                Launch a Campaign
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
             <Link href="/studio">
               <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
-                En savoir plus sur le Studio
+                Learn More About the Studio
               </Button>
             </Link>
           </div>
@@ -49,39 +49,39 @@ export default function CreativeStudioService() {
       {/* Core Services */}
       <section className="py-20 px-4 bg-black/20">
         <div className="container max-w-6xl">
-          <h2 className="text-4xl font-bold text-white mb-12">Services Créatifs</h2>
+          <h2 className="text-4xl font-bold text-white mb-12">Creative Services</h2>
           
           <div className="grid md:grid-cols-2 gap-8">
             {[
               {
                 icon: Zap,
                 title: "Agentic Marketing",
-                description: "Déploiement d'agents AI autonomes pour automatiser et optimiser vos campagnes marketing : génération de contenu, A/B testing, personnalisation en temps réel."
+                description: "Deployment of autonomous AI agents to automate and optimize your marketing campaigns: content generation, A/B testing, real-time personalization."
               },
               {
                 icon: MessageSquare,
                 title: "Content Generation",
-                description: "Production de contenu à grande échelle : articles de blog, posts sociaux, newsletters, scripts vidéo, le tout adapté à votre ton et votre audience."
+                description: "Large-scale content production: blog articles, social posts, newsletters, video scripts, all adapted to your tone and audience."
               },
               {
                 icon: Image,
                 title: "Visual Creation",
-                description: "Génération d'images, illustrations et designs avec AI : visuels pour réseaux sociaux, assets marketing, mockups produits et brand assets."
+                description: "AI-powered image, illustration, and design generation: social media visuals, marketing assets, product mockups, and brand assets."
               },
               {
                 icon: Video,
                 title: "Video & Animation",
-                description: "Création de vidéos augmentées par AI : montage automatique, génération de voix-off, sous-titres intelligents et animations personnalisées."
+                description: "AI-augmented video creation: automatic editing, voiceover generation, intelligent subtitles, and personalized animations."
               },
               {
                 icon: Mic,
                 title: "Audio & Voice",
-                description: "Production audio AI : voix-off synthétiques naturelles, podcasts automatisés, traduction vocale et clonage de voix pour le branding."
+                description: "AI audio production: natural synthetic voiceovers, automated podcasts, voice translation, and voice cloning for branding."
               },
               {
                 icon: Globe,
                 title: "Omnichannel Campaigns",
-                description: "Orchestration de campagnes multicanales cohérentes avec personnalisation AI sur web, social, email, SMS et publicité programmatique."
+                description: "Orchestration of cohesive omnichannel campaigns with AI personalization across web, social, email, SMS, and programmatic advertising."
               }
             ].map((service, index) => (
               <div key={index} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6 hover:bg-white/10 transition-colors">
@@ -97,28 +97,28 @@ export default function CreativeStudioService() {
       {/* Creative Process */}
       <section className="py-20 px-4">
         <div className="container max-w-6xl">
-          <h2 className="text-4xl font-bold text-white mb-6">Processus Créatif Augmenté</h2>
+          <h2 className="text-4xl font-bold text-white mb-6">Augmented Creative Process</h2>
           <p className="text-white/70 mb-12 max-w-3xl">
-            Notre approche hybride combine créativité humaine et puissance de l'AI pour créer du contenu qui résonne et performe.
+            Our hybrid approach combines human creativity and AI power to create content that resonates and performs.
           </p>
           
           <div className="grid md:grid-cols-4 gap-6">
             {[
               {
                 phase: "Ideate",
-                description: "Brainstorming augmenté par AI, analyse de tendances et génération d'idées créatives à grande échelle"
+                description: "AI-augmented brainstorming, trend analysis, and large-scale creative idea generation"
               },
               {
                 phase: "Create",
-                description: "Production de contenu multiformat avec outils AI, itération rapide et variations personnalisées"
+                description: "Multi-format content production with AI tools, rapid iteration, and personalized variations"
               },
               {
                 phase: "Optimize",
-                description: "A/B testing automatisé, analyse de performance en temps réel et optimisation continue"
+                description: "Automated A/B testing, real-time performance analysis, and continuous optimization"
               },
               {
                 phase: "Scale",
-                description: "Déploiement multicanal, adaptation locale et amplification intelligente du contenu performant"
+                description: "Omnichannel deployment, local adaptation, and intelligent amplification of high-performing content"
               }
             ].map((phase, index) => (
               <div key={index} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6">
@@ -133,12 +133,12 @@ export default function CreativeStudioService() {
       {/* Tools & Platforms */}
       <section className="py-20 px-4 bg-black/20">
         <div className="container max-w-6xl">
-          <h2 className="text-4xl font-bold text-white mb-12">Outils & Plateformes</h2>
+          <h2 className="text-4xl font-bold text-white mb-12">Tools Outils & Plateformes Platforms</h2>
           
           <div className="grid md:grid-cols-3 gap-8">
             <div className="space-y-4">
               <Palette className="w-12 h-12 text-pink-400" />
-              <h3 className="text-xl font-semibold text-white">Génération de Contenu</h3>
+              <h3 className="text-xl font-semibold text-white">Content Generation</h3>
               <ul className="space-y-2 text-white/70">
                 <li>• GPT-4, Claude, Gemini</li>
                 <li>• Midjourney, DALL-E, Stable Diffusion</li>
@@ -178,28 +178,28 @@ export default function CreativeStudioService() {
       {/* Use Cases */}
       <section className="py-20 px-4">
         <div className="container max-w-6xl">
-          <h2 className="text-4xl font-bold text-white mb-12">Cas d'Usage</h2>
+          <h2 className="text-4xl font-bold text-white mb-12">Use Cases</h2>
           
           <div className="space-y-6">
             {[
               {
                 title: "Content Marketing at Scale",
-                description: "Génération automatisée de centaines d'articles de blog SEO-optimisés par mois, adaptés à différentes audiences et personas.",
-                impact: "10x volume de contenu, -70% coûts de production"
+                description: "Automated generation of hundreds of SEO-optimized blog articles per month, adapted to different audiences and personas.",
+                impact: "10x content volume, -70% production costs"
               },
               {
                 title: "Personalized Email Campaigns",
-                description: "Création de campagnes email hyper-personnalisées avec contenu dynamique généré par AI selon le profil et comportement de chaque lead.",
-                impact: "+250% taux d'ouverture, +180% taux de conversion"
+                description: "Creation of hyper-personalized email campaigns with AI-generated dynamic content based on each lead's profile and behavior.",
+                impact: "+250% open rate, +180% conversion rate"
               },
               {
                 title: "Social Media Automation",
-                description: "Agents AI qui créent, programment et optimisent automatiquement vos posts sur tous les réseaux sociaux avec A/B testing continu.",
-                impact: "100% couverture quotidienne, +320% engagement"
+                description: "AI agents that automatically create, schedule, and optimize your posts across all social networks with continuous A/B testing.",
+                impact: "100% daily coverage, +320% engagement"
               },
               {
                 title: "Dynamic Ad Creative",
-                description: "Génération automatique de milliers de variations de créatives publicitaires testées et optimisées en temps réel selon la performance.",
+                description: "Automatic generation of thousands of ad creative variations tested and optimized in real-time based on performance.",
                 impact: "-45% CPA, +190% ROAS"
               }
             ].map((useCase, index) => (
@@ -219,10 +219,10 @@ export default function CreativeStudioService() {
       <section className="py-20 px-4 bg-black/20">
         <div className="container max-w-4xl text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Prêt à amplifier votre impact créatif ?
+            Ready to amplify your creative impact?
           </h2>
           <p className="text-xl text-white/70 mb-8">
-            Discutons de vos objectifs marketing et créons ensemble des campagnes qui performent à l'échelle.
+            Let's discuss your marketing goals and create campaigns that perform at scale together.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/contact">

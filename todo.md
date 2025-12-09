@@ -870,4 +870,11 @@
 - [x] Ajouter des éléments visuels dynamiques (icônes animées, gradients, blur effects)
 - [x] Améliorer le flow de lecture avec sections plus engageantes (stats, cards)
 - [x] Tester le nouveau design (page beaucoup plus dynamique et engageante)
+- [x] Push GitHub
+
+## Traduction anglais + funkybness page Arts & Culture
+- [x] Traduire tout le contenu français en anglais
+- [x] Ajouter des animations funky et audacieuses (rotate, scale, translate)
+- [x] Ajouter des effets visuels créatifs (parallax mouse, scroll effects, bounce)
+- [x] Tester la page en anglais avec effets funky (super dynamique !)
 - [ ] Push GitHub

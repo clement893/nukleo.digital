@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { trpc } from '@/lib/trpc';
+import { useLocation } from 'wouter';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
@@ -11,9 +12,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2, ArrowLeft } from 'lucide-react';
 
 export default function StartProject() {
+  const [, navigate] = useLocation();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -62,6 +64,18 @@ export default function StartProject() {
       <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-blue-500 rounded-full blur-3xl opacity-20 animate-blob animation-delay-4000" />
 
       <div className="container mx-auto px-6 py-24 md:py-32 relative z-10">
+        {/* Back Button */}
+        <div className="max-w-3xl mx-auto mb-8">
+          <Button
+            variant="ghost"
+            onClick={() => navigate('/')}
+            className="text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Home
+          </Button>
+        </div>
+
         {/* Header */}
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">

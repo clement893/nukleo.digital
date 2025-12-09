@@ -1089,5 +1089,11 @@
 - [x] Implémenter l'envoi à clement@nukleo.com (notification admin)
 - [x] Implémenter l'envoi au client (confirmation)
 - [x] Tester l'envoi d'emails (tests vitest passés)
+- [x] Créer un checkpoint
+- [x] Push GitHub
+
+## Ajouter bouton Back sur page Start Project
+- [x] Ajouter un bouton Back/retour en haut de la page
+- [x] Tester la navigation
 - [ ] Créer un checkpoint
 - [ ] Push GitHub

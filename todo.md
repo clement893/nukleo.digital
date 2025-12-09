@@ -1095,5 +1095,37 @@
 ## Ajouter bouton Back sur page Start Project
 - [x] Ajouter un bouton Back/retour en haut de la page
 - [x] Tester la navigation
+- [x] Créer un checkpoint
+- [x] Push GitHub
+
+## Corriger l'envoi d'emails lors de la soumission du formulaire
+- [ ] Tester le formulaire et vérifier les logs
+- [ ] Identifier la cause du problème
+- [ ] Corriger le code
+- [ ] Tester à nouveau l'envoi d'emails
+- [ ] Créer un checkpoint
+- [ ] Push GitHub
+
+## Vérifier et corriger les liens 404 et erreurs
+- [ ] Vérifier les liens de navigation principaux
+- [ ] Vérifier les liens du footer
+- [ ] Vérifier les liens internes des pages
+- [ ] Corriger les liens cassés
+- [ ] Créer un checkpoint
+- [ ] Push GitHub
+
+## Debug: Formulaire Start Project n'envoie pas d'emails
+- [ ] Tester le formulaire et vérifier les logs
+- [ ] Vérifier la configuration SendGrid
+- [ ] Identifier et corriger le problème
+- [ ] Tester à nouveau l'envoi
+- [ ] Créer un checkpoint
+- [ ] Push GitHub
+
+## Corriger logo blanc et créer avatar LEO
+- [x] Vérifier la page /leo
+- [x] Corriger la couleur du logo (blanc avec brightness-0 invert)
+- [x] Créer un avatar cute pour LEO
+- [x] Intégrer l'avatar dans la page
 - [ ] Créer un checkpoint
 - [ ] Push GitHub

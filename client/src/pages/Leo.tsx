@@ -97,7 +97,7 @@ export default function Leo() {
               <img 
                 src="/nukleo-logo.png" 
                 alt="Nukleo" 
-                className="h-8 w-auto cursor-pointer"
+                className="h-8 w-auto cursor-pointer brightness-0 invert"
               />
             </Link>
 
@@ -151,13 +151,11 @@ export default function Leo() {
             >
               {message.role === 'assistant' && (
                 <div className="flex-shrink-0">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[oklch(0.85_0.15_300)] to-[oklch(0.85_0.15_340)] flex items-center justify-center">
-                    <img 
-                      src="/nukleo-logo.png" 
-                      alt="Leo" 
-                      className="w-8 h-8 object-contain"
-                    />
-                  </div>
+                  <img 
+                    src="/leo-avatar.png" 
+                    alt="Leo" 
+                    className="w-12 h-12 object-contain"
+                  />
                 </div>
               )}
 
@@ -195,13 +193,11 @@ export default function Leo() {
           {isLoading && (
             <div className="flex gap-4 justify-start">
               <div className="flex-shrink-0">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[oklch(0.85_0.15_300)] to-[oklch(0.85_0.15_340)] flex items-center justify-center">
-                  <img 
-                    src="/nukleo-logo.png" 
-                    alt="Leo" 
-                    className="w-8 h-8 object-contain"
-                  />
-                </div>
+                <img 
+                  src="/leo-avatar.png" 
+                  alt="Leo" 
+                  className="w-12 h-12 object-contain"
+                />
               </div>
               <div className="flex flex-col items-start">
                 <span className="text-xs text-white/40 uppercase tracking-wider mb-2">LEO</span>

@@ -1273,3 +1273,8 @@
 - [x] Ajouter le lien dans le footer
 - [ ] Créer un checkpoint
 - [ ] Push GitHub
+
+## Traduire la page Agencies en anglais
+- [x] Traduire tous les textes de Agencies.tsx en anglais
+- [ ] Créer un checkpoint
+- [ ] Push GitHub

@@ -19,28 +19,28 @@ export default function Agencies() {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              Votre Équipe Technique
+              Your European Technical Team
               <span className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
-                Européenne Basée au Canada
+                Based in Canada
               </span>
             </h1>
             <p className="text-xl text-white/80 max-w-3xl mx-auto mb-8">
-              Nucleus Stratégie Europe : votre partenaire nearshore premium pour une expansion sans risque et des économies garanties
+              Nucleus Strategy Europe: your premium nearshore partner for risk-free expansion and guaranteed savings
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4 text-white/70 text-sm">
               <span className="flex items-center gap-2">
                 <Globe className="w-4 h-4" />
-                Europe francophone 2025-2030
+                Francophone Europe 2025-2030
               </span>
               <span>•</span>
               <span className="flex items-center gap-2">
                 <Users className="w-4 h-4" />
-                12 employés • 1,2M€ CA
+                12 employees • €1.2M revenue
               </span>
               <span>•</span>
               <span className="flex items-center gap-2">
                 <Award className="w-4 h-4" />
-                3 ans d'expertise
+                3 years of expertise
               </span>
             </div>
           </div>
@@ -49,20 +49,20 @@ export default function Agencies() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             <Card className="p-8 bg-white/5 backdrop-blur-xl border-white/10 text-center">
               <div className="text-4xl font-bold text-cyan-400 mb-2">2 → 32</div>
-              <div className="text-white font-semibold mb-1">Agences partenaires</div>
+              <div className="text-white font-semibold mb-1">Partner Agencies</div>
               <div className="text-white/60 text-sm">2025-2030</div>
             </Card>
             
             <Card className="p-8 bg-white/5 backdrop-blur-xl border-white/10 text-center">
-              <div className="text-4xl font-bold text-purple-400 mb-2">1,9M€</div>
-              <div className="text-white font-semibold mb-1">Chiffre d'affaires</div>
-              <div className="text-white/60 text-sm">Objectif 2030</div>
+              <div className="text-4xl font-bold text-purple-400 mb-2">€1.9M</div>
+              <div className="text-white font-semibold mb-1">Revenue Target</div>
+              <div className="text-white/60 text-sm">2030 Goal</div>
             </Card>
             
             <Card className="p-8 bg-white/5 backdrop-blur-xl border-white/10 text-center">
-              <div className="text-4xl font-bold text-pink-400 mb-2">189M€</div>
-              <div className="text-white font-semibold mb-1">Marché potentiel</div>
-              <div className="text-white/60 text-sm">4 pays cibles</div>
+              <div className="text-4xl font-bold text-pink-400 mb-2">€189M</div>
+              <div className="text-white font-semibold mb-1">Market Potential</div>
+              <div className="text-white/60 text-sm">4 target countries</div>
             </Card>
           </div>
 
@@ -71,25 +71,25 @@ export default function Agencies() {
             <Card className="p-6 bg-white/5 backdrop-blur-xl border-white/10 text-center">
               <Award className="w-8 h-8 text-green-400 mx-auto mb-3" />
               <div className="text-2xl font-bold text-white mb-1">95%</div>
-              <div className="text-white/70 text-sm">Satisfaction garantie</div>
+              <div className="text-white/70 text-sm">Guaranteed satisfaction</div>
             </Card>
             
             <Card className="p-6 bg-white/5 backdrop-blur-xl border-white/10 text-center">
               <Clock className="w-8 h-8 text-blue-400 mx-auto mb-3" />
               <div className="text-2xl font-bold text-white mb-1">98%</div>
-              <div className="text-white/70 text-sm">Respect délais</div>
+              <div className="text-white/70 text-sm">On-time delivery</div>
             </Card>
             
             <Card className="p-6 bg-white/5 backdrop-blur-xl border-white/10 text-center">
               <Shield className="w-8 h-8 text-purple-400 mx-auto mb-3" />
-              <div className="text-2xl font-bold text-white mb-1">1M€</div>
-              <div className="text-white/70 text-sm">Assurance protection</div>
+              <div className="text-2xl font-bold text-white mb-1">€1M</div>
+              <div className="text-white/70 text-sm">Insurance coverage</div>
             </Card>
             
             <Card className="p-6 bg-white/5 backdrop-blur-xl border-white/10 text-center">
               <TrendingUp className="w-8 h-8 text-cyan-400 mx-auto mb-3" />
               <div className="text-2xl font-bold text-white mb-1">725%</div>
-              <div className="text-white/70 text-sm">ROI sur 5 ans</div>
+              <div className="text-white/70 text-sm">5-year ROI</div>
             </Card>
           </div>
         </div>
@@ -100,10 +100,10 @@ export default function Agencies() {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-white mb-4">
-              Pourquoi les Agences Choisissent Nucleus
+              Why Agencies Choose Nucleus
             </h2>
             <p className="text-xl text-white/70">
-              Extension naturelle • Qualité garantie • Économies réelles
+              Natural extension • Guaranteed quality • Real savings
             </p>
           </div>
 
@@ -111,45 +111,45 @@ export default function Agencies() {
             {/* Operational Advantages */}
             <Card className="p-8 bg-white/5 backdrop-blur-xl border-white/10">
               <Zap className="w-12 h-12 text-cyan-400 mb-4" />
-              <h3 className="text-2xl font-bold text-white mb-4">Avantages Opérationnels</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">Operational Advantages</h3>
               
               <div className="space-y-6">
                 <div>
                   <h4 className="text-white font-semibold mb-2 flex items-center gap-2">
                     <CheckCircle2 className="w-5 h-5 text-green-400" />
-                    Flexibilité Totale
+                    Total Flexibility
                   </h4>
                   <ul className="text-white/70 text-sm space-y-1 ml-7">
-                    <li>• Scaling up/down selon projets</li>
-                    <li>• Pas de contraintes RH internes</li>
-                    <li>• Adaptation rapide aux besoins</li>
-                    <li>• Gestion pics de charge optimale</li>
+                    <li>• Scale up/down based on projects</li>
+                    <li>• No internal HR constraints</li>
+                    <li>• Rapid adaptation to needs</li>
+                    <li>• Optimal workload management</li>
                   </ul>
                 </div>
 
                 <div>
                   <h4 className="text-white font-semibold mb-2 flex items-center gap-2">
                     <CheckCircle2 className="w-5 h-5 text-green-400" />
-                    Time-to-Market Accéléré
+                    Accelerated Time-to-Market
                   </h4>
                   <ul className="text-white/70 text-sm space-y-1 ml-7">
-                    <li>• Équipe immédiatement disponible</li>
-                    <li>• Pas de recrutement/formation</li>
-                    <li>• Démarrage projets sous 48h</li>
-                    <li>• Gain : 4-8 semaines vs recrutement</li>
+                    <li>• Team immediately available</li>
+                    <li>• No recruitment/training needed</li>
+                    <li>• Project start within 48h</li>
+                    <li>• Gain: 4-8 weeks vs internal hiring</li>
                   </ul>
                 </div>
 
                 <div>
                   <h4 className="text-white font-semibold mb-2 flex items-center gap-2">
                     <CheckCircle2 className="w-5 h-5 text-green-400" />
-                    Risques Minimisés
+                    Minimized Risks
                   </h4>
                   <ul className="text-white/70 text-sm space-y-1 ml-7">
-                    <li>• Garanties contractuelles uniques</li>
-                    <li>• Assurance responsabilité 1M€</li>
-                    <li>• Pas de risque turnover équipe</li>
-                    <li>• Support technique permanent</li>
+                    <li>• Unique contractual guarantees</li>
+                    <li>• €1M liability insurance</li>
+                    <li>• No team turnover risk</li>
+                    <li>• Permanent technical support</li>
                   </ul>
                 </div>
               </div>
@@ -158,59 +158,59 @@ export default function Agencies() {
             {/* Financial Advantages */}
             <Card className="p-8 bg-white/5 backdrop-blur-xl border-white/10">
               <Euro className="w-12 h-12 text-purple-400 mb-4" />
-              <h3 className="text-2xl font-bold text-white mb-4">Avantages Financiers</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">Financial Advantages</h3>
               
               <div className="space-y-6">
                 <div>
                   <h4 className="text-white font-semibold mb-2 flex items-center gap-2">
                     <CheckCircle2 className="w-5 h-5 text-green-400" />
-                    Économies Directes
+                    Direct Savings
                   </h4>
                   <ul className="text-white/70 text-sm space-y-1 ml-7">
-                    <li>• 30-40% vs développeurs locaux</li>
-                    <li>• Pas de charges sociales</li>
-                    <li>• Pas de formation</li>
+                    <li>• 30-40% vs local developers</li>
+                    <li>• No social charges</li>
+                    <li>• No training costs</li>
                   </ul>
                 </div>
 
                 <div>
                   <h4 className="text-white font-semibold mb-2 flex items-center gap-2">
                     <CheckCircle2 className="w-5 h-5 text-green-400" />
-                    ROI Garanti
+                    Guaranteed ROI
                   </h4>
                   <ul className="text-white/70 text-sm space-y-1 ml-7">
-                    <li>• Minimum 30% contractuel</li>
-                    <li>• Mesure et reporting transparents</li>
+                    <li>• Minimum 30% contractual</li>
+                    <li>• Transparent measurement & reporting</li>
                   </ul>
                 </div>
 
                 <div>
                   <h4 className="text-white font-semibold mb-2 flex items-center gap-2">
                     <CheckCircle2 className="w-5 h-5 text-green-400" />
-                    Coûts Prévisibles
+                    Predictable Costs
                   </h4>
                   <ul className="text-white/70 text-sm space-y-1 ml-7">
-                    <li>• Prix fixes • Pas de dépassements</li>
-                    <li>• Budgets maîtrisés et respectés</li>
+                    <li>• Fixed prices • No overruns</li>
+                    <li>• Controlled & respected budgets</li>
                   </ul>
                 </div>
               </div>
 
               {/* Competitive Advantage Box */}
               <div className="mt-8 p-6 bg-purple-500/10 border border-purple-500/30 rounded-lg">
-                <h4 className="text-white font-semibold mb-4 text-center">Avantage Concurrentiel</h4>
+                <h4 className="text-white font-semibold mb-4 text-center">Competitive Advantage</h4>
                 <div className="grid grid-cols-2 gap-4 text-center">
                   <div>
                     <div className="text-3xl font-bold text-cyan-400">3x</div>
-                    <div className="text-white/70 text-xs">Capacité projets</div>
+                    <div className="text-white/70 text-xs">Project capacity</div>
                   </div>
                   <div>
                     <div className="text-3xl font-bold text-purple-400">40%</div>
-                    <div className="text-white/70 text-xs">Économies</div>
+                    <div className="text-white/70 text-xs">Savings</div>
                   </div>
                   <div>
                     <div className="text-3xl font-bold text-pink-400">0</div>
-                    <div className="text-white/70 text-xs">Risque RH</div>
+                    <div className="text-white/70 text-xs">HR risk</div>
                   </div>
                   <div>
                     <div className="text-3xl font-bold text-green-400">24/7</div>
@@ -225,26 +225,26 @@ export default function Agencies() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <Card className="p-8 bg-white/5 backdrop-blur-xl border-white/10">
               <Sparkles className="w-12 h-12 text-pink-400 mb-4" />
-              <h3 className="text-2xl font-bold text-white mb-4">Qualité & Expertise</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">Quality & Expertise</h3>
               
               <div className="space-y-4">
                 <div>
-                  <h4 className="text-white font-semibold mb-2">Excellence Technique Prouvée</h4>
+                  <h4 className="text-white font-semibold mb-2">Proven Technical Excellence</h4>
                   <ul className="text-white/70 text-sm space-y-1">
-                    <li>• Équipe senior 5+ ans expérience</li>
-                    <li>• 100% satisfaction historique Canada</li>
-                    <li>• 0 projet échoué en 3 ans</li>
-                    <li>• Standards qualité européens</li>
+                    <li>• Senior team 5+ years experience</li>
+                    <li>• 100% satisfaction track record in Canada</li>
+                    <li>• 0 failed projects in 3 years</li>
+                    <li>• European quality standards</li>
                   </ul>
                 </div>
 
                 <div>
-                  <h4 className="text-white font-semibold mb-2">Communication Parfaite</h4>
+                  <h4 className="text-white font-semibold mb-2">Perfect Communication</h4>
                   <ul className="text-white/70 text-sm space-y-1">
-                    <li>• Bilinguisme natif français/anglais</li>
-                    <li>• Compréhension culture business européenne</li>
-                    <li>• Reporting transparent et régulier</li>
-                    <li>• Disponibilité heures ouvrables Europe</li>
+                    <li>• Native French/English bilingualism</li>
+                    <li>• Understanding of European business culture</li>
+                    <li>• Transparent & regular reporting</li>
+                    <li>• Availability during European business hours</li>
                   </ul>
                 </div>
               </div>
@@ -252,27 +252,27 @@ export default function Agencies() {
 
             <Card className="p-8 bg-white/5 backdrop-blur-xl border-white/10">
               <HeartHandshake className="w-12 h-12 text-green-400 mb-4" />
-              <h3 className="text-2xl font-bold text-white mb-4">Modèle de Partenariat</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">Partnership Model</h3>
               
               <div className="space-y-4">
                 <div>
-                  <h4 className="text-white font-semibold mb-2">Extension d'Équipe</h4>
+                  <h4 className="text-white font-semibold mb-2">Team Extension</h4>
                   <p className="text-white/70 text-sm">
-                    Intégration transparente avec vos équipes. Pas de sous-traitance visible pour clients.
+                    Seamless integration with your teams. No visible subcontracting to clients.
                   </p>
                 </div>
 
                 <div>
-                  <h4 className="text-white font-semibold mb-2">Focus sur Votre Cœur de Métier</h4>
+                  <h4 className="text-white font-semibold mb-2">Focus on Your Core Business</h4>
                   <p className="text-white/70 text-sm">
-                    Vous gardez stratégie et relation client. Nous assurons l'exécution technique.
+                    You keep strategy & client relationships. We handle technical execution.
                   </p>
                 </div>
 
                 <div>
-                  <h4 className="text-white font-semibold mb-2">Croissance Accélérée</h4>
+                  <h4 className="text-white font-semibold mb-2">Accelerated Growth</h4>
                   <p className="text-white/70 text-sm">
-                    Capacité projets multipliée par 3. Nouveaux services sans investissement.
+                    Project capacity multiplied by 3. New services without investment.
                   </p>
                 </div>
               </div>
@@ -286,16 +286,16 @@ export default function Agencies() {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-white mb-4">
-              Notre Offre de Services
+              Our Service Offering
             </h2>
             <p className="text-xl text-white/70">
-              Écosystèmes numériques complets pour agences européennes
+              Complete digital ecosystems for European agencies
             </p>
           </div>
 
           {/* 3-Phase Methodology */}
           <Card className="p-8 bg-white/5 backdrop-blur-xl border-white/10 mb-12">
-            <h3 className="text-2xl font-bold text-white mb-6 text-center">Méthodologie 3 Phases</h3>
+            <h3 className="text-2xl font-bold text-white mb-6 text-center">3-Phase Methodology</h3>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center">
@@ -304,10 +304,10 @@ export default function Agencies() {
                 </div>
                 <h4 className="text-white font-semibold mb-2">Understand</h4>
                 <p className="text-white/70 text-sm mb-3">
-                  Analyse approfondie besoins • Audit technique • Architecture optimale
+                  In-depth needs analysis • Technical audit • Optimal architecture
                 </p>
                 <div className="text-white/50 text-xs">
-                  1-2 semaines • Cahier des charges
+                  1-2 weeks • Technical specifications
                 </div>
               </div>
 
@@ -317,10 +317,10 @@ export default function Agencies() {
                 </div>
                 <h4 className="text-white font-semibold mb-2">Activate</h4>
                 <p className="text-white/70 text-sm mb-3">
-                  Développement agile • Tests automatisés • Validation continue
+                  Agile development • Automated testing • Continuous validation
                 </p>
                 <div className="text-white/50 text-xs">
-                  4-12 semaines • Solution fonctionnelle
+                  4-12 weeks • Functional solution
                 </div>
               </div>
 
@@ -330,10 +330,10 @@ export default function Agencies() {
                 </div>
                 <h4 className="text-white font-semibold mb-2">Evolve</h4>
                 <p className="text-white/70 text-sm mb-3">
-                  Formation équipes • Support continu • Optimisations performance
+                  Team training • Ongoing support • Performance optimization
                 </p>
                 <div className="text-white/50 text-xs">
-                  Support continu • Maintenance évolutive
+                  Ongoing support • Evolutionary maintenance
                 </div>
               </div>
             </div>
@@ -343,11 +343,11 @@ export default function Agencies() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card className="p-6 bg-white/5 backdrop-blur-xl border-white/10">
               <Code2 className="w-10 h-10 text-cyan-400 mb-4" />
-              <h3 className="text-xl font-bold text-white mb-3">Développement Web & Applications</h3>
+              <h3 className="text-xl font-bold text-white mb-3">Web & Application Development</h3>
               <ul className="text-white/70 text-sm space-y-2">
-                <li>• Sites web corporate et e-commerce</li>
-                <li>• Applications web sur mesure</li>
-                <li>• Plateformes collaboratives</li>
+                <li>• Corporate & e-commerce websites</li>
+                <li>• Custom web applications</li>
+                <li>• Collaborative platforms</li>
                 <li>• Progressive Web Apps (PWA)</li>
               </ul>
               <div className="mt-4 text-white/50 text-xs">
@@ -357,12 +357,12 @@ export default function Agencies() {
 
             <Card className="p-6 bg-white/5 backdrop-blur-xl border-white/10">
               <Smartphone className="w-10 h-10 text-purple-400 mb-4" />
-              <h3 className="text-xl font-bold text-white mb-3">Applications Mobiles</h3>
+              <h3 className="text-xl font-bold text-white mb-3">Mobile Applications</h3>
               <ul className="text-white/70 text-sm space-y-2">
-                <li>• Apps natives iOS/Android</li>
-                <li>• Applications hybrides</li>
-                <li>• Intégration APIs tierces</li>
-                <li>• Synchronisation cloud</li>
+                <li>• Native iOS/Android apps</li>
+                <li>• Hybrid applications</li>
+                <li>• Third-party API integration</li>
+                <li>• Cloud synchronization</li>
               </ul>
               <div className="mt-4 text-white/50 text-xs">
                 React Native, Flutter, Swift, Kotlin
@@ -388,15 +388,15 @@ export default function Agencies() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
             <Card className="p-4 bg-white/5 backdrop-blur-xl border-white/10 text-center">
               <div className="text-2xl font-bold text-green-400 mb-1">95%</div>
-              <div className="text-white/70 text-sm">Satisfaction min.</div>
+              <div className="text-white/70 text-sm">Min. satisfaction</div>
             </Card>
             <Card className="p-4 bg-white/5 backdrop-blur-xl border-white/10 text-center">
               <div className="text-2xl font-bold text-blue-400 mb-1">98%</div>
-              <div className="text-white/70 text-sm">Respect délais</div>
+              <div className="text-white/70 text-sm">On-time delivery</div>
             </Card>
             <Card className="p-4 bg-white/5 backdrop-blur-xl border-white/10 text-center">
               <div className="text-2xl font-bold text-purple-400 mb-1">24/7</div>
-              <div className="text-white/70 text-sm">Support garanti</div>
+              <div className="text-white/70 text-sm">Guaranteed support</div>
             </Card>
             <Card className="p-4 bg-white/5 backdrop-blur-xl border-white/10 text-center">
               <div className="text-2xl font-bold text-cyan-400 mb-1">100%</div>
@@ -411,32 +411,32 @@ export default function Agencies() {
         <div className="container mx-auto max-w-4xl text-center">
           <Rocket className="w-16 h-16 text-cyan-400 mx-auto mb-6" />
           <h2 className="text-4xl font-bold text-white mb-6">
-            Prêt à Amplifier Votre Succès ?
+            Ready to Amplify Your Success?
           </h2>
           <p className="text-xl text-white/70 mb-8 max-w-2xl mx-auto">
-            Rejoignez les agences européennes qui font confiance à Nucleus pour leur expansion technique. 
-            Discutons de votre projet dès aujourd'hui.
+            Join European agencies trusting Nucleus for their technical expansion. 
+            Let's discuss your project today.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/contact">
               <Button size="lg" className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white">
-                Devenir Partenaire
+                Become a Partner
               </Button>
             </Link>
             <Link href="/start-project">
               <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
-                Demander une Démo
+                Request a Demo
               </Button>
             </Link>
           </div>
 
           <div className="mt-12 p-6 bg-white/5 backdrop-blur-xl border border-white/10 rounded-lg">
             <p className="text-white/80 text-sm mb-2">
-              <strong>Financement Export Canada :</strong> 75 000$ CAD disponible
+              <strong>Export Canada Financing:</strong> CAD $75,000 available
             </p>
             <p className="text-white/60 text-xs">
-              Nucleus Stratégie Inc. • 12 employés • 1,2M€ CA • Canada
+              Nucleus Strategy Inc. • 12 employees • €1.2M revenue • Canada
             </p>
           </div>
         </div>

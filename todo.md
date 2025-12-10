@@ -1265,3 +1265,11 @@
 - [x] Pousser les changements de schéma (pnpm db:push)
 - [ ] Créer un checkpoint
 - [ ] Push GitHub
+
+## Créer la page Agences (modèle d'export)
+- [x] Lire et analyser le PDF du plan d'exportation
+- [x] Créer la page Agencies.tsx avec les informations clés
+- [x] Ajouter la route /agencies dans App.tsx
+- [x] Ajouter le lien dans le footer
+- [ ] Créer un checkpoint
+- [ ] Push GitHub

@@ -42,6 +42,7 @@ import Studio from "./pages/Studio";
 import AILabService from "./pages/services/AILab";
 import StrategicBureauService from "./pages/services/StrategicBureau";
 import CreativeStudioService from "./pages/services/CreativeStudio";
+import Agencies from "./pages/Agencies";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 
 function Router() {
@@ -60,6 +61,7 @@ function Router() {
       <Route path={"/contact"} component={Contact} />
       <Route path={"/start-project"} component={StartProject} />
       <Route path={"/media"} component={Media} />
+      <Route path={"/agencies"} component={Agencies} />
       <Route path={"/leo"} component={Leo} />
       <Route path={"/manifesto"} component={Manifesto} />
       <Route path={"/radar"} component={Radar} />

@@ -12,6 +12,7 @@ export default function Footer() {
     { label: 'FAQ', href: '/faq' },
     { label: 'Contact', href: '/contact' },
     { label: 'Media', href: '/media' },
+    { label: 'Agencies', href: '/agencies' },
   ];
 
   const services = [

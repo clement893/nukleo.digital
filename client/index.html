@@ -35,31 +35,132 @@
   </head>
 
   <body>
-    <!-- Simple loading indicator -->
+    <!-- Loading animation -->
     <style>
       #app-loader {
         position: fixed;
         inset: 0;
-        background: linear-gradient(135deg, rgb(60,15,15) 0%, rgb(40,60,120) 50%, rgb(60,15,15) 100%);
+        background: linear-gradient(135deg, rgb(107,23,22) 0%, rgb(40,60,120) 50%, rgb(107,23,22) 100%);
         display: flex;
         align-items: center;
         justify-content: center;
         z-index: 9999;
+        overflow: hidden;
       }
-      #app-loader::after {
-        content: '';
-        width: 48px;
-        height: 48px;
-        border: 4px solid rgba(255,255,255,0.1);
-        border-top-color: #a855f7;
+      #app-loader .grain {
+        position: absolute;
+        inset: 0;
+        background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');
+        opacity: 0.15;
+        pointer-events: none;
+      }
+      #app-loader .content {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+      }
+      #app-loader .rings {
+        position: relative;
+        width: 8rem;
+        height: 8rem;
+      }
+      #app-loader .ring {
+        position: absolute;
+        border: 2px solid rgba(168, 85, 247, 0.3);
         border-radius: 50%;
-        animation: spin 1s linear infinite;
+        animation: spin-slow 3s linear infinite;
       }
-      @keyframes spin {
+      #app-loader .ring:nth-child(1) { inset: 0; }
+      #app-loader .ring:nth-child(2) { inset: 0.5rem; border-color: rgba(236, 72, 153, 0.3); animation: spin-reverse 4s linear infinite; }
+      #app-loader .ring:nth-child(3) { inset: 1rem; border-color: rgba(59, 130, 246, 0.3); }
+      #app-loader .hexagon {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #app-loader svg {
+        width: 4rem;
+        height: 4rem;
+        filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.6));
+        animation: pulse-glow 2s ease-in-out infinite;
+      }
+      #app-loader h2 {
+        font-size: 2.25rem;
+        font-weight: 700;
+        color: white;
+        letter-spacing: 0.1em;
+        animation: glitch 0.5s infinite;
+        margin: 0;
+      }
+      #app-loader .progress-bar {
+        width: 16rem;
+        height: 0.25rem;
+        background: rgba(255,255,255,0.1);
+        border-radius: 9999px;
+        overflow: hidden;
+        backdrop-filter: blur(4px);
+      }
+      #app-loader .progress-fill {
+        height: 100%;
+        background: linear-gradient(to right, #a855f7, #ec4899, #3b82f6);
+        animation: progress 2s ease-out infinite;
+      }
+      @keyframes spin-slow {
+        from { transform: rotate(0deg); }
         to { transform: rotate(360deg); }
       }
+      @keyframes spin-reverse {
+        from { transform: rotate(360deg); }
+        to { transform: rotate(0deg); }
+      }
+      @keyframes pulse-glow {
+        0%, 100% { filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.6)); }
+        50% { filter: drop-shadow(0 0 20px rgba(236, 72, 153, 0.8)); }
+      }
+      @keyframes glitch {
+        0%, 100% { transform: translate(0); }
+        20% { transform: translate(-2px, 2px); }
+        40% { transform: translate(-2px, -2px); }
+        60% { transform: translate(2px, 2px); }
+        80% { transform: translate(2px, -2px); }
+      }
+      @keyframes progress {
+        0% { width: 0%; }
+        50% { width: 70%; }
+        100% { width: 95%; }
+      }
     </style>
-    <div id="app-loader"></div>
+    <div id="app-loader">
+      <div class="grain"></div>
+      <div class="content">
+        <div class="rings">
+          <div class="ring"></div>
+          <div class="ring"></div>
+          <div class="ring"></div>
+          <div class="hexagon">
+            <svg viewBox="0 0 100 100">
+              <polygon points="50 1 95 25 95 75 50 99 5 75 5 25" fill="none" stroke="url(#gradient)" stroke-width="2" />
+              <defs>
+                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#a855f7" />
+                  <stop offset="50%" stop-color="#ec4899" />
+                  <stop offset="100%" stop-color="#3b82f6" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
+        <h2>NUKLEO</h2>
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+      </div>
+    </div>
     <div id="root"></div>
     <script>
       // Hide loader once React renders content

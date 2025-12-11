@@ -29,25 +29,40 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: (id) => {
-          // Vendor chunks
+          // Vendor chunks - more granular splitting
           if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('react-dom')) {
+            if (id.includes('react') || id.includes('react-dom') || id.includes('scheduler')) {
               return 'react-vendor';
             }
-            if (id.includes('lucide-react') || id.includes('recharts')) {
-              return 'ui-vendor';
+            if (id.includes('lucide-react')) {
+              return 'icons-vendor';
             }
-            if (id.includes('@trpc') || id.includes('@tanstack')) {
+            if (id.includes('recharts') || id.includes('d3-')) {
+              return 'charts-vendor';
+            }
+            if (id.includes('@trpc') || id.includes('@tanstack/react-query')) {
               return 'trpc-vendor';
+            }
+            if (id.includes('framer-motion')) {
+              return 'animation-vendor';
+            }
+            if (id.includes('wouter')) {
+              return 'router-vendor';
             }
             // Other node_modules go to vendor chunk
             return 'vendor';
           }
-          // Split large components
+          // Split by page for better lazy loading
+          if (id.includes('/pages/admin/')) {
+            return 'admin';
+          }
+          if (id.includes('/pages/services/')) {
+            return 'services';
+          }
           if (id.includes('/components/radar/')) {
             return 'radar';
           }
-          if (id.includes('/components/UniversalLEO') || id.includes('/components/Leo')) {
+          if (id.includes('/components/UniversalLEO') || id.includes('/components/Leo') || id.includes('/pages/Leo')) {
             return 'leo';
           }
         },

@@ -13,6 +13,7 @@ import cookieParser from "cookie-parser";
 import helmet from "helmet";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
+import compression from "compression";
 import { logger } from "./logger";
 import { initSentry, Sentry } from "./sentry";
 
@@ -46,6 +47,9 @@ async function startServer() {
   if (process.env.SENTRY_DSN) {
     app.use(Sentry.Handlers.requestHandler());
   }
+  
+  // Compression (gzip/brotli)
+  app.use(compression({ level: 9 }));
   
   // Security: Helmet for HTTP headers
   app.use(helmet({
@@ -122,6 +126,18 @@ async function startServer() {
   if (process.env.NODE_ENV === "development") {
     await setupVite(app, server);
   } else {
+    // Cache static assets aggressively in production
+    app.use('/assets', (req, res, next) => {
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+      next();
+    });
+    app.use((req, res, next) => {
+      // Cache images, fonts, and other static files
+      if (req.url.match(/\.(jpg|jpeg|png|gif|webp|svg|woff|woff2|ttf|eot|ico)$/)) {
+        res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+      }
+      next();
+    });
     serveStatic(app);
   }
   

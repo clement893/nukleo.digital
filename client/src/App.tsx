@@ -45,6 +45,7 @@ import CreativeStudioService from "./pages/services/CreativeStudio";
 import Agencies from "./pages/Agencies";
 import AdminAgencyLeads from "./pages/admin/AdminAgencyLeads";
 import AdminLEOAnalytics from "./pages/admin/AdminLEOAnalytics";
+import AdminLEOContacts from "./pages/admin/AdminLEOContacts";
 import AdminLogin from "./pages/admin/AdminLogin";
 import CreateFirstAdmin from "./pages/CreateFirstAdmin";
 import InitDatabase from "./pages/InitDatabase";
@@ -80,6 +81,9 @@ function Router() {
       </Route>
       <Route path={"/admin/leo-analytics"}>
         {() => <AdminRoute><AdminLEOAnalytics /></AdminRoute>}
+      </Route>
+      <Route path={"/admin/leo-contacts"}>
+        {() => <AdminRoute><AdminLEOContacts /></AdminRoute>}
       </Route>
       <Route path={"/leo"} component={Leo} />
       <Route path={"/manifesto"} component={Manifesto} />

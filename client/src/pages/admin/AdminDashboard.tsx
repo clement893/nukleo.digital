@@ -125,6 +125,13 @@ export default function AdminDashboard() {
                   <div className="text-gray-400 text-sm">Manage agency contact submissions</div>
                 </a>
                 <a
+                  href="/admin/leo-contacts"
+                  className="block p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                >
+                  <div className="text-white font-medium">LEO Contacts</div>
+                  <div className="text-gray-400 text-sm">View emails captured by LEO chatbot</div>
+                </a>
+                <a
                   href="/admin/assessments"
                   className="block p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
                 >

@@ -8,7 +8,7 @@ import {
   mediaAssets, 
   users 
 } from "../../drizzle/schema";
-import { count } from "drizzle-orm";
+import { count, desc } from "drizzle-orm";
 
 export const adminRouter = router({
   getStats: publicProcedure.query(async () => {
@@ -53,6 +53,26 @@ export const adminRouter = router({
         mediaAssets: 0,
         totalUsers: 0,
       };
+    }
+  }),
+
+  getLeoContacts: publicProcedure.query(async () => {
+    try {
+      const db = await getDb();
+      if (!db) {
+        throw new Error("Database not available");
+      }
+      
+      // Get all LEO contacts ordered by creation date (newest first)
+      const contacts = await db
+        .select()
+        .from(leoContacts)
+        .orderBy(desc(leoContacts.createdAt));
+
+      return contacts;
+    } catch (error) {
+      console.error("[Admin] Error fetching LEO contacts:", error);
+      return [];
     }
   }),
 });

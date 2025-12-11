@@ -1,349 +1,221 @@
-import { useState, useEffect } from 'react';
-import { X, MessageCircle, Send, CheckCircle2 } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { X, MessageCircle, Send, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { trpc } from '@/lib/trpc';
 
-interface Question {
-  id: string;
-  question: string;
-  type: 'text' | 'select' | 'multiselect';
-  options?: string[];
-  field: string;
-}
-
 type PageContext = 'home' | 'agencies' | 'services' | 'contact' | 'projects' | 'about' | 'default';
+
+interface Message {
+  role: 'user' | 'assistant';
+  content: string;
+}
 
 interface UniversalLEOProps {
   pageContext?: PageContext;
 }
 
-// Questions personnalisées par contexte de page
-const questionsByContext: Record<PageContext, Question[]> = {
-  agencies: [
-    {
-      id: '1',
-      question: "Hi! 👋 I'm LEO, your AI assistant. Looking to scale your agency? What's your email?",
-      type: 'text',
-      field: 'email',
-    },
-    {
-      id: '2',
-      question: "Great! What's your agency name?",
-      type: 'text',
-      field: 'companyName',
-    },
-    {
-      id: '3',
-      question: "How many people work at your agency?",
-      type: 'select',
-      options: ['1-5', '6-20', '21-50', '50+'],
-      field: 'agencySize',
-    },
-    {
-      id: '4',
-      question: "What technical services are you most interested in?",
-      type: 'multiselect',
-      options: ['AI & Machine Learning', 'Web & Mobile Apps', 'Cloud & DevOps', 'Data & Automation'],
-      field: 'techNeeds',
-    },
-    {
-      id: '5',
-      question: "What's your typical project budget range?",
-      type: 'select',
-      options: ['<10k', '10-50k', '50-100k', '100k+'],
-      field: 'budget',
-    },
-    {
-      id: '6',
-      question: "When are you looking to start?",
-      type: 'select',
-      options: ['Immediate', '1-3 months', '3-6 months', 'Just exploring'],
-      field: 'urgency',
-    },
-  ],
-  home: [
-    {
-      id: '1',
-      question: "Hi! 👋 I'm LEO, Nukleo's AI assistant. I can help you explore how AI can transform your business. What's your email?",
-      type: 'text',
-      field: 'email',
-    },
-    {
-      id: '2',
-      question: "What's your name?",
-      type: 'text',
-      field: 'name',
-    },
-    {
-      id: '3',
-      question: "What brings you to Nukleo today?",
-      type: 'select',
-      options: ['Exploring AI solutions', 'Need a specific project', 'Looking for partnership', 'Just browsing'],
-      field: 'interest',
-    },
-    {
-      id: '4',
-      question: "What industry are you in?",
-      type: 'text',
-      field: 'industry',
-    },
-  ],
-  services: [
-    {
-      id: '1',
-      question: "Hi! 👋 I'm LEO. Interested in our services? Let's connect! What's your email?",
-      type: 'text',
-      field: 'email',
-    },
-    {
-      id: '2',
-      question: "What's your name?",
-      type: 'text',
-      field: 'name',
-    },
-    {
-      id: '3',
-      question: "Which service interests you most?",
-      type: 'select',
-      options: ['AI Lab', 'Strategic Bureau', 'Creative Studio', 'All of them'],
-      field: 'serviceInterest',
-    },
-    {
-      id: '4',
-      question: "What's your biggest challenge right now?",
-      type: 'text',
-      field: 'challenge',
-    },
-  ],
-  contact: [
-    {
-      id: '1',
-      question: "Hi! 👋 I'm LEO. Let's get you connected with our team. What's your email?",
-      type: 'text',
-      field: 'email',
-    },
-    {
-      id: '2',
-      question: "What's your name?",
-      type: 'text',
-      field: 'name',
-    },
-    {
-      id: '3',
-      question: "How can we help you?",
-      type: 'text',
-      field: 'message',
-    },
-  ],
-  projects: [
-    {
-      id: '1',
-      question: "Hi! 👋 I'm LEO. Inspired by our work? Let's discuss your project! What's your email?",
-      type: 'text',
-      field: 'email',
-    },
-    {
-      id: '2',
-      question: "What's your name?",
-      type: 'text',
-      field: 'name',
-    },
-    {
-      id: '3',
-      question: "What type of project do you have in mind?",
-      type: 'select',
-      options: ['AI Implementation', 'Digital Platform', 'Strategy Consulting', 'Creative Campaign'],
-      field: 'projectType',
-    },
-  ],
-  about: [
-    {
-      id: '1',
-      question: "Hi! 👋 I'm LEO. Want to learn more about Nukleo? What's your email?",
-      type: 'text',
-      field: 'email',
-    },
-    {
-      id: '2',
-      question: "What's your name?",
-      type: 'text',
-      field: 'name',
-    },
-    {
-      id: '3',
-      question: "What would you like to know about us?",
-      type: 'select',
-      options: ['Team & Culture', 'Our Approach', 'Career Opportunities', 'Partnership Options'],
-      field: 'aboutInterest',
-    },
-  ],
-  default: [
-    {
-      id: '1',
-      question: "Hi! 👋 I'm LEO, your AI assistant at Nukleo. What's your email?",
-      type: 'text',
-      field: 'email',
-    },
-    {
-      id: '2',
-      question: "What's your name?",
-      type: 'text',
-      field: 'name',
-    },
-    {
-      id: '3',
-      question: "How can I help you today?",
-      type: 'text',
-      field: 'message',
-    },
-  ],
+// Prompts d'accueil personnalisés par page
+const welcomeMessages: Record<PageContext, string> = {
+  home: "Hi! 👋 I'm LEO, Nukleo's AI assistant. I'm here to help you explore how AI can transform your business. What brings you here today?",
+  agencies: "Hi! 👋 I'm LEO. Looking to scale your agency with Nukleo's nearshore team? I can help you understand our partnership model. What's your biggest challenge right now?",
+  services: "Hi! 👋 I'm LEO. Interested in our services? Whether it's AI Lab, Strategic Bureau, or Creative Studio, I can help you find the right fit. What are you looking to achieve?",
+  contact: "Hi! 👋 I'm LEO. Ready to connect with our team? Tell me a bit about your project and I'll make sure you get the right help.",
+  projects: "Hi! 👋 I'm LEO. Inspired by our work? I'd love to hear about your project vision. What kind of transformation are you considering?",
+  about: "Hi! 👋 I'm LEO. Want to know more about Nukleo? Ask me anything about our team, culture, or approach!",
+  default: "Hi! 👋 I'm LEO, your AI assistant at Nukleo. How can I help you today?",
 };
 
 export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [answers, setAnswers] = useState<Record<string, any>>({});
+  const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
-  const [isCompleted, setIsCompleted] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
+  const [emailCaptured, setEmailCaptured] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  const chatMutation = trpc.leo.chat.useMutation();
   const saveLeoContact = trpc.leo.saveContact.useMutation();
   const saveAgencyLead = trpc.agencies.saveLead.useMutation();
 
-  const questions = questionsByContext[pageContext];
-  const storageKey = `leo-${pageContext}-completed`;
+  const storageKey = `leo-${pageContext}-interacted`;
 
   // Auto-open after 10 seconds if not interacted
   useEffect(() => {
+    const hasSeenBefore = localStorage.getItem(storageKey);
+    if (hasSeenBefore) {
+      setHasInteracted(true);
+      return;
+    }
+
     const timer = setTimeout(() => {
-      if (!hasInteracted && !localStorage.getItem(storageKey)) {
+      if (!hasInteracted) {
         setIsOpen(true);
+        // Add welcome message
+        setMessages([{
+          role: 'assistant',
+          content: welcomeMessages[pageContext],
+        }]);
       }
     }, 10000);
 
     return () => clearTimeout(timer);
-  }, [hasInteracted, storageKey]);
+  }, [hasInteracted, pageContext, storageKey]);
 
-  const currentQuestion = questions[currentQuestionIndex];
+  // Scroll to bottom when new messages arrive
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
-  const calculateScore = (answers: Record<string, any>): number => {
-    let score = 0;
-    
-    // Agency-specific scoring
+  // Extract email from text using regex
+  const extractEmail = (text: string): string | null => {
+    const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
+    const match = text.match(emailRegex);
+    return match ? match[0] : null;
+  };
+
+  // Extract structured data from conversation
+  const extractDataFromConversation = (messages: Message[]): Record<string, any> => {
+    const data: Record<string, any> = {};
+    const fullConversation = messages.map(m => m.content).join(' ');
+
+    // Extract email
+    const email = extractEmail(fullConversation);
+    if (email) data.email = email;
+
+    // Extract name (simple heuristic: "I'm X" or "My name is X")
+    const nameMatch = fullConversation.match(/(?:I'm|I am|my name is|call me)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)/i);
+    if (nameMatch) data.name = nameMatch[1];
+
+    // For agencies context, extract additional data
     if (pageContext === 'agencies') {
-      if (answers.agencySize === '50+') score += 25;
-      else if (answers.agencySize === '21-50') score += 20;
-      else if (answers.agencySize === '6-20') score += 15;
-      else score += 10;
+      // Extract company name
+      const companyMatch = fullConversation.match(/(?:work at|from|company is|agency is)\s+([A-Z][a-zA-Z\s&]+)/);
+      if (companyMatch) data.companyName = companyMatch[1].trim();
 
-      if (answers.budget === '100k+') score += 30;
-      else if (answers.budget === '50-100k') score += 25;
-      else if (answers.budget === '10-50k') score += 15;
-      else score += 5;
+      // Extract budget mentions
+      if (/100k\+|100,000|six figures/i.test(fullConversation)) data.budget = '100k+';
+      else if (/50-100k|50k-100k|50,000-100,000/i.test(fullConversation)) data.budget = '50-100k';
+      else if (/10-50k|10k-50k|10,000-50,000/i.test(fullConversation)) data.budget = '10-50k';
+      else if (/<10k|under 10k|less than 10,000/i.test(fullConversation)) data.budget = '<10k';
 
-      if (answers.urgency === 'Immediate') score += 25;
-      else if (answers.urgency === '1-3 months') score += 20;
-      else if (answers.urgency === '3-6 months') score += 10;
-      else score += 5;
+      // Extract urgency
+      if (/immediate|urgent|asap|right away|now/i.test(fullConversation)) data.urgency = 'Immediate';
+      else if (/1-3 months|next quarter|soon/i.test(fullConversation)) data.urgency = '1-3 months';
+      else if (/3-6 months|later this year/i.test(fullConversation)) data.urgency = '3-6 months';
+      else if (/exploring|just looking|researching/i.test(fullConversation)) data.urgency = 'Just exploring';
 
-      if (answers.techNeeds && answers.techNeeds.length >= 3) score += 20;
-      else if (answers.techNeeds && answers.techNeeds.length >= 2) score += 15;
-      else score += 10;
-    } else {
-      // Default scoring for other contexts
-      score = 50; // Base score for engagement
+      // Extract agency size
+      if (/50\+|more than 50|over 50/i.test(fullConversation)) data.agencySize = '50+';
+      else if (/21-50|20-50/i.test(fullConversation)) data.agencySize = '21-50';
+      else if (/6-20|10-20/i.test(fullConversation)) data.agencySize = '6-20';
+      else if (/1-5|small team|few people/i.test(fullConversation)) data.agencySize = '1-5';
     }
 
-    return Math.min(score, 100);
+    return data;
   };
 
-  const handleNext = async () => {
-    if (currentQuestion.type === 'text' && !inputValue.trim()) return;
-    if (currentQuestion.type === 'multiselect' && selectedOptions.length === 0) return;
+  const handleSendMessage = async () => {
+    if (!inputValue.trim() || chatMutation.isPending) return;
 
-    const newAnswers = {
-      ...answers,
-      [currentQuestion.field]: currentQuestion.type === 'multiselect' ? selectedOptions : inputValue,
+    const userMessage: Message = {
+      role: 'user',
+      content: inputValue.trim(),
     };
-    setAnswers(newAnswers);
 
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-      setInputValue('');
-      setSelectedOptions([]);
-    } else {
-      // Submit based on context
-      try {
-        if (pageContext === 'agencies') {
-          // Save as agency lead
-          const score = calculateScore(newAnswers);
-          await saveAgencyLead.mutateAsync({
-            email: newAnswers.email,
-            companyName: newAnswers.companyName,
-            agencySize: newAnswers.agencySize,
-            techNeeds: newAnswers.techNeeds || undefined,
-            budget: newAnswers.budget,
-            urgency: newAnswers.urgency,
-          });
-        } else {
-          // Save as LEO contact
-          await saveLeoContact.mutateAsync({
-            email: newAnswers.email,
-            name: newAnswers.name || '',
-            conversationContext: JSON.stringify({
-              pageContext,
-              answers: newAnswers,
-            }),
-          });
-        }
+    const newMessages = [...messages, userMessage];
+    setMessages(newMessages);
+    setInputValue('');
 
-        setIsCompleted(true);
-        localStorage.setItem(storageKey, 'true');
+    try {
+      // Call AI chat
+      const response = await chatMutation.mutateAsync({
+        messages: newMessages,
+      });
+
+      const assistantMessage: Message = {
+        role: 'assistant',
+        content: typeof response.content === 'string' ? response.content : '',
+      };
+
+      const updatedMessages = [...newMessages, assistantMessage];
+      setMessages(updatedMessages);
+
+      // Try to extract and save data if email is found
+      if (!emailCaptured) {
+        const extractedData = extractDataFromConversation(updatedMessages);
         
-        // Auto-close after 3 seconds
-        setTimeout(() => {
-          setIsOpen(false);
-        }, 3000);
-      } catch (error) {
-        console.error('Error saving:', error);
-      }
-    }
-  };
+        if (extractedData.email) {
+          setEmailCaptured(true);
+          
+          // Save based on context
+          if (pageContext === 'agencies' && extractedData.companyName) {
+            // Calculate qualification score
+            let score = 50; // Base score
+            if (extractedData.agencySize === '50+') score += 15;
+            else if (extractedData.agencySize === '21-50') score += 10;
+            if (extractedData.budget === '100k+') score += 20;
+            else if (extractedData.budget === '50-100k') score += 15;
+            if (extractedData.urgency === 'Immediate') score += 15;
+            else if (extractedData.urgency === '1-3 months') score += 10;
 
-  const handleOptionClick = (option: string) => {
-    if (currentQuestion.type === 'multiselect') {
-      setSelectedOptions(prev =>
-        prev.includes(option) ? prev.filter(o => o !== option) : [...prev, option]
-      );
-    } else if (currentQuestion.type === 'select') {
-      setInputValue(option);
-      // Auto-advance for single select
-      setTimeout(() => {
-        const newAnswers = {
-          ...answers,
-          [currentQuestion.field]: option,
-        };
-        setAnswers(newAnswers);
-        if (currentQuestionIndex < questions.length - 1) {
-          setCurrentQuestionIndex(currentQuestionIndex + 1);
-          setInputValue('');
+            await saveAgencyLead.mutateAsync({
+              email: extractedData.email,
+              companyName: extractedData.companyName,
+              agencySize: extractedData.agencySize,
+              budget: extractedData.budget,
+              urgency: extractedData.urgency,
+              techNeeds: undefined,
+            });
+          } else {
+            // Save as LEO contact
+            await saveLeoContact.mutateAsync({
+              email: extractedData.email,
+              name: extractedData.name || '',
+              conversationContext: JSON.stringify({
+                pageContext,
+                messages: updatedMessages.slice(0, 10), // Save first 10 messages
+                extractedData,
+              }),
+            });
+          }
         }
-      }, 300);
+      }
+    } catch (error) {
+      console.error('Chat error:', error);
+      setMessages([
+        ...newMessages,
+        {
+          role: 'assistant',
+          content: "I'm sorry, I encountered an error. Could you try again?",
+        },
+      ]);
     }
   };
 
   const handleOpen = () => {
     setIsOpen(true);
     setHasInteracted(true);
+    localStorage.setItem(storageKey, 'true');
+    
+    // Add welcome message if no messages yet
+    if (messages.length === 0) {
+      setMessages([{
+        role: 'assistant',
+        content: welcomeMessages[pageContext],
+      }]);
+    }
   };
 
   const handleClose = () => {
     setIsOpen(false);
-    setHasInteracted(true);
   };
 
-  const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
 
   return (
     <>
@@ -361,9 +233,9 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 z-50 w-[400px] max-w-[calc(100vw-3rem)] bg-gradient-to-br from-[oklch(0.25_0.05_300)] to-[oklch(0.15_0.05_340)] border border-cyan-500/30 rounded-2xl shadow-2xl overflow-hidden">
+        <div className="fixed bottom-6 right-6 z-50 w-[400px] max-w-[calc(100vw-3rem)] bg-gradient-to-br from-[oklch(0.25_0.05_300)] to-[oklch(0.15_0.05_340)] border border-cyan-500/30 rounded-2xl shadow-2xl overflow-hidden flex flex-col" style={{ height: '600px', maxHeight: 'calc(100vh - 3rem)' }}>
           {/* Header */}
-          <div className="bg-gradient-to-r from-cyan-500 to-purple-600 p-4 flex items-center justify-between">
+          <div className="bg-gradient-to-r from-cyan-500 to-purple-600 p-4 flex items-center justify-between flex-shrink-0">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-2xl">
                 🤖
@@ -381,98 +253,60 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
             </button>
           </div>
 
-          {/* Progress Bar */}
-          {!isCompleted && (
-            <div className="h-1 bg-white/10">
+          {/* Messages */}
+          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            {messages.map((message, index) => (
               <div
-                className="h-full bg-gradient-to-r from-cyan-500 to-purple-600 transition-all duration-300"
-                style={{ width: `${progress}%` }}
-              />
-            </div>
-          )}
-
-          {/* Content */}
-          <div className="p-6">
-            {isCompleted ? (
-              <div className="text-center py-8">
-                <CheckCircle2 className="w-16 h-16 text-green-400 mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2">You're All Set! 🎉</h3>
-                <p className="text-white/70">
-                  {pageContext === 'agencies' 
-                    ? "We'll reach out soon to discuss how Nukleo can help scale your agency!"
-                    : "Thanks for connecting! We'll be in touch shortly."}
-                </p>
-              </div>
-            ) : (
-              <>
-                {/* Question */}
-                <div className="mb-6">
-                  <div className="bg-white/10 rounded-lg p-4 mb-4">
-                    <p className="text-white">{currentQuestion.question}</p>
-                  </div>
-
-                  {/* Input based on type */}
-                  {currentQuestion.type === 'text' && (
-                    <input
-                      type={currentQuestion.field === 'email' ? 'email' : 'text'}
-                      value={inputValue}
-                      onChange={(e) => setInputValue(e.target.value)}
-                      onKeyPress={(e) => e.key === 'Enter' && handleNext()}
-                      placeholder="Type your answer..."
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-cyan-500"
-                      autoFocus
-                    />
-                  )}
-
-                  {(currentQuestion.type === 'select' || currentQuestion.type === 'multiselect') && (
-                    <div className="space-y-2">
-                      {currentQuestion.options?.map((option) => (
-                        <button
-                          key={option}
-                          onClick={() => handleOptionClick(option)}
-                          className={`w-full px-4 py-3 rounded-lg border transition-all text-left ${
-                            currentQuestion.type === 'multiselect'
-                              ? selectedOptions.includes(option)
-                                ? 'bg-cyan-500/20 border-cyan-500 text-white'
-                                : 'bg-white/5 border-white/20 text-white/70 hover:border-cyan-500/50'
-                              : inputValue === option
-                              ? 'bg-cyan-500/20 border-cyan-500 text-white'
-                              : 'bg-white/5 border-white/20 text-white/70 hover:border-cyan-500/50'
-                          }`}
-                        >
-                          {option}
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                {/* Next Button */}
-                <Button
-                  onClick={handleNext}
-                  disabled={
-                    (currentQuestion.type === 'text' && !inputValue.trim()) ||
-                    (currentQuestion.type === 'multiselect' && selectedOptions.length === 0) ||
-                    (currentQuestion.type === 'select' && !inputValue)
-                  }
-                  className="w-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white disabled:opacity-50"
+                key={index}
+                className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+              >
+                <div
+                  className={`max-w-[80%] rounded-lg p-3 ${
+                    message.role === 'user'
+                      ? 'bg-gradient-to-r from-cyan-500 to-purple-600 text-white'
+                      : 'bg-white/10 text-white'
+                  }`}
                 >
-                  {currentQuestionIndex < questions.length - 1 ? (
-                    <>
-                      Next <Send className="w-4 h-4 ml-2" />
-                    </>
-                  ) : (
-                    <>
-                      Submit <CheckCircle2 className="w-4 h-4 ml-2" />
-                    </>
-                  )}
-                </Button>
+                  <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                </div>
+              </div>
+            ))}
+            
+            {chatMutation.isPending && (
+              <div className="flex justify-start">
+                <div className="bg-white/10 rounded-lg p-3">
+                  <Loader2 className="w-5 h-5 text-cyan-400 animate-spin" />
+                </div>
+              </div>
+            )}
+            
+            <div ref={messagesEndRef} />
+          </div>
 
-                {/* Progress indicator */}
-                <p className="text-xs text-white/40 text-center mt-3">
-                  Question {currentQuestionIndex + 1} of {questions.length}
-                </p>
-              </>
+          {/* Input */}
+          <div className="p-4 border-t border-white/10 flex-shrink-0">
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder="Type your message..."
+                className="flex-1 px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-cyan-500"
+                disabled={chatMutation.isPending}
+              />
+              <Button
+                onClick={handleSendMessage}
+                disabled={!inputValue.trim() || chatMutation.isPending}
+                className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white disabled:opacity-50"
+              >
+                <Send className="w-4 h-4" />
+              </Button>
+            </div>
+            {emailCaptured && (
+              <p className="text-xs text-green-400 mt-2 text-center">
+                ✓ Thanks! We'll be in touch soon.
+              </p>
             )}
           </div>
         </div>

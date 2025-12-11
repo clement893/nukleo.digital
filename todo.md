@@ -1328,3 +1328,14 @@
 - [x] Adapter les questions et le ton selon le contexte
 - [ ] Créer un checkpoint
 - [ ] Push GitHub
+
+## Transformer LEO en chatbot IA conversationnel
+- [x] Créer la procédure tRPC pour les conversations AI (leo.chat) - Déjà existante
+- [x] Définir les prompts système par contexte de page
+- [x] Refactoriser UniversalLEO pour mode conversationnel
+- [x] Ajouter l'historique des messages
+- [x] Implémenter l'extraction intelligente des données clés
+- [x] Sauvegarder automatiquement quand email capturé
+- [ ] Tester les conversations sur différentes pages
+- [ ] Créer un checkpoint
+- [ ] Push GitHub

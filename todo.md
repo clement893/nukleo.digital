@@ -1417,3 +1417,8 @@
 - [x] Ajouter la navigation dans le layout admin
 - [x] Créer les procédures tRPC pour récupérer les statistiques
 - [ ] Tester le dashboard complet
+
+## Homepage Text Update
+- [x] Changer "AI Revolution" en "AI Evolution" sur la page d'accueil
+- [x] Vérifier que le changement est visible
+- [ ] Déployer sur Railway

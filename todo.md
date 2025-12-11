@@ -1276,13 +1276,25 @@
 
 ## Traduire la page Agencies en anglais
 - [x] Traduire tous les textes de Agencies.tsx en anglais
-- [ ] Créer un checkpoint
-- [ ] Push GitHub
+- [x] Créer un checkpoint
+- [x] Push GitHub
 
 ## Ajouter un champ email dans le chat LEO
 - [x] Analyser la page LEO actuelle
 - [x] Ajouter un champ de saisie d'email dans l'interface du chat
 - [x] Créer une procédure tRPC pour sauvegarder l'email
 - [x] Ajouter la logique frontend pour capturer et envoyer l'email
+- [x] Créer un checkpoint
+- [x] Push GitHub
+
+## Refonte complète de la page Agencies (design vendeur)
+- [x] Recréer la page avec approche marketing axée conversion
+- [x] Hero impactant avec proposition de valeur claire
+- [x] Section problème/solution
+- [x] Bénéfices concrets avec chiffres
+- [x] Témoignages et preuve sociale
+- [x] Pricing transparent
+- [x] CTA puissants et multiples
+- [x] Design moderne et vendeur
 - [ ] Créer un checkpoint
 - [ ] Push GitHub

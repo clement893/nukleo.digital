@@ -9,6 +9,7 @@ import { createContext } from "./context";
 import sitemapRouter from "../sitemap";
 import { serveStatic, setupVite } from "./vite";
 import { initDatabase } from "../init-db";
+import cookieParser from "cookie-parser";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -35,6 +36,8 @@ async function startServer() {
   // Configure body parser with larger size limit for file uploads
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
+  // Configure cookie parser for admin authentication
+  app.use(cookieParser());
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
   // Sitemap and robots.txt

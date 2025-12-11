@@ -35,7 +35,71 @@
   </head>
 
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Inline loader - shows immediately before React loads -->
+      <div id="initial-loader" style="position: fixed; inset: 0; z-index: 9999; background: linear-gradient(135deg, rgb(107,23,22) 0%, rgb(40,60,120) 50%, rgb(107,23,22) 100%); display: flex; align-items: center; justify-content: center; overflow: hidden;">
+        <!-- Grain texture -->
+        <div style="position: absolute; inset: 0; background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E'); opacity: 0.15; pointer-events: none;"></div>
+        
+        <!-- Main content -->
+        <div style="position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 2rem;">
+          <!-- Rotating rings -->
+          <div style="position: relative; width: 8rem; height: 8rem;">
+            <div style="position: absolute; inset: 0; border: 2px solid rgba(168, 85, 247, 0.3); border-radius: 50%; animation: spin-slow 3s linear infinite;"></div>
+            <div style="position: absolute; inset: 0.5rem; border: 2px solid rgba(236, 72, 153, 0.3); border-radius: 50%; animation: spin-reverse 4s linear infinite;"></div>
+            <div style="position: absolute; inset: 1rem; border: 2px solid rgba(59, 130, 246, 0.3); border-radius: 50%; animation: spin-slow 3s linear infinite;"></div>
+            
+            <!-- Center hexagon -->
+            <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
+              <svg viewBox="0 0 100 100" style="width: 4rem; height: 4rem; filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.6)); animation: pulse-glow 2s ease-in-out infinite;">
+                <polygon points="50 1 95 25 95 75 50 99 5 75 5 25" fill="none" stroke="url(#gradient)" stroke-width="2" />
+                <defs>
+                  <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#a855f7" />
+                    <stop offset="50%" stop-color="#ec4899" />
+                    <stop offset="100%" stop-color="#3b82f6" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+          </div>
+          
+          <!-- Loading text -->
+          <h2 style="font-size: 2.25rem; font-weight: 700; color: white; letter-spacing: 0.1em; animation: glitch 0.5s infinite;">NUKLEO</h2>
+          
+          <!-- Progress bar -->
+          <div style="width: 16rem; height: 0.25rem; background: rgba(255,255,255,0.1); border-radius: 9999px; overflow: hidden; backdrop-filter: blur(4px);">
+            <div style="height: 100%; background: linear-gradient(to right, #a855f7, #ec4899, #3b82f6); animation: progress 2s ease-out forwards;"></div>
+          </div>
+        </div>
+        
+        <style>
+          @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+          @keyframes spin-reverse {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+          }
+          @keyframes pulse-glow {
+            0%, 100% { filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.6)); }
+            50% { filter: drop-shadow(0 0 20px rgba(236, 72, 153, 0.8)); }
+          }
+          @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+          }
+          @keyframes progress {
+            from { width: 0%; }
+            to { width: 90%; }
+          }
+        </style>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx" defer></script>
     <script
       defer

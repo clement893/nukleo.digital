@@ -1,16 +1,19 @@
+import { lazy, Suspense } from 'react';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import SEO from '@/components/SEO';
 import StructuredData, { organizationSchema, websiteSchema } from '@/components/StructuredData';
-import ManifestoSection from '@/components/ManifestoSection';
-import WhoWeServeSection from '@/components/WhoWeServeSection';
-import CapabilitiesSection from '@/components/CapabilitiesSection';
-import TrinitySection from '@/components/TrinitySection';
-import CTASection from '@/components/CTASection';
-import TestimonialsCarousel from '@/components/TestimonialsCarousel';
-import ClientLogos from '@/components/ClientLogos';
 import Footer from '@/components/Footer';
 import UniversalLEO from '@/components/UniversalLEO';
+
+// Lazy load below-the-fold sections
+const ManifestoSection = lazy(() => import('@/components/ManifestoSection'));
+const WhoWeServeSection = lazy(() => import('@/components/WhoWeServeSection'));
+const CapabilitiesSection = lazy(() => import('@/components/CapabilitiesSection'));
+const TrinitySection = lazy(() => import('@/components/TrinitySection'));
+const CTASection = lazy(() => import('@/components/CTASection'));
+const TestimonialsCarousel = lazy(() => import('@/components/TestimonialsCarousel'));
+const ClientLogos = lazy(() => import('@/components/ClientLogos'));
 
 export default function Home() {
   return (
@@ -50,16 +53,20 @@ export default function Home() {
           
           <div className="relative z-10">
             <HeroSection />
-            <ManifestoSection />
-            <WhoWeServeSection />
-            <CapabilitiesSection />
+            <Suspense fallback={<div style={{ minHeight: '400px' }} />}>
+              <ManifestoSection />
+              <WhoWeServeSection />
+              <CapabilitiesSection />
+            </Suspense>
           </div>
         </div>
         
-        <TrinitySection />
-        <TestimonialsCarousel />
-        <CTASection />
-        <ClientLogos />
+        <Suspense fallback={<div style={{ minHeight: '800px' }} />}>
+          <TrinitySection />
+          <TestimonialsCarousel />
+          <CTASection />
+          <ClientLogos />
+        </Suspense>
       </main>
       <Footer />
       <UniversalLEO pageContext="home" />

@@ -1318,3 +1318,13 @@
 - [x] Protéger la route avec adminProcedure
 - [ ] Créer un checkpoint
 - [ ] Push GitHub
+
+## Transformer LEO en chatbot universel sur tout le site
+- [x] Analyser les deux chatbots existants (LEO page et AgencyQualificationBot)
+- [x] Créer un composant UniversalLEO avec contexte de page
+- [x] Définir les approches personnalisées par page (home, services, agences, contact, etc.)
+- [x] Intégrer LEO sur toutes les pages principales
+- [x] Supprimer AgencyQualificationBot et utiliser LEO partout
+- [x] Adapter les questions et le ton selon le contexte
+- [ ] Créer un checkpoint
+- [ ] Push GitHub

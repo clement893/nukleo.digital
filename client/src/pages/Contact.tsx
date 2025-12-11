@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import PageLayout from '@/components/PageLayout';
 import { trpc } from '@/lib/trpc';
 import SEO from '@/components/SEO';
+import UniversalLEO from '@/components/UniversalLEO';
 
 export default function Contact() {
   const [formData, setFormData] = useState({

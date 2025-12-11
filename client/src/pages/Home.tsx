@@ -10,7 +10,7 @@ import CTASection from '@/components/CTASection';
 import TestimonialsCarousel from '@/components/TestimonialsCarousel';
 import ClientLogos from '@/components/ClientLogos';
 import Footer from '@/components/Footer';
-import LeoChatWidget from '@/components/LeoChatWidget';
+import UniversalLEO from '@/components/UniversalLEO';
 
 export default function Home() {
   return (
@@ -62,7 +62,7 @@ export default function Home() {
         <ClientLogos />
       </main>
       <Footer />
-      <LeoChatWidget />
+      <UniversalLEO pageContext="home" />
     </div>
   );
 }

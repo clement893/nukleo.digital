@@ -2,7 +2,7 @@ import SEO from '@/components/SEO';
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import AgencyQualificationBot from '@/components/AgencyQualificationBot';
+import UniversalLEO from '@/components/UniversalLEO';
 import { 
   ArrowRight, 
   CheckCircle2, 
@@ -549,7 +549,7 @@ export default function Agencies() {
         </div>
       </section>
     </div>
-    <AgencyQualificationBot />
+    <UniversalLEO pageContext="agencies" />
     </>
   );
 }

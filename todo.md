@@ -1370,3 +1370,7 @@
 - [x] Créer le premier compte admin (clement)
 - [x] Tester le login en local
 - [x] Pusher les changements vers GitHub/Railway
+
+## Railway Production Admin Account
+- [ ] Créer le compte admin sur la base de données Railway
+- [ ] Tester le login sur https://nukleodigital-production.up.railway.app/admin/login

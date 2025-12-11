@@ -6,23 +6,7 @@ import { createRoot } from "react-dom/client";
 import superjson from "superjson";
 import App from "./App";
 
-// Hide initial HTML loader once React is ready
-const hideInitialLoader = () => {
-  const loader = document.getElementById('initial-loader');
-  if (loader) {
-    // Minimum display time: 1.5 seconds
-    const startTime = performance.now();
-    const minDisplayTime = 1500;
-    const elapsed = startTime - ((window as any).loaderStartTime || startTime);
-    const remainingTime = Math.max(0, minDisplayTime - elapsed);
-    
-    setTimeout(() => {
-      loader.style.opacity = '0';
-      loader.style.transition = 'opacity 0.5s ease-out';
-      setTimeout(() => loader.remove(), 500);
-    }, remainingTime);
-  }
-};
+
 import { getLoginUrl } from "./const";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import "./index.css";
@@ -71,9 +55,6 @@ const trpcClient = trpc.createClient({
   ],
 });
 
-// Track when loader started
-(window as any).loaderStartTime = performance.now();
-
 createRoot(document.getElementById("root")!).render(
   <trpc.Provider client={trpcClient} queryClient={queryClient}>
     <QueryClientProvider client={queryClient}>
@@ -83,6 +64,3 @@ createRoot(document.getElementById("root")!).render(
     </QueryClientProvider>
   </trpc.Provider>
 );
-
-// Hide loader after React mounts (with minimum display time)
-hideInitialLoader();

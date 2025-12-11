@@ -1466,4 +1466,4 @@
 - [x] Créer un composant LEO unifié avec toutes les fonctionnalités
 - [x] Remplacer toutes les instances par la version unifiée
 - [x] Tester sur toutes les pages
-- [ ] Déployer sur Railway
+- [x] Déployer sur Railway

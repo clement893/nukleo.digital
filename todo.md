@@ -1445,3 +1445,7 @@
 - [x] Convertir en texte simple défilant
 - [x] Ajouter le défilement automatique
 - [x] Déployer sur Railway
+
+## Remove Carousel Gradients
+- [ ] Retirer les gradients rouges sur les bords du carrousel
+- [ ] Déployer sur Railway

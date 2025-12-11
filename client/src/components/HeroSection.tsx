@@ -105,10 +105,6 @@ export default function HeroSection() {
                     ))
                   ))}
                 </div>
-                
-                {/* Gradient Overlays */}
-                <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[rgb(60,15,15)] to-transparent pointer-events-none" />
-                <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[rgb(60,15,15)] to-transparent pointer-events-none" />
               </div>
             </div>
           </div>

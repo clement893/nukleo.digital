@@ -69,6 +69,33 @@ export default function HeroSection() {
                 </Button>
               </Link>
             </div>
+
+            {/* Services Banner */}
+            <div className="mt-12 sm:mt-16 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-1200">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-3xl">
+                <div className="flex flex-col items-center gap-2 p-4 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
+                  <span className="text-2xl">🤖</span>
+                  <span className="text-white font-semibold text-sm sm:text-base">AI Strategy</span>
+                </div>
+                <div className="flex flex-col items-center gap-2 p-4 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
+                  <span className="text-2xl">💻</span>
+                  <span className="text-white font-semibold text-sm sm:text-base">Digital Platforms</span>
+                </div>
+                <div className="flex flex-col items-center gap-2 p-4 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
+                  <span className="text-2xl">🎨</span>
+                  <span className="text-white font-semibold text-sm sm:text-base">Creative Studio</span>
+                </div>
+                <div className="flex flex-col items-center gap-2 p-4 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
+                  <span className="text-2xl">⚡</span>
+                  <span className="text-white font-semibold text-sm sm:text-base">Operations</span>
+                </div>
+              </div>
+              
+              {/* Beyond AI Text */}
+              <p className="mt-8 text-center text-white/60 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+                More than AI. We craft complete digital ecosystems—from strategy and platforms to creative content and intelligent automation.
+              </p>
+            </div>
           </div>
         </div>
       </div>

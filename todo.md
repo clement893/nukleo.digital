@@ -1422,3 +1422,9 @@
 - [x] Changer "AI Revolution" en "AI Evolution" sur la page d'accueil
 - [x] Vérifier que le changement est visible
 - [x] Déployer sur Railway
+
+## Hero Section Enhancement
+- [x] Ajouter une bande de 4 services sous le CTA (AI Strategy, Digital Platforms, Creative Studio, Operations)
+- [x] Ajouter le texte "Beyond AI" pour clarifier l'offre complète
+- [ ] Tester visuellement sur desktop et mobile
+- [ ] Déployer sur Railway

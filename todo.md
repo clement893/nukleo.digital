@@ -1491,5 +1491,18 @@
 - [x] Ajouter la liste des conversations récentes
 - [x] Ajouter les statistiques par page (remplace filtres)
 - [x] Tester le dashboard
+- [x] Créer un checkpoint
+- [x] Pousser sur GitHub
+
+
+## Corriger le menu sur page Agencies
+- [x] Analyser pourquoi le menu disparaît sur /agencies
+- [x] Corriger le problème de z-index ou position
+- [x] Tester le menu sur /agencies
+
+## Améliorer UniversalLEO - Capture Email & Typing Speed
+- [x] Ajouter un modal de capture d'email après 3-4 messages
+- [x] Augmenter la vitesse de typing (réduire l'intervalle)
+- [x] Tester le modal et la vitesse
 - [ ] Créer un checkpoint
 - [ ] Pousser sur GitHub

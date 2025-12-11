@@ -1,8 +1,10 @@
-import SEO from '@/components/SEO';
+import { useState } from 'react';
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import UniversalLEO from '@/components/UniversalLEO';
+import Header from '@/components/Header';
+import SEO from '@/components/SEO';
 import { 
   ArrowRight, 
   CheckCircle2, 
@@ -23,12 +25,12 @@ import {
 export default function Agencies() {
   return (
     <>
-    <div className="min-h-screen bg-gradient-to-br from-[oklch(0.20_0.05_300)] via-[oklch(0.15_0.05_320)] to-[oklch(0.10_0.05_340)]">
       <SEO 
         title="Partner with Nukleo | Your AI & Digital Team on Demand"
         description="Scale your agency with Nukleo's expert AI & digital team. 40% cost savings, zero hiring hassle, premium quality guaranteed."
       />
-
+      <Header />
+      <div className="min-h-screen bg-gradient-to-br from-[oklch(0.20_0.05_300)] via-[oklch(0.15_0.05_320)] to-[oklch(0.10_0.05_340)]">
       {/* Hero Section - Ultra impactant */}
       <section className="relative overflow-hidden pt-32 pb-20">
         {/* Gradient overlay */}
@@ -548,8 +550,8 @@ export default function Agencies() {
           </div>
         </div>
       </section>
-    </div>
-    <UniversalLEO pageContext="agencies" />
+      </div>
+      <UniversalLEO pageContext="agencies" />
     </>
   );
 }

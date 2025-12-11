@@ -46,6 +46,9 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
   const [currentEmotion, setCurrentEmotion] = useState<Emotion>('default');
   const [isTyping, setIsTyping] = useState(false);
   const [typingText, setTypingText] = useState('');
+  const [showEmailModal, setShowEmailModal] = useState(false);
+  const [emailInput, setEmailInput] = useState('');
+  const [nameInput, setNameInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const chatMutation = trpc.leo.chat.useMutation();
@@ -250,6 +253,11 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
           setMessages(updatedMessages);
           setTypingText('');
 
+          // Show email modal after 3 messages (6 total including responses)
+          if (!emailCaptured && updatedMessages.length >= 6 && !showEmailModal) {
+            setShowEmailModal(true);
+          }
+
           // Try to extract and save data if email is found
           if (!emailCaptured) {
             const extractedData = extractDataFromConversation(updatedMessages);
@@ -296,7 +304,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
             }
           }
         }
-      }, 30);
+      }, 10);
     } catch (error) {
       console.error('Chat error:', error);
       setMessages([
@@ -465,6 +473,103 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
                 ✓ Thanks! We'll be in touch soon.
               </p>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Email Capture Modal */}
+      {showEmailModal && !emailCaptured && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+          <div className="bg-gradient-to-br from-[oklch(0.35_0.15_300)] to-[oklch(0.30_0.15_340)] border border-cyan-500/30 rounded-2xl p-6 max-w-md w-full shadow-2xl">
+            <div className="flex items-center gap-3 mb-4">
+              <img 
+                src={getAvatarSrc('happy')} 
+                alt="LEO" 
+                className="w-12 h-12 rounded-full object-cover"
+              />
+              <div>
+                <h3 className="text-xl font-bold text-white">Stay Connected!</h3>
+                <p className="text-sm text-white/60">Get personalized insights</p>
+              </div>
+            </div>
+            
+            <p className="text-white/80 mb-4">
+              I'd love to send you a detailed analysis and recommendations. Drop your email below!
+            </p>
+            
+            <div className="space-y-3">
+              <input
+                type="text"
+                placeholder="Your name"
+                value={nameInput}
+                onChange={(e) => setNameInput(e.target.value)}
+                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-cyan-500"
+              />
+              <input
+                type="email"
+                placeholder="your@email.com"
+                value={emailInput}
+                onChange={(e) => setEmailInput(e.target.value)}
+                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-cyan-500"
+              />
+              
+              <div className="flex gap-2">
+                <Button
+                  onClick={() => setShowEmailModal(false)}
+                  variant="outline"
+                  className="flex-1 border-white/20 text-white hover:bg-white/10"
+                >
+                  Maybe Later
+                </Button>
+                <Button
+                  onClick={async () => {
+                    if (emailInput.trim()) {
+                      setEmailCaptured(true);
+                      setShowEmailModal(false);
+                      
+                      // Update session
+                      const conversationDuration = Math.floor((Date.now() - sessionStartTime) / 1000);
+                      fetch('/api/trpc/leo.updateSession', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                          sessionId,
+                          emailCaptured: 1,
+                          capturedEmail: emailInput,
+                          conversationDuration,
+                          completedAt: new Date(),
+                        }),
+                      }).catch(err => console.error('Failed to update session:', err));
+                      
+                      // Save contact
+                      if (pageContext === 'agencies') {
+                        await saveAgencyLead.mutateAsync({
+                          email: emailInput,
+                          companyName: nameInput || undefined,
+                          agencySize: undefined,
+                          budget: undefined,
+                          urgency: undefined,
+                          techNeeds: undefined,
+                        }).catch(err => console.error('Failed to save agency lead:', err));
+                      } else {
+                        await saveLeoContact.mutateAsync({
+                          email: emailInput,
+                          name: nameInput,
+                          conversationContext: JSON.stringify({
+                            pageContext,
+                            messages: messages.slice(0, 10),
+                          }),
+                        }).catch(err => console.error('Failed to save contact:', err));
+                      }
+                    }
+                  }}
+                  disabled={!emailInput.trim()}
+                  className="flex-1 bg-white text-purple-900 hover:bg-white/90 disabled:opacity-50"
+                >
+                  Send Me Insights
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       )}

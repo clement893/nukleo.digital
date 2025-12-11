@@ -1460,3 +1460,10 @@
 - [x] Supprimer les gradients et bordures
 - [x] Convertir en défilement automatique de texte (déjà implémenté)
 - [x] Déployer sur Railway
+
+## Unify LEO Chatbot
+- [x] Analyser UniversalLEO et AIChatBox
+- [x] Créer un composant LEO unifié avec toutes les fonctionnalités
+- [x] Remplacer toutes les instances par la version unifiée
+- [x] Tester sur toutes les pages
+- [ ] Déployer sur Railway

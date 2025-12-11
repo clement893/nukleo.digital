@@ -1,6 +1,5 @@
 import PageLayout from "@/components/PageLayout";
 import SEO from '@/components/SEO';
-import UniversalLEO from '@/components/UniversalLEO';
 import { Linkedin } from 'lucide-react';
 
 const teamMembers = [

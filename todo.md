@@ -1524,3 +1524,22 @@
 - [x] Tester les deux pages
 - [ ] Créer un checkpoint
 - [ ] Pousser sur GitHub
+
+
+## Capture d'email inline dans le chat (pas popup)
+- [ ] Supprimer le modal popup dans UniversalLEO
+- [ ] Créer un message spécial avec formulaire inline
+- [ ] Ajouter le formulaire dans le fil de messages
+- [ ] Supprimer le modal popup dans Leo.tsx
+- [ ] Appliquer le même système inline à Leo.tsx
+- [ ] Tester sur les deux pages
+- [ ] Créer un checkpoint
+- [ ] Pousser sur GitHub
+
+
+## Effet de glow du curseur - Focus sur boutons
+- [x] Trouver le code du glow du curseur
+- [x] Ajouter l'effet de réduction/focus quand on survole un bouton
+- [x] Tester l'effet sur différents boutons
+- [ ] Créer un checkpoint
+- [ ] Pousser sur GitHub

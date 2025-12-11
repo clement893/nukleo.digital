@@ -170,8 +170,19 @@
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
-  transition: opacity 0.3s ease;
+  transition: all 0.3s ease;
   mix-blend-mode: screen;
+}
+
+.cursor-glow-focused {
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(
+    circle, 
+    rgba(255, 255, 255, 0.20) 0%, 
+    rgba(255, 255, 255, 0.10) 40%,
+    transparent 70%
+  );
 }
 
 /* Curseur système visible + effet halo en arrière-plan */

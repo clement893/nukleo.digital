@@ -70,31 +70,53 @@ export default function HeroSection() {
               </Link>
             </div>
 
-            {/* Services Banner */}
+            {/* Beyond AI Text - Now before services */}
             <div className="mt-12 sm:mt-16 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-1200">
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-3xl">
-                <div className="flex flex-col items-center gap-2 p-4 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
-                  <span className="text-2xl">🤖</span>
-                  <span className="text-white font-semibold text-sm sm:text-base">AI Strategy</span>
-                </div>
-                <div className="flex flex-col items-center gap-2 p-4 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
-                  <span className="text-2xl">💻</span>
-                  <span className="text-white font-semibold text-sm sm:text-base">Digital Platforms</span>
-                </div>
-                <div className="flex flex-col items-center gap-2 p-4 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
-                  <span className="text-2xl">🎨</span>
-                  <span className="text-white font-semibold text-sm sm:text-base">Creative Studio</span>
-                </div>
-                <div className="flex flex-col items-center gap-2 p-4 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300">
-                  <span className="text-2xl">⚡</span>
-                  <span className="text-white font-semibold text-sm sm:text-base">Operations</span>
-                </div>
-              </div>
-              
-              {/* Beyond AI Text */}
-              <p className="mt-8 text-center text-white/60 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+              <p className="text-center text-white/70 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-8">
                 More than AI. We craft complete digital ecosystems—from strategy and platforms to creative content and intelligent automation.
               </p>
+            </div>
+
+            {/* Services Carousel */}
+            <div className="mt-8 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-1400">
+              <div className="relative max-w-5xl mx-auto">
+                {/* Carousel Container */}
+                <div className="overflow-hidden">
+                  <div 
+                    className="flex gap-4 transition-transform duration-500 ease-out"
+                    style={{
+                      transform: `translateX(-${(mousePosition.x / 100) * 20}%)`
+                    }}
+                  >
+                    {[
+                      { icon: '🤖', label: 'AI Strategy' },
+                      { icon: '💻', label: 'Digital Platforms' },
+                      { icon: '📱', label: 'Mobile Apps' },
+                      { icon: '🎨', label: 'Creative Studio' },
+                      { icon: '📊', label: 'CRM Solutions' },
+                      { icon: '🌐', label: 'Portals' },
+                      { icon: '📢', label: 'Marketing' },
+                      { icon: '💬', label: 'Communication' },
+                      { icon: '⚡', label: 'Operations' },
+                      { icon: '🔐', label: 'Security' },
+                      { icon: '📈', label: 'Analytics' },
+                      { icon: '☁️', label: 'Cloud Solutions' },
+                    ].map((service, index) => (
+                      <div 
+                        key={index}
+                        className="flex-shrink-0 w-40 sm:w-48 flex flex-col items-center gap-3 p-5 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105"
+                      >
+                        <span className="text-3xl sm:text-4xl">{service.icon}</span>
+                        <span className="text-white font-semibold text-sm sm:text-base text-center">{service.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                {/* Gradient Overlays */}
+                <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[rgb(60,15,15)] to-transparent pointer-events-none" />
+                <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[rgb(60,15,15)] to-transparent pointer-events-none" />
+              </div>
             </div>
           </div>
         </div>

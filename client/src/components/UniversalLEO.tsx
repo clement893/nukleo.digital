@@ -3,6 +3,15 @@ import { X, MessageCircle, Send, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { trpc } from '@/lib/trpc';
 
+// Generate a simple UUID v4
+function generateUUID() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    const r = Math.random() * 16 | 0;
+    const v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
 type PageContext = 'home' | 'agencies' | 'services' | 'contact' | 'projects' | 'about' | 'default';
 
 interface Message {
@@ -31,11 +40,44 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
   const [inputValue, setInputValue] = useState('');
   const [hasInteracted, setHasInteracted] = useState(false);
   const [emailCaptured, setEmailCaptured] = useState(false);
+  const [sessionId] = useState(() => generateUUID());
+  const [sessionStartTime] = useState(() => Date.now());
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const chatMutation = trpc.leo.chat.useMutation();
   const saveLeoContact = trpc.leo.saveContact.useMutation();
   const saveAgencyLead = trpc.agencies.saveLead.useMutation();
+  
+  // Track session creation
+  useEffect(() => {
+    if (isOpen && messages.length > 0) {
+      // Create session on first interaction
+      fetch('/api/trpc/leo.createSession', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sessionId,
+          pageContext,
+        }),
+      }).catch(err => console.error('Failed to create session:', err));
+    }
+  }, [isOpen, messages.length, sessionId, pageContext]);
+  
+  // Update session on message count change
+  useEffect(() => {
+    if (messages.length > 0) {
+      const conversationDuration = Math.floor((Date.now() - sessionStartTime) / 1000);
+      fetch('/api/trpc/leo.updateSession', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sessionId,
+          messageCount: messages.length,
+          conversationDuration,
+        }),
+      }).catch(err => console.error('Failed to update session:', err));
+    }
+  }, [messages.length, sessionId, sessionStartTime]);
 
   const storageKey = `leo-${pageContext}-interacted`;
 
@@ -144,8 +186,22 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
       if (!emailCaptured) {
         const extractedData = extractDataFromConversation(updatedMessages);
         
-        if (extractedData.email) {
+          if (extractedData.email) {
           setEmailCaptured(true);
+          
+          // Update session with email capture
+          const conversationDuration = Math.floor((Date.now() - sessionStartTime) / 1000);
+          fetch('/api/trpc/leo.updateSession', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              sessionId,
+              emailCaptured: 1,
+              capturedEmail: extractedData.email,
+              conversationDuration,
+              completedAt: new Date(),
+            }),
+          }).catch(err => console.error('Failed to update session:', err));
           
           // Save based on context
           if (pageContext === 'agencies' && extractedData.companyName) {

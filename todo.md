@@ -1339,3 +1339,16 @@
 - [ ] Tester les conversations sur différentes pages
 - [ ] Créer un checkpoint
 - [ ] Push GitHub
+
+## Créer un dashboard LEO Analytics
+- [x] Enrichir le schéma avec table leo_sessions pour tracking
+- [x] Créer les procédures tRPC pour récupérer les analytics
+- [x] Créer la page /admin/leo-analytics avec métriques
+- [x] Ajouter taux de complétion par page
+- [x] Ajouter temps moyen de conversation
+- [x] Ajouter pages avec meilleur engagement
+- [x] Ajouter funnel de conversion
+- [x] Ajouter graphiques de tendances
+- [x] Ajouter le tracking dans UniversalLEO
+- [ ] Créer un checkpoint
+- [ ] Push GitHub

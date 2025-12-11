@@ -1,6 +1,6 @@
 import { eq, desc } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, leoContacts, InsertLeoContact, agencyLeads, InsertAgencyLead } from "../drizzle/schema";
+import { InsertUser, users, leoContacts, InsertLeoContact, leoSessions, InsertLeoSession, agencyLeads, InsertAgencyLead } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -62,6 +62,54 @@ export async function saveLeoContact(contact: InsertLeoContact): Promise<void> {
   } catch (error) {
     console.error("[Database] Error saving LEO contact:", error);
     throw error;
+  }
+}
+
+// LEO Session functions for analytics
+export async function createLeoSession(session: InsertLeoSession): Promise<void> {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot create LEO session: database not available");
+    return;
+  }
+
+  try {
+    await db.insert(leoSessions).values(session);
+  } catch (error) {
+    console.error("[Database] Error creating LEO session:", error);
+    throw error;
+  }
+}
+
+export async function updateLeoSession(sessionId: string, data: Partial<InsertLeoSession>): Promise<void> {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot update LEO session: database not available");
+    return;
+  }
+
+  try {
+    await db.update(leoSessions)
+      .set(data)
+      .where(eq(leoSessions.sessionId, sessionId));
+  } catch (error) {
+    console.error("[Database] Error updating LEO session:", error);
+    throw error;
+  }
+}
+
+export async function getLeoAnalytics() {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get LEO analytics: database not available");
+    return [];
+  }
+
+  try {
+    return await db.select().from(leoSessions).orderBy(desc(leoSessions.startedAt));
+  } catch (error) {
+    console.error("[Database] Error getting LEO analytics:", error);
+    return [];
   }
 }
 

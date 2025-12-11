@@ -38,6 +38,23 @@ export const leoContacts = mysqlTable("leo_contacts", {
 export type LeoContact = typeof leoContacts.$inferSelect;
 export type InsertLeoContact = typeof leoContacts.$inferInsert;
 
+// LEO Sessions table for analytics tracking
+export const leoSessions = mysqlTable("leo_sessions", {
+  id: int("id").autoincrement().primaryKey(),
+  sessionId: varchar("sessionId", { length: 64 }).notNull().unique(), // UUID for session
+  pageContext: varchar("pageContext", { length: 50 }).notNull(), // home, agencies, services, etc.
+  messageCount: int("messageCount").default(0).notNull(), // Number of messages exchanged
+  emailCaptured: int("emailCaptured").default(0).notNull(), // 0 or 1
+  capturedEmail: varchar("capturedEmail", { length: 320 }), // Email if captured
+  conversationDuration: int("conversationDuration"), // Duration in seconds
+  startedAt: timestamp("startedAt").defaultNow().notNull(),
+  completedAt: timestamp("completedAt"),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type LeoSession = typeof leoSessions.$inferSelect;
+export type InsertLeoSession = typeof leoSessions.$inferInsert;
+
 // AI Readiness Assessment table
 export const aiAssessments = mysqlTable("ai_assessments", {
   id: int("id").autoincrement().primaryKey(),

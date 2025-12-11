@@ -9,8 +9,8 @@ import { contactRouter } from "./routers/contact";
 import { mediaAssetsRouter } from "./routers/mediaAssets";
 import { startProjectRouter } from "./routers/startProject";
 import { agenciesRouter } from "./routers/agencies";
-import { saveLeoContact } from "./db";
-
+import { leoAnalyticsRouter } from "./routers/leoAnalytics";
+import { saveLeoContact, createLeoSession, updateLeoSession } from "./db";
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
   system: systemRouter,
@@ -19,6 +19,7 @@ export const appRouter = router({
   mediaAssets: mediaAssetsRouter,
   startProject: startProjectRouter,
   agencies: agenciesRouter,
+  leoAnalytics: leoAnalyticsRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {
@@ -127,6 +128,48 @@ Limitations:
           throw new Error("Failed to save contact");
         }
       }),
+
+  createSession: publicProcedure
+    .input(
+      z.object({
+        sessionId: z.string(),
+        pageContext: z.string(),
+      })
+    )
+    .mutation(async ({ input }) => {
+      try {
+        await createLeoSession({
+          sessionId: input.sessionId,
+          pageContext: input.pageContext,
+        });
+        return { success: true };
+      } catch (error) {
+        console.error("[Leo Create Session Error]", error);
+        throw new Error("Failed to create session");
+      }
+    }),
+
+  updateSession: publicProcedure
+    .input(
+      z.object({
+        sessionId: z.string(),
+        messageCount: z.number().optional(),
+        emailCaptured: z.number().optional(),
+        capturedEmail: z.string().optional(),
+        conversationDuration: z.number().optional(),
+        completedAt: z.date().optional(),
+      })
+    )
+    .mutation(async ({ input }) => {
+      try {
+        const { sessionId, ...data } = input;
+        await updateLeoSession(sessionId, data);
+        return { success: true };
+      } catch (error) {
+        console.error("[Leo Update Session Error]", error);
+        throw new Error("Failed to update session");
+      }
+    }),
   }),
 });
 

@@ -16,8 +16,9 @@ type PageContext = 'home' | 'agencies' | 'services' | 'contact' | 'projects' | '
 type Emotion = 'default' | 'happy' | 'thinking' | 'surprised' | 'confused' | 'excited';
 
 interface Message {
-  role: 'user' | 'assistant';
+  role: 'user' | 'assistant' | 'system';
   content: string;
+  isEmailForm?: boolean;
 }
 
 interface UniversalLEOProps {
@@ -46,7 +47,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
   const [currentEmotion, setCurrentEmotion] = useState<Emotion>('default');
   const [isTyping, setIsTyping] = useState(false);
   const [typingText, setTypingText] = useState('');
-  const [showEmailModal, setShowEmailModal] = useState(false);
+  const [showEmailForm, setShowEmailForm] = useState(false);
   const [emailInput, setEmailInput] = useState('');
   const [nameInput, setNameInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -157,7 +158,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
   // Scroll to bottom when new messages arrive
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, typingText]);
+  }, [messages, typingText, showEmailForm]);
 
   // Extract email from text using regex
   const extractEmail = (text: string): string | null => {
@@ -253,9 +254,15 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
           setMessages(updatedMessages);
           setTypingText('');
 
-          // Show email modal after first exchange (2 messages: user + assistant)
-          if (!emailCaptured && updatedMessages.length >= 2 && !showEmailModal) {
-            setShowEmailModal(true);
+          // Show email form inline after first exchange (2 messages: user + assistant)
+          if (!emailCaptured && updatedMessages.length >= 2 && !showEmailForm) {
+            setShowEmailForm(true);
+            // Add email form message
+            setMessages([...updatedMessages, {
+              role: 'system',
+              content: "Before we continue, I'd love to send you personalized insights! Could you share your email?",
+              isEmailForm: true,
+            }]);
           }
 
           // Try to extract and save data if email is found
@@ -317,6 +324,69 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
     }
   };
 
+  const handleEmailSubmit = async () => {
+    if (!emailInput.trim()) return;
+
+    setEmailCaptured(true);
+    setShowEmailForm(false);
+    
+    // Remove email form message and add confirmation
+    const messagesWithoutForm = messages.filter(m => !m.isEmailForm);
+    setMessages([...messagesWithoutForm, {
+      role: 'assistant',
+      content: `Perfect! Thanks ${nameInput || 'there'}! 🎉 I'll send personalized insights to ${emailInput}. Now, let's continue our conversation!`,
+    }]);
+    
+    // Update session
+    const conversationDuration = Math.floor((Date.now() - sessionStartTime) / 1000);
+    fetch('/api/trpc/leo.updateSession', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        sessionId,
+        emailCaptured: 1,
+        capturedEmail: emailInput,
+        conversationDuration,
+        completedAt: new Date(),
+      }),
+    }).catch(err => console.error('Failed to update session:', err));
+    
+    // Save contact
+    if (pageContext === 'agencies') {
+      await saveAgencyLead.mutateAsync({
+        email: emailInput,
+        companyName: nameInput || undefined,
+        agencySize: undefined,
+        budget: undefined,
+        urgency: undefined,
+        techNeeds: undefined,
+      }).catch(err => console.error('Failed to save agency lead:', err));
+    } else {
+      await saveLeoContact.mutateAsync({
+        email: emailInput,
+        name: nameInput,
+        conversationContext: JSON.stringify({
+          pageContext,
+          messages: messages.slice(0, 10),
+        }),
+      }).catch(err => console.error('Failed to save contact:', err));
+    }
+    
+    // Clear inputs
+    setEmailInput('');
+    setNameInput('');
+  };
+
+  const handleSkipEmail = () => {
+    setShowEmailForm(false);
+    // Remove email form message and add skip confirmation
+    const messagesWithoutForm = messages.filter(m => !m.isEmailForm);
+    setMessages([...messagesWithoutForm, {
+      role: 'assistant',
+      content: "No problem! Let's continue our conversation. 😊",
+    }]);
+  };
+
   const handleOpen = () => {
     setIsOpen(true);
     setHasInteracted(true);
@@ -338,7 +408,11 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
-      handleSendMessage();
+      if (showEmailForm) {
+        handleEmailSubmit();
+      } else {
+        handleSendMessage();
+      }
     }
   };
 
@@ -400,26 +474,78 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
           {/* Messages */}
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
             {messages.map((message, index) => (
-              <div
-                key={index}
-                className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
-              >
-                {message.role === 'assistant' && (
-                  <img 
-                    src={getAvatarSrc(currentEmotion)} 
-                    alt="LEO" 
-                    className="w-8 h-8 rounded-full object-cover flex-shrink-0"
-                  />
+              <div key={index}>
+                {message.isEmailForm ? (
+                  // Inline Email Form
+                  <div className="flex gap-3 justify-start">
+                    <img 
+                      src={getAvatarSrc('happy')} 
+                      alt="LEO" 
+                      className="w-8 h-8 rounded-full object-cover flex-shrink-0"
+                    />
+                    <div className="max-w-[85%] rounded-2xl px-4 py-4 bg-white/10 backdrop-blur-md text-white border border-cyan-500/30">
+                      <p className="text-sm mb-3">{message.content}</p>
+                      <div className="space-y-2">
+                        <input
+                          type="text"
+                          placeholder="Your name (optional)"
+                          value={nameInput}
+                          onChange={(e) => setNameInput(e.target.value)}
+                          onKeyPress={handleKeyPress}
+                          className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-sm text-white placeholder-white/40 focus:outline-none focus:border-cyan-500"
+                        />
+                        <input
+                          type="email"
+                          placeholder="your@email.com"
+                          value={emailInput}
+                          onChange={(e) => setEmailInput(e.target.value)}
+                          onKeyPress={handleKeyPress}
+                          className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-sm text-white placeholder-white/40 focus:outline-none focus:border-cyan-500"
+                        />
+                        <div className="flex gap-2">
+                          <Button
+                            onClick={handleSkipEmail}
+                            variant="outline"
+                            size="sm"
+                            className="flex-1 border-white/20 text-white hover:bg-white/10 text-xs"
+                          >
+                            Skip
+                          </Button>
+                          <Button
+                            onClick={handleEmailSubmit}
+                            disabled={!emailInput.trim()}
+                            size="sm"
+                            className="flex-1 bg-white text-purple-900 hover:bg-white/90 disabled:opacity-50 text-xs"
+                          >
+                            Send
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  // Regular Message
+                  <div
+                    className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                  >
+                    {message.role === 'assistant' && (
+                      <img 
+                        src={getAvatarSrc(currentEmotion)} 
+                        alt="LEO" 
+                        className="w-8 h-8 rounded-full object-cover flex-shrink-0"
+                      />
+                    )}
+                    <div
+                      className={`max-w-[75%] rounded-2xl px-4 py-3 ${
+                        message.role === 'user'
+                          ? 'bg-white text-purple-900'
+                          : 'bg-white/10 backdrop-blur-md text-white border border-white/10'
+                      }`}
+                    >
+                      <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                    </div>
+                  </div>
                 )}
-                <div
-                  className={`max-w-[75%] rounded-2xl px-4 py-3 ${
-                    message.role === 'user'
-                      ? 'bg-white text-purple-900'
-                      : 'bg-white/10 backdrop-blur-md text-white border border-white/10'
-                  }`}
-                >
-                  <p className="text-sm whitespace-pre-wrap">{message.content}</p>
-                </div>
               </div>
             ))}
             
@@ -458,11 +584,11 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
                 onKeyPress={handleKeyPress}
                 placeholder="Type your message..."
                 className="flex-1 px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-cyan-500"
-                disabled={chatMutation.isPending}
+                disabled={chatMutation.isPending || showEmailForm}
               />
               <Button
                 onClick={handleSendMessage}
-                disabled={!inputValue.trim() || chatMutation.isPending}
+                disabled={!inputValue.trim() || chatMutation.isPending || showEmailForm}
                 className="bg-white text-purple-900 hover:bg-white/90 disabled:opacity-50"
               >
                 <Send className="w-4 h-4" />
@@ -473,103 +599,6 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
                 ✓ Thanks! We'll be in touch soon.
               </p>
             )}
-          </div>
-        </div>
-      )}
-
-      {/* Email Capture Modal */}
-      {showEmailModal && !emailCaptured && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-          <div className="bg-gradient-to-br from-[oklch(0.35_0.15_300)] to-[oklch(0.30_0.15_340)] border border-cyan-500/30 rounded-2xl p-6 max-w-md w-full shadow-2xl">
-            <div className="flex items-center gap-3 mb-4">
-              <img 
-                src={getAvatarSrc('happy')} 
-                alt="LEO" 
-                className="w-12 h-12 rounded-full object-cover"
-              />
-              <div>
-                <h3 className="text-xl font-bold text-white">Stay Connected!</h3>
-                <p className="text-sm text-white/60">Get personalized insights</p>
-              </div>
-            </div>
-            
-            <p className="text-white/80 mb-4">
-              Want personalized insights sent to your inbox? I can provide a detailed analysis tailored to your needs!
-            </p>
-            
-            <div className="space-y-3">
-              <input
-                type="text"
-                placeholder="Your name"
-                value={nameInput}
-                onChange={(e) => setNameInput(e.target.value)}
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-cyan-500"
-              />
-              <input
-                type="email"
-                placeholder="your@email.com"
-                value={emailInput}
-                onChange={(e) => setEmailInput(e.target.value)}
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-cyan-500"
-              />
-              
-              <div className="flex gap-2">
-                <Button
-                  onClick={() => setShowEmailModal(false)}
-                  variant="outline"
-                  className="flex-1 border-white/20 text-white hover:bg-white/10"
-                >
-                  Maybe Later
-                </Button>
-                <Button
-                  onClick={async () => {
-                    if (emailInput.trim()) {
-                      setEmailCaptured(true);
-                      setShowEmailModal(false);
-                      
-                      // Update session
-                      const conversationDuration = Math.floor((Date.now() - sessionStartTime) / 1000);
-                      fetch('/api/trpc/leo.updateSession', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                          sessionId,
-                          emailCaptured: 1,
-                          capturedEmail: emailInput,
-                          conversationDuration,
-                          completedAt: new Date(),
-                        }),
-                      }).catch(err => console.error('Failed to update session:', err));
-                      
-                      // Save contact
-                      if (pageContext === 'agencies') {
-                        await saveAgencyLead.mutateAsync({
-                          email: emailInput,
-                          companyName: nameInput || undefined,
-                          agencySize: undefined,
-                          budget: undefined,
-                          urgency: undefined,
-                          techNeeds: undefined,
-                        }).catch(err => console.error('Failed to save agency lead:', err));
-                      } else {
-                        await saveLeoContact.mutateAsync({
-                          email: emailInput,
-                          name: nameInput,
-                          conversationContext: JSON.stringify({
-                            pageContext,
-                            messages: messages.slice(0, 10),
-                          }),
-                        }).catch(err => console.error('Failed to save contact:', err));
-                      }
-                    }
-                  }}
-                  disabled={!emailInput.trim()}
-                  className="flex-1 bg-white text-purple-900 hover:bg-white/90 disabled:opacity-50"
-                >
-                  Send Me Insights
-                </Button>
-              </div>
-            </div>
           </div>
         </div>
       )}

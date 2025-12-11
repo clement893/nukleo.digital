@@ -1,16 +1,16 @@
-import SEO from '@/components/SEO';
+// Leo.tsx - Chatbot page with inline email capture
 import { useState, useRef, useEffect } from 'react';
 import { Send, Mic, Mail, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { trpc } from '@/lib/trpc';
 import { Link } from 'wouter';
-import { Card } from '@/components/ui/card';
 
 interface Message {
-  role: 'user' | 'assistant';
+  role: 'user' | 'assistant' | 'system';
   content: string;
   timestamp: Date;
+  isEmailForm?: boolean;
 }
 
 export default function Leo() {
@@ -46,7 +46,7 @@ export default function Leo() {
   const [typingText, setTypingText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [currentEmotion, setCurrentEmotion] = useState<'default' | 'happy' | 'thinking' | 'surprised' | 'confused' | 'excited'>('default');
-  const [showEmailModal, setShowEmailModal] = useState(false);
+  const [showEmailForm, setShowEmailForm] = useState(false);
   const [emailInput, setEmailInput] = useState('');
   const [nameInput, setNameInput] = useState('');
   const [emailSaved, setEmailSaved] = useState(false);
@@ -253,7 +253,7 @@ export default function Leo() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messages, typingText, showEmailForm]);
 
   const handleSuggestionClick = (suggestion: string) => {
     setInput(suggestion);
@@ -274,6 +274,8 @@ export default function Leo() {
     setIsLoading(false);
     setIsTyping(false);
     setTypingText('');
+    setShowEmailForm(false);
+    setEmailSaved(false);
   };
 
   const handleSend = async () => {
@@ -327,6 +329,18 @@ export default function Leo() {
           setTypingText('');
           // Show suggestions again after response is complete
           setShowSuggestions(true);
+
+          // Show email form inline after first exchange (2 messages: user + assistant)
+          const emailAlreadySaved = localStorage.getItem('leo-email-saved');
+          if (!emailAlreadySaved && !emailSaved && messages.length >= 1 && !showEmailForm) {
+            setShowEmailForm(true);
+            setMessages((prev) => [...prev, {
+              role: 'system',
+              content: "Before we continue, I'd love to send you personalized insights! Could you share your email?",
+              timestamp: new Date(),
+              isEmailForm: true,
+            }]);
+          }
         }
       }, 5); // 5ms per character for fast typing speed
     } catch (error) {
@@ -343,40 +357,58 @@ export default function Leo() {
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSend();
-    }
-  };
-
-  const handleSaveEmail = async () => {
+  const handleEmailSubmit = async () => {
     if (!emailInput.trim()) return;
 
     try {
-      const lastMessage = messages[messages.length - 1];
+      const lastMessage = messages[messages.length - 2]; // Get last real message before form
       await saveContactMutation.mutateAsync({
         email: emailInput,
         name: nameInput || undefined,
         conversationContext: lastMessage ? lastMessage.content.substring(0, 500) : undefined,
       });
+      
       setEmailSaved(true);
+      setShowEmailForm(false);
       localStorage.setItem('leo-email-saved', 'true');
-      setTimeout(() => {
-        setShowEmailModal(false);
-      }, 2000);
+      
+      // Remove email form message and add confirmation
+      const messagesWithoutForm = messages.filter(m => !m.isEmailForm);
+      setMessages([...messagesWithoutForm, {
+        role: 'assistant',
+        content: `Perfect! Thanks ${nameInput || 'there'}! 🎉 I'll send personalized insights to ${emailInput}. Now, let's continue our conversation!`,
+        timestamp: new Date(),
+      }]);
+      
+      // Clear inputs
+      setEmailInput('');
+      setNameInput('');
     } catch (error) {
       console.error('Error saving email:', error);
     }
   };
 
-  // Show email modal after 3 messages if not already saved
-  useEffect(() => {
-    const emailAlreadySaved = localStorage.getItem('leo-email-saved');
-    if (!emailAlreadySaved && messages.length >= 2 && !showEmailModal && !emailSaved) {
-      setShowEmailModal(true);
+  const handleSkipEmail = () => {
+    setShowEmailForm(false);
+    // Remove email form message and add skip confirmation
+    const messagesWithoutForm = messages.filter(m => !m.isEmailForm);
+    setMessages([...messagesWithoutForm, {
+      role: 'assistant',
+      content: "No problem! Let's continue our conversation. 😊",
+      timestamp: new Date(),
+    }]);
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      if (showEmailForm) {
+        handleEmailSubmit();
+      } else {
+        handleSend();
+      }
     }
-  }, [messages.length, showEmailModal, emailSaved]);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[oklch(0.35_0.15_300)] via-[oklch(0.40_0.15_320)] to-[oklch(0.35_0.15_340)] flex flex-col">
@@ -452,50 +484,107 @@ export default function Leo() {
       <div className="flex-1 container pb-32 overflow-y-auto">
         <div className="max-w-3xl mx-auto space-y-8">
           {messages.map((message, index) => (
-            <div
-              key={index}
-              className={`flex gap-4 ${
-                message.role === 'user' ? 'justify-end' : 'justify-start'
-              }`}
-            >
-              {message.role === 'assistant' && (
-                <div className="flex-shrink-0">
-                  <img 
-                    src={getAvatarSrc(index === messages.length - 1 ? currentEmotion : 'default')} 
-                    alt="Leo" 
-                    className={`w-12 h-12 object-contain transition-all duration-300 ${
-                      index === messages.length - 1 ? `avatar-${currentEmotion}` : 'avatar-default'
-                    }`}
-                  />
+            <div key={index}>
+              {message.isEmailForm ? (
+                // Inline Email Form
+                <div className="flex gap-4 justify-start">
+                  <div className="flex-shrink-0">
+                    <img 
+                      src={getAvatarSrc('happy')} 
+                      alt="Leo" 
+                      className="w-12 h-12 object-contain avatar-happy"
+                    />
+                  </div>
+                  <div className="flex flex-col items-start max-w-[70%]">
+                    <span className="text-xs text-white/40 uppercase tracking-wider mb-2">LEO</span>
+                    <div className="px-6 py-4 rounded-2xl bg-white/10 backdrop-blur-md border border-cyan-500/30 text-white">
+                      <p className="text-base leading-relaxed mb-4">{message.content}</p>
+                      <div className="space-y-3">
+                        <input
+                          type="text"
+                          placeholder="Your name (optional)"
+                          value={nameInput}
+                          onChange={(e) => setNameInput(e.target.value)}
+                          onKeyPress={handleKeyPress}
+                          className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-sm text-white placeholder-white/40 focus:outline-none focus:border-cyan-500"
+                        />
+                        <input
+                          type="email"
+                          placeholder="your@email.com"
+                          value={emailInput}
+                          onChange={(e) => setEmailInput(e.target.value)}
+                          onKeyPress={handleKeyPress}
+                          className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-sm text-white placeholder-white/40 focus:outline-none focus:border-cyan-500"
+                        />
+                        <div className="flex gap-2">
+                          <Button
+                            onClick={handleSkipEmail}
+                            variant="outline"
+                            size="sm"
+                            className="flex-1 border-white/20 text-white hover:bg-white/10 text-xs"
+                          >
+                            Skip
+                          </Button>
+                          <Button
+                            onClick={handleEmailSubmit}
+                            disabled={!emailInput.trim() || saveContactMutation.isPending}
+                            size="sm"
+                            className="flex-1 bg-white text-purple-900 hover:bg-white/90 disabled:opacity-50 text-xs"
+                          >
+                            {saveContactMutation.isPending ? 'Saving...' : 'Send'}
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              )}
-
-              <div className={`flex flex-col ${message.role === 'user' ? 'items-end' : 'items-start'} max-w-[70%]`}>
-                <span className="text-xs text-white/40 uppercase tracking-wider mb-2">
-                  {message.role === 'assistant' ? 'LEO' : 'YOU'}
-                </span>
+              ) : (
+                // Regular Message
                 <div
-                  className={`px-6 py-4 rounded-2xl ${
-                    message.role === 'user'
-                      ? 'bg-gradient-to-r from-[oklch(0.85_0.15_300)] to-[oklch(0.85_0.15_340)] text-white'
-                      : 'bg-white/10 backdrop-blur-md border border-white/20 text-white'
+                  className={`flex gap-4 ${
+                    message.role === 'user' ? 'justify-end' : 'justify-start'
                   }`}
                 >
-                  <p className="text-base leading-relaxed whitespace-pre-wrap">{message.content}</p>
-                </div>
-                <span className="text-xs text-white/30 mt-2">
-                  {message.timestamp.toLocaleTimeString('fr-FR', {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                  })}
-                </span>
-              </div>
+                  {message.role === 'assistant' && (
+                    <div className="flex-shrink-0">
+                      <img 
+                        src={getAvatarSrc(index === messages.length - 1 ? currentEmotion : 'default')} 
+                        alt="Leo" 
+                        className={`w-12 h-12 object-contain transition-all duration-300 ${
+                          index === messages.length - 1 ? `avatar-${currentEmotion}` : 'avatar-default'
+                        }`}
+                      />
+                    </div>
+                  )}
 
-              {message.role === 'user' && (
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                    <span className="text-white font-semibold text-lg">👤</span>
+                  <div className={`flex flex-col ${message.role === 'user' ? 'items-end' : 'items-start'} max-w-[70%]`}>
+                    <span className="text-xs text-white/40 uppercase tracking-wider mb-2">
+                      {message.role === 'assistant' ? 'LEO' : 'YOU'}
+                    </span>
+                    <div
+                      className={`px-6 py-4 rounded-2xl ${
+                        message.role === 'user'
+                          ? 'bg-gradient-to-r from-[oklch(0.85_0.15_300)] to-[oklch(0.85_0.15_340)] text-white'
+                          : 'bg-white/10 backdrop-blur-md border border-white/20 text-white'
+                      }`}
+                    >
+                      <p className="text-base leading-relaxed whitespace-pre-wrap">{message.content}</p>
+                    </div>
+                    <span className="text-xs text-white/30 mt-2">
+                      {message.timestamp.toLocaleTimeString('fr-FR', {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                      })}
+                    </span>
                   </div>
+
+                  {message.role === 'user' && (
+                    <div className="flex-shrink-0">
+                      <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                        <span className="text-white font-semibold text-lg">👤</span>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -570,81 +659,6 @@ export default function Leo() {
         </div>
       </div>
 
-      {/* Email Capture Modal */}
-      {showEmailModal && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <Card className="max-w-md w-full bg-white/10 backdrop-blur-xl border-white/20 p-8 relative">
-            <button
-              onClick={() => setShowEmailModal(false)}
-              className="absolute top-4 right-4 text-white/60 hover:text-white transition-colors"
-            >
-              <X className="w-5 h-5" />
-            </button>
-            
-            {!emailSaved ? (
-              <>
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-br from-cyan-400 to-purple-600 rounded-full flex items-center justify-center">
-                    <Mail className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white">Stay Connected</h3>
-                    <p className="text-sm text-white/60">Get AI insights & updates</p>
-                  </div>
-                </div>
-                
-                <div className="space-y-4 mb-6">
-                  <div>
-                    <label className="text-sm text-white/80 mb-2 block">Your Name (optional)</label>
-                    <Input
-                      value={nameInput}
-                      onChange={(e) => setNameInput(e.target.value)}
-                      placeholder="John Doe"
-                      className="bg-white/5 border-white/20 text-white placeholder:text-white/40"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-sm text-white/80 mb-2 block">Email Address *</label>
-                    <Input
-                      type="email"
-                      value={emailInput}
-                      onChange={(e) => setEmailInput(e.target.value)}
-                      placeholder="you@company.com"
-                      className="bg-white/5 border-white/20 text-white placeholder:text-white/40"
-                      onKeyPress={(e) => {
-                        if (e.key === 'Enter') {
-                          handleSaveEmail();
-                        }
-                      }}
-                    />
-                  </div>
-                </div>
-                
-                <Button
-                  onClick={handleSaveEmail}
-                  disabled={!emailInput.trim() || saveContactMutation.isPending}
-                  className="w-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700"
-                >
-                  {saveContactMutation.isPending ? 'Saving...' : 'Keep Me Updated'}
-                </Button>
-                
-                <p className="text-xs text-white/40 mt-4 text-center">
-                  We'll only send you relevant AI insights. No spam, ever.
-                </p>
-              </>
-            ) : (
-              <div className="text-center py-6">
-                <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Mail className="w-8 h-8 text-green-400" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2">You're All Set! 🎉</h3>
-                <p className="text-white/60">We'll keep you updated with the latest AI insights.</p>
-              </div>
-            )}
-          </Card>
-        </div>
-      )}
-
       {/* Input fixed at bottom */}
       <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-[oklch(0.35_0.15_300)] via-[oklch(0.35_0.15_300)] to-transparent pt-8 pb-6">
         <div className="container">
@@ -656,12 +670,12 @@ export default function Leo() {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Type your response..."
-                disabled={isLoading}
+                disabled={isLoading || showEmailForm}
                 className="flex-1 bg-transparent border-0 text-white placeholder:text-white/40 focus-visible:ring-0 focus-visible:ring-offset-0 text-base"
               />
               <button
                 onClick={handleSend}
-                disabled={isLoading || !input.trim()}
+                disabled={isLoading || !input.trim() || showEmailForm}
                 className="text-white/60 hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
               >
                 <Send className="w-5 h-5" />

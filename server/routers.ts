@@ -8,6 +8,7 @@ import { assessmentRouter } from "./routers/assessment";
 import { contactRouter } from "./routers/contact";
 import { mediaAssetsRouter } from "./routers/mediaAssets";
 import { startProjectRouter } from "./routers/startProject";
+import { agenciesRouter } from "./routers/agencies";
 import { saveLeoContact } from "./db";
 
 export const appRouter = router({
@@ -17,6 +18,7 @@ export const appRouter = router({
   contact: contactRouter,
   mediaAssets: mediaAssetsRouter,
   startProject: startProjectRouter,
+  agencies: agenciesRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {

@@ -99,3 +99,20 @@ export const mediaAssets = mysqlTable("media_assets", {
 
 export type MediaAsset = typeof mediaAssets.$inferSelect;
 export type InsertMediaAsset = typeof mediaAssets.$inferInsert;
+
+// Agency Leads table for qualification chatbot
+export const agencyLeads = mysqlTable("agency_leads", {
+  id: int("id").autoincrement().primaryKey(),
+  email: varchar("email", { length: 320 }).notNull(),
+  companyName: varchar("companyName", { length: 255 }),
+  agencySize: varchar("agencySize", { length: 50 }), // '1-5', '6-20', '21-50', '50+'
+  techNeeds: text("techNeeds"), // JSON array of tech needs
+  budget: varchar("budget", { length: 50 }), // '<10k', '10-50k', '50-100k', '100k+'
+  urgency: varchar("urgency", { length: 50 }), // 'immediate', '1-3 months', '3-6 months', 'exploring'
+  qualificationScore: int("qualificationScore"), // 0-100 based on answers
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type AgencyLead = typeof agencyLeads.$inferSelect;
+export type InsertAgencyLead = typeof agencyLeads.$inferInsert;

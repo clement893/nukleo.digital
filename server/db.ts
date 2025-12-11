@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, leoContacts, InsertLeoContact } from "../drizzle/schema";
+import { InsertUser, users, leoContacts, InsertLeoContact, agencyLeads, InsertAgencyLead } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -16,6 +16,22 @@ export async function getDb() {
     }
   }
   return _db;
+}
+
+// Agency Leads functions
+export async function saveAgencyLead(lead: InsertAgencyLead): Promise<void> {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot save agency lead: database not available");
+    return;
+  }
+
+  try {
+    await db.insert(agencyLeads).values(lead);
+  } catch (error) {
+    console.error("[Database] Error saving agency lead:", error);
+    throw error;
+  }
 }
 
 // LEO Contact functions

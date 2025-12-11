@@ -2,6 +2,7 @@ import SEO from '@/components/SEO';
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import AgencyQualificationBot from '@/components/AgencyQualificationBot';
 import { 
   ArrowRight, 
   CheckCircle2, 
@@ -21,6 +22,7 @@ import {
 
 export default function Agencies() {
   return (
+    <>
     <div className="min-h-screen bg-gradient-to-br from-[oklch(0.20_0.05_300)] via-[oklch(0.15_0.05_320)] to-[oklch(0.10_0.05_340)]">
       <SEO 
         title="Partner with Nukleo | Your AI & Digital Team on Demand"
@@ -120,11 +122,11 @@ export default function Agencies() {
                   description: 'Local dev costs eat profits. You need premium quality at nearshore prices.',
                 },
               ].map((problem, index) => (
-                <Card key={index} className="bg-red-500/10 border-red-500/30 p-6">
+                <div key={index} className="p-6 border-l-4 border-red-500 bg-red-500/5">
                   <problem.icon className="w-12 h-12 text-red-400 mb-4" />
                   <h3 className="text-xl font-bold text-white mb-3">{problem.title}</h3>
                   <p className="text-white/70">{problem.description}</p>
-                </Card>
+                </div>
               ))}
             </div>
           </div>
@@ -190,7 +192,7 @@ export default function Agencies() {
                   highlight: 'Real-time collaboration',
                 },
               ].map((benefit, index) => (
-                <Card key={index} className="bg-white/5 border-white/10 p-6 hover:bg-white/10 transition-all group">
+                <div key={index} className="p-6 border-l-4 border-cyan-500 hover:border-purple-600 transition-all group">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-cyan-500/20 to-purple-600/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                       <benefit.icon className="w-6 h-6 text-cyan-400" />
@@ -204,7 +206,7 @@ export default function Agencies() {
                       </div>
                     </div>
                   </div>
-                </Card>
+                </div>
               ))}
             </div>
 
@@ -311,7 +313,7 @@ export default function Agencies() {
                   services: ['Data pipelines', 'Business intelligence', 'Process automation', 'API integrations', 'ETL workflows'],
                 },
               ].map((category, index) => (
-                <Card key={index} className="bg-white/5 border-white/10 p-6">
+                <div key={index} className="p-6 border-l-4 border-cyan-500">
                   <h3 className="text-2xl font-bold text-white mb-4">{category.title}</h3>
                   <ul className="space-y-2">
                     {category.services.map((service, idx) => (
@@ -321,7 +323,7 @@ export default function Agencies() {
                       </li>
                     ))}
                   </ul>
-                </Card>
+                </div>
               ))}
             </div>
           </div>
@@ -381,12 +383,12 @@ export default function Agencies() {
                   cta: 'Discuss Retainer',
                 },
               ].map((plan, index) => (
-                <Card 
+                <div 
                   key={index} 
                   className={`p-8 relative ${
                     plan.popular 
-                      ? 'bg-gradient-to-br from-cyan-500/20 to-purple-600/20 border-cyan-500/50' 
-                      : 'bg-white/5 border-white/10'
+                      ? 'border-l-4 border-cyan-500 bg-gradient-to-br from-cyan-500/10 to-purple-600/10' 
+                      : 'border-l-4 border-white/30'
                   }`}
                 >
                   {plan.popular && (
@@ -423,7 +425,7 @@ export default function Agencies() {
                       {plan.cta}
                     </Button>
                   </Link>
-                </Card>
+                </div>
               ))}
             </div>
 
@@ -467,7 +469,7 @@ export default function Agencies() {
                   metric: "Zero turnover risk",
                 },
               ].map((testimonial, index) => (
-                <Card key={index} className="bg-white/5 border-white/10 p-6">
+                <div key={index} className="p-6 border-l-4 border-yellow-400">
                   <div className="flex gap-1 mb-4">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
@@ -489,7 +491,7 @@ export default function Agencies() {
                       <span className="text-sm font-medium text-cyan-400">{testimonial.metric}</span>
                     </div>
                   </div>
-                </Card>
+                </div>
               ))}
             </div>
           </div>
@@ -547,5 +549,7 @@ export default function Agencies() {
         </div>
       </section>
     </div>
+    <AgencyQualificationBot />
+    </>
   );
 }

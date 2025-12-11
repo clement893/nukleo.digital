@@ -1298,3 +1298,13 @@
 - [x] Design moderne et vendeur
 - [ ] Créer un checkpoint
 - [ ] Push GitHub
+
+## Intégrer un chatbot de qualification sur la page Agencies
+- [x] Simplifier le design de la page Agencies (réduire les cartes en verre)
+- [x] Créer le schéma de base de données (table agency_leads)
+- [x] Créer les procédures tRPC pour sauvegarder les leads qualifiés
+- [x] Créer le composant AgencyQualificationBot avec questions clés
+- [x] Intégrer le chatbot dans la page Agencies
+- [x] Ajouter l'animation d'apparition automatique
+- [ ] Créer un checkpoint
+- [ ] Push GitHub

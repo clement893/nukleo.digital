@@ -1379,3 +1379,11 @@
 - [x] Créer un script de migration automatique au démarrage
 - [x] Configurer package.json pour exécuter les migrations avant le démarrage
 - [ ] Tester le déploiement avec migrations
+
+## PostgreSQL Migration for Railway
+- [ ] Installer les dépendances PostgreSQL (postgres, pg)
+- [ ] Convertir le schéma Drizzle de MySQL vers PostgreSQL
+- [ ] Mettre à jour drizzle.config.ts pour PostgreSQL
+- [ ] Configurer la variable d'environnement DATABASE_URL sur Railway
+- [ ] Tester le déploiement
+- [ ] Créer le compte admin

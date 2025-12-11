@@ -1392,3 +1392,9 @@
 - [x] Créer un endpoint /admin/init-db pour créer les tables automatiquement
 - [ ] Tester l'endpoint sur Railway
 - [ ] Créer le compte admin après initialisation
+
+## Admin Authentication Fix
+- [ ] Vérifier la configuration des cookies (secure, sameSite, domain)
+- [ ] Vérifier que JWT_SECRET est bien configuré sur Railway
+- [ ] Tester le flow de login complet
+- [ ] Corriger la redirection après login

@@ -1,7 +1,7 @@
 import { publicProcedure, router } from "../_core/trpc";
 import { z } from "zod";
 import { verifyAdminPassword, createAdminUser } from "../db";
-import jwt from "jsonwebtoken";
+import { sign, verify } from "jsonwebtoken";
 import { ENV } from "../_core/env";
 
 const ADMIN_JWT_SECRET = ENV.cookieSecret + "-admin"; // Separate secret for admin tokens
@@ -23,7 +23,7 @@ export const adminAuthRouter = router({
       }
 
       // Create JWT token
-      const token = jwt.sign(
+      const token = sign(
         { id: admin.id, username: admin.username, email: admin.email },
         ADMIN_JWT_SECRET,
         { expiresIn: "7d" }
@@ -61,7 +61,7 @@ export const adminAuthRouter = router({
     }
 
     try {
-      const decoded = jwt.verify(token, ADMIN_JWT_SECRET) as {
+      const decoded = verify(token, ADMIN_JWT_SECRET) as {
         id: number;
         username: string;
         email: string;

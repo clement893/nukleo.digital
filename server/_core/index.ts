@@ -8,6 +8,7 @@ import { appRouter } from "../routers";
 import { createContext } from "./context";
 import sitemapRouter from "../sitemap";
 import { serveStatic, setupVite } from "./vite";
+import { initDatabase } from "../init-db";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -38,6 +39,8 @@ async function startServer() {
   registerOAuthRoutes(app);
   // Sitemap and robots.txt
   app.use(sitemapRouter);
+  // Database initialization endpoint
+  app.post("/api/init-db", initDatabase);
   // tRPC API
   app.use(
     "/api/trpc",

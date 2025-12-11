@@ -47,6 +47,7 @@ import AdminAgencyLeads from "./pages/admin/AdminAgencyLeads";
 import AdminLEOAnalytics from "./pages/admin/AdminLEOAnalytics";
 import AdminLogin from "./pages/admin/AdminLogin";
 import CreateFirstAdmin from "./pages/CreateFirstAdmin";
+import InitDatabase from "./pages/InitDatabase";
 import AdminRoute from "./components/AdminRoute";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 
@@ -69,6 +70,7 @@ function Router() {
       <Route path={"/agencies"} component={Agencies} />
       <Route path={"/admin/login"} component={AdminLogin} />
       <Route path={"/admin/create-first"} component={CreateFirstAdmin} />
+      <Route path={"/admin/init-db"} component={InitDatabase} />
       <Route path={"/admin/agency-leads"}>
         {() => <AdminRoute><AdminAgencyLeads /></AdminRoute>}
       </Route>

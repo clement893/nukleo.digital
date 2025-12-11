@@ -1387,3 +1387,8 @@
 - [ ] Configurer la variable d'environnement DATABASE_URL sur Railway
 - [ ] Tester le déploiement
 - [ ] Créer le compte admin
+
+## Database Initialization Endpoint
+- [ ] Créer un endpoint /admin/init-db pour créer les tables automatiquement
+- [ ] Tester l'endpoint sur Railway
+- [ ] Créer le compte admin après initialisation

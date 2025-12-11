@@ -28,9 +28,28 @@ export default defineConfig({
     minify: 'esbuild',
     rollupOptions: {
       output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom'],
-          'ui-vendor': ['lucide-react', 'recharts'],
+        manualChunks: (id) => {
+          // Vendor chunks
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'react-vendor';
+            }
+            if (id.includes('lucide-react') || id.includes('recharts')) {
+              return 'ui-vendor';
+            }
+            if (id.includes('@trpc') || id.includes('@tanstack')) {
+              return 'trpc-vendor';
+            }
+            // Other node_modules go to vendor chunk
+            return 'vendor';
+          }
+          // Split large components
+          if (id.includes('/components/radar/')) {
+            return 'radar';
+          }
+          if (id.includes('/components/UniversalLEO') || id.includes('/components/Leo')) {
+            return 'leo';
+          }
         },
       },
     },

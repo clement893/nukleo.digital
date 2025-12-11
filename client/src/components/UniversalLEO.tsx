@@ -88,15 +88,15 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
     return 'default';
   };
 
-  // Avatar mapping
+  // Avatar mapping - using optimized WebP images
   const getAvatarSrc = (emotion: Emotion): string => {
     switch (emotion) {
-      case 'happy': return '/leo-avatar-happy.png';
-      case 'thinking': return '/leo-avatar-thinking.png';
-      case 'surprised': return '/leo-avatar-surprised.png';
-      case 'confused': return '/leo-avatar-confused.png';
-      case 'excited': return '/leo-avatar-excited.png';
-      default: return '/leo-avatar.png';
+      case 'happy': return '/leo-avatar-happy.webp';
+      case 'thinking': return '/leo-avatar-thinking.webp';
+      case 'surprised': return '/leo-avatar-surprised.webp';
+      case 'confused': return '/leo-avatar-confused.webp';
+      case 'excited': return '/leo-avatar-excited.webp';
+      default: return '/leo-avatar.webp';
     }
   };
   
@@ -433,7 +433,10 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
             <div className="relative w-16 h-16 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 flex items-center justify-center shadow-2xl hover:shadow-cyan-500/50 transition-all duration-300 hover:scale-110">
               <img 
                 src={getAvatarSrc(currentEmotion)} 
-                alt="LEO" 
+                alt="LEO - AI Assistant" 
+                width="48"
+                height="48"
+                fetchPriority="high"
                 className={`w-12 h-12 rounded-full object-cover avatar-${currentEmotion}`}
               />
             </div>

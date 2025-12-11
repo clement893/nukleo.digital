@@ -84,15 +84,15 @@ export default function Leo() {
     return 'default';
   };
 
-  // Avatar mapping
+  // Avatar mapping - using optimized WebP images
   const getAvatarSrc = (emotion: typeof currentEmotion): string => {
     switch (emotion) {
-      case 'happy': return '/leo-avatar-happy.png';
-      case 'thinking': return '/leo-avatar-thinking.png';
-      case 'surprised': return '/leo-avatar-surprised.png';
-      case 'confused': return '/leo-avatar-confused.png';
-      case 'excited': return '/leo-avatar-excited.png';
-      default: return '/leo-avatar.png';
+      case 'happy': return '/leo-avatar-happy.webp';
+      case 'thinking': return '/leo-avatar-thinking.webp';
+      case 'surprised': return '/leo-avatar-surprised.webp';
+      case 'confused': return '/leo-avatar-confused.webp';
+      case 'excited': return '/leo-avatar-excited.webp';
+      default: return '/leo-avatar.webp';
     }
   };
   const messagesEndRef = useRef<HTMLDivElement>(null);

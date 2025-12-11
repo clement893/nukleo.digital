@@ -122,8 +122,8 @@ export default function LeoChatWidget() {
   };
 
   const getAvatarSrc = () => {
-    if (isTyping) return '/leo-avatar-thinking.png';
-    return `/leo-avatar-${currentEmotion}.png`;
+    if (isTyping) return '/leo-avatar-thinking.webp';
+    return `/leo-avatar-${currentEmotion}.webp`;
   };
 
   const getAnimationClass = () => {

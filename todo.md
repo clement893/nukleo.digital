@@ -1394,7 +1394,7 @@
 - [ ] Créer le compte admin après initialisation
 
 ## Admin Authentication Fix
-- [ ] Vérifier la configuration des cookies (secure, sameSite, domain)
-- [ ] Vérifier que JWT_SECRET est bien configuré sur Railway
+- [x] Vérifier la configuration des cookies (secure, sameSite, domain)
+- [x] Vérifier que JWT_SECRET est bien configuré sur Railway
 - [ ] Tester le flow de login complet
 - [ ] Corriger la redirection après login

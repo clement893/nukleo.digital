@@ -1389,6 +1389,6 @@
 - [ ] Créer le compte admin
 
 ## Database Initialization Endpoint
-- [ ] Créer un endpoint /admin/init-db pour créer les tables automatiquement
+- [x] Créer un endpoint /admin/init-db pour créer les tables automatiquement
 - [ ] Tester l'endpoint sur Railway
 - [ ] Créer le compte admin après initialisation

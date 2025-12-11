@@ -64,6 +64,20 @@
       "when": 1765469602935,
       "tag": "0008_square_frank_castle",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "5",
+      "when": 1765482491358,
+      "tag": "0009_cold_rictor",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "5",
+      "when": 1765482605804,
+      "tag": "0010_elite_dagger",
+      "breakpoints": true
     }
   ]
 }

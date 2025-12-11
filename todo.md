@@ -1460,3 +1460,14 @@
 - [x] Supprimer les gradients et bordures
 - [x] Convertir en défilement automatique de texte (déjà implémenté)
 - [x] Déployer sur Railway
+
+
+## Intégrer le chatbot LEO sur Home et Agencies
+- [x] Analyser le composant Leo.tsx actuel
+- [x] Créer un composant UniversalLEO réutilisable (widget flottant)
+- [x] Intégrer le chatbot sur la page Home
+- [x] Intégrer le chatbot sur la page Agencies
+- [x] Adapter les messages d'accueil selon la page
+- [x] Tester le chatbot sur les deux pages
+- [ ] Créer un checkpoint
+- [ ] Pousser sur GitHub

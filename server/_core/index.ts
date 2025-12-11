@@ -10,6 +10,11 @@ import sitemapRouter from "../sitemap";
 import { serveStatic, setupVite } from "./vite";
 import { initDatabase } from "../init-db";
 import cookieParser from "cookie-parser";
+import helmet from "helmet";
+import cors from "cors";
+import rateLimit from "express-rate-limit";
+import { logger } from "./logger";
+import { initSentry, Sentry } from "./sentry";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -31,8 +36,68 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
 }
 
 async function startServer() {
+  // Initialize Sentry for error monitoring
+  initSentry();
+  
   const app = express();
   const server = createServer(app);
+  
+  // Sentry request handler (must be first)
+  if (process.env.SENTRY_DSN) {
+    app.use(Sentry.Handlers.requestHandler());
+  }
+  
+  // Security: Helmet for HTTP headers
+  app.use(helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://fonts.googleapis.com", "https://*.manusvm.computer"],
+        styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+        imgSrc: ["'self'", "data:", "https:", "blob:"],
+        fontSrc: ["'self'", "https://fonts.gstatic.com", "data:"],
+        connectSrc: ["'self'", "https://api.manus.im", "https://*.railway.app", "https://*.manusvm.computer"],
+        frameSrc: ["'self'"],
+        objectSrc: ["'none'"],
+        upgradeInsecureRequests: process.env.NODE_ENV === 'production' ? [] : null,
+      },
+    },
+    hsts: {
+      maxAge: 31536000,
+      includeSubDomains: true,
+      preload: true
+    },
+    crossOriginEmbedderPolicy: false, // Allow embedding for OAuth
+  }));
+  
+  // Security: CORS configuration
+  app.use(cors({
+    origin: process.env.NODE_ENV === 'production' 
+      ? ['https://nukleo.digital', 'https://nukleodigital-production.up.railway.app', 'https://www.nukleo.digital']
+      : true,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
+  }));
+  
+  // Security: Rate limiting - General (100 req/15min)
+  const generalLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 100,
+    message: 'Too many requests from this IP, please try again later.',
+    standardHeaders: true,
+    legacyHeaders: false,
+  });
+  
+  // Security: Rate limiting - Auth (5 req/15min)
+  const authLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 5,
+    message: 'Too many authentication attempts, please try again later.',
+    standardHeaders: true,
+    legacyHeaders: false,
+  });
+  
   // Configure body parser with larger size limit for file uploads
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
@@ -44,7 +109,8 @@ async function startServer() {
   app.use(sitemapRouter);
   // Database initialization endpoint
   app.post("/api/init-db", initDatabase);
-  // tRPC API
+  // tRPC API with rate limiting
+  app.use("/api/trpc", generalLimiter);
   app.use(
     "/api/trpc",
     createExpressMiddleware({
@@ -58,6 +124,11 @@ async function startServer() {
   } else {
     serveStatic(app);
   }
+  
+  // Sentry error handler (must be after all routes)
+  if (process.env.SENTRY_DSN) {
+    app.use(Sentry.Handlers.errorHandler());
+  }
 
   const preferredPort = parseInt(process.env.PORT || "3000");
   const port = await findAvailablePort(preferredPort);
@@ -67,7 +138,7 @@ async function startServer() {
   }
 
   server.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}/`);
+    logger.info(`Server running on http://localhost:${port}/`);
   });
 }
 

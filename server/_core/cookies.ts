@@ -23,7 +23,7 @@ function isSecureRequest(req: Request) {
 
 export function getSessionCookieOptions(
   req: Request
-): Pick<CookieOptions, "domain" | "httpOnly" | "path" | "sameSite" | "secure"> {
+): Pick<CookieOptions, "domain" | "httpOnly" | "path" | "sameSite" | "secure" | "maxAge"> {
   // const hostname = req.hostname;
   // const shouldSetDomain =
   //   hostname &&
@@ -39,10 +39,13 @@ export function getSessionCookieOptions(
   //       ? hostname
   //       : undefined;
 
+  const isProduction = process.env.NODE_ENV === 'production';
+  
   return {
     httpOnly: true,
     path: "/",
-    sameSite: "none",
+    sameSite: isProduction ? "strict" : "none",
     secure: isSecureRequest(req),
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   };
 }

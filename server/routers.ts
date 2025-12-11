@@ -3,6 +3,7 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
 import { invokeLLM } from "./_core/llm";
+import { logger, sanitizeLogData } from "./_core/logger";
 import { z } from "zod";
 import { assessmentRouter } from "./routers/assessment";
 import { contactRouter } from "./routers/contact";
@@ -42,9 +43,15 @@ export const appRouter = router({
           messages: z.array(
             z.object({
               role: z.enum(["user", "assistant", "system"]),
-              content: z.string(),
+              content: z.string()
+                .min(1, "Message cannot be empty")
+                .max(2000, "Message too long (max 2000 characters)")
+                .refine(
+                  (val) => !val.includes('<script>') && !val.includes('javascript:'),
+                  "Invalid characters in message"
+                ),
             })
-          ),
+          ).max(50, "Too many messages in history"),
         })
       )
       .mutation(async ({ input }) => {
@@ -97,13 +104,10 @@ Limitations:
             content: response.choices[0].message.content || "Sorry, I couldn't generate a response. Could you rephrase your question?",
           };
         } catch (error) {
-          console.error('[Leo Chat Error]', error);
-          console.error('[Leo Chat Error Details]', {
+          logger.error('Leo Chat Error', sanitizeLogData({
             message: error instanceof Error ? error.message : 'Unknown error',
-            stack: error instanceof Error ? error.stack : undefined,
-            apiUrl: process.env.BUILT_IN_FORGE_API_URL,
             hasApiKey: !!process.env.BUILT_IN_FORGE_API_KEY,
-          });
+          }));
           throw error;
         }
       }),

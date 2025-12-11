@@ -8,6 +8,11 @@ Allow: /
 # Block test and component pages
 Disallow: /component-showcase
 
+# Block admin pages
+Disallow: /admin/
+Disallow: /admin/*
+Disallow: /init-db
+
 # Block API endpoints
 Disallow: /api/
 

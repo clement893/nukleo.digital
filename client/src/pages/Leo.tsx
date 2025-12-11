@@ -1,5 +1,6 @@
-// Leo.tsx - Chatbot page with inline email capture
+// Leo.tsx
 import { useState, useRef, useEffect } from 'react';
+import SEO from '@/components/SEO';
 import { Send, Mic, Mail, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -411,7 +412,14 @@ export default function Leo() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[oklch(0.35_0.15_300)] via-[oklch(0.40_0.15_320)] to-[oklch(0.35_0.15_340)] flex flex-col">
+    <>
+      <SEO
+        title="Chat with LEO - AI Assistant | Get Instant AI Consultation"
+        description="Talk to LEO, Nukleo Digital's AI assistant. Get instant answers about AI transformation, strategy, and implementation for your business. Free AI consultation chatbot."
+        keywords="AI chatbot, AI assistant, AI consultation, AI strategy, AI transformation help, AI implementation guide, free AI consultation, AI advisor"
+        ogImage="https://nukleo.digital/og-leo.jpg"
+      />
+      <div className="min-h-screen bg-gradient-to-br from-[oklch(0.35_0.15_300)] via-[oklch(0.40_0.15_320)] to-[oklch(0.35_0.15_340)] flex flex-col">
       {/* Header minimal */}
       <header className="fixed top-0 left-0 right-0 z-50">
         <div className="container">
@@ -698,5 +706,6 @@ export default function Leo() {
         </div>
       </div>
     </div>
+    </>
   );
 }

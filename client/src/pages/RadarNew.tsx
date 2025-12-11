@@ -1,5 +1,6 @@
 // RadarNew.tsx
 import { useState } from "react";
+import SEO from "@/components/SEO";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { RadarHero } from "../components/radar/RadarHero";
@@ -33,6 +34,12 @@ export function RadarNew() {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="AI Technology Radar 2024 | Proven AI Tools & Solutions"
+        description="Discover AI technologies that matter for organizations of all sizes. Cut through the hype with proven ROI, realistic budgets, and fast implementation. Explore our curated AI technology radar."
+        keywords="AI technology radar, AI tools 2024, AI adoption, AI implementation, AI ROI, enterprise AI, AI solutions, machine learning tools, AI platforms, AI maturity"
+        ogImage="https://nukleo.digital/og-radar.jpg"
+      />
       <Header />
       {/* Hero Section */}
       <RadarHero />

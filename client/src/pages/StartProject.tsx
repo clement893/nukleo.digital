@@ -1,4 +1,6 @@
+// StartProject.tsx
 import { useState } from 'react';
+import SEO from '@/components/SEO';
 import { Button } from '@/components/ui/button';
 import { trpc } from '@/lib/trpc';
 import { useLocation } from 'wouter';
@@ -57,7 +59,14 @@ export default function StartProject() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-950 via-purple-900 to-purple-950 relative overflow-hidden">
+    <>
+      <SEO
+        title="Start Your AI Project | Transform Your Business with AI"
+        description="Ready to transform your business with AI? Start your project with Nukleo Digital. Expert guidance from strategy to implementation. Get a free consultation and custom AI roadmap."
+        keywords="start AI project, AI consultation, AI implementation, AI strategy, AI transformation, AI project planning, AI roadmap, AI business transformation"
+        ogImage="https://nukleo.digital/og-start-project.jpg"
+      />
+      <div className="min-h-screen bg-gradient-to-br from-purple-950 via-purple-900 to-purple-950 relative overflow-hidden">
       {/* Background Blobs */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500 rounded-full blur-3xl opacity-20 animate-blob" />
       <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-pink-500 rounded-full blur-3xl opacity-20 animate-blob animation-delay-2000" />
@@ -232,5 +241,6 @@ export default function StartProject() {
         </div>
       </div>
     </div>
+    </>
   );
 }

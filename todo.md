@@ -1454,3 +1454,9 @@
 - [x] Remplacer "More than AI" par "Beyond AI"
 - [x] Rendre le texte plus clair et visible
 - [x] Déployer sur Railway
+
+## Update Client Carousel
+- [ ] Trouver le composant du carrousel clients
+- [ ] Supprimer les gradients et bordures
+- [ ] Convertir en défilement automatique de texte
+- [ ] Déployer sur Railway

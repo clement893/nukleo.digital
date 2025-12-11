@@ -1374,3 +1374,8 @@
 ## Railway Production Admin Account
 - [ ] Créer le compte admin sur la base de données Railway
 - [ ] Tester le login sur https://nukleodigital-production.up.railway.app/admin/login
+
+## Railway Database Migration
+- [ ] Créer un script de migration automatique au démarrage
+- [ ] Configurer package.json pour exécuter les migrations avant le démarrage
+- [ ] Tester le déploiement avec migrations

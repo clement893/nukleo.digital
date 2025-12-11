@@ -1,8 +1,18 @@
 import { z } from "zod";
-import { publicProcedure, router } from "../_core/trpc";
-import { saveAgencyLead } from "../db";
+import { publicProcedure, protectedProcedure, router } from "../_core/trpc";
+import { TRPCError } from "@trpc/server";
+import { saveAgencyLead, getAllAgencyLeads } from "../db";
 
 export const agenciesRouter = router({
+  getAllLeads: protectedProcedure.query(async ({ ctx }) => {
+    // Only admins can view leads
+    if (ctx.user?.role !== 'admin') {
+      throw new TRPCError({ code: 'FORBIDDEN', message: 'Admin access required' });
+    }
+    
+    return await getAllAgencyLeads();
+  }),
+
   saveLead: publicProcedure
     .input(
       z.object({

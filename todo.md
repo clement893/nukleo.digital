@@ -1308,3 +1308,13 @@
 - [x] Ajouter l'animation d'apparition automatique
 - [ ] Créer un checkpoint
 - [ ] Push GitHub
+
+## Créer un dashboard admin pour les leads qualifiés
+- [x] Créer les procédures tRPC pour récupérer tous les leads
+- [x] Ajouter des filtres (score, budget, urgence, date)
+- [x] Créer la page AdminAgencyLeads.tsx avec tableau et statistiques
+- [x] Ajouter l'export CSV
+- [x] Ajouter la navigation dans DashboardLayout
+- [x] Protéger la route avec adminProcedure
+- [ ] Créer un checkpoint
+- [ ] Push GitHub

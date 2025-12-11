@@ -163,16 +163,26 @@
     </div>
     <div id="root"></div>
     <script>
-      // Hide loader once React renders content
+      // Track start time
+      const startTime = Date.now();
+      const minDisplayTime = 3000; // 3 seconds minimum
+      
+      // Hide loader once React renders content (with minimum display time)
       const observer = new MutationObserver(() => {
         const root = document.getElementById('root');
         if (root && root.children.length > 0) {
-          const loader = document.getElementById('app-loader');
-          if (loader) {
-            loader.style.opacity = '0';
-            loader.style.transition = 'opacity 0.3s';
-            setTimeout(() => loader.remove(), 300);
-          }
+          const elapsed = Date.now() - startTime;
+          const remainingTime = Math.max(0, minDisplayTime - elapsed);
+          
+          setTimeout(() => {
+            const loader = document.getElementById('app-loader');
+            if (loader) {
+              loader.style.opacity = '0';
+              loader.style.transition = 'opacity 0.5s ease-out';
+              setTimeout(() => loader.remove(), 500);
+            }
+          }, remainingTime);
+          
           observer.disconnect();
         }
       });

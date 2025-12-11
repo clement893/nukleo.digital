@@ -1430,12 +1430,12 @@
 - [x] Déployer sur Railway
 
 ## Revert Title to Revolution
-- [ ] Changer "AI Evolution" en "AI Revolution"
-- [ ] Déployer sur Railway
+- [x] Changer "AI Evolution" en "AI Revolution"
+- [x] Déployer sur Railway
 
 ## Services Carousel Implementation
 - [x] Déplacer le texte "Beyond AI" avant les cartes de services
 - [x] Créer un carrousel de 12 services (AI Strategy, Digital Platforms, Mobile Apps, Creative Studio, CRM, Portals, Marketing, Communication, Operations, Security, Analytics, Cloud)
 - [x] Ajouter les contrôles de navigation du carrousel (mouvement souris)
-- [ ] Tester le carrousel sur mobile et desktop
-- [ ] Déployer sur Railway
+- [x] Tester le carrousel sur mobile et desktop
+- [x] Déployer sur Railway

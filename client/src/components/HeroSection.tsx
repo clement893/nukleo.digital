@@ -42,7 +42,7 @@ export default function HeroSection() {
               <span 
                 className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent"
               >
-                AI Evolution
+                AI Revolution
               </span>
             </h1>
 

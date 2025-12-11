@@ -1428,3 +1428,7 @@
 - [x] Ajouter le texte "Beyond AI" pour clarifier l'offre complète
 - [x] Tester visuellement sur desktop et mobile
 - [x] Déployer sur Railway
+
+## Revert Title to Revolution
+- [ ] Changer "AI Evolution" en "AI Revolution"
+- [ ] Déployer sur Railway

@@ -1449,3 +1449,8 @@
 ## Remove Carousel Gradients
 - [ ] Retirer les gradients rouges sur les bords du carrousel
 - [ ] Déployer sur Railway
+
+## Update Beyond AI Text
+- [ ] Remplacer "More than AI" par "Beyond AI"
+- [ ] Rendre le texte plus clair et visible
+- [ ] Déployer sur Railway

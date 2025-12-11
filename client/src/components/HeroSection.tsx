@@ -69,8 +69,11 @@ export default function HeroSection() {
 
             {/* Beyond AI Text - Now before services */}
             <div className="mt-12 sm:mt-16 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-1200">
-              <p className="text-center text-white/70 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-8">
-                More than AI. We craft complete digital ecosystems—from strategy and platforms to creative content and intelligent automation.
+              <h3 className="text-center text-white font-semibold text-xl sm:text-2xl mb-4">
+                Beyond AI
+              </h3>
+              <p className="text-center text-white/80 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-8">
+                We craft complete digital ecosystems—from strategy and platforms to creative content and intelligent automation.
               </p>
             </div>
 

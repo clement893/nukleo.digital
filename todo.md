@@ -1406,6 +1406,6 @@
 - [ ] Tester le flow complet sur Railway
 
 ## Cookie Parser Missing
-- [ ] Installer cookie-parser
-- [ ] Configurer cookie-parser dans server/_core/index.ts
-- [ ] Tester que ctx.req.cookies fonctionne
+- [x] Installer cookie-parser
+- [x] Configurer cookie-parser dans server/_core/index.ts
+- [x] Tester que ctx.req.cookies fonctionne

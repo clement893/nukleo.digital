@@ -3,8 +3,10 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import CustomCursor from "./components/CustomCursor";
 import ModernLoader from "./components/ModernLoader";
+import SuspenseLoader from "./components/SuspenseLoader";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import ScrollToTop from "./components/ScrollToTop";
+import { usePageTransition } from "./hooks/usePageTransition";
 
 // Eager load only critical pages
 import Home from "./pages/Home";
@@ -54,12 +56,15 @@ const CreateFirstAdmin = lazy(() => import("./pages/CreateFirstAdmin"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
 
 function App() {
+  // Trigger animations on route change
+  usePageTransition();
+  
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="dark">
         <CustomCursor />
         <ScrollToTop />
-        <Suspense fallback={<ModernLoader />}>
+        <Suspense fallback={<SuspenseLoader />}>
           <Switch>
             <Route path="/" component={Home} />
             <Route path="/projects" component={Projects} />

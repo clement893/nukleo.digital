@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users } from "../drizzle/schema";
+import { InsertUser, users, leoContacts, InsertLeoContact } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -16,6 +16,22 @@ export async function getDb() {
     }
   }
   return _db;
+}
+
+// LEO Contact functions
+export async function saveLeoContact(contact: InsertLeoContact): Promise<void> {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot save LEO contact: database not available");
+    return;
+  }
+
+  try {
+    await db.insert(leoContacts).values(contact);
+  } catch (error) {
+    console.error("[Database] Error saving LEO contact:", error);
+    throw error;
+  }
 }
 
 export async function upsertUser(user: InsertUser): Promise<void> {

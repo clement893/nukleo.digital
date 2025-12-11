@@ -1278,3 +1278,11 @@
 - [x] Traduire tous les textes de Agencies.tsx en anglais
 - [ ] Créer un checkpoint
 - [ ] Push GitHub
+
+## Ajouter un champ email dans le chat LEO
+- [x] Analyser la page LEO actuelle
+- [x] Ajouter un champ de saisie d'email dans l'interface du chat
+- [x] Créer une procédure tRPC pour sauvegarder l'email
+- [x] Ajouter la logique frontend pour capturer et envoyer l'email
+- [ ] Créer un checkpoint
+- [ ] Push GitHub

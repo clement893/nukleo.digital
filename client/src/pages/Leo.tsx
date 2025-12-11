@@ -1,10 +1,11 @@
 import SEO from '@/components/SEO';
 import { useState, useRef, useEffect } from 'react';
-import { Send, Mic } from 'lucide-react';
+import { Send, Mic, Mail, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { trpc } from '@/lib/trpc';
 import { Link } from 'wouter';
+import { Card } from '@/components/ui/card';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -45,6 +46,10 @@ export default function Leo() {
   const [typingText, setTypingText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [currentEmotion, setCurrentEmotion] = useState<'default' | 'happy' | 'thinking' | 'surprised' | 'confused' | 'excited'>('default');
+  const [showEmailModal, setShowEmailModal] = useState(false);
+  const [emailInput, setEmailInput] = useState('');
+  const [nameInput, setNameInput] = useState('');
+  const [emailSaved, setEmailSaved] = useState(false);
 
   // Detect emotion from message content
   const detectEmotion = (content: string): 'default' | 'happy' | 'thinking' | 'surprised' | 'confused' | 'excited' => {
@@ -91,6 +96,7 @@ export default function Leo() {
   };
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatMutation = trpc.leo.chat.useMutation();
+  const saveContactMutation = trpc.leo.saveContact.useMutation();
 
   // Contextual suggestion categories
   const suggestionCategories = {
@@ -344,6 +350,34 @@ export default function Leo() {
     }
   };
 
+  const handleSaveEmail = async () => {
+    if (!emailInput.trim()) return;
+
+    try {
+      const lastMessage = messages[messages.length - 1];
+      await saveContactMutation.mutateAsync({
+        email: emailInput,
+        name: nameInput || undefined,
+        conversationContext: lastMessage ? lastMessage.content.substring(0, 500) : undefined,
+      });
+      setEmailSaved(true);
+      localStorage.setItem('leo-email-saved', 'true');
+      setTimeout(() => {
+        setShowEmailModal(false);
+      }, 2000);
+    } catch (error) {
+      console.error('Error saving email:', error);
+    }
+  };
+
+  // Show email modal after 3 messages if not already saved
+  useEffect(() => {
+    const emailAlreadySaved = localStorage.getItem('leo-email-saved');
+    if (!emailAlreadySaved && messages.length >= 6 && !showEmailModal && !emailSaved) {
+      setShowEmailModal(true);
+    }
+  }, [messages.length, showEmailModal, emailSaved]);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[oklch(0.35_0.15_300)] via-[oklch(0.40_0.15_320)] to-[oklch(0.35_0.15_340)] flex flex-col">
       {/* Header minimal */}
@@ -535,6 +569,81 @@ export default function Leo() {
           <div ref={messagesEndRef} />
         </div>
       </div>
+
+      {/* Email Capture Modal */}
+      {showEmailModal && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <Card className="max-w-md w-full bg-white/10 backdrop-blur-xl border-white/20 p-8 relative">
+            <button
+              onClick={() => setShowEmailModal(false)}
+              className="absolute top-4 right-4 text-white/60 hover:text-white transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            
+            {!emailSaved ? (
+              <>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 bg-gradient-to-br from-cyan-400 to-purple-600 rounded-full flex items-center justify-center">
+                    <Mail className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white">Stay Connected</h3>
+                    <p className="text-sm text-white/60">Get AI insights & updates</p>
+                  </div>
+                </div>
+                
+                <div className="space-y-4 mb-6">
+                  <div>
+                    <label className="text-sm text-white/80 mb-2 block">Your Name (optional)</label>
+                    <Input
+                      value={nameInput}
+                      onChange={(e) => setNameInput(e.target.value)}
+                      placeholder="John Doe"
+                      className="bg-white/5 border-white/20 text-white placeholder:text-white/40"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm text-white/80 mb-2 block">Email Address *</label>
+                    <Input
+                      type="email"
+                      value={emailInput}
+                      onChange={(e) => setEmailInput(e.target.value)}
+                      placeholder="you@company.com"
+                      className="bg-white/5 border-white/20 text-white placeholder:text-white/40"
+                      onKeyPress={(e) => {
+                        if (e.key === 'Enter') {
+                          handleSaveEmail();
+                        }
+                      }}
+                    />
+                  </div>
+                </div>
+                
+                <Button
+                  onClick={handleSaveEmail}
+                  disabled={!emailInput.trim() || saveContactMutation.isPending}
+                  className="w-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700"
+                >
+                  {saveContactMutation.isPending ? 'Saving...' : 'Keep Me Updated'}
+                </Button>
+                
+                <p className="text-xs text-white/40 mt-4 text-center">
+                  We'll only send you relevant AI insights. No spam, ever.
+                </p>
+              </>
+            ) : (
+              <div className="text-center py-6">
+                <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Mail className="w-8 h-8 text-green-400" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-2">You're All Set! 🎉</h3>
+                <p className="text-white/60">We'll keep you updated with the latest AI insights.</p>
+              </div>
+            )}
+          </Card>
+        </div>
+      )}
 
       {/* Input fixed at bottom */}
       <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-[oklch(0.35_0.15_300)] via-[oklch(0.35_0.15_300)] to-transparent pt-8 pb-6">

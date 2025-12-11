@@ -25,6 +25,19 @@ export const users = mysqlTable("users", {
 export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 
+// LEO Contact table for email capture
+export const leoContacts = mysqlTable("leo_contacts", {
+  id: int("id").autoincrement().primaryKey(),
+  email: varchar("email", { length: 320 }).notNull(),
+  name: varchar("name", { length: 255 }),
+  conversationContext: text("conversationContext"), // Store last message or context
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type LeoContact = typeof leoContacts.$inferSelect;
+export type InsertLeoContact = typeof leoContacts.$inferInsert;
+
 // AI Readiness Assessment table
 export const aiAssessments = mysqlTable("ai_assessments", {
   id: int("id").autoincrement().primaryKey(),

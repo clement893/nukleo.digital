@@ -8,6 +8,7 @@ import { assessmentRouter } from "./routers/assessment";
 import { contactRouter } from "./routers/contact";
 import { mediaAssetsRouter } from "./routers/mediaAssets";
 import { startProjectRouter } from "./routers/startProject";
+import { saveLeoContact } from "./db";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -97,6 +98,31 @@ Limitations:
             hasApiKey: !!process.env.BUILT_IN_FORGE_API_KEY,
           });
           throw error;
+        }
+      }),
+    
+    saveContact: publicProcedure
+      .input(
+        z.object({
+          email: z.string().email(),
+          name: z.string().optional(),
+          conversationContext: z.string().optional(),
+        })
+      )
+      .mutation(async ({ input }) => {
+        try {
+          await saveLeoContact({
+            email: input.email,
+            name: input.name,
+            conversationContext: input.conversationContext,
+          });
+          return {
+            success: true,
+            message: "Contact saved successfully",
+          };
+        } catch (error) {
+          console.error("[Leo Save Contact Error]", error);
+          throw new Error("Failed to save contact");
         }
       }),
   }),

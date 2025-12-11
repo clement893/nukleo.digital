@@ -1,0 +1,32 @@
+import { useEffect } from "react";
+import { useLocation } from "wouter";
+import { trpc } from "@/lib/trpc";
+
+interface AdminRouteProps {
+  children: React.ReactNode;
+}
+
+export default function AdminRoute({ children }: AdminRouteProps) {
+  const [, setLocation] = useLocation();
+  const { data, isLoading } = trpc.adminAuth.checkAuth.useQuery();
+
+  useEffect(() => {
+    if (!isLoading && !data?.authenticated) {
+      setLocation("/admin/login");
+    }
+  }, [data, isLoading, setLocation]);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+        <div className="text-white text-lg">Loading...</div>
+      </div>
+    );
+  }
+
+  if (!data?.authenticated) {
+    return null;
+  }
+
+  return <>{children}</>;
+}

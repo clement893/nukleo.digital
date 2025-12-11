@@ -1456,7 +1456,7 @@
 - [x] Déployer sur Railway
 
 ## Update Client Carousel
-- [ ] Trouver le composant du carrousel clients
-- [ ] Supprimer les gradients et bordures
-- [ ] Convertir en défilement automatique de texte
-- [ ] Déployer sur Railway
+- [x] Trouver le composant du carrousel clients
+- [x] Supprimer les gradients et bordures
+- [x] Convertir en défilement automatique de texte (déjà implémenté)
+- [x] Déployer sur Railway

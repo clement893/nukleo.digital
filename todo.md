@@ -1513,5 +1513,14 @@
 - [x] Afficher le modal d'email dès le premier message
 - [x] Permettre de continuer sans donner l'email
 - [x] Tester les changements
+- [x] Créer un checkpoint
+- [x] Pousser sur GitHub
+
+
+## Améliorer capture d'email et synchroniser /leo
+- [x] Ajouter la capture d'email inline dans le chat (en plus du modal)
+- [x] Appliquer la vitesse 5ms à Leo.tsx
+- [x] Appliquer le modal early à Leo.tsx
+- [x] Tester les deux pages
 - [ ] Créer un checkpoint
 - [ ] Pousser sur GitHub

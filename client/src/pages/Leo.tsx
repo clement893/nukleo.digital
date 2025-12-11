@@ -328,7 +328,7 @@ export default function Leo() {
           // Show suggestions again after response is complete
           setShowSuggestions(true);
         }
-      }, 30); // 30ms per character for realistic typing speed
+      }, 5); // 5ms per character for fast typing speed
     } catch (error) {
       console.error('Error sending message:', error);
       const errorMessage: Message = {
@@ -373,7 +373,7 @@ export default function Leo() {
   // Show email modal after 3 messages if not already saved
   useEffect(() => {
     const emailAlreadySaved = localStorage.getItem('leo-email-saved');
-    if (!emailAlreadySaved && messages.length >= 6 && !showEmailModal && !emailSaved) {
+    if (!emailAlreadySaved && messages.length >= 2 && !showEmailModal && !emailSaved) {
       setShowEmailModal(true);
     }
   }, [messages.length, showEmailModal, emailSaved]);

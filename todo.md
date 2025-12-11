@@ -1361,6 +1361,6 @@
 - [x] Créer un wrapper AdminRoute de protection des routes admin
 - [x] Protéger les routes /admin/* avec AdminRoute
 - [x] Ajouter la gestion de session avec JWT cookies
-- [ ] Créer un utilisateur admin par défaut
-- [ ] Créer un checkpoint
-- [ ] Push GitHub
+- [x] Créer un utilisateur admin par défaut (clement@nukleo.com)
+- [x] Créer un checkpoint
+- [x] Push GitHub

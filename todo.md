@@ -1444,4 +1444,4 @@
 - [x] Retirer les bordures et icônes des cartes
 - [x] Convertir en texte simple défilant
 - [x] Ajouter le défilement automatique
-- [ ] Déployer sur Railway
+- [x] Déployer sur Railway

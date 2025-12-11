@@ -1336,9 +1336,9 @@
 - [x] Ajouter l'historique des messages
 - [x] Implémenter l'extraction intelligente des données clés
 - [x] Sauvegarder automatiquement quand email capturé
-- [ ] Tester les conversations sur différentes pages
-- [ ] Créer un checkpoint
-- [ ] Push GitHub
+- [x] Tester les conversations sur différentes pages
+- [x] Créer un checkpoint
+- [x] Push GitHub
 
 ## Créer un dashboard LEO Analytics
 - [x] Enrichir le schéma avec table leo_sessions pour tracking
@@ -1350,5 +1350,17 @@
 - [x] Ajouter funnel de conversion
 - [x] Ajouter graphiques de tendances
 - [x] Ajouter le tracking dans UniversalLEO
+- [x] Créer un checkpoint
+- [x] Push GitHub
+
+## Créer un système d'authentification admin
+- [x] Créer le schéma de base de données (table admin_users)
+- [x] Ajouter le hashing de mot de passe avec bcrypt
+- [x] Créer les procédures tRPC (login, logout, checkAuth, createFirstAdmin)
+- [x] Créer la page de login admin (/admin/login)
+- [x] Créer un wrapper AdminRoute de protection des routes admin
+- [x] Protéger les routes /admin/* avec AdminRoute
+- [x] Ajouter la gestion de session avec JWT cookies
+- [ ] Créer un utilisateur admin par défaut
 - [ ] Créer un checkpoint
 - [ ] Push GitHub

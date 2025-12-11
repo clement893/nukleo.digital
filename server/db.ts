@@ -1,6 +1,7 @@
 import { eq, desc } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, leoContacts, InsertLeoContact, leoSessions, InsertLeoSession, agencyLeads, InsertAgencyLead } from "../drizzle/schema";
+import { InsertUser, users, leoContacts, InsertLeoContact, leoSessions, InsertLeoSession, agencyLeads, InsertAgencyLead, adminUsers, InsertAdminUser } from "../drizzle/schema";
+import bcrypt from "bcrypt";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -205,3 +206,67 @@ export async function getAllMediaAssets() {
 }
 
 
+// ===== Admin Users =====
+
+export async function createAdminUser(data: { username: string; password: string; email: string }) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot create admin user: database not available");
+    throw new Error("Database not available");
+  }
+
+  try {
+    const passwordHash = await bcrypt.hash(data.password, 10);
+    await db.insert(adminUsers).values({
+      username: data.username,
+      passwordHash,
+      email: data.email,
+    });
+    return { success: true };
+  } catch (error) {
+    console.error("[Database] Error creating admin user:", error);
+    throw error;
+  }
+}
+
+export async function getAdminByUsername(username: string) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get admin: database not available");
+    return null;
+  }
+
+  try {
+    const result = await db.select().from(adminUsers).where(eq(adminUsers.username, username)).limit(1);
+    return result.length > 0 ? result[0] : null;
+  } catch (error) {
+    console.error("[Database] Error getting admin:", error);
+    return null;
+  }
+}
+
+export async function verifyAdminPassword(username: string, password: string) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot verify admin: database not available");
+    return null;
+  }
+
+  try {
+    const admin = await getAdminByUsername(username);
+    if (!admin) return null;
+    
+    const isValid = await bcrypt.compare(password, admin.passwordHash);
+    if (!isValid) return null;
+    
+    // Update last login
+    await db.update(adminUsers)
+      .set({ lastLoginAt: new Date() })
+      .where(eq(adminUsers.id, admin.id));
+    
+    return admin;
+  } catch (error) {
+    console.error("[Database] Error verifying admin password:", error);
+    return null;
+  }
+}

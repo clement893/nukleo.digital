@@ -1,5 +1,6 @@
 import { Layers, BarChart3, Globe, Zap, Target, Users, Brain, Code, Workflow, MessageSquare, TrendingUp, Shield, Palette, Sparkles, Camera, PenTool } from 'lucide-react';
 import SEO from '@/components/SEO';
+import UniversalLEO from '@/components/UniversalLEO';
 import { Link } from 'wouter';
 import PageLayout from '../components/PageLayout';
 

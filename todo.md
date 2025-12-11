@@ -1411,9 +1411,9 @@
 - [x] Tester que ctx.req.cookies fonctionne
 
 ## Admin Dashboard Creation
-- [ ] Créer la page AdminDashboard avec statistiques globales
-- [ ] Ajouter des cartes de statistiques (total leads, sessions, assessments)
-- [ ] Créer des tableaux de données pour chaque type d'entité
-- [ ] Ajouter la navigation dans le layout admin
-- [ ] Créer les procédures tRPC pour récupérer les statistiques
+- [x] Créer la page AdminDashboard avec statistiques globales
+- [x] Ajouter des cartes de statistiques (total leads, sessions, assessments)
+- [x] Créer des tableaux de données pour chaque type d'entité
+- [x] Ajouter la navigation dans le layout admin
+- [x] Créer les procédures tRPC pour récupérer les statistiques
 - [ ] Tester le dashboard complet

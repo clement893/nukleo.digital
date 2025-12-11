@@ -22,6 +22,8 @@ export const adminAuthRouter = router({
         throw new Error("Invalid credentials");
       }
 
+      console.log("[Admin Auth] Login successful for:", admin.username);
+      
       // Create JWT token
       const token = jwt.sign(
         { id: admin.id, username: admin.username, email: admin.email },
@@ -29,6 +31,8 @@ export const adminAuthRouter = router({
         { expiresIn: "7d" }
       );
 
+      console.log("[Admin Auth] Setting cookie:", ADMIN_COOKIE_NAME);
+      
       // Set cookie
       ctx.res.cookie(ADMIN_COOKIE_NAME, token, {
         httpOnly: true,
@@ -56,7 +60,12 @@ export const adminAuthRouter = router({
   checkAuth: publicProcedure.query(({ ctx }) => {
     const token = ctx.req.cookies[ADMIN_COOKIE_NAME];
     
+    console.log("[Admin Auth] checkAuth called");
+    console.log("[Admin Auth] All cookies:", ctx.req.cookies);
+    console.log("[Admin Auth] Admin cookie:", token);
+    
     if (!token) {
+      console.log("[Admin Auth] No token found, returning unauthenticated");
       return { authenticated: false, admin: null };
     }
 

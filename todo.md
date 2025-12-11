@@ -1398,3 +1398,9 @@
 - [x] Vérifier que JWT_SECRET est bien configuré sur Railway
 - [x] Tester le flow de login complet
 - [x] Corriger la redirection après login
+
+## Admin Login Redirect Loop Fix
+- [ ] Vérifier que les cookies sont bien envoyés après login
+- [ ] Vérifier que checkAuth lit correctement les cookies
+- [ ] Vérifier la configuration secure/sameSite pour Railway (HTTPS)
+- [ ] Tester le flow complet sur Railway

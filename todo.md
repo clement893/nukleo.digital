@@ -1421,4 +1421,4 @@
 ## Homepage Text Update
 - [x] Changer "AI Revolution" en "AI Evolution" sur la page d'accueil
 - [x] Vérifier que le changement est visible
-- [ ] Déployer sur Railway
+- [x] Déployer sur Railway

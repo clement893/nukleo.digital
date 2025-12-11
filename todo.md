@@ -1381,9 +1381,9 @@
 - [ ] Tester le déploiement avec migrations
 
 ## PostgreSQL Migration for Railway
-- [ ] Installer les dépendances PostgreSQL (postgres, pg)
-- [ ] Convertir le schéma Drizzle de MySQL vers PostgreSQL
-- [ ] Mettre à jour drizzle.config.ts pour PostgreSQL
+- [x] Installer les dépendances PostgreSQL (postgres, pg)
+- [x] Convertir le schéma Drizzle de MySQL vers PostgreSQL
+- [x] Mettre à jour drizzle.config.ts pour PostgreSQL
 - [ ] Configurer la variable d'environnement DATABASE_URL sur Railway
 - [ ] Tester le déploiement
 - [ ] Créer le compte admin

@@ -1426,5 +1426,5 @@
 ## Hero Section Enhancement
 - [x] Ajouter une bande de 4 services sous le CTA (AI Strategy, Digital Platforms, Creative Studio, Operations)
 - [x] Ajouter le texte "Beyond AI" pour clarifier l'offre complète
-- [ ] Tester visuellement sur desktop et mobile
-- [ ] Déployer sur Railway
+- [x] Tester visuellement sur desktop et mobile
+- [x] Déployer sur Railway

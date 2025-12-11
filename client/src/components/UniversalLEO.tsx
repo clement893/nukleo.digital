@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { X, MessageCircle, Send, Loader2 } from 'lucide-react';
+import { X, Send, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { trpc } from '@/lib/trpc';
 
@@ -13,6 +13,7 @@ function generateUUID() {
 }
 
 type PageContext = 'home' | 'agencies' | 'services' | 'contact' | 'projects' | 'about' | 'default';
+type Emotion = 'default' | 'happy' | 'thinking' | 'surprised' | 'confused' | 'excited';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -25,13 +26,13 @@ interface UniversalLEOProps {
 
 // Prompts d'accueil personnalisés par page
 const welcomeMessages: Record<PageContext, string> = {
-  home: "Hi! 👋 I'm LEO, Nukleo's AI assistant. I'm here to help you explore how AI can transform your business. What brings you here today?",
-  agencies: "Hi! 👋 I'm LEO. Looking to scale your agency with Nukleo's nearshore team? I can help you understand our partnership model. What's your biggest challenge right now?",
-  services: "Hi! 👋 I'm LEO. Interested in our services? Whether it's AI Lab, Strategic Bureau, or Creative Studio, I can help you find the right fit. What are you looking to achieve?",
-  contact: "Hi! 👋 I'm LEO. Ready to connect with our team? Tell me a bit about your project and I'll make sure you get the right help.",
-  projects: "Hi! 👋 I'm LEO. Inspired by our work? I'd love to hear about your project vision. What kind of transformation are you considering?",
-  about: "Hi! 👋 I'm LEO. Want to know more about Nukleo? Ask me anything about our team, culture, or approach!",
-  default: "Hi! 👋 I'm LEO, your AI assistant at Nukleo. How can I help you today?",
+  home: "👋 Hi! I'm LEO, Nukleo's AI assistant. I'm here to help you explore how AI can transform your business. What brings you here today?",
+  agencies: "👋 Welcome! I'm LEO. Looking to scale your agency with Nukleo's nearshore team? I can help you understand our partnership model. What's your biggest challenge right now?",
+  services: "👋 Hi! I'm LEO. Interested in our services? Whether it's AI Lab, Strategic Bureau, or Creative Studio, I can help you find the right fit. What are you looking to achieve?",
+  contact: "👋 Hi! I'm LEO. Ready to connect with our team? Tell me a bit about your project and I'll make sure you get the right help.",
+  projects: "👋 Hi! I'm LEO. Inspired by our work? I'd love to hear about your project vision. What kind of transformation are you considering?",
+  about: "👋 Hi! I'm LEO. Want to know more about Nukleo? Ask me anything about our team, culture, or approach!",
+  default: "👋 Hi! I'm LEO, your AI assistant at Nukleo. How can I help you today?",
 };
 
 export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOProps) {
@@ -42,11 +43,58 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
   const [emailCaptured, setEmailCaptured] = useState(false);
   const [sessionId] = useState(() => generateUUID());
   const [sessionStartTime] = useState(() => Date.now());
+  const [currentEmotion, setCurrentEmotion] = useState<Emotion>('default');
+  const [isTyping, setIsTyping] = useState(false);
+  const [typingText, setTypingText] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const chatMutation = trpc.leo.chat.useMutation();
   const saveLeoContact = trpc.leo.saveContact.useMutation();
   const saveAgencyLead = trpc.agencies.saveLead.useMutation();
+  
+  // Detect emotion from message content
+  const detectEmotion = (content: string): Emotion => {
+    const lowerContent = content.toLowerCase();
+    
+    // Excited: achievements, success, great results
+    if (lowerContent.match(/(excellent|amazing|fantastic|great|perfect|wonderful|awesome|brilliant)/)) {
+      return 'excited';
+    }
+    
+    // Happy: positive outcomes, solutions
+    if (lowerContent.match(/(yes|sure|happy|glad|pleased|delighted|good|nice)/)) {
+      return 'happy';
+    }
+    
+    // Surprised: unexpected info, interesting facts
+    if (lowerContent.match(/(wow|really|interesting|surprising|unexpected|actually|indeed)/)) {
+      return 'surprised';
+    }
+    
+    // Confused: questions, uncertainties
+    if (lowerContent.match(/(\?|confused|unclear|not sure|maybe|perhaps|possibly|hmm)/)) {
+      return 'confused';
+    }
+    
+    // Thinking: analysis, consideration, complex topics
+    if (lowerContent.match(/(consider|analyze|think|evaluate|assess|review|examine|let me|let's)/)) {
+      return 'thinking';
+    }
+    
+    return 'default';
+  };
+
+  // Avatar mapping
+  const getAvatarSrc = (emotion: Emotion): string => {
+    switch (emotion) {
+      case 'happy': return '/leo-avatar-happy.png';
+      case 'thinking': return '/leo-avatar-thinking.png';
+      case 'surprised': return '/leo-avatar-surprised.png';
+      case 'confused': return '/leo-avatar-confused.png';
+      case 'excited': return '/leo-avatar-excited.png';
+      default: return '/leo-avatar.png';
+    }
+  };
   
   // Track session creation
   useEffect(() => {
@@ -106,7 +154,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
   // Scroll to bottom when new messages arrive
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  }, [messages, typingText]);
 
   // Extract email from text using regex
   const extractEmail = (text: string): string | null => {
@@ -174,68 +222,81 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
         messages: newMessages,
       });
 
-      const assistantMessage: Message = {
-        role: 'assistant',
-        content: typeof response.content === 'string' ? response.content : '',
-      };
-
-      const updatedMessages = [...newMessages, assistantMessage];
-      setMessages(updatedMessages);
-
-      // Try to extract and save data if email is found
-      if (!emailCaptured) {
-        const extractedData = extractDataFromConversation(updatedMessages);
-        
-          if (extractedData.email) {
-          setEmailCaptured(true);
+      const fullText = typeof response.content === 'string' ? response.content : '';
+      
+      // Detect emotion from response
+      const detectedEmotion = detectEmotion(fullText);
+      setCurrentEmotion(detectedEmotion);
+      
+      // Simulate typing effect
+      setIsTyping(true);
+      setTypingText('');
+      
+      let currentIndex = 0;
+      const typingInterval = setInterval(async () => {
+        if (currentIndex < fullText.length) {
+          setTypingText(fullText.slice(0, currentIndex + 1));
+          currentIndex++;
+        } else {
+          clearInterval(typingInterval);
+          setIsTyping(false);
           
-          // Update session with email capture
-          const conversationDuration = Math.floor((Date.now() - sessionStartTime) / 1000);
-          fetch('/api/trpc/leo.updateSession', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              sessionId,
-              emailCaptured: 1,
-              capturedEmail: extractedData.email,
-              conversationDuration,
-              completedAt: new Date(),
-            }),
-          }).catch(err => console.error('Failed to update session:', err));
+          const assistantMessage: Message = {
+            role: 'assistant',
+            content: fullText,
+          };
           
-          // Save based on context
-          if (pageContext === 'agencies' && extractedData.companyName) {
-            // Calculate qualification score
-            let score = 50; // Base score
-            if (extractedData.agencySize === '50+') score += 15;
-            else if (extractedData.agencySize === '21-50') score += 10;
-            if (extractedData.budget === '100k+') score += 20;
-            else if (extractedData.budget === '50-100k') score += 15;
-            if (extractedData.urgency === 'Immediate') score += 15;
-            else if (extractedData.urgency === '1-3 months') score += 10;
+          const updatedMessages = [...newMessages, assistantMessage];
+          setMessages(updatedMessages);
+          setTypingText('');
 
-            await saveAgencyLead.mutateAsync({
-              email: extractedData.email,
-              companyName: extractedData.companyName,
-              agencySize: extractedData.agencySize,
-              budget: extractedData.budget,
-              urgency: extractedData.urgency,
-              techNeeds: undefined,
-            });
-          } else {
-            // Save as LEO contact
-            await saveLeoContact.mutateAsync({
-              email: extractedData.email,
-              name: extractedData.name || '',
-              conversationContext: JSON.stringify({
-                pageContext,
-                messages: updatedMessages.slice(0, 10), // Save first 10 messages
-                extractedData,
-              }),
-            });
+          // Try to extract and save data if email is found
+          if (!emailCaptured) {
+            const extractedData = extractDataFromConversation(updatedMessages);
+            
+            if (extractedData.email) {
+              setEmailCaptured(true);
+              
+              // Update session with email capture
+              const conversationDuration = Math.floor((Date.now() - sessionStartTime) / 1000);
+              fetch('/api/trpc/leo.updateSession', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  sessionId,
+                  emailCaptured: 1,
+                  capturedEmail: extractedData.email,
+                  conversationDuration,
+                  completedAt: new Date(),
+                }),
+              }).catch(err => console.error('Failed to update session:', err));
+              
+              // Save based on context
+              if (pageContext === 'agencies' && extractedData.companyName) {
+                saveAgencyLead.mutateAsync({
+                  email: extractedData.email,
+                  companyName: extractedData.companyName,
+                  agencySize: extractedData.agencySize,
+                  budget: extractedData.budget,
+                  urgency: extractedData.urgency,
+                  techNeeds: undefined,
+                }).catch(err => console.error('Failed to save agency lead:', err));
+              } else {
+                // Save as LEO contact
+                saveLeoContact.mutateAsync({
+                  email: extractedData.email,
+                  name: extractedData.name || '',
+                  conversationContext: JSON.stringify({
+                    pageContext,
+                    messages: updatedMessages.slice(0, 10),
+                    extractedData,
+                  }),
+                }).catch(err => console.error('Failed to save contact:', err));
+              }
+            }
           }
         }
-      }
+      }, 30);
     } catch (error) {
       console.error('Chat error:', error);
       setMessages([
@@ -279,26 +340,45 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
       {!isOpen && (
         <button
           onClick={handleOpen}
-          className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full shadow-2xl hover:shadow-cyan-500/50 transition-all duration-300 flex items-center justify-center group hover:scale-110"
+          className="fixed bottom-6 right-6 z-50 group"
           aria-label="Open LEO chat"
         >
-          <MessageCircle className="w-7 h-7 text-white" />
-          <span className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white animate-pulse"></span>
+          <div className="relative">
+            {/* Pulsing ring */}
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 opacity-75 animate-ping" />
+            
+            {/* Main button with LEO avatar */}
+            <div className="relative w-16 h-16 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 flex items-center justify-center shadow-2xl hover:shadow-cyan-500/50 transition-all duration-300 hover:scale-110">
+              <img 
+                src={getAvatarSrc(currentEmotion)} 
+                alt="LEO" 
+                className={`w-12 h-12 rounded-full object-cover avatar-${currentEmotion}`}
+              />
+            </div>
+
+            {/* Online indicator */}
+            <span className="absolute top-0 right-0 w-4 h-4 bg-green-500 rounded-full border-2 border-white animate-pulse"></span>
+          </div>
         </button>
       )}
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 z-50 w-[400px] max-w-[calc(100vw-3rem)] bg-gradient-to-br from-[oklch(0.25_0.05_300)] to-[oklch(0.15_0.05_340)] border border-cyan-500/30 rounded-2xl shadow-2xl overflow-hidden flex flex-col" style={{ height: '600px', maxHeight: 'calc(100vh - 3rem)' }}>
+        <div className="fixed bottom-6 right-6 z-50 w-[400px] max-w-[calc(100vw-3rem)] bg-gradient-to-br from-[oklch(0.35_0.15_300)] via-[oklch(0.40_0.15_320)] to-[oklch(0.35_0.15_340)] border border-cyan-500/30 rounded-2xl shadow-2xl overflow-hidden flex flex-col" style={{ height: '600px', maxHeight: 'calc(100vh - 3rem)' }}>
           {/* Header */}
-          <div className="bg-gradient-to-r from-cyan-500 to-purple-600 p-4 flex items-center justify-between flex-shrink-0">
+          <div className="bg-white/10 backdrop-blur-md border-b border-white/10 p-4 flex items-center justify-between flex-shrink-0">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-2xl">
-                🤖
-              </div>
+              <img 
+                src={getAvatarSrc(currentEmotion)} 
+                alt="LEO" 
+                className={`w-10 h-10 rounded-full object-cover avatar-${currentEmotion}`}
+              />
               <div>
                 <h3 className="font-bold text-white">LEO</h3>
-                <p className="text-xs text-white/80">AI Assistant</p>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                  <span className="text-xs text-white/60">AI Online</span>
+                </div>
               </div>
             </div>
             <button
@@ -314,13 +394,20 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
             {messages.map((message, index) => (
               <div
                 key={index}
-                className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
+                {message.role === 'assistant' && (
+                  <img 
+                    src={getAvatarSrc(currentEmotion)} 
+                    alt="LEO" 
+                    className="w-8 h-8 rounded-full object-cover flex-shrink-0"
+                  />
+                )}
                 <div
-                  className={`max-w-[80%] rounded-lg p-3 ${
+                  className={`max-w-[75%] rounded-2xl px-4 py-3 ${
                     message.role === 'user'
-                      ? 'bg-gradient-to-r from-cyan-500 to-purple-600 text-white'
-                      : 'bg-white/10 text-white'
+                      ? 'bg-white text-purple-900'
+                      : 'bg-white/10 backdrop-blur-md text-white border border-white/10'
                   }`}
                 >
                   <p className="text-sm whitespace-pre-wrap">{message.content}</p>
@@ -328,7 +415,21 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
               </div>
             ))}
             
-            {chatMutation.isPending && (
+            {/* Typing indicator */}
+            {isTyping && (
+              <div className="flex gap-3 justify-start">
+                <img 
+                  src={getAvatarSrc(currentEmotion)} 
+                  alt="LEO" 
+                  className="w-8 h-8 rounded-full object-cover flex-shrink-0"
+                />
+                <div className="max-w-[75%] rounded-2xl px-4 py-3 bg-white/10 backdrop-blur-md text-white border border-white/10">
+                  <p className="text-sm whitespace-pre-wrap">{typingText}</p>
+                </div>
+              </div>
+            )}
+            
+            {chatMutation.isPending && !isTyping && (
               <div className="flex justify-start">
                 <div className="bg-white/10 rounded-lg p-3">
                   <Loader2 className="w-5 h-5 text-cyan-400 animate-spin" />
@@ -340,7 +441,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
           </div>
 
           {/* Input */}
-          <div className="p-4 border-t border-white/10 flex-shrink-0">
+          <div className="bg-white/10 backdrop-blur-md border-t border-white/10 p-4 flex-shrink-0">
             <div className="flex gap-2">
               <input
                 type="text"
@@ -354,7 +455,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
               <Button
                 onClick={handleSendMessage}
                 disabled={!inputValue.trim() || chatMutation.isPending}
-                className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white disabled:opacity-50"
+                className="bg-white text-purple-900 hover:bg-white/90 disabled:opacity-50"
               >
                 <Send className="w-4 h-4" />
               </Button>

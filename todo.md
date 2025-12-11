@@ -1469,5 +1469,15 @@
 - [x] Intégrer le chatbot sur la page Agencies
 - [x] Adapter les messages d'accueil selon la page
 - [x] Tester le chatbot sur les deux pages
+- [x] Créer un checkpoint
+- [x] Pousser sur GitHub
+
+
+## Mettre à jour UniversalLEO avec le design de /leo
+- [x] Ajouter les avatars émotionnels (happy, thinking, surprised, confused, excited)
+- [x] Ajouter la détection d'émotion dans les réponses
+- [x] Mettre à jour le design du bouton flottant avec l'avatar LEO
+- [x] Ajouter les animations CSS pour les avatars
+- [x] Tester les avatars émotionnels
 - [ ] Créer un checkpoint
 - [ ] Pousser sur GitHub

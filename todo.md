@@ -1364,3 +1364,9 @@
 - [x] Créer un utilisateur admin par défaut (clement@nukleo.com)
 - [x] Créer un checkpoint
 - [x] Push GitHub
+
+## Railway Admin Login Fix
+- [x] Corriger l'erreur jsonwebtoken import pour Railway
+- [x] Créer le premier compte admin (clement)
+- [x] Tester le login en local
+- [x] Pusher les changements vers GitHub/Railway

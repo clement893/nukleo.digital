@@ -1409,3 +1409,11 @@
 - [x] Installer cookie-parser
 - [x] Configurer cookie-parser dans server/_core/index.ts
 - [x] Tester que ctx.req.cookies fonctionne
+
+## Admin Dashboard Creation
+- [ ] Créer la page AdminDashboard avec statistiques globales
+- [ ] Ajouter des cartes de statistiques (total leads, sessions, assessments)
+- [ ] Créer des tableaux de données pour chaque type d'entité
+- [ ] Ajouter la navigation dans le layout admin
+- [ ] Créer les procédures tRPC pour récupérer les statistiques
+- [ ] Tester le dashboard complet

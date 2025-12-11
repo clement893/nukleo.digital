@@ -1504,5 +1504,14 @@
 - [x] Ajouter un modal de capture d'email après 3-4 messages
 - [x] Augmenter la vitesse de typing (réduire l'intervalle)
 - [x] Tester le modal et la vitesse
+- [x] Créer un checkpoint
+- [x] Pousser sur GitHub
+
+
+## Optimiser LEO - Vitesse et Email Early
+- [x] Accélérer l'écriture à 5ms (actuellement 10ms)
+- [x] Afficher le modal d'email dès le premier message
+- [x] Permettre de continuer sans donner l'email
+- [x] Tester les changements
 - [ ] Créer un checkpoint
 - [ ] Pousser sur GitHub

@@ -253,8 +253,8 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
           setMessages(updatedMessages);
           setTypingText('');
 
-          // Show email modal after 3 messages (6 total including responses)
-          if (!emailCaptured && updatedMessages.length >= 6 && !showEmailModal) {
+          // Show email modal after first exchange (2 messages: user + assistant)
+          if (!emailCaptured && updatedMessages.length >= 2 && !showEmailModal) {
             setShowEmailModal(true);
           }
 
@@ -304,7 +304,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
             }
           }
         }
-      }, 10);
+      }, 5);
     } catch (error) {
       console.error('Chat error:', error);
       setMessages([
@@ -494,7 +494,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
             </div>
             
             <p className="text-white/80 mb-4">
-              I'd love to send you a detailed analysis and recommendations. Drop your email below!
+              Want personalized insights sent to your inbox? I can provide a detailed analysis tailored to your needs!
             </p>
             
             <div className="space-y-3">

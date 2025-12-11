@@ -13,6 +13,19 @@ interface Message {
 }
 
 export default function Leo() {
+  // Generate or retrieve session ID
+  const getSessionId = (): string => {
+    let sessionId = sessionStorage.getItem('leo-session-id');
+    if (!sessionId) {
+      sessionId = `leo-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+      sessionStorage.setItem('leo-session-id', sessionId);
+    }
+    return sessionId;
+  };
+
+  const [sessionId] = useState(getSessionId);
+  const trackSessionMutation = trpc.leoAnalytics.trackSession.useMutation();
+
   // Load messages from localStorage on mount
   const loadMessages = (): Message[] => {
     try {
@@ -321,6 +334,15 @@ export default function Leo() {
           setTypingText('');
           // Show suggestions again after response is complete
           setShowSuggestions(true);
+          
+          // Track session after message exchange
+          trackSessionMutation.mutate({
+            sessionId,
+            page: 'leo',
+            messagesCount: messages.length + 2, // +2 for user message and assistant response
+            userAgent: navigator.userAgent,
+            referrer: document.referrer,
+          });
         }
       }, 30); // 30ms per character for realistic typing speed
     } catch (error) {

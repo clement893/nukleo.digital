@@ -86,3 +86,34 @@ export const mediaAssets = mysqlTable("media_assets", {
 
 export type MediaAsset = typeof mediaAssets.$inferSelect;
 export type InsertMediaAsset = typeof mediaAssets.$inferInsert;
+// LEO Chat Sessions table for analytics
+export const leoSessions = mysqlTable("leo_sessions", {
+  id: int("id").autoincrement().primaryKey(),
+  sessionId: varchar("sessionId", { length: 255 }).notNull().unique(),
+  page: varchar("page", { length: 100 }).notNull(), // 'home', 'leo', 'agencies', etc.
+  
+  // Session tracking
+  messagesCount: int("messagesCount").default(0).notNull(),
+  startedAt: timestamp("startedAt").defaultNow().notNull(),
+  lastActivityAt: timestamp("lastActivityAt").defaultNow().notNull(),
+  endedAt: timestamp("endedAt"),
+  durationSeconds: int("durationSeconds").default(0),
+  
+  // User info (captured during conversation)
+  userEmail: varchar("userEmail", { length: 255 }),
+  userName: varchar("userName", { length: 255 }),
+  
+  // Conversion tracking
+  emailCaptured: int("emailCaptured").default(0).notNull(),
+  emailCapturedAt: timestamp("emailCapturedAt"),
+  
+  // Metadata
+  userAgent: text("userAgent"),
+  referrer: text("referrer"),
+  
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type LeoSession = typeof leoSessions.$inferSelect;
+export type InsertLeoSession = typeof leoSessions.$inferInsert;

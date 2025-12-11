@@ -1,6 +1,6 @@
-import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users } from "../drizzle/schema";
+import { InsertUser, users, leoSessions, InsertLeoSession, LeoSession } from "../drizzle/schema";
+import { eq, desc, and, gte, sql } from "drizzle-orm";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -105,6 +105,161 @@ export async function getAllMediaAssets() {
     return result;
   } catch (error) {
     console.error("[Database] Error fetching media assets:", error);
+    return [];
+  }
+}
+
+// ============================================
+// LEO Sessions Analytics Functions
+// ============================================
+
+/**
+ * Create or update a LEO chat session
+ */
+export async function upsertLeoSession(data: {
+  sessionId: string;
+  page: string;
+  messagesCount?: number;
+  userEmail?: string;
+  userName?: string;
+  emailCaptured?: boolean;
+  userAgent?: string;
+  referrer?: string;
+}): Promise<LeoSession | null> {
+  const db = await getDb();
+  if (!db) return null;
+
+  try {
+    const now = new Date();
+    
+    // Check if session exists
+    const existing = await db
+      .select()
+      .from(leoSessions)
+      .where(eq(leoSessions.sessionId, data.sessionId))
+      .limit(1);
+
+    if (existing.length > 0) {
+      // Update existing session
+      const session = existing[0];
+      const durationSeconds = Math.floor((now.getTime() - new Date(session.startedAt).getTime()) / 1000);
+      
+      await db
+        .update(leoSessions)
+        .set({
+          messagesCount: data.messagesCount ?? session.messagesCount,
+          lastActivityAt: now,
+          userEmail: data.userEmail ?? session.userEmail,
+          userName: data.userName ?? session.userName,
+          emailCaptured: data.emailCaptured ? 1 : session.emailCaptured,
+          emailCapturedAt: data.emailCaptured && !session.emailCapturedAt ? now : session.emailCapturedAt,
+          durationSeconds,
+          updatedAt: now,
+        })
+        .where(eq(leoSessions.id, session.id));
+
+      return {
+        ...session,
+        messagesCount: data.messagesCount ?? session.messagesCount,
+        lastActivityAt: now,
+        durationSeconds,
+      };
+    } else {
+      // Create new session
+      const insertData: InsertLeoSession = {
+        sessionId: data.sessionId,
+        page: data.page,
+        messagesCount: data.messagesCount ?? 0,
+        userEmail: data.userEmail,
+        userName: data.userName,
+        emailCaptured: data.emailCaptured ? 1 : 0,
+        emailCapturedAt: data.emailCaptured ? now : undefined,
+        userAgent: data.userAgent,
+        referrer: data.referrer,
+        startedAt: now,
+        lastActivityAt: now,
+      };
+
+      await db.insert(leoSessions).values(insertData);
+
+      const created = await db
+        .select()
+        .from(leoSessions)
+        .where(eq(leoSessions.sessionId, data.sessionId))
+        .limit(1);
+
+      return created[0] || null;
+    }
+  } catch (error) {
+    console.error("[Database] Error upserting LEO session:", error);
+    return null;
+  }
+}
+
+/**
+ * Get LEO analytics summary
+ */
+export async function getLeoAnalytics(days: number = 30) {
+  const db = await getDb();
+  if (!db) return null;
+
+  try {
+    const since = new Date();
+    since.setDate(since.getDate() - days);
+
+    const sessions = await db
+      .select()
+      .from(leoSessions)
+      .where(gte(leoSessions.startedAt, since))
+      .orderBy(desc(leoSessions.startedAt));
+
+    const totalSessions = sessions.length;
+    const totalMessages = sessions.reduce((sum, s) => sum + s.messagesCount, 0);
+    const emailsCaptured = sessions.filter(s => s.emailCaptured === 1).length;
+    const avgMessagesPerSession = totalSessions > 0 ? totalMessages / totalSessions : 0;
+    const conversionRate = totalSessions > 0 ? (emailsCaptured / totalSessions) * 100 : 0;
+
+    // Group by page
+    const byPage = sessions.reduce((acc, s) => {
+      if (!acc[s.page]) {
+        acc[s.page] = { sessions: 0, messages: 0, emails: 0 };
+      }
+      acc[s.page].sessions++;
+      acc[s.page].messages += s.messagesCount;
+      if (s.emailCaptured === 1) acc[s.page].emails++;
+      return acc;
+    }, {} as Record<string, { sessions: number; messages: number; emails: number }>);
+
+    return {
+      totalSessions,
+      totalMessages,
+      emailsCaptured,
+      avgMessagesPerSession: Math.round(avgMessagesPerSession * 10) / 10,
+      conversionRate: Math.round(conversionRate * 10) / 10,
+      byPage,
+      recentSessions: sessions.slice(0, 10),
+    };
+  } catch (error) {
+    console.error("[Database] Error getting LEO analytics:", error);
+    return null;
+  }
+}
+
+/**
+ * Get all LEO sessions (for admin dashboard)
+ */
+export async function getAllLeoSessions(limit: number = 100): Promise<LeoSession[]> {
+  const db = await getDb();
+  if (!db) return [];
+
+  try {
+    return await db
+      .select()
+      .from(leoSessions)
+      .orderBy(desc(leoSessions.startedAt))
+      .limit(limit);
+  } catch (error) {
+    console.error("[Database] Error getting all LEO sessions:", error);
     return [];
   }
 }

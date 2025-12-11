@@ -1190,3 +1190,17 @@
 - [x] Optimiser les transitions entre émotions (duration-300)
 - [ ] Créer un checkpoint
 - [ ] Push GitHub
+
+
+## Restauration Chatbot LEO Original avec Analytics
+- [x] Rollback au checkpoint avec le chatbot LEO avec avatars émotionnels (ffeb8c8d)
+- [x] Vérifier que les 5 avatars émotionnels fonctionnent (happy, thinking, surprised, confused, excited)
+- [x] Vérifier les animations spécifiques par émotion
+- [x] Créer la table leo_sessions dans le schéma de base de données
+- [x] Créer les fonctions de tracking dans server/db.ts (upsertLeoSession, getLeoAnalytics, getAllLeoSessions)
+- [x] Créer le router tRPC leoAnalytics avec 3 procédures (trackSession, getAnalytics, getAllSessions)
+- [x] Intégrer le tracking dans le composant Leo.tsx (sessionId, messagesCount, userAgent, referrer)
+- [x] Créer les tests vitest pour le système de tracking (5 tests passent)
+- [x] Vérifier que le projet compile sans erreurs
+- [ ] Créer un checkpoint
+- [ ] Pousser sur GitHub

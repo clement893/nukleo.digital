@@ -3,24 +3,21 @@ import { Button } from '@/components/ui/button';
 import { useSound } from '@/hooks/useSound';
 import { Link } from 'wouter';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 export default function HeroSection() {
   const { playHover, playClick } = useSound();
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
   
 
   
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth) * 100,
-        y: (e.clientY / window.innerHeight) * 100
-      });
-    };
+    const interval = setInterval(() => {
+      setScrollPosition((prev) => prev + 1);
+    }, 30);
     
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    return () => clearInterval(interval);
   }, []);
   
   return (
@@ -77,45 +74,41 @@ export default function HeroSection() {
               </p>
             </div>
 
-            {/* Services Carousel */}
+            {/* Services Carousel - Text Only */}
             <div className="mt-8 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-1400">
-              <div className="relative max-w-5xl mx-auto">
-                {/* Carousel Container */}
-                <div className="overflow-hidden">
-                  <div 
-                    className="flex gap-4 transition-transform duration-500 ease-out"
-                    style={{
-                      transform: `translateX(-${(mousePosition.x / 100) * 20}%)`
-                    }}
-                  >
-                    {[
-                      { icon: '🤖', label: 'AI Strategy' },
-                      { icon: '💻', label: 'Digital Platforms' },
-                      { icon: '📱', label: 'Mobile Apps' },
-                      { icon: '🎨', label: 'Creative Studio' },
-                      { icon: '📊', label: 'CRM Solutions' },
-                      { icon: '🌐', label: 'Portals' },
-                      { icon: '📢', label: 'Marketing' },
-                      { icon: '💬', label: 'Communication' },
-                      { icon: '⚡', label: 'Operations' },
-                      { icon: '🔐', label: 'Security' },
-                      { icon: '📈', label: 'Analytics' },
-                      { icon: '☁️', label: 'Cloud Solutions' },
-                    ].map((service, index) => (
-                      <div 
-                        key={index}
-                        className="flex-shrink-0 w-40 sm:w-48 flex flex-col items-center gap-3 p-5 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105"
+              <div className="relative max-w-6xl mx-auto overflow-hidden py-4">
+                <div 
+                  ref={scrollRef}
+                  className="flex gap-8 whitespace-nowrap"
+                  style={{
+                    transform: `translateX(-${scrollPosition}px)`,
+                    transition: 'none'
+                  }}
+                  onTransitionEnd={() => {
+                    if (scrollRef.current) {
+                      const width = scrollRef.current.scrollWidth / 2;
+                      if (scrollPosition >= width) {
+                        setScrollPosition(0);
+                      }
+                    }
+                  }}
+                >
+                  {/* Double the services for seamless loop */}
+                  {[...Array(2)].map((_, setIndex) => (
+                    ['AI Strategy', 'Digital Platforms', 'Mobile Apps', 'Creative Studio', 'CRM Solutions', 'Portals', 'Marketing', 'Communication', 'Operations', 'Security', 'Analytics', 'Cloud Solutions'].map((service, index) => (
+                      <span 
+                        key={`${setIndex}-${index}`}
+                        className="text-white/40 hover:text-white/80 text-lg sm:text-xl font-medium transition-colors duration-300 cursor-default"
                       >
-                        <span className="text-3xl sm:text-4xl">{service.icon}</span>
-                        <span className="text-white font-semibold text-sm sm:text-base text-center">{service.label}</span>
-                      </div>
-                    ))}
-                  </div>
+                        {service}
+                      </span>
+                    ))
+                  ))}
                 </div>
                 
                 {/* Gradient Overlays */}
-                <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[rgb(60,15,15)] to-transparent pointer-events-none" />
-                <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[rgb(60,15,15)] to-transparent pointer-events-none" />
+                <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[rgb(60,15,15)] to-transparent pointer-events-none" />
+                <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[rgb(60,15,15)] to-transparent pointer-events-none" />
               </div>
             </div>
           </div>

@@ -1439,3 +1439,9 @@
 - [x] Ajouter les contrôles de navigation du carrousel (mouvement souris)
 - [x] Tester le carrousel sur mobile et desktop
 - [x] Déployer sur Railway
+
+## Carousel Simplification
+- [x] Retirer les bordures et icônes des cartes
+- [x] Convertir en texte simple défilant
+- [x] Ajouter le défilement automatique
+- [ ] Déployer sur Railway

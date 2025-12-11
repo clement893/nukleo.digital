@@ -1,8 +1,6 @@
-import { eq, desc } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/postgres-js";
-import postgres from "postgres";
-import { InsertUser, users, leoContacts, InsertLeoContact, leoSessions, InsertLeoSession, agencyLeads, InsertAgencyLead, adminUsers, InsertAdminUser } from "../drizzle/schema";
-import bcrypt from "bcrypt";
+import { eq } from "drizzle-orm";
+import { drizzle } from "drizzle-orm/mysql2";
+import { InsertUser, users } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -11,109 +9,13 @@ let _db: ReturnType<typeof drizzle> | null = null;
 export async function getDb() {
   if (!_db && process.env.DATABASE_URL) {
     try {
-      const client = postgres(process.env.DATABASE_URL!);
-      _db = drizzle(client);
+      _db = drizzle(process.env.DATABASE_URL);
     } catch (error) {
       console.warn("[Database] Failed to connect:", error);
       _db = null;
     }
   }
   return _db;
-}
-
-// Agency Leads functions
-export async function getAllAgencyLeads() {
-  const db = await getDb();
-  if (!db) {
-    console.warn("[Database] Cannot get agency leads: database not available");
-    return [];
-  }
-
-  try {
-    return await db.select().from(agencyLeads).orderBy(desc(agencyLeads.createdAt));
-  } catch (error) {
-    console.error("[Database] Error getting agency leads:", error);
-    throw error;
-  }
-}
-
-export async function saveAgencyLead(lead: InsertAgencyLead): Promise<void> {
-  const db = await getDb();
-  if (!db) {
-    console.warn("[Database] Cannot save agency lead: database not available");
-    return;
-  }
-
-  try {
-    await db.insert(agencyLeads).values(lead);
-  } catch (error) {
-    console.error("[Database] Error saving agency lead:", error);
-    throw error;
-  }
-}
-
-// LEO Contact functions
-export async function saveLeoContact(contact: InsertLeoContact): Promise<void> {
-  const db = await getDb();
-  if (!db) {
-    console.warn("[Database] Cannot save LEO contact: database not available");
-    return;
-  }
-
-  try {
-    await db.insert(leoContacts).values(contact);
-  } catch (error) {
-    console.error("[Database] Error saving LEO contact:", error);
-    throw error;
-  }
-}
-
-// LEO Session functions for analytics
-export async function createLeoSession(session: InsertLeoSession): Promise<void> {
-  const db = await getDb();
-  if (!db) {
-    console.warn("[Database] Cannot create LEO session: database not available");
-    return;
-  }
-
-  try {
-    await db.insert(leoSessions).values(session);
-  } catch (error) {
-    console.error("[Database] Error creating LEO session:", error);
-    throw error;
-  }
-}
-
-export async function updateLeoSession(sessionId: string, data: Partial<InsertLeoSession>): Promise<void> {
-  const db = await getDb();
-  if (!db) {
-    console.warn("[Database] Cannot update LEO session: database not available");
-    return;
-  }
-
-  try {
-    await db.update(leoSessions)
-      .set(data)
-      .where(eq(leoSessions.sessionId, sessionId));
-  } catch (error) {
-    console.error("[Database] Error updating LEO session:", error);
-    throw error;
-  }
-}
-
-export async function getLeoAnalytics() {
-  const db = await getDb();
-  if (!db) {
-    console.warn("[Database] Cannot get LEO analytics: database not available");
-    return [];
-  }
-
-  try {
-    return await db.select().from(leoSessions).orderBy(desc(leoSessions.startedAt));
-  } catch (error) {
-    console.error("[Database] Error getting LEO analytics:", error);
-    return [];
-  }
 }
 
 export async function upsertUser(user: InsertUser): Promise<void> {
@@ -166,8 +68,7 @@ export async function upsertUser(user: InsertUser): Promise<void> {
       updateSet.lastSignedIn = new Date();
     }
 
-    await db.insert(users).values(values).onConflictDoUpdate({
-      target: users.openId,
+    await db.insert(users).values(values).onDuplicateKeyUpdate({
       set: updateSet,
     });
   } catch (error) {
@@ -205,71 +106,5 @@ export async function getAllMediaAssets() {
   } catch (error) {
     console.error("[Database] Error fetching media assets:", error);
     return [];
-  }
-}
-
-
-// ===== Admin Users =====
-
-export async function createAdminUser(data: { username: string; password: string; email: string }) {
-  const db = await getDb();
-  if (!db) {
-    console.warn("[Database] Cannot create admin user: database not available");
-    throw new Error("Database not available");
-  }
-
-  try {
-    const passwordHash = await bcrypt.hash(data.password, 10);
-    await db.insert(adminUsers).values({
-      username: data.username,
-      passwordHash,
-      email: data.email,
-    });
-    return { success: true };
-  } catch (error) {
-    console.error("[Database] Error creating admin user:", error);
-    throw error;
-  }
-}
-
-export async function getAdminByUsername(username: string) {
-  const db = await getDb();
-  if (!db) {
-    console.warn("[Database] Cannot get admin: database not available");
-    return null;
-  }
-
-  try {
-    const result = await db.select().from(adminUsers).where(eq(adminUsers.username, username)).limit(1);
-    return result.length > 0 ? result[0] : null;
-  } catch (error) {
-    console.error("[Database] Error getting admin:", error);
-    return null;
-  }
-}
-
-export async function verifyAdminPassword(username: string, password: string) {
-  const db = await getDb();
-  if (!db) {
-    console.warn("[Database] Cannot verify admin: database not available");
-    return null;
-  }
-
-  try {
-    const admin = await getAdminByUsername(username);
-    if (!admin) return null;
-    
-    const isValid = await bcrypt.compare(password, admin.passwordHash);
-    if (!isValid) return null;
-    
-    // Update last login
-    await db.update(adminUsers)
-      .set({ lastLoginAt: new Date() })
-      .where(eq(adminUsers.id, admin.id));
-    
-    return admin;
-  } catch (error) {
-    console.error("[Database] Error verifying admin password:", error);
-    return null;
   }
 }

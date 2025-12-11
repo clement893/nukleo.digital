@@ -1,9 +1,0 @@
-{
-  "query": "INSERT INTO admin_users (username, passwordHash, email, createdAt) \nVALUES ('clement', '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdnYr1eUy', 'clement@nukleo.com', NOW())",
-  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user yK33XAHqfEovshw.be4b3946a246 --database fXnGt4rfsHAy5LdzFDZGVg --execute INSERT INTO admin_users (username, passwordHash, email, createdAt) \nVALUES ('clement', '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdnYr1eUy', 'clement@nukleo.com', NOW())",
-  "rows": [],
-  "messages": [],
-  "stdout": "",
-  "stderr": "",
-  "execution_time_ms": 72
-}

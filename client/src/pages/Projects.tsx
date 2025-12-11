@@ -1,5 +1,4 @@
 import SEO from '@/components/SEO';
-
 import { useState } from 'react';
 import { Filter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -144,14 +143,12 @@ export default function Projects() {
                     </div>
                   </div>
 
-                  <a href="/contact">
-                    <Button
-                      variant="ghost"
-                      className="text-accent hover:text-accent/80 p-0 h-auto font-medium group/btn"
-                    >
-                      View Case Study
-                    </Button>
-                  </a>
+                  <Button
+                    variant="ghost"
+                    className="text-accent hover:text-accent/80 p-0 h-auto font-medium group/btn"
+                  >
+                    View Case Study
+                  </Button>
                 </div>
               </div>
             ))}
@@ -172,14 +169,12 @@ export default function Projects() {
               Let's discuss how we can architect your AI-powered future.
             </p>
 
-            <a href="/start-project">
-              <Button
-                size="lg"
-                className="rounded-full text-lg px-10 py-8 bg-white text-purple-900 hover:bg-white/90 transition-all duration-500 font-bold tracking-wider shimmer"
-              >
-                Start Your Transformation
-              </Button>
-            </a>
+            <Button
+              size="lg"
+              className="rounded-full text-lg px-10 py-8 bg-white text-purple-900 hover:bg-white/90 transition-all duration-500 font-bold tracking-wider shimmer"
+            >
+              Start Your Transformation
+            </Button>
           </div>
         </div>
       </section>

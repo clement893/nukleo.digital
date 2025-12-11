@@ -10,7 +10,6 @@ import CTASection from '@/components/CTASection';
 import TestimonialsCarousel from '@/components/TestimonialsCarousel';
 import ClientLogos from '@/components/ClientLogos';
 import Footer from '@/components/Footer';
-import LEOChatUnified from '@/components/LEOChatUnified';
 
 export default function Home() {
   return (
@@ -62,7 +61,6 @@ export default function Home() {
         <ClientLogos />
       </main>
       <Footer />
-      <LEOChatUnified pageContext="home" autoOpen={true} />
     </div>
   );
 }

@@ -34,6 +34,10 @@ export default function ClientLogos() {
 
         {/* Carousel */}
         <div className="relative">
+          {/* Gradient overlays */}
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[rgb(30,20,60)] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[rgb(30,20,60)] to-transparent z-10 pointer-events-none" />
+          
           {/* Scrolling container */}
           <div className="overflow-hidden">
             <div className="flex gap-12 animate-scroll">

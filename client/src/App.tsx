@@ -31,10 +31,6 @@ import Services from "./pages/Services";
 import Clients from "./pages/Clients";
 import StartProject from "./pages/StartProject";
 import MediaCenter from "./pages/MediaCenter";
-import Media from "./pages/Media";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import TermsOfService from "./pages/TermsOfService";
-import CookiePolicy from "./pages/CookiePolicy";
 import ArtsCulture from "./pages/ArtsCulture";
 import Lab from "./pages/Lab";
 import Bureau from "./pages/Bureau";
@@ -42,14 +38,6 @@ import Studio from "./pages/Studio";
 import AILabService from "./pages/services/AILab";
 import StrategicBureauService from "./pages/services/StrategicBureau";
 import CreativeStudioService from "./pages/services/CreativeStudio";
-import Agencies from "./pages/Agencies";
-import AdminAgencyLeads from "./pages/admin/AdminAgencyLeads";
-import AdminLEOAnalytics from "./pages/admin/AdminLEOAnalytics";
-import AdminLogin from "./pages/admin/AdminLogin";
-import CreateFirstAdmin from "./pages/CreateFirstAdmin";
-import InitDatabase from "./pages/InitDatabase";
-import AdminDashboard from "./pages/admin/AdminDashboard";
-import AdminRoute from "./components/AdminRoute";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 
 function Router() {
@@ -67,20 +55,7 @@ function Router() {
       <Route path={"/faq"} component={FAQ} />
       <Route path={"/contact"} component={Contact} />
       <Route path={"/start-project"} component={StartProject} />
-      <Route path={"/media"} component={Media} />
-      <Route path={"/agencies"} component={Agencies} />
-      <Route path={"/admin/login"} component={AdminLogin} />
-      <Route path={"/admin/create-first"} component={CreateFirstAdmin} />
-      <Route path={"/admin/init-db"} component={InitDatabase} />
-      <Route path={"/admin"}>
-        {() => <AdminRoute><AdminDashboard /></AdminRoute>}
-      </Route>
-      <Route path={"/admin/agency-leads"}>
-        {() => <AdminRoute><AdminAgencyLeads /></AdminRoute>}
-      </Route>
-      <Route path={"/admin/leo-analytics"}>
-        {() => <AdminRoute><AdminLEOAnalytics /></AdminRoute>}
-      </Route>
+      <Route path={"/media"} component={MediaCenter} />
       <Route path={"/leo"} component={Leo} />
       <Route path={"/manifesto"} component={Manifesto} />
       <Route path={"/radar"} component={Radar} />
@@ -94,11 +69,8 @@ function Router() {
       <Route path={"/glossary"} component={Glossary} />
       <Route path={"/glossary/:termId"} component={GlossaryTerm} />
       <Route path={"/privacy"} component={Privacy} />
-      <Route path={"/privacy-policy"} component={PrivacyPolicy} />
       <Route path={"/terms"} component={Terms} />
-      <Route path={"/terms-of-service"} component={TermsOfService} />
       <Route path={"/cookies"} component={Cookies} />
-      <Route path={"/cookie-policy"} component={CookiePolicy} />
       <Route path={"/testimonials"} component={Testimonials} />
       <Route path={"/arts-culture"} component={ArtsCulture} />
       <Route path={"/lab"} component={Lab} />

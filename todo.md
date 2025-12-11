@@ -1479,5 +1479,17 @@
 - [x] Mettre à jour le design du bouton flottant avec l'avatar LEO
 - [x] Ajouter les animations CSS pour les avatars
 - [x] Tester les avatars émotionnels
+- [x] Créer un checkpoint
+- [x] Pousser sur GitHub
+
+
+## Dashboard Admin LEO Analytics
+- [x] Vérifier les procédures tRPC analytics existantes
+- [x] Créer la page /admin/leo-analytics
+- [x] Ajouter les KPIs (sessions totales, taux conversion, durée moyenne)
+- [x] Ajouter le graphique de sessions par jour
+- [x] Ajouter la liste des conversations récentes
+- [x] Ajouter les statistiques par page (remplace filtres)
+- [x] Tester le dashboard
 - [ ] Créer un checkpoint
 - [ ] Pousser sur GitHub

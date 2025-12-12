@@ -51,6 +51,7 @@ const Agencies = lazy(() => import("./pages/Agencies"));
 const ArrowDemo = lazy(() => import("./pages/ArrowDemo"));
 const ArrowDemoV2 = lazy(() => import("./pages/ArrowDemoV2"));
 const ArrowDemoV3 = lazy(() => import("./pages/ArrowDemoV3"));
+const LoaderDemo = lazy(() => import("./pages/LoaderDemo"));
 const AdminAgencyLeads = lazy(() => import("./pages/admin/AdminAgencyLeads"));
 const AdminLEOAnalytics = lazy(() => import("./pages/admin/AdminLEOAnalytics"));
 const AdminLEOContacts = lazy(() => import("./pages/admin/AdminLEOContacts"));
@@ -109,6 +110,7 @@ function App() {
           <Route path="/arrow-demo" component={ArrowDemo} />
           <Route path="/arrow-demo-v2" component={ArrowDemoV2} />
           <Route path="/arrow-demo-v3" component={ArrowDemoV3} />
+          <Route path="/loader-demo" component={LoaderDemo} />
             <Route path="/admin/agency-leads" component={AdminAgencyLeads} />
             <Route path="/admin/leo-analytics" component={AdminLEOAnalytics} />
             <Route path="/admin/leo-contacts" component={AdminLEOContacts} />

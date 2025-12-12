@@ -48,6 +48,7 @@ const AILabService = lazy(() => import("./pages/services/AILab"));
 const StrategicBureauService = lazy(() => import("./pages/services/StrategicBureau"));
 const CreativeStudioService = lazy(() => import("./pages/services/CreativeStudio"));
 const Agencies = lazy(() => import("./pages/Agencies"));
+const ArrowDemo = lazy(() => import("./pages/ArrowDemo"));
 const AdminAgencyLeads = lazy(() => import("./pages/admin/AdminAgencyLeads"));
 const AdminLEOAnalytics = lazy(() => import("./pages/admin/AdminLEOAnalytics"));
 const AdminLEOContacts = lazy(() => import("./pages/admin/AdminLEOContacts"));
@@ -102,6 +103,7 @@ function App() {
             <Route path="/services/strategic-bureau" component={StrategicBureauService} />
             <Route path="/services/creative-studio" component={CreativeStudioService} />
             <Route path="/agencies" component={Agencies} />
+          <Route path="/arrow-demo" component={ArrowDemo} />
             <Route path="/admin/agency-leads" component={AdminAgencyLeads} />
             <Route path="/admin/leo-analytics" component={AdminLEOAnalytics} />
             <Route path="/admin/leo-contacts" component={AdminLEOContacts} />

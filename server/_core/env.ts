@@ -10,4 +10,5 @@ export const ENV = {
   googleClientId: process.env.GOOGLE_CLIENT_ID ?? "",
   googleClientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
   adminAllowedEmails: process.env.ADMIN_ALLOWED_EMAILS ?? "",
+  baseUrl: process.env.BASE_URL ?? "http://localhost:3000",
 };

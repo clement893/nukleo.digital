@@ -20,7 +20,7 @@ export function configureGoogleAuth() {
       {
         clientID: ENV.googleClientId,
         clientSecret: ENV.googleClientSecret,
-        callbackURL: "/api/auth/google/callback",
+        callbackURL: `${ENV.baseUrl}/api/auth/google/callback`,
       },
       (accessToken, refreshToken, profile, done) => {
         // Extract email from profile

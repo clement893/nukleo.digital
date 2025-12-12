@@ -18,6 +18,7 @@ import compression from "compression";
 import { logger } from "./logger";
 import { initSentry, Sentry } from "./sentry";
 import session from "express-session";
+import connectPgSimple from "connect-pg-simple";
 import passport from "passport";
 import { configureGoogleAuth, requireAdminAuth } from "./googleAuth";
 
@@ -117,8 +118,13 @@ async function startServer() {
   // Configure cookie parser for admin authentication
   app.use(cookieParser());
   
-  // Configure session for Passport
+  // Configure session for Passport with PostgreSQL store
+  const PgSession = connectPgSimple(session);
   app.use(session({
+    store: new PgSession({
+      conString: process.env.DATABASE_URL,
+      createTableIfMissing: true,
+    }),
     secret: process.env.JWT_SECRET || 'nukleo-admin-secret',
     resave: false,
     saveUninitialized: false,
@@ -126,6 +132,7 @@ async function startServer() {
       secure: process.env.NODE_ENV === 'production',
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000, // 24 hours
+      sameSite: 'lax',
     },
   }));
   

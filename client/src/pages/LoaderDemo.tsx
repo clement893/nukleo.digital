@@ -87,7 +87,7 @@ function Loader1Preview() {
   return (
     <div className="relative">
       <img
-        src="/nukleo-logo.svg"
+        src="/Nukleo_blanc_RVB.svg"
         alt="Nukleo"
         className="w-20 h-20 animate-pulse"
         style={{
@@ -114,7 +114,7 @@ function Loader1Full() {
         }
       `}</style>
       <img
-        src="/nukleo-logo.svg"
+        src="/Nukleo_blanc_RVB.svg"
         alt="Nukleo"
         className="w-48 h-48"
         style={{
@@ -130,7 +130,7 @@ function Loader2Preview() {
   return (
     <div className="relative w-20 h-20">
       <img
-        src="/nukleo-logo.svg"
+        src="/Nukleo_blanc_RVB.svg"
         alt="Nukleo"
         className="w-20 h-20 animate-spin"
         style={{
@@ -167,7 +167,7 @@ function Loader2Full() {
       `}</style>
       
       <img
-        src="/nukleo-logo.svg"
+        src="/Nukleo_blanc_RVB.svg"
         alt="Nukleo"
         className="w-48 h-48 absolute top-1/2 left-1/2"
         style={{
@@ -198,7 +198,7 @@ function Loader3Preview() {
   return (
     <div className="relative">
       <img
-        src="/nukleo-logo.svg"
+        src="/Nukleo_blanc_RVB.svg"
         alt="Nukleo"
         className="w-20 h-20"
         style={{
@@ -228,7 +228,7 @@ function Loader3Full() {
         }
       `}</style>
       <img
-        src="/nukleo-logo.svg"
+        src="/Nukleo_blanc_RVB.svg"
         alt="Nukleo"
         className="w-48 h-48"
         style={{

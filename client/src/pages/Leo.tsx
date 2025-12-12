@@ -427,9 +427,9 @@ export default function Leo() {
             {/* Logo */}
             <Link href="/">
               <img 
-                src="/nukleo-logo.png" 
+                src="/Nukleo_blanc_RVB.svg" 
                 alt="Nukleo" 
-                className="h-8 w-auto cursor-pointer brightness-0 invert"
+                className="h-8 w-auto cursor-pointer"
               />
             </Link>
 

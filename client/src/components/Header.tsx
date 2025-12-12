@@ -41,12 +41,12 @@ export default function Header() {
             {/* Logo */}
             <a href="/" className="flex flex-col group cursor-pointer">
               <img 
-                src="/nukleo-logo.webp" 
+                src="/Nukleo_blanc_RVB.svg" 
                 alt="Nukleo" 
                 width="120"
                 height="32"
                 fetchPriority="high"
-                className="h-8 w-auto object-contain brightness-0 invert mb-1"
+                className="h-8 w-auto object-contain mb-1"
               />
               <span className="text-[10px] text-white/60 font-medium tracking-wider">
                 Choose Intelligence

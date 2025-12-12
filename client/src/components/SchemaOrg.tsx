@@ -15,7 +15,7 @@ export default function SchemaOrg({ type, data }: SchemaOrgProps) {
           "name": "Nukleo Digital",
           "alternateName": "Nukleo",
           "url": "https://nukleodigital-production.up.railway.app",
-          "logo": "https://nukleodigital-production.up.railway.app/nukleo-logo.png",
+          "logo": "https://nukleodigital-production.up.railway.app/Nukleo_blanc_RVB.svg",
           "description": "Transform your business with agentic AI. Expert consulting, custom development & intelligent automation for startups, SMBs & enterprises.",
           "foundingDate": "2020",
           "address": {

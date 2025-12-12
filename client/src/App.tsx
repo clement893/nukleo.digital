@@ -2,8 +2,7 @@ import { Suspense, lazy } from "react";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import CustomCursor from "./components/CustomCursor";
-import ModernLoader from "./components/ModernLoader";
-import SuspenseLoader from "./components/SuspenseLoader";
+
 import { ThemeProvider } from "./contexts/ThemeContext";
 import ScrollToTop from "./components/ScrollToTop";
 import { usePageTransition } from "./hooks/usePageTransition";
@@ -65,7 +64,7 @@ function App() {
       <ThemeProvider defaultTheme="dark">
         <CustomCursor />
         <ScrollToTop />
-        <Suspense fallback={<SuspenseLoader />}>
+        <Suspense fallback={null}>
           <Switch>
             <Route path="/" component={Home} />
             <Route path="/projects" component={Projects} />

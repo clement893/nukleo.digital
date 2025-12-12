@@ -1533,3 +1533,17 @@
 - [x] Tester le système de chargement dynamique
 - [x] Vérifier que le loader s'affiche correctement
 - [ ] Déployer sur Railway
+
+## Optimisation des Performances (Score PageSpeed: 33 → 80+)
+- [x] Supprimer le délai minimum de 3 secondes du loader
+- [x] Optimiser l'affichage du loader (disparition immédiate quand React est prêt)
+- [x] Lazy load du chatbot Leo
+- [x] Lazy load de TrendRadar
+- [x] Lazy load de AIReadinessAssessment
+- [x] Lazy load des pages non critiques (About, Projects, Resources, FAQ)
+- [x] Preload des ressources critiques (JS/CSS)
+- [x] Analyser les bundles avec build --analyze
+- [ ] Optimiser les animations (transform/opacity uniquement)
+- [ ] Defer Google Fonts
+- [ ] Tester avec PageSpeed Insights
+- [ ] Déployer sur Railway

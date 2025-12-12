@@ -32,6 +32,10 @@
     
     <!-- Preload LCP image (LEO avatar) -->
     <link rel="preload" href="/leo-avatar.webp" as="image" type="image/webp" fetchpriority="high" />
+    
+    <!-- Performance hints -->
+    <link rel="dns-prefetch" href="https://nukleodigital-production.up.railway.app" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
   </head>
 
   <body>
@@ -97,22 +101,14 @@
             });
           }
           
-          // Hide loader when app is ready (minimum 3 seconds)
-          const minDisplayTime = 3000;
-          const startTime = Date.now();
-          
+          // Hide loader when app is ready (no artificial delay)
           window.addEventListener('load', () => {
-            const elapsed = Date.now() - startTime;
-            const remaining = Math.max(0, minDisplayTime - elapsed);
-            
-            setTimeout(() => {
-              if (loaderContainer) {
-                loaderContainer.classList.add('loader-fade-out');
-                setTimeout(() => {
-                  loaderContainer.style.display = 'none';
-                }, 500);
-              }
-            }, remaining);
+            if (loaderContainer) {
+              loaderContainer.classList.add('loader-fade-out');
+              setTimeout(() => {
+                loaderContainer.style.display = 'none';
+              }, 500); // Just the fade-out animation time
+            }
           });
           
         } catch (error) {

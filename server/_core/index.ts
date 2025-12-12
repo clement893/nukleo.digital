@@ -16,6 +16,9 @@ import rateLimit from "express-rate-limit";
 import compression from "compression";
 import { logger } from "./logger";
 import { initSentry, Sentry } from "./sentry";
+import session from "express-session";
+import passport from "passport";
+import { configureGoogleAuth, requireAdminAuth } from "./googleAuth";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -107,6 +110,55 @@ async function startServer() {
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
   // Configure cookie parser for admin authentication
   app.use(cookieParser());
+  
+  // Configure session for Passport
+  app.use(session({
+    secret: process.env.JWT_SECRET || 'nukleo-admin-secret',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: process.env.NODE_ENV === 'production',
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    },
+  }));
+  
+  // Initialize Passport
+  app.use(passport.initialize());
+  app.use(passport.session());
+  configureGoogleAuth();
+  
+  // Google OAuth routes
+  app.get('/api/auth/google', authLimiter, passport.authenticate('google', {
+    scope: ['profile', 'email'],
+  }));
+  
+  app.get('/api/auth/google/callback',
+    passport.authenticate('google', { failureRedirect: '/admin/login?error=unauthorized' }),
+    (req, res) => {
+      // Successful authentication, redirect to admin
+      res.redirect('/admin');
+    }
+  );
+  
+  // Logout route
+  app.post('/api/auth/logout', (req, res) => {
+    req.logout((err) => {
+      if (err) {
+        return res.status(500).json({ error: 'Logout failed' });
+      }
+      res.json({ success: true });
+    });
+  });
+  
+  // Check auth status
+  app.get('/api/auth/me', (req, res) => {
+    if (req.isAuthenticated()) {
+      res.json({ user: req.user });
+    } else {
+      res.status(401).json({ error: 'Not authenticated' });
+    }
+  });
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
   // Sitemap and robots.txt

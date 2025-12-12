@@ -1,0 +1,8 @@
+{
+  "query": "INSERT INTO loaders (name, description, css_code, is_active, display_order) VALUES\n('Psychedelic Current', 'Loader actuel avec particules, grain et effets psychédéliques', 'current', TRUE, 1),\n('Kaleidoscope Dreams', 'Triangles colorés en rotation kaléidoscopique', 'kaleidoscope', FALSE, 2),\n('Liquid Motion', 'Blobs organiques fluides en mouvement', 'liquid', FALSE, 3),\n('Cyberpunk Matrix', 'Pluie de code style Matrix cyberpunk', 'matrix', FALSE, 4);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user yK33XAHqfEovshw.be4b3946a246 --database fXnGt4rfsHAy5LdzFDZGVg --execute INSERT INTO loaders (name, description, css_code, is_active, display_order) VALUES\n('Psychedelic Current', 'Loader actuel avec particules, grain et effets psychédéliques', 'current', TRUE, 1),\n('Kaleidoscope Dreams', 'Triangles colorés en rotation kaléidoscopique', 'kaleidoscope', FALSE, 2),\n('Liquid Motion', 'Blobs organiques fluides en mouvement', 'liquid', FALSE, 3),\n('Cyberpunk Matrix', 'Pluie de code style Matrix cyberpunk', 'matrix', FALSE, 4);",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1062 (23000) at line 1: Duplicate entry '?' for key 'loaders.name'"
+  ]
+}

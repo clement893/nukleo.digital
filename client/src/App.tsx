@@ -61,6 +61,7 @@ const CreateFirstAdmin = lazy(() => import("./pages/CreateFirstAdmin"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
 const AdminLoaders = lazy(() => import("./pages/AdminLoaders"));
 const AdminHome = lazy(() => import("./pages/admin/AdminHome"));
+import { ProtectedAdminRoute } from "./components/ProtectedAdminRoute";
 
 function App() {
   // Trigger animations on route change
@@ -115,13 +116,25 @@ function App() {
           <Route path="/arrow-demo-v3" component={ArrowDemoV3} />
           <Route path="/loader-demo" component={LoaderDemo} />
           <Route path="/loader-demo-artsy" component={LoaderDemoArtsy} />
-            <Route path="/admin/agency-leads" component={AdminAgencyLeads} />
-            <Route path="/admin/leo-analytics" component={AdminLEOAnalytics} />
-            <Route path="/admin/leo-contacts" component={AdminLEOContacts} />
             <Route path="/admin/login" component={AdminLogin} />
-            <Route path="/admin" component={AdminHome} />
-            <Route path="/admin/dashboard" component={AdminDashboard} />
-            <Route path="/admin/loaders" component={AdminLoaders} />
+            <Route path="/admin/agency-leads">
+              <ProtectedAdminRoute><AdminAgencyLeads /></ProtectedAdminRoute>
+            </Route>
+            <Route path="/admin/leo-analytics">
+              <ProtectedAdminRoute><AdminLEOAnalytics /></ProtectedAdminRoute>
+            </Route>
+            <Route path="/admin/leo-contacts">
+              <ProtectedAdminRoute><AdminLEOContacts /></ProtectedAdminRoute>
+            </Route>
+            <Route path="/admin">
+              <ProtectedAdminRoute><AdminHome /></ProtectedAdminRoute>
+            </Route>
+            <Route path="/admin/dashboard">
+              <ProtectedAdminRoute><AdminDashboard /></ProtectedAdminRoute>
+            </Route>
+            <Route path="/admin/loaders">
+              <ProtectedAdminRoute><AdminLoaders /></ProtectedAdminRoute>
+            </Route>
             <Route path="/create-first-admin" component={CreateFirstAdmin} />
             <Route component={NotFound404} />
           </Switch>

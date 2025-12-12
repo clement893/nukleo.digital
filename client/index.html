@@ -36,89 +36,14 @@
     <!-- Performance hints -->
     <link rel="dns-prefetch" href="https://nukleodigital-production.up.railway.app" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
+    
+    <!-- Async load Google Fonts (non-blocking) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" /></noscript>
   </head>
 
   <body>
-    <!-- Dynamic Loader Container -->
-    <div id="app-loader"></div>
-
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    
-    <script>
-      // Dynamic Loader System
-      // Fetches the active loader from the database and injects it into the page
-      (async function() {
-        const isAdminPage = window.location.pathname.startsWith('/admin');
-        const loaderContainer = document.getElementById('app-loader');
-        
-        // Skip loader on admin pages
-        if (isAdminPage) {
-          if (loaderContainer) {
-            loaderContainer.style.display = 'none';
-          }
-          return;
-        }
-        
-        try {
-          // Fetch active loader from API
-          const response = await fetch('/api/loader/active');
-          const data = await response.json();
-          
-          if (!data || !data.code) {
-            console.warn('No active loader found');
-            if (loaderContainer) {
-              loaderContainer.style.display = 'none';
-            }
-            return;
-          }
-          
-          // Inject loader code into the page
-          const tempDiv = document.createElement('div');
-          tempDiv.innerHTML = data.code;
-          
-          // Extract and inject CSS
-          const styleTag = tempDiv.querySelector('style');
-          if (styleTag) {
-            document.head.appendChild(styleTag);
-          }
-          
-          // Extract and inject HTML (everything except style tags)
-          const htmlContent = Array.from(tempDiv.childNodes)
-            .filter(node => node.nodeName !== 'STYLE')
-            .map(node => node.outerHTML || node.textContent)
-            .join('');
-          
-          if (loaderContainer) {
-            loaderContainer.innerHTML = htmlContent;
-            
-            // Execute any inline scripts
-            const scripts = loaderContainer.querySelectorAll('script');
-            scripts.forEach(oldScript => {
-              const newScript = document.createElement('script');
-              newScript.textContent = oldScript.textContent;
-              oldScript.parentNode.replaceChild(newScript, oldScript);
-            });
-          }
-          
-          // Hide loader when app is ready (no artificial delay)
-          window.addEventListener('load', () => {
-            if (loaderContainer) {
-              loaderContainer.classList.add('loader-fade-out');
-              setTimeout(() => {
-                loaderContainer.style.display = 'none';
-              }, 500); // Just the fade-out animation time
-            }
-          });
-          
-        } catch (error) {
-          console.error('Failed to load dynamic loader:', error);
-          // Hide loader container on error
-          if (loaderContainer) {
-            loaderContainer.style.display = 'none';
-          }
-        }
-      })();
-    </script>
   </body>
 </html>

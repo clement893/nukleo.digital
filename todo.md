@@ -1547,3 +1547,28 @@
 - [ ] Defer Google Fonts
 - [ ] Tester avec PageSpeed Insights
 - [ ] Déployer sur Railway
+
+## Optimisation Performance V2 (Score: 43 → 80+)
+### Phase 1: Corriger le CLS (0.457 → 0.1)
+- [x] Supprimer complètement le loader (solution radicale)
+- [x] Éliminer toutes les animations du loader
+- [x] Supprimer l'endpoint /api/loader/active
+- [x] Nettoyer index.html
+
+### Phase 2: Réduire le TBT (1,080ms → 200ms)
+- [x] Lazy load UniversalLEO (chatbot)
+- [x] Utiliser React.memo() sur HeroSection
+- [ ] Utiliser React.memo() sur TrendRadar
+- [ ] Implémenter startTransition() pour les animations
+
+### Phase 3: Optimiser CSS/Fonts
+- [x] Defer Google Fonts avec media="print"
+- [x] Commenter l'import dans index.css
+- [x] Charger async dans index.html
+- [ ] Inline le CSS critique (< 14KB)
+
+### Phase 4: Tests et Déploiement
+- [ ] Tester avec PageSpeed Insights
+- [ ] Vérifier le score CLS < 0.1
+- [ ] Vérifier le score TBT < 300ms
+- [ ] Déployer sur Railway

@@ -3,9 +3,9 @@ import { Button } from '@/components/ui/button';
 import { useSound } from '@/hooks/useSound';
 import { Link } from 'wouter';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, memo } from 'react';
 
-export default function HeroSection() {
+function HeroSection() {
   const { playHover, playClick } = useSound();
   const [scrollPosition, setScrollPosition] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -125,3 +125,5 @@ export default function HeroSection() {
     </section>
   );
 }
+
+export default memo(HeroSection);

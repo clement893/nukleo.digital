@@ -1,5 +1,6 @@
-/* JetBrains Mono for technical elements (numbers, code) */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@tailwind base;
+/* Google Fonts loaded async in index.html to avoid render blocking */
+/* @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap'); */
 
 /* Aktiv Grotesk Font Family - Complete System */
 

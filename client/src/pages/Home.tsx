@@ -4,9 +4,8 @@ import HeroSection from '@/components/HeroSection';
 import SEO from '@/components/SEO';
 import StructuredData, { organizationSchema, websiteSchema } from '@/components/StructuredData';
 import Footer from '@/components/Footer';
-import UniversalLEO from '@/components/UniversalLEO';
-
 // Lazy load below-the-fold sections
+const UniversalLEO = lazy(() => import('@/components/UniversalLEO'));
 const ManifestoSection = lazy(() => import('@/components/ManifestoSection'));
 const WhoWeServeSection = lazy(() => import('@/components/WhoWeServeSection'));
 const CapabilitiesSection = lazy(() => import('@/components/CapabilitiesSection'));

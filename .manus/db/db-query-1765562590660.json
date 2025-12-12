@@ -1,0 +1,9 @@
+{
+  "query": "INSERT IGNORE INTO loaders (name, description, css_code, is_active, display_order)\nVALUES (\n  'Psychedelic Crazy Arts',\n  'Loader psychédélique avec effets visuels avancés, particules flottantes, hexagones rotatifs et ondes d''énergie',\n  'psychedelic-crazy-arts',\n  1,\n  1\n);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user yK33XAHqfEovshw.be4b3946a246 --database fXnGt4rfsHAy5LdzFDZGVg --execute INSERT IGNORE INTO loaders (name, description, css_code, is_active, display_order)\nVALUES (\n  'Psychedelic Crazy Arts',\n  'Loader psychédélique avec effets visuels avancés, particules flottantes, hexagones rotatifs et ondes d''énergie',\n  'psychedelic-crazy-arts',\n  1,\n  1\n);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 61
+}

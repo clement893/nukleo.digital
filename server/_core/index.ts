@@ -9,6 +9,7 @@ import { createContext } from "./context";
 import sitemapRouter from "../sitemap";
 import { serveStatic, setupVite } from "./vite";
 import { initDatabase } from "../init-db";
+import { seedLoaders } from "../seed-loaders";
 import cookieParser from "cookie-parser";
 import helmet from "helmet";
 import cors from "cors";
@@ -210,8 +211,10 @@ async function startServer() {
     console.log(`Port ${preferredPort} is busy, using port ${port} instead`);
   }
 
-  server.listen(port, () => {
+  server.listen(port, async () => {
     logger.info(`Server running on http://localhost:${port}/`);
+    // Seed loaders on startup
+    await seedLoaders();
   });
 }
 

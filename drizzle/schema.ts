@@ -156,11 +156,11 @@ export const loaders = pgTable("loaders", {
   id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
   name: varchar("name", { length: 255 }).notNull().unique(), // 'Psychedelic', 'Kaleidoscope', etc.
   description: text("description"), // Description of the loader
-  cssCode: text("cssCode").notNull(), // CSS/HTML code for the loader
-  isActive: boolean("isActive").default(true).notNull(), // Whether this loader is in rotation
-  displayOrder: integer("displayOrder").default(0).notNull(), // Order in rotation
-  createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+  cssCode: text("css_code").notNull(), // CSS/HTML code for the loader
+  isActive: boolean("is_active").default(true).notNull(), // Whether this loader is in rotation
+  displayOrder: integer("display_order").default(0).notNull(), // Order in rotation
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
 export type Loader = typeof loaders.$inferSelect;

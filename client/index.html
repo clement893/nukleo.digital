@@ -354,23 +354,32 @@
     
     <script>
       // Hide loader when app is ready (minimum 3 seconds)
-      const minDisplayTime = 3000;
-      const startTime = Date.now();
+      // Skip loader on admin pages
+      const isAdminPage = window.location.pathname.startsWith('/admin');
+      const loader = document.getElementById('app-loader');
       
-      window.addEventListener('load', () => {
-        const elapsed = Date.now() - startTime;
-        const remaining = Math.max(0, minDisplayTime - elapsed);
+      if (isAdminPage && loader) {
+        // Hide loader immediately on admin pages
+        loader.style.display = 'none';
+      } else {
+        // Normal loader behavior for public pages
+        const minDisplayTime = 3000;
+        const startTime = Date.now();
         
-        setTimeout(() => {
-          const loader = document.getElementById('app-loader');
-          if (loader) {
-            loader.classList.add('loader-fade-out');
-            setTimeout(() => {
-              loader.style.display = 'none';
-            }, 500);
-          }
-        }, remaining);
-      });
+        window.addEventListener('load', () => {
+          const elapsed = Date.now() - startTime;
+          const remaining = Math.max(0, minDisplayTime - elapsed);
+          
+          setTimeout(() => {
+            if (loader) {
+              loader.classList.add('loader-fade-out');
+              setTimeout(() => {
+                loader.style.display = 'none';
+              }, 500);
+            }
+          }, remaining);
+        });
+      }
     </script>
   </body>
 </html>

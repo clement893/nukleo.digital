@@ -96,10 +96,10 @@ async function startServer() {
     legacyHeaders: false,
   });
   
-  // Security: Rate limiting - Auth (5 req/15min)
+  // Security: Rate limiting - Auth (20 req/15min)
   const authLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
-    max: 5,
+    max: 20,
     message: 'Too many authentication attempts, please try again later.',
     standardHeaders: true,
     legacyHeaders: false,

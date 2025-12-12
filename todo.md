@@ -1611,3 +1611,12 @@
 - [x] Optimiser les bundles - target: es2020, cssCodeSplit: true
 - [x] Éviter les long main-thread tasks - requestAnimationFrame pour scroll animation
 - [x] Optimiser les animations - will-change: opacity, translateZ(0) pour GPU
+
+## Optimisations PageSpeed Mobile (Score actuel: 78 → Objectif: 90+)
+- [x] Optimiser le LCP mobile (4.6s → 2.5s) - SVG inline + preload
+- [x] Ajouter fetchpriority="high" sur l'image LCP (nukleo-arrow.svg)
+- [x] Précharger les ressources critiques avec preload
+- [x] Lazy loading sur les images below-the-fold (2/3 flèches)
+- [ ] Réduire le TBT mobile (100ms) - 4 long tasks détectées
+- [ ] Optimiser le FCP mobile (1.7s → 1.0s)
+- [ ] Réduire le JavaScript inutilisé (173 KiB) - vendor et react-dom

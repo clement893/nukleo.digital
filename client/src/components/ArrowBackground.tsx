@@ -35,6 +35,8 @@ export default function ArrowBackground({ variant = 'default' }: ArrowBackground
           src="/nukleo-arrow.svg"
           alt=""
           className="absolute"
+          loading={i === 0 ? undefined : 'lazy'} // First arrow eager (LCP), others lazy
+          fetchPriority={i === 0 ? 'high' : undefined} // Prioritize LCP image
           style={{
             ...arrow,
             width: `${arrow.size}px`,

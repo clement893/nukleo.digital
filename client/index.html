@@ -135,9 +135,90 @@
         60% { width: 60%; }
         100% { width: 95%; }
       }
+      #app-loader .particles {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+      #app-loader .particles::before,
+      #app-loader .particles::after {
+        content: '';
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.2);
+        animation: float-particle 15s infinite ease-in-out;
+      }
+      #app-loader .particles::before {
+        left: 20%;
+        top: 30%;
+        animation-delay: 0s;
+      }
+      #app-loader .particles::after {
+        left: 80%;
+        top: 60%;
+        animation-delay: 3s;
+      }
+      @keyframes float-particle {
+        0%, 100% { transform: translate(0, 0); }
+        25% { transform: translate(20px, -30px); }
+        50% { transform: translate(-10px, -60px); }
+        75% { transform: translate(-30px, -30px); }
+      }
+      #app-loader .hexagons {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+      #app-loader .hex-1 {
+        position: absolute;
+        width: 16rem;
+        height: 16rem;
+        top: 20%;
+        left: 10%;
+        opacity: 0.1;
+        animation: spin-slow 20s linear infinite;
+      }
+      #app-loader .hex-2 {
+        position: absolute;
+        width: 12rem;
+        height: 12rem;
+        top: 60%;
+        right: 15%;
+        opacity: 0.1;
+        animation: spin-reverse 15s linear infinite;
+      }
+      #app-loader .hex-3 {
+        position: absolute;
+        width: 10rem;
+        height: 10rem;
+        bottom: 20%;
+        left: 20%;
+        opacity: 0.1;
+        animation: spin-slow 25s linear infinite;
+      }
     </style>
     <div id="app-loader">
       <div class="grain"></div>
+      
+      <!-- Floating Particles -->
+      <div class="particles"></div>
+      
+      <!-- Rotating Hexagons -->
+      <div class="hexagons">
+        <svg class="hex-1" viewBox="0 0 100 100">
+          <polygon points="50 1 95 25 95 75 50 99 5 75 5 25" fill="none" stroke="rgba(168,85,247,0.3)" stroke-width="1" />
+          <polygon points="50 10 85 30 85 70 50 90 15 70 15 30" fill="none" stroke="rgba(236,72,153,0.3)" stroke-width="1" />
+        </svg>
+        <svg class="hex-2" viewBox="0 0 100 100">
+          <polygon points="50 1 95 25 95 75 50 99 5 75 5 25" fill="none" stroke="rgba(59,130,246,0.3)" stroke-width="1" />
+        </svg>
+        <svg class="hex-3" viewBox="0 0 100 100">
+          <polygon points="50 1 95 25 95 75 50 99 5 75 5 25" fill="none" stroke="rgba(168,85,247,0.3)" stroke-width="1" />
+        </svg>
+      </div>
+      
       <div class="content">
         <div class="rings">
           <div class="ring"></div>

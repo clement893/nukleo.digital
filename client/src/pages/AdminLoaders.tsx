@@ -1,12 +1,15 @@
+import { useState } from "react";
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Trash2, Eye, Plus } from "lucide-react";
 import LoaderPreview from "@/components/LoaderPreview";
+import LoaderFullscreenPreview from "@/components/LoaderFullscreenPreview";
 
 export default function AdminLoaders() {
   const utils = trpc.useUtils();
+  const [previewLoader, setPreviewLoader] = useState<{ type: string; name: string } | null>(null);
 
   // Fetch all loaders
   const { data: loaders, isLoading } = trpc.loaders.getAll.useQuery();
@@ -125,7 +128,11 @@ export default function AdminLoaders() {
                   </div>
 
                   {/* Preview Button */}
-                  <Button variant="outline" size="sm">
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={() => setPreviewLoader({ type: loader.cssCode, name: loader.name })}
+                  >
                     <Eye className="w-4 h-4" />
                   </Button>
 
@@ -181,6 +188,16 @@ export default function AdminLoaders() {
           </Card>
         )}
       </div>
+
+      {/* Fullscreen Preview Modal */}
+      {previewLoader && (
+        <LoaderFullscreenPreview
+          loaderType={previewLoader.type}
+          loaderName={previewLoader.name}
+          isOpen={true}
+          onClose={() => setPreviewLoader(null)}
+        />
+      )}
     </div>
   );
 }

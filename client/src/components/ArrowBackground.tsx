@@ -28,7 +28,7 @@ export default function ArrowBackground({ variant = 'default' }: ArrowBackground
       ];
 
   return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
+    <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
       {positions.map((arrow, i) => (
         <img
           key={i}

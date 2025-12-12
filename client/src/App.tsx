@@ -5,6 +5,7 @@ import CustomCursor from "./components/CustomCursor";
 
 import { ThemeProvider } from "./contexts/ThemeContext";
 import ScrollToTop from "./components/ScrollToTop";
+import ArrowBackground from "./components/ArrowBackground";
 import { usePageTransition } from "./hooks/usePageTransition";
 
 // Eager load only critical pages
@@ -64,6 +65,7 @@ function App() {
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="dark">
+        <ArrowBackground variant="default" />
         <CustomCursor />
         <ScrollToTop />
         <Suspense fallback={null}>

@@ -54,9 +54,10 @@ async function startServer() {
   }
   
   // Sentry request handler (must be first)
-  if (process.env.SENTRY_DSN) {
-    app.use(Sentry.Handlers.requestHandler());
-  }
+  // Note: Sentry.Handlers is deprecated in newer versions, skip for now
+  // if (process.env.SENTRY_DSN) {
+  //   app.use(Sentry.Handlers.requestHandler());
+  // }
   
   // Compression (gzip/brotli)
   app.use(compression({ level: 9 }));
@@ -172,6 +173,52 @@ async function startServer() {
       res.status(401).json({ error: 'Not authenticated' });
     }
   });
+  // Loader API - Get active loader (public, no auth required)
+  app.get('/api/loader/active', async (req, res) => {
+    try {
+      logger.info('[Loader API] Fetching active loader...');
+      
+      // Use Railway PostgreSQL directly for loaders table
+      // Note: Loaders are stored in Railway PostgreSQL, not TiDB
+      const postgres = (await import('postgres')).default;
+      const RAILWAY_DB_URL = 'postgresql://postgres:hqPgUeEGphHQWGOsDBbHuPJlBQuQdPrA@mainline.proxy.rlwy.net:36397/railway';
+      const sql = postgres(RAILWAY_DB_URL, {
+        max: 1, // Single connection for this request
+        idle_timeout: 20,
+        connect_timeout: 10,
+      });
+      
+      const result = await sql`
+        SELECT id, name, css_code as "cssCode"
+        FROM loaders 
+        WHERE is_active = true 
+        ORDER BY display_order 
+        LIMIT 1
+      `;
+      
+      await sql.end();
+      
+      logger.info(`[Loader API] Found ${result.length} active loader(s)`);
+      
+      if (result.length === 0) {
+        logger.warn('[Loader API] No active loaders found');
+        return res.json({ loader: null });
+      }
+      
+      const loader = result[0];
+      logger.info(`[Loader API] Returning loader: ${loader.name} (${loader.cssCode?.length || 0} chars)`);
+      
+      res.json({
+        id: loader.id,
+        name: loader.name,
+        code: loader.cssCode,
+      });
+    } catch (error) {
+      logger.error('[Loader API] Failed to fetch active loader:', error);
+      res.status(500).json({ error: 'Failed to fetch loader', details: error instanceof Error ? error.message : String(error) });
+    }
+  });
+  
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
   // Sitemap and robots.txt
@@ -207,9 +254,10 @@ async function startServer() {
   }
   
   // Sentry error handler (must be after all routes)
-  if (process.env.SENTRY_DSN) {
-    app.use(Sentry.Handlers.errorHandler());
-  }
+  // Note: Sentry.Handlers is deprecated in newer versions, skip for now
+  // if (process.env.SENTRY_DSN) {
+  //   app.use(Sentry.Handlers.errorHandler());
+  // }
 
   const preferredPort = parseInt(process.env.PORT || "3000");
   const port = await findAvailablePort(preferredPort);

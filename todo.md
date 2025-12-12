@@ -1524,3 +1524,12 @@
 - [x] Tester les deux pages
 - [ ] Créer un checkpoint
 - [ ] Pousser sur GitHub
+
+## Système de Loader Dynamique
+- [x] Extraire le code CSS/HTML du loader actuel de index.html
+- [x] Sauvegarder le loader complet dans la DB (table loaders)
+- [x] Créer un endpoint API pour récupérer le loader actif
+- [x] Modifier index.html pour charger dynamiquement le loader depuis l'API
+- [x] Tester le système de chargement dynamique
+- [x] Vérifier que le loader s'affiche correctement
+- [ ] Déployer sur Railway

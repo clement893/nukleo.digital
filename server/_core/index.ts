@@ -9,7 +9,6 @@ import { createContext } from "./context";
 import sitemapRouter from "../sitemap";
 import { serveStatic, setupVite } from "./vite";
 import { initDatabase } from "../init-db";
-import { seedLoaders } from "../seed-loaders";
 import cookieParser from "cookie-parser";
 import helmet from "helmet";
 import cors from "cors";
@@ -223,8 +222,8 @@ async function startServer() {
 
   server.listen(port, async () => {
     logger.info(`Server running on http://localhost:${port}/`);
-    // Seed loaders on startup
-    await seedLoaders();
+    // Loader system disabled for performance
+    // await seedLoaders();
   });
 }
 

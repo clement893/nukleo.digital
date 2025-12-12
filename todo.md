@@ -1597,3 +1597,9 @@
 - [ ] Vérifier LCP < 2.5s
 - [ ] Vérifier TBT < 200ms
 - [ ] Déployer sur Railway
+
+## Bug Loader Persistant en Production
+- [ ] Investiguer pourquoi le loader apparaît encore sur Railway malgré la désactivation du plugin
+- [ ] Vérifier si Railway utilise un cache de build
+- [ ] Forcer un rebuild complet sur Railway
+- [ ] Confirmer que le loader a disparu en production

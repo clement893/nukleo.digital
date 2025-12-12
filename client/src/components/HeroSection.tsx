@@ -13,11 +13,20 @@ function HeroSection() {
 
   
   useEffect(() => {
-    const interval = setInterval(() => {
-      setScrollPosition((prev) => prev + 1);
-    }, 30);
+    let animationFrameId: number;
+    let lastTimestamp = 0;
+    const speed = 0.5; // pixels per frame
     
-    return () => clearInterval(interval);
+    const animate = (timestamp: number) => {
+      if (timestamp - lastTimestamp > 16) { // ~60fps
+        setScrollPosition((prev) => prev + speed);
+        lastTimestamp = timestamp;
+      }
+      animationFrameId = requestAnimationFrame(animate);
+    };
+    
+    animationFrameId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrameId);
   }, []);
   
   return (

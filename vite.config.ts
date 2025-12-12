@@ -25,7 +25,15 @@ export default defineConfig({
     emptyOutDir: true,
     sourcemap: false,
     minify: 'esbuild',
+    target: 'es2020',
+    cssCodeSplit: true,
+    assetsInlineLimit: 4096,
     rollupOptions: {
+      treeshake: {
+        moduleSideEffects: 'no-external',
+        propertyReadSideEffects: false,
+        tryCatchDeoptimization: false,
+      },
       output: {
         manualChunks: (id) => {
           // Vendor chunks - ultra-granular splitting for better caching
@@ -90,6 +98,7 @@ export default defineConfig({
       },
     },
     chunkSizeWarningLimit: 1000,
+    reportCompressedSize: false,
   },
   server: {
     host: true,

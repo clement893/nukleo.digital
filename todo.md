@@ -1603,3 +1603,11 @@
 - [ ] Vérifier si Railway utilise un cache de build
 - [ ] Forcer un rebuild complet sur Railway
 - [ ] Confirmer que le loader a disparu en production
+
+## Optimisations PageSpeed (Score actuel: 77 → Objectif: 90+)
+- [x] Corriger le CLS (0.459) - Augmentation des min-height des Suspense fallbacks
+- [x] Réduire l'Element Render Delay - content-visibility: auto sur sections lazy
+- [x] Réduire le JavaScript inutilisé - Tree-shaking agressif activé (-126 KB sur react-dom)
+- [x] Optimiser les bundles - target: es2020, cssCodeSplit: true
+- [x] Éviter les long main-thread tasks - requestAnimationFrame pour scroll animation
+- [x] Optimiser les animations - will-change: opacity, translateZ(0) pour GPU

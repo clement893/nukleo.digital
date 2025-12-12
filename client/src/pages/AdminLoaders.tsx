@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Trash2, Eye, Plus } from "lucide-react";
+import LoaderPreview from "@/components/LoaderPreview";
 
 export default function AdminLoaders() {
   const utils = trpc.useUtils();
@@ -141,6 +142,11 @@ export default function AdminLoaders() {
               </div>
             </CardHeader>
             <CardContent>
+              {/* Preview */}
+              <div className="mb-4">
+                <LoaderPreview loaderType={loader.cssCode} />
+              </div>
+              
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-muted-foreground">Ordre d'affichage:</span>

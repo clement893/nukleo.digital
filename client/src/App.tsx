@@ -59,6 +59,7 @@ const AdminLEOContacts = lazy(() => import("./pages/admin/AdminLEOContacts"));
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const CreateFirstAdmin = lazy(() => import("./pages/CreateFirstAdmin"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
+const AdminLoaders = lazy(() => import("./pages/AdminLoaders"));
 
 function App() {
   // Trigger animations on route change
@@ -118,6 +119,7 @@ function App() {
             <Route path="/admin/leo-contacts" component={AdminLEOContacts} />
             <Route path="/admin/login" component={AdminLogin} />
             <Route path="/admin/dashboard" component={AdminDashboard} />
+            <Route path="/admin/loaders" component={AdminLoaders} />
             <Route path="/create-first-admin" component={CreateFirstAdmin} />
             <Route component={NotFound404} />
           </Switch>

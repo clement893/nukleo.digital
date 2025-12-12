@@ -1,0 +1,9 @@
+{
+  "query": "INSERT INTO loaders (name, description, css_code, is_active, display_order)\nSELECT 'Psychedelic Current', 'Loader actuel avec grain, particules, hexagones, ondes d''énergie et effets glitch', 'current', true, 1\nWHERE NOT EXISTS (SELECT 1 FROM loaders WHERE name = 'Psychedelic Current');",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user yK33XAHqfEovshw.be4b3946a246 --database fXnGt4rfsHAy5LdzFDZGVg --execute INSERT INTO loaders (name, description, css_code, is_active, display_order)\nSELECT 'Psychedelic Current', 'Loader actuel avec grain, particules, hexagones, ondes d''énergie et effets glitch', 'current', true, 1\nWHERE NOT EXISTS (SELECT 1 FROM loaders WHERE name = 'Psychedelic Current');",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 131
+}

@@ -1,4 +1,4 @@
-import { integer, pgEnum, pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
+import { boolean, integer, pgEnum, pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
 
 /**
  * Core user table backing auth flow.
@@ -150,3 +150,18 @@ export const adminUsers = pgTable("admin_users", {
 
 export type AdminUser = typeof adminUsers.$inferSelect;
 export type InsertAdminUser = typeof adminUsers.$inferInsert;
+
+// Loaders table for managing loading screen animations
+export const loaders = pgTable("loaders", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  name: varchar("name", { length: 255 }).notNull().unique(), // 'Psychedelic', 'Kaleidoscope', etc.
+  description: text("description"), // Description of the loader
+  cssCode: text("cssCode").notNull(), // CSS/HTML code for the loader
+  isActive: boolean("isActive").default(true).notNull(), // Whether this loader is in rotation
+  displayOrder: integer("displayOrder").default(0).notNull(), // Order in rotation
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+});
+
+export type Loader = typeof loaders.$inferSelect;
+export type InsertLoader = typeof loaders.$inferInsert;

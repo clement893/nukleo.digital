@@ -1,0 +1,8 @@
+{
+  "query": "CREATE TABLE IF NOT EXISTS loaders (\n  id SERIAL PRIMARY KEY,\n  name VARCHAR(255) NOT NULL UNIQUE,\n  description TEXT,\n  css_code TEXT NOT NULL,\n  is_active BOOLEAN DEFAULT true NOT NULL,\n  display_order INTEGER DEFAULT 0 NOT NULL,\n  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,\n  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL\n);\n\nINSERT INTO loaders (name, description, css_code, is_active, display_order)\nVALUES (\n  'Psychedelic Current',\n  'Loader actuel avec grain, particules, hexagones, ondes d''énergie et effets glitch',\n  'current',\n  true,\n  1\n)\nON CONFLICT (name) DO NOTHING;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user yK33XAHqfEovshw.be4b3946a246 --database fXnGt4rfsHAy5LdzFDZGVg --execute CREATE TABLE IF NOT EXISTS loaders (\n  id SERIAL PRIMARY KEY,\n  name VARCHAR(255) NOT NULL UNIQUE,\n  description TEXT,\n  css_code TEXT NOT NULL,\n  is_active BOOLEAN DEFAULT true NOT NULL,\n  display_order INTEGER DEFAULT 0 NOT NULL,\n  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,\n  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL\n);\n\nINSERT INTO loaders (name, description, css_code, is_active, display_order)\nVALUES (\n  'Psychedelic Current',\n  'Loader actuel avec grain, particules, hexagones, ondes d''énergie et effets glitch',\n  'current',\n  true,\n  1\n)\nON CONFLICT (name) DO NOTHING;",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1064 (42000) at line 12: You have an error in your SQL syntax; check the manual that corresponds to your TiDB version for the right syntax to use line 9 column 12 near \"CONFLICT (name) DO NOTHING\""
+  ]
+}

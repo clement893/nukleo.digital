@@ -29,25 +29,44 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: (id) => {
-          // Vendor chunks - more granular splitting
+          // Vendor chunks - ultra-granular splitting for better caching
           if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('react-dom') || id.includes('scheduler')) {
-              return 'react-vendor';
+            // React core - split into smaller chunks
+            if (id.includes('react/') && !id.includes('react-dom')) {
+              return 'react-core';
             }
+            if (id.includes('react-dom')) {
+              return 'react-dom';
+            }
+            if (id.includes('scheduler')) {
+              return 'react-scheduler';
+            }
+            // Icons - split by usage
             if (id.includes('lucide-react')) {
               return 'icons-vendor';
             }
+            // Charts - heavy library, separate
             if (id.includes('recharts') || id.includes('d3-')) {
               return 'charts-vendor';
             }
-            if (id.includes('@trpc') || id.includes('@tanstack/react-query')) {
+            // tRPC and React Query
+            if (id.includes('@trpc')) {
               return 'trpc-vendor';
             }
+            if (id.includes('@tanstack/react-query')) {
+              return 'react-query-vendor';
+            }
+            // Animation libraries
             if (id.includes('framer-motion')) {
               return 'animation-vendor';
             }
+            // Router
             if (id.includes('wouter')) {
               return 'router-vendor';
+            }
+            // Markdown rendering (used in LEO)
+            if (id.includes('streamdown') || id.includes('react-markdown')) {
+              return 'markdown-vendor';
             }
             // Other node_modules go to vendor chunk
             return 'vendor';
@@ -61,6 +80,9 @@ export default defineConfig({
           }
           if (id.includes('/components/radar/')) {
             return 'radar';
+          }
+          if (id.includes('/components/glossary/')) {
+            return 'glossary';
           }
           if (id.includes('/components/UniversalLEO') || id.includes('/components/Leo') || id.includes('/pages/Leo')) {
             return 'leo';

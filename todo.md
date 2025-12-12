@@ -1572,3 +1572,28 @@
 - [ ] Vérifier le score CLS < 0.1
 - [ ] Vérifier le score TBT < 300ms
 - [ ] Déployer sur Railway
+
+## Optimisation Performance V3 (Score: 76 → 90+)
+### Phase 1: Corriger les Régressions LCP/FCP/SI
+- [ ] Réactiver preload de leo-avatar.webp
+- [ ] Inline Aktiv Grotesk Light dans index.html
+- [ ] Preload le CSS critique
+- [ ] Optimiser l'ordre de chargement des fonts
+
+### Phase 2: Optimiser les Bundles JS (243 KiB inutilisé)
+- [ ] Analyser les bundles avec pnpm run build --analyze
+- [ ] Tree-shaking plus agressif
+- [ ] Dynamic imports pour composants non-critiques
+- [ ] Réduire la taille de react-vendor.js
+
+### Phase 3: Optimiser Images et Compression
+- [ ] Réduire leo-avatar.webp de 168x168 à 96x96
+- [ ] Activer compression Brotli sur Railway
+- [ ] Preconnect aux origines critiques
+- [ ] Optimiser le cache des assets
+
+### Phase 4: Tests et Déploiement
+- [ ] Tester avec PageSpeed Insights Mobile
+- [ ] Vérifier LCP < 2.5s
+- [ ] Vérifier TBT < 200ms
+- [ ] Déployer sur Railway

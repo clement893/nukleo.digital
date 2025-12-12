@@ -37,6 +37,18 @@
     <link rel="dns-prefetch" href="https://nukleodigital-production.up.railway.app" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
     
+    <!-- Inline critical font-face for instant rendering -->
+    <style>
+      /* Aktiv Grotesk Light 300 - Primary body text (critical) */
+      @font-face {
+        font-family: 'Aktiv Grotesk';
+        src: url('/fonts/AktivGrotesk-Light.woff2') format('woff2');
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
+    
     <!-- Async load Google Fonts (non-blocking) -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" /></noscript>

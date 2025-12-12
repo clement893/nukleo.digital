@@ -1,0 +1,13 @@
+{
+  "query": "SELECT COUNT(*) as count FROM loaders WHERE name = 'Psychedelic Crazy Arts';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user yK33XAHqfEovshw.be4b3946a246 --database fXnGt4rfsHAy5LdzFDZGVg --execute SELECT COUNT(*) as count FROM loaders WHERE name = 'Psychedelic Crazy Arts';",
+  "rows": [
+    {
+      "count": "1"
+    }
+  ],
+  "messages": [],
+  "stdout": "count\n1\n",
+  "stderr": "",
+  "execution_time_ms": 52
+}

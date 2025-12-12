@@ -1,5 +1,6 @@
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useEffect } from "react";
 
 interface LoaderFullscreenPreviewProps {
   loaderType: string;
@@ -14,20 +15,31 @@ export default function LoaderFullscreenPreview({
   isOpen,
   onClose,
 }: LoaderFullscreenPreviewProps) {
+  // Handle ESC key
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    if (isOpen) {
+      window.addEventListener("keydown", handleEsc);
+      return () => window.removeEventListener("keydown", handleEsc);
+    }
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const renderLoader = () => {
     switch (loaderType) {
-      case "current":
+      case "psychedelic-crazy-arts":
         return (
           <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-pink-900 to-cyan-900">
             {/* Grain texture */}
             <div className="absolute inset-0 opacity-20 mix-blend-overlay pointer-events-none">
               <svg width="100%" height="100%">
-                <filter id="noise">
+                <filter id="noise-preview">
                   <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" />
                 </filter>
-                <rect width="100%" height="100%" filter="url(#noise)" opacity="0.5" />
+                <rect width="100%" height="100%" filter="url(#noise-preview)" opacity="0.5" />
               </svg>
             </div>
 
@@ -70,101 +82,104 @@ export default function LoaderFullscreenPreview({
           </div>
         );
 
-      case "kaleidoscope":
+      case "minimal-dots":
         return (
-          <div className="absolute inset-0 bg-black flex items-center justify-center">
-            <div className="relative w-96 h-96">
-              {/* Kaleidoscope triangles */}
-              {[0, 60, 120, 180, 240, 300].map((rotation, i) => (
+          <div className="absolute inset-0 bg-white flex items-center justify-center">
+            <div className="flex gap-3">
+              {[0, 1, 2].map((i) => (
                 <div
                   key={i}
-                  className="absolute inset-0 animate-spin"
+                  className="w-4 h-4 bg-gray-800 rounded-full animate-bounce"
                   style={{
-                    transform: `rotate(${rotation}deg)`,
-                    animationDuration: "4s",
-                    animationDelay: `${i * 0.2}s`,
+                    animationDelay: `${i * 0.15}s`,
+                    animationDuration: "0.6s",
                   }}
-                >
-                  <div
-                    className="absolute top-0 left-1/2 w-0 h-0 -translate-x-1/2"
-                    style={{
-                      borderLeft: "100px solid transparent",
-                      borderRight: "100px solid transparent",
-                      borderBottom: `200px solid hsl(${rotation}, 80%, 60%)`,
-                      opacity: 0.7,
-                    }}
-                  />
-                </div>
+                />
               ))}
-              {/* Logo centered */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <img src="/Nukleo_blanc_RVB.svg" alt="Logo" className="w-32 h-32" />
+            </div>
+          </div>
+        );
+
+      case "gradient-spinner":
+        return (
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center">
+            <div className="relative w-32 h-32">
+              <div
+                className="absolute inset-0 rounded-full border-8 border-transparent border-t-white animate-spin"
+                style={{ animationDuration: "1s" }}
+              />
+              <div
+                className="absolute inset-2 rounded-full border-8 border-transparent border-t-white/60 animate-spin"
+                style={{ animationDuration: "1.5s", animationDirection: "reverse" }}
+              />
+              <div
+                className="absolute inset-4 rounded-full border-8 border-transparent border-t-white/30 animate-spin"
+                style={{ animationDuration: "2s" }}
+              />
+            </div>
+          </div>
+        );
+
+      case "neon-pulse":
+        return (
+          <div className="absolute inset-0 bg-black flex items-center justify-center">
+            <div className="relative">
+              {/* Neon rings */}
+              {[0, 1, 2, 3].map((i) => (
+                <div
+                  key={i}
+                  className="absolute inset-0 rounded-full border-4 animate-ping"
+                  style={{
+                    width: `${80 + i * 40}px`,
+                    height: `${80 + i * 40}px`,
+                    left: `${-i * 20}px`,
+                    top: `${-i * 20}px`,
+                    borderColor: i % 2 === 0 ? "#00ffff" : "#ff00ff",
+                    animationDuration: `${2 + i * 0.5}s`,
+                    animationDelay: `${i * 0.2}s`,
+                    boxShadow: `0 0 20px ${i % 2 === 0 ? "#00ffff" : "#ff00ff"}`,
+                  }}
+                />
+              ))}
+              {/* Center logo */}
+              <div className="relative w-20 h-20 flex items-center justify-center">
+                <img
+                  src="/Nukleo_blanc_RVB.svg"
+                  alt="Logo"
+                  className="w-16 h-16"
+                  style={{
+                    filter: "drop-shadow(0 0 20px #00ffff)",
+                  }}
+                />
               </div>
             </div>
           </div>
         );
 
-      case "liquid":
+      case "geometric-morph":
         return (
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-pink-500 to-orange-500">
-            {/* Liquid blobs */}
-            <div className="absolute inset-0">
-              {[0, 1, 2, 3, 4].map((i) => (
-                <div
-                  key={i}
-                  className="absolute rounded-full blur-3xl animate-pulse"
-                  style={{
-                    width: `${200 + i * 60}px`,
-                    height: `${200 + i * 60}px`,
-                    background: `radial-gradient(circle, ${
-                      i % 3 === 0
-                        ? "rgba(168, 85, 247, 0.6)"
-                        : i % 3 === 1
-                        ? "rgba(236, 72, 153, 0.6)"
-                        : "rgba(34, 211, 238, 0.6)"
-                    }, transparent)`,
-                    left: `${10 + i * 20}%`,
-                    top: `${10 + i * 15}%`,
-                    animationDuration: `${3 + i}s`,
-                    animationDelay: `${i * 0.5}s`,
-                  }}
-                />
-              ))}
-            </div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <img src="/Nukleo_blanc_RVB.svg" alt="Logo" className="w-40 h-40 relative z-10" />
-            </div>
-          </div>
-        );
-
-      case "matrix":
-        return (
-          <div className="absolute inset-0 bg-black">
-            {/* Matrix rain effect */}
-            <div className="absolute inset-0 overflow-hidden">
-              {[...Array(40)].map((_, i) => (
-                <div
-                  key={i}
-                  className="absolute top-0 text-green-500 text-sm font-mono opacity-70 animate-pulse whitespace-pre"
-                  style={{
-                    left: `${i * 2.5}%`,
-                    animationDuration: `${1 + Math.random()}s`,
-                    animationDelay: `${Math.random() * 2}s`,
-                  }}
-                >
-                  {Array.from({ length: 20 }, () =>
-                    Math.random().toString(36).substring(2, 3)
-                  ).join("\n")}
-                </div>
-              ))}
-            </div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <img
-                src="/Nukleo_blanc_RVB.svg"
-                alt="Logo"
-                className="w-40 h-40 relative z-10"
+          <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center">
+            <div className="relative w-40 h-40">
+              {/* Morphing shapes */}
+              <div
+                className="absolute inset-0 bg-white/20 animate-spin"
                 style={{
-                  filter: "drop-shadow(0 0 30px rgba(34, 211, 238, 1))",
+                  clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
+                  animationDuration: "3s",
+                }}
+              />
+              <div
+                className="absolute inset-4 bg-white/30 animate-spin"
+                style={{
+                  clipPath: "polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)",
+                  animationDuration: "4s",
+                  animationDirection: "reverse",
+                }}
+              />
+              <div
+                className="absolute inset-8 bg-white/40 rounded-full animate-pulse"
+                style={{
+                  animationDuration: "2s",
                 }}
               />
             </div>
@@ -173,8 +188,9 @@ export default function LoaderFullscreenPreview({
 
       default:
         return (
-          <div className="absolute inset-0 bg-gray-900 flex items-center justify-center">
-            <p className="text-white text-xl">Preview non disponible</p>
+          <div className="absolute inset-0 bg-gray-900 flex items-center justify-center flex-col gap-4">
+            <p className="text-white text-xl">Prévisualisation non disponible</p>
+            <p className="text-white/60 text-sm">Type de loader: {loaderType}</p>
           </div>
         );
     }

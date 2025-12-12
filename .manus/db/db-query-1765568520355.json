@@ -1,0 +1,9 @@
+{
+  "query": "CREATE TABLE IF NOT EXISTS loaders (\n  id SERIAL PRIMARY KEY,\n  name VARCHAR(255) NOT NULL UNIQUE,\n  description TEXT,\n  css_code TEXT NOT NULL,\n  is_active BOOLEAN DEFAULT TRUE NOT NULL,\n  display_order INTEGER DEFAULT 0 NOT NULL,\n  created_at TIMESTAMP DEFAULT NOW() NOT NULL,\n  updated_at TIMESTAMP DEFAULT NOW() NOT NULL\n);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user yK33XAHqfEovshw.be4b3946a246 --database fXnGt4rfsHAy5LdzFDZGVg --execute CREATE TABLE IF NOT EXISTS loaders (\n  id SERIAL PRIMARY KEY,\n  name VARCHAR(255) NOT NULL UNIQUE,\n  description TEXT,\n  css_code TEXT NOT NULL,\n  is_active BOOLEAN DEFAULT TRUE NOT NULL,\n  display_order INTEGER DEFAULT 0 NOT NULL,\n  created_at TIMESTAMP DEFAULT NOW() NOT NULL,\n  updated_at TIMESTAMP DEFAULT NOW() NOT NULL\n);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 193
+}

@@ -46,6 +46,11 @@ async function startServer() {
   const app = express();
   const server = createServer(app);
   
+  // Trust proxy for Railway/production environments
+  if (process.env.NODE_ENV === 'production') {
+    app.set('trust proxy', 1);
+  }
+  
   // Sentry request handler (must be first)
   if (process.env.SENTRY_DSN) {
     app.use(Sentry.Handlers.requestHandler());

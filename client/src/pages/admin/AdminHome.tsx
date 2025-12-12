@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { AdminHeader } from "@/components/AdminHeader";
 import { 
   LayoutDashboard, 
   Loader2, 
@@ -86,6 +87,7 @@ export default function AdminHome() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
+      <AdminHeader />
       <div className="container mx-auto py-12">
         {/* Header */}
         <div className="mb-12">

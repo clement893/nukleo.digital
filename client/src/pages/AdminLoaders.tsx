@@ -6,6 +6,7 @@ import { Switch } from "@/components/ui/switch";
 import { Trash2, Eye, Plus } from "lucide-react";
 import LoaderPreview from "@/components/LoaderPreview";
 import LoaderFullscreenPreview from "@/components/LoaderFullscreenPreview";
+import { AdminHeader } from "@/components/AdminHeader";
 
 export default function AdminLoaders() {
   const utils = trpc.useUtils();
@@ -54,7 +55,9 @@ export default function AdminLoaders() {
   }
 
   return (
-    <div className="container mx-auto py-8">
+    <>
+      <AdminHeader />
+      <div className="container mx-auto py-8">
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-4xl font-bold mb-2">Gestion des Loaders</h1>
@@ -199,5 +202,6 @@ export default function AdminLoaders() {
         />
       )}
     </div>
+    </>
   );
 }

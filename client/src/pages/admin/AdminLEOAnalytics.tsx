@@ -1,6 +1,7 @@
 import { trpc } from '@/lib/trpc';
 import { Card } from '@/components/ui/card';
 import { Loader2, TrendingUp, Users, MessageSquare, Clock, Mail } from 'lucide-react';
+import { AdminHeader } from "@/components/AdminHeader";
 import { Line, Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,

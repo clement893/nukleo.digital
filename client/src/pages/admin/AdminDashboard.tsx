@@ -2,6 +2,7 @@ import { trpc } from "@/lib/trpc";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Users, MessageSquare, FileText, TrendingUp, Activity, Database } from "lucide-react";
 import AdminRoute from "@/components/AdminRoute";
+import { AdminHeader } from "@/components/AdminHeader";
 
 export default function AdminDashboard() {
   const { data: stats, isLoading } = trpc.admin.getStats.useQuery();
@@ -65,6 +66,7 @@ export default function AdminDashboard() {
 
   return (
     <AdminRoute>
+      <AdminHeader />
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-8">
         <div className="max-w-7xl mx-auto space-y-8">
           {/* Header */}

@@ -167,7 +167,7 @@ export default function TestimonialsCarousel() {
 
           {/* CTA Link */}
           <div className="text-center mt-12">
-            <Link href="/testimonials">
+            <Link href={getLocalizedPath('/testimonials')}>
               <a className="
                 inline-flex items-center gap-2
                 text-white/70 hover:text-white

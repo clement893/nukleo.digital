@@ -1,4 +1,5 @@
 import { createLoader } from "./loaders";
+import { generateAlternatingText } from "./loader-text-utils";
 
 // Loader 1: OCEAN - Vagues profondes avec bulles et créatures marines
 const loaderOcean = `<div class="nukleo-loader-ocean">
@@ -140,32 +141,16 @@ const loaderOcean = `<div class="nukleo-loader-ocean">
     }
     
     .nukleo-loader-ocean .text {
-      position: absolute;
-      bottom: 25%;
-      left: 50%;
-      transform: translateX(-50%);
       color: rgba(255, 255, 255, 0.95);
       font-family: 'Aktiv Grotesk', sans-serif;
       font-size: 16px;
       letter-spacing: 0.5em;
       text-transform: uppercase;
       font-weight: 300;
-      animation: text-wave 2.5s ease-in-out infinite;
       text-shadow: 
         0 0 20px rgba(0, 191, 255, 0.8),
         0 0 40px rgba(64, 224, 208, 0.6),
         0 2px 10px rgba(0, 0, 0, 0.5);
-    }
-    
-    @keyframes text-wave {
-      0%, 100% { 
-        opacity: 0.8; 
-        transform: translateX(-50%) translateY(0);
-      }
-      50% { 
-        opacity: 1; 
-        transform: translateX(-50%) translateY(-3px);
-      }
     }
   </style>
   
@@ -197,7 +182,7 @@ const loaderOcean = `<div class="nukleo-loader-ocean">
     <img src="/Nukleo_blanc_RVB.svg" alt="Nukleo Digital" />
   </div>
   
-  <div class="text">Choose Intelligence</div>
+  ${generateAlternatingText('nukleo-loader-ocean-text', 'color: rgba(255, 255, 255, 0.95); font-family: \'Aktiv Grotesk\', sans-serif; font-size: 16px; letter-spacing: 0.5em; text-transform: uppercase; font-weight: 300; text-shadow: 0 0 20px rgba(0, 191, 255, 0.8), 0 0 40px rgba(64, 224, 208, 0.6), 0 2px 10px rgba(0, 0, 0, 0.5);', '25%')}
 </div>`;
 
 // Loader 2: AI - Réseaux neuronaux avec circuits et particules tech
@@ -350,26 +335,16 @@ const loaderAI = `<div class="nukleo-loader-ai">
     }
     
     .nukleo-loader-ai .text {
-      position: absolute;
-      bottom: 28%;
-      left: 50%;
-      transform: translateX(-50%);
       color: rgba(0, 255, 255, 0.95);
       font-family: 'JetBrains Mono', monospace;
       font-size: 14px;
       letter-spacing: 0.6em;
       text-transform: uppercase;
       font-weight: 400;
-      animation: text-blink 1.5s ease-in-out infinite;
       text-shadow: 
         0 0 10px rgba(0, 255, 255, 0.8),
         0 0 20px rgba(0, 255, 255, 0.6),
         0 0 30px rgba(0, 200, 255, 0.4);
-    }
-    
-    @keyframes text-blink {
-      0%, 100% { opacity: 0.7; }
-      50% { opacity: 1; }
     }
   </style>
   
@@ -436,7 +411,7 @@ const loaderAI = `<div class="nukleo-loader-ai">
     <img src="/Nukleo_blanc_RVB.svg" alt="Nukleo Digital" />
   </div>
   
-  <div class="text">CHOOSE INTELLIGENCE</div>
+  ${generateAlternatingText('nukleo-loader-ai-text', 'color: rgba(0, 255, 255, 0.95); font-family: \'JetBrains Mono\', monospace; font-size: 14px; letter-spacing: 0.6em; text-transform: uppercase; font-weight: 400; text-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.6), 0 0 30px rgba(0, 200, 255, 0.4);', '28%')}
 </div>`;
 
 // Loader 3: FUNK - Disco avec couleurs vives, formes dansantes et effets psychédéliques
@@ -611,35 +586,17 @@ const loaderFunk = `<div class="nukleo-loader-funk">
     }
     
     .nukleo-loader-funk .text {
-      position: absolute;
-      bottom: 25%;
-      left: 50%;
-      transform: translateX(-50%);
       color: rgba(255, 255, 255, 1);
       font-family: 'Aktiv Grotesk', sans-serif;
       font-size: 18px;
       letter-spacing: 0.6em;
       text-transform: uppercase;
       font-weight: 700;
-      animation: text-funk 1.5s ease-in-out infinite;
       text-shadow: 
         0 0 10px rgba(255, 255, 255, 1),
         0 0 20px rgba(255, 0, 110, 0.8),
         0 0 30px rgba(131, 56, 236, 0.6),
         0 0 40px rgba(58, 134, 255, 0.4);
-    }
-    
-    @keyframes text-funk {
-      0%, 100% {
-        opacity: 0.9;
-        transform: translateX(-50%) scale(1);
-        letter-spacing: 0.6em;
-      }
-      50% {
-        opacity: 1;
-        transform: translateX(-50%) scale(1.1);
-        letter-spacing: 0.7em;
-      }
     }
   </style>
   
@@ -656,7 +613,7 @@ const loaderFunk = `<div class="nukleo-loader-funk">
     <img src="/Nukleo_blanc_RVB.svg" alt="Nukleo Digital" />
   </div>
   
-  <div class="text">CHOOSE INTELLIGENCE</div>
+  ${generateAlternatingText('nukleo-loader-funk-text', 'color: rgba(255, 255, 255, 1); font-family: \'Aktiv Grotesk\', sans-serif; font-size: 18px; letter-spacing: 0.6em; text-transform: uppercase; font-weight: 700; text-shadow: 0 0 10px rgba(255, 255, 255, 1), 0 0 20px rgba(255, 0, 110, 0.8), 0 0 30px rgba(131, 56, 236, 0.6), 0 0 40px rgba(58, 134, 255, 0.4);', '25%')}
 </div>`;
 
 // Loader 4: BASQUIAT - Style graffiti avec couleurs primaires, formes brutes et énergie brute
@@ -850,34 +807,16 @@ const loaderBasquiat = `<div class="nukleo-loader-basquiat">
     }
     
     .nukleo-loader-basquiat .text {
-      position: absolute;
-      bottom: 22%;
-      left: 50%;
-      transform: translateX(-50%);
       color: #000000;
       font-family: 'Arial Black', sans-serif;
       font-size: 20px;
       letter-spacing: 0.3em;
       text-transform: uppercase;
       font-weight: 900;
-      animation: text-basquiat 2s ease-in-out infinite;
       text-shadow: 
         3px 3px 0px rgba(255, 0, 0, 0.8),
         -2px -2px 0px rgba(0, 0, 255, 0.6),
         4px 4px 8px rgba(0, 0, 0, 0.5);
-    }
-    
-    @keyframes text-basquiat {
-      0%, 100% {
-        opacity: 0.9;
-        transform: translateX(-50%) translateY(0);
-        letter-spacing: 0.3em;
-      }
-      50% {
-        opacity: 1;
-        transform: translateX(-50%) translateY(-5px);
-        letter-spacing: 0.35em;
-      }
     }
   </style>
   
@@ -899,7 +838,7 @@ const loaderBasquiat = `<div class="nukleo-loader-basquiat">
     <img src="/Nukleo_blanc_RVB.svg" alt="Nukleo Digital" />
   </div>
   
-  <div class="text">CHOOSE INTELLIGENCE</div>
+  ${generateAlternatingText('nukleo-loader-basquiat-text', 'color: #000000; font-family: \'Arial Black\', sans-serif; font-size: 20px; letter-spacing: 0.3em; text-transform: uppercase; font-weight: 900; text-shadow: 3px 3px 0px rgba(255, 0, 0, 0.8), -2px -2px 0px rgba(0, 0, 255, 0.6), 4px 4px 8px rgba(0, 0, 0, 0.5);', '22%')}
 </div>`;
 
 export async function seedCrazyLoaders() {

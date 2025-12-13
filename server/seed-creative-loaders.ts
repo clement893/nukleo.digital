@@ -1,4 +1,5 @@
 import { createLoader } from "./loaders";
+import { generateAlternatingText } from "./loader-text-utils";
 
 // Loader 1: Particules cosmiques avec effet de vortex
 const loader1 = `<div class="nukleo-loader-cosmic">
@@ -93,23 +94,13 @@ const loader1 = `<div class="nukleo-loader-cosmic">
     }
     
     .nukleo-loader-cosmic .text {
-      position: absolute;
-      bottom: 25%;
-      left: 50%;
-      transform: translateX(-50%);
       color: rgba(255, 255, 255, 0.95);
       font-family: 'Aktiv Grotesk', sans-serif;
       font-size: 16px;
       letter-spacing: 0.5em;
       text-transform: uppercase;
       font-weight: 300;
-      animation: text-shimmer 2s ease-in-out infinite;
       text-shadow: 0 0 20px rgba(139, 92, 246, 0.8), 0 0 40px rgba(236, 72, 153, 0.6);
-    }
-    
-    @keyframes text-shimmer {
-      0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
-      50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
     }
   </style>
   
@@ -126,7 +117,7 @@ const loader1 = `<div class="nukleo-loader-cosmic">
     <img src="/Nukleo_blanc_RVB.svg" alt="Nukleo Digital" />
   </div>
   
-  <div class="text">Choose Intelligence</div>
+  ${generateAlternatingText('nukleo-loader-cosmic-text', 'color: rgba(255, 255, 255, 0.95); font-family: \'Aktiv Grotesk\', sans-serif; font-size: 16px; letter-spacing: 0.5em; text-transform: uppercase; font-weight: 300; text-shadow: 0 0 20px rgba(139, 92, 246, 0.8), 0 0 40px rgba(236, 72, 153, 0.6);', '25%')}
 </div>`;
 
 // Loader 2: Glitch néon avec effet de scan
@@ -227,22 +218,12 @@ const loader2 = `<div class="nukleo-loader-glitch">
     }
     
     .nukleo-loader-glitch .text {
-      position: absolute;
-      bottom: 30%;
-      left: 50%;
-      transform: translateX(-50%);
       color: rgba(0, 255, 255, 0.9);
       font-family: 'JetBrains Mono', monospace;
       font-size: 14px;
       letter-spacing: 0.4em;
       text-transform: uppercase;
-      animation: text-flicker 0.15s infinite;
       text-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(255, 0, 255, 0.6);
-    }
-    
-    @keyframes text-flicker {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.8; }
     }
   </style>
   
@@ -250,7 +231,7 @@ const loader2 = `<div class="nukleo-loader-glitch">
     <img class="logo" src="/Nukleo_blanc_RVB.svg" alt="Nukleo Digital" />
   </div>
   
-  <div class="text">CHOOSE INTELLIGENCE</div>
+  ${generateAlternatingText('nukleo-loader-glitch-text', 'color: rgba(0, 255, 255, 0.9); font-family: \'JetBrains Mono\', monospace; font-size: 14px; letter-spacing: 0.4em; text-transform: uppercase; text-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(255, 0, 255, 0.6);', '30%')}
 </div>`;
 
 // Loader 3: Morphing géométrique avec formes qui se transforment
@@ -355,22 +336,12 @@ const loader3 = `<div class="nukleo-loader-morph">
     }
     
     .nukleo-loader-morph .text {
-      position: absolute;
-      bottom: 28%;
-      left: 50%;
-      transform: translateX(-50%);
       color: rgba(255, 255, 255, 0.9);
       font-family: 'Aktiv Grotesk', sans-serif;
       font-size: 15px;
       letter-spacing: 0.4em;
       text-transform: uppercase;
-      animation: text-morph 2.5s ease-in-out infinite;
       text-shadow: 0 0 20px rgba(139, 92, 246, 0.8);
-    }
-    
-    @keyframes text-morph {
-      0%, 100% { opacity: 0.7; letter-spacing: 0.4em; }
-      50% { opacity: 1; letter-spacing: 0.5em; }
     }
   </style>
   
@@ -384,7 +355,7 @@ const loader3 = `<div class="nukleo-loader-morph">
     <img src="/Nukleo_blanc_RVB.svg" alt="Nukleo Digital" />
   </div>
   
-  <div class="text">Choose Intelligence</div>
+  ${generateAlternatingText('nukleo-loader-morph-text', 'color: rgba(255, 255, 255, 0.9); font-family: \'Aktiv Grotesk\', sans-serif; font-size: 15px; letter-spacing: 0.4em; text-transform: uppercase; text-shadow: 0 0 20px rgba(139, 92, 246, 0.8);', '28%')}
 </div>`;
 
 // Loader 4: Ondes et vibrations avec effet de liquide
@@ -494,22 +465,12 @@ const loader4 = `<div class="nukleo-loader-waves">
     }
     
     .nukleo-loader-waves .text {
-      position: absolute;
-      bottom: 30%;
-      left: 50%;
-      transform: translateX(-50%);
       color: rgba(255, 255, 255, 0.9);
       font-family: 'Aktiv Grotesk', sans-serif;
       font-size: 14px;
       letter-spacing: 0.35em;
       text-transform: uppercase;
-      animation: text-wave 2s ease-in-out infinite;
       text-shadow: 0 0 15px rgba(139, 92, 246, 0.7);
-    }
-    
-    @keyframes text-wave {
-      0%, 100% { opacity: 0.6; transform: translateX(-50%) translateY(0); }
-      50% { opacity: 1; transform: translateX(-50%) translateY(-5px); }
     }
   </style>
   
@@ -540,7 +501,7 @@ const loader4 = `<div class="nukleo-loader-waves">
     <img src="/Nukleo_blanc_RVB.svg" alt="Nukleo Digital" />
   </div>
   
-  <div class="text">Choose Intelligence</div>
+  ${generateAlternatingText('nukleo-loader-waves-text', 'color: rgba(255, 255, 255, 0.9); font-family: \'Aktiv Grotesk\', sans-serif; font-size: 14px; letter-spacing: 0.35em; text-transform: uppercase; text-shadow: 0 0 15px rgba(139, 92, 246, 0.7);', '30%')}
 </div>`;
 
 // Loader 5: Explosion de particules avec effet de feu
@@ -655,34 +616,16 @@ const loader5 = `<div class="nukleo-loader-explosion">
     }
     
     .nukleo-loader-explosion .text {
-      position: absolute;
-      bottom: 28%;
-      left: 50%;
-      transform: translateX(-50%);
       color: rgba(255, 255, 255, 0.95);
       font-family: 'Aktiv Grotesk', sans-serif;
       font-size: 16px;
       letter-spacing: 0.45em;
       text-transform: uppercase;
       font-weight: 300;
-      animation: text-explode 2s ease-in-out infinite;
       text-shadow: 
         0 0 10px rgba(139, 92, 246, 0.8),
         0 0 20px rgba(236, 72, 153, 0.6),
         0 0 30px rgba(34, 211, 238, 0.4);
-    }
-    
-    @keyframes text-explode {
-      0%, 100% {
-        opacity: 0.7;
-        transform: translateX(-50%) scale(1);
-        letter-spacing: 0.45em;
-      }
-      50% {
-        opacity: 1;
-        transform: translateX(-50%) scale(1.05);
-        letter-spacing: 0.5em;
-      }
     }
   </style>
   
@@ -712,7 +655,7 @@ const loader5 = `<div class="nukleo-loader-explosion">
     <img src="/Nukleo_blanc_RVB.svg" alt="Nukleo Digital" />
   </div>
   
-  <div class="text">Choose Intelligence</div>
+  ${generateAlternatingText('nukleo-loader-explosion-text', 'color: rgba(255, 255, 255, 0.95); font-family: \'Aktiv Grotesk\', sans-serif; font-size: 16px; letter-spacing: 0.45em; text-transform: uppercase; font-weight: 300; text-shadow: 0 0 10px rgba(139, 92, 246, 0.8), 0 0 20px rgba(236, 72, 153, 0.6), 0 0 30px rgba(34, 211, 238, 0.4);', '28%')}
 </div>`;
 
 export async function seedCreativeLoaders() {

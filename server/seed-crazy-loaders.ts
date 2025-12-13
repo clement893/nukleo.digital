@@ -1039,7 +1039,7 @@ const loaderElegant = `<div class="nukleo-loader-elegant">
     <img src="/Nukleo_blanc_RVB.svg" alt="Nukleo Digital" />
   </div>
   
-  ${generateAlternatingText('nukleo-loader-elegant-text', 'color: rgba(255, 255, 255, 0.7); font-family: \'Aktiv Grotesk\', sans-serif; font-size: 13px; letter-spacing: 0.4em; text-transform: uppercase; font-weight: 300;', '28%')}
+  <div class="text" style="position: fixed; bottom: 28%; left: 50%; transform: translateX(-50%); z-index: 10000; pointer-events: none; color: rgba(255, 255, 255, 0.7); font-family: 'Aktiv Grotesk', sans-serif; font-size: 13px; letter-spacing: 0.4em; text-transform: uppercase; font-weight: 300;">Choose Intelligence</div>
 </div>`;
 
 // Loader 6: LUXE SOPHISTIQUÉ - Effets de lumière douce et transitions fluides
@@ -1229,7 +1229,7 @@ const loaderLuxe = `<div class="nukleo-loader-luxe">
     <img src="/Nukleo_blanc_RVB.svg" alt="Nukleo Digital" />
   </div>
   
-  ${generateAlternatingText('nukleo-loader-luxe-text', 'color: rgba(255, 255, 255, 0.65); font-family: \'Aktiv Grotesk\', sans-serif; font-size: 12px; letter-spacing: 0.5em; text-transform: uppercase; font-weight: 200;', '28%')}
+  <div class="text" style="position: fixed; bottom: 28%; left: 50%; transform: translateX(-50%); z-index: 10000; pointer-events: none; color: rgba(255, 255, 255, 0.65); font-family: 'Aktiv Grotesk', sans-serif; font-size: 12px; letter-spacing: 0.5em; text-transform: uppercase; font-weight: 200;">Choose Intelligence</div>
 </div>`;
 
 export async function seedCrazyLoaders() {

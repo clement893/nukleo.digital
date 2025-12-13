@@ -88,8 +88,9 @@ export default function PageLoader() {
     // Still loading loaders, show black background
     return (
       <div
-        className="fixed inset-0 z-[9999] bg-black"
+        className="fixed inset-0 z-[9999]"
         style={{
+          backgroundColor: '#000000',
           opacity: 1,
           pointerEvents: "all",
         }}
@@ -103,7 +104,7 @@ export default function PageLoader() {
 
   return (
     <div
-      className="fixed inset-0 z-[9999] bg-black"
+      className="fixed inset-0 z-[9999]"
       style={{
         opacity: isLoading ? 1 : 0,
         pointerEvents: isLoading ? "all" : "none",
@@ -113,7 +114,8 @@ export default function PageLoader() {
       {htmlContent && (
         <div
           key={`page-loader-${loaderHtml.substring(0, 50)}`}
-          className="absolute inset-0"
+          className="fixed inset-0"
+          style={{ zIndex: 9999 }}
           dangerouslySetInnerHTML={{ __html: htmlContent }}
         />
       )}

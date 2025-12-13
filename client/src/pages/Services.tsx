@@ -51,23 +51,23 @@ export default function Services() {
       services: [
         {
           icon: Code,
-          title: 'Custom Web Applications',
-          description: 'Develop bespoke web platforms with AI-powered features, real-time collaboration, and seamless integrations.',
+          title: t('services.lab.services.customWebApps.title'),
+          description: t('services.lab.services.customWebApps.description'),
         },
         {
           icon: Zap,
-          title: 'API Development & Integration',
-          description: 'Create robust APIs and integrate third-party services to build connected, intelligent ecosystems.',
+          title: t('services.lab.services.apiDevelopment.title'),
+          description: t('services.lab.services.apiDevelopment.description'),
         },
         {
           icon: Users,
-          title: 'User Experience Design',
-          description: 'Design intuitive interfaces that combine human-centered design with AI-driven personalization.',
+          title: t('services.lab.services.uxDesign.title'),
+          description: t('services.lab.services.uxDesign.description'),
         },
         {
           icon: Shield,
-          title: 'Security & Compliance',
-          description: 'Implement enterprise-grade security, data privacy controls, and compliance frameworks for your digital platforms.',
+          title: t('services.lab.services.security.title'),
+          description: t('services.lab.services.security.description'),
         },
       ],
     },
@@ -80,23 +80,23 @@ export default function Services() {
       services: [
         {
           icon: Sparkles,
-          title: 'Brand Identity & Strategy',
-          description: 'Craft compelling brand identities that resonate with your audience and differentiate you in the market.',
+          title: t('services.studio.services.brandIdentity.title'),
+          description: t('services.studio.services.brandIdentity.description'),
         },
         {
           icon: PenTool,
-          title: 'UI/UX Design',
-          description: 'Design stunning interfaces that blend aesthetics with functionality, creating experiences users love.',
+          title: t('services.studio.services.uiuxDesign.title'),
+          description: t('services.studio.services.uiuxDesign.description'),
         },
         {
           icon: Camera,
-          title: 'Content Creation',
-          description: 'Produce high-impact visual and written content that tells your story and drives engagement.',
+          title: t('services.studio.services.contentCreation.title'),
+          description: t('services.studio.services.contentCreation.description'),
         },
         {
           icon: TrendingUp,
-          title: 'Campaign Design',
-          description: 'Design integrated marketing campaigns that capture attention and deliver measurable results.',
+          title: t('services.studio.services.campaignDesign.title'),
+          description: t('services.studio.services.campaignDesign.description'),
         },
       ],
     },

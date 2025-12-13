@@ -110,17 +110,71 @@
     "bureau": {
       "category": "The Bureau",
       "subtitle": "Strategic Headquarters",
-      "description": "Your strategic headquarters. Here, we transform data into decisions, insights into actions, and opportunities into measurable results."
+      "description": "Your strategic headquarters. Here, we transform data into decisions, insights into actions, and opportunities into measurable results.",
+      "services": {
+        "aiStrategy": {
+          "title": "AI Strategy Consulting",
+          "description": "Define your AI roadmap with expert guidance on technology selection, implementation planning, and ROI optimization."
+        },
+        "conversationalAI": {
+          "title": "Conversational AI",
+          "description": "Deploy intelligent chatbots and virtual assistants that understand context, learn from interactions, and deliver personalized experiences."
+        },
+        "marketingAutomation": {
+          "title": "Marketing Automation",
+          "description": "Automatize your marketing workflows with AI-powered campaigns, lead scoring, and personalized content delivery."
+        },
+        "predictiveAnalytics": {
+          "title": "Predictive Analytics",
+          "description": "Leverage AI to forecast trends, predict customer behavior, and make data-driven decisions with confidence."
+        }
+      }
     },
     "lab": {
       "category": "The Lab",
       "subtitle": "Innovation Laboratory",
-      "description": "Welcome to our innovation laboratory. Here, we transform cutting-edge technologies into tangible competitive advantages."
+      "description": "Welcome to our innovation laboratory. Here, we transform cutting-edge technologies into tangible competitive advantages.",
+      "services": {
+        "customWebApps": {
+          "title": "Custom Web Applications",
+          "description": "Develop bespoke web platforms with AI-powered features, real-time collaboration, and seamless integrations."
+        },
+        "apiDevelopment": {
+          "title": "API Development & Integration",
+          "description": "Create robust APIs and integrate third-party services to build connected, intelligent ecosystems."
+        },
+        "uxDesign": {
+          "title": "User Experience Design",
+          "description": "Design intuitive interfaces that combine human-centered design with AI-driven personalization."
+        },
+        "security": {
+          "title": "Security & Compliance",
+          "description": "Implement enterprise-grade security, data privacy controls, and compliance frameworks for your digital platforms."
+        }
+      }
     },
     "studio": {
       "category": "The Studio",
       "subtitle": "Creative Workshop",
-      "description": "Welcome to the workshop where ideas become reality. Our Creative Studio fuses strategy and creativity to create brand experiences that captivate."
+      "description": "Welcome to the workshop where ideas become reality. Our Creative Studio fuses strategy and creativity to create brand experiences that captivate.",
+      "services": {
+        "brandIdentity": {
+          "title": "Brand Identity & Strategy",
+          "description": "Craft compelling brand identities that resonate with your audience and differentiate you in the market."
+        },
+        "uiuxDesign": {
+          "title": "UI/UX Design",
+          "description": "Design stunning interfaces that blend aesthetics with functionality, creating experiences users love."
+        },
+        "contentCreation": {
+          "title": "Content Creation",
+          "description": "Produce high-impact visual and written content that tells your story and drives engagement."
+        },
+        "campaignDesign": {
+          "title": "Campaign Design",
+          "description": "Design integrated marketing campaigns that capture attention and deliver measurable results."
+        }
+      }
     }
   },
   "contact": {
@@ -157,8 +211,38 @@
     "sectionNumber": "02 Projects",
     "heroTitle": "Transformations",
     "heroSubtitle": "that Resonate",
+    "description": "Real results from organizations that chose to lead rather than follow. Each project represents a complete reimagining of operations through agentic AI.",
     "filterAll": "All",
-    "noProjects": "No projects found"
+    "noProjects": "No projects found",
+    "filters": {
+      "all": "All",
+      "aiPlatforms": "AI Platforms",
+      "marketing": "Marketing",
+      "webApps": "Web Apps",
+      "strategy": "Strategy"
+    },
+    "items": {
+      "autonomousMarketing": {
+        "title": "Autonomous Marketing Platform",
+        "category": "AI Platforms",
+        "description": "End-to-end campaign management powered by AI agents, from content generation to performance optimization."
+      },
+      "intelligentEcommerce": {
+        "title": "Intelligent E-Commerce Ecosystem",
+        "category": "Web Apps",
+        "description": "Self-optimizing shopping experience with AI-driven personalization and predictive inventory management."
+      },
+      "enterpriseTransformation": {
+        "title": "Enterprise AI Transformation",
+        "category": "Strategy",
+        "description": "Complete operational overhaul integrating agentic AI across all departments and workflows."
+      },
+      "contentGeneration": {
+        "title": "Content Generation Engine",
+        "category": "Marketing",
+        "description": "Automated content creation system producing personalized, multi-channel campaigns at scale."
+      }
+    }
   },
   "expertise": {
     "title": "Expertise",

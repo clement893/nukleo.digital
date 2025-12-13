@@ -11,38 +11,44 @@ export default function Projects() {
   const { t } = useLanguage();
   const [activeFilter, setActiveFilter] = useState('all');
 
-  const filters = ['all', 'AI Platforms', 'Marketing', 'Web Apps', 'Strategy'];
+  const filters = [
+    { key: 'all', label: t('projects.filters.all') },
+    { key: 'AI Platforms', label: t('projects.filters.aiPlatforms') },
+    { key: 'Marketing', label: t('projects.filters.marketing') },
+    { key: 'Web Apps', label: t('projects.filters.webApps') },
+    { key: 'Strategy', label: t('projects.filters.strategy') },
+  ];
 
   const projects = [
     {
       id: 1,
-      title: 'Autonomous Marketing Platform',
+      title: t('projects.items.autonomousMarketing.title'),
       category: 'AI Platforms',
-      description: 'End-to-end campaign management powered by AI agents, from content generation to performance optimization.',
+      description: t('projects.items.autonomousMarketing.description'),
       metrics: { roi: '+340%', time: '-75%', output: '10x' },
       image: '/projects/project1.jpg',
     },
     {
       id: 2,
-      title: 'Intelligent E-Commerce Ecosystem',
+      title: t('projects.items.intelligentEcommerce.title'),
       category: 'Web Apps',
-      description: 'Self-optimizing shopping experience with AI-driven personalization and predictive inventory management.',
+      description: t('projects.items.intelligentEcommerce.description'),
       metrics: { roi: '+220%', time: '-60%', output: '8x' },
       image: '/projects/project2.jpg',
     },
     {
       id: 3,
-      title: 'Enterprise AI Transformation',
+      title: t('projects.items.enterpriseTransformation.title'),
       category: 'Strategy',
-      description: 'Complete operational overhaul integrating agentic AI across all departments and workflows.',
+      description: t('projects.items.enterpriseTransformation.description'),
       metrics: { roi: '+450%', time: '-80%', output: '12x' },
       image: '/projects/project3.jpg',
     },
     {
       id: 4,
-      title: 'Content Generation Engine',
+      title: t('projects.items.contentGeneration.title'),
       category: 'Marketing',
-      description: 'Automated content creation system producing personalized, multi-channel campaigns at scale.',
+      description: t('projects.items.contentGeneration.description'),
       metrics: { roi: '+280%', time: '-70%', output: '15x' },
       image: '/projects/project4.jpg',
     },
@@ -74,7 +80,7 @@ export default function Projects() {
           </h1>
 
           <p className="text-white/75 text-lg lg:text-xl leading-relaxed max-w-3xl">
-            Real results from organizations that chose to lead rather than follow. Each project represents a complete reimagining of operations through agentic AI.
+            {t('projects.description')}
           </p>
         </div>
       </section>
@@ -85,15 +91,15 @@ export default function Projects() {
           <div className="flex flex-wrap gap-3">
             {filters.map((filter) => (
               <button
-                key={filter}
-                onClick={() => setActiveFilter(filter)}
+                key={filter.key}
+                onClick={() => setActiveFilter(filter.key)}
                 className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
-                  activeFilter === filter
+                  activeFilter === filter.key
                     ? 'bg-accent text-white'
                     : 'glass text-white/75 hover:text-white hover:bg-white/10'
                 }`}
               >
-                {filter === 'all' ? t('projects.filterAll') : filter}
+                {filter.label}
               </button>
             ))}
           </div>

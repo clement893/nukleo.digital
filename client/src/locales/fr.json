@@ -110,17 +110,71 @@
     "bureau": {
       "category": "The Bureau",
       "subtitle": "Quartier Général Stratégique",
-      "description": "Votre quartier général stratégique. Ici, nous transformons les données en décisions, les insights en actions, et les opportunités en résultats mesurables."
+      "description": "Votre quartier général stratégique. Ici, nous transformons les données en décisions, les insights en actions, et les opportunités en résultats mesurables.",
+      "services": {
+        "aiStrategy": {
+          "title": "Consultation en Stratégie IA",
+          "description": "Définissez votre feuille de route IA avec des conseils d'experts sur la sélection de technologies, la planification de l'implémentation et l'optimisation du ROI."
+        },
+        "conversationalAI": {
+          "title": "IA Conversationnelle",
+          "description": "Déployez des chatbots intelligents et des assistants virtuels qui comprennent le contexte, apprennent des interactions et offrent des expériences personnalisées."
+        },
+        "marketingAutomation": {
+          "title": "Automatisation Marketing",
+          "description": "Automatisez vos flux de travail marketing avec des campagnes alimentées par l'IA, le scoring de leads et la livraison de contenu personnalisé."
+        },
+        "predictiveAnalytics": {
+          "title": "Analytique Prédictive",
+          "description": "Exploitez l'IA pour prévoir les tendances, prédire le comportement des clients et prendre des décisions basées sur les données en toute confiance."
+        }
+      }
     },
     "lab": {
       "category": "The Lab",
       "subtitle": "Laboratoire d'Innovation",
-      "description": "Bienvenue dans notre laboratoire d'innovation. Ici, nous transformons les technologies de pointe en avantages concurrentiels tangibles."
+      "description": "Bienvenue dans notre laboratoire d'innovation. Ici, nous transformons les technologies de pointe en avantages concurrentiels tangibles.",
+      "services": {
+        "customWebApps": {
+          "title": "Applications Web Sur Mesure",
+          "description": "Développez des plateformes web sur mesure avec des fonctionnalités alimentées par l'IA, la collaboration en temps réel et des intégrations transparentes."
+        },
+        "apiDevelopment": {
+          "title": "Développement et Intégration d'API",
+          "description": "Créez des API robustes et intégrez des services tiers pour construire des écosystèmes connectés et intelligents."
+        },
+        "uxDesign": {
+          "title": "Design d'Expérience Utilisateur",
+          "description": "Concevez des interfaces intuitives qui combinent le design centré sur l'humain avec la personnalisation alimentée par l'IA."
+        },
+        "security": {
+          "title": "Sécurité et Conformité",
+          "description": "Implémentez une sécurité de niveau entreprise, des contrôles de confidentialité des données et des cadres de conformité pour vos plateformes numériques."
+        }
+      }
     },
     "studio": {
       "category": "The Studio",
       "subtitle": "Atelier Créatif",
-      "description": "Bienvenue dans l'atelier où les idées deviennent réalité. Notre Studio Créatif fusionne stratégie et créativité pour créer des expériences de marque captivantes."
+      "description": "Bienvenue dans l'atelier où les idées deviennent réalité. Notre Studio Créatif fusionne stratégie et créativité pour créer des expériences de marque captivantes.",
+      "services": {
+        "brandIdentity": {
+          "title": "Identité et Stratégie de Marque",
+          "description": "Créez des identités de marque convaincantes qui résonnent avec votre audience et vous différencient sur le marché."
+        },
+        "uiuxDesign": {
+          "title": "Design UI/UX",
+          "description": "Concevez des interfaces époustouflantes qui allient esthétique et fonctionnalité, créant des expériences que les utilisateurs adorent."
+        },
+        "contentCreation": {
+          "title": "Création de Contenu",
+          "description": "Produisez du contenu visuel et écrit à fort impact qui raconte votre histoire et stimule l'engagement."
+        },
+        "campaignDesign": {
+          "title": "Design de Campagne",
+          "description": "Concevez des campagnes marketing intégrées qui captent l'attention et offrent des résultats mesurables."
+        }
+      }
     }
   },
   "contact": {
@@ -157,8 +211,38 @@
     "sectionNumber": "02 Projets",
     "heroTitle": "Transformations",
     "heroSubtitle": "qui Résonnent",
+    "description": "Résultats réels d'organisations qui ont choisi de mener plutôt que de suivre. Chaque projet représente une réimagination complète des opérations grâce à l'IA agentique.",
     "filterAll": "Tous",
-    "noProjects": "Aucun projet trouvé"
+    "noProjects": "Aucun projet trouvé",
+    "filters": {
+      "all": "Tous",
+      "aiPlatforms": "Plateformes IA",
+      "marketing": "Marketing",
+      "webApps": "Applications Web",
+      "strategy": "Stratégie"
+    },
+    "items": {
+      "autonomousMarketing": {
+        "title": "Plateforme Marketing Autonome",
+        "category": "Plateformes IA",
+        "description": "Gestion de campagnes de bout en bout alimentée par des agents IA, de la génération de contenu à l'optimisation des performances."
+      },
+      "intelligentEcommerce": {
+        "title": "Écosystème E-Commerce Intelligent",
+        "category": "Applications Web",
+        "description": "Expérience d'achat auto-optimisante avec personnalisation alimentée par l'IA et gestion prédictive des stocks."
+      },
+      "enterpriseTransformation": {
+        "title": "Transformation IA d'Entreprise",
+        "category": "Stratégie",
+        "description": "Refonte opérationnelle complète intégrant l'IA agentique dans tous les départements et flux de travail."
+      },
+      "contentGeneration": {
+        "title": "Moteur de Génération de Contenu",
+        "category": "Marketing",
+        "description": "Système de création de contenu automatisé produisant des campagnes personnalisées multi-canaux à grande échelle."
+      }
+    }
   },
   "expertise": {
     "title": "Expertise",

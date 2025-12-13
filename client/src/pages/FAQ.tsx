@@ -52,38 +52,37 @@ export default function FAQ() {
     };
   }, [language]);
 
-  // Helper to get value from translations
-  const getTranslationValue = (key: string): any => {
-    if (!translationsData) return null;
-    try {
-      const keys = key.split('.');
-      let value: any = translationsData;
-      for (const k of keys) {
-        if (value && typeof value === 'object' && k in value) {
-          value = value[k];
-        } else {
-          return null;
-        }
-      }
-      return value;
-    } catch {
-      return null;
-    }
-  };
-
   // Build FAQs from translations
   const faqs: FAQItem[] = useMemo(() => {
     const allFaqs: FAQItem[] = [];
     
     if (!translationsData) return allFaqs;
     
+    // Helper to get value from translations (inside useMemo to avoid closure issues)
+    const getValue = (key: string): any => {
+      try {
+        const keys = key.split('.');
+        let value: any = translationsData;
+        for (const k of keys) {
+          if (value && typeof value === 'object' && k in value) {
+            value = value[k];
+          } else {
+            return null;
+          }
+        }
+        return value;
+      } catch {
+        return null;
+      }
+    };
+    
     const categoryMap: Record<string, string> = {
-      agenticAI: getTranslationValue('faq.categories.agenticAI') || 'Agentic AI',
-      transformation: getTranslationValue('faq.categories.transformation') || 'Transformation',
-      roi: getTranslationValue('faq.categories.roi') || 'ROI',
-      technical: getTranslationValue('faq.categories.technical') || 'Technical',
-      useCases: getTranslationValue('faq.categories.useCases') || 'Use Cases',
-      aboutNukleo: getTranslationValue('faq.categories.aboutNukleo') || 'About Nukleo'
+      agenticAI: getValue('faq.categories.agenticAI') || 'Agentic AI',
+      transformation: getValue('faq.categories.transformation') || 'Transformation',
+      roi: getValue('faq.categories.roi') || 'ROI',
+      technical: getValue('faq.categories.technical') || 'Technical',
+      useCases: getValue('faq.categories.useCases') || 'Use Cases',
+      aboutNukleo: getValue('faq.categories.aboutNukleo') || 'About Nukleo'
     };
     
     try {
@@ -97,7 +96,7 @@ export default function FAQ() {
       ];
 
       questionCategories.forEach(({ key, path }) => {
-        const questions = getTranslationValue(path);
+        const questions = getValue(path);
         if (Array.isArray(questions)) {
           questions.forEach((item: any) => {
             if (item && typeof item === 'object' && item.question && item.answer) {
@@ -116,18 +115,37 @@ export default function FAQ() {
     }
 
     return allFaqs;
-  }, [language, translationsData]);
+  }, [translationsData]);
 
   const categories = useMemo(() => {
     if (!translationsData) return [];
+    
+    // Helper to get value from translations (inside useMemo to avoid closure issues)
+    const getValue = (key: string): any => {
+      try {
+        const keys = key.split('.');
+        let value: any = translationsData;
+        for (const k of keys) {
+          if (value && typeof value === 'object' && k in value) {
+            value = value[k];
+          } else {
+            return null;
+          }
+        }
+        return value;
+      } catch {
+        return null;
+      }
+    };
+    
     return [
-      { key: "all", label: String(getTranslationValue('faq.categories.all') || 'All') },
-      { key: "agenticAI", label: String(getTranslationValue('faq.categories.agenticAI') || 'Agentic AI') },
-      { key: "transformation", label: String(getTranslationValue('faq.categories.transformation') || 'Transformation') },
-      { key: "roi", label: String(getTranslationValue('faq.categories.roi') || 'ROI') },
-      { key: "technical", label: String(getTranslationValue('faq.categories.technical') || 'Technical') },
-      { key: "useCases", label: String(getTranslationValue('faq.categories.useCases') || 'Use Cases') },
-      { key: "aboutNukleo", label: String(getTranslationValue('faq.categories.aboutNukleo') || 'About Nukleo') }
+      { key: "all", label: String(getValue('faq.categories.all') || 'All') },
+      { key: "agenticAI", label: String(getValue('faq.categories.agenticAI') || 'Agentic AI') },
+      { key: "transformation", label: String(getValue('faq.categories.transformation') || 'Transformation') },
+      { key: "roi", label: String(getValue('faq.categories.roi') || 'ROI') },
+      { key: "technical", label: String(getValue('faq.categories.technical') || 'Technical') },
+      { key: "useCases", label: String(getValue('faq.categories.useCases') || 'Use Cases') },
+      { key: "aboutNukleo", label: String(getValue('faq.categories.aboutNukleo') || 'About Nukleo') }
     ];
   }, [translationsData]);
 

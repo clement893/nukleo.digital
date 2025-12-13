@@ -20,6 +20,8 @@ import session from "express-session";
 import connectPgSimple from "connect-pg-simple";
 import passport from "passport";
 import { configureGoogleAuth, requireAdminAuth } from "./googleAuth";
+import { getDb } from "../db";
+import { sql } from "drizzle-orm";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -234,9 +236,73 @@ async function startServer() {
       const { seedCrazyLoaders } = await import("../seed-crazy-loaders");
       await seedCrazyLoaders();
       
+      // Initialize radar tables if they don't exist
+      try {
+        const db = await getDb();
+        if (db) {
+          // Check if radar_technologies table exists
+          const tableCheck = await db.execute(sql`
+            SELECT EXISTS (
+              SELECT FROM information_schema.tables 
+              WHERE table_schema = 'public' 
+              AND table_name = 'radar_technologies'
+            );
+          `);
+          
+          const tableExists = tableCheck.rows[0]?.exists;
+          if (!tableExists) {
+            logger.info("Radar tables not found, creating them...");
+            // Create tables
+            await db.execute(sql`
+              CREATE TABLE IF NOT EXISTS radar_technologies (
+                id SERIAL PRIMARY KEY,
+                name VARCHAR(255) NOT NULL UNIQUE,
+                slug VARCHAR(255) NOT NULL UNIQUE,
+                description TEXT NOT NULL,
+                "createdAt" TIMESTAMP DEFAULT NOW() NOT NULL,
+                "updatedAt" TIMESTAMP DEFAULT NOW() NOT NULL
+              );
+            `);
+            
+            await db.execute(sql`
+              CREATE TABLE IF NOT EXISTS radar_positions (
+                id SERIAL PRIMARY KEY,
+                "technologyId" INTEGER NOT NULL REFERENCES radar_technologies(id) ON DELETE CASCADE,
+                date TIMESTAMP NOT NULL,
+                "maturityScore" INTEGER NOT NULL CHECK ("maturityScore" >= 0 AND "maturityScore" <= 100),
+                "impactScore" INTEGER NOT NULL CHECK ("impactScore" >= 0 AND "impactScore" <= 100),
+                definition TEXT NOT NULL,
+                "useCases" TEXT NOT NULL,
+                "maturityLevel" VARCHAR(50) NOT NULL,
+                "maturityJustification" TEXT NOT NULL,
+                "impactBusiness" TEXT NOT NULL,
+                "adoptionBarriers" TEXT NOT NULL,
+                recommendations TEXT NOT NULL,
+                "aiGeneratedAt" TIMESTAMP DEFAULT NOW() NOT NULL,
+                "createdAt" TIMESTAMP DEFAULT NOW() NOT NULL,
+                "updatedAt" TIMESTAMP DEFAULT NOW() NOT NULL
+              );
+            `);
+            
+            await db.execute(sql`
+              CREATE INDEX IF NOT EXISTS idx_radar_positions_technology_date 
+              ON radar_positions("technologyId", date DESC);
+            `);
+            
+            logger.info("Radar tables created successfully");
+          }
+        }
+      } catch (error) {
+        logger.error("Failed to initialize radar tables:", error);
+      }
+      
       // Seed radar technologies
-      const { seedRadarTechnologies } = await import("../routers/radar");
-      await seedRadarTechnologies();
+      try {
+        const { seedRadarTechnologies } = await import("../routers/radar");
+        await seedRadarTechnologies();
+      } catch (error) {
+        logger.error("Failed to seed radar technologies:", error);
+      }
     } catch (error) {
       logger.error("Failed to seed loaders:", error);
     }

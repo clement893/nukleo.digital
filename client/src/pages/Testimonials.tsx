@@ -1,13 +1,14 @@
-import { testimonials } from '@/data/testimonials';
 import SEO from '@/components/SEO';
 import PageLayout from '../components/PageLayout';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { Link } from 'wouter';
+import { trpc } from '@/lib/trpc';
 
 export default function Testimonials() {
   const { t, language } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
+  const { data: testimonials = [], isLoading } = trpc.testimonials.getAll.useQuery({ language });
 
   return (
     <>
@@ -38,8 +39,13 @@ export default function Testimonials() {
 
           {/* Testimonials Grid */}
           <section className="container px-6 md:px-12">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {testimonials.map((testimonial, index) => (
+            {isLoading ? (
+              <div className="text-center py-20">
+                <p className="text-white/70">Loading testimonials...</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {testimonials.map((testimonial, index) => (
                 <div
                   key={index}
                   className="
@@ -88,8 +94,9 @@ export default function Testimonials() {
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </section>
 
           {/* CTA Section */}

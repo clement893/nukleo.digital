@@ -165,3 +165,21 @@ export const loaders = pgTable("loaders", {
 
 export type Loader = typeof loaders.$inferSelect;
 export type InsertLoader = typeof loaders.$inferInsert;
+
+// Testimonials table for client testimonials with multilingual support
+export const testimonials = pgTable("testimonials", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  client: varchar("client", { length: 255 }).notNull(),
+  contact: varchar("contact", { length: 255 }).notNull(),
+  title: varchar("title", { length: 255 }).notNull(),
+  company: varchar("company", { length: 255 }).notNull(),
+  textEn: text("text_en").notNull(), // English testimonial text
+  textFr: text("text_fr").notNull(), // French testimonial text
+  displayOrder: integer("display_order").default(0).notNull(), // Order for display
+  isActive: boolean("is_active").default(true).notNull(), // Whether to show this testimonial
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export type Testimonial = typeof testimonials.$inferSelect;
+export type InsertTestimonial = typeof testimonials.$inferInsert;

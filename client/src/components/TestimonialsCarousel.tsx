@@ -1,17 +1,18 @@
 import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { testimonials } from '@/data/testimonials';
 import { Link } from 'wouter';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { trpc } from '@/lib/trpc';
 
 export default function TestimonialsCarousel() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const { data: testimonials = [], isLoading } = trpc.testimonials.getAll.useQuery({ language });
 
-  // Sélectionner 6 témoignages aléatoires pour le carrousel
+  // Sélectionner 6 témoignages pour le carrousel
   const carouselTestimonials = testimonials.slice(0, 6);
 
   // Auto-play
@@ -41,6 +42,17 @@ export default function TestimonialsCarousel() {
     setIsAutoPlaying(false);
     setCurrentIndex(index);
   };
+
+  // Reset index if testimonials change
+  useEffect(() => {
+    if (carouselTestimonials.length > 0 && currentIndex >= carouselTestimonials.length) {
+      setCurrentIndex(0);
+    }
+  }, [carouselTestimonials.length, currentIndex]);
+
+  if (isLoading || carouselTestimonials.length === 0) {
+    return null; // Don't show carousel if loading or no testimonials
+  }
 
   const currentTestimonial = carouselTestimonials[currentIndex];
 
@@ -175,7 +187,7 @@ export default function TestimonialsCarousel() {
                 transition-all duration-300
                 group
               ">
-                See all client testimonials
+                {t('testimonials.seeAll')}
                 <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>

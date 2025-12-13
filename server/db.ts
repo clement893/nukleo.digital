@@ -2,7 +2,7 @@ import { eq, desc } from "drizzle-orm";
 import { sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
-import { InsertUser, users, leoContacts, InsertLeoContact, leoSessions, InsertLeoSession, agencyLeads, InsertAgencyLead, adminUsers, InsertAdminUser } from "../drizzle/schema";
+import { InsertUser, users, leoContacts, InsertLeoContact, leoSessions, InsertLeoSession, agencyLeads, InsertAgencyLead, adminUsers, InsertAdminUser, testimonials, InsertTestimonial } from "../drizzle/schema";
 import bcrypt from "bcrypt";
 import { ENV } from './_core/env';
 

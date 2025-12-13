@@ -10,6 +10,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import ArrowBackground from "./components/ArrowBackground";
 import { FloatingLanguageToggle } from "./components/FloatingLanguageToggle";
 import { usePageTransition } from "./hooks/usePageTransition";
+import { usePageBackground } from "./hooks/usePageBackground";
 
 // Lazy load UniversalLEO
 const UniversalLEO = lazy(() => import("./components/UniversalLEO"));
@@ -105,6 +106,8 @@ function LanguageRoute({ component: Component, ...props }: { component: any; pat
 function App() {
   // Trigger animations on route change
   usePageTransition();
+  // Preload background of destination page to prevent color flash
+  usePageBackground();
   
   return (
     <ErrorBoundary>

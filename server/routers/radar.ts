@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { router, publicProcedure } from "../_core/trpc";
 import { getDb } from "../db";
-import { radarTechnologies, radarPositions, type InsertRadarTechnology, type InsertRadarPosition } from "../../drizzle/schema";
+import { radarTechnologies, radarPositions, type InsertRadarTechnology, type InsertRadarPosition, type RadarPosition } from "../../drizzle/schema";
 import { eq, desc, and, gte, lte } from "drizzle-orm";
 import { invokeLLM } from "../_core/llm";
 
@@ -285,7 +285,7 @@ export async function seedRadarTechnologies() {
     return; // Already seeded
   }
   
-  // db is already defined above, continue with seeding
+  // db is already defined above (line 250), continue with seeding
   for (const tech of INITIAL_TECHNOLOGIES) {
     const [inserted] = await db.insert(radarTechnologies).values(tech).returning();
     

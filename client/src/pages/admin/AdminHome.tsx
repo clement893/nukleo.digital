@@ -3,8 +3,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { AdminHeader } from "@/components/AdminHeader";
 import { 
   LayoutDashboard, 
-  Loader2, 
-  Users, 
   BarChart3, 
   MessageSquare, 
   Building2,
@@ -59,13 +57,6 @@ export default function AdminHome() {
       href: "/admin/dashboard",
     },
     {
-      title: "Gestion des Loaders",
-      description: "Gérer les animations de chargement et leur rotation",
-      icon: <Loader2 className="w-6 h-6 text-primary" />,
-      href: "/admin/loaders",
-      badge: "Nouveau",
-    },
-    {
       title: "LEO Analytics",
       description: "Statistiques et analyses des interactions avec LEO",
       icon: <BarChart3 className="w-6 h-6 text-primary" />,
@@ -100,17 +91,11 @@ export default function AdminHome() {
         </div>
 
         {/* Quick Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <Card>
             <CardHeader className="pb-3">
               <CardDescription>Pages Admin</CardDescription>
               <CardTitle className="text-3xl">{adminSections.length}</CardTitle>
-            </CardHeader>
-          </Card>
-          <Card>
-            <CardHeader className="pb-3">
-              <CardDescription>Loaders Actifs</CardDescription>
-              <CardTitle className="text-3xl">1</CardTitle>
             </CardHeader>
           </Card>
           <Card>

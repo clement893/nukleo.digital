@@ -51,15 +51,12 @@ const Agencies = lazy(() => import("./pages/Agencies"));
 const ArrowDemo = lazy(() => import("./pages/ArrowDemo"));
 const ArrowDemoV2 = lazy(() => import("./pages/ArrowDemoV2"));
 const ArrowDemoV3 = lazy(() => import("./pages/ArrowDemoV3"));
-const LoaderDemo = lazy(() => import("./pages/LoaderDemo"));
-const LoaderDemoArtsy = lazy(() => import("./pages/LoaderDemoArtsy"));
 const AdminAgencyLeads = lazy(() => import("./pages/admin/AdminAgencyLeads"));
 const AdminLEOAnalytics = lazy(() => import("./pages/admin/AdminLEOAnalytics"));
 const AdminLEOContacts = lazy(() => import("./pages/admin/AdminLEOContacts"));
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const CreateFirstAdmin = lazy(() => import("./pages/CreateFirstAdmin"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
-const AdminLoaders = lazy(() => import("./pages/AdminLoaders"));
 const AdminHome = lazy(() => import("./pages/admin/AdminHome"));
 import { ProtectedAdminRoute } from "./components/ProtectedAdminRoute";
 
@@ -114,8 +111,6 @@ function App() {
           <Route path="/arrow-demo" component={ArrowDemo} />
           <Route path="/arrow-demo-v2" component={ArrowDemoV2} />
           <Route path="/arrow-demo-v3" component={ArrowDemoV3} />
-          <Route path="/loader-demo" component={LoaderDemo} />
-          <Route path="/loader-demo-artsy" component={LoaderDemoArtsy} />
             <Route path="/admin/login" component={AdminLogin} />
             <Route path="/admin/agency-leads">
               <ProtectedAdminRoute><AdminAgencyLeads /></ProtectedAdminRoute>
@@ -131,9 +126,6 @@ function App() {
             </Route>
             <Route path="/admin/dashboard">
               <ProtectedAdminRoute><AdminDashboard /></ProtectedAdminRoute>
-            </Route>
-            <Route path="/admin/loaders">
-              <ProtectedAdminRoute><AdminLoaders /></ProtectedAdminRoute>
             </Route>
             <Route path="/create-first-admin" component={CreateFirstAdmin} />
             <Route component={NotFound404} />

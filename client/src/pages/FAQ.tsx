@@ -172,15 +172,18 @@ export default function FAQ() {
     return allFaqs;
   }, [t, language, translationsData]);
 
-  const categories = useMemo(() => [
-    { key: "all", label: String(t('faq.categories.all') || 'All') },
-    { key: "agenticAI", label: String(t('faq.categories.agenticAI') || 'Agentic AI') },
-    { key: "transformation", label: String(t('faq.categories.transformation') || 'Transformation') },
-    { key: "roi", label: String(t('faq.categories.roi') || 'ROI') },
-    { key: "technical", label: String(t('faq.categories.technical') || 'Technical') },
-    { key: "useCases", label: String(t('faq.categories.useCases') || 'Use Cases') },
-    { key: "aboutNukleo", label: String(t('faq.categories.aboutNukleo') || 'About Nukleo') }
-  ], [t]);
+  const categories = useMemo(() => {
+    if (!translationsData) return [];
+    return [
+      { key: "all", label: String(t('faq.categories.all') || 'All') },
+      { key: "agenticAI", label: String(t('faq.categories.agenticAI') || 'Agentic AI') },
+      { key: "transformation", label: String(t('faq.categories.transformation') || 'Transformation') },
+      { key: "roi", label: String(t('faq.categories.roi') || 'ROI') },
+      { key: "technical", label: String(t('faq.categories.technical') || 'Technical') },
+      { key: "useCases", label: String(t('faq.categories.useCases') || 'Use Cases') },
+      { key: "aboutNukleo", label: String(t('faq.categories.aboutNukleo') || 'About Nukleo') }
+    ];
+  }, [t, translationsData]);
 
   const filteredFaqs = selectedCategory === "all" 
     ? faqs 
@@ -192,7 +195,7 @@ export default function FAQ() {
   }, [faqs]);
 
   // Show loading state if translations aren't loaded yet
-  if (!translationsData || faqs.length === 0) {
+  if (!translationsData || faqs.length === 0 || categories.length === 0) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-[#1a0b2e] via-[#2d1b4e] to-[#1a0b2e] flex items-center justify-center">
         <div className="text-white">Chargement...</div>

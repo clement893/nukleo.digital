@@ -8,6 +8,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import ScrollToTop from "./components/ScrollToTop";
 import ArrowBackground from "./components/ArrowBackground";
+import { FloatingLanguageToggle } from "./components/FloatingLanguageToggle";
 import { usePageTransition } from "./hooks/usePageTransition";
 
 // Eager load only critical pages
@@ -80,6 +81,7 @@ function App() {
           <ArrowBackground variant="default" />
           <CustomCursor />
           <ScrollToTop />
+          <FloatingLanguageToggle />
           <Suspense fallback={null}>
             <Switch>
               {/* Language routes - French */}

@@ -52,145 +52,84 @@ export default function FAQ() {
     };
   }, [language]);
 
+  // Helper to get value from translations
+  const getTranslationValue = (key: string): any => {
+    if (!translationsData) return null;
+    try {
+      const keys = key.split('.');
+      let value: any = translationsData;
+      for (const k of keys) {
+        if (value && typeof value === 'object' && k in value) {
+          value = value[k];
+        } else {
+          return null;
+        }
+      }
+      return value;
+    } catch {
+      return null;
+    }
+  };
+
   // Build FAQs from translations
   const faqs: FAQItem[] = useMemo(() => {
     const allFaqs: FAQItem[] = [];
     
-    if (!translationsData || typeof t !== 'function') return allFaqs;
+    if (!translationsData) return allFaqs;
     
-    // Helper to get array/object from translations
-    const getTranslationArray = (key: string): any[] => {
-      try {
-        const keys = key.split('.');
-        let value: any = translationsData;
-        for (const k of keys) {
-          if (value && typeof value === 'object' && k in value) {
-            value = value[k];
-          } else {
-            return [];
-          }
-        }
-        return Array.isArray(value) ? value : [];
-      } catch {
-        return [];
-      }
+    const categoryMap: Record<string, string> = {
+      agenticAI: getTranslationValue('faq.categories.agenticAI') || 'Agentic AI',
+      transformation: getTranslationValue('faq.categories.transformation') || 'Transformation',
+      roi: getTranslationValue('faq.categories.roi') || 'ROI',
+      technical: getTranslationValue('faq.categories.technical') || 'Technical',
+      useCases: getTranslationValue('faq.categories.useCases') || 'Use Cases',
+      aboutNukleo: getTranslationValue('faq.categories.aboutNukleo') || 'About Nukleo'
     };
     
     try {
-      // Agentic AI
-      const agenticAI = getTranslationArray('faq.questions.agenticAI');
-      if (Array.isArray(agenticAI)) {
-        agenticAI.forEach((item: any) => {
-          if (item && typeof item === 'object' && item.question && item.answer) {
-            const categoryLabel = typeof t === 'function' ? t('faq.categories.agenticAI') : 'Agentic AI';
-            allFaqs.push({
-              question: String(item.question),
-              answer: String(item.answer),
-              category: String(categoryLabel || 'Agentic AI'),
-              categoryKey: 'agenticAI'
-            });
-          }
-        });
-      }
+      const questionCategories = [
+        { key: 'agenticAI', path: 'faq.questions.agenticAI' },
+        { key: 'transformation', path: 'faq.questions.transformation' },
+        { key: 'roi', path: 'faq.questions.roi' },
+        { key: 'technical', path: 'faq.questions.technical' },
+        { key: 'useCases', path: 'faq.questions.useCases' },
+        { key: 'aboutNukleo', path: 'faq.questions.aboutNukleo' }
+      ];
 
-      // Transformation
-      const transformation = getTranslationArray('faq.questions.transformation');
-      if (Array.isArray(transformation)) {
-        transformation.forEach((item: any) => {
-          if (item && typeof item === 'object' && item.question && item.answer) {
-            const categoryLabel = typeof t === 'function' ? t('faq.categories.transformation') : 'Transformation';
-            allFaqs.push({
-              question: String(item.question),
-              answer: String(item.answer),
-              category: String(categoryLabel || 'Transformation'),
-              categoryKey: 'transformation'
-            });
-          }
-        });
-      }
-
-      // ROI
-      const roi = getTranslationArray('faq.questions.roi');
-      if (Array.isArray(roi)) {
-        roi.forEach((item: any) => {
-          if (item && typeof item === 'object' && item.question && item.answer) {
-            const categoryLabel = typeof t === 'function' ? t('faq.categories.roi') : 'ROI';
-            allFaqs.push({
-              question: String(item.question),
-              answer: String(item.answer),
-              category: String(categoryLabel || 'ROI'),
-              categoryKey: 'roi'
-            });
-          }
-        });
-      }
-
-      // Technical
-      const technical = getTranslationArray('faq.questions.technical');
-      if (Array.isArray(technical)) {
-        technical.forEach((item: any) => {
-          if (item && typeof item === 'object' && item.question && item.answer) {
-            const categoryLabel = typeof t === 'function' ? t('faq.categories.technical') : 'Technical';
-            allFaqs.push({
-              question: String(item.question),
-              answer: String(item.answer),
-              category: String(categoryLabel || 'Technical'),
-              categoryKey: 'technical'
-            });
-          }
-        });
-      }
-
-      // Use Cases
-      const useCases = getTranslationArray('faq.questions.useCases');
-      if (Array.isArray(useCases)) {
-        useCases.forEach((item: any) => {
-          if (item && typeof item === 'object' && item.question && item.answer) {
-            const categoryLabel = typeof t === 'function' ? t('faq.categories.useCases') : 'Use Cases';
-            allFaqs.push({
-              question: String(item.question),
-              answer: String(item.answer),
-              category: String(categoryLabel || 'Use Cases'),
-              categoryKey: 'useCases'
-            });
-          }
-        });
-      }
-
-      // About Nukleo
-      const aboutNukleo = getTranslationArray('faq.questions.aboutNukleo');
-      if (Array.isArray(aboutNukleo)) {
-        aboutNukleo.forEach((item: any) => {
-          if (item && typeof item === 'object' && item.question && item.answer) {
-            const categoryLabel = typeof t === 'function' ? t('faq.categories.aboutNukleo') : 'About Nukleo';
-            allFaqs.push({
-              question: String(item.question),
-              answer: String(item.answer),
-              category: String(categoryLabel || 'About Nukleo'),
-              categoryKey: 'aboutNukleo'
-            });
-          }
-        });
-      }
+      questionCategories.forEach(({ key, path }) => {
+        const questions = getTranslationValue(path);
+        if (Array.isArray(questions)) {
+          questions.forEach((item: any) => {
+            if (item && typeof item === 'object' && item.question && item.answer) {
+              allFaqs.push({
+                question: String(item.question),
+                answer: String(item.answer),
+                category: String(categoryMap[key] || key),
+                categoryKey: key
+              });
+            }
+          });
+        }
+      });
     } catch (error) {
       console.error('Error building FAQs:', error);
     }
 
     return allFaqs;
-  }, [t, language, translationsData]);
+  }, [language, translationsData]);
 
   const categories = useMemo(() => {
-    if (!translationsData || typeof t !== 'function') return [];
+    if (!translationsData) return [];
     return [
-      { key: "all", label: String(t('faq.categories.all') || 'All') },
-      { key: "agenticAI", label: String(t('faq.categories.agenticAI') || 'Agentic AI') },
-      { key: "transformation", label: String(t('faq.categories.transformation') || 'Transformation') },
-      { key: "roi", label: String(t('faq.categories.roi') || 'ROI') },
-      { key: "technical", label: String(t('faq.categories.technical') || 'Technical') },
-      { key: "useCases", label: String(t('faq.categories.useCases') || 'Use Cases') },
-      { key: "aboutNukleo", label: String(t('faq.categories.aboutNukleo') || 'About Nukleo') }
+      { key: "all", label: String(getTranslationValue('faq.categories.all') || 'All') },
+      { key: "agenticAI", label: String(getTranslationValue('faq.categories.agenticAI') || 'Agentic AI') },
+      { key: "transformation", label: String(getTranslationValue('faq.categories.transformation') || 'Transformation') },
+      { key: "roi", label: String(getTranslationValue('faq.categories.roi') || 'ROI') },
+      { key: "technical", label: String(getTranslationValue('faq.categories.technical') || 'Technical') },
+      { key: "useCases", label: String(getTranslationValue('faq.categories.useCases') || 'Use Cases') },
+      { key: "aboutNukleo", label: String(getTranslationValue('faq.categories.aboutNukleo') || 'About Nukleo') }
     ];
-  }, [t, translationsData]);
+  }, [translationsData]);
 
   const filteredFaqs = selectedCategory === "all" 
     ? faqs 
@@ -201,8 +140,8 @@ export default function FAQ() {
     return faqs.map(faq => ({ question: String(faq.question), answer: String(faq.answer) }));
   }, [faqs]);
 
-  // Show loading state if translations aren't loaded yet or t is not a function
-  if (typeof t !== 'function' || !translationsData || faqs.length === 0 || categories.length === 0) {
+  // Show loading state if translations aren't loaded yet
+  if (!translationsData || faqs.length === 0 || categories.length === 0) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-[#1a0b2e] via-[#2d1b4e] to-[#1a0b2e] flex items-center justify-center">
         <div className="text-white">Chargement...</div>

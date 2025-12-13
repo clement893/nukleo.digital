@@ -7,13 +7,7 @@ import SEO from '@/components/SEO';
 import StructuredData, { createFAQSchema } from '@/components/StructuredData';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
-
-interface FAQItem {
-  question: string;
-  answer: string;
-  category: string;
-  categoryKey: string;
-}
+import { getFAQs } from '@/data/faq';
 
 export default function FAQ() {
   const { t, language } = useLanguage();
@@ -22,75 +16,20 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const { playHover, playClick } = useSound();
 
-  // Helper to get array from translations using the same pattern as WhoWeServeSection
-  const getArrayTranslation = (key: string): any[] => {
-    try {
-      const translations = require(`../locales/${language || 'en'}.json`);
-      const keys = key.split('.');
-      let value: any = translations.default || translations;
-      for (const k of keys) {
-        if (value && typeof value === 'object' && k in value) {
-          value = value[k];
-        } else {
-          return [];
-        }
-      }
-      return Array.isArray(value) ? value : [];
-    } catch {
-      return [];
-    }
-  };
-
-  // Build FAQs from translations
-  const faqs: FAQItem[] = useMemo(() => {
-    const allFaqs: FAQItem[] = [];
-    
-    const categoryMap: Record<string, string> = {
-      agenticAI: t('faq.categories.agenticAI') || 'Agentic AI',
-      transformation: t('faq.categories.transformation') || 'Transformation',
-      roi: t('faq.categories.roi') || 'ROI',
-      technical: t('faq.categories.technical') || 'Technical',
-      useCases: t('faq.categories.useCases') || 'Use Cases',
-      aboutNukleo: t('faq.categories.aboutNukleo') || 'About Nukleo'
-    };
-    
-    const questionCategories = [
-      { key: 'agenticAI', path: 'faq.questions.agenticAI' },
-      { key: 'transformation', path: 'faq.questions.transformation' },
-      { key: 'roi', path: 'faq.questions.roi' },
-      { key: 'technical', path: 'faq.questions.technical' },
-      { key: 'useCases', path: 'faq.questions.useCases' },
-      { key: 'aboutNukleo', path: 'faq.questions.aboutNukleo' }
-    ];
-
-    questionCategories.forEach(({ key, path }) => {
-      const questions = getArrayTranslation(path);
-      if (Array.isArray(questions)) {
-        questions.forEach((item: any) => {
-          if (item && typeof item === 'object' && item.question && item.answer) {
-            allFaqs.push({
-              question: String(item.question),
-              answer: String(item.answer),
-              category: String(categoryMap[key] || key),
-              categoryKey: key
-            });
-          }
-        });
-      }
-    });
-
-    return allFaqs;
-  }, [language, t]);
+  // Get FAQs from static data file
+  const faqs = useMemo(() => {
+    return getFAQs(language);
+  }, [language]);
 
   const categories = useMemo(() => {
     return [
-      { key: "all", label: t('faq.categories.all') || 'All' },
-      { key: "agenticAI", label: t('faq.categories.agenticAI') || 'Agentic AI' },
-      { key: "transformation", label: t('faq.categories.transformation') || 'Transformation' },
-      { key: "roi", label: t('faq.categories.roi') || 'ROI' },
-      { key: "technical", label: t('faq.categories.technical') || 'Technical' },
-      { key: "useCases", label: t('faq.categories.useCases') || 'Use Cases' },
-      { key: "aboutNukleo", label: t('faq.categories.aboutNukleo') || 'About Nukleo' }
+      { key: "all", label: t('faq.categories.all') },
+      { key: "agenticAI", label: t('faq.categories.agenticAI') },
+      { key: "transformation", label: t('faq.categories.transformation') },
+      { key: "roi", label: t('faq.categories.roi') },
+      { key: "technical", label: t('faq.categories.technical') },
+      { key: "useCases", label: t('faq.categories.useCases') },
+      { key: "aboutNukleo", label: t('faq.categories.aboutNukleo') }
     ];
   }, [t]);
 
@@ -159,12 +98,12 @@ export default function FAQ() {
             <div className="max-w-4xl mx-auto space-y-4">
               {filteredFaqs.length === 0 ? (
                 <div className="text-center text-white/70 py-12">
-                  <p>Aucune question trouvée pour cette catégorie.</p>
+                  <p>{language === 'fr' ? 'Chargement des questions...' : 'Loading questions...'}</p>
                 </div>
               ) : (
                 filteredFaqs.map((faq, index) => (
                   <div
-                    key={index}
+                    key={`${faq.categoryKey}-${index}`}
                     className="glass rounded-2xl overflow-hidden transition-all duration-300 hover:bg-white/10"
                   >
                     <button

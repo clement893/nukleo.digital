@@ -118,9 +118,9 @@ export default function LoaderFullscreenPreview({
   if (!isOpen) return null;
 
   const renderLoader = () => {
-    // If loaderType contains HTML/CSS (starts with <div or contains <style>), use iframe
+    // If loaderType contains HTML/CSS (starts with <div or contains <style>), render directly
     if (loaderType.includes('<div') || loaderType.includes('<style>')) {
-      if (!iframeContent) {
+      if (!stylesReady || !htmlContent) {
         return (
           <div className="absolute inset-0 flex items-center justify-center bg-gray-900">
             <div className="text-white">Chargement du loader...</div>
@@ -129,19 +129,18 @@ export default function LoaderFullscreenPreview({
       }
 
       return (
-        <iframe
-          srcDoc={iframeContent}
-          className="absolute inset-0 w-full h-full border-0"
+        <div 
+          ref={containerRef}
+          dangerouslySetInnerHTML={{ __html: htmlContent }}
+          className="absolute inset-0"
           style={{ 
             position: 'fixed',
             top: 0,
             left: 0,
             right: 0,
             bottom: 0,
-            zIndex: 9998,
-            pointerEvents: 'none'
+            zIndex: 9998
           }}
-          sandbox="allow-same-origin"
         />
       );
     }

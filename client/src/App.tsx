@@ -65,6 +65,7 @@ const DigitalPlatforms = lazy(() => import("./pages/services/DigitalPlatforms"))
 const IntelligentOperations = lazy(() => import("./pages/services/IntelligentOperations"));
 const Glossary = lazy(() => import("./pages/Glossary"));
 const GlossaryTerm = lazy(() => import("./pages/GlossaryTerm"));
+const AIGlossary = lazy(() => import("./pages/AIGlossary"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const Terms = lazy(() => import("./pages/Terms"));
 const Cookies = lazy(() => import("./pages/Cookies"));
@@ -140,6 +141,7 @@ function App() {
               <Route path="/fr/services/intelligent-operations" component={IntelligentOperations} />
               <Route path="/fr/glossary" component={Glossary} />
               <Route path="/fr/glossary/:slug" component={GlossaryTerm} />
+              <Route path="/fr/ai-glossary" component={AIGlossary} />
               <Route path="/fr/privacy" component={Privacy} />
               <Route path="/fr/terms" component={Terms} />
               <Route path="/fr/cookies" component={Cookies} />
@@ -179,6 +181,7 @@ function App() {
             <Route path="/services/intelligent-operations" component={IntelligentOperations} />
             <Route path="/glossary" component={Glossary} />
             <Route path="/glossary/:slug" component={GlossaryTerm} />
+            <Route path="/ai-glossary" component={AIGlossary} />
             <Route path="/privacy" component={Privacy} />
             <Route path="/terms" component={Terms} />
             <Route path="/cookies" component={Cookies} />

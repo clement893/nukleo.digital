@@ -52,20 +52,36 @@ export default function Resources() {
 
   const tools = [
     {
-      badge: 'AI Trend Radar',
-      title: 'AI Trend Radar',
-      description: 'Visualisez l\'évolution des technologies IA selon leur maturité et leur impact business. Mise à jour quotidienne avec analyse générée par IA.',
-      tags: ['Tendances IA', 'Technologies émergentes', 'Impact business', 'Maturité technologique'],
-      link: getLocalizedPath('/ai-trend-radar'),
-      buttonText: 'Explorer le Radar'
+      badge: t('resources.tools.aiReadiness.badge'),
+      title: t('resources.tools.aiReadiness.title'),
+      description: t('resources.tools.aiReadiness.description'),
+      tags: getArrayTranslation('resources.tools.aiReadiness.tags'),
+      link: getLocalizedPath('/ai-readiness'),
+      buttonText: t('resources.tools.aiReadiness.buttonText')
     },
     {
-      badge: 'AI Readiness Assessment',
-      title: 'AI Readiness Assessment',
-      description: 'Évaluez la maturité IA de votre organisation en 5 minutes. Obtenez un rapport détaillé avec des recommandations personnalisées pour votre roadmap IA.',
-      tags: ['Évaluation', 'Maturité IA', 'Roadmap', 'Recommandations'],
-      link: getLocalizedPath('/ai-readiness-assessment'),
-      buttonText: 'Commencer l\'Évaluation'
+      badge: t('resources.tools.radar.badge'),
+      title: t('resources.tools.radar.title'),
+      description: t('resources.tools.radar.description'),
+      tags: getArrayTranslation('resources.tools.radar.tags'),
+      link: getLocalizedPath('/radar'),
+      buttonText: t('resources.tools.radar.buttonText')
+    },
+    {
+      badge: t('resources.tools.aiGlossary.badge'),
+      title: t('resources.tools.aiGlossary.title'),
+      description: t('resources.tools.aiGlossary.description'),
+      tags: getArrayTranslation('resources.tools.aiGlossary.tags'),
+      link: getLocalizedPath('/ai-glossary'),
+      buttonText: t('resources.tools.aiGlossary.buttonText')
+    },
+    {
+      badge: t('resources.tools.glossary.badge'),
+      title: t('resources.tools.glossary.title'),
+      description: t('resources.tools.glossary.description'),
+      tags: getArrayTranslation('resources.tools.glossary.tags'),
+      link: getLocalizedPath('/glossary'),
+      buttonText: t('resources.tools.glossary.buttonText')
     }
   ];
 

@@ -551,12 +551,43 @@
         "tags": ["10+ Technologies", "Monthly Updates", "Interactive Map"],
         "buttonText": "Explore Radar"
       },
+      "aiGlossary": {
+        "badge": "Knowledge Base",
+        "title": "AI Glossary",
+        "description": "Complete guide to AI terminology with essential definitions, categories, and importance levels. Perfect for understanding key AI concepts.",
+        "tags": ["Essential terms", "By category", "Searchable"],
+        "buttonText": "Browse Glossary"
+      },
       "glossary": {
         "badge": "Knowledge Base",
         "title": "AI Glossary",
         "description": "Your complete guide to AI terminology. 100+ terms with real-world examples, from beginner to advanced concepts.",
         "tags": ["100+ Terms", "Real Examples", "Searchable"],
         "buttonText": "Browse Glossary"
+      },
+      "aiGlossaryPage": {
+        "badge": "AI Glossary",
+        "title": "AI GLOSSARY",
+        "subtitle": "Your complete guide to AI terminology",
+        "description": "Comprehensive AI terminology glossary covering essential AI terms, definitions, and concepts.",
+        "seoTitle": "AI Glossary | Complete Guide to AI Terminology | Nukleo",
+        "seoDescription": "Comprehensive AI terminology glossary covering essential AI terms, definitions, and concepts. From fundamentals to advanced topics.",
+        "seoKeywords": "AI glossary, artificial intelligence terms, AI terminology, AI definitions, AI dictionary, machine learning glossary, AI knowledge base",
+        "terms": "Terms",
+        "categories": "Categories",
+        "searchable": "Searchable",
+        "searchPlaceholder": "Search terms... (e.g., machine learning, NLP, GPT)",
+        "category": "Category",
+        "importance": "Importance",
+        "all": "All",
+        "showing": "Showing",
+        "of": "of",
+        "noTerms": "No terms found",
+        "adjustFilters": "Try adjusting your search or filters",
+        "ctaTitle": "READY TO TRANSFORM<br />WITH AI?",
+        "ctaDescription": "Now that you understand the terminology, let's discuss how AI can drive growth for your organization.",
+        "ctaButton1": "Take AI Readiness Assessment",
+        "ctaButton2": "Discuss Your Project"
       }
     },
     "filter": {

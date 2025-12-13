@@ -551,12 +551,43 @@
         "tags": ["10+ technologies", "Mises à jour mensuelles", "Carte interactive"],
         "buttonText": "Explorer le radar"
       },
+      "aiGlossary": {
+        "badge": "Base de connaissances",
+        "title": "Glossaire IA",
+        "description": "Guide complet de la terminologie IA avec définitions essentielles, catégories et niveaux d'importance. Parfait pour comprendre les concepts clés de l'IA.",
+        "tags": ["Termes essentiels", "Par catégorie", "Rechercheable"],
+        "buttonText": "Explorer le glossaire"
+      },
       "glossary": {
         "badge": "Base de connaissances",
         "title": "Glossaire IA",
         "description": "Votre guide complet de la terminologie IA. 100+ termes avec des exemples du monde réel, des concepts débutants aux avancés.",
         "tags": ["100+ termes", "Exemples réels", "Rechercheable"],
         "buttonText": "Parcourir le glossaire"
+      },
+      "aiGlossaryPage": {
+        "badge": "Glossaire IA",
+        "title": "GLOSSAIRE IA",
+        "subtitle": "Votre guide complet de la terminologie IA",
+        "description": "Guide complet de la terminologie IA couvrant les termes essentiels, définitions et concepts.",
+        "seoTitle": "Glossaire IA | Guide complet de la terminologie IA | Nukleo",
+        "seoDescription": "Guide complet de la terminologie IA couvrant les termes essentiels, définitions et concepts. Des fondamentaux aux sujets avancés.",
+        "seoKeywords": "glossaire IA, termes intelligence artificielle, terminologie IA, définitions IA, dictionnaire IA, glossaire machine learning, base de connaissances IA",
+        "terms": "Termes",
+        "categories": "Catégories",
+        "searchable": "Rechercheable",
+        "searchPlaceholder": "Rechercher des termes... (ex: machine learning, NLP, GPT)",
+        "category": "Catégorie",
+        "importance": "Importance",
+        "all": "Tout",
+        "showing": "Affichage de",
+        "of": "sur",
+        "noTerms": "Aucun terme trouvé",
+        "adjustFilters": "Essayez d'ajuster votre recherche ou vos filtres",
+        "ctaTitle": "PRÊT À TRANSFORMER<br />AVEC L'IA?",
+        "ctaDescription": "Maintenant que vous comprenez la terminologie, discutons de la façon dont l'IA peut stimuler la croissance de votre organisation.",
+        "ctaButton1": "Passer l'évaluation de maturité IA",
+        "ctaButton2": "Discuter de votre projet"
       }
     },
     "filter": {

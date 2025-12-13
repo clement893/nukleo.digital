@@ -2,14 +2,29 @@ import { AssessmentResults } from './scoring';
 import { getRecommendationsForLevel } from './recommendations';
 import { EmailCaptureData } from '@/components/assessment/EmailCaptureModal';
 
-// Lazy load jsPDF only when needed
+// Lazy load jsPDF only when needed - try npm package first, then CDN fallback
 async function loadJsPDF() {
   try {
-    // @ts-ignore - dynamic import that may not exist
+    // Try to import from node_modules
     const module = await import('jspdf');
     return module.default || module;
-  } catch {
-    return null;
+  } catch (npmError) {
+    try {
+      // Fallback: load from CDN
+      console.log('Loading jsPDF from CDN...');
+      await new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js';
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+      // @ts-ignore - jsPDF loaded from CDN
+      return window.jspdf || (window as any).jspdf;
+    } catch (cdnError) {
+      console.warn('Failed to load jsPDF from both npm and CDN:', { npmError, cdnError });
+      return null;
+    }
   }
 }
 

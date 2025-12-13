@@ -31,7 +31,6 @@ export default defineConfig({
     assetsInlineLimit: 4096,
     reportCompressedSize: false,
     rollupOptions: {
-      external: ['jspdf', 'html2canvas'], // Externalize PDF libraries - loaded dynamically
       treeshake: {
         moduleSideEffects: 'no-external',
         propertyReadSideEffects: false,

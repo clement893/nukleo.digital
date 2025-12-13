@@ -114,13 +114,13 @@
     "sectionLabel": "01 Manifeste",
     "title": "Passez du<br />pilote à<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">l'échelle.</span>",
     "description": "L'écart se creuse. Pendant que certains expérimentent, les leaders réarchitecturent toute leur opération autour de l'IA agentique.",
-    "readMore": "Lire Le Manifeste Complet",
+    "readMore": "Lire le manifeste complet",
     "card1": {
-      "title": "Leader, Pas Suiveur",
+      "title": "Leader, pas suiveur",
       "description": "Intégrez des capacités d'IA agentique qui peuvent tripler votre ROI, votre vitesse et votre volume de production."
     },
     "card2": {
-      "title": "Opérations Réinventées",
+      "title": "Opérations réinventées",
       "description": "Réarchitecturer les flux de travail autour d'agents intelligents qui automatisent et optimisent en continu."
     },
     "page": {
@@ -230,18 +230,18 @@
       "title": "PME",
       "description": "Transformez votre entreprise avec des solutions IA pratiques et rentables qui génèrent un vrai ROI de l'automatisation des tâches répétitives au déblocage des insights clients.",
       "highlights": [
-        "Solutions IA Abordables",
-        "Gains Rapides Et ROI Rapide",
-        "Pas De Complexité D'Entreprise"
+        "Solutions IA abordables",
+        "Gains rapides et ROI rapide",
+        "Pas de complexité d'entreprise"
       ]
     },
     "nonprofits": {
       "title": "Organisations à but non lucratif",
       "description": "Amplifiez votre impact avec des outils IA qui vous aident à servir plus de personnes, à opérer plus efficacement et à raconter votre histoire plus puissamment sans casser le budget.",
       "highlights": [
-        "IA Axée Sur La Mission",
-        "Outils D'Engagement Des Donateurs",
-        "Efficacité Opérationnelle"
+        "IA axée sur la mission",
+        "Outils d'engagement des donateurs",
+        "Efficacité opérationnelle"
       ]
     }
   },
@@ -253,7 +253,7 @@
   "services": {
     "title": "Services",
     "subtitle": "Nous sommes à vos côtés pour vous aider à grandir.",
-    "description": "Services IA complets : Stratégie & Marketing, Plateformes Numériques, Opérations Intelligentes."
+    "description": "Services IA complets : Stratégie & Marketing, plateformes numériques, opérations intelligentes."
   },
   "contact": {
     "title": "Contactez-nous",
@@ -274,25 +274,25 @@
     "heroTitle1": "Stratégie.",
     "heroTitle2": "Créativité.",
     "heroTitle3": "Technologie.",
-    "manifesto": "MANIFESTE",
+    "manifesto": "Manifeste",
     "nukleoSpirit": "Esprit Nukleo",
     "nukleoSpiritText": "Chez <strong>Nukleo</strong>, nous croyons que la technologie doit stimuler la croissance, pas la ralentir. Nous transformons les outils numériques en véritables moteurs de performance qui sont intelligents, humains et axés sur les résultats.",
-    "ourApproach": "Notre Approche",
+    "ourApproach": "Notre approche",
     "ourApproachText": "Nous sommes une équipe passionnée et curieuse qui aime résoudre les problèmes de manière créative. De la stratégie au design, du développement au lancement, nous rassemblons toutes les compétences nécessaires pour faire avancer votre projet et le faire briller.",
-    "whatSetsUsApart": "Ce Qui Nous Distingue",
+    "whatSetsUsApart": "Ce qui nous distingue",
     "whatSetsUsApartText": "Pas de jargon. Pas de chaos. Juste de vrais partenaires qui écoutent, guident et livrent. Nous ne prenons pas seulement un projet en charge, nous construisons des collaborations durables qui ont un impact réel.",
-    "ourTeam": "NOTRE ÉQUIPE",
-    "ourOffices": "NOS BUREAUX",
-    "montreal": "MONTRÉAL",
+    "ourTeam": "Notre équipe",
+    "ourOffices": "Nos bureaux",
+    "montreal": "Montréal",
     "montrealDescription": "Au cœur de la Petite Italie, nous serions ravis de nous rencontrer au marché Jean-Talon pour discuter !",
-    "halifax": "HALIFAX",
+    "halifax": "Halifax",
     "halifaxDescription": "Au cœur du centre-ville de Halifax, nous serions heureux de nous rencontrer au bord de l'eau pour discuter !",
     "letsTalk": "Parlons-en"
   },
   "services": {
     "title": "Services",
     "subtitle": "Nous sommes à vos côtés pour vous aider à grandir.",
-    "description": "Services IA complets : Stratégie & Marketing, Plateformes Numériques, Opérations Intelligentes.",
+    "description": "Services IA complets : Stratégie & Marketing, plateformes numériques, opérations intelligentes.",
     "ourServices": "Nos services",
     "heroTitle": "Nous sommes à vos côtés",
     "heroSubtitle": "pour vous aider à grandir.",
@@ -459,9 +459,9 @@
     "categories": {
       "all": "Tout",
       "agenticAI": "IA agentique",
-      "transformation": "Transformation & Implémentation",
-      "roi": "ROI & Cas d'affaires",
-      "technical": "Technique & Sécurité",
+      "transformation": "Transformation & implémentation",
+      "roi": "ROI & cas d'affaires",
+      "technical": "Technique & sécurité",
       "useCases": "Cas d'usage",
       "aboutNukleo": "À propos de Nukleo"
     },
@@ -628,7 +628,7 @@
     },
     "services": {
       "title": "Services IA | Stratégie, plateformes & opérations intelligentes",
-      "description": "Services IA complets : Stratégie & Marketing, Plateformes Numériques, Opérations Intelligentes. 12 solutions spécialisées pour accélérer votre transformation IA."
+      "description": "Services IA complets : Stratégie & Marketing, plateformes numériques, opérations intelligentes. 12 solutions spécialisées pour accélérer votre transformation IA."
     },
     "contact": {
       "title": "Contactez Nukleo Digital | Démarrez votre transformation IA",

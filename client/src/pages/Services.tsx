@@ -22,13 +22,13 @@ export default function Services() {
       services: [
         {
           icon: Target,
-          title: 'AI Strategy Consulting',
-          description: 'Define your AI roadmap with expert guidance on technology selection, implementation planning, and ROI optimization.',
+          title: t('services.bureau.services.aiStrategy.title'),
+          description: t('services.bureau.services.aiStrategy.description'),
         },
         {
           icon: MessageSquare,
-          title: 'Conversational AI',
-          description: 'Deploy intelligent chatbots and virtual assistants that understand context, learn from interactions, and deliver personalized experiences.',
+          title: t('services.bureau.services.conversationalAI.title'),
+          description: t('services.bureau.services.conversationalAI.description'),
         },
         {
           icon: TrendingUp,
@@ -37,8 +37,8 @@ export default function Services() {
         },
         {
           icon: Brain,
-          title: 'Predictive Analytics',
-          description: 'Leverage AI to forecast trends, predict customer behavior, and make data-driven decisions with confidence.',
+          title: t('services.bureau.services.predictiveAnalytics.title'),
+          description: t('services.bureau.services.predictiveAnalytics.description'),
         },
       ],
     },

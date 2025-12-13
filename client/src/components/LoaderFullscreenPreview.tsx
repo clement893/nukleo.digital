@@ -16,18 +16,18 @@ export default function LoaderFullscreenPreview({
   onClose,
 }: LoaderFullscreenPreviewProps) {
   const [progress, setProgress] = useState(0);
-  const [iframeSrc, setIframeSrc] = useState<string>('');
+  const [iframeContent, setIframeContent] = useState<string>('');
   const LOADING_DURATION = 4000; // 4 secondes
 
   // Prepare iframe content with full HTML document
   useEffect(() => {
     if (!isOpen) {
-      setIframeSrc('');
+      setIframeContent('');
       return;
     }
 
     if (!loaderType.includes('<div') && !loaderType.includes('<style>')) {
-      setIframeSrc('');
+      setIframeContent('');
       return;
     }
 
@@ -55,17 +55,7 @@ export default function LoaderFullscreenPreview({
 </body>
 </html>`;
 
-    // Convert to data URL for iframe
-    const blob = new Blob([fullHTML], { type: 'text/html' });
-    const url = URL.createObjectURL(blob);
-    setIframeSrc(url);
-
-    // Cleanup blob URL when component unmounts or loader changes
-    return () => {
-      if (url) {
-        URL.revokeObjectURL(url);
-      }
-    };
+    setIframeContent(fullHTML);
   }, [loaderType, isOpen]);
 
   // Simulate loading progress

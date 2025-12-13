@@ -19,7 +19,7 @@ export default function LoaderFullscreenPreview({
   const [isReady, setIsReady] = useState(false);
   const LOADING_DURATION = 4000; // 4 secondes
 
-  // Extract styles and HTML from loaderType
+  // Extract and inject styles when preview opens
   useEffect(() => {
     if (!isOpen) {
       setIsReady(false);
@@ -41,9 +41,6 @@ export default function LoaderFullscreenPreview({
     const styleMatch = loaderType.match(/<style>([\s\S]*?)<\/style>/);
     const cssStyles = styleMatch ? styleMatch[1] : '';
 
-    // Extract HTML content (without style tags)
-    const htmlContent = loaderType.replace(/<style>[\s\S]*?<\/style>/g, '').trim();
-
     // Inject CSS into document head
     if (cssStyles) {
       // Remove existing style element if any
@@ -59,19 +56,15 @@ export default function LoaderFullscreenPreview({
       document.head.appendChild(styleElement);
     }
 
-    // Store HTML content in data attribute for rendering
-    const container = document.getElementById('loader-preview-container');
-    if (container && htmlContent) {
-      container.innerHTML = htmlContent;
-    }
-
-    // Wait a bit to ensure styles are applied, then mark as ready
-    const timer = setTimeout(() => {
-      setIsReady(true);
-    }, 100);
+    // Wait for styles to be applied before rendering HTML
+    // Use double requestAnimationFrame to ensure styles are processed
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setIsReady(true);
+      });
+    });
 
     return () => {
-      clearTimeout(timer);
       const styleElement = document.getElementById('loader-preview-styles');
       if (styleElement) {
         styleElement.remove();
@@ -121,6 +114,14 @@ export default function LoaderFullscreenPreview({
     ? loaderType.replace(/<style>[\s\S]*?<\/style>/g, '').trim()
     : '';
 
+  // Extract HTML content (without style tags) for custom loaders
+  const getHtmlContent = () => {
+    if (loaderType.includes('<style>')) {
+      return loaderType.replace(/<style>[\s\S]*?<\/style>/g, '').trim();
+    }
+    return loaderType;
+  };
+
   // Render predefined loaders or custom HTML
   const renderLoader = () => {
     // Custom HTML/CSS loader
@@ -133,9 +134,11 @@ export default function LoaderFullscreenPreview({
         );
       }
 
+      const htmlContent = getHtmlContent();
+
       return (
         <div
-          id="loader-preview-container"
+          key={`loader-${loaderName}-${isReady}`}
           className="absolute inset-0"
           style={{
             position: 'fixed',

@@ -153,9 +153,10 @@ export default function LeoChatWidget() {
           >
             <img
               src="/leo-avatar-happy.png"
-              alt="LEO"
+              alt="LEO - AI Assistant Avatar"
               width="48"
               height="48"
+              fetchPriority="high"
               className="w-12 h-12 rounded-full animate-pulse-subtle"
             />
             <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
@@ -174,9 +175,10 @@ export default function LeoChatWidget() {
               <div className="flex items-start gap-3">
                 <img
                   src="/leo-avatar-happy.png"
-                  alt="LEO"
+                  alt="LEO - AI Assistant Avatar"
                   width="40"
                   height="40"
+                  loading="lazy"
                   className="w-10 h-10 rounded-full flex-shrink-0"
                 />
                 <div>
@@ -207,7 +209,7 @@ export default function LeoChatWidget() {
             <div className="flex items-center gap-3">
               <img
                 src={getAvatarSrc()}
-                alt="LEO"
+                alt="LEO - AI Assistant Avatar"
                 width="40"
                 height="40"
                 className={`w-10 h-10 rounded-full ${getAnimationClass()} transition-all duration-300`}
@@ -253,9 +255,10 @@ export default function LeoChatWidget() {
                 {msg.role === 'assistant' && (
                   <img
                     src={msg.emotion ? `/leo-avatar-${msg.emotion}.png` : '/leo-avatar-happy.png'}
-                    alt="LEO"
+                    alt="LEO - AI Assistant Avatar"
                     width="32"
                     height="32"
+                    loading="lazy"
                     className="w-8 h-8 rounded-full flex-shrink-0"
                   />
                 )}
@@ -276,9 +279,10 @@ export default function LeoChatWidget() {
               <div className="flex gap-3">
                 <img
                   src="/leo-avatar-thinking.png"
-                  alt="LEO"
+                  alt="LEO - AI Assistant Avatar"
                   width="32"
                   height="32"
+                  loading="lazy"
                   className="w-8 h-8 rounded-full flex-shrink-0 animate-leo-thinking"
                 />
                 <div className="max-w-[80%] rounded-2xl px-4 py-2 bg-white/10 text-white/90">
@@ -294,9 +298,10 @@ export default function LeoChatWidget() {
               <div className="flex gap-3">
                 <img
                   src="/leo-avatar-thinking.png"
-                  alt="LEO"
+                  alt="LEO - AI Assistant Avatar"
                   width="32"
                   height="32"
+                  loading="lazy"
                   className="w-8 h-8 rounded-full flex-shrink-0 animate-leo-thinking"
                 />
                 <div className="flex items-center gap-1 bg-white/10 rounded-2xl px-4 py-3">

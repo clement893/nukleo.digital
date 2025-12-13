@@ -1,6 +1,7 @@
 import { Brain, Code, Palette, TrendingUp, Database, Sparkles } from 'lucide-react';
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export default function Expertise() {
   const expertiseAreas = [
@@ -78,12 +79,13 @@ export default function Expertise() {
         title="Our AI Expertise | Agentic AI, Platforms & Strategy"
         description="Discover our AI expertise: Agentic AI systems, AI-native platforms, transformation strategy, creative studio & intelligent data. Proven 4-phase methodology for success."
         keywords="AI expertise, agentic AI systems, AI-native platforms, AI transformation strategy, AI methodology"
-        ogImage="/og-expertise.jpg"
+        ogImage="https://nukleo.digital/og-expertise.jpg"
       />
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">
         <div className="container">
+          <Breadcrumb items={[{ name: 'Expertise', url: '/expertise' }]} />
           <span className="font-mono text-accent text-sm mb-8 block tracking-widest">
             04 — Expertise
           </span>

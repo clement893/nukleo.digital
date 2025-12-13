@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'wouter';
+import { Link } from 'wouter';
 import { ChevronRight, Home } from 'lucide-react';
 import StructuredData, { createBreadcrumbSchema } from './StructuredData';
 
@@ -8,80 +8,60 @@ interface BreadcrumbItem {
 }
 
 interface BreadcrumbProps {
-  items?: BreadcrumbItem[];
-  className?: string;
+  items: BreadcrumbItem[];
 }
 
-/**
- * Breadcrumb component for navigation hierarchy
- * Automatically generates breadcrumbs from current route if items not provided
- */
-export default function Breadcrumb({ items, className = '' }: BreadcrumbProps) {
-  const [location] = useLocation();
-  
-  // Auto-generate breadcrumbs from route if not provided
-  const breadcrumbItems: BreadcrumbItem[] = items || (() => {
-    const pathSegments = location.split('/').filter(Boolean);
-    const generated: BreadcrumbItem[] = [
-      { name: 'Home', url: '/' }
-    ];
-    
-    let currentPath = '';
-    pathSegments.forEach((segment, index) => {
-      currentPath += `/${segment}`;
-      // Convert segment to readable name
-      const name = segment
-        .split('-')
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ');
-      
-      generated.push({
-        name,
-        url: currentPath
-      });
-    });
-    
-    return generated;
-  })();
+export default function Breadcrumb({ items }: BreadcrumbProps) {
+  // Always include home as first item
+  const breadcrumbItems: BreadcrumbItem[] = [
+    { name: 'Home', url: '/' },
+    ...items,
+  ];
+
+  // Create structured data
+  const structuredData = createBreadcrumbSchema(
+    breadcrumbItems.map(item => ({
+      name: item.name,
+      url: `https://nukleo.digital${item.url}`,
+    }))
+  );
 
   return (
     <>
-      <StructuredData data={createBreadcrumbSchema(breadcrumbItems)} />
-      <nav 
-        aria-label="Breadcrumb" 
-        className={`flex items-center gap-2 text-sm ${className}`}
-      >
-        {breadcrumbItems.map((item, index) => {
-          const isLast = index === breadcrumbItems.length - 1;
-          
-          return (
-            <div key={item.url} className="flex items-center gap-2">
-              {index === 0 ? (
-                <Link href={item.url}>
-                  <a className="flex items-center gap-1 text-white/60 hover:text-white transition-colors">
-                    <Home className="w-4 h-4" />
-                    <span>{item.name}</span>
-                  </a>
-                </Link>
-              ) : (
-                <>
-                  <ChevronRight className="w-4 h-4 text-white/40" />
-                  {isLast ? (
-                    <span className="text-white font-medium" aria-current="page">
-                      {item.name}
-                    </span>
-                  ) : (
-                    <Link href={item.url}>
-                      <a className="text-white/60 hover:text-white transition-colors">
+      <StructuredData data={structuredData} />
+      <nav aria-label="Breadcrumb" className="mb-6">
+        <ol className="flex items-center gap-2 text-sm text-white/60 flex-wrap">
+          {breadcrumbItems.map((item, index) => {
+            const isLast = index === breadcrumbItems.length - 1;
+            
+            return (
+              <li key={item.url} className="flex items-center gap-2">
+                {index === 0 ? (
+                  <Link href={item.url} className="hover:text-white transition-colors">
+                    <Home className="w-4 h-4" aria-hidden="true" />
+                    <span className="sr-only">{item.name}</span>
+                  </Link>
+                ) : (
+                  <>
+                    <ChevronRight className="w-4 h-4 text-white/40" aria-hidden="true" />
+                    {isLast ? (
+                      <span className="text-white font-medium" aria-current="page">
                         {item.name}
-                      </a>
-                    </Link>
-                  )}
-                </>
-              )}
-            </div>
-          );
-        })}
+                      </span>
+                    ) : (
+                      <Link 
+                        href={item.url} 
+                        className="hover:text-white transition-colors"
+                      >
+                        {item.name}
+                      </Link>
+                    )}
+                  </>
+                )}
+              </li>
+            );
+          })}
+        </ol>
       </nav>
     </>
   );

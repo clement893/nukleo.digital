@@ -441,7 +441,9 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
             <div className="flex items-center gap-3">
               <img 
                 src={getAvatarSrc(currentEmotion)} 
-                alt="LEO" 
+                alt="LEO - AI Assistant Avatar" 
+                width="40"
+                height="40"
                 className={`w-10 h-10 rounded-full object-cover avatar-${currentEmotion}`}
               />
               <div>
@@ -469,7 +471,10 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
                   <div className="flex gap-3 justify-start">
                     <img 
                       src={getAvatarSrc('happy')} 
-                      alt="LEO" 
+                      alt="LEO - AI Assistant Avatar" 
+                      width="32"
+                      height="32"
+                      loading="lazy"
                       className="w-8 h-8 rounded-full object-cover flex-shrink-0"
                     />
                     <div className="max-w-[85%] rounded-2xl px-4 py-4 bg-white/10 backdrop-blur-md text-white border border-cyan-500/30">
@@ -520,7 +525,10 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
                     {message.role === 'assistant' && (
                       <img 
                         src={getAvatarSrc(currentEmotion)} 
-                        alt="LEO" 
+                        alt="LEO - AI Assistant Avatar" 
+                        width="32"
+                        height="32"
+                        loading="lazy"
                         className="w-8 h-8 rounded-full object-cover flex-shrink-0"
                       />
                     )}
@@ -543,7 +551,10 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
               <div className="flex gap-3 justify-start">
                 <img 
                   src={getAvatarSrc(currentEmotion)} 
-                  alt="LEO" 
+                  alt="LEO - AI Assistant Avatar" 
+                  width="32"
+                  height="32"
+                  loading="lazy"
                   className="w-8 h-8 rounded-full object-cover flex-shrink-0"
                 />
                 <div className="max-w-[75%] rounded-2xl px-4 py-3 bg-white/10 backdrop-blur-md text-white border border-white/10">

@@ -2,6 +2,7 @@ import PageLayout from "@/components/PageLayout";
 import SEO from '@/components/SEO';
 import UniversalLEO from '@/components/UniversalLEO';
 import { Linkedin } from 'lucide-react';
+import Breadcrumb from '@/components/Breadcrumb';
 
 const teamMembers = [
   {
@@ -118,11 +119,12 @@ export default function About() {
         title="About Nukleo Digital | AI Transformation Experts"
         description="Meet the Nukleo Digital team: 15+ AI experts transforming businesses across Canada. Based in Montréal & Halifax, we deliver cutting-edge AI solutions since 2020."
         keywords="AI experts, AI transformation team, AI consulting experts, Montréal AI agency, Halifax AI services"
-        ogImage="/og-about.jpg"
+        ogImage="https://nukleo.digital/og-about.jpg"
       />
       <div className="min-h-screen bg-gradient-to-br from-violet-950 via-fuchsia-950 to-rose-950">
         {/* Hero Section */}
         <section className="container mx-auto px-4 pt-32 pb-20">
+          <Breadcrumb items={[{ name: 'About', url: '/about' }]} />
           <div className="text-center mb-16">
             <p className="text-violet-300 uppercase tracking-widest text-sm mb-4">ABOUT US</p>
             <h1 className="text-6xl md:text-8xl font-bold mb-8">
@@ -180,7 +182,7 @@ export default function About() {
                 <div className="aspect-square rounded-xl overflow-hidden mb-4">
                   <img 
                     src={member.image} 
-                    alt={member.name}
+                    alt={`${member.name} - ${member.role} at Nukleo Digital`}
                     width="400"
                     height="400"
                     loading="lazy"

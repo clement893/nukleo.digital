@@ -17,7 +17,9 @@ export function AdminHeader() {
             <div className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity">
               <img 
                 src="/Nukleo_blanc_RVB.svg" 
-                alt="Nukleo" 
+                alt="Nukleo Digital - AI Transformation Agency" 
+                width="120"
+                height="32"
                 className="h-8"
               />
               <span className="text-sm text-white/60 hidden sm:inline">Admin Panel</span>
@@ -30,7 +32,9 @@ export function AdminHeader() {
               {user.picture ? (
                 <img 
                   src={user.picture} 
-                  alt={user.name}
+                  alt={`${user.name} - Admin Profile Picture`}
+                  width="32"
+                  height="32"
                   className="w-8 h-8 rounded-full"
                 />
               ) : (

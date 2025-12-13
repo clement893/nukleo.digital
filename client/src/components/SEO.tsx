@@ -6,6 +6,8 @@ interface SEOProps {
   description?: string;
   keywords?: string;
   ogImage?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
   ogType?: 'website' | 'article';
   article?: {
     publishedTime?: string;
@@ -15,6 +17,8 @@ interface SEOProps {
     tags?: string[];
   };
   noindex?: boolean;
+  locale?: string;
+  alternateLanguages?: Array<{ lang: string; url: string }>;
 }
 
 const DEFAULT_SEO = {
@@ -32,9 +36,13 @@ export default function SEO({
   description = DEFAULT_SEO.description,
   keywords = DEFAULT_SEO.keywords,
   ogImage = DEFAULT_SEO.ogImage,
+  ogImageWidth = 1200,
+  ogImageHeight = 630,
   ogType = 'website',
   article,
   noindex = false,
+  locale = 'fr_FR',
+  alternateLanguages,
 }: SEOProps) {
   const [location] = useLocation();
   
@@ -74,9 +82,12 @@ export default function SEO({
     updateMetaTag('og:title', fullTitle, true);
     updateMetaTag('og:description', description, true);
     updateMetaTag('og:image', ogImage, true);
+    updateMetaTag('og:image:width', ogImageWidth.toString(), true);
+    updateMetaTag('og:image:height', ogImageHeight.toString(), true);
     updateMetaTag('og:url', canonicalUrl, true);
     updateMetaTag('og:type', ogType, true);
     updateMetaTag('og:site_name', DEFAULT_SEO.siteName, true);
+    updateMetaTag('og:locale', locale, true);
 
     // Article-specific OG tags
     if (article && ogType === 'article') {
@@ -115,7 +126,34 @@ export default function SEO({
     }
     canonical.href = canonicalUrl;
 
-  }, [fullTitle, description, keywords, ogImage, ogType, canonicalUrl, article, noindex]);
+    // Hreflang tags for alternate languages
+    if (alternateLanguages && alternateLanguages.length > 0) {
+      // Remove existing hreflang tags
+      document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(el => el.remove());
+      
+      alternateLanguages.forEach(({ lang, url }) => {
+        const link = document.createElement('link');
+        link.rel = 'alternate';
+        link.setAttribute('hreflang', lang);
+        link.href = url;
+        document.head.appendChild(link);
+      });
+      
+      // Add x-default
+      const defaultLink = document.createElement('link');
+      defaultLink.rel = 'alternate';
+      defaultLink.setAttribute('hreflang', 'x-default');
+      defaultLink.href = canonicalUrl;
+      document.head.appendChild(defaultLink);
+    }
+
+    // Update HTML lang attribute
+    const htmlElement = document.documentElement;
+    const detectedLang = locale.split('_')[0] || 'fr';
+    htmlElement.setAttribute('lang', detectedLang);
+    htmlElement.setAttribute('dir', 'ltr');
+
+  }, [fullTitle, description, keywords, ogImage, ogImageWidth, ogImageHeight, ogType, canonicalUrl, article, noindex, locale, alternateLanguages]);
 
   return null;
 }

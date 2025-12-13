@@ -42,7 +42,7 @@ export default function Header() {
             <a href="/" className="flex flex-col group cursor-pointer">
               <img 
                 src="/Nukleo_blanc_RVB.svg" 
-                alt="Nukleo" 
+                alt="Nukleo Digital - AI Transformation Agency" 
                 width="120"
                 height="32"
                 fetchPriority="high"

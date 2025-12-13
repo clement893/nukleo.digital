@@ -66,7 +66,7 @@ export default function MediaCenter() {
         title="Media Center | Press Releases & Media Kit | Nukleo Digital"
         description="Access Nukleo Digital's press releases, media kit, brand assets, and latest news. Download logos, company information, and press materials for media use."
         keywords="Nukleo Digital press, media kit, press releases, brand assets, company logos, media resources, press contact, AI agency news"
-        ogImage="https://nukleo.digital/og-media.jpg"
+        ogImage="https://nukleo.digital/og-image.jpg"
         ogType="website"
       />
       <Header />

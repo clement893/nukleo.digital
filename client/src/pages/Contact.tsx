@@ -6,6 +6,7 @@ import { trpc } from '@/lib/trpc';
 import SEO from '@/components/SEO';
 import UniversalLEO from '@/components/UniversalLEO';
 import StructuredData from '@/components/StructuredData';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -96,6 +97,7 @@ export default function Contact() {
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">
         <div className="container">
+          <Breadcrumb items={[{ name: 'Contact', url: '/contact' }]} />
           <span className="font-mono text-accent text-sm mb-8 block tracking-widest">
             07 — Contact
           </span>

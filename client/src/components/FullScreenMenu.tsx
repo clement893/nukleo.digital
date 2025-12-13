@@ -87,7 +87,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
           <a href="/" className="flex items-center group cursor-pointer" onClick={onClose}>
             <img 
               src="/Nukleo_blanc_RVB.svg" 
-              alt="Nukleo" 
+              alt="Nukleo Digital - AI Transformation Agency" 
               width="120"
               height="32"
               fetchPriority="high"

@@ -4,6 +4,7 @@ import UniversalLEO from '@/components/UniversalLEO';
 import { Link } from 'wouter';
 import PageLayout from '../components/PageLayout';
 import StructuredData, { serviceSchema } from '@/components/StructuredData';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export default function Services() {
   const services = [
@@ -102,10 +103,13 @@ export default function Services() {
         title="AI Services | Strategy, Platforms & Intelligent Operations"
         description="Comprehensive AI services: Strategy & Marketing, Digital Platforms, Intelligent Operations. 12 specialized solutions to accelerate your AI transformation. Explore now."
         keywords="AI services, AI strategy, digital platforms, intelligent operations, AI transformation"
-        ogImage="/og-services.jpg"
+        ogImage="https://nukleo.digital/og-services.jpg"
       />
       <StructuredData data={serviceSchema} />
       <div className="min-h-screen pt-24 pb-20 px-4">
+        <div className="max-w-6xl mx-auto">
+          <Breadcrumb items={[{ name: 'Services', url: '/services' }]} />
+        </div>
         {/* Hero Section */}
         <div className="max-w-6xl mx-auto mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-8">

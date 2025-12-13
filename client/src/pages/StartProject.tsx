@@ -64,7 +64,7 @@ export default function StartProject() {
         title="Start Your AI Project | Transform Your Business with AI"
         description="Ready to transform your business with AI? Start your project with Nukleo Digital. Expert guidance from strategy to implementation. Get a free consultation and custom AI roadmap."
         keywords="start AI project, AI consultation, AI implementation, AI strategy, AI transformation, AI project planning, AI roadmap, AI business transformation"
-        ogImage="https://nukleo.digital/og-start-project.jpg"
+        ogImage="https://nukleo.digital/og-image.jpg"
       />
       <div className="min-h-screen bg-gradient-to-br from-purple-950 via-purple-900 to-purple-950 relative overflow-hidden">
       {/* Background Blobs */}

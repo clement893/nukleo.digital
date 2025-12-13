@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Filter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import PageLayout from '@/components/PageLayout';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -60,6 +61,7 @@ export default function Projects() {
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">
         <div className="container">
+          <Breadcrumb items={[{ name: 'Projects', url: '/projects' }]} />
           <span className="font-mono text-accent text-sm mb-8 block tracking-widest">
             02 — Projects
           </span>

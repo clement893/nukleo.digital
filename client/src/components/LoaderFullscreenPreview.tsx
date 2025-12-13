@@ -122,23 +122,32 @@ export default function LoaderFullscreenPreview({
         );
       }
 
-      // Remove <style> tags from HTML (styles are injected via useEffect into document head)
+      // Extract styles and HTML separately
+      const styleMatch = loaderType.match(/<style>([\s\S]*?)<\/style>/);
+      const styles = styleMatch ? styleMatch[1] : '';
       const htmlWithoutStyles = loaderType.replace(/<style>[\s\S]*?<\/style>/g, '').trim();
       
       return (
-        <div 
-          key={`loader-${loaderName}-${stylesInjected}`}
-          dangerouslySetInnerHTML={{ __html: htmlWithoutStyles }}
-          className="absolute inset-0"
-          style={{ 
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            zIndex: 9998
-          }}
-        />
+        <>
+          {/* Inject styles directly in component */}
+          {styles && (
+            <style dangerouslySetInnerHTML={{ __html: styles }} />
+          )}
+          <div 
+            key={`loader-${loaderName}-${Date.now()}`}
+            dangerouslySetInnerHTML={{ __html: htmlWithoutStyles }}
+            className="absolute inset-0"
+            style={{ 
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              zIndex: 9998,
+              isolation: 'isolate'
+            }}
+          />
+        </>
       );
     }
 

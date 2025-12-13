@@ -214,16 +214,8 @@
     font-family: var(--font-sans);
     position: relative;
     min-height: 100vh;
-    background: linear-gradient(
-      135deg,
-      #1e3a8a 0%,      /* bleu navy */
-      #3730a3 20%,     /* indigo */
-      #5b21b6 35%,     /* violet profond */
-      #7c3aed 50%,     /* violet bleué */
-      #6d28d9 65%,     /* violet */
-      #7f1d1d 85%,     /* rouge bordeaux foncé */
-      #991b1b 100%     /* rouge bordeaux */
-    );
+    /* Fond noir pour éviter le flash de couleur entre les pages */
+    background: #0a0a0a;
     background-attachment: fixed;
   }
 

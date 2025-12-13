@@ -131,7 +131,6 @@ function App() {
               <Route path="/fr/contact" component={Contact} />
               <Route path="/fr/leo" component={Leo} />
               <Route path="/fr/manifesto" component={Manifesto} />
-              <Route path="/fr/radar" component={Radar} />
               <Route path="/fr/ai-trend-radar" component={AITrendRadar} />
               <Route path="/fr/assessment" component={AIReadinessAssessment} />
               <Route path="/fr/services/ai-strategy-marketing" component={AIStrategyMarketing} />
@@ -170,7 +169,6 @@ function App() {
             <Route path="/contact" component={Contact} />
             <Route path="/leo" component={Leo} />
             <Route path="/manifesto" component={Manifesto} />
-            <Route path="/radar" component={Radar} />
             <Route path="/ai-trend-radar" component={AITrendRadar} />
             <Route path="/assessment" component={AIReadinessAssessment} />
             <Route path="/services/ai-strategy-marketing" component={AIStrategyMarketing} />

@@ -131,14 +131,28 @@ export default function PageLoader() {
 
         const styleElement = document.createElement("style");
         styleElement.id = styleId;
-        // Add CSS to fix logo in center and prevent it from moving
+        // Add CSS to fix logo in center and prevent it from moving - only applies within loader container
         styleElement.textContent = cssStyles + `
-          /* Fix logo in center for all loaders */
-          img[src*="Nukleo"], img[src*="nukleo"], img[src*="logo"], img[alt*="Nukleo"], img[alt*="nukleo"], img[alt*="Logo"],
-          svg[viewBox*="1451"], svg[viewBox*="1781"], svg[class*="logo"], svg[id*="logo"],
-          .logo, [class*="logo"], [id*="logo"], [class*="Logo"], [id*="Logo"],
-          object[data*="nukleo"], object[data*="logo"],
-          embed[src*="nukleo"], embed[src*="logo"] {
+          /* Fix logo in center for all loaders - scoped to loader container */
+          [data-page-loader] img[src*="Nukleo"], 
+          [data-page-loader] img[src*="nukleo"], 
+          [data-page-loader] img[src*="logo"], 
+          [data-page-loader] img[alt*="Nukleo"], 
+          [data-page-loader] img[alt*="nukleo"], 
+          [data-page-loader] img[alt*="Logo"],
+          [data-page-loader] svg[viewBox*="1451"], 
+          [data-page-loader] svg[viewBox*="1781"], 
+          [data-page-loader] svg[class*="logo"], 
+          [data-page-loader] svg[id*="logo"],
+          [data-page-loader] .logo, 
+          [data-page-loader] [class*="logo"], 
+          [data-page-loader] [id*="logo"], 
+          [data-page-loader] [class*="Logo"], 
+          [data-page-loader] [id*="Logo"],
+          [data-page-loader] object[data*="nukleo"], 
+          [data-page-loader] object[data*="logo"],
+          [data-page-loader] embed[src*="nukleo"], 
+          [data-page-loader] embed[src*="logo"] {
             position: fixed !important;
             top: 50% !important;
             left: 50% !important;
@@ -195,6 +209,11 @@ export default function PageLoader() {
           document.body.classList.add('loaded');
           // Clear loader HTML to ensure logo disappears
           setLoaderHtml(null);
+          // Remove loader styles immediately
+          const styleElement = document.getElementById("page-loader-styles");
+          if (styleElement) {
+            styleElement.remove();
+          }
         } else {
           setTimeout(checkReady, 50);
         }
@@ -209,10 +228,17 @@ export default function PageLoader() {
     }
 
     return () => {
+      // Cleanup: remove styles and ensure loader is hidden
       const styleElement = document.getElementById("page-loader-styles");
       if (styleElement) {
         styleElement.remove();
       }
+      // Remove any remaining loader elements from DOM
+      document.querySelectorAll('[data-page-loader]').forEach(el => {
+        if (el instanceof HTMLElement && el.style.zIndex === '10001') {
+          el.remove();
+        }
+      });
       // Ensure loader is hidden when component unmounts or location changes
       setIsLoading(false);
       setLoaderHtml(null);
@@ -255,6 +281,7 @@ export default function PageLoader() {
 
   return (
     <div
+      data-page-loader
       className="fixed inset-0 z-[9999]"
       style={{
         opacity: isLoading ? 1 : 0,
@@ -288,6 +315,7 @@ export default function PageLoader() {
       
       {htmlContent && isLoading && (
         <div
+          data-page-loader
           key={`page-loader-${loaderHtml.substring(0, 50)}`}
           className="fixed inset-0"
           style={{ 

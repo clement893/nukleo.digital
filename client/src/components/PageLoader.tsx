@@ -27,9 +27,7 @@ export default function PageLoader() {
     const randomLoader = activeLoaders[Math.floor(Math.random() * activeLoaders.length)];
     
     if (randomLoader && randomLoader.cssCode) {
-      setLoaderHtml(randomLoader.cssCode);
-
-      // Extract and inject CSS styles
+      // Extract and inject CSS styles FIRST
       const styleMatch = randomLoader.cssCode.match(/<style>([\s\S]*?)<\/style>/);
       const cssStyles = styleMatch ? styleMatch[1] : "";
 
@@ -46,7 +44,10 @@ export default function PageLoader() {
         document.head.appendChild(styleElement);
       }
 
-      // Wait for styles to be applied
+      // Set HTML content
+      setLoaderHtml(randomLoader.cssCode);
+
+      // Wait for styles to be applied, then show loader
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           setStylesReady(true);
@@ -83,7 +84,23 @@ export default function PageLoader() {
     };
   }, [activeLoaders, isLoadingLoaders]);
 
-  if (!isLoading || !loaderHtml) return null;
+  // Show loader container immediately if we have loaders, even while loading
+  if (!activeLoaders || activeLoaders.length === 0) {
+    return null;
+  }
+
+  // Show loader container while fetching or loading
+  if (isLoadingLoaders || !loaderHtml) {
+    return (
+      <div
+        className="fixed inset-0 z-[9999] bg-black"
+        style={{
+          opacity: 1,
+          pointerEvents: "all",
+        }}
+      />
+    );
+  }
 
   const htmlContent = loaderHtml.includes("<style>")
     ? loaderHtml.replace(/<style>[\s\S]*?<\/style>/g, "").trim()
@@ -98,7 +115,7 @@ export default function PageLoader() {
         transition: "opacity 0.5s ease-out",
       }}
     >
-      {stylesReady && htmlContent && (
+      {htmlContent && (
         <div
           key={`page-loader-${stylesReady}`}
           className="absolute inset-0"

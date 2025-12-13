@@ -188,32 +188,6 @@ export default function AITrendRadar() {
           </div>
         </div>
 
-        {/* Info Section */}
-        <div className="mt-16 grid md:grid-cols-3 gap-6">
-          <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6">
-            <h3 className="text-white font-bold mb-3">Mise à jour quotidienne</h3>
-            <p className="text-white/70 text-sm">
-              Les positions des technologies sont analysées et mises à jour chaque jour à 2h UTC 
-              grâce à l'intelligence artificielle.
-            </p>
-          </div>
-          
-          <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6">
-            <h3 className="text-white font-bold mb-3">Analyse approfondie</h3>
-            <p className="text-white/70 text-sm">
-              Chaque technologie inclut une analyse détaillée : cas d'usage, barrières à l'adoption, 
-              et recommandations par niveau de maturité organisationnelle.
-            </p>
-          </div>
-          
-          <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6">
-            <h3 className="text-white font-bold mb-3">Focus Canada</h3>
-            <p className="text-white/70 text-sm">
-              Analyses adaptées au marché canadien francophone avec terminologie et exemples 
-              pertinents pour les entreprises québécoises et canadiennes.
-            </p>
-          </div>
-        </div>
       </div>
       
       <Footer />

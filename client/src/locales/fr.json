@@ -51,7 +51,7 @@
   "footer": {
     "description": "Transformez votre entreprise avec des solutions alimentées par l'IA.",
     "links": {
-      "about": "À Propos",
+      "about": "À propos",
       "services": "Services",
       "projects": "Projets",
       "contact": "Contact",
@@ -59,14 +59,14 @@
       "terms": "Conditions",
       "cookies": "Cookies"
     },
-    "copyright": "© {{year}} Nukleo Digital. Tous Droits Réservés.",
+    "copyright": "© {{year}} Nukleo Digital. Tous droits réservés.",
     "navigation": "Navigation",
     "services": "Services",
     "contact": "Contact",
-    "newsletterTitle": "Restez À L'Avant-Garde De L'IA",
-    "newsletterDescription": "Abonnez-Vous Pour Recevoir Nos Derniers Insights, Guides Techniques Et Analyses De L'Industrie.",
-    "newsletterPlaceholder": "Entrez Votre Email",
-    "newsletterButton": "S'Abonner",
+    "newsletterTitle": "Restez à l'avant-garde de l'IA",
+    "newsletterDescription": "Abonnez-vous pour recevoir nos derniers insights, guides techniques et analyses de l'industrie.",
+    "newsletterPlaceholder": "Entrez votre email",
+    "newsletterButton": "S'abonner",
     "nav": {
       "manifesto": "Manifeste",
       "clients": "Clients",
@@ -75,10 +75,10 @@
       "agencies": "Agences"
     },
     "services": {
-      "agenticAI": "Systèmes IA Agentiques",
-      "aiNative": "Plateformes Natives IA",
-      "transformation": "Stratégie De Transformation",
-      "creativeStudio": "Studio Créatif",
+      "agenticAI": "Systèmes IA agentiques",
+      "aiNative": "Plateformes natives IA",
+      "transformation": "Stratégie de transformation",
+      "creativeStudio": "Studio créatif",
       "aiConsulting": "Consultation IA"
     }
   },
@@ -109,7 +109,7 @@
   },
   "manifesto": {
     "sectionLabel": "01 Manifeste",
-    "title": "Passez Du<br /><span class=\"text-white/40\">Pilote À</span><br />L'Échelle.",
+    "title": "Passez du<br /><span class=\"text-white/40\">pilote à</span><br />l'échelle.",
     "description": "L'écart se creuse. Pendant que d'autres expérimentent, les leaders réarchitecturent toute leur opération autour de l'IA Agentique.",
     "readMore": "Lire Le Manifeste Complet",
     "card1": {
@@ -457,11 +457,11 @@
       "description": "Rencontrez l'équipe Nukleo Digital : 15+ experts IA transformant les entreprises au Canada. Basés à Montréal & Halifax."
     },
     "services": {
-      "title": "Services IA | Stratégie, Plateformes & Opérations Intelligentes",
+      "title": "Services IA | Stratégie, plateformes & opérations intelligentes",
       "description": "Services IA complets : Stratégie & Marketing, Plateformes Numériques, Opérations Intelligentes. 12 solutions spécialisées pour accélérer votre transformation IA."
     },
     "contact": {
-      "title": "Contactez Nukleo Digital | Démarrez votre Transformation IA",
+      "title": "Contactez Nukleo Digital | Démarrez votre transformation IA",
       "description": "Prêt à transformer avec l'IA ? Contactez Nukleo Digital pour une consultation experte. Bureaux à Montréal & Halifax."
     }
   },
@@ -550,7 +550,7 @@
         ]
       },
       "agentic": {
-        "title": "Marketing Agentique",
+        "title": "Marketing agentique",
         "items": [
           "Orchestration autonome des campagnes",
           "Optimisation continue en temps réel",

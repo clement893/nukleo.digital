@@ -99,7 +99,7 @@ export default function LoaderFullscreenPreview({
   const renderLoader = () => {
     // If loaderType contains HTML/CSS (starts with <div or contains <style>), use iframe
     if (loaderType.includes('<div') || loaderType.includes('<style>')) {
-      if (!iframeSrc) {
+      if (!iframeContent) {
         return (
           <div className="absolute inset-0 flex items-center justify-center bg-gray-900">
             <div className="text-white">Chargement du loader...</div>
@@ -109,7 +109,7 @@ export default function LoaderFullscreenPreview({
 
       return (
         <iframe
-          src={iframeSrc}
+          srcDoc={iframeContent}
           className="absolute inset-0 w-full h-full border-0"
           style={{ 
             position: 'fixed',

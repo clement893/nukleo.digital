@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 interface LoaderFullscreenPreviewProps {
   loaderType: string;
@@ -16,46 +16,67 @@ export default function LoaderFullscreenPreview({
   onClose,
 }: LoaderFullscreenPreviewProps) {
   const [progress, setProgress] = useState(0);
-  const [iframeContent, setIframeContent] = useState<string>('');
+  const [htmlContent, setHtmlContent] = useState<string>('');
+  const [stylesReady, setStylesReady] = useState(false);
+  const containerRef = React.useRef<HTMLDivElement>(null);
   const LOADING_DURATION = 4000; // 4 secondes
 
-  // Prepare iframe content with full HTML document
+  // Extract and inject styles, then prepare HTML
   useEffect(() => {
     if (!isOpen) {
-      setIframeContent('');
+      setHtmlContent('');
+      setStylesReady(false);
+      // Cleanup styles when preview closes
+      const styleToRemove = document.getElementById('loader-preview-styles');
+      if (styleToRemove) {
+        styleToRemove.remove();
+      }
       return;
     }
 
     if (!loaderType.includes('<div') && !loaderType.includes('<style>')) {
-      setIframeContent('');
+      setHtmlContent('');
+      setStylesReady(false);
       return;
     }
 
     // Extract styles and HTML
     const styleMatch = loaderType.match(/<style>([\s\S]*?)<\/style>/);
     const styles = styleMatch ? styleMatch[1] : '';
-    let htmlContent = loaderType.replace(/<style>[\s\S]*?<\/style>/g, '').trim();
+    const htmlWithoutStyles = loaderType.replace(/<style>[\s\S]*?<\/style>/g, '').trim();
 
-    // Convert relative image paths to absolute URLs for iframe
-    const baseUrl = window.location.origin;
-    htmlContent = htmlContent.replace(/src="(\/[^"]+)"/g, `src="${baseUrl}$1"`);
-    htmlContent = htmlContent.replace(/src='(\/[^']+)'/g, `src='${baseUrl}$1'`);
+    // Inject styles into document head
+    if (styles) {
+      const styleId = 'loader-preview-styles';
+      const existingStyle = document.getElementById(styleId);
+      if (existingStyle) {
+        existingStyle.remove();
+      }
 
-    // Create a complete HTML document with the loader content
-    const fullHTML = `<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Loader Preview</title>
-  ${styles ? `<style>${styles}</style>` : ''}
-</head>
-<body style="margin: 0; padding: 0; overflow: hidden; width: 100vw; height: 100vh;">
-  ${htmlContent}
-</body>
-</html>`;
+      const styleElement = document.createElement('style');
+      styleElement.id = styleId;
+      styleElement.textContent = styles;
+      document.head.appendChild(styleElement);
 
-    setIframeContent(fullHTML);
+      // Wait for styles to be applied before rendering HTML
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setStylesReady(true);
+          setHtmlContent(htmlWithoutStyles);
+        });
+      });
+    } else {
+      setStylesReady(true);
+      setHtmlContent(htmlWithoutStyles);
+    }
+
+    // Cleanup
+    return () => {
+      const styleToRemove = document.getElementById('loader-preview-styles');
+      if (styleToRemove) {
+        styleToRemove.remove();
+      }
+    };
   }, [loaderType, isOpen]);
 
   // Simulate loading progress

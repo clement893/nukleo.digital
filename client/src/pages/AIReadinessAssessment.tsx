@@ -105,7 +105,9 @@ export default function AIReadinessAssessment() {
       [currentQuestion.id]: points,
     }));
     
-    // Auto-advance to next question after 1500ms
+    playClick();
+    
+    // Auto-advance to next question after 600ms with smooth animation
     setTimeout(() => {
       if (isLastQuestion) {
         const assessmentResults = calculateScores({ ...answers, [currentQuestion.id]: points });
@@ -117,8 +119,7 @@ export default function AIReadinessAssessment() {
         setCurrentQuestionIndex(prev => prev + 1);
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
-      playClick();
-    }, 1500);
+    }, 600);
   };
 
   const handleNext = () => {
@@ -174,6 +175,21 @@ export default function AIReadinessAssessment() {
       <FullScreenMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
 
       <div className="min-h-screen bg-gradient-to-br from-slate-950 via-violet-950/20 to-slate-950 pt-32 pb-20 px-4">
+      <style>{`
+        @keyframes fadeInSlide {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fade-in {
+          animation: fadeInSlide 0.4s ease-out;
+        }
+      `}</style>
       <div className="container">
         {state === 'intro' && (
           <AssessmentIntro onStart={handleStart} />
@@ -186,14 +202,22 @@ export default function AIReadinessAssessment() {
               total={totalQuestions} 
             />
 
-            <QuestionCard
-              question={currentQuestion}
-              selectedOption={answers[currentQuestion.id] ?? null}
-              onSelectOption={handleSelectOption}
-            />
+            <div 
+              key={currentQuestionIndex}
+              className="animate-fade-in"
+              style={{
+                animation: 'fadeInSlide 0.4s ease-out',
+              }}
+            >
+              <QuestionCard
+                question={currentQuestion}
+                selectedOption={answers[currentQuestion.id] ?? null}
+                onSelectOption={handleSelectOption}
+              />
+            </div>
 
-            {/* Navigation Buttons */}
-            <div className="flex items-center justify-between mt-12">
+            {/* Navigation Buttons - Only Previous */}
+            <div className="flex items-center justify-start mt-12">
               <button
                 onClick={handlePrevious}
                 disabled={currentQuestionIndex === 0}
@@ -201,15 +225,6 @@ export default function AIReadinessAssessment() {
               >
                 <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
                 Previous
-              </button>
-
-              <button
-                onClick={handleNext}
-                disabled={!canGoNext}
-                className="group inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-violet-500 to-rose-500 text-white font-bold rounded-full hover:shadow-[0_0_40px_rgba(139,92,246,0.5)] disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-300"
-              >
-                {isLastQuestion ? 'Complete Assessment' : 'Next'}
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
           </div>

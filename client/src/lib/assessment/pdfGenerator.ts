@@ -2,18 +2,27 @@ import { AssessmentResults } from './scoring';
 import { getRecommendationsForLevel } from './recommendations';
 import { EmailCaptureData } from '@/components/assessment/EmailCaptureModal';
 
+// Lazy load jsPDF only when needed
+async function loadJsPDF() {
+  try {
+    // @ts-ignore - dynamic import that may not exist
+    const module = await import('jspdf');
+    return module.default || module;
+  } catch {
+    return null;
+  }
+}
+
 export async function generatePDFReport(
   results: AssessmentResults,
   userData: EmailCaptureData
 ): Promise<void> {
-  // Try to dynamically import jspdf - if not available, fallback to text download
-  let jsPDF: any;
-  try {
-    // Use dynamic import with string literal to avoid Vite resolving at build time
-    const jsPDFModule = await import(/* @vite-ignore */ 'jspdf');
-    jsPDF = jsPDFModule.default || jsPDFModule;
-  } catch (error) {
-    console.warn('jsPDF not available, falling back to text report:', error);
+  // Try to load jsPDF dynamically
+  const jsPDF = await loadJsPDF();
+  
+  if (!jsPDF) {
+    // Fallback: download as text file if jsPDF not available
+    console.warn('jsPDF not available, falling back to text report');
     // Fallback: download as text file
     const recommendations = getRecommendationsForLevel(results.maturityLevel);
     const reportText = `

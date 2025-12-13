@@ -52,28 +52,29 @@ export default function FAQ() {
     };
   }, [language]);
 
-  // Helper to get array/object from translations
-  const getTranslationArray = (key: string): any[] => {
-    if (!translationsData) return [];
-    try {
-      const keys = key.split('.');
-      let value: any = translationsData;
-      for (const k of keys) {
-        if (value && typeof value === 'object' && k in value) {
-          value = value[k];
-        } else {
-          return [];
-        }
-      }
-      return Array.isArray(value) ? value : [];
-    } catch {
-      return [];
-    }
-  };
-
   // Build FAQs from translations
   const faqs: FAQItem[] = useMemo(() => {
     const allFaqs: FAQItem[] = [];
+    
+    if (!translationsData) return allFaqs;
+    
+    // Helper to get array/object from translations
+    const getTranslationArray = (key: string): any[] => {
+      try {
+        const keys = key.split('.');
+        let value: any = translationsData;
+        for (const k of keys) {
+          if (value && typeof value === 'object' && k in value) {
+            value = value[k];
+          } else {
+            return [];
+          }
+        }
+        return Array.isArray(value) ? value : [];
+      } catch {
+        return [];
+      }
+    };
     
     try {
       // Agentic AI

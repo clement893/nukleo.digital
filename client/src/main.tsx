@@ -55,7 +55,12 @@ const trpcClient = trpc.createClient({
   ],
 });
 
-createRoot(document.getElementById("root")!).render(
+const rootElement = document.getElementById("root");
+if (!rootElement) {
+  throw new Error("Root element not found");
+}
+
+createRoot(rootElement).render(
   <trpc.Provider client={trpcClient} queryClient={queryClient}>
     <QueryClientProvider client={queryClient}>
       <ThemeProvider defaultTheme="dark" switchable={false}>
@@ -64,3 +69,10 @@ createRoot(document.getElementById("root")!).render(
     </QueryClientProvider>
   </trpc.Provider>
 );
+
+// Show body content once React has mounted
+document.body.classList.add('loaded');
+const svg = document.getElementById('nukleo-arrow-inline');
+if (svg) {
+  svg.style.display = 'block';
+}

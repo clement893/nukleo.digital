@@ -56,7 +56,14 @@
   </head>
 
   <body>
+    <!-- Prevent flash of unstyled content -->
+    <style>
+      body { visibility: hidden; }
+      body.loaded { visibility: visible; }
+      #nukleo-arrow-inline { display: none !important; }
+    </style>
     <!-- Inline LCP SVG for mobile performance (eliminates 1650ms Resource Load Delay) -->
+    <!-- Hidden until React mounts to prevent flash -->
     <svg id="nukleo-arrow-inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1451.13 1781.63" style="position:absolute;top:15%;left:5%;width:250px;opacity:0.025;pointer-events:none;">
       <defs>
         <style>.st0{fill:#fff;}</style>
@@ -65,5 +72,6 @@
     </svg>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <!-- Content visibility is controlled by main.tsx after React mounts -->
   </body>
 </html>

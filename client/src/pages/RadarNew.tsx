@@ -1,14 +1,14 @@
 // RadarNew.tsx
 import { useState } from "react";
 import SEO from "@/components/SEO";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import { RadarHero } from "../components/radar/RadarHero";
-import { FilterSection } from "../components/radar/FilterSection";
-import { RadarVisualization } from "../components/radar/RadarVisualization";
-import { TechnologyCard } from "../components/radar/TechnologyCard";
-import { RadarCTA } from "../components/radar/RadarCTA";
-import { technologies } from "../lib/radar/technologies";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { RadarHero } from "@/components/radar/RadarHero";
+import { FilterSection } from "@/components/radar/FilterSection";
+import { RadarVisualization } from "@/components/radar/RadarVisualization";
+import { TechnologyCard } from "@/components/radar/TechnologyCard";
+import { RadarCTA } from "@/components/radar/RadarCTA";
+import { technologies } from "@/lib/radar/technologies";
 export function RadarNew() {
   const [categoryFilter, setCategoryFilter] = useState("All");
   const [maturityFilter, setMaturityFilter] = useState("All");

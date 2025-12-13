@@ -1,6 +1,6 @@
-import SEO from '../components/SEO';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import SEO from '@/components/SEO';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import { Sparkles, Palette, Zap, Users } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';

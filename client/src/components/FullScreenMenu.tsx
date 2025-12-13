@@ -17,12 +17,18 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
   const { t } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
   
+  // Helper function to normalize paths for comparison (remove language prefix)
+  const normalizePath = (path: string): string => {
+    return path.replace(/^\/(fr|en)/, '') || '/';
+  };
+  
   const navItems = [
     { number: '01', label: t('nav.expertise'), path: '/expertise' },
     { number: '02', label: t('nav.projects'), path: '/projects' },
     { number: '03', label: t('nav.about'), path: '/about' },
     { number: '04', label: t('nav.resources'), path: '/resources' },
     { number: '05', label: t('nav.contact'), path: '/contact' },
+    { number: '06', label: t('nav.faq'), path: '/faq' },
     { number: '07', label: t('nav.talkToLeo'), path: '/leo' },
     { number: '08', label: t('nav.artsCulture'), path: '/arts-culture' },
   ];
@@ -189,7 +195,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
                                 text-2xl md:text-3xl lg:text-4xl 
                                 font-bold 
                                 transition-all duration-500
-                                ${location === item.path 
+                                ${normalizePath(location) === item.path 
                                   ? 'text-white' 
                                   : 'text-white/70 group-hover:text-white group-hover:translate-x-4'
                                 }
@@ -197,7 +203,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
                             >
                               {item.label}
                             </span>
-                            {location === item.path && (
+                            {normalizePath(location) === item.path && (
                               <div className="ml-auto w-2 h-2 bg-accent rounded-full animate-pulse" />
                             )}
                           </div>

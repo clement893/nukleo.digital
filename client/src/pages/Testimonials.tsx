@@ -1,5 +1,5 @@
 import SEO from '@/components/SEO';
-import PageLayout from '../components/PageLayout';
+import PageLayout from '@/components/PageLayout';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { Link } from 'wouter';

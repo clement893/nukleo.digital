@@ -66,14 +66,6 @@ export default function Resources() {
       tags: ['Tendances IA', 'Technologies émergentes', 'Impact business', 'Maturité technologique'],
       link: getLocalizedPath('/ai-trend-radar'),
       buttonText: 'Explorer le Radar'
-    },
-    {
-      badge: t('resources.tools.radar.badge'),
-      title: t('resources.tools.radar.title'),
-      description: t('resources.tools.radar.description'),
-      tags: getArrayTranslation('resources.tools.radar.tags'),
-      link: getLocalizedPath('/radar'),
-      buttonText: t('resources.tools.radar.buttonText')
     }
   ];
 

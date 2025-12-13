@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { Link } from 'wouter';
 import Header from '@/components/Header';
@@ -22,67 +22,37 @@ export default function FAQ() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const { playHover, playClick } = useSound();
-  const [translationsData, setTranslationsData] = useState<any>(null);
 
-  // Load translations dynamically
-  useEffect(() => {
-    let cancelled = false;
-    import(`../locales/${language || 'en'}.json`)
-      .then((module) => {
-        if (!cancelled) {
-          setTranslationsData(module.default);
+  // Helper to get array from translations (same approach as WhoWeServeSection)
+  const getArrayTranslation = (key: string): any[] => {
+    try {
+      const translations = require(`../locales/${language || 'en'}.json`);
+      const keys = key.split('.');
+      let value: any = translations.default || translations;
+      for (const k of keys) {
+        if (value && typeof value === 'object' && k in value) {
+          value = value[k];
+        } else {
+          return [];
         }
-      })
-      .catch(() => {
-        import('../locales/en.json')
-          .then((module) => {
-            if (!cancelled) {
-              setTranslationsData(module.default);
-            }
-          })
-          .catch(() => {
-            if (!cancelled) {
-              setTranslationsData({});
-            }
-          });
-      });
-    
-    return () => {
-      cancelled = true;
-    };
-  }, [language]);
+      }
+      return Array.isArray(value) ? value : [];
+    } catch {
+      return [];
+    }
+  };
 
   // Build FAQs from translations
   const faqs: FAQItem[] = useMemo(() => {
     const allFaqs: FAQItem[] = [];
     
-    if (!translationsData) return allFaqs;
-    
-    // Helper to get value from translations (inside useMemo to avoid closure issues)
-    const getValue = (key: string): any => {
-      try {
-        const keys = key.split('.');
-        let value: any = translationsData;
-        for (const k of keys) {
-          if (value && typeof value === 'object' && k in value) {
-            value = value[k];
-          } else {
-            return null;
-          }
-        }
-        return value;
-      } catch {
-        return null;
-      }
-    };
-    
     const categoryMap: Record<string, string> = {
-      agenticAI: getValue('faq.categories.agenticAI') || 'Agentic AI',
-      transformation: getValue('faq.categories.transformation') || 'Transformation',
-      roi: getValue('faq.categories.roi') || 'ROI',
-      technical: getValue('faq.categories.technical') || 'Technical',
-      useCases: getValue('faq.categories.useCases') || 'Use Cases',
-      aboutNukleo: getValue('faq.categories.aboutNukleo') || 'About Nukleo'
+      agenticAI: t('faq.categories.agenticAI') || 'Agentic AI',
+      transformation: t('faq.categories.transformation') || 'Transformation',
+      roi: t('faq.categories.roi') || 'ROI',
+      technical: t('faq.categories.technical') || 'Technical',
+      useCases: t('faq.categories.useCases') || 'Use Cases',
+      aboutNukleo: t('faq.categories.aboutNukleo') || 'About Nukleo'
     };
     
     try {
@@ -96,7 +66,7 @@ export default function FAQ() {
       ];
 
       questionCategories.forEach(({ key, path }) => {
-        const questions = getValue(path);
+        const questions = getArrayTranslation(path);
         if (Array.isArray(questions)) {
           questions.forEach((item: any) => {
             if (item && typeof item === 'object' && item.question && item.answer) {
@@ -115,39 +85,17 @@ export default function FAQ() {
     }
 
     return allFaqs;
-  }, [translationsData]);
+  }, [t, language]);
 
-  const categories = useMemo(() => {
-    if (!translationsData) return [];
-    
-    // Helper to get value from translations (inside useMemo to avoid closure issues)
-    const getValue = (key: string): any => {
-      try {
-        const keys = key.split('.');
-        let value: any = translationsData;
-        for (const k of keys) {
-          if (value && typeof value === 'object' && k in value) {
-            value = value[k];
-          } else {
-            return null;
-          }
-        }
-        return value;
-      } catch {
-        return null;
-      }
-    };
-    
-    return [
-      { key: "all", label: String(getValue('faq.categories.all') || 'All') },
-      { key: "agenticAI", label: String(getValue('faq.categories.agenticAI') || 'Agentic AI') },
-      { key: "transformation", label: String(getValue('faq.categories.transformation') || 'Transformation') },
-      { key: "roi", label: String(getValue('faq.categories.roi') || 'ROI') },
-      { key: "technical", label: String(getValue('faq.categories.technical') || 'Technical') },
-      { key: "useCases", label: String(getValue('faq.categories.useCases') || 'Use Cases') },
-      { key: "aboutNukleo", label: String(getValue('faq.categories.aboutNukleo') || 'About Nukleo') }
-    ];
-  }, [translationsData]);
+  const categories = useMemo(() => [
+    { key: "all", label: t('faq.categories.all') || 'All' },
+    { key: "agenticAI", label: t('faq.categories.agenticAI') || 'Agentic AI' },
+    { key: "transformation", label: t('faq.categories.transformation') || 'Transformation' },
+    { key: "roi", label: t('faq.categories.roi') || 'ROI' },
+    { key: "technical", label: t('faq.categories.technical') || 'Technical' },
+    { key: "useCases", label: t('faq.categories.useCases') || 'Use Cases' },
+    { key: "aboutNukleo", label: t('faq.categories.aboutNukleo') || 'About Nukleo' }
+  ], [t]);
 
   const filteredFaqs = selectedCategory === "all" 
     ? faqs 
@@ -158,8 +106,8 @@ export default function FAQ() {
     return faqs.map(faq => ({ question: String(faq.question), answer: String(faq.answer) }));
   }, [faqs]);
 
-  // Show loading state if translations aren't loaded yet
-  if (!translationsData || faqs.length === 0 || categories.length === 0) {
+  // Show loading state if no FAQs loaded
+  if (faqs.length === 0) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-[#1a0b2e] via-[#2d1b4e] to-[#1a0b2e] flex items-center justify-center">
         <div className="text-white">Chargement...</div>

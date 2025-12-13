@@ -205,6 +205,47 @@ export default function EmailCaptureModal({ onSubmit, onClose }: EmailCaptureMod
             </div>
           </div>
 
+          {/* Company Size & Industry */}
+          <div className="grid md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-white/80 text-sm font-medium mb-2">
+                Company Size
+              </label>
+              <select
+                value={formData.companySize}
+                onChange={(e) => handleChange('companySize', e.target.value)}
+                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-accent transition-colors"
+              >
+                <option value="">Select size</option>
+                <option value="1-10">1-10 employees</option>
+                <option value="11-50">11-50 employees</option>
+                <option value="51-200">51-200 employees</option>
+                <option value="201-1000">201-1000 employees</option>
+                <option value="1000+">+1000 employees</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-white/80 text-sm font-medium mb-2">
+                Industry
+              </label>
+              <select
+                value={formData.industry}
+                onChange={(e) => handleChange('industry', e.target.value)}
+                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-accent transition-colors"
+              >
+                <option value="">Select industry</option>
+                <option value="ecommerce-retail">E-commerce & Retail</option>
+                <option value="financial-services">Services financiers</option>
+                <option value="healthcare-pharma">Santé & Pharma</option>
+                <option value="manufacturing">Manufacturing</option>
+                <option value="professional-services">Services professionnels</option>
+                <option value="saas-tech">Technologie SaaS</option>
+                <option value="other">Autre</option>
+              </select>
+            </div>
+          </div>
+
           {/* Consent */}
           <div>
             <label className="flex items-start gap-3 cursor-pointer group">

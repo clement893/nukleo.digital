@@ -171,14 +171,27 @@ export const loadersRouter = router({
   </style>
   
   <div class="particles">
-    ${Array.from({ length: 20 }, (_, i) => `
+    ${(() => {
+      const positions = [
+        [15, 20], [45, 30], [75, 15], [25, 50], [60, 65], [85, 45],
+        [30, 80], [70, 25], [10, 60], [90, 70], [40, 10], [55, 85],
+        [20, 40], [65, 55], [5, 75], [95, 35], [35, 90], [80, 5],
+        [12, 45], [88, 60]
+      ];
+      const delays = [0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 0.1, 0.3, 0.5, 0.7, 0.9, 1.1, 1.3, 1.5, 1.7, 1.9];
+      const durations = [3, 3.5, 4, 4.5, 5, 3.2, 3.7, 4.2, 4.7, 5.2, 3.1, 3.6, 4.1, 4.6, 5.1, 3.3, 3.8, 4.3, 4.8, 5.3];
+      return Array.from({ length: 20 }, (_, i) => {
+        const [left, top] = positions[i] || [50, 50];
+        return `
       <div class="particle" style="
-        left: ${Math.random() * 100}%;
-        top: ${Math.random() * 100}%;
-        animation-delay: ${Math.random() * 2}s;
-        animation-duration: ${3 + Math.random() * 2}s;
+        left: ${left}%;
+        top: ${top}%;
+        animation-delay: ${delays[i]}s;
+        animation-duration: ${durations[i]}s;
       "></div>
-    `).join('')}
+    `;
+      }).join('');
+    })()}
   </div>
   
   <div class="logo-container">

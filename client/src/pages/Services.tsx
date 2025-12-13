@@ -160,7 +160,7 @@ export default function Services() {
                     {category.link && (
                       <Link href={category.link}>
                         <button className="mt-6 text-accent hover:text-accent/80 font-semibold inline-flex items-center gap-2 transition-colors">
-                          Explore {category.category}
+                          {t('services.explore')} {category.category}
                           <span className="text-xl">→</span>
                         </button>
                       </Link>
@@ -201,14 +201,14 @@ export default function Services() {
         <div className="max-w-4xl mx-auto mt-32">
           <div className="bg-gradient-to-r from-purple-900/50 via-purple-800/50 to-purple-700/50 rounded-3xl p-12 text-center border border-white/10">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Ready to Get Started?
+              {t('services.cta.title')}
             </h2>
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              Let's discuss how our AI services can transform your business and accelerate your growth.
+              {t('services.cta.description')}
             </p>
-            <Link href="/contact">
+            <Link href={getLocalizedPath('/contact')}>
               <button className="bg-white text-purple-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/90 transition-all hover:scale-[1.022] inline-flex items-center gap-2">
-                Start Your Transformation
+                {t('services.cta.button')}
               </button>
             </Link>
           </div>

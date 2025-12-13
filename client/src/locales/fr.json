@@ -175,6 +175,12 @@
           "description": "Concevez des campagnes marketing intégrées qui captent l'attention et offrent des résultats mesurables."
         }
       }
+    },
+    "explore": "Explorer",
+    "cta": {
+      "title": "Prêt à Commencer ?",
+      "description": "Discutons de la façon dont nos services IA peuvent transformer votre entreprise et accélérer votre croissance.",
+      "button": "Démarrer votre Transformation"
     }
   },
   "contact": {

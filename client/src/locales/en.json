@@ -175,6 +175,12 @@
           "description": "Design integrated marketing campaigns that capture attention and deliver measurable results."
         }
       }
+    },
+    "explore": "Explore",
+    "cta": {
+      "title": "Ready to Get Started?",
+      "description": "Let's discuss how our AI services can transform your business and accelerate your growth.",
+      "button": "Start Your Transformation"
     }
   },
   "contact": {

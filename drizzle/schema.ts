@@ -150,18 +150,3 @@ export const adminUsers = pgTable("admin_users", {
 
 export type AdminUser = typeof adminUsers.$inferSelect;
 export type InsertAdminUser = typeof adminUsers.$inferInsert;
-
-// Loaders table for managing loading screen animations
-export const loaders = pgTable("loaders", {
-  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
-  name: varchar("name", { length: 255 }).notNull().unique(), // 'Psychedelic', 'Kaleidoscope', etc.
-  description: text("description"), // Description of the loader
-  cssCode: text("css_code").notNull(), // CSS/HTML code for the loader
-  isActive: boolean("is_active").default(true).notNull(), // Whether this loader is in rotation
-  displayOrder: integer("display_order").default(0).notNull(), // Order in rotation
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-  updatedAt: timestamp("updated_at").defaultNow().notNull(),
-});
-
-export type Loader = typeof loaders.$inferSelect;
-export type InsertLoader = typeof loaders.$inferInsert;

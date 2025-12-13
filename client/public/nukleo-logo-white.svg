@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" width="400" height="120">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 150" width="500" height="150">
   <defs>
     <style>
       .nukleo-text {
         fill: #ffffff;
-        font-family: 'Aktiv Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-family: 'Aktiv Grotesk', 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         font-weight: 700;
-        font-size: 80px;
-        letter-spacing: -0.02em;
+        font-size: 100px;
+        letter-spacing: -0.03em;
       }
       .chevron {
         fill: #ffffff;
@@ -15,7 +15,7 @@
     </style>
   </defs>
   <!-- nukleo text -->
-  <text x="0" y="90" class="nukleo-text">nukleo</text>
-  <!-- Chevron -->
-  <path class="chevron" d="M 280 20 L 320 60 L 280 100 L 300 100 L 340 60 L 300 20 Z"/>
+  <text x="0" y="110" class="nukleo-text">nukleo</text>
+  <!-- Chevron (>) -->
+  <path class="chevron" d="M 380 30 L 450 75 L 380 120 L 410 120 L 470 75 L 410 30 Z"/>
 </svg>

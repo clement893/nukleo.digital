@@ -2,6 +2,7 @@ import { Suspense, lazy } from "react";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import CustomCursor from "./components/CustomCursor";
+import PageLoader from "./components/PageLoader";
 
 import { ThemeProvider } from "./contexts/ThemeContext";
 import ScrollToTop from "./components/ScrollToTop";
@@ -68,6 +69,7 @@ function App() {
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="dark">
+        <PageLoader />
         <ArrowBackground variant="default" />
         <CustomCursor />
         <ScrollToTop />

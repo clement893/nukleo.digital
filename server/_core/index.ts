@@ -291,6 +291,17 @@ async function startServer() {
               ON radar_positions("technologyId", date DESC);
             `);
             
+            // Create ai_news_subscribers table
+            await client.unsafe(`
+              CREATE TABLE IF NOT EXISTS ai_news_subscribers (
+                id SERIAL PRIMARY KEY,
+                email VARCHAR(320) NOT NULL UNIQUE,
+                source VARCHAR(100) DEFAULT 'ai-trend-radar' NOT NULL,
+                "createdAt" TIMESTAMP DEFAULT NOW() NOT NULL,
+                "updatedAt" TIMESTAMP DEFAULT NOW() NOT NULL
+              );
+            `);
+            
             await client.end();
             logger.info("Radar tables created successfully");
           } else {

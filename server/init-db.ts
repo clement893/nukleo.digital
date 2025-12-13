@@ -176,6 +176,17 @@ export async function initDatabase(req: Request, res: Response) {
       ON radar_positions("technologyId", date DESC);
     `);
 
+    // Create ai_news_subscribers table
+    await db.execute(sql`
+      CREATE TABLE IF NOT EXISTS ai_news_subscribers (
+        id SERIAL PRIMARY KEY,
+        email VARCHAR(320) NOT NULL UNIQUE,
+        source VARCHAR(100) DEFAULT 'ai-trend-radar' NOT NULL,
+        "createdAt" TIMESTAMP DEFAULT NOW() NOT NULL,
+        "updatedAt" TIMESTAMP DEFAULT NOW() NOT NULL
+      );
+    `);
+
     res.json({ 
       message: "Database initialized successfully! All tables created.",
       tables: [
@@ -187,7 +198,8 @@ export async function initDatabase(req: Request, res: Response) {
         "agency_leads",
         "admin_users",
         "radar_technologies",
-        "radar_positions"
+        "radar_positions",
+        "ai_news_subscribers"
       ]
     });
   } catch (error) {

@@ -8,7 +8,8 @@ import {
   MessageSquare, 
   Building2,
   Settings,
-  ArrowRight
+  ArrowRight,
+  Mail
 } from "lucide-react";
 
 interface AdminCardProps {
@@ -80,6 +81,12 @@ export default function AdminHome() {
       description: "Gérer les animations de chargement et leur rotation",
       icon: <Loader2 className="w-6 h-6 text-primary" />,
       href: "/admin/loaders",
+    },
+    {
+      title: "AI News Subscribers",
+      description: "Gérer les abonnés à la newsletter AI News",
+      icon: <Mail className="w-6 h-6 text-primary" />,
+      href: "/admin/ai-news-subscribers",
     },
   ];
 

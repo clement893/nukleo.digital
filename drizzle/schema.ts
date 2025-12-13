@@ -219,3 +219,15 @@ export const radarPositions = pgTable("radar_positions", {
 
 export type RadarPosition = typeof radarPositions.$inferSelect;
 export type InsertRadarPosition = typeof radarPositions.$inferInsert;
+
+// AI News Newsletter Subscribers table
+export const aiNewsSubscribers = pgTable("ai_news_subscribers", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  email: varchar("email", { length: 320 }).notNull().unique(),
+  source: varchar("source", { length: 100 }).default("ai-trend-radar").notNull(), // Track where subscription came from
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+});
+
+export type AINewsSubscriber = typeof aiNewsSubscribers.$inferSelect;
+export type InsertAINewsSubscriber = typeof aiNewsSubscribers.$inferInsert;

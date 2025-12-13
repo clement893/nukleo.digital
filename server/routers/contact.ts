@@ -1,6 +1,8 @@
 import { z } from 'zod';
 import { publicProcedure, router } from '../_core/trpc';
 import { sendEmail } from '../_core/sendgrid';
+import { getDb } from '../db';
+import { aiNewsSubscribers } from '../../drizzle/schema';
 
 const contactSchema = z.object({
   firstName: z.string().min(1, 'First name is required'),
@@ -50,27 +52,52 @@ export const contactRouter = router({
     .input(newsletterSchema)
     .mutation(async ({ input }) => {
       try {
+        const db = await getDb();
+        if (!db) {
+          throw new Error('Database connection failed');
+        }
+
+        // Save to database (ignore duplicate email errors)
+        try {
+          await db.insert(aiNewsSubscribers).values({
+            email: input.email,
+            source: 'ai-trend-radar',
+          });
+        } catch (dbError: any) {
+          // If email already exists, that's okay - just continue
+          if (!dbError?.message?.includes('unique') && !dbError?.code?.includes('23505')) {
+            console.error('Database error:', dbError);
+            throw dbError;
+          }
+        }
+
         // Send notification to Nukleo team
         const emailSent = await sendEmail({
           to: process.env.SENDGRID_FROM_EMAIL || 'hello@nukleo.digital',
-          subject: `New Newsletter Subscription: ${input.email}`,
+          subject: `New AI News Newsletter Subscription: ${input.email}`,
           html: `
-            <h2>New Newsletter Subscription</h2>
+            <h2>New AI News Newsletter Subscription</h2>
             <p><strong>Email:</strong> ${input.email}</p>
+            <p><strong>Source:</strong> AI Trend Radar</p>
             <p><strong>Date:</strong> ${new Date().toLocaleString()}</p>
           `,
         });
 
         if (!emailSent) {
-          throw new Error('Failed to send notification');
+          console.warn('Failed to send notification email, but subscription was saved to DB');
         }
 
         // Send welcome email to subscriber
-        await sendEmail({
-          to: input.email,
-          subject: 'Welcome to Nukleo Digital Newsletter',
-          html: generateWelcomeEmail(),
-        });
+        try {
+          await sendEmail({
+            to: input.email,
+            subject: 'Welcome to Nukleo Digital AI News Newsletter',
+            html: generateWelcomeEmail(),
+          });
+        } catch (emailError) {
+          console.warn('Failed to send welcome email:', emailError);
+          // Don't fail the subscription if welcome email fails
+        }
 
         return {
           success: true,

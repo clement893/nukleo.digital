@@ -6,7 +6,8 @@ import {
   aiAssessments, 
   leoContacts, 
   mediaAssets, 
-  users 
+  users,
+  aiNewsSubscribers
 } from "../../drizzle/schema";
 import { count, desc } from "drizzle-orm";
 
@@ -72,6 +73,26 @@ export const adminRouter = router({
       return contacts;
     } catch (error) {
       console.error("[Admin] Error fetching LEO contacts:", error);
+      return [];
+    }
+  }),
+
+  getAINewsSubscribers: publicProcedure.query(async () => {
+    try {
+      const db = await getDb();
+      if (!db) {
+        throw new Error("Database not available");
+      }
+      
+      // Get all AI News subscribers ordered by creation date (newest first)
+      const subscribers = await db
+        .select()
+        .from(aiNewsSubscribers)
+        .orderBy(desc(aiNewsSubscribers.createdAt));
+
+      return subscribers;
+    } catch (error) {
+      console.error("[Admin] Error fetching AI News subscribers:", error);
       return [];
     }
   }),

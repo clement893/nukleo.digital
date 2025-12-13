@@ -132,6 +132,12 @@
     "description": "The era of Agentic Marketing is here. Define your roadmap to becoming an AI-native leader.",
     "button": "Start Your Transformation"
   },
+  "testimonials": {
+    "sectionLabel": "Client Success Stories",
+    "title": "What Our Clients Say",
+    "description": "Trusted by organizations worldwide to deliver exceptional AI transformation results",
+    "seeAll": "See all client testimonials"
+  },
   "whoWeServe": {
     "subtitle": "Champions of Smaller Organizations",
     "title": "Who We Serve",

@@ -2,8 +2,12 @@ import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { testimonials } from '@/data/testimonials';
 import { Link } from 'wouter';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 export default function TestimonialsCarousel() {
+  const { t } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
@@ -49,13 +53,13 @@ export default function TestimonialsCarousel() {
         {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-block px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-6">
-            <span className="text-sm font-mono text-white/70">Client Success Stories</span>
+            <span className="text-sm font-mono text-white/70">{t('testimonials.sectionLabel')}</span>
           </div>
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            What Our Clients Say
+            {t('testimonials.title')}
           </h2>
           <p className="text-xl text-white/70 max-w-2xl mx-auto">
-            Trusted by organizations worldwide to deliver exceptional AI transformation results
+            {t('testimonials.description')}
           </p>
         </div>
 

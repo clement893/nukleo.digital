@@ -129,8 +129,14 @@
   },
   "cta": {
     "title": "Prêt À<br />S'Élever ?",
-    "description": "L'ère du Marketing Agentique est arrivée. Définissez votre feuille de route pour devenir un leader natif IA.",
+    "description": "L'Ère Du Marketing Agentique Est Arrivée. Définissez Votre Feuille De Route Pour Devenir Un Leader Natif IA.",
     "button": "Démarrer Votre Transformation"
+  },
+  "testimonials": {
+    "sectionLabel": "Histoires De Succès Clients",
+    "title": "Ce Que Disent Nos Clients",
+    "description": "Fait confiance par des organisations du monde entier pour offrir des résultats exceptionnels de transformation IA",
+    "seeAll": "Voir Tous Les Témoignages Clients"
   },
   "whoWeServe": {
     "subtitle": "Champions Des Petites Organisations",

@@ -1,33 +1,37 @@
 import { Cpu, Compass, Sparkles } from 'lucide-react';
 import { Link } from 'wouter';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 export default function TrinitySection() {
+  const { t } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
   const departments = [
     {
       number: '01',
       icon: Cpu,
       name: 'Lab',
-      title: 'The AI Lab',
-      subtitle: 'Technology Foundation',
-      description: 'Building the robust and flexible technological foundation for AI integration. From intelligent data platforms to custom AI agents and intelligent process automation.',
+      title: t('trinity.lab.title'),
+      subtitle: t('trinity.lab.subtitle'),
+      description: t('trinity.lab.description'),
       link: '/services/ai-lab',
     },
     {
       number: '02',
       icon: Compass,
       name: 'Bureau',
-      title: 'The Strategic Bureau',
-      subtitle: 'Transformation Orchestration',
-      description: 'Defining strategy, driving transformation, and measuring AI impact. From maturity audits to agentic transformation strategy and AI governance.',
+      title: t('trinity.bureau.title'),
+      subtitle: t('trinity.bureau.subtitle'),
+      description: t('trinity.bureau.description'),
       link: '/services/strategic-bureau',
     },
     {
       number: '03',
       icon: Sparkles,
       name: 'Studio',
-      title: 'The Creative Studio',
-      subtitle: 'Augmented Content & Experiences',
-      description: 'Using AI to create brand experiences and content at unparalleled scale and relevance. From augmented content creation to agentic marketing campaigns.',
+      title: t('trinity.studio.title'),
+      subtitle: t('trinity.studio.subtitle'),
+      description: t('trinity.studio.description'),
       link: '/services/creative-studio',
     },
   ];
@@ -41,12 +45,11 @@ export default function TrinitySection() {
         {/* Section Header */}
         <div className="flex justify-between items-end mb-24 border-b border-black/10 pb-8">
           <h2 className="text-8xl font-heading font-bold tracking-tighter">
-            The<br />
-            Trinity
+            {t('trinity.title')}
           </h2>
 
           <p className="text-xl max-w-sm font-light text-white/80 pb-2">
-            Three specialized divisions acting as the pillars of your transformation.
+            {t('trinity.description')}
           </p>
         </div>
 
@@ -102,10 +105,10 @@ export default function TrinitySection() {
 
                 {/* Link */}
                 <Link 
-                  href={dept.link}
+                  href={getLocalizedPath(dept.link)}
                   className="inline-flex items-center font-bold text-lg group-hover:translate-x-2 transition-transform relative z-10"
                 >
-                  Explore {dept.name}
+                  {t('trinity.explore')} {dept.name}
                 </Link>
               </div>
             );

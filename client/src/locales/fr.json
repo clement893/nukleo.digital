@@ -107,6 +107,31 @@
       "description": "Réarchitecturer les flux de travail autour d'agents intelligents qui automatisent et optimisent en continu."
     }
   },
+  "trinity": {
+    "title": "La<br />Trinité",
+    "description": "Trois divisions spécialisées agissant comme les piliers de votre transformation.",
+    "lab": {
+      "title": "The AI Lab",
+      "subtitle": "Technology Foundation",
+      "description": "Construire la fondation technologique robuste et flexible pour l'intégration IA. Des plateformes de données intelligentes aux agents IA sur mesure et à l'automatisation intelligente des processus."
+    },
+    "bureau": {
+      "title": "The Strategic Bureau",
+      "subtitle": "Transformation Orchestration",
+      "description": "Définir la stratégie, piloter la transformation et mesurer l'impact de l'IA. Des audits de maturité à la stratégie de transformation agentique et à la gouvernance IA."
+    },
+    "studio": {
+      "title": "The Creative Studio",
+      "subtitle": "Augmented Content & Experiences",
+      "description": "Utiliser l'IA pour créer des expériences de marque et du contenu à une échelle et une pertinence sans précédent. De la création de contenu augmenté aux campagnes marketing agentiques."
+    },
+    "explore": "Explorer"
+  },
+  "cta": {
+    "title": "Prêt À<br />S'Élever ?",
+    "description": "L'ère du Marketing Agentique est arrivée. Définissez votre feuille de route pour devenir un leader natif IA.",
+    "button": "Démarrer Votre Transformation"
+  },
   "whoWeServe": {
     "subtitle": "Champions Des Petites Organisations",
     "title": "Qui Nous Servons",

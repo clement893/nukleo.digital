@@ -1,18 +1,31 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
 
 export default function PageLoader() {
+  const [location] = useLocation();
   const [isLoading, setIsLoading] = useState(true);
   const [loaderHtml, setLoaderHtml] = useState<string | null>(null);
   const [stylesReady, setStylesReady] = useState(false);
 
-  // Fetch active loaders
+  // Don't show loader in admin area
+  const isAdminArea = location.startsWith("/admin");
+
+  // Fetch active loaders (only if not in admin area)
   const { data: activeLoaders, isLoading: isLoadingLoaders } = trpc.loaders.getActive.useQuery(undefined, {
     staleTime: 5 * 60 * 1000, // Cache for 5 minutes
     refetchOnWindowFocus: false,
+    enabled: !isAdminArea, // Don't fetch if in admin area
   });
 
   useEffect(() => {
+    // Don't show loader in admin area
+    if (isAdminArea) {
+      setIsLoading(false);
+      document.body.classList.add('loaded');
+      return;
+    }
+
     // Wait for loaders to be fetched
     if (isLoadingLoaders) return;
 
@@ -76,7 +89,12 @@ export default function PageLoader() {
         styleElement.remove();
       }
     };
-  }, [activeLoaders, isLoadingLoaders]);
+  }, [activeLoaders, isLoadingLoaders, isAdminArea]);
+
+  // Don't show loader in admin area
+  if (isAdminArea) {
+    return null;
+  }
 
   // Don't show anything if no loaders are active
   if (!isLoadingLoaders && (!activeLoaders || activeLoaders.length === 0)) {

@@ -49,9 +49,6 @@ export default function PageLoader() {
 
   // Don't show loader in admin area
   const isAdminArea = location.startsWith("/admin");
-  
-  // Track if this is a page transition (not first load)
-  const isPageTransition = prevLocationRef.current !== location && !isFirstLoad;
 
   // If in admin area, show body immediately and don't fetch loaders
   useEffect(() => {
@@ -78,8 +75,11 @@ export default function PageLoader() {
   }, [isAdminArea]);
 
   useEffect(() => {
-    // Update previous location ref
+    // Check if this is a page transition (not first load)
     const locationChanged = prevLocationRef.current !== location;
+    const isPageTransition = locationChanged && !isFirstLoad;
+    
+    // Update previous location ref
     if (locationChanged) {
       prevLocationRef.current = location;
     }
@@ -196,7 +196,7 @@ export default function PageLoader() {
         styleElement.remove();
       }
     };
-  }, [activeLoaders, isLoadingLoaders, isAdminArea, location, isPageTransition]);
+  }, [activeLoaders, isLoadingLoaders, isAdminArea, location, isFirstLoad]);
 
   // Don't show loader in admin area
   if (isAdminArea) {

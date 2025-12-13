@@ -10,23 +10,23 @@ export default function Footer() {
   const getLocalizedPath = useLocalizedPath();
   
   const navigation = [
-    { label: 'Manifesto', href: '/manifesto' },
+    { label: t('footer.nav.manifesto'), href: '/manifesto' },
     { label: t('nav.about'), href: '/about' },
     { label: t('nav.expertise'), href: '/expertise' },
-    { label: 'Clients', href: '/clients' },
+    { label: t('footer.nav.clients'), href: '/clients' },
     { label: t('nav.resources'), href: '/resources' },
-    { label: 'FAQ', href: '/faq' },
+    { label: t('footer.nav.faq'), href: '/faq' },
     { label: t('nav.contact'), href: '/contact' },
-    { label: 'Media', href: '/media' },
-    { label: 'Agencies', href: '/agencies' },
+    { label: t('footer.nav.media'), href: '/media' },
+    { label: t('footer.nav.agencies'), href: '/agencies' },
   ];
 
   const services = [
-    { label: 'Agentic AI Systems', href: '/services/agentic-ai' },
-    { label: 'AI-Native Platforms', href: '/services/digital-platforms' },
-    { label: 'Transformation Strategy', href: '/services/ai-strategy-marketing' },
-    { label: 'Creative Studio', href: '/services/creative-studio' },
-    { label: 'AI Consulting', href: '/services/intelligent-operations' },
+    { label: t('footer.services.agenticAI'), href: '/services/agentic-ai' },
+    { label: t('footer.services.aiNative'), href: '/services/digital-platforms' },
+    { label: t('footer.services.transformation'), href: '/services/ai-strategy-marketing' },
+    { label: t('footer.services.creativeStudio'), href: '/services/creative-studio' },
+    { label: t('footer.services.aiConsulting'), href: '/services/intelligent-operations' },
   ];
 
   return (

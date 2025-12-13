@@ -49,9 +49,9 @@
     ]
   },
   "footer": {
-    "description": "Transformez votre entreprise avec des solutions alimentées par l'IA.",
+    "description": "Transformez Votre Entreprise Avec Des Solutions Alimentées Par L'IA.",
     "links": {
-      "about": "À propos",
+      "about": "À Propos",
       "services": "Services",
       "projects": "Projets",
       "contact": "Contact",
@@ -59,14 +59,28 @@
       "terms": "Conditions",
       "cookies": "Cookies"
     },
-    "copyright": "© {{year}} Nukleo Digital. Tous droits réservés.",
+    "copyright": "© {{year}} Nukleo Digital. Tous Droits Réservés.",
     "navigation": "Navigation",
     "services": "Services",
     "contact": "Contact",
-    "newsletterTitle": "Restez à l'Avant-Garde de l'IA",
-    "newsletterDescription": "Abonnez-vous pour recevoir nos derniers insights, guides techniques et analyses de l'industrie.",
-    "newsletterPlaceholder": "Entrez votre email",
-    "newsletterButton": "S'abonner"
+    "newsletterTitle": "Restez À L'Avant-Garde De L'IA",
+    "newsletterDescription": "Abonnez-Vous Pour Recevoir Nos Derniers Insights, Guides Techniques Et Analyses De L'Industrie.",
+    "newsletterPlaceholder": "Entrez Votre Email",
+    "newsletterButton": "S'Abonner",
+    "nav": {
+      "manifesto": "Manifeste",
+      "clients": "Clients",
+      "faq": "FAQ",
+      "media": "Médias",
+      "agencies": "Agences"
+    },
+    "services": {
+      "agenticAI": "Systèmes IA Agentiques",
+      "aiNative": "Plateformes Natives IA",
+      "transformation": "Stratégie De Transformation",
+      "creativeStudio": "Studio Créatif",
+      "aiConsulting": "Consultation IA"
+    }
   },
   "home": {
     "beyondAI": "Au-Delà De L'IA",

@@ -66,7 +66,21 @@
     "newsletterTitle": "Stay Ahead of the AI Curve",
     "newsletterDescription": "Subscribe to receive our latest insights, technical guides, and industry analysis.",
     "newsletterPlaceholder": "Enter your email",
-    "newsletterButton": "Subscribe"
+    "newsletterButton": "Subscribe",
+    "nav": {
+      "manifesto": "Manifesto",
+      "clients": "Clients",
+      "faq": "FAQ",
+      "media": "Media",
+      "agencies": "Agencies"
+    },
+    "services": {
+      "agenticAI": "Agentic AI Systems",
+      "aiNative": "AI-Native Platforms",
+      "transformation": "Transformation Strategy",
+      "creativeStudio": "Creative Studio",
+      "aiConsulting": "AI Consulting"
+    }
   },
   "home": {
     "beyondAI": "Beyond AI",

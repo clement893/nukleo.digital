@@ -1,6 +1,7 @@
 import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { Button } from "@/components/ui/button";
 import { LogOut, User } from "lucide-react";
+import { Link } from "wouter";
 
 export function AdminHeader() {
   const { user, logout } = useAdminAuth();
@@ -12,14 +13,16 @@ export function AdminHeader() {
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center gap-3">
-            <img 
-              src="/Nukleo_blanc_RVB.svg" 
-              alt="Nukleo" 
-              className="h-8"
-            />
-            <span className="text-sm text-white/60 hidden sm:inline">Admin Panel</span>
-          </div>
+          <Link href="/admin">
+            <div className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity">
+              <img 
+                src="/Nukleo_blanc_RVB.svg" 
+                alt="Nukleo" 
+                className="h-8"
+              />
+              <span className="text-sm text-white/60 hidden sm:inline">Admin Panel</span>
+            </div>
+          </Link>
 
           {/* User Info & Logout */}
           <div className="flex items-center gap-4">

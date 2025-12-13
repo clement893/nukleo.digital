@@ -65,7 +65,7 @@ export default function Projects() {
         description="Explore our AI transformation projects: real results across healthcare, finance, retail & government. See how we deliver measurable ROI. View case studies now."
         keywords="AI transformation projects, AI case studies, AI success stories, AI implementation examples, AI project portfolio"
       />
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-nukleo">
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">
         <div className="container">

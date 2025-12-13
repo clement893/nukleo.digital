@@ -146,7 +146,7 @@ export default function Resources() {
         description={t('resources.seoDescription')}
         keywords={t('resources.seoKeywords')}
       />
-      <div className="min-h-screen">
+      <div className="min-h-screen bg-gradient-nukleo">
         {/* Hero Section */}
         <section className="relative min-h-[60vh] flex flex-col justify-center pt-32 pb-20 overflow-hidden">
           {/* Background effects */}

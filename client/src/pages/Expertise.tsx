@@ -83,7 +83,7 @@ export default function Expertise() {
         keywords="AI expertise, agentic AI systems, AI-native platforms, AI transformation strategy, AI methodology"
         ogImage="https://nukleo.digital/og-expertise.jpg"
       />
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-nukleo">
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">
         <div className="container">

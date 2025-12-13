@@ -98,7 +98,7 @@ export default function Contact() {
         keywords="contact AI agency, AI consultation, Montréal AI services, Halifax AI agency, AI transformation contact"
       />
       <StructuredData data={contactPageSchema} />
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-nukleo">
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">
         <div className="container">

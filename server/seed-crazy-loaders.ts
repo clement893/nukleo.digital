@@ -841,6 +841,397 @@ const loaderBasquiat = `<div class="nukleo-loader-basquiat">
   ${generateAlternatingText('nukleo-loader-basquiat-text', 'color: #000000; font-family: \'Arial Black\', sans-serif; font-size: 20px; letter-spacing: 0.3em; text-transform: uppercase; font-weight: 900; text-shadow: 3px 3px 0px rgba(255, 0, 0, 0.8), -2px -2px 0px rgba(0, 0, 255, 0.6), 4px 4px 8px rgba(0, 0, 0, 0.5);', '22%')}
 </div>`;
 
+// Loader 5: ÉLÉGANT MINIMALISTE - Lignes fines et effets subtils avec style luxe
+const loaderElegant = `<div class="nukleo-loader-elegant">
+  <style>
+    .nukleo-loader-elegant {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      overflow: hidden;
+    }
+    
+    .nukleo-loader-elegant::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+      animation: elegant-glow 4s ease-in-out infinite;
+    }
+    
+    @keyframes elegant-glow {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+    
+    .nukleo-loader-elegant .elegant-lines {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    
+    .nukleo-loader-elegant .line {
+      position: absolute;
+      background: linear-gradient(90deg, 
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.15),
+        rgba(255, 255, 255, 0.1),
+        transparent
+      );
+      height: 1px;
+      animation: line-sweep 3s ease-in-out infinite;
+    }
+    
+    .nukleo-loader-elegant .line-horizontal {
+      width: 100%;
+      left: 0;
+    }
+    
+    .nukleo-loader-elegant .line-vertical {
+      width: 1px;
+      height: 100%;
+      top: 0;
+    }
+    
+    .nukleo-loader-elegant .line-h-1 {
+      top: 20%;
+      animation-delay: 0s;
+    }
+    
+    .nukleo-loader-elegant .line-h-2 {
+      top: 50%;
+      animation-delay: 0.5s;
+    }
+    
+    .nukleo-loader-elegant .line-h-3 {
+      top: 80%;
+      animation-delay: 1s;
+    }
+    
+    .nukleo-loader-elegant .line-v-1 {
+      left: 20%;
+      animation-delay: 0.25s;
+    }
+    
+    .nukleo-loader-elegant .line-v-2 {
+      left: 50%;
+      animation-delay: 0.75s;
+    }
+    
+    .nukleo-loader-elegant .line-v-3 {
+      left: 80%;
+      animation-delay: 1.25s;
+    }
+    
+    @keyframes line-sweep {
+      0%, 100% {
+        opacity: 0;
+        transform: scaleX(0);
+      }
+      50% {
+        opacity: 1;
+        transform: scaleX(1);
+      }
+    }
+    
+    .nukleo-loader-elegant .logo-container {
+      position: relative;
+      z-index: 10;
+      animation: logo-elegant 3s ease-in-out infinite;
+      filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.1)) drop-shadow(0 0 40px rgba(255, 255, 255, 0.05));
+    }
+    
+    @keyframes logo-elegant {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.1)) drop-shadow(0 0 40px rgba(255, 255, 255, 0.05));
+      }
+      50% {
+        transform: scale(1.02);
+        opacity: 0.95;
+        filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.15)) drop-shadow(0 0 60px rgba(255, 255, 255, 0.08));
+      }
+    }
+    
+    .nukleo-loader-elegant .logo-container img {
+      width: 220px;
+      height: auto;
+      opacity: 0.95;
+    }
+    
+    .nukleo-loader-elegant .text {
+      color: rgba(255, 255, 255, 0.7);
+      font-family: 'Aktiv Grotesk', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      font-weight: 300;
+    }
+    
+    .nukleo-loader-elegant .corner-decoration {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      animation: corner-fade 4s ease-in-out infinite;
+    }
+    
+    .nukleo-loader-elegant .corner-top-left {
+      top: 40px;
+      left: 40px;
+      border-right: none;
+      border-bottom: none;
+      animation-delay: 0s;
+    }
+    
+    .nukleo-loader-elegant .corner-top-right {
+      top: 40px;
+      right: 40px;
+      border-left: none;
+      border-bottom: none;
+      animation-delay: 1s;
+    }
+    
+    .nukleo-loader-elegant .corner-bottom-left {
+      bottom: 40px;
+      left: 40px;
+      border-right: none;
+      border-top: none;
+      animation-delay: 2s;
+    }
+    
+    .nukleo-loader-elegant .corner-bottom-right {
+      bottom: 40px;
+      right: 40px;
+      border-left: none;
+      border-top: none;
+      animation-delay: 3s;
+    }
+    
+    @keyframes corner-fade {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.7; }
+    }
+  </style>
+  
+  <div class="elegant-lines">
+    <div class="line line-horizontal line-h-1"></div>
+    <div class="line line-horizontal line-h-2"></div>
+    <div class="line line-horizontal line-h-3"></div>
+    <div class="line line-vertical line-v-1"></div>
+    <div class="line line-vertical line-v-2"></div>
+    <div class="line line-vertical line-v-3"></div>
+  </div>
+  
+  <div class="corner-decoration corner-top-left"></div>
+  <div class="corner-decoration corner-top-right"></div>
+  <div class="corner-decoration corner-bottom-left"></div>
+  <div class="corner-decoration corner-bottom-right"></div>
+  
+  <div class="logo-container">
+    <img src="/Nukleo_blanc_RVB.svg" alt="Nukleo Digital" />
+  </div>
+  
+  ${generateAlternatingText('nukleo-loader-elegant-text', 'color: rgba(255, 255, 255, 0.7); font-family: \'Aktiv Grotesk\', sans-serif; font-size: 13px; letter-spacing: 0.4em; text-transform: uppercase; font-weight: 300;', '28%')}
+</div>`;
+
+// Loader 6: LUXE SOPHISTIQUÉ - Effets de lumière douce et transitions fluides
+const loaderLuxe = `<div class="nukleo-loader-luxe">
+  <style>
+    .nukleo-loader-luxe {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at center, #1a1a1a 0%, #000000 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      overflow: hidden;
+    }
+    
+    .nukleo-loader-luxe::before {
+      content: '';
+      position: absolute;
+      inset: -50%;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        rgba(255, 255, 255, 0.02) 45deg,
+        transparent 90deg,
+        rgba(255, 255, 255, 0.02) 135deg,
+        transparent 180deg,
+        rgba(255, 255, 255, 0.02) 225deg,
+        transparent 270deg,
+        rgba(255, 255, 255, 0.02) 315deg,
+        transparent 360deg
+      );
+      animation: luxe-rotate 20s linear infinite;
+    }
+    
+    @keyframes luxe-rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    .nukleo-loader-luxe .luxe-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    
+    .nukleo-loader-luxe .luxe-particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      box-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+      animation: luxe-particle-float 8s ease-in-out infinite;
+    }
+    
+    @keyframes luxe-particle-float {
+      0%, 100% {
+        transform: translate(0, 0) scale(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--tx), var(--ty)) scale(0);
+        opacity: 0;
+      }
+    }
+    
+    .nukleo-loader-luxe .luxe-ring {
+      position: absolute;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: luxe-ring-expand 4s ease-out infinite;
+    }
+    
+    .nukleo-loader-luxe .luxe-ring-1 {
+      width: 200px;
+      height: 200px;
+      animation-delay: 0s;
+    }
+    
+    .nukleo-loader-luxe .luxe-ring-2 {
+      width: 300px;
+      height: 300px;
+      animation-delay: 1s;
+    }
+    
+    .nukleo-loader-luxe .luxe-ring-3 {
+      width: 400px;
+      height: 400px;
+      animation-delay: 2s;
+    }
+    
+    @keyframes luxe-ring-expand {
+      0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0.6;
+      }
+      50% {
+        opacity: 0.3;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0;
+      }
+    }
+    
+    .nukleo-loader-luxe .logo-container {
+      position: relative;
+      z-index: 10;
+      animation: logo-luxe 4s ease-in-out infinite;
+      filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.15)) drop-shadow(0 0 60px rgba(255, 255, 255, 0.08));
+    }
+    
+    @keyframes logo-luxe {
+      0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.15)) drop-shadow(0 0 60px rgba(255, 255, 255, 0.08));
+      }
+      25% {
+        transform: scale(1.01);
+        filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.2)) drop-shadow(0 0 80px rgba(255, 255, 255, 0.1));
+      }
+      50% {
+        transform: scale(1.02);
+        filter: drop-shadow(0 0 50px rgba(255, 255, 255, 0.25)) drop-shadow(0 0 100px rgba(255, 255, 255, 0.12));
+      }
+      75% {
+        transform: scale(1.01);
+        filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.2)) drop-shadow(0 0 80px rgba(255, 255, 255, 0.1));
+      }
+    }
+    
+    .nukleo-loader-luxe .logo-container img {
+      width: 240px;
+      height: auto;
+      opacity: 0.98;
+    }
+    
+    .nukleo-loader-luxe .text {
+      color: rgba(255, 255, 255, 0.65);
+      font-family: 'Aktiv Grotesk', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      font-weight: 200;
+    }
+  </style>
+  
+  <div class="luxe-particles">
+    ${(() => {
+      const particles = [];
+      for (let i = 0; i < 12; i++) {
+        const angle = (i / 12) * Math.PI * 2;
+        const distance = 150 + Math.random() * 100;
+        const tx = Math.cos(angle) * distance;
+        const ty = Math.sin(angle) * distance;
+        particles.push(`
+          <div class="luxe-particle" style="
+            --tx: ${tx}px;
+            --ty: ${ty}px;
+            left: 50%;
+            top: 50%;
+            animation-delay: ${i * 0.5}s;
+            animation-duration: ${6 + Math.random() * 2}s;
+          "></div>
+        `);
+      }
+      return particles.join('');
+    })()}
+  </div>
+  
+  <div class="luxe-ring luxe-ring-1"></div>
+  <div class="luxe-ring luxe-ring-2"></div>
+  <div class="luxe-ring luxe-ring-3"></div>
+  
+  <div class="logo-container">
+    <img src="/Nukleo_blanc_RVB.svg" alt="Nukleo Digital" />
+  </div>
+  
+  ${generateAlternatingText('nukleo-loader-luxe-text', 'color: rgba(255, 255, 255, 0.65); font-family: \'Aktiv Grotesk\', sans-serif; font-size: 12px; letter-spacing: 0.5em; text-transform: uppercase; font-weight: 200;', '28%')}
+</div>`;
+
 export async function seedCrazyLoaders() {
   try {
     const existingLoaders = await import("./loaders").then((m) =>
@@ -875,6 +1266,20 @@ export async function seedCrazyLoaders() {
         cssCode: loaderBasquiat,
         isActive: false,
         displayOrder: 13,
+      },
+      {
+        name: "Elegant Minimalist",
+        description: "Lignes fines et effets subtils avec style luxe - design minimaliste et élégant",
+        cssCode: loaderElegant,
+        isActive: false,
+        displayOrder: 14,
+      },
+      {
+        name: "Luxe Sophisticated",
+        description: "Effets de lumière douce et transitions fluides - style sophistiqué et raffiné",
+        cssCode: loaderLuxe,
+        isActive: false,
+        displayOrder: 15,
       },
     ];
 

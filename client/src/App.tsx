@@ -98,6 +98,7 @@ const CreateFirstAdmin = lazy(() => import("./pages/CreateFirstAdmin"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
 const AdminLoaders = lazy(() => import("./pages/AdminLoaders"));
 const AdminAINewsSubscribers = lazy(() => import("./pages/admin/AdminAINewsSubscribers"));
+const AdminSounds = lazy(() => import("./pages/admin/AdminSounds"));
 const AdminHome = lazy(() => import("./pages/admin/AdminHome"));
 import { ProtectedAdminRoute } from "./components/ProtectedAdminRoute";
 
@@ -227,6 +228,9 @@ function App() {
             </Route>
             <Route path="/admin/ai-news-subscribers">
               <ProtectedAdminRoute><AdminAINewsSubscribers /></ProtectedAdminRoute>
+            </Route>
+            <Route path="/admin/sounds">
+              <ProtectedAdminRoute><AdminSounds /></ProtectedAdminRoute>
             </Route>
             <Route path="/create-first-admin" component={CreateFirstAdmin} />
             <Route component={NotFound404} />

@@ -9,7 +9,8 @@ import {
   Building2,
   Settings,
   ArrowRight,
-  Mail
+  Mail,
+  Volume2
 } from "lucide-react";
 
 interface AdminCardProps {
@@ -87,6 +88,12 @@ export default function AdminHome() {
       description: "Gérer les abonnés à la newsletter AI News",
       icon: <Mail className="w-6 h-6 text-primary" />,
       href: "/admin/ai-news-subscribers",
+    },
+    {
+      title: "Gestion des Sons",
+      description: "Personnaliser les sons interactifs de l'interface",
+      icon: <Volume2 className="w-6 h-6 text-primary" />,
+      href: "/admin/sounds",
     },
   ];
 

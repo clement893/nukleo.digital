@@ -22,11 +22,13 @@ export default function Contact() {
     message: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
 
   const sendMessage = trpc.contact.send.useMutation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setValidationErrors({});
     
     try {
       await sendMessage.mutateAsync(formData);
@@ -41,8 +43,70 @@ export default function Contact() {
       
       // Reset success message after 5 seconds
       setTimeout(() => setIsSubmitted(false), 5000);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to send message:', error);
+      
+      // Extract validation errors from tRPC error
+      // tRPC formats Zod errors differently - check multiple formats
+      const formattedErrors: Record<string, string> = {};
+      
+      // Format 1: error.data is directly an array of Zod errors (most common with tRPC)
+      if (Array.isArray(error?.data)) {
+        error.data.forEach((err: any) => {
+          if (err.path && Array.isArray(err.path) && err.path.length > 0) {
+            const field = err.path[err.path.length - 1];
+            formattedErrors[field] = err.message || 'Invalid value';
+          }
+        });
+      }
+      // Format 2: error.data.zodError.fieldErrors
+      else if (error?.data?.zodError?.fieldErrors) {
+        const fieldErrors = error.data.zodError.fieldErrors;
+        Object.keys(fieldErrors).forEach((key) => {
+          if (fieldErrors[key] && fieldErrors[key].length > 0) {
+            formattedErrors[key] = fieldErrors[key][0];
+          }
+        });
+      }
+      // Format 3: error.data.zodError.issues (array)
+      else if (error?.data?.zodError?.issues && Array.isArray(error.data.zodError.issues)) {
+        error.data.zodError.issues.forEach((err: any) => {
+          if (err.path && Array.isArray(err.path) && err.path.length > 0) {
+            const field = err.path[err.path.length - 1];
+            formattedErrors[field] = err.message || 'Invalid value';
+          }
+        });
+      }
+      // Format 4: error.data.zodError is directly an array
+      else if (Array.isArray(error?.data?.zodError)) {
+        error.data.zodError.forEach((err: any) => {
+          if (err.path && Array.isArray(err.path) && err.path.length > 0) {
+            const field = err.path[err.path.length - 1];
+            formattedErrors[field] = err.message || 'Invalid value';
+          }
+        });
+      }
+      
+      // Check error message format (tRPC sometimes puts errors in error.message)
+      if (error?.message && typeof error.message === 'string' && error.message.includes('zodError')) {
+        try {
+          const parsed = JSON.parse(error.message);
+          if (Array.isArray(parsed)) {
+            parsed.forEach((err: any) => {
+              if (err.path && Array.isArray(err.path) && err.path.length > 0) {
+                const field = err.path[err.path.length - 1];
+                formattedErrors[field] = err.message || 'Invalid value';
+              }
+            });
+          }
+        } catch (e) {
+          // Not JSON, ignore
+        }
+      }
+      
+      if (Object.keys(formattedErrors).length > 0) {
+        setValidationErrors(formattedErrors);
+      }
     }
   };
 
@@ -51,6 +115,14 @@ export default function Contact() {
       ...prev,
       [e.target.name]: e.target.value,
     }));
+    // Clear validation error for this field when user starts typing
+    if (validationErrors[e.target.name]) {
+      setValidationErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[e.target.name];
+        return newErrors;
+      });
+    }
   };
 
   const contactPageSchema = {
@@ -136,11 +208,31 @@ export default function Contact() {
                 </div>
               )}
 
-              {sendMessage.error && (
+              {(sendMessage.error || Object.keys(validationErrors).length > 0) && (
                 <div className="mb-6 p-4 bg-red-500/20 border border-red-500/50 rounded-xl">
-                  <p className="text-red-400 font-medium">
-                    {t('contact.errorMessage')}
+                  <p className="text-red-400 font-medium mb-2">
+                    {Object.keys(validationErrors).length > 0 
+                      ? 'Veuillez corriger les erreurs ci-dessous'
+                      : t('contact.errorMessage')}
                   </p>
+                  {Object.keys(validationErrors).length > 0 && (
+                    <ul className="list-disc list-inside text-red-300 text-sm space-y-1 mt-2">
+                      {Object.entries(validationErrors).map(([field, message]) => {
+                        const fieldLabels: Record<string, string> = {
+                          message: t('contact.message'),
+                          email: t('contact.email'),
+                          firstName: t('contact.firstName'),
+                          lastName: t('contact.lastName'),
+                          company: t('contact.company'),
+                        };
+                        return (
+                          <li key={field}>
+                            <strong>{fieldLabels[field] || field}</strong>: {message}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  )}
                 </div>
               )}
 
@@ -208,17 +300,28 @@ export default function Contact() {
 
                 <div>
                   <label className="block text-white/90 text-sm mb-2 font-medium">
-                    {t('contact.message')}
+                    {t('contact.message')} *
+                    {validationErrors.message && (
+                      <span className="text-red-400 text-xs ml-2">({validationErrors.message})</span>
+                    )}
                   </label>
                   <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
                     required
+                    minLength={10}
                     rows={6}
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/50 focus:outline-none focus:border-accent transition-colors resize-none"
+                    className={`w-full px-4 py-3 rounded-xl bg-white/5 border ${
+                      validationErrors.message 
+                        ? 'border-red-500/50' 
+                        : 'border-white/10'
+                    } text-white placeholder:text-white/50 focus:outline-none focus:border-accent transition-colors resize-none`}
                     placeholder={t('contact.messagePlaceholder')}
                   />
+                  <p className="text-white/50 text-xs mt-1">
+                    Minimum 10 caractères requis ({formData.message.length}/10)
+                  </p>
                 </div>
 
                 <Button

@@ -47,32 +47,34 @@ export default function PageLoader() {
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const prevLocationRef = useRef(location);
 
-  // Don't show loader in admin area
+  // Don't show loader in admin area or contact page
   const isAdminArea = location.startsWith("/admin");
+  const isContactPage = location === "/contact" || location === "/fr/contact" || location.startsWith("/contact/") || location.startsWith("/fr/contact/");
+  const shouldSkipLoader = isAdminArea || isContactPage;
 
-  // If in admin area, show body immediately and don't fetch loaders
+  // If in admin area or contact page, show body immediately and don't fetch loaders
   useEffect(() => {
-    if (isAdminArea) {
+    if (shouldSkipLoader) {
       setIsLoading(false);
       if (!document.body.classList.contains('loaded')) {
         document.body.classList.add('loaded');
       }
     }
-  }, [isAdminArea]);
+  }, [shouldSkipLoader]);
 
-  // Fetch active loaders (only if not in admin area)
+  // Fetch active loaders (only if not in admin area or contact page)
   const { data: activeLoaders, isLoading: isLoadingLoaders } = trpc.loaders.getActive.useQuery(undefined, {
     staleTime: 5 * 60 * 1000, // Cache for 5 minutes
     refetchOnWindowFocus: false,
-    enabled: !isAdminArea, // Don't fetch if in admin area
+    enabled: !shouldSkipLoader, // Don't fetch if in admin area or contact page
   });
 
   // Preload resources as soon as component mounts
   useEffect(() => {
-    if (!isAdminArea) {
+    if (!shouldSkipLoader) {
       preloadResources();
     }
-  }, [isAdminArea]);
+  }, [shouldSkipLoader]);
 
   useEffect(() => {
     // Check if this is a page transition (not first load)
@@ -84,11 +86,11 @@ export default function PageLoader() {
       prevLocationRef.current = location;
     }
 
-    // Don't show loader in admin area - show body immediately
-    if (isAdminArea) {
+    // Don't show loader in admin area or contact page - show body immediately
+    if (shouldSkipLoader) {
       setIsLoading(false);
       setIsFirstLoad(false);
-      // Make body visible immediately in admin area
+      // Make body visible immediately
       if (!document.body.classList.contains('loaded')) {
         document.body.classList.add('loaded');
       }
@@ -243,10 +245,10 @@ export default function PageLoader() {
       setIsLoading(false);
       setLoaderHtml(null);
     };
-  }, [activeLoaders, isLoadingLoaders, isAdminArea, location, isFirstLoad]);
+  }, [activeLoaders, isLoadingLoaders, shouldSkipLoader, location, isFirstLoad]);
 
-  // Don't show loader in admin area
-  if (isAdminArea) {
+  // Don't show loader in admin area or contact page
+  if (shouldSkipLoader) {
     return null;
   }
 

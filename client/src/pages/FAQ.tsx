@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { Link } from 'wouter';
 import Header from '@/components/Header';
@@ -22,13 +22,43 @@ export default function FAQ() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const { playHover, playClick } = useSound();
+  const [translationsData, setTranslationsData] = useState<any>(null);
 
-  // Helper to get value from translations using require (synchronous)
-  const getValue = (key: string): any => {
+  // Load translations dynamically
+  useEffect(() => {
+    let cancelled = false;
+    import(`../locales/${language || 'en'}.json`)
+      .then((module) => {
+        if (!cancelled) {
+          setTranslationsData(module.default);
+        }
+      })
+      .catch(() => {
+        // Fallback to English
+        import('../locales/en.json')
+          .then((module) => {
+            if (!cancelled) {
+              setTranslationsData(module.default);
+            }
+          })
+          .catch(() => {
+            if (!cancelled) {
+              setTranslationsData({});
+            }
+          });
+      });
+    
+    return () => {
+      cancelled = true;
+    };
+  }, [language]);
+
+  // Helper to get value from translations data
+  const getValue = (key: string, data: any): any => {
+    if (!data) return null;
     try {
-      const translations = require(`../locales/${language || 'en'}.json`);
       const keys = key.split('.');
-      let value: any = translations.default || translations;
+      let value: any = data;
       for (const k of keys) {
         if (value && typeof value === 'object' && k in value) {
           value = value[k];
@@ -42,36 +72,19 @@ export default function FAQ() {
     }
   };
 
-  // Helper to get array from translations
-  const getArrayTranslation = (key: string): any[] => {
-    try {
-      const translations = require(`../locales/${language || 'en'}.json`);
-      const keys = key.split('.');
-      let value: any = translations.default || translations;
-      for (const k of keys) {
-        if (value && typeof value === 'object' && k in value) {
-          value = value[k];
-        } else {
-          return [];
-        }
-      }
-      return Array.isArray(value) ? value : [];
-    } catch {
-      return [];
-    }
-  };
-
   // Build FAQs from translations
   const faqs: FAQItem[] = useMemo(() => {
     const allFaqs: FAQItem[] = [];
     
+    if (!translationsData) return allFaqs;
+    
     const categoryMap: Record<string, string> = {
-      agenticAI: getValue('faq.categories.agenticAI') || 'Agentic AI',
-      transformation: getValue('faq.categories.transformation') || 'Transformation',
-      roi: getValue('faq.categories.roi') || 'ROI',
-      technical: getValue('faq.categories.technical') || 'Technical',
-      useCases: getValue('faq.categories.useCases') || 'Use Cases',
-      aboutNukleo: getValue('faq.categories.aboutNukleo') || 'About Nukleo'
+      agenticAI: getValue('faq.categories.agenticAI', translationsData) || 'Agentic AI',
+      transformation: getValue('faq.categories.transformation', translationsData) || 'Transformation',
+      roi: getValue('faq.categories.roi', translationsData) || 'ROI',
+      technical: getValue('faq.categories.technical', translationsData) || 'Technical',
+      useCases: getValue('faq.categories.useCases', translationsData) || 'Use Cases',
+      aboutNukleo: getValue('faq.categories.aboutNukleo', translationsData) || 'About Nukleo'
     };
     
     try {
@@ -85,7 +98,7 @@ export default function FAQ() {
       ];
 
       questionCategories.forEach(({ key, path }) => {
-        const questions = getArrayTranslation(path);
+        const questions = getValue(path, translationsData);
         if (Array.isArray(questions)) {
           questions.forEach((item: any) => {
             if (item && typeof item === 'object' && item.question && item.answer) {
@@ -104,19 +117,20 @@ export default function FAQ() {
     }
 
     return allFaqs;
-  }, [language]);
+  }, [translationsData]);
 
   const categories = useMemo(() => {
+    if (!translationsData) return [];
     return [
-      { key: "all", label: getValue('faq.categories.all') || 'All' },
-      { key: "agenticAI", label: getValue('faq.categories.agenticAI') || 'Agentic AI' },
-      { key: "transformation", label: getValue('faq.categories.transformation') || 'Transformation' },
-      { key: "roi", label: getValue('faq.categories.roi') || 'ROI' },
-      { key: "technical", label: getValue('faq.categories.technical') || 'Technical' },
-      { key: "useCases", label: getValue('faq.categories.useCases') || 'Use Cases' },
-      { key: "aboutNukleo", label: getValue('faq.categories.aboutNukleo') || 'About Nukleo' }
+      { key: "all", label: getValue('faq.categories.all', translationsData) || 'All' },
+      { key: "agenticAI", label: getValue('faq.categories.agenticAI', translationsData) || 'Agentic AI' },
+      { key: "transformation", label: getValue('faq.categories.transformation', translationsData) || 'Transformation' },
+      { key: "roi", label: getValue('faq.categories.roi', translationsData) || 'ROI' },
+      { key: "technical", label: getValue('faq.categories.technical', translationsData) || 'Technical' },
+      { key: "useCases", label: getValue('faq.categories.useCases', translationsData) || 'Use Cases' },
+      { key: "aboutNukleo", label: getValue('faq.categories.aboutNukleo', translationsData) || 'About Nukleo' }
     ];
-  }, [language]);
+  }, [translationsData]);
 
   const filteredFaqs = selectedCategory === "all" 
     ? faqs 
@@ -127,8 +141,8 @@ export default function FAQ() {
     return faqs.map(faq => ({ question: String(faq.question), answer: String(faq.answer) }));
   }, [faqs]);
 
-  // Show loading state if FAQs aren't loaded yet
-  if (faqs.length === 0) {
+  // Show loading state if translations aren't loaded yet
+  if (!translationsData || faqs.length === 0) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-[#1a0b2e] via-[#2d1b4e] to-[#1a0b2e] flex items-center justify-center">
         <div className="text-white">Chargement...</div>

@@ -20,7 +20,7 @@ export default function LoaderFullscreenPreview({
 
   // Extract and inject styles when loaderType changes
   useEffect(() => {
-    if (!loaderType.includes('<style>')) return;
+    if (!isOpen || !loaderType.includes('<style>')) return;
 
     const styleMatch = loaderType.match(/<style>([\s\S]*?)<\/style>/);
     if (!styleMatch) return;
@@ -34,7 +34,7 @@ export default function LoaderFullscreenPreview({
       existingStyle.remove();
     }
 
-    // Inject styles into document head
+    // Inject styles into document head with scoped selectors
     const styleElement = document.createElement('style');
     styleElement.id = styleId;
     styleElement.textContent = styles;
@@ -47,7 +47,7 @@ export default function LoaderFullscreenPreview({
         styleToRemove.remove();
       }
     };
-  }, [loaderType]);
+  }, [loaderType, isOpen]);
 
   // Simulate loading progress
   useEffect(() => {
@@ -390,7 +390,9 @@ export default function LoaderFullscreenPreview({
         </div>
 
         {/* Loader content */}
-        {renderLoader()}
+        <div className="absolute inset-0" style={{ isolation: 'isolate' }}>
+          {renderLoader()}
+        </div>
 
         {/* ESC hint */}
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/40 text-sm">

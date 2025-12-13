@@ -20,6 +20,8 @@ export function AdminHeader() {
                 alt="Nukleo Digital - AI Transformation Agency" 
                 width="120"
                 height="32"
+                fetchPriority="high"
+                loading="eager"
                 className="h-8"
               />
               <span className="text-sm text-white/60 hidden sm:inline">Admin Panel</span>
@@ -35,6 +37,7 @@ export function AdminHeader() {
                   alt={`${user.name} - Admin Profile Picture`}
                   width="32"
                   height="32"
+                  loading="lazy"
                   className="w-8 h-8 rounded-full"
                 />
               ) : (

@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import SEO from '@/components/SEO';
+import Breadcrumb from '@/components/Breadcrumb';
 import { Link } from 'wouter';
 import { Menu, X, Target, TrendingUp, Users, Lightbulb, CheckCircle, ArrowRight } from 'lucide-react';
 import FullScreenMenu from '@/components/FullScreenMenu';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function AIStrategyMarketing() {
+  const { t } = useLanguage();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const seoContent = (
@@ -51,6 +54,14 @@ export default function AIStrategyMarketing() {
     <>
       {seoContent}
       <FullScreenMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+      
+      {/* Breadcrumb */}
+      <div className="container pt-24 pb-4">
+        <Breadcrumb items={[
+          { name: t('nav.services') || 'Services', url: '/services' },
+          { name: 'AI Strategy & Marketing', url: '/services/ai-strategy-marketing' }
+        ]} />
+      </div>
       
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b border-white/5">

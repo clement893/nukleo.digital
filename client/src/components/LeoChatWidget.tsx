@@ -152,11 +152,12 @@ export default function LeoChatWidget() {
             aria-label="Chat with LEO"
           >
             <img
-              src="/leo-avatar-happy.png"
+              src="/leo-avatar-happy.webp"
               alt="LEO - AI Assistant Avatar"
               width="48"
               height="48"
               fetchPriority="high"
+              loading="eager"
               className="w-12 h-12 rounded-full animate-pulse-subtle"
             />
             <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white animate-pulse"></div>
@@ -174,7 +175,7 @@ export default function LeoChatWidget() {
             <div className="absolute bottom-20 right-0 bg-white text-gray-800 rounded-2xl shadow-2xl p-4 max-w-[280px] animate-in slide-in-from-bottom-4 duration-300">
               <div className="flex items-start gap-3">
                 <img
-                  src="/leo-avatar-happy.png"
+                  src="/leo-avatar-happy.webp"
                   alt="LEO - AI Assistant Avatar"
                   width="40"
                   height="40"
@@ -254,7 +255,7 @@ export default function LeoChatWidget() {
               >
                 {msg.role === 'assistant' && (
                   <img
-                    src={msg.emotion ? `/leo-avatar-${msg.emotion}.png` : '/leo-avatar-happy.png'}
+                    src={msg.emotion ? `/leo-avatar-${msg.emotion}.webp` : '/leo-avatar-happy.webp'}
                     alt="LEO - AI Assistant Avatar"
                     width="32"
                     height="32"
@@ -278,7 +279,7 @@ export default function LeoChatWidget() {
             {isTyping && typingText && (
               <div className="flex gap-3">
                 <img
-                  src="/leo-avatar-thinking.png"
+                  src="/leo-avatar-thinking.webp"
                   alt="LEO - AI Assistant Avatar"
                   width="32"
                   height="32"
@@ -297,7 +298,7 @@ export default function LeoChatWidget() {
             {chatMutation.isPending && !isTyping && (
               <div className="flex gap-3">
                 <img
-                  src="/leo-avatar-thinking.png"
+                  src="/leo-avatar-thinking.webp"
                   alt="LEO - AI Assistant Avatar"
                   width="32"
                   height="32"

@@ -2,6 +2,7 @@ import { Filter } from 'lucide-react';
 import PageLayout from '@/components/PageLayout';
 import { useState } from 'react';
 import SEO from '@/components/SEO';
+import Breadcrumb from '@/components/Breadcrumb';
 import { trpc } from '@/lib/trpc';
 import { Button } from '@/components/ui/button';
 import { Link } from 'wouter';
@@ -65,14 +66,6 @@ export default function Resources() {
       tags: getArrayTranslation('resources.tools.radar.tags'),
       link: getLocalizedPath('/radar'),
       buttonText: t('resources.tools.radar.buttonText')
-    },
-    {
-      badge: t('resources.tools.glossary.badge'),
-      title: t('resources.tools.glossary.title'),
-      description: t('resources.tools.glossary.description'),
-      tags: getArrayTranslation('resources.tools.glossary.tags'),
-      link: getLocalizedPath('/glossary'),
-      buttonText: t('resources.tools.glossary.buttonText')
     }
   ];
 
@@ -154,6 +147,7 @@ export default function Resources() {
           <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px]" />
           
           <div className="container relative z-10">
+            <Breadcrumb items={[{ name: t('nav.resources') || 'Resources', url: '/resources' }]} />
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1 border border-accent/50 rounded-full text-accent text-xs font-mono uppercase tracking-widest mb-8">
               <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />

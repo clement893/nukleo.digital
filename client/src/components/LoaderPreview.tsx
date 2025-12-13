@@ -127,7 +127,11 @@ export default function LoaderPreview({
             >
               <img 
                 src="/Nukleo_blanc_RVB.svg" 
-                alt="nukleo" 
+                alt="Nukleo Digital - AI Transformation Agency" 
+                width="300"
+                height="75"
+                fetchPriority="high"
+                loading="eager"
                 className="w-full h-auto"
                 style={{
                   opacity: 1,

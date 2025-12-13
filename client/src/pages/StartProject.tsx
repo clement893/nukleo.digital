@@ -1,6 +1,7 @@
 // StartProject.tsx
 import { useState } from 'react';
 import SEO from '@/components/SEO';
+import Breadcrumb from '@/components/Breadcrumb';
 import { Button } from '@/components/ui/button';
 import { trpc } from '@/lib/trpc';
 import { useLocation } from 'wouter';
@@ -15,9 +16,11 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { ArrowRight, CheckCircle2, ArrowLeft } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function StartProject() {
   const [, navigate] = useLocation();
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -73,6 +76,10 @@ export default function StartProject() {
       <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-blue-500 rounded-full blur-3xl opacity-20 animate-blob animation-delay-4000" />
 
       <div className="container mx-auto px-6 py-24 md:py-32 relative z-10">
+        {/* Breadcrumb */}
+        <div className="max-w-3xl mx-auto mb-8">
+          <Breadcrumb items={[{ name: t('nav.startProject') || 'Start Project', url: '/start-project' }]} />
+        </div>
         {/* Back Button */}
         <div className="max-w-3xl mx-auto mb-8">
           <Button

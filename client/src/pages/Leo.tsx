@@ -1,11 +1,13 @@
 // Leo.tsx
 import { useState, useRef, useEffect } from 'react';
 import SEO from '@/components/SEO';
+import Breadcrumb from '@/components/Breadcrumb';
 import { Send, Mic, Mail, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { trpc } from '@/lib/trpc';
 import { Link } from 'wouter';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface Message {
   role: 'user' | 'assistant' | 'system';
@@ -15,6 +17,7 @@ interface Message {
 }
 
 export default function Leo() {
+  const { t } = useLanguage();
   // Load messages from localStorage on mount
   const loadMessages = (): Message[] => {
     try {
@@ -420,6 +423,10 @@ export default function Leo() {
         ogImage="https://nukleo.digital/og-image.jpg"
       />
       <div className="min-h-screen bg-gradient-to-br from-[oklch(0.35_0.15_300)] via-[oklch(0.40_0.15_320)] to-[oklch(0.35_0.15_340)] flex flex-col">
+      {/* Breadcrumb */}
+      <div className="container pt-24 pb-4">
+        <Breadcrumb items={[{ name: t('nav.leo') || 'LEO AI Assistant', url: '/leo' }]} />
+      </div>
       {/* Header minimal */}
       <header className="fixed top-0 left-0 right-0 z-50">
         <div className="container">
@@ -428,9 +435,11 @@ export default function Leo() {
             <Link href="/">
               <img 
                 src="/Nukleo_blanc_RVB.svg" 
-                alt="Nukleo" 
+                alt="Nukleo Digital - AI Transformation Agency" 
                 width="120"
                 height="32"
+                fetchPriority="high"
+                loading="eager"
                 className="h-8 w-auto cursor-pointer"
               />
             </Link>

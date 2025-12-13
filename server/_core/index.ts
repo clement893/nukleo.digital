@@ -247,10 +247,10 @@ async function startServer() {
               SELECT FROM information_schema.tables 
               WHERE table_schema = 'public' 
               AND table_name = 'radar_technologies'
-            );
+            ) as exists;
           `;
           
-          const tableExists = tableCheck[0]?.exists;
+          const tableExists = Array.isArray(tableCheck) && tableCheck.length > 0 && tableCheck[0]?.exists;
           if (!tableExists) {
             logger.info("Radar tables not found, creating them...");
             

@@ -429,6 +429,8 @@ export default function Leo() {
               <img 
                 src="/Nukleo_blanc_RVB.svg" 
                 alt="Nukleo" 
+                width="120"
+                height="32"
                 className="h-8 w-auto cursor-pointer"
               />
             </Link>
@@ -500,6 +502,8 @@ export default function Leo() {
                     <img 
                       src={getAvatarSrc('happy')} 
                       alt="Leo" 
+                      width="48"
+                      height="48"
                       className="w-12 h-12 object-contain avatar-happy"
                     />
                   </div>
@@ -558,6 +562,8 @@ export default function Leo() {
                       <img 
                         src={getAvatarSrc(index === messages.length - 1 ? currentEmotion : 'default')} 
                         alt="Leo" 
+                        width="48"
+                        height="48"
                         className={`w-12 h-12 object-contain transition-all duration-300 ${
                           index === messages.length - 1 ? `avatar-${currentEmotion}` : 'avatar-default'
                         }`}
@@ -605,6 +611,8 @@ export default function Leo() {
                 <img 
                   src={getAvatarSrc('thinking')} 
                   alt="Leo" 
+                  width="48"
+                  height="48"
                   className="w-12 h-12 object-contain avatar-thinking transition-all duration-300"
                 />
               </div>
@@ -628,6 +636,8 @@ export default function Leo() {
                 <img 
                   src={getAvatarSrc(currentEmotion)} 
                   alt="Leo" 
+                  width="48"
+                  height="48"
                   className={`w-12 h-12 object-contain transition-all duration-300 avatar-${currentEmotion}`}
                 />
               </div>

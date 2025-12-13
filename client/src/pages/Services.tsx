@@ -3,6 +3,7 @@ import SEO from '@/components/SEO';
 import UniversalLEO from '@/components/UniversalLEO';
 import { Link } from 'wouter';
 import PageLayout from '../components/PageLayout';
+import StructuredData, { serviceSchema } from '@/components/StructuredData';
 
 export default function Services() {
   const services = [
@@ -103,6 +104,7 @@ export default function Services() {
         keywords="AI services, AI strategy, digital platforms, intelligent operations, AI transformation"
         ogImage="/og-services.jpg"
       />
+      <StructuredData data={serviceSchema} />
       <div className="min-h-screen pt-24 pb-20 px-4">
         {/* Hero Section */}
         <div className="max-w-6xl mx-auto mb-20">

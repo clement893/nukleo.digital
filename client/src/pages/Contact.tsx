@@ -5,6 +5,7 @@ import PageLayout from '@/components/PageLayout';
 import { trpc } from '@/lib/trpc';
 import SEO from '@/components/SEO';
 import UniversalLEO from '@/components/UniversalLEO';
+import StructuredData from '@/components/StructuredData';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -46,6 +47,43 @@ export default function Contact() {
     }));
   };
 
+  const contactPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'Contact Nukleo Digital',
+    url: 'https://nukleo.digital/contact',
+    description: 'Contact Nukleo Digital for AI transformation consulting and services',
+    mainEntity: {
+      '@type': 'Organization',
+      name: 'Nukleo Digital',
+      address: [
+        {
+          '@type': 'PostalAddress',
+          streetAddress: '7236 Rue Waverly',
+          addressLocality: 'Montréal',
+          addressRegion: 'QC',
+          postalCode: 'H2R 0C2',
+          addressCountry: 'CA',
+        },
+        {
+          '@type': 'PostalAddress',
+          streetAddress: '1800 Argyle St Unit 801',
+          addressLocality: 'Halifax',
+          addressRegion: 'NS',
+          postalCode: 'B3J 3N8',
+          addressCountry: 'CA',
+        },
+      ],
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'Business Inquiries',
+        email: 'hello@nukleo.ai',
+        telephone: '+1-514-777-1234',
+        availableLanguage: ['English', 'French'],
+      },
+    },
+  };
+
   return (
     <PageLayout>
       <SEO 
@@ -53,6 +91,7 @@ export default function Contact() {
         description="Ready to transform with AI? Contact Nukleo Digital for expert consultation. Offices in Montréal & Halifax. Get tailored AI solutions for your business today."
         keywords="contact AI agency, AI consultation, Montréal AI services, Halifax AI agency, AI transformation contact"
       />
+      <StructuredData data={contactPageSchema} />
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">

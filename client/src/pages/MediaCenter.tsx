@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { trpc } from '@/lib/trpc';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import SEO from '@/components/SEO';
 
 export default function MediaCenter() {
   const { data: mediaAssets, isLoading } = trpc.mediaAssets.list.useQuery();
@@ -61,6 +62,13 @@ export default function MediaCenter() {
 
   return (
     <>
+      <SEO
+        title="Media Center | Press Releases & Media Kit | Nukleo Digital"
+        description="Access Nukleo Digital's press releases, media kit, brand assets, and latest news. Download logos, company information, and press materials for media use."
+        keywords="Nukleo Digital press, media kit, press releases, brand assets, company logos, media resources, press contact, AI agency news"
+        ogImage="https://nukleo.digital/og-media.jpg"
+        ogType="website"
+      />
       <Header />
       <div className="min-h-screen bg-gradient-to-br from-purple-950 via-purple-900 to-purple-950">
         {/* Hero Section */}

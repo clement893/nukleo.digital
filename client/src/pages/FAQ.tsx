@@ -22,27 +22,42 @@ export default function FAQ() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const { playHover, playClick } = useSound();
-  const [translations, setTranslations] = useState<any>(null);
+  const [translationsData, setTranslationsData] = useState<any>(null);
 
-  // Load translations
+  // Load translations dynamically
   useEffect(() => {
+    let cancelled = false;
     import(`../locales/${language || 'en'}.json`)
       .then((module) => {
-        setTranslations(module.default);
+        if (!cancelled) {
+          setTranslationsData(module.default);
+        }
       })
       .catch(() => {
         import('../locales/en.json')
-          .then((module) => setTranslations(module.default))
-          .catch(() => setTranslations({}));
+          .then((module) => {
+            if (!cancelled) {
+              setTranslationsData(module.default);
+            }
+          })
+          .catch(() => {
+            if (!cancelled) {
+              setTranslationsData({});
+            }
+          });
       });
+    
+    return () => {
+      cancelled = true;
+    };
   }, [language]);
 
   // Helper to get array/object from translations
   const getTranslationArray = (key: string): any[] => {
-    if (!translations) return [];
+    if (!translationsData) return [];
     try {
       const keys = key.split('.');
-      let value: any = translations;
+      let value: any = translationsData;
       for (const k of keys) {
         if (value && typeof value === 'object' && k in value) {
           value = value[k];
@@ -155,7 +170,7 @@ export default function FAQ() {
     }
 
     return allFaqs;
-  }, [t, language, translations]);
+  }, [t, language, translationsData]);
 
   const categories = useMemo(() => [
     { key: "all", label: String(t('faq.categories.all') || 'All') },
@@ -176,11 +191,11 @@ export default function FAQ() {
     return faqs.map(faq => ({ question: String(faq.question), answer: String(faq.answer) }));
   }, [faqs]);
 
-  // Don't render until translations are loaded
-  if (!translations || faqs.length === 0) {
+  // Show loading state if translations aren't loaded yet
+  if (!translationsData || faqs.length === 0) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-[#1a0b2e] via-[#2d1b4e] to-[#1a0b2e] flex items-center justify-center">
-        <div className="text-white">Loading...</div>
+        <div className="text-white">Chargement...</div>
       </div>
     );
   }

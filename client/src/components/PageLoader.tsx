@@ -98,6 +98,7 @@ export default function PageLoader() {
     // For page transitions (not first load), skip the loader and show content immediately
     if (isPageTransition) {
       setIsLoading(false);
+      setLoaderHtml(null); // Clear loader HTML on transitions
       document.body.classList.add('loaded');
       return;
     }
@@ -200,6 +201,11 @@ export default function PageLoader() {
 
   // Don't show loader in admin area
   if (isAdminArea) {
+    return null;
+  }
+
+  // Don't show loader if not loading (e.g., during page transitions)
+  if (!isLoading) {
     return null;
   }
 

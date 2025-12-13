@@ -5,7 +5,6 @@ import { Link, useLocation } from 'wouter';
 import FullScreenMenu from './FullScreenMenu';
 import { useSound } from '@/hooks/useSound';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { LanguageSwitcher } from './LanguageSwitcher';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -64,10 +63,8 @@ export default function Header() {
               </span>
             </Link>
 
-            {/* Right: Language Switcher + CTA + Burger Menu */}
+            {/* Right: CTA + Burger Menu */}
             <div className="flex items-center gap-4">
-              <LanguageSwitcher />
-              
               <Link href={getLocalizedPath('/start-project')}>
                 <Button
                   onClick={playClick}

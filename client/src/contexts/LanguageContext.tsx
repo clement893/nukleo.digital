@@ -88,14 +88,27 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
     setLocation(newPath);
   };
 
-  // Translation function
+  // Translation function with nested key support (e.g., "hero.title")
   const t = (key: string, params?: Record<string, string | number>): string => {
-    let translation = translations[key] || key;
+    // Support nested keys like "hero.title"
+    const keys = key.split('.');
+    let value: any = translations;
+    
+    for (const k of keys) {
+      if (value && typeof value === 'object' && k in value) {
+        value = value[k];
+      } else {
+        // Key not found, return the key itself
+        return key;
+      }
+    }
+    
+    let translation = typeof value === 'string' ? value : key;
     
     // Replace parameters
     if (params) {
-      Object.entries(params).forEach(([paramKey, value]) => {
-        translation = translation.replace(new RegExp(`{{${paramKey}}}`, 'g'), String(value));
+      Object.entries(params).forEach(([paramKey, paramValue]) => {
+        translation = translation.replace(new RegExp(`{{${paramKey}}}`, 'g'), String(paramValue));
       });
     }
     

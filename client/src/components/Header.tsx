@@ -46,6 +46,7 @@ export default function Header() {
                 width="120"
                 height="32"
                 fetchPriority="high"
+                decoding="async"
                 className="h-8 w-auto object-contain mb-1"
               />
               <span className="text-[10px] text-white/60 font-medium tracking-wider">

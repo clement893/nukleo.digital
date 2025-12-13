@@ -9,6 +9,7 @@ import App from "./App";
 
 import { getLoginUrl } from "./const";
 import { ThemeProvider } from "./contexts/ThemeContext";
+// CSS is loaded async to avoid render blocking - critical CSS is inlined in index.html
 import "./index.css";
 
 const queryClient = new QueryClient();

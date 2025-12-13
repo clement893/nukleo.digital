@@ -31,15 +31,17 @@
     <link rel="preload" href="/fonts/AktivGrotesk-Bold.woff2" as="font" type="font/woff2" crossorigin />
     
     <!-- Preload LCP images -->
-    <link rel="preload" href="/nukleo-arrow.svg" as="image" type="image/svg+xml" fetchpriority="high" />
+    <!-- Note: nukleo-arrow.svg is now inline in ArrowBackground component for better LCP -->
     <link rel="preload" href="/leo-avatar.webp" as="image" type="image/webp" fetchpriority="high" />
+    <link rel="preload" href="/Nukleo_blanc_RVB.svg" as="image" type="image/svg+xml" fetchpriority="high" />
     
     <!-- Performance hints -->
     <link rel="dns-prefetch" href="https://nukleodigital-production.up.railway.app" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
     
-    <!-- Inline critical font-face for instant rendering -->
+    <!-- Inline critical CSS for instant rendering -->
     <style>
+      /* Critical CSS - Above the fold styles */
       /* Aktiv Grotesk Light 300 - Primary body text (critical) */
       @font-face {
         font-family: 'Aktiv Grotesk';
@@ -47,6 +49,40 @@
         font-weight: 300;
         font-style: normal;
         font-display: swap;
+      }
+      
+      /* Critical reset and base styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      html {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      
+      body {
+        font-family: 'Aktiv Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-weight: 300;
+        line-height: 1.6;
+        color: #fff;
+        background-color: #000;
+      }
+      
+      /* Critical hero styles */
+      h1 {
+        font-weight: 700;
+        line-height: 0.9;
+        letter-spacing: -0.02em;
+      }
+      
+      /* Prevent layout shift */
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
       }
     </style>
     

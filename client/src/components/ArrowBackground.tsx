@@ -7,11 +7,22 @@
  * - All arrows point to the right
  * - No animation (static)
  * - Positioned behind all content (z-index: 0)
+ * - Uses inline SVG for better LCP performance on mobile
  */
 
 interface ArrowBackgroundProps {
   variant?: 'default' | 'alternate';
 }
+
+// Inline SVG path for better performance (eliminates resource load delay)
+const ArrowSVG = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1451.13 1781.63" style={{ width: '100%', height: '100%' }}>
+    <defs>
+      <style>{`.st0{fill:#fff;}`}</style>
+    </defs>
+    <polygon className="st0" points="667.82 352.09 667.18 351.32 339.5 351.32 795.15 892.73 342.38 1427.85 339.35 1431.42 667.14 1431.42 1099.24 923.39 1099.76 922.78 1099.76 862.84 911.51 640.24 667.82 352.09"/>
+  </svg>
+);
 
 export default function ArrowBackground({ variant = 'default' }: ArrowBackgroundProps) {
   // Two different positioning patterns for variety across pages
@@ -30,20 +41,20 @@ export default function ArrowBackground({ variant = 'default' }: ArrowBackground
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
       {positions.map((arrow, i) => (
-        <img
+        <div
           key={i}
-          src="/nukleo-arrow.svg"
-          alt=""
           className="absolute"
-          loading={i === 0 ? undefined : 'lazy'} // First arrow eager (LCP), others lazy
-          fetchPriority={i === 0 ? 'high' : undefined} // Prioritize LCP image
           style={{
             ...arrow,
             width: `${arrow.size}px`,
+            height: `${arrow.size}px`,
             transform: 'rotate(0deg)',
             filter: 'invert(1)',
+            opacity: arrow.opacity,
           }}
-        />
+        >
+          <ArrowSVG />
+        </div>
       ))}
     </div>
   );

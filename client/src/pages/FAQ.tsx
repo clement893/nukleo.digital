@@ -6,9 +6,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 export default function FAQ() {
-  const faqs = [
+  const { language } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
+  
+  const faqsFr = [
     {
       category: "Services & Solutions",
       questions: [
@@ -96,22 +101,145 @@ export default function FAQ() {
     }
   ];
 
+  const faqsEn = [
+    {
+      category: "Services & Solutions",
+      questions: [
+        {
+          question: "What services does Nukleo Digital offer?",
+          answer: "Nukleo Digital offers a comprehensive range of services including AI marketing strategy, digital platform development, intelligent operations, creative studio, AI lab, and strategic bureau. We support businesses in their digital transformation with customized solutions."
+        },
+        {
+          question: "How does your AI Readiness Assessment work?",
+          answer: "Our AI Readiness Assessment analyzes your technological infrastructure, business processes, and organizational culture to determine your AI maturity level. We provide a detailed report with personalized recommendations to accelerate your AI adoption."
+        },
+        {
+          question: "Do you offer customized solutions?",
+          answer: "Absolutely. Every project at Nukleo Digital is custom-designed to meet the specific needs of our clients. We start with an in-depth analysis of your challenges and objectives, then develop solutions tailored to your unique context."
+        }
+      ]
+    },
+    {
+      category: "Process & Methodology",
+      questions: [
+        {
+          question: "How does a project with Nukleo Digital work?",
+          answer: "Our process begins with a discovery phase where we analyze your needs and objectives. Then, we develop a personalized strategy, followed by implementation with regular iterations and client feedback. We also ensure post-launch follow-up to guarantee long-term success."
+        },
+        {
+          question: "What is the average timeline for a project?",
+          answer: "Timelines vary depending on the complexity and scope of the project. An AI marketing strategy project can take 4-8 weeks, while a complete digital platform may require 3-6 months. We provide detailed estimates during our initial consultation."
+        },
+        {
+          question: "Do you work with companies of all sizes?",
+          answer: "Yes, we work with startups, SMEs, and large enterprises. Our approach adapts to each context, whether you're a young company looking to integrate AI or an established organization aiming for complete digital transformation."
+        }
+      ]
+    },
+    {
+      category: "Technology & AI",
+      questions: [
+        {
+          question: "What technologies do you use?",
+          answer: "We use the latest AI technologies, including advanced language models, machine learning, and data analytics. Our solutions are built with modern frameworks and cloud-native architectures to ensure performance, scalability, and security."
+        },
+        {
+          question: "How do you ensure data security?",
+          answer: "Security is an absolute priority. We implement enterprise-level security measures, including data encryption, multi-factor authentication, and compliance with regulations such as GDPR. All our solutions adhere to security best practices."
+        },
+        {
+          question: "Do you offer training for our teams?",
+          answer: "Yes, we offer customized training programs to help your teams master the tools and technologies we deploy. We believe that long-term success requires your teams to be autonomous and competent."
+        }
+      ]
+    },
+    {
+      category: "Pricing & Engagement",
+      questions: [
+        {
+          question: "How does your pricing work?",
+          answer: "Our pricing is tailored to each project. We offer flexible models including fixed-price projects, monthly commitments, or annual contracts depending on your needs. Contact us for a free consultation and personalized quote."
+        },
+        {
+          question: "Do you offer free consultations?",
+          answer: "Yes, we offer an initial free consultation to discuss your needs and explore how we can help you. It's the perfect opportunity to ask your questions and understand our approach."
+        },
+        {
+          question: "What is your billing process?",
+          answer: "We typically bill in several stages based on project progress. An initial deposit is required to start, then payments are made at predefined milestones. For recurring contracts, billing is monthly or annual according to the agreement."
+        }
+      ]
+    },
+    {
+      category: "Support & Follow-up",
+      questions: [
+        {
+          question: "What support do you offer after delivery?",
+          answer: "We offer comprehensive post-launch support including maintenance, updates, troubleshooting, and continuous optimization. Our clients benefit from priority access to our support team and regular updates to their solutions."
+        },
+        {
+          question: "How can I track my project progress?",
+          answer: "We maintain transparent communication throughout the project with regular meetings, detailed progress reports, and access to a client portal where you can track progress in real-time."
+        },
+        {
+          question: "What if I'm not satisfied with the result?",
+          answer: "Your satisfaction is our priority. We work closely with you at every step to ensure the final result meets your expectations. If adjustments are needed, we make them until you are completely satisfied."
+        }
+      ]
+    }
+  ];
+
+  const faqs = language === 'fr' ? faqsFr : faqsEn;
+  
+  const content = {
+    fr: {
+      title: "Questions Fréquentes",
+      subtitle: "Trouvez les réponses aux questions les plus courantes sur nos services, notre processus et nos solutions.",
+      ctaTitle: "Vous avez d'autres questions ?",
+      ctaText: "Notre équipe est là pour vous aider. N'hésitez pas à nous contacter.",
+      ctaButton: "Nous contacter",
+      seoTitle: "FAQ | Questions Fréquentes | Nukleo Digital",
+      seoDescription: "Trouvez les réponses aux questions fréquentes sur les services, processus et solutions de Nukleo Digital. Tout ce que vous devez savoir sur notre agence de marketing IA.",
+      seoKeywords: "FAQ, questions fréquentes, support, aide, Nukleo Digital, marketing IA, services digitaux"
+    },
+    en: {
+      title: "Frequently Asked Questions",
+      subtitle: "Find answers to the most common questions about our services, process, and solutions.",
+      ctaTitle: "Have more questions?",
+      ctaText: "Our team is here to help. Don't hesitate to contact us.",
+      ctaButton: "Contact Us",
+      seoTitle: "FAQ | Frequently Asked Questions | Nukleo Digital",
+      seoDescription: "Find answers to frequently asked questions about Nukleo Digital's services, processes, and solutions. Everything you need to know about our AI marketing agency.",
+      seoKeywords: "FAQ, frequently asked questions, support, help, Nukleo Digital, AI marketing, digital services"
+    }
+  };
+
+  const currentContent = content[language];
+
   return (
     <PageLayout>
       <SEO 
-        title="FAQ | Questions Fréquentes | Nukleo Digital"
-        description="Trouvez les réponses aux questions fréquentes sur les services, processus et solutions de Nukleo Digital. Tout ce que vous devez savoir sur notre agence de marketing IA."
-        keywords="FAQ, questions fréquentes, support, aide, Nukleo Digital, marketing IA, services digitaux"
+        title={currentContent.seoTitle}
+        description={currentContent.seoDescription}
+        keywords={currentContent.seoKeywords}
       />
       
       <div className="min-h-screen bg-gradient-to-br from-violet-950 via-fuchsia-950 to-rose-950">
         <div className="container mx-auto px-4 py-32 max-w-5xl">
           <div className="text-center mb-16">
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
-              Questions <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Fréquentes</span>
+              {language === 'fr' ? (
+                <>
+                  Questions <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Fréquentes</span>
+                </>
+              ) : (
+                <>
+                  Frequently Asked <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Questions</span>
+                </>
+              )}
             </h1>
             <p className="text-white/70 text-lg max-w-2xl mx-auto">
-              Trouvez les réponses aux questions les plus courantes sur nos services, notre processus et nos solutions.
+              {currentContent.subtitle}
             </p>
           </div>
 
@@ -146,16 +274,16 @@ export default function FAQ() {
 
           <div className="mt-16 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8 text-center">
             <h3 className="text-2xl font-bold text-white mb-4">
-              Vous avez d'autres questions ?
+              {currentContent.ctaTitle}
             </h3>
             <p className="text-white/70 mb-6">
-              Notre équipe est là pour vous aider. N'hésitez pas à nous contacter.
+              {currentContent.ctaText}
             </p>
             <a 
-              href="/contact" 
+              href={getLocalizedPath('/contact')}
               className="inline-block px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-semibold rounded-lg hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105"
             >
-              Nous contacter
+              {currentContent.ctaButton}
             </a>
           </div>
         </div>

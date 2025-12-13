@@ -20,7 +20,6 @@ const Projects = lazy(() => import("./pages/Projects"));
 const About = lazy(() => import("./pages/About"));
 const Expertise = lazy(() => import("./pages/Expertise"));
 const Resources = lazy(() => import("./pages/Resources"));
-const FAQ = lazy(() => import("./pages/FAQ"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Leo = lazy(() => import("./pages/Leo"));
 const Manifesto = lazy(() => import("./pages/Manifesto"));
@@ -90,7 +89,6 @@ function App() {
               <Route path="/fr/about" component={About} />
               <Route path="/fr/expertise" component={Expertise} />
               <Route path="/fr/resources" component={Resources} />
-              <Route path="/fr/faq" component={FAQ} />
               <Route path="/fr/contact" component={Contact} />
               <Route path="/fr/leo" component={Leo} />
               <Route path="/fr/manifesto" component={Manifesto} />
@@ -128,7 +126,6 @@ function App() {
             <Route path="/about" component={About} />
             <Route path="/expertise" component={Expertise} />
             <Route path="/resources" component={Resources} />
-            <Route path="/faq" component={FAQ} />
             <Route path="/contact" component={Contact} />
             <Route path="/leo" component={Leo} />
             <Route path="/manifesto" component={Manifesto} />

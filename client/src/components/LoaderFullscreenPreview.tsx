@@ -57,6 +57,16 @@ export default function LoaderFullscreenPreview({
   if (!isOpen) return null;
 
   const renderLoader = () => {
+    // If loaderType contains HTML/CSS (starts with <div or contains <style>), render it directly
+    if (loaderType.includes('<div') || loaderType.includes('<style>')) {
+      return (
+        <div 
+          dangerouslySetInnerHTML={{ __html: loaderType }}
+          className="absolute inset-0"
+        />
+      );
+    }
+
     switch (loaderType) {
       case "psychedelic-crazy-arts":
         return (

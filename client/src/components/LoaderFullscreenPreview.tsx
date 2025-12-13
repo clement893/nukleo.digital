@@ -16,25 +16,25 @@ export default function LoaderFullscreenPreview({
   onClose,
 }: LoaderFullscreenPreviewProps) {
   const [progress, setProgress] = useState(0);
-  const containerRef = React.useRef<HTMLDivElement>(null);
+  const [htmlContent, setHtmlContent] = useState<string>('');
+  const containerRef = useRef<HTMLDivElement>(null);
   const LOADING_DURATION = 4000; // 4 secondes
 
-  // Render loader HTML/CSS using Shadow DOM for proper style isolation
+  // Extract and inject styles, then render HTML
   useEffect(() => {
-    if (!isOpen || !containerRef.current) return;
-    if (!loaderType.includes('<div') && !loaderType.includes('<style>')) return;
-
-    // Clear container
-    if (containerRef.current.shadowRoot) {
-      containerRef.current.shadowRoot.innerHTML = '';
-    } else {
-      containerRef.current.innerHTML = '';
+    if (!isOpen) {
+      setHtmlContent('');
+      // Cleanup styles when preview closes
+      const styleToRemove = document.getElementById('loader-preview-styles');
+      if (styleToRemove) {
+        styleToRemove.remove();
+      }
+      return;
     }
 
-    // Create shadow root for style isolation (if not already created)
-    let shadowRoot = containerRef.current.shadowRoot;
-    if (!shadowRoot) {
-      shadowRoot = containerRef.current.attachShadow({ mode: 'open' });
+    if (!loaderType.includes('<div') && !loaderType.includes('<style>')) {
+      setHtmlContent('');
+      return;
     }
 
     // Extract styles and HTML
@@ -42,21 +42,32 @@ export default function LoaderFullscreenPreview({
     const styles = styleMatch ? styleMatch[1] : '';
     const htmlWithoutStyles = loaderType.replace(/<style>[\s\S]*?<\/style>/g, '').trim();
 
-    // Create style element in shadow DOM
+    // Inject styles into document head first
     if (styles) {
+      const styleId = 'loader-preview-styles';
+      const existingStyle = document.getElementById(styleId);
+      if (existingStyle) {
+        existingStyle.remove();
+      }
+
       const styleElement = document.createElement('style');
+      styleElement.id = styleId;
       styleElement.textContent = styles;
-      shadowRoot.appendChild(styleElement);
+      document.head.appendChild(styleElement);
     }
 
-    // Create container for HTML content
-    const contentDiv = document.createElement('div');
-    contentDiv.innerHTML = htmlWithoutStyles;
-    shadowRoot.appendChild(contentDiv);
+    // Set HTML content after styles are injected
+    // Use setTimeout to ensure styles are applied before rendering
+    setTimeout(() => {
+      setHtmlContent(htmlWithoutStyles);
+    }, 100);
 
     // Cleanup
     return () => {
-      // Don't cleanup shadow root, just clear it for next render
+      const styleToRemove = document.getElementById('loader-preview-styles');
+      if (styleToRemove) {
+        styleToRemove.remove();
+      }
     };
   }, [loaderType, isOpen]);
 
@@ -99,11 +110,20 @@ export default function LoaderFullscreenPreview({
   if (!isOpen) return null;
 
   const renderLoader = () => {
-    // If loaderType contains HTML/CSS (starts with <div or contains <style>), use Shadow DOM
+    // If loaderType contains HTML/CSS (starts with <div or contains <style>), render directly
     if (loaderType.includes('<div') || loaderType.includes('<style>')) {
+      if (!htmlContent) {
+        return (
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-900">
+            <div className="text-white">Chargement du loader...</div>
+          </div>
+        );
+      }
+
       return (
         <div 
           ref={containerRef}
+          dangerouslySetInnerHTML={{ __html: htmlContent }}
           className="absolute inset-0"
           style={{ 
             position: 'fixed',

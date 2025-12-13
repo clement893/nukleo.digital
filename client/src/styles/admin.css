@@ -1,0 +1,32 @@
+/* Admin Panel Styles - Aktiv Grotesk Font Family */
+
+/* Ensure Aktiv Grotesk fonts are loaded for admin */
+@layer base {
+  /* Admin body text */
+  body[data-admin="true"],
+  body.admin-panel,
+  [data-admin-panel] {
+    font-family: var(--font-sans);
+  }
+
+  /* Admin headings */
+  [data-admin-panel] h1,
+  [data-admin-panel] h2,
+  [data-admin-panel] h3,
+  [data-admin-panel] h4,
+  [data-admin-panel] h5,
+  [data-admin-panel] h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+  }
+
+  /* Admin specific font overrides */
+  [data-admin-panel] * {
+    font-family: var(--font-sans);
+  }
+
+  [data-admin-panel] .font-heading {
+    font-family: var(--font-heading);
+  }
+}

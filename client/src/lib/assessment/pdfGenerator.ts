@@ -9,10 +9,11 @@ export async function generatePDFReport(
   // Try to dynamically import jspdf - if not available, fallback to text download
   let jsPDF: any;
   try {
-    const jsPDFModule = await import('jspdf');
+    // Use dynamic import with string literal to avoid Vite resolving at build time
+    const jsPDFModule = await import(/* @vite-ignore */ 'jspdf');
     jsPDF = jsPDFModule.default || jsPDFModule;
   } catch (error) {
-    console.warn('jsPDF not available, falling back to text report');
+    console.warn('jsPDF not available, falling back to text report:', error);
     // Fallback: download as text file
     const recommendations = getRecommendationsForLevel(results.maturityLevel);
     const reportText = `

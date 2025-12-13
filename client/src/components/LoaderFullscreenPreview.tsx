@@ -31,6 +31,16 @@ export default function LoaderFullscreenPreview({
       return;
     }
 
+    // Extract styles and HTML
+    const styleMatch = loaderType.match(/<style>([\s\S]*?)<\/style>/);
+    const styles = styleMatch ? styleMatch[1] : '';
+    let htmlContent = loaderType.replace(/<style>[\s\S]*?<\/style>/g, '').trim();
+
+    // Convert relative image paths to absolute URLs for iframe
+    const baseUrl = window.location.origin;
+    htmlContent = htmlContent.replace(/src="(\/[^"]+)"/g, `src="${baseUrl}$1"`);
+    htmlContent = htmlContent.replace(/src='(\/[^']+)'/g, `src='${baseUrl}$1'`);
+
     // Create a complete HTML document with the loader content
     const fullHTML = `<!DOCTYPE html>
 <html lang="fr">
@@ -38,10 +48,10 @@ export default function LoaderFullscreenPreview({
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Loader Preview</title>
-  ${loaderType.match(/<style>([\s\S]*?)<\/style>/)?.[1] ? `<style>${loaderType.match(/<style>([\s\S]*?)<\/style>/)?.[1]}</style>` : ''}
+  ${styles ? `<style>${styles}</style>` : ''}
 </head>
 <body style="margin: 0; padding: 0; overflow: hidden; width: 100vw; height: 100vh;">
-  ${loaderType.replace(/<style>[\s\S]*?<\/style>/g, '')}
+  ${htmlContent}
 </body>
 </html>`;
 

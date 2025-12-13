@@ -53,7 +53,7 @@
   },
   "home": {
     "beyondAI": "Au-delà de l'IA",
-    "beyondAIDescription": "Nous créons des écosystèmes numériques complets—de la stratégie et des plateformes au contenu créatif et à l'automatisation intelligente."
+    "beyondAIDescription": "Nous créons des écosystèmes numériques complets de la stratégie et des plateformes au contenu créatif et à l'automatisation intelligente."
   },
   "about": {
     "title": "À propos",
@@ -133,7 +133,7 @@
     "message": "Message",
     "send": "Envoyer",
     "success": "Message envoyé avec succès !",
-    "sectionNumber": "07 — Contact",
+    "sectionNumber": "07 Contact",
     "heroTitle": "Commençons",
     "heroSubtitle": "Votre Transformation",
     "heroDescription": "Prêt à devenir un leader axé sur l'IA ? Contactez-nous et discutons de la façon dont nous pouvons vous aider à prospérer à l'ère de l'intelligence artificielle.",
@@ -154,7 +154,7 @@
   },
   "projects": {
     "title": "Projets",
-    "sectionNumber": "02 — Projets",
+    "sectionNumber": "02 Projets",
     "heroTitle": "Transformations",
     "heroSubtitle": "qui Résonnent",
     "filterAll": "Tous",
@@ -162,7 +162,7 @@
   },
   "expertise": {
     "title": "Expertise",
-    "sectionNumber": "04 — Expertise",
+    "sectionNumber": "04 Expertise",
     "heroTitle": "Expertise",
     "heroSubtitle": "Approfondie"
   },

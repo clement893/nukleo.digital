@@ -55,7 +55,7 @@ export default function Agencies() {
             </h1>
 
             <p className="text-xl md:text-2xl text-white/70 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Scale your agency instantly with our expert team. Deliver more projects, increase margins, keep clients happy—all without hiring headaches.
+              Scale your agency instantly with our expert team. Deliver more projects, increase margins, keep clients happy all without hiring headaches.
             </p>
 
             {/* CTA Buttons */}
@@ -116,7 +116,7 @@ export default function Agencies() {
                 {
                   icon: TrendingUp,
                   title: 'Clients Want More, Faster',
-                  description: 'AI, automation, custom platforms—demands are exploding but your team is maxed out.',
+                  description: 'AI, automation, custom platforms demands are exploding but your team is maxed out.',
                 },
                 {
                   icon: DollarSign,
@@ -150,7 +150,7 @@ export default function Agencies() {
                 Your Instant <span className="bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">AI & Digital Powerhouse</span>
               </h2>
               <p className="text-xl text-white/70 max-w-3xl mx-auto">
-                We become your technical backbone—seamlessly integrated, instantly scalable, transparently priced.
+                We become your technical backbone seamlessly integrated, instantly scalable, transparently priced.
               </p>
             </div>
 
@@ -184,7 +184,7 @@ export default function Agencies() {
                 {
                   icon: Target,
                   title: 'AI & Automation Experts',
-                  description: 'Not just coders—strategic AI partners who understand business transformation.',
+                  description: 'Not just coders strategic AI partners who understand business transformation.',
                   highlight: '5+ years avg. experience',
                 },
                 {
@@ -255,7 +255,7 @@ export default function Agencies() {
                 {
                   step: '03',
                   title: 'Project Kickoff',
-                  description: 'Team integrated into your workflow. Slack, GitHub, daily standups—seamless collaboration.',
+                  description: 'Team integrated into your workflow. Slack, GitHub, daily standups seamless collaboration.',
                   timeline: 'Day 4+',
                 },
               ].map((step, index) => (
@@ -516,7 +516,7 @@ export default function Agencies() {
             </h2>
 
             <p className="text-xl text-white/70 mb-12 max-w-2xl mx-auto">
-              Join 32+ agencies who've transformed their business with Nukleo. Book a free strategy call today—no commitment, just insights.
+              Join 32+ agencies who've transformed their business with Nukleo. Book a free strategy call today no commitment, just insights.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">

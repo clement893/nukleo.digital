@@ -8,7 +8,7 @@ export default function ManifestoSection() {
           {/* Left: Title and Description */}
           <div>
             <span className="font-mono text-accent text-sm mb-8 block tracking-widest">
-              01 — Manifesto
+              01 Manifesto
             </span>
 
             <h2 className="text-white mb-6 sm:mb-8 text-4xl sm:text-5xl lg:text-6xl">

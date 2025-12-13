@@ -242,7 +242,7 @@ export default function ArtsCulture() {
                 <div className="text-4xl mb-4 inline-block group-hover:animate-bounce">⚠️</div>
                 <h3 className="text-xl font-semibold mb-3 group-hover:text-orange-300 transition-colors">Precarious Conditions</h3>
                 <p className="text-white/70 leading-relaxed">
-                  Artists face unstable income, lack of benefits, and uncertain futures—making it harder to focus on what they do best: <span className="text-white/90 font-medium">creating</span>.
+                  Artists face unstable income, lack of benefits, and uncertain futures making it harder to focus on what they do best: <span className="text-white/90 font-medium">creating</span>.
                 </p>
                 
                 {/* Reveal on hover */}
@@ -341,7 +341,7 @@ export default function ArtsCulture() {
                 Our <span className="font-light italic">Action</span>
               </h2>
               <p className="text-lg text-white/60 max-w-2xl mx-auto">
-                We don't just <span className="line-through text-white/40">talk</span> about supporting culture—we <span className="text-white/80 font-semibold">act</span> on it every day.
+                We don't just <span className="line-through text-white/40">talk</span> about supporting culture we <span className="text-white/80 font-semibold">act</span> on it every day.
               </p>
             </div>
 
@@ -458,7 +458,7 @@ export default function ArtsCulture() {
                         <h3 className="text-2xl font-semibold group-hover:text-purple-300 transition-colors">Raise Awareness</h3>
                       </div>
                       <p className="text-white/70 leading-relaxed">
-                        We actively promote arts and culture within our company, among partners, and in our community—staying <span className="text-white/90 font-medium">informed</span> and <span className="text-white/90 font-medium">engaged</span> with contemporary cultural issues.
+                        We actively promote arts and culture within our company, among partners, and in our community staying <span className="text-white/90 font-medium">informed</span> and <span className="text-white/90 font-medium">engaged</span> with contemporary cultural issues.
                       </p>
                       <div className="mt-4 text-sm text-purple-300/60 italic group-hover:text-purple-300/80 transition-colors">
                         → Amplify the voices that matter
@@ -536,7 +536,7 @@ export default function ArtsCulture() {
                 Let's grow culture <span className="font-light italic">together</span>
               </h2>
               <p className="text-lg text-white/60 mb-8 max-w-2xl mx-auto leading-relaxed">
-                Whether you're an artist, cultural organization, or fellow entrepreneur—join us in making a real difference.
+                Whether you're an artist, cultural organization, or fellow entrepreneur join us in making a real difference.
               </p>
               <Link href="/contact">
                 <button className="group/btn bg-white text-[rgb(107,23,22)] px-8 py-4 rounded-full font-semibold hover:bg-white/90 transition-all inline-flex items-center gap-2 hover:gap-3">

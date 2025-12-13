@@ -43,7 +43,7 @@ export default function Studio() {
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
               <div className="inline-block mb-6 px-4 py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm">
-                <span className="text-sm font-mono text-white/70">03 — STUDIO</span>
+                <span className="text-sm font-mono text-white/70">03 STUDIO</span>
               </div>
               
               <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
@@ -73,7 +73,7 @@ export default function Studio() {
                 <p className="text-2xl text-white/90 leading-relaxed">
                   To harness the creative power of AI to deliver 
                   <span className="text-accent font-semibold"> hyper-personalized experiences at scale</span>. 
-                  We don't replace human creativity—we amplify it, enabling your brand to create 
+                  We don't replace human creativity we amplify it, enabling your brand to create 
                   meaningful connections with every customer, in every moment.
                 </p>
               </div>
@@ -117,7 +117,7 @@ export default function Studio() {
               
               <div className="space-y-8">
                 <p className="text-xl text-white/80 leading-relaxed">
-                  We're entering the era of <span className="text-accent font-semibold">Agentic Marketing</span>—where 
+                  We're entering the era of <span className="text-accent font-semibold">Agentic Marketing</span> where 
                   autonomous AI systems don't just execute campaigns, they learn, decide, and act independently 
                   to achieve your business objectives.
                 </p>
@@ -166,7 +166,7 @@ export default function Studio() {
                       <h3 className="text-2xl font-bold mb-3">Dynamic Content Generation</h3>
                       <p className="text-white/70 leading-relaxed">
                         Generate thousands of unique product descriptions, blog posts, and social media 
-                        content tailored to different audience segments—all while maintaining brand voice 
+                        content tailored to different audience segments all while maintaining brand voice 
                         and quality standards.
                       </p>
                     </div>

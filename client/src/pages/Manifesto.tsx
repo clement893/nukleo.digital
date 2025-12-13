@@ -13,7 +13,7 @@ export default function Manifesto() {
         {/* Hero Section */}
         <div className="max-w-6xl mx-auto mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-8">
-            <span className="text-sm font-medium text-white/90">01 — Manifesto</span>
+            <span className="text-sm font-medium text-white/90">01 Manifesto</span>
           </div>
           
           <h1 className="text-6xl md:text-8xl font-bold text-white mb-8 leading-tight">
@@ -154,7 +154,7 @@ export default function Manifesto() {
             <blockquote className="text-2xl md:text-3xl font-light text-white/80 italic leading-relaxed">
               "The future belongs to those who build tomorrow's systems today."
             </blockquote>
-            <p className="text-white/60 mt-4">— The Nukleo Digital Team</p>
+            <p className="text-white/60 mt-4">The Nukleo Digital Team</p>
           </section>
         </div>
       </div>

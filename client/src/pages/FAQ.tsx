@@ -27,7 +27,7 @@ const faqs: FAQItem[] = [
   },
   {
     question: "What's the difference between a chatbot and an AI agent?",
-    answer: "A traditional chatbot follows a predefined script with fixed decision trees: if the user says X, respond Y. It cannot deviate from its script or adapt to unexpected situations. An AI agent, on the other hand, possesses reasoning, planning, and tool-use capabilities. It can understand the intent behind a complex request, break down the problem into subtasks, access multiple data sources, make contextual decisions, and adapt its approach based on intermediate results. For example, faced with a complex refund request, a chatbot will redirect to a human, while an AI agent will analyze the refund policy, verify eligibility, calculate the amount, initiate the process, and inform the customer of the timeline — all autonomously.",
+    answer: "A traditional chatbot follows a predefined script with fixed decision trees: if the user says X, respond Y. It cannot deviate from its script or adapt to unexpected situations. An AI agent, on the other hand, possesses reasoning, planning, and tool-use capabilities. It can understand the intent behind a complex request, break down the problem into subtasks, access multiple data sources, make contextual decisions, and adapt its approach based on intermediate results. For example, faced with a complex refund request, a chatbot will redirect to a human, while an AI agent will analyze the refund policy, verify eligibility, calculate the amount, initiate the process, and inform the customer of the timeline all autonomously.",
     category: "Agentic AI"
   },
   
@@ -61,7 +61,7 @@ const faqs: FAQItem[] = [
   },
   {
     question: "How do you measure AI agent success?",
-    answer: "We measure success across 3 dimensions: 1) Business metrics (cost reduction, revenue increase, customer satisfaction, time savings — concrete, quantifiable impact), 2) Technical metrics (accuracy, response time, error rate, system availability — operational quality), 3) Adoption metrics (usage rate, user satisfaction, escalation to humans — actual adoption). We establish a baseline before deployment and track these KPIs weekly during the first 3 months, then monthly. This approach ensures we optimize not just for technical performance, but for real business impact.",
+    answer: "We measure success across 3 dimensions: 1) Business metrics (cost reduction, revenue increase, customer satisfaction, time savings concrete, quantifiable impact), 2) Technical metrics (accuracy, response time, error rate, system availability operational quality), 3) Adoption metrics (usage rate, user satisfaction, escalation to humans actual adoption). We establish a baseline before deployment and track these KPIs weekly during the first 3 months, then monthly. This approach ensures we optimize not just for technical performance, but for real business impact.",
     category: "ROI & Business Case"
   },
   {
@@ -73,12 +73,12 @@ const faqs: FAQItem[] = [
   // Technical & Security
   {
     question: "What technologies do you use?",
-    answer: "Our technology stack combines best-in-class tools: LLMs (OpenAI GPT-4, Anthropic Claude, Google Gemini — we choose based on your specific use case), Agent frameworks (LangChain, LangGraph, AutoGen, CrewAI for orchestration), Vector databases (Pinecone, Weaviate, Qdrant for RAG), Cloud infrastructure (AWS, Azure, GCP for scalability), and Integration tools (APIs, webhooks, ETL for connection to your existing systems). We're technology-agnostic: we select the best tools for your specific needs rather than imposing a one-size-fits-all solution.",
+    answer: "Our technology stack combines best-in-class tools: LLMs (OpenAI GPT-4, Anthropic Claude, Google Gemini we choose based on your specific use case), Agent frameworks (LangChain, LangGraph, AutoGen, CrewAI for orchestration), Vector databases (Pinecone, Weaviate, Qdrant for RAG), Cloud infrastructure (AWS, Azure, GCP for scalability), and Integration tools (APIs, webhooks, ETL for connection to your existing systems). We're technology-agnostic: we select the best tools for your specific needs rather than imposing a one-size-fits-all solution.",
     category: "Technical & Security"
   },
   {
     question: "How do you ensure data security and privacy?",
-    answer: "Security is built into every layer: 1) Data encryption (at rest and in transit with AES-256 and TLS 1.3), 2) Access control (role-based authentication, principle of least privilege), 3) Data isolation (your data never mixes with other clients, dedicated infrastructure if needed), 4) Compliance (GDPR, CCPA, SOC 2, HIPAA depending on your industry), 5) Audit and monitoring (complete traceability of all agent actions, real-time alerts for anomalies). We also offer on-premise or private cloud deployment for organizations with strict security requirements. Your data remains YOUR data — we never use it to train models or share it with third parties.",
+    answer: "Security is built into every layer: 1) Data encryption (at rest and in transit with AES-256 and TLS 1.3), 2) Access control (role-based authentication, principle of least privilege), 3) Data isolation (your data never mixes with other clients, dedicated infrastructure if needed), 4) Compliance (GDPR, CCPA, SOC 2, HIPAA depending on your industry), 5) Audit and monitoring (complete traceability of all agent actions, real-time alerts for anomalies). We also offer on-premise or private cloud deployment for organizations with strict security requirements. Your data remains YOUR data we never use it to train models or share it with third parties.",
     category: "Technical & Security"
   },
   {
@@ -95,24 +95,24 @@ const faqs: FAQItem[] = [
   },
   {
     question: "Can agentic AI completely replace my customer support?",
-    answer: "No, and that's not the goal. The optimal approach is AI-human collaboration: AI agents handle 60-80% of volume (frequent questions, simple requests, repetitive tasks) 24/7 with near-instant response time, while human agents focus on the 20-40% of complex cases that are emotionally sensitive or require creativity and empathy. Result: better customer experience (fast answers for simple cases, human expertise for complex ones), more satisfied teams (less repetition, more interesting problem-solving), and optimized costs. The human role evolves from 'responder' to 'expert-supervisor' — a positive transformation, not a replacement.",
+    answer: "No, and that's not the goal. The optimal approach is AI-human collaboration: AI agents handle 60-80% of volume (frequent questions, simple requests, repetitive tasks) 24/7 with near-instant response time, while human agents focus on the 20-40% of complex cases that are emotionally sensitive or require creativity and empathy. Result: better customer experience (fast answers for simple cases, human expertise for complex ones), more satisfied teams (less repetition, more interesting problem-solving), and optimized costs. The human role evolves from 'responder' to 'expert-supervisor' a positive transformation, not a replacement.",
     category: "Use Cases"
   },
   {
     question: "How can agentic AI improve my marketing?",
-    answer: "Agentic AI transforms marketing across 4 axes: 1) Content generation at scale (blog articles, social posts, emails, landing pages — 3x volume with consistent quality), 2) Dynamic personalization (real-time content adaptation based on each visitor's profile, behavior, and context), 3) Continuous advertising optimization (agents automatically test creative variants, audiences, and bids to maximize ROI — 40-60% improvement), 4) Predictive analytics (identification of high-potential leads, trend forecasting, strategic recommendations). The result: more effective campaigns, improved marketing ROI, and teams focused on creative strategy rather than repetitive execution.",
+    answer: "Agentic AI transforms marketing across 4 axes: 1) Content generation at scale (blog articles, social posts, emails, landing pages 3x volume with consistent quality), 2) Dynamic personalization (real-time content adaptation based on each visitor's profile, behavior, and context), 3) Continuous advertising optimization (agents automatically test creative variants, audiences, and bids to maximize ROI 40-60% improvement), 4) Predictive analytics (identification of high-potential leads, trend forecasting, strategic recommendations). The result: more effective campaigns, improved marketing ROI, and teams focused on creative strategy rather than repetitive execution.",
     category: "Use Cases"
   },
   
   // About Nukleo
   {
     question: "What differentiates Nukleo from other AI agencies?",
-    answer: "Three key differentiators: 1) Deep technical expertise — our team combines senior ML/AI engineers, cloud architects, and product specialists who have built AI systems at scale (not just API integrators), 2) Exclusive focus on agentic AI — we don't do 'generic digital transformation', we specialize in autonomous agents and multi-agent systems, 3) End-to-end AI-native approach — we don't just plug ChatGPT into your site, we re-architect your processes, data, and interfaces to be natively AI-first. Result: deployment in 90 days instead of 12-24 months, and systems that evolve with your needs rather than becoming obsolete.",
+    answer: "Three key differentiators: 1) Deep technical expertise our team combines senior ML/AI engineers, cloud architects, and product specialists who have built AI systems at scale (not just API integrators), 2) Exclusive focus on agentic AI we don't do 'generic digital transformation', we specialize in autonomous agents and multi-agent systems, 3) End-to-end AI-native approach we don't just plug ChatGPT into your site, we re-architect your processes, data, and interfaces to be natively AI-first. Result: deployment in 90 days instead of 12-24 months, and systems that evolve with your needs rather than becoming obsolete.",
     category: "About Nukleo"
   },
   {
     question: "Do you offer training for our teams?",
-    answer: "Yes, training is an integral part of every project. We offer: 1) Executive workshops (strategic vision, business cases, ROI — 4h for leadership), 2) Technical training (architecture, tools, best practices — 2 days for dev/data teams), 3) End-user training (how to interact with agents, when to escalate, feedback loops — 1 day for operational teams), 4) Train-the-trainer program (to create internal champions who can train future employees). We also provide detailed documentation, video tutorials, and 3 months of post-launch support to ensure smooth adoption. The goal: your teams become autonomous and can evolve the system without depending on us long-term.",
+    answer: "Yes, training is an integral part of every project. We offer: 1) Executive workshops (strategic vision, business cases, ROI 4h for leadership), 2) Technical training (architecture, tools, best practices 2 days for dev/data teams), 3) End-user training (how to interact with agents, when to escalate, feedback loops 1 day for operational teams), 4) Train-the-trainer program (to create internal champions who can train future employees). We also provide detailed documentation, video tutorials, and 3 months of post-launch support to ensure smooth adoption. The goal: your teams become autonomous and can evolve the system without depending on us long-term.",
     category: "About Nukleo"
   },
   {

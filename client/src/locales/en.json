@@ -53,7 +53,7 @@
   },
   "home": {
     "beyondAI": "Beyond AI",
-    "beyondAIDescription": "We craft complete digital ecosystems—from strategy and platforms to creative content and intelligent automation."
+    "beyondAIDescription": "We craft complete digital ecosystems from strategy and platforms to creative content and intelligent automation."
   },
   "about": {
     "title": "About",
@@ -133,7 +133,7 @@
     "message": "Message",
     "send": "Send",
     "success": "Message sent successfully!",
-    "sectionNumber": "07 — Contact",
+    "sectionNumber": "07 Contact",
     "heroTitle": "Let's Start",
     "heroSubtitle": "Your Transformation",
     "heroDescription": "Ready to become an AI-native leader? Get in touch and let's discuss how we can help you thrive in the age of artificial intelligence.",
@@ -154,7 +154,7 @@
   },
   "projects": {
     "title": "Projects",
-    "sectionNumber": "02 — Projects",
+    "sectionNumber": "02 Projects",
     "heroTitle": "Transformations",
     "heroSubtitle": "that Resonate",
     "filterAll": "All",
@@ -162,7 +162,7 @@
   },
   "expertise": {
     "title": "Expertise",
-    "sectionNumber": "04 — Expertise",
+    "sectionNumber": "04 Expertise",
     "heroTitle": "Deep",
     "heroSubtitle": "Expertise"
   },

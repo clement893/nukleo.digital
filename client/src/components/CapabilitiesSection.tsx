@@ -23,7 +23,7 @@ export default function CapabilitiesSection() {
     {
       icon: BarChart3,
       title: 'Automated Marketing',
-      description: 'End-to-end campaign management by AI agents—from content generation to ad buying and performance analysis.',
+      description: 'End-to-end campaign management by AI agents from content generation to ad buying and performance analysis.',
     },
   ];
 

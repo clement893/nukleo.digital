@@ -11,13 +11,13 @@ export default function WhoWeServeSection() {
     {
       icon: Building2,
       title: 'SMBs',
-      description: 'Transform your business with practical, cost-effective AI solutions that deliver real ROI—from automating repetitive tasks to unlocking customer insights.',
+      description: 'Transform your business with practical, cost-effective AI solutions that deliver real ROI from automating repetitive tasks to unlocking customer insights.',
       highlights: ['Affordable AI solutions', 'Quick wins & fast ROI', 'No enterprise complexity']
     },
     {
       icon: Heart,
       title: 'Non-Profits',
-      description: 'Amplify your impact with AI tools that help you serve more people, operate more efficiently, and tell your story more powerfully—without breaking the budget.',
+      description: 'Amplify your impact with AI tools that help you serve more people, operate more efficiently, and tell your story more powerfully without breaking the budget.',
       highlights: ['Mission-driven AI', 'Donor engagement tools', 'Operational efficiency']
     }
   ];
@@ -34,7 +34,7 @@ export default function WhoWeServeSection() {
             Who We Serve
           </h2>
           <p className="text-base sm:text-lg lg:text-xl text-white/70 max-w-3xl mx-auto px-4">
-            We're here to help <span className="text-white font-bold">EVERYONE</span> transform. Big tech has AI—now it's your turn. We bring enterprise-grade AI to startups, SMBs, and non-profits who refuse to be left behind.
+            We're here to help <span className="text-white font-bold">EVERYONE</span> transform. Big tech has AI now it's your turn. We bring enterprise-grade AI to startups, SMBs, and non-profits who refuse to be left behind.
           </p>
         </div>
 

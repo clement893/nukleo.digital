@@ -658,6 +658,397 @@ const loader5 = `<div class="nukleo-loader-explosion">
   ${generateAlternatingText('nukleo-loader-explosion-text', 'color: rgba(255, 255, 255, 0.95); font-family: \'Aktiv Grotesk\', sans-serif; font-size: 16px; letter-spacing: 0.45em; text-transform: uppercase; font-weight: 300; text-shadow: 0 0 10px rgba(139, 92, 246, 0.8), 0 0 20px rgba(236, 72, 153, 0.6), 0 0 30px rgba(34, 211, 238, 0.4);', '28%')}
 </div>`;
 
+// Loader 6: Geometric Lines - Lignes géométriques modernes avec effet de scan
+const loader6 = `<div class="nukleo-loader-geometric">
+  <style>
+    .nukleo-loader-geometric {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #1a0b2e 0%, #2d1b4e 50%, #1a0b2e 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      overflow: hidden;
+    }
+    
+    .nukleo-loader-geometric::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        linear-gradient(45deg, transparent 30%, rgba(139, 92, 246, 0.1) 50%, transparent 70%),
+        linear-gradient(-45deg, transparent 30%, rgba(236, 72, 153, 0.08) 50%, transparent 70%);
+      animation: geometric-scan 4s ease-in-out infinite;
+    }
+    
+    @keyframes geometric-scan {
+      0%, 100% { opacity: 0.3; transform: translateX(-100%); }
+      50% { opacity: 0.6; transform: translateX(100%); }
+    }
+    
+    .nukleo-loader-geometric .lines {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    
+    .nukleo-loader-geometric .line {
+      position: absolute;
+      background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.6), transparent);
+      height: 1px;
+      animation: line-sweep 3s ease-in-out infinite;
+    }
+    
+    .nukleo-loader-geometric .line-horizontal {
+      width: 100%;
+      left: 0;
+    }
+    
+    .nukleo-loader-geometric .line-vertical {
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(180deg, transparent, rgba(139, 92, 246, 0.6), transparent);
+    }
+    
+    @keyframes line-sweep {
+      0%, 100% { opacity: 0; transform: scaleX(0); }
+      50% { opacity: 1; transform: scaleX(1); }
+    }
+    
+    .nukleo-loader-geometric .logo-container {
+      position: relative;
+      z-index: 10;
+      animation: geometric-pulse 2.5s ease-in-out infinite;
+    }
+    
+    @keyframes geometric-pulse {
+      0%, 100% { 
+        transform: scale(1);
+        filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.6));
+      }
+      50% { 
+        transform: scale(1.05);
+        filter: drop-shadow(0 0 50px rgba(139, 92, 246, 0.9)) drop-shadow(0 0 80px rgba(236, 72, 153, 0.6));
+      }
+    }
+    
+    .nukleo-loader-geometric .logo-container img {
+      width: 200px;
+      height: auto;
+    }
+  </style>
+  
+  <div class="lines">
+    ${Array.from({ length: 5 }, (_, i) => `
+      <div class="line line-horizontal" style="top: ${20 + i * 15}%; animation-delay: ${i * 0.3}s;"></div>
+      <div class="line line-vertical" style="left: ${20 + i * 15}%; animation-delay: ${i * 0.3 + 0.15}s;"></div>
+    `).join('')}
+  </div>
+  
+  <div class="logo-container">
+    <img src="/Nukleo_blanc_RVB.svg" alt="Nukleo Digital" />
+  </div>
+  
+  ${generateAlternatingText('nukleo-loader-geometric-text', 'color: rgba(255, 255, 255, 0.95); font-family: \'Aktiv Grotesk\', sans-serif; font-size: 14px; letter-spacing: 0.4em; text-transform: uppercase; font-weight: 300; text-shadow: 0 0 10px rgba(139, 92, 246, 0.8), 0 0 20px rgba(236, 72, 153, 0.6);', '28%')}
+</div>`;
+
+// Loader 7: Floating Particles - Particules élégantes flottantes
+const loader7 = `<div class="nukleo-loader-floating">
+  <style>
+    .nukleo-loader-floating {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at center, #1a0b2e 0%, #0f0519 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      overflow: hidden;
+    }
+    
+    .nukleo-loader-floating::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 30% 30%, rgba(139, 92, 246, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(236, 72, 153, 0.15) 0%, transparent 50%);
+      animation: floating-glow 6s ease-in-out infinite;
+    }
+    
+    @keyframes floating-glow {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.1); }
+    }
+    
+    .nukleo-loader-floating .particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    
+    .nukleo-loader-floating .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: radial-gradient(circle, rgba(139, 92, 246, 1), rgba(139, 92, 246, 0));
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(139, 92, 246, 0.8);
+      animation: float 8s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) translateX(0) scale(1);
+        opacity: 0.4;
+      }
+      25% {
+        transform: translateY(-30px) translateX(20px) scale(1.2);
+        opacity: 0.8;
+      }
+      50% {
+        transform: translateY(-60px) translateX(-10px) scale(1);
+        opacity: 1;
+      }
+      75% {
+        transform: translateY(-30px) translateX(-20px) scale(1.2);
+        opacity: 0.8;
+      }
+    }
+    
+    .nukleo-loader-floating .logo-container {
+      position: relative;
+      z-index: 10;
+      animation: floating-logo 3s ease-in-out infinite;
+    }
+    
+    @keyframes floating-logo {
+      0%, 100% { 
+        transform: translateY(0) scale(1);
+        filter: drop-shadow(0 0 25px rgba(139, 92, 246, 0.7));
+      }
+      50% { 
+        transform: translateY(-10px) scale(1.03);
+        filter: drop-shadow(0 0 40px rgba(139, 92, 246, 0.9)) drop-shadow(0 0 60px rgba(236, 72, 153, 0.5));
+      }
+    }
+    
+    .nukleo-loader-floating .logo-container img {
+      width: 200px;
+      height: auto;
+    }
+  </style>
+  
+  <div class="particles">
+    ${Array.from({ length: 15 }, (_, i) => {
+      const left = Math.random() * 100;
+      const top = Math.random() * 100;
+      const delay = Math.random() * 8;
+      return `<div class="particle" style="left: ${left}%; top: ${top}%; animation-delay: ${delay}s;"></div>`;
+    }).join('')}
+  </div>
+  
+  <div class="logo-container">
+    <img src="/Nukleo_blanc_RVB.svg" alt="Nukleo Digital" />
+  </div>
+  
+  ${generateAlternatingText('nukleo-loader-floating-text', 'color: rgba(255, 255, 255, 0.95); font-family: \'Aktiv Grotesk\', sans-serif; font-size: 14px; letter-spacing: 0.4em; text-transform: uppercase; font-weight: 300; text-shadow: 0 0 10px rgba(139, 92, 246, 0.8), 0 0 20px rgba(236, 72, 153, 0.6);', '28%')}
+</div>`;
+
+// Loader 8: Light Rays - Rayons de lumière élégants
+const loader8 = `<div class="nukleo-loader-rays">
+  <style>
+    .nukleo-loader-rays {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at center, #1a0b2e 0%, #000000 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      overflow: hidden;
+    }
+    
+    .nukleo-loader-rays::before {
+      content: '';
+      position: absolute;
+      inset: -50%;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        rgba(139, 92, 246, 0.15) 45deg,
+        rgba(236, 72, 153, 0.2) 90deg,
+        rgba(139, 92, 246, 0.15) 135deg,
+        transparent 180deg,
+        rgba(139, 92, 246, 0.15) 225deg,
+        rgba(236, 72, 153, 0.2) 270deg,
+        rgba(139, 92, 246, 0.15) 315deg,
+        transparent 360deg
+      );
+      animation: rays-rotate 12s linear infinite;
+    }
+    
+    @keyframes rays-rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    .nukleo-loader-rays .rays {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    
+    .nukleo-loader-rays .ray {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 2px;
+      height: 40%;
+      background: linear-gradient(180deg, rgba(139, 92, 246, 0.8), transparent);
+      transform-origin: top center;
+      animation: ray-pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes ray-pulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.8); }
+      50% { opacity: 0.8; transform: scaleY(1); }
+    }
+    
+    .nukleo-loader-rays .logo-container {
+      position: relative;
+      z-index: 10;
+      animation: rays-logo 2.5s ease-in-out infinite;
+    }
+    
+    @keyframes rays-logo {
+      0%, 100% { 
+        transform: scale(1);
+        filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.7)) drop-shadow(0 0 50px rgba(236, 72, 153, 0.5));
+      }
+      50% { 
+        transform: scale(1.05);
+        filter: drop-shadow(0 0 50px rgba(139, 92, 246, 1)) drop-shadow(0 0 80px rgba(236, 72, 153, 0.8));
+      }
+    }
+    
+    .nukleo-loader-rays .logo-container img {
+      width: 200px;
+      height: auto;
+    }
+  </style>
+  
+  <div class="rays">
+    ${Array.from({ length: 12 }, (_, i) => {
+      const angle = (i / 12) * 360;
+      return `<div class="ray" style="transform: rotate(${angle}deg) translateY(-50%); animation-delay: ${i * 0.15}s;"></div>`;
+    }).join('')}
+  </div>
+  
+  <div class="logo-container">
+    <img src="/Nukleo_blanc_RVB.svg" alt="Nukleo Digital" />
+  </div>
+  
+  ${generateAlternatingText('nukleo-loader-rays-text', 'color: rgba(255, 255, 255, 0.95); font-family: \'Aktiv Grotesk\', sans-serif; font-size: 14px; letter-spacing: 0.4em; text-transform: uppercase; font-weight: 300; text-shadow: 0 0 10px rgba(139, 92, 246, 0.8), 0 0 20px rgba(236, 72, 153, 0.6);', '28%')}
+</div>`;
+
+// Loader 9: Minimalist Abstract - Formes abstraites minimalistes
+const loader9 = `<div class="nukleo-loader-minimalist">
+  <style>
+    .nukleo-loader-minimalist {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #0f0519 0%, #1a0b2e 50%, #0f0519 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      overflow: hidden;
+    }
+    
+    .nukleo-loader-minimalist::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+      animation: minimalist-pulse 4s ease-in-out infinite;
+    }
+    
+    @keyframes minimalist-pulse {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.2); }
+    }
+    
+    .nukleo-loader-minimalist .shapes {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    
+    .nukleo-loader-minimalist .shape {
+      position: absolute;
+      border: 1px solid rgba(139, 92, 246, 0.4);
+      animation: shape-rotate 6s linear infinite;
+    }
+    
+    .nukleo-loader-minimalist .shape-circle {
+      border-radius: 50%;
+      border: 1px solid rgba(139, 92, 246, 0.3);
+    }
+    
+    .nukleo-loader-minimalist .shape-square {
+      border: 1px solid rgba(236, 72, 153, 0.3);
+    }
+    
+    @keyframes shape-rotate {
+      from { transform: rotate(0deg) scale(1); opacity: 0.3; }
+      50% { transform: rotate(180deg) scale(1.1); opacity: 0.6; }
+      to { transform: rotate(360deg) scale(1); opacity: 0.3; }
+    }
+    
+    .nukleo-loader-minimalist .logo-container {
+      position: relative;
+      z-index: 10;
+      animation: minimalist-logo 3s ease-in-out infinite;
+    }
+    
+    @keyframes minimalist-logo {
+      0%, 100% { 
+        transform: scale(1);
+        filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.5));
+      }
+      50% { 
+        transform: scale(1.02);
+        filter: drop-shadow(0 0 35px rgba(139, 92, 246, 0.8)) drop-shadow(0 0 50px rgba(236, 72, 153, 0.4));
+      }
+    }
+    
+    .nukleo-loader-minimalist .logo-container img {
+      width: 200px;
+      height: auto;
+    }
+  </style>
+  
+  <div class="shapes">
+    ${Array.from({ length: 6 }, (_, i) => {
+      const size = 80 + i * 40;
+      const left = 50 - (size / 2) / 10;
+      const top = 50 - (size / 2) / 10;
+      const type = i % 2 === 0 ? 'shape-circle' : 'shape-square';
+      const delay = i * 0.5;
+      return `<div class="shape ${type}" style="width: ${size}px; height: ${size}px; left: ${left}%; top: ${top}%; animation-delay: ${delay}s;"></div>`;
+    }).join('')}
+  </div>
+  
+  <div class="logo-container">
+    <img src="/Nukleo_blanc_RVB.svg" alt="Nukleo Digital" />
+  </div>
+  
+  ${generateAlternatingText('nukleo-loader-minimalist-text', 'color: rgba(255, 255, 255, 0.95); font-family: \'Aktiv Grotesk\', sans-serif; font-size: 14px; letter-spacing: 0.4em; text-transform: uppercase; font-weight: 300; text-shadow: 0 0 10px rgba(139, 92, 246, 0.8), 0 0 20px rgba(236, 72, 153, 0.6);', '28%')}
+</div>`;
+
 export async function seedCreativeLoaders() {
   try {
     const existingLoaders = await import("./loaders").then((m) =>
@@ -699,6 +1090,34 @@ export async function seedCreativeLoaders() {
         cssCode: loader5,
         isActive: false,
         displayOrder: 5,
+      },
+      {
+        name: "Geometric Lines",
+        description: "Lignes géométriques modernes avec effet de scan élégant",
+        cssCode: loader6,
+        isActive: false,
+        displayOrder: 6,
+      },
+      {
+        name: "Floating Particles",
+        description: "Particules élégantes flottantes avec mouvement fluide",
+        cssCode: loader7,
+        isActive: false,
+        displayOrder: 7,
+      },
+      {
+        name: "Light Rays",
+        description: "Rayons de lumière élégants avec rotation douce",
+        cssCode: loader8,
+        isActive: false,
+        displayOrder: 8,
+      },
+      {
+        name: "Minimalist Abstract",
+        description: "Formes abstraites minimalistes avec style épuré",
+        cssCode: loader9,
+        isActive: false,
+        displayOrder: 9,
       },
     ];
 

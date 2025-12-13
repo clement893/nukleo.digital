@@ -101,11 +101,14 @@ export const adminRouter = router({
 
   getStartProjectSubmissions: publicProcedure.query(async () => {
     try {
+      console.log("[Admin] Starting to fetch start project submissions...");
       const db = await getDb();
       if (!db) {
         console.error("[Admin] Database connection not available");
         throw new Error("Database not available");
       }
+      
+      console.log("[Admin] Database connection OK, querying start_project_submissions table...");
       
       // Get all start project submissions ordered by creation date (newest first)
       const submissions = await db
@@ -113,13 +116,23 @@ export const adminRouter = router({
         .from(startProjectSubmissions)
         .orderBy(desc(startProjectSubmissions.createdAt));
 
-      console.log(`[Admin] Fetched ${submissions.length} start project submissions`);
+      console.log(`[Admin] Successfully fetched ${submissions.length} start project submissions`);
+      if (submissions.length > 0) {
+        console.log("[Admin] First submission:", JSON.stringify(submissions[0], null, 2));
+      }
       return submissions;
     } catch (error: any) {
       console.error("[Admin] Error fetching start project submissions:", error);
       console.error("[Admin] Error message:", error?.message);
       console.error("[Admin] Error code:", error?.code);
+      console.error("[Admin] Error stack:", error?.stack);
       console.error("[Admin] Full error:", JSON.stringify(error, Object.getOwnPropertyNames(error), 2));
+      
+      // Check if it's a table doesn't exist error
+      if (error?.message?.includes("does not exist") || error?.code === "42P01") {
+        console.error("[Admin] Table 'start_project_submissions' does not exist. Please run migrations.");
+      }
+      
       return [];
     }
   }),

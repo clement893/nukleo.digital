@@ -4,6 +4,8 @@ import HeroSection from '@/components/HeroSection';
 import SEO from '@/components/SEO';
 import StructuredData, { organizationSchema, websiteSchema } from '@/components/StructuredData';
 import Footer from '@/components/Footer';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 // Lazy load below-the-fold sections
 const UniversalLEO = lazy(() => import('@/components/UniversalLEO'));
 const ManifestoSection = lazy(() => import('@/components/ManifestoSection'));
@@ -15,11 +17,14 @@ const TestimonialsCarousel = lazy(() => import('@/components/TestimonialsCarouse
 const ClientLogos = lazy(() => import('@/components/ClientLogos'));
 
 export default function Home() {
+  const { t } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
+  
   return (
     <div className="relative">
       <SEO 
-        title="AI Transformation Agency | Agentic AI Solutions"
-        description="Transform your business with AI-powered solutions. We help startups, SMBs, enterprises, and governments unlock the power of artificial intelligence through strategic consulting, intelligent platforms, and automated operations."
+        title={t('seo.home.title')}
+        description={t('seo.home.description')}
         keywords="AI transformation, artificial intelligence consulting, agentic AI, AI strategy, machine learning, AI automation, digital transformation, AI agency, enterprise AI, AI solutions, AI marketing, intelligent operations"
       />
       <StructuredData data={organizationSchema} />

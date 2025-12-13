@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'wouter';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface SEOProps {
   title?: string;
@@ -41,13 +42,23 @@ export default function SEO({
   ogType = 'website',
   article,
   noindex = false,
-  locale = 'fr_FR',
+  locale,
   alternateLanguages,
 }: SEOProps) {
   const [location] = useLocation();
+  const { language } = useLanguage();
+  
+  // Auto-detect locale from language
+  const detectedLocale = locale || (language === 'fr' ? 'fr_FR' : 'en_US');
   
   const fullTitle = title ? `${title} | Nukleo Digital` : DEFAULT_SEO.title;
   const canonicalUrl = `${DEFAULT_SEO.siteUrl}${location}`;
+  
+  // Auto-generate alternate languages if not provided
+  const autoAlternateLanguages = alternateLanguages || [
+    { lang: 'fr', url: `${DEFAULT_SEO.siteUrl}${location.replace(/^\/(en|fr)/, '/fr') || '/fr'}` },
+    { lang: 'en', url: `${DEFAULT_SEO.siteUrl}${location.replace(/^\/(en|fr)/, '') || '/'}` },
+  ];
 
   useEffect(() => {
     // Update document title
@@ -87,7 +98,7 @@ export default function SEO({
     updateMetaTag('og:url', canonicalUrl, true);
     updateMetaTag('og:type', ogType, true);
     updateMetaTag('og:site_name', DEFAULT_SEO.siteName, true);
-    updateMetaTag('og:locale', locale, true);
+    updateMetaTag('og:locale', detectedLocale, true);
 
     // Article-specific OG tags
     if (article && ogType === 'article') {
@@ -127,33 +138,30 @@ export default function SEO({
     canonical.href = canonicalUrl;
 
     // Hreflang tags for alternate languages
-    if (alternateLanguages && alternateLanguages.length > 0) {
-      // Remove existing hreflang tags
-      document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(el => el.remove());
-      
-      alternateLanguages.forEach(({ lang, url }) => {
-        const link = document.createElement('link');
-        link.rel = 'alternate';
-        link.setAttribute('hreflang', lang);
-        link.href = url;
-        document.head.appendChild(link);
-      });
-      
-      // Add x-default
-      const defaultLink = document.createElement('link');
-      defaultLink.rel = 'alternate';
-      defaultLink.setAttribute('hreflang', 'x-default');
-      defaultLink.href = canonicalUrl;
-      document.head.appendChild(defaultLink);
-    }
+    // Remove existing hreflang tags
+    document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(el => el.remove());
+    
+    autoAlternateLanguages.forEach(({ lang, url }) => {
+      const link = document.createElement('link');
+      link.rel = 'alternate';
+      link.setAttribute('hreflang', lang);
+      link.href = url;
+      document.head.appendChild(link);
+    });
+    
+    // Add x-default
+    const defaultLink = document.createElement('link');
+    defaultLink.rel = 'alternate';
+    defaultLink.setAttribute('hreflang', 'x-default');
+    defaultLink.href = canonicalUrl;
+    document.head.appendChild(defaultLink);
 
     // Update HTML lang attribute
     const htmlElement = document.documentElement;
-    const detectedLang = locale.split('_')[0] || 'fr';
-    htmlElement.setAttribute('lang', detectedLang);
+    htmlElement.setAttribute('lang', language);
     htmlElement.setAttribute('dir', 'ltr');
 
-  }, [fullTitle, description, keywords, ogImage, ogImageWidth, ogImageHeight, ogType, canonicalUrl, article, noindex, locale, alternateLanguages]);
+  }, [fullTitle, description, keywords, ogImage, ogImageWidth, ogImageHeight, ogType, canonicalUrl, article, noindex, detectedLocale, autoAlternateLanguages, language]);
 
   return null;
 }

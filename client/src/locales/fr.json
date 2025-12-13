@@ -1,0 +1,90 @@
+{
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "close": "Fermer",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "search": "Rechercher",
+    "submit": "Soumettre",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent"
+  },
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "services": "Services",
+    "projects": "Projets",
+    "expertise": "Expertise",
+    "resources": "Ressources",
+    "contact": "Contact",
+    "startProject": "Démarrer un projet",
+    "talkToLeo": "Parler à Leo",
+    "artsCulture": "Arts & Culture"
+  },
+  "hero": {
+    "title": "Rejoignez la",
+    "titleHighlight": "Révolution IA",
+    "subtitle": "Commencez votre parcours de transformation avec nous.",
+    "cta": "Rejoindre les Leaders"
+  },
+  "footer": {
+    "description": "Transformez votre entreprise avec des solutions alimentées par l'IA.",
+    "links": {
+      "about": "À propos",
+      "services": "Services",
+      "projects": "Projets",
+      "contact": "Contact",
+      "privacy": "Confidentialité",
+      "terms": "Conditions",
+      "cookies": "Cookies"
+    },
+    "copyright": "© {{year}} Nukleo Digital. Tous droits réservés."
+  },
+  "home": {
+    "beyondAI": "Au-delà de l'IA",
+    "beyondAIDescription": "Nous créons des écosystèmes numériques complets—de la stratégie et des plateformes au contenu créatif et à l'automatisation intelligente."
+  },
+  "about": {
+    "title": "À propos",
+    "subtitle": "Notre équipe",
+    "description": "Découvrez les experts derrière Nukleo Digital"
+  },
+  "services": {
+    "title": "Services",
+    "subtitle": "Nous sommes à vos côtés pour vous aider à grandir.",
+    "description": "Services IA complets : Stratégie & Marketing, Plateformes Numériques, Opérations Intelligentes."
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "subtitle": "Prêt à transformer votre entreprise avec l'IA ?",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "email": "Email",
+    "company": "Entreprise",
+    "message": "Message",
+    "send": "Envoyer",
+    "success": "Message envoyé avec succès !"
+  },
+  "seo": {
+    "home": {
+      "title": "Agence de Transformation IA | Solutions d'IA Agentique",
+      "description": "Transformez votre entreprise avec des solutions alimentées par l'IA. Nous aidons les startups, PME, entreprises et gouvernements à débloquer le pouvoir de l'intelligence artificielle."
+    },
+    "about": {
+      "title": "À propos de Nukleo Digital | Experts en Transformation IA",
+      "description": "Rencontrez l'équipe Nukleo Digital : 15+ experts IA transformant les entreprises au Canada. Basés à Montréal & Halifax."
+    },
+    "services": {
+      "title": "Services IA | Stratégie, Plateformes & Opérations Intelligentes",
+      "description": "Services IA complets : Stratégie & Marketing, Plateformes Numériques, Opérations Intelligentes. 12 solutions spécialisées pour accélérer votre transformation IA."
+    },
+    "contact": {
+      "title": "Contactez Nukleo Digital | Démarrez votre Transformation IA",
+      "description": "Prêt à transformer avec l'IA ? Contactez Nukleo Digital pour une consultation experte. Bureaux à Montréal & Halifax."
+    }
+  }
+}

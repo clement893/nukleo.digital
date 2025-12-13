@@ -5,6 +5,7 @@ import CustomCursor from "./components/CustomCursor";
 import PageLoader from "./components/PageLoader";
 
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { LanguageProvider } from "./contexts/LanguageContext";
 import ScrollToTop from "./components/ScrollToTop";
 import ArrowBackground from "./components/ArrowBackground";
 import { usePageTransition } from "./hooks/usePageTransition";
@@ -62,6 +63,11 @@ const AdminLoaders = lazy(() => import("./pages/AdminLoaders"));
 const AdminHome = lazy(() => import("./pages/admin/AdminHome"));
 import { ProtectedAdminRoute } from "./components/ProtectedAdminRoute";
 
+// Wrapper component to handle language routes
+function LanguageRoute({ component: Component, ...props }: { component: any; path: string }) {
+  return <Component {...props} />;
+}
+
 function App() {
   // Trigger animations on route change
   usePageTransition();
@@ -69,14 +75,54 @@ function App() {
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="dark">
-        <PageLoader />
-        <ArrowBackground variant="default" />
-        <CustomCursor />
-        <ScrollToTop />
-        <Suspense fallback={null}>
-          <Switch>
-            <Route path="/" component={Home} />
-            <Route path="/projects" component={Projects} />
+        <LanguageProvider>
+          <PageLoader />
+          <ArrowBackground variant="default" />
+          <CustomCursor />
+          <ScrollToTop />
+          <Suspense fallback={null}>
+            <Switch>
+              {/* Language routes - French */}
+              <Route path="/fr" component={Home} />
+              <Route path="/fr/projects" component={Projects} />
+              <Route path="/fr/about" component={About} />
+              <Route path="/fr/expertise" component={Expertise} />
+              <Route path="/fr/resources" component={Resources} />
+              <Route path="/fr/faq" component={FAQ} />
+              <Route path="/fr/contact" component={Contact} />
+              <Route path="/fr/leo" component={Leo} />
+              <Route path="/fr/manifesto" component={Manifesto} />
+              <Route path="/fr/radar" component={Radar} />
+              <Route path="/fr/assessment" component={AIReadinessAssessment} />
+              <Route path="/fr/services/ai-strategy-marketing" component={AIStrategyMarketing} />
+              <Route path="/fr/services/digital-platforms" component={DigitalPlatforms} />
+              <Route path="/fr/services/intelligent-operations" component={IntelligentOperations} />
+              <Route path="/fr/glossary" component={Glossary} />
+              <Route path="/fr/glossary/:slug" component={GlossaryTerm} />
+              <Route path="/fr/privacy" component={Privacy} />
+              <Route path="/fr/terms" component={Terms} />
+              <Route path="/fr/cookies" component={Cookies} />
+              <Route path="/fr/testimonials" component={Testimonials} />
+              <Route path="/fr/services" component={Services} />
+              <Route path="/fr/clients" component={Clients} />
+              <Route path="/fr/start-project" component={StartProject} />
+              <Route path="/fr/media-center" component={MediaCenter} />
+              <Route path="/fr/media" component={Media} />
+              <Route path="/fr/privacy-policy" component={PrivacyPolicy} />
+              <Route path="/fr/terms-of-service" component={TermsOfService} />
+              <Route path="/fr/cookie-policy" component={CookiePolicy} />
+              <Route path="/fr/arts-culture" component={ArtsCulture} />
+              <Route path="/fr/lab" component={Lab} />
+              <Route path="/fr/bureau" component={Bureau} />
+              <Route path="/fr/studio" component={Studio} />
+              <Route path="/fr/services/ai-lab" component={AILabService} />
+              <Route path="/fr/services/strategic-bureau" component={StrategicBureauService} />
+              <Route path="/fr/services/creative-studio" component={CreativeStudioService} />
+              <Route path="/fr/agencies" component={Agencies} />
+              
+              {/* Default routes (English) */}
+              <Route path="/" component={Home} />
+              <Route path="/projects" component={Projects} />
             <Route path="/about" component={About} />
             <Route path="/expertise" component={Expertise} />
             <Route path="/resources" component={Resources} />

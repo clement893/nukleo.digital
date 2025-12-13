@@ -2,13 +2,21 @@
 import { Button } from '@/components/ui/button';
 import { useSound } from '@/hooks/useSound';
 import { Link } from 'wouter';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 import { useEffect, useState, useRef, memo } from 'react';
 
 function HeroSection() {
   const { playHover, playClick } = useSound();
+  const { language, t } = useLanguage();
   const [scrollPosition, setScrollPosition] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
+  
+  // Helper to get localized path
+  const getLocalizedPath = (path: string) => {
+    const basePath = path === '/' ? '' : path;
+    return language === 'fr' ? `/fr${basePath}` : basePath;
+  };
   
 
   
@@ -43,12 +51,12 @@ function HeroSection() {
                 font-bold leading-[0.9] tracking-tighter text-white mb-6 sm:mb-8 italic
               "
             >
-              Join the
+              {t('hero.title')}
               <br />
               <span 
                 className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent"
               >
-                AI Revolution
+                {t('hero.titleHighlight')}
               </span>
             </h1>
 
@@ -56,20 +64,20 @@ function HeroSection() {
             <p 
               className="text-lg sm:text-xl text-white/70 leading-relaxed font-light mb-8 sm:mb-12 max-w-2xl"
             >
-              Start your transformation journey with us.
+              {t('hero.subtitle')}
             </p>
 
             {/* CTAs */}
             <div 
               className="flex flex-col sm:flex-row items-start sm:items-center gap-6"
             >
-              <Link href="/start-project">
+              <Link href={getLocalizedPath('/start-project')}>
                 <Button
                   onClick={playClick}
                   onMouseEnter={playHover}
                   className="relative rounded-full text-base sm:text-lg px-8 sm:px-12 py-6 sm:py-8 bg-white text-purple-900 hover:bg-white transition-all duration-500 font-bold tracking-wider hover:scale-[1.045] hover:shadow-xl hover:shadow-purple-500/25 group overflow-hidden w-full sm:w-auto"
                 >
-                  <span className="relative z-10">Join the Leaders</span>
+                  <span className="relative z-10">{t('hero.cta')}</span>
                   {/* Shimmer effect */}
                   <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
                 </Button>
@@ -79,10 +87,10 @@ function HeroSection() {
             {/* Beyond AI Text - Now before services */}
             <div className="mt-12 sm:mt-16">
               <h3 className="text-center text-white font-semibold text-xl sm:text-2xl mb-4">
-                Beyond AI
+                {t('home.beyondAI')}
               </h3>
               <p className="text-center text-white/80 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-8">
-                We craft complete digital ecosystems—from strategy and platforms to creative content and intelligent automation.
+                {t('home.beyondAIDescription')}
               </p>
             </div>
 

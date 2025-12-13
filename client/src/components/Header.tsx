@@ -1,14 +1,24 @@
 import { useState, useEffect } from 'react';
 import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Link } from 'wouter';
+import { Link, useLocation } from 'wouter';
 import FullScreenMenu from './FullScreenMenu';
 import { useSound } from '@/hooks/useSound';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { playHover, playClick } = useSound();
+  const { language, t } = useLanguage();
+  const [location] = useLocation();
+  
+  // Helper to get localized path
+  const getLocalizedPath = (path: string) => {
+    const basePath = path === '/' ? '' : path;
+    return language === 'fr' ? `/fr${basePath}` : basePath;
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,7 +49,7 @@ export default function Header() {
         >
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <a href="/" className="flex flex-col group cursor-pointer">
+            <Link href={getLocalizedPath('/')} className="flex flex-col group cursor-pointer">
               <img 
                 src="/Nukleo_blanc_RVB.svg" 
                 alt="Nukleo Digital - AI Transformation Agency" 
@@ -52,11 +62,13 @@ export default function Header() {
               <span className="text-[10px] text-white/60 font-medium tracking-wider">
                 Choose Intelligence
               </span>
-            </a>
+            </Link>
 
-            {/* Right: CTA + Burger Menu */}
+            {/* Right: Language Switcher + CTA + Burger Menu */}
             <div className="flex items-center gap-4">
-              <Link href="/start-project">
+              <LanguageSwitcher />
+              
+              <Link href={getLocalizedPath('/start-project')}>
                 <Button
                   onClick={playClick}
                   onMouseEnter={playHover}
@@ -75,7 +87,7 @@ export default function Header() {
                     flex items-center gap-2
                   "
                 >
-                  Start Project
+                  {t('nav.startProject')}
                 </Button>
               </Link>
 

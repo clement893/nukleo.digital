@@ -1,16 +1,22 @@
 import { Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Link } from 'wouter';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 export default function Footer() {
+  const { t } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
+  
   const navigation = [
     { label: 'Manifesto', href: '/manifesto' },
-    { label: 'About', href: '/about' },
-    { label: 'Expertise', href: '/expertise' },
+    { label: t('nav.about'), href: '/about' },
+    { label: t('nav.expertise'), href: '/expertise' },
     { label: 'Clients', href: '/clients' },
-    { label: 'Resources', href: '/resources' },
+    { label: t('nav.resources'), href: '/resources' },
     { label: 'FAQ', href: '/faq' },
-    { label: 'Contact', href: '/contact' },
+    { label: t('nav.contact'), href: '/contact' },
     { label: 'Media', href: '/media' },
     { label: 'Agencies', href: '/agencies' },
   ];
@@ -41,11 +47,11 @@ export default function Footer() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
           {/* Logo and Description */}
           <div className="lg:col-span-4">
-            <a href="/" className="text-2xl font-bold font-['Space_Grotesk'] mb-4 block">
+            <Link href={getLocalizedPath('/')} className="text-2xl font-bold font-['Space_Grotesk'] mb-4 block">
               nukleo.
-            </a>
+            </Link>
             <p className="text-white/60 text-sm leading-relaxed mb-6">
-              Architects of your AI future. We transform your marketing, platforms, and operations to help you thrive in the age of artificial intelligence.
+              {t('footer.description')}
             </p>
             <div className="flex items-center gap-4">
               <a 
@@ -65,12 +71,12 @@ export default function Footer() {
             <ul className="space-y-3">
               {navigation.map((item) => (
                 <li key={item.href}>
-                  <a
-                    href={item.href}
+                  <Link
+                    href={getLocalizedPath(item.href)}
                     className="text-white/60 hover:text-white transition-colors text-sm"
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -82,12 +88,12 @@ export default function Footer() {
             <ul className="space-y-3">
               {services.map((item) => (
                 <li key={item.href}>
-                  <a
-                    href={item.href}
+                  <Link
+                    href={getLocalizedPath(item.href)}
                     className="text-white/60 hover:text-white transition-colors text-sm"
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -144,11 +150,11 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/60">
-          <div>© 2025 Nukleo. All rights reserved.</div>
+          <div>{t('footer.copyright', { year: new Date().getFullYear() })}</div>
           <div className="flex gap-6">
-            <a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="/terms" className="hover:text-white transition-colors">Terms of Service</a>
-            <a href="/cookies" className="hover:text-white transition-colors">Cookie Policy</a>
+            <Link href={getLocalizedPath('/privacy')} className="hover:text-white transition-colors">{t('footer.links.privacy')}</Link>
+            <Link href={getLocalizedPath('/terms')} className="hover:text-white transition-colors">{t('footer.links.terms')}</Link>
+            <Link href={getLocalizedPath('/cookies')} className="hover:text-white transition-colors">{t('footer.links.cookies')}</Link>
           </div>
         </div>
       </div>

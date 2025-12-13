@@ -1,0 +1,90 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "close": "Close",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "search": "Search",
+    "submit": "Submit",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "projects": "Projects",
+    "expertise": "Expertise",
+    "resources": "Resources",
+    "contact": "Contact",
+    "startProject": "Start Project",
+    "talkToLeo": "Talk to Leo",
+    "artsCulture": "Arts & Culture"
+  },
+  "hero": {
+    "title": "Join the",
+    "titleHighlight": "AI Revolution",
+    "subtitle": "Start your transformation journey with us.",
+    "cta": "Join the Leaders"
+  },
+  "footer": {
+    "description": "Transform your business with AI-powered solutions.",
+    "links": {
+      "about": "About",
+      "services": "Services",
+      "projects": "Projects",
+      "contact": "Contact",
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "cookies": "Cookies"
+    },
+    "copyright": "© {{year}} Nukleo Digital. All rights reserved."
+  },
+  "home": {
+    "beyondAI": "Beyond AI",
+    "beyondAIDescription": "We craft complete digital ecosystems—from strategy and platforms to creative content and intelligent automation."
+  },
+  "about": {
+    "title": "About",
+    "subtitle": "Our Team",
+    "description": "Meet the experts behind Nukleo Digital"
+  },
+  "services": {
+    "title": "Services",
+    "subtitle": "We are by your side to help you grow.",
+    "description": "Comprehensive AI services: Strategy & Marketing, Digital Platforms, Intelligent Operations."
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Ready to transform your business with AI?",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "company": "Company",
+    "message": "Message",
+    "send": "Send",
+    "success": "Message sent successfully!"
+  },
+  "seo": {
+    "home": {
+      "title": "AI Transformation Agency | Agentic AI Solutions",
+      "description": "Transform your business with AI-powered solutions. We help startups, SMBs, enterprises, and governments unlock the power of artificial intelligence."
+    },
+    "about": {
+      "title": "About Nukleo Digital | AI Transformation Experts",
+      "description": "Meet the Nukleo Digital team: 15+ AI experts transforming businesses across Canada. Based in Montréal & Halifax."
+    },
+    "services": {
+      "title": "AI Services | Strategy, Platforms & Intelligent Operations",
+      "description": "Comprehensive AI services: Strategy & Marketing, Digital Platforms, Intelligent Operations. 12 specialized solutions to accelerate your AI transformation."
+    },
+    "contact": {
+      "title": "Contact Nukleo Digital | Start Your AI Transformation",
+      "description": "Ready to transform with AI? Contact Nukleo Digital for expert consultation. Offices in Montréal & Halifax."
+    }
+  }
+}

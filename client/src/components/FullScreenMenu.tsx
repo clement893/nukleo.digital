@@ -3,6 +3,8 @@ import { Button } from '@/components/ui/button';
 import { Link, useLocation } from 'wouter';
 import { useEffect } from 'react';
 import { useSound } from '@/hooks/useSound';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 interface FullScreenMenuProps {
   isOpen: boolean;
@@ -12,16 +14,18 @@ interface FullScreenMenuProps {
 export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps) {
   const [location] = useLocation();
   const { playHover, playClick } = useSound();
+  const { t } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
   
   const navItems = [
-    { number: '01', label: 'Expertise', path: '/expertise' },
-    { number: '02', label: 'Projects', path: '/projects' },
-    { number: '03', label: 'About', path: '/about' },
-    { number: '04', label: 'Resources', path: '/resources' },
+    { number: '01', label: t('nav.expertise'), path: '/expertise' },
+    { number: '02', label: t('nav.projects'), path: '/projects' },
+    { number: '03', label: t('nav.about'), path: '/about' },
+    { number: '04', label: t('nav.resources'), path: '/resources' },
     { number: '05', label: 'FAQ', path: '/faq' },
-    { number: '06', label: 'Contact', path: '/contact' },
-    { number: '07', label: 'Talk to Leo', path: '/leo' },
-    { number: '08', label: 'Arts & Culture', path: '/arts-culture' },
+    { number: '06', label: t('nav.contact'), path: '/contact' },
+    { number: '07', label: t('nav.talkToLeo'), path: '/leo' },
+    { number: '08', label: t('nav.artsCulture'), path: '/arts-culture' },
   ];
 
   useEffect(() => {
@@ -84,7 +88,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
       <div className="absolute top-0 left-0 right-0 z-50 px-6 md:px-12 pt-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <a href="/" className="flex items-center group cursor-pointer" onClick={onClose}>
+          <Link href={getLocalizedPath('/')} className="flex items-center group cursor-pointer" onClick={onClose}>
             <img 
               src="/Nukleo_blanc_RVB.svg" 
               alt="Nukleo Digital - AI Transformation Agency" 
@@ -97,7 +101,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
 
           {/* Close Button and CTA */}
           <div className="flex items-center gap-4">
-            <Link href="/contact">
+            <Link href={getLocalizedPath('/start-project')}>
               <Button
                 className="
                   rounded-full 
@@ -118,7 +122,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
                   setTimeout(onClose, 300);
                 }}
               >
-                Start Project
+                {t('nav.startProject')}
               </Button>
             </Link>
             <button
@@ -149,7 +153,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
                         }}
                       >
                         <Link
-                          href={item.path}
+                          href={getLocalizedPath(item.path)}
                           onClick={() => {
                             playClick();
                             setTimeout(onClose, 300);

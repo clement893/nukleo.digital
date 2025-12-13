@@ -54,14 +54,14 @@ function HeroSection() {
 
             {/* Subtitle */}
             <p 
-              className="text-lg sm:text-xl text-white/70 leading-relaxed font-light mb-8 sm:mb-12 max-w-2xl animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-600"
+              className="text-lg sm:text-xl text-white/70 leading-relaxed font-light mb-8 sm:mb-12 max-w-2xl"
             >
               Start your transformation journey with us.
             </p>
 
             {/* CTAs */}
             <div 
-              className="flex flex-col sm:flex-row items-start sm:items-center gap-6 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-900"
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-6"
             >
               <Link href="/start-project">
                 <Button
@@ -77,7 +77,7 @@ function HeroSection() {
             </div>
 
             {/* Beyond AI Text - Now before services */}
-            <div className="mt-12 sm:mt-16 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-1200">
+            <div className="mt-12 sm:mt-16">
               <h3 className="text-center text-white font-semibold text-xl sm:text-2xl mb-4">
                 Beyond AI
               </h3>
@@ -87,7 +87,7 @@ function HeroSection() {
             </div>
 
             {/* Services Carousel - Text Only */}
-            <div className="mt-8 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-1400">
+            <div className="mt-8">
               <div className="relative max-w-6xl mx-auto overflow-hidden py-4">
                 <div 
                   ref={scrollRef}

@@ -2,6 +2,43 @@ import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
 
+// Preload critical resources during loader display
+function preloadResources() {
+  // Preload critical images
+  const criticalImages = [
+    '/Nukleo_blanc_RVB.svg',
+    '/leo-avatar.webp',
+    '/nukleo-arrow.svg',
+  ];
+  
+  criticalImages.forEach(src => {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = src;
+    document.head.appendChild(link);
+  });
+
+  // Preload critical fonts if not already loaded
+  const fonts = [
+    '/fonts/AktivGrotesk-Regular.woff2',
+    '/fonts/AktivGrotesk-Medium.woff2',
+    '/fonts/AktivGrotesk-Bold.woff2',
+  ];
+  
+  fonts.forEach(font => {
+    if (!document.querySelector(`link[href="${font}"]`)) {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'font';
+      link.type = 'font/woff2';
+      link.crossOrigin = 'anonymous';
+      link.href = font;
+      document.head.appendChild(link);
+    }
+  });
+}
+
 export default function PageLoader() {
   const [location] = useLocation();
   const [isLoading, setIsLoading] = useState(true);
@@ -27,6 +64,13 @@ export default function PageLoader() {
     refetchOnWindowFocus: false,
     enabled: !isAdminArea, // Don't fetch if in admin area
   });
+
+  // Preload resources as soon as component mounts
+  useEffect(() => {
+    if (!isAdminArea) {
+      preloadResources();
+    }
+  }, [isAdminArea]);
 
   useEffect(() => {
     // Don't show loader in admin area - show body immediately
@@ -74,15 +118,37 @@ export default function PageLoader() {
       setLoaderHtml(randomLoader.cssCode);
       setStylesReady(true);
 
-      // Hide loader after a delay (e.g., 2 seconds minimum, or when page is ready)
+      // Preload content while loader is showing
+      // Use the loader time to prepare the page content
       const minDisplayTime = 2000;
       const startTime = Date.now();
 
+      // Preload critical resources during loader display
+      const preloadPageContent = async () => {
+        // Ensure fonts are loaded
+        await document.fonts.ready;
+        
+        // Preload critical components for home page (non-blocking)
+        if (location === '/') {
+          // Preload Home component in background
+          import('../pages/Home').catch(() => {
+            // Silently fail - component will load normally if preload fails
+          });
+        }
+      };
+
+      // Start preloading immediately (non-blocking)
+      preloadPageContent();
+
       const checkReady = () => {
         const elapsed = Date.now() - startTime;
-        if (document.readyState === "complete" && elapsed >= minDisplayTime) {
+        // Wait for minimum time AND page to be ready
+        // Hero will be visible immediately when loader disappears
+        const isReady = document.readyState === "complete" && elapsed >= minDisplayTime;
+        
+        if (isReady) {
           setIsLoading(false);
-          // Show body content when loader is done
+          // Show body content immediately - hero should be visible without animations
           document.body.classList.add('loaded');
         } else {
           setTimeout(checkReady, 100);
@@ -102,7 +168,7 @@ export default function PageLoader() {
         styleElement.remove();
       }
     };
-  }, [activeLoaders, isLoadingLoaders, isAdminArea]);
+  }, [activeLoaders, isLoadingLoaders, isAdminArea, location]);
 
   // Don't show loader in admin area
   if (isAdminArea) {

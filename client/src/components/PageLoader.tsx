@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
 
@@ -44,9 +44,14 @@ export default function PageLoader() {
   const [isLoading, setIsLoading] = useState(true);
   const [loaderHtml, setLoaderHtml] = useState<string | null>(null);
   const [stylesReady, setStylesReady] = useState(false);
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
+  const prevLocationRef = useRef(location);
 
   // Don't show loader in admin area
   const isAdminArea = location.startsWith("/admin");
+  
+  // Track if this is a page transition (not first load)
+  const isPageTransition = prevLocationRef.current !== location && !isFirstLoad;
 
   // If in admin area, show body immediately and don't fetch loaders
   useEffect(() => {
@@ -73,9 +78,16 @@ export default function PageLoader() {
   }, [isAdminArea]);
 
   useEffect(() => {
+    // Update previous location ref
+    const locationChanged = prevLocationRef.current !== location;
+    if (locationChanged) {
+      prevLocationRef.current = location;
+    }
+
     // Don't show loader in admin area - show body immediately
     if (isAdminArea) {
       setIsLoading(false);
+      setIsFirstLoad(false);
       // Make body visible immediately in admin area
       if (!document.body.classList.contains('loaded')) {
         document.body.classList.add('loaded');
@@ -83,12 +95,20 @@ export default function PageLoader() {
       return;
     }
 
-    // Wait for loaders to be fetched
+    // For page transitions (not first load), skip the loader and show content immediately
+    if (isPageTransition) {
+      setIsLoading(false);
+      document.body.classList.add('loaded');
+      return;
+    }
+
+    // Wait for loaders to be fetched (only on first load)
     if (isLoadingLoaders) return;
 
     if (!activeLoaders || activeLoaders.length === 0) {
       // No active loaders, show body content immediately
       setIsLoading(false);
+      setIsFirstLoad(false);
       document.body.classList.add('loaded');
       return;
     }
@@ -150,6 +170,7 @@ export default function PageLoader() {
         
         if (isReady) {
           setIsLoading(false);
+          setIsFirstLoad(false);
           // Show body content immediately - hero should be visible without animations
           document.body.classList.add('loaded');
           // Force hide loader after a brief moment to ensure it's gone
@@ -165,6 +186,7 @@ export default function PageLoader() {
       setTimeout(checkReady, minDisplayTime);
     } else {
       setIsLoading(false);
+      setIsFirstLoad(false);
       document.body.classList.add('loaded');
     }
 
@@ -174,7 +196,7 @@ export default function PageLoader() {
         styleElement.remove();
       }
     };
-  }, [activeLoaders, isLoadingLoaders, isAdminArea, location]);
+  }, [activeLoaders, isLoadingLoaders, isAdminArea, location, isPageTransition]);
 
   // Don't show loader in admin area
   if (isAdminArea) {

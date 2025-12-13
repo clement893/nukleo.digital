@@ -70,8 +70,8 @@ createRoot(rootElement).render(
   </trpc.Provider>
 );
 
-// Show body content once React has mounted
-document.body.classList.add('loaded');
+// Don't show body content immediately - PageLoader will handle it
+// This prevents flash of white/colored content before loader appears
 const svg = document.getElementById('nukleo-arrow-inline');
 if (svg) {
   svg.style.display = 'block';

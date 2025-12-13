@@ -7,18 +7,20 @@ export default function PageLoader() {
   const [stylesReady, setStylesReady] = useState(false);
 
   // Fetch active loaders
-  const { data: activeLoaders } = trpc.loaders.getActive.useQuery(undefined, {
+  const { data: activeLoaders, isLoading: isLoadingLoaders } = trpc.loaders.getActive.useQuery(undefined, {
     staleTime: 5 * 60 * 1000, // Cache for 5 minutes
     refetchOnWindowFocus: false,
   });
 
   useEffect(() => {
+    // Wait for loaders to be fetched
+    if (isLoadingLoaders) return;
+
     if (!activeLoaders || activeLoaders.length === 0) {
-      // No active loaders, hide after a short delay
-      const timer = setTimeout(() => {
-        setIsLoading(false);
-      }, 500);
-      return () => clearTimeout(timer);
+      // No active loaders, show body content immediately
+      setIsLoading(false);
+      document.body.classList.add('loaded');
+      return;
     }
 
     // Select a random loader from active loaders
@@ -59,6 +61,8 @@ export default function PageLoader() {
         const elapsed = Date.now() - startTime;
         if (document.readyState === "complete" && elapsed >= minDisplayTime) {
           setIsLoading(false);
+          // Show body content when loader is done
+          document.body.classList.add('loaded');
         } else {
           setTimeout(checkReady, 100);
         }
@@ -68,6 +72,7 @@ export default function PageLoader() {
       setTimeout(checkReady, minDisplayTime);
     } else {
       setIsLoading(false);
+      document.body.classList.add('loaded');
     }
 
     return () => {
@@ -76,7 +81,7 @@ export default function PageLoader() {
         styleElement.remove();
       }
     };
-  }, [activeLoaders]);
+  }, [activeLoaders, isLoadingLoaders]);
 
   if (!isLoading || !loaderHtml) return null;
 

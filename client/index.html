@@ -58,9 +58,16 @@
   <body>
     <!-- Prevent flash of unstyled content -->
     <style>
-      body { visibility: hidden; }
+      body { 
+        visibility: hidden; 
+        background-color: #000000;
+      }
       body.loaded { visibility: visible; }
       #nukleo-arrow-inline { display: none !important; }
+      /* Show loader immediately if present */
+      #root > div > div[style*="z-[9999]"] {
+        visibility: visible !important;
+      }
     </style>
     <!-- Inline LCP SVG for mobile performance (eliminates 1650ms Resource Load Delay) -->
     <!-- Hidden until React mounts to prevent flash -->

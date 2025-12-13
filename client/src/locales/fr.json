@@ -915,5 +915,28 @@
       "description": "Explorons comment The Creative Studio peut vous aider à créer des expériences et du contenu qui captivent les audiences à une échelle sans précédent.",
       "button": "Créons ensemble"
     }
+  },
+  "clients": {
+    "seoTitle": "Nos clients | Fait confiance par des leaders de l'industrie",
+    "seoDescription": "Fait confiance par 12+ leaders de l'industrie : MBAM, Summit Law, Affilia, GoCoupons & plus. Découvrez comment nous avons transformé les opérations dans 8+ industries avec l'IA. Voir les études de cas.",
+    "seoKeywords": "clients IA, études de cas IA, leaders de l'industrie IA, histoires de succès transformation IA, portfolio IA",
+    "badge": "Fait confiance par des leaders de l'industrie",
+    "title": "Nos",
+    "titleHighlight": "Clients",
+    "description": "Des musées aux startups technologiques, nous avons aidé des organisations de diverses industries à transformer leurs opérations avec des solutions alimentées par l'IA. Voici quelques-unes des entreprises formidables avec lesquelles nous avons eu le privilège de travailler.",
+    "stats": {
+      "clients": "Clients de confiance",
+      "industries": "Industries servies",
+      "roi": "Augmentation moyenne du ROI"
+    },
+    "labels": {
+      "servicesProvided": "Services fournis",
+      "keyResults": "Résultats clés"
+    },
+    "cta": {
+      "title": "Prêt à les rejoindre ?",
+      "description": "Discutons de la façon dont nos services IA peuvent transformer votre entreprise et accélérer votre croissance.",
+      "button": "Démarrer votre transformation"
+    }
   }
 }

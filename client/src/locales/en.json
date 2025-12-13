@@ -915,5 +915,28 @@
       "description": "Let's explore how The Creative Studio can help you create experiences and content that captivate audiences at unprecedented scale.",
       "button": "Let's Create Together"
     }
+  },
+  "clients": {
+    "seoTitle": "Our Clients | Trusted by Industry Leaders",
+    "seoDescription": "Trusted by 12+ industry leaders: MBAM, Summit Law, Affilia, GoCoupons & more. See how we transformed operations across 8+ industries with AI. View case studies.",
+    "seoKeywords": "AI clients, AI case studies, industry leaders AI, AI transformation success stories, AI portfolio",
+    "badge": "Trusted by Industry Leaders",
+    "title": "Our",
+    "titleHighlight": "Clients",
+    "description": "From museums to tech startups, we've helped organizations across diverse industries transform their operations with AI-powered solutions. Here are some of the amazing companies we've had the privilege to work with.",
+    "stats": {
+      "clients": "Trusted Clients",
+      "industries": "Industries Served",
+      "roi": "Average ROI Increase"
+    },
+    "labels": {
+      "servicesProvided": "Services Provided",
+      "keyResults": "Key Results"
+    },
+    "cta": {
+      "title": "Ready to Join Them?",
+      "description": "Let's discuss how our AI services can transform your business and accelerate your growth.",
+      "button": "Start Your Transformation"
+    }
   }
 }

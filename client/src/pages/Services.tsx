@@ -32,8 +32,8 @@ export default function Services() {
         },
         {
           icon: TrendingUp,
-          title: 'Marketing Automation',
-          description: 'Automate your marketing workflows with AI-powered campaigns, lead scoring, and personalized content delivery.',
+          title: t('services.bureau.services.marketingAutomation.title'),
+          description: t('services.bureau.services.marketingAutomation.description'),
         },
         {
           icon: Brain,

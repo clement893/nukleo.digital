@@ -1,5 +1,5 @@
 import { Suspense, lazy } from "react";
-import { Route, Switch } from "wouter";
+import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import CustomCursor from "./components/CustomCursor";
 import PageLoader from "./components/PageLoader";
@@ -10,6 +10,39 @@ import ScrollToTop from "./components/ScrollToTop";
 import ArrowBackground from "./components/ArrowBackground";
 import { FloatingLanguageToggle } from "./components/FloatingLanguageToggle";
 import { usePageTransition } from "./hooks/usePageTransition";
+
+// Lazy load UniversalLEO
+const UniversalLEO = lazy(() => import("./components/UniversalLEO"));
+
+// Helper function to determine page context from URL
+function getPageContext(pathname: string): 'home' | 'agencies' | 'services' | 'contact' | 'projects' | 'about' | 'default' {
+  // Remove language prefix if present
+  const path = pathname.replace(/^\/(fr|en)/, '') || '/';
+  
+  // Skip admin routes
+  if (path.startsWith('/admin')) return 'default';
+  
+  if (path === '/' || path === '') return 'home';
+  if (path.includes('/agencies')) return 'agencies';
+  if (path.includes('/services')) return 'services';
+  if (path.includes('/contact')) return 'contact';
+  if (path.includes('/projects')) return 'projects';
+  if (path.includes('/about')) return 'about';
+  
+  return 'default';
+}
+
+// Global LEO component that detects page context
+function GlobalLEO() {
+  const [location] = useLocation();
+  const pageContext = getPageContext(location);
+  
+  return (
+    <Suspense fallback={null}>
+      <UniversalLEO pageContext={pageContext} />
+    </Suspense>
+  );
+}
 
 // Eager load only critical pages
 import Home from "./pages/Home";
@@ -82,6 +115,7 @@ function App() {
           <CustomCursor />
           <ScrollToTop />
           <FloatingLanguageToggle />
+          <GlobalLEO />
           <Suspense fallback={null}>
             <Switch>
               {/* Language routes - French */}

@@ -7,7 +7,6 @@ import Footer from '@/components/Footer';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 // Lazy load below-the-fold sections
-const UniversalLEO = lazy(() => import('@/components/UniversalLEO'));
 const ManifestoSection = lazy(() => import('@/components/ManifestoSection'));
 const WhoWeServeSection = lazy(() => import('@/components/WhoWeServeSection'));
 const CapabilitiesSection = lazy(() => import('@/components/CapabilitiesSection'));
@@ -73,7 +72,6 @@ export default function Home() {
         </Suspense>
       </main>
       <Footer />
-      <UniversalLEO pageContext="home" />
     </div>
   );
 }

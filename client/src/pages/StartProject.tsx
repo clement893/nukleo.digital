@@ -177,11 +177,11 @@ export default function StartProject() {
                       <SelectValue placeholder="Select a project type" />
                     </SelectTrigger>
                     <SelectContent className="bg-slate-900 border-white/20 backdrop-blur-xl">
-                      <SelectItem value="ai-strategy" className="text-white hover:bg-white/10">AI Strategy & Consulting</SelectItem>
-                      <SelectItem value="agentic-ai" className="text-white hover:bg-white/10">Agentic AI Development</SelectItem>
-                      <SelectItem value="ai-integration" className="text-white hover:bg-white/10">AI Integration</SelectItem>
-                      <SelectItem value="ai-training" className="text-white hover:bg-white/10">AI Training & Workshops</SelectItem>
-                      <SelectItem value="other" className="text-white hover:bg-white/10">Other</SelectItem>
+                      <SelectItem value="ai-strategy" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">AI Strategy & Consulting</SelectItem>
+                      <SelectItem value="agentic-ai" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">Agentic AI Development</SelectItem>
+                      <SelectItem value="ai-integration" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">AI Integration</SelectItem>
+                      <SelectItem value="ai-training" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">AI Training & Workshops</SelectItem>
+                      <SelectItem value="other" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">Other</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -200,11 +200,11 @@ export default function StartProject() {
                       <SelectValue placeholder="Select a budget range" />
                     </SelectTrigger>
                     <SelectContent className="bg-slate-900 border-white/20 backdrop-blur-xl">
-                      <SelectItem value="10k-25k" className="text-white hover:bg-white/10">$10k - $25k</SelectItem>
-                      <SelectItem value="25k-50k" className="text-white hover:bg-white/10">$25k - $50k</SelectItem>
-                      <SelectItem value="50k-100k" className="text-white hover:bg-white/10">$50k - $100k</SelectItem>
-                      <SelectItem value="100k+" className="text-white hover:bg-white/10">$100k+</SelectItem>
-                      <SelectItem value="not-sure" className="text-white hover:bg-white/10">Not sure yet</SelectItem>
+                      <SelectItem value="10k-25k" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">$10k - $25k</SelectItem>
+                      <SelectItem value="25k-50k" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">$25k - $50k</SelectItem>
+                      <SelectItem value="50k-100k" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">$50k - $100k</SelectItem>
+                      <SelectItem value="100k+" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">$100k+</SelectItem>
+                      <SelectItem value="not-sure" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">Not sure yet</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>

@@ -226,9 +226,10 @@ export const startProjectRouter = router({
         // Save to database first
         const db = await getDb();
         if (!db) {
-          console.error("[StartProject] Database connection not available");
+          console.error("[StartProject] ⚠️ Database connection not available");
         } else {
           try {
+            console.log(`[StartProject] Attempting to save submission for ${name} (${email})`);
             const result = await db.insert(startProjectSubmissions).values({
               name,
               email,
@@ -237,12 +238,19 @@ export const startProjectRouter = router({
               budget,
               description,
             }).returning({ id: startProjectSubmissions.id });
-            console.log(`[StartProject] Successfully saved submission for ${name} (${email})`, result);
+            console.log(`[StartProject] ✅ Successfully saved submission for ${name} (${email})`, result);
+            console.log(`[StartProject] Submission ID: ${result[0]?.id}`);
           } catch (dbError: any) {
-            console.error("[StartProject] Database error:", dbError);
+            console.error("[StartProject] ❌ Database error:", dbError);
             console.error("[StartProject] Error message:", dbError?.message);
             console.error("[StartProject] Error code:", dbError?.code);
             console.error("[StartProject] Full error:", JSON.stringify(dbError, Object.getOwnPropertyNames(dbError), 2));
+            
+            // Check if it's a table doesn't exist error
+            if (dbError?.message?.includes("does not exist") || dbError?.code === "42P01") {
+              console.error("[StartProject] ⚠️ Table 'start_project_submissions' does not exist!");
+              console.error("[StartProject] ⚠️ Please run migrations: pnpm db:push or npm run db:push");
+            }
             // Continue even if DB save fails - still try to send emails
           }
         }

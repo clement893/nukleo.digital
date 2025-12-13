@@ -11,7 +11,7 @@ import {
   startProjectSubmissions,
   contactMessages
 } from "../../drizzle/schema";
-import { count, desc } from "drizzle-orm";
+import { count, desc, sql } from "drizzle-orm";
 
 export const adminRouter = router({
   getStats: publicProcedure.query(async () => {
@@ -119,6 +119,8 @@ export const adminRouter = router({
       console.log(`[Admin] Successfully fetched ${submissions.length} start project submissions`);
       if (submissions.length > 0) {
         console.log("[Admin] First submission:", JSON.stringify(submissions[0], null, 2));
+      } else {
+        console.log("[Admin] No submissions found in database (table exists but is empty)");
       }
       return submissions;
     } catch (error: any) {
@@ -130,7 +132,7 @@ export const adminRouter = router({
       
       // Check if it's a table doesn't exist error
       if (error?.message?.includes("does not exist") || error?.code === "42P01") {
-        console.error("[Admin] Table 'start_project_submissions' does not exist. Please run migrations.");
+        console.error("[Admin] ⚠️ Table 'start_project_submissions' does not exist. Please run migrations.");
       }
       
       return [];

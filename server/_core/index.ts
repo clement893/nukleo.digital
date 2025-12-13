@@ -223,10 +223,13 @@ async function startServer() {
   server.listen(port, async () => {
     logger.info(`Server running on http://localhost:${port}/`);
     
-    // Seed test loader on startup
+    // Seed loaders on startup
     try {
       const { seedLoaders } = await import("../seed-loaders");
       await seedLoaders();
+      
+      const { seedCreativeLoaders } = await import("../seed-creative-loaders");
+      await seedCreativeLoaders();
     } catch (error) {
       logger.error("Failed to seed loaders:", error);
     }

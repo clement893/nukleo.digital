@@ -38,11 +38,12 @@ export function AITrendRadarVisualization({ data, onTechnologyClick }: AITrendRa
   const [hoveredTech, setHoveredTech] = useState<RadarData | null>(null);
 
   // Radar dimensions
-  const width = 800;
-  const height = 800;
+  const width = 900;
+  const height = 900;
   const centerX = width / 2;
   const centerY = height / 2;
-  const radius = 350;
+  const radius = 380;
+  const padding = 80;
 
   // Convert scores to coordinates
   // Maturity: 0-100 -> X: left to right (0 = left, 100 = right)
@@ -50,7 +51,7 @@ export function AITrendRadarVisualization({ data, onTechnologyClick }: AITrendRa
   const scoreToCoords = (maturity: number, impact: number) => {
     const x = centerX + ((maturity - 50) / 50) * radius;
     const y = centerY - ((impact - 50) / 50) * radius;
-    return { x: Math.max(50, Math.min(width - 50, x)), y: Math.max(50, Math.min(height - 50, y)) };
+    return { x: Math.max(padding, Math.min(width - padding, x)), y: Math.max(padding, Math.min(height - padding, y)) };
   };
 
   const getQuadrant = (maturity: number, impact: number): string => {
@@ -80,38 +81,70 @@ export function AITrendRadarVisualization({ data, onTechnologyClick }: AITrendRa
           viewBox={`0 0 ${width} ${height}`}
           className="w-full h-auto"
         >
-          {/* Grid lines */}
+          {/* Grid lines - more visible */}
           <defs>
-            <pattern id="grid-trend" width="50" height="50" patternUnits="userSpaceOnUse">
-              <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="1"/>
+            <pattern id="grid-trend" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="0.5"/>
             </pattern>
           </defs>
           <rect width={width} height={height} fill="url(#grid-trend)" />
           
-          {/* Axes */}
-          <line x1={centerX} y1={0} x2={centerX} y2={height} stroke="rgba(255,255,255,0.3)" strokeWidth="2" />
-          <line x1={0} y1={centerY} x2={width} y2={centerY} stroke="rgba(255,255,255,0.3)" strokeWidth="2" />
+          {/* Concentric circles for better readability */}
+          {[0.25, 0.5, 0.75, 1].map((scale, idx) => (
+            <circle
+              key={idx}
+              cx={centerX}
+              cy={centerY}
+              r={radius * scale}
+              fill="none"
+              stroke="rgba(255,255,255,0.2)"
+              strokeWidth="1"
+              strokeDasharray={idx % 2 === 0 ? "5,5" : "none"}
+            />
+          ))}
           
-          {/* Quadrant labels */}
-          <text x={centerX - 100} y={centerY - 20} fill="rgba(255,255,255,0.6)" fontSize="14" fontWeight="bold">
+          {/* Axes - thicker and more visible */}
+          <line x1={centerX} y1={padding} x2={centerX} y2={height - padding} stroke="rgba(255,255,255,0.5)" strokeWidth="3" />
+          <line x1={padding} y1={centerY} x2={width - padding} y2={centerY} stroke="rgba(255,255,255,0.5)" strokeWidth="3" />
+          
+          {/* Axis arrows */}
+          <polygon points={`${centerX},${padding} ${centerX - 8},${padding + 20} ${centerX + 8},${padding + 20}`} fill="rgba(255,255,255,0.7)" />
+          <polygon points={`${width - padding},${centerY} ${width - padding - 20},${centerY - 8} ${width - padding - 20},${centerY + 8}`} fill="rgba(255,255,255,0.7)" />
+          
+          {/* Axis labels - larger and more visible */}
+          <text x={centerX} y={padding - 15} fill="rgba(255,255,255,0.9)" fontSize="16" fontWeight="bold" textAnchor="middle">
             Impact Élevé
           </text>
-          <text x={centerX + 100} y={centerY - 20} fill="rgba(255,255,255,0.6)" fontSize="14" fontWeight="bold">
-            Impact Élevé
-          </text>
-          <text x={centerX - 100} y={centerY + 20} fill="rgba(255,255,255,0.6)" fontSize="14" fontWeight="bold">
-            Impact Faible
-          </text>
-          <text x={centerX + 100} y={centerY + 20} fill="rgba(255,255,255,0.6)" fontSize="14" fontWeight="bold">
+          <text x={centerX} y={height - padding + 35} fill="rgba(255,255,255,0.9)" fontSize="16" fontWeight="bold" textAnchor="middle">
             Impact Faible
           </text>
           
-          <text x={20} y={centerY - 10} fill="rgba(255,255,255,0.6)" fontSize="14" fontWeight="bold">
+          <text x={padding - 10} y={centerY - 10} fill="rgba(255,255,255,0.9)" fontSize="16" fontWeight="bold" textAnchor="end">
             Émergent
           </text>
-          <text x={width - 100} y={centerY - 10} fill="rgba(255,255,255,0.6)" fontSize="14" fontWeight="bold">
+          <text x={width - padding + 10} y={centerY - 10} fill="rgba(255,255,255,0.9)" fontSize="16" fontWeight="bold" textAnchor="start">
             Établi
           </text>
+          
+          {/* Score labels on axes */}
+          {[0, 25, 50, 75, 100].map((score) => {
+            const x = centerX + ((score - 50) / 50) * radius;
+            const y = centerY - ((score - 50) / 50) * radius;
+            return (
+              <g key={`score-${score}`}>
+                {score !== 50 && (
+                  <>
+                    <text x={x} y={centerY + 30} fill="rgba(255,255,255,0.6)" fontSize="12" textAnchor="middle">
+                      {score}
+                    </text>
+                    <text x={centerX - 30} y={y} fill="rgba(255,255,255,0.6)" fontSize="12" textAnchor="middle">
+                      {score}
+                    </text>
+                  </>
+                )}
+              </g>
+            );
+          })}
           
           {/* Quadrant backgrounds */}
           <rect x={0} y={0} width={centerX} height={centerY} fill="rgba(139,92,246,0.05)" />
@@ -119,24 +152,40 @@ export function AITrendRadarVisualization({ data, onTechnologyClick }: AITrendRa
           <rect x={0} y={centerY} width={centerX} height={centerY} fill="rgba(234,179,8,0.05)" />
           <rect x={centerX} y={centerY} width={centerX} height={centerY} fill="rgba(34,197,94,0.05)" />
           
-          {/* Technology bubbles */}
+          {/* Technology bubbles - always visible with labels */}
           {data.map((item) => {
             const { x, y } = scoreToCoords(item.position.maturityScore, item.position.impactScore);
             const quadrant = getQuadrant(item.position.maturityScore, item.position.impactScore);
             const isHovered = hoveredTech?.technology.id === item.technology.id;
             const isSelected = selectedTech?.technology.id === item.technology.id;
             
+            // Determine label position to avoid overlap
+            const labelOffset = isSelected ? -40 : -35;
+            const labelY = y + labelOffset;
+            
             return (
               <g key={item.technology.id}>
+                {/* Glow effect for selected/hovered */}
+                {(isSelected || isHovered) && (
+                  <circle
+                    cx={x}
+                    cy={y}
+                    r={isSelected ? 35 : 30}
+                    fill={isSelected ? '#8b5cf6' : '#a78bfa'}
+                    opacity="0.3"
+                    className="pointer-events-none"
+                  />
+                )}
+                
                 <circle
                   data-tech-slug={item.technology.slug}
                   cx={x}
                   cy={y}
-                  r={isSelected ? 25 : isHovered ? 20 : 15}
+                  r={isSelected ? 22 : isHovered ? 18 : 16}
                   fill={isSelected ? '#8b5cf6' : isHovered ? '#a78bfa' : '#c4b5fd'}
                   stroke="white"
-                  strokeWidth={isSelected ? 3 : 2}
-                  opacity={isSelected ? 1 : isHovered ? 0.9 : 0.7}
+                  strokeWidth={isSelected ? 4 : isHovered ? 3 : 2.5}
+                  opacity={isSelected ? 1 : isHovered ? 0.95 : 0.85}
                   className="cursor-pointer transition-all duration-200"
                   onMouseEnter={() => setHoveredTech(item)}
                   onMouseLeave={() => setHoveredTech(null)}
@@ -145,18 +194,44 @@ export function AITrendRadarVisualization({ data, onTechnologyClick }: AITrendRa
                     onTechnologyClick?.(item);
                   }}
                 />
-                {(isHovered || isSelected) && (
+                
+                {/* Always visible label with background for readability */}
+                <g className="pointer-events-none">
+                  <rect
+                    x={x - 60}
+                    y={labelY - 12}
+                    width={120}
+                    height={24}
+                    fill="rgba(0,0,0,0.6)"
+                    rx="4"
+                    className="backdrop-blur-sm"
+                  />
                   <text
                     x={x}
-                    y={y - 30}
+                    y={labelY + 4}
                     fill="white"
-                    fontSize="12"
+                    fontSize={isSelected ? "14" : "13"}
                     fontWeight="bold"
                     textAnchor="middle"
-                    className="pointer-events-none"
                   >
                     {item.technology.name}
                   </text>
+                </g>
+                
+                {/* Score indicators */}
+                {(isHovered || isSelected) && (
+                  <g>
+                    <text
+                      x={x}
+                      y={y + 40}
+                      fill="rgba(255,255,255,0.8)"
+                      fontSize="11"
+                      textAnchor="middle"
+                      className="pointer-events-none"
+                    >
+                      M:{item.position.maturityScore} I:{item.position.impactScore}
+                    </text>
+                  </g>
                 )}
               </g>
             );

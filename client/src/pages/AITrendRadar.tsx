@@ -6,17 +6,32 @@ import Breadcrumb from '@/components/Breadcrumb';
 import { AITrendRadarVisualization } from '@/components/radar/AITrendRadarVisualization';
 import { trpc } from '@/lib/trpc';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Mail } from 'lucide-react';
 
 export default function AITrendRadar() {
   const { t } = useLanguage();
   const { data: radarData, isLoading, error } = trpc.radar.getCurrent.useQuery();
   const { data: latestNews, isLoading: isLoadingNews } = trpc.radar.getLatestNews.useQuery({ limit: 5 });
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [email, setEmail] = useState('');
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const subscribeNewsletter = trpc.contact.subscribe.useMutation();
 
   const handleTechnologyClick = (tech: any) => {
     // Scroll to detail panel (handled by RadarVisualization component)
     console.log('Selected technology:', tech);
+  };
+
+  const handleNewsletterSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await subscribeNewsletter.mutateAsync({ email });
+      setIsSubscribed(true);
+      setEmail('');
+      setTimeout(() => setIsSubscribed(false), 5000);
+    } catch (error) {
+      console.error('Failed to subscribe:', error);
+    }
   };
 
   return (
@@ -144,6 +159,61 @@ export default function AITrendRadar() {
             </p>
           </div>
         )}
+
+        {/* AI News Newsletter Subscription */}
+        <div className="mt-16 bg-gradient-to-br from-purple-600/20 via-purple-700/20 to-cyan-600/20 backdrop-blur-md border border-purple-500/30 rounded-3xl p-8 md:p-12">
+          <div className="max-w-2xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-500/30 border border-purple-400/50 rounded-full text-purple-200 text-sm font-semibold mb-6">
+              <Mail className="w-4 h-4" />
+              Restez informé
+            </div>
+            
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Recevez les dernières nouvelles IA
+            </h2>
+            <p className="text-lg text-white/70 mb-8 leading-relaxed">
+              Inscrivez-vous à la newsletter <strong className="text-white">AI News de Nukleo</strong> et recevez chaque semaine les tendances, analyses et développements les plus importants en intelligence artificielle.
+            </p>
+
+            {isSubscribed && (
+              <div className="mb-6 p-4 bg-green-500/20 border border-green-500/50 rounded-2xl backdrop-blur-sm">
+                <p className="text-green-300 font-medium">
+                  ✓ Merci ! Vérifiez votre boîte mail pour confirmer votre inscription.
+                </p>
+              </div>
+            )}
+
+            {subscribeNewsletter.error && (
+              <div className="mb-6 p-4 bg-red-500/20 border border-red-500/50 rounded-2xl backdrop-blur-sm">
+                <p className="text-red-300 font-medium">
+                  Une erreur est survenue. Veuillez réessayer.
+                </p>
+              </div>
+            )}
+
+            <form onSubmit={handleNewsletterSubscribe} className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                placeholder="Votre adresse email"
+                className="flex-1 px-6 py-4 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:border-purple-400/50 focus:ring-2 focus:ring-purple-400/30 transition-all text-base"
+              />
+              <button 
+                type="submit"
+                disabled={subscribeNewsletter.isPending}
+                className="px-8 py-4 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 text-white font-bold hover:from-purple-600 hover:to-cyan-600 transition-all duration-300 hover:scale-[1.02] shadow-xl hover:shadow-2xl text-base disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {subscribeNewsletter.isPending ? 'Inscription...' : "S'inscrire"}
+              </button>
+            </form>
+
+            <p className="mt-4 text-white/50 text-sm">
+              Nous respectons votre vie privée. Désinscription à tout moment.
+            </p>
+          </div>
+        </div>
 
         {/* Info Section */}
         <div className="mt-16 grid md:grid-cols-3 gap-6">

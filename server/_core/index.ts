@@ -179,6 +179,19 @@ async function startServer() {
   app.use(sitemapRouter);
   // Database initialization endpoint
   app.post("/api/init-db", initDatabase);
+  // Reset loaders endpoint (for admin use)
+  app.post("/api/reset-loaders", async (req, res) => {
+    try {
+      const { appRouter } = await import("../routers");
+      const context = await createContext({ req, res });
+      const caller = appRouter.createCaller(context);
+      const result = await caller.loaders.reset();
+      res.json(result);
+    } catch (error) {
+      console.error("[Reset Loaders Error]", error);
+      res.status(500).json({ error: "Failed to reset loaders", details: error instanceof Error ? error.message : String(error) });
+    }
+  });
   // tRPC API with rate limiting
   app.use("/api/trpc", generalLimiter);
   app.use(

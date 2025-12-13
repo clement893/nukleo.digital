@@ -134,9 +134,11 @@ export default function PageLoader() {
         // Add CSS to fix logo in center and prevent it from moving
         styleElement.textContent = cssStyles + `
           /* Fix logo in center for all loaders */
-          img[src*="Nukleo"], img[src*="nukleo"], img[alt*="Nukleo"], img[alt*="nukleo"],
-          svg[viewBox*="1451"], svg[viewBox*="1781"],
-          .logo, [class*="logo"], [id*="logo"] {
+          img[src*="Nukleo"], img[src*="nukleo"], img[src*="logo"], img[alt*="Nukleo"], img[alt*="nukleo"], img[alt*="Logo"],
+          svg[viewBox*="1451"], svg[viewBox*="1781"], svg[class*="logo"], svg[id*="logo"],
+          .logo, [class*="logo"], [id*="logo"], [class*="Logo"], [id*="Logo"],
+          object[data*="nukleo"], object[data*="logo"],
+          embed[src*="nukleo"], embed[src*="logo"] {
             position: fixed !important;
             top: 50% !important;
             left: 50% !important;
@@ -146,6 +148,7 @@ export default function PageLoader() {
             will-change: auto !important;
             animation: none !important;
             transition: none !important;
+            margin: 0 !important;
           }
         `;
         document.head.appendChild(styleElement);

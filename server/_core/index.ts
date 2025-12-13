@@ -225,6 +225,33 @@ async function startServer() {
   server.listen(port, async () => {
     logger.info(`Server running on http://localhost:${port}/`);
     
+    // Initialize database tables on startup
+    if (process.env.DATABASE_URL) {
+      try {
+        console.log("[Server] Initializing database tables...");
+        const mockReq = {
+          body: {},
+        } as any;
+        const mockRes = {
+          status: (code: number) => ({
+            json: (data: any) => {
+              if (code === 200) {
+                console.log("[Server] ✅ Database tables initialized successfully");
+              } else {
+                console.error("[Server] ⚠️ Database initialization failed:", data);
+              }
+            },
+          }),
+          json: (data: any) => {
+            console.log("[Server] ✅ Database tables initialized successfully");
+          },
+        } as any;
+        await initDatabase(mockReq, mockRes);
+      } catch (error) {
+        console.error("[Server] ⚠️ Failed to initialize database:", error);
+      }
+    }
+    
     // Seed loaders on startup
     try {
       const { seedLoaders } = await import("../seed-loaders");

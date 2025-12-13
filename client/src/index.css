@@ -214,8 +214,17 @@
     font-family: var(--font-sans);
     position: relative;
     min-height: 100vh;
-    /* Fond noir pour éviter le flash de couleur entre les pages */
-    background: #0a0a0a;
+    /* Fond gradient par défaut - les pages avec fond noir le remplaceront */
+    background: linear-gradient(
+      135deg,
+      #1e3a8a 0%,
+      #3730a3 20%,
+      #5b21b6 35%,
+      #7c3aed 50%,
+      #6d28d9 65%,
+      #7f1d1d 85%,
+      #991b1b 100%
+    );
     background-attachment: fixed;
   }
 

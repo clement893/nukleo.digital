@@ -10,7 +10,6 @@ import ScrollToTop from "./components/ScrollToTop";
 import ArrowBackground from "./components/ArrowBackground";
 import { FloatingLanguageToggle } from "./components/FloatingLanguageToggle";
 import { usePageTransition } from "./hooks/usePageTransition";
-import PageTransition from "./components/PageTransition";
 
 // Lazy load UniversalLEO
 const UniversalLEO = lazy(() => import("./components/UniversalLEO"));
@@ -112,7 +111,6 @@ function App() {
       <ThemeProvider defaultTheme="dark">
         <LanguageProvider>
           <PageLoader />
-          <PageTransition />
           <ArrowBackground variant="default" />
           <CustomCursor />
           <ScrollToTop />

@@ -1,5 +1,5 @@
 [build]
-builder = "RAILPACK"
+builder = "NIXPACKS"
 
-[build.railpack]
+[build]
 installCommand = "pnpm install --no-frozen-lockfile"

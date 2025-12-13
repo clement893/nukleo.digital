@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 
 interface LoaderFullscreenPreviewProps {
   loaderType: string;
@@ -18,7 +18,6 @@ export default function LoaderFullscreenPreview({
   const [progress, setProgress] = useState(0);
   const [htmlContent, setHtmlContent] = useState<string>('');
   const [stylesReady, setStylesReady] = useState(false);
-  const containerRef = React.useRef<HTMLDivElement>(null);
   const LOADING_DURATION = 4000; // 4 secondes
 
   // Extract and inject styles, then prepare HTML
@@ -130,7 +129,7 @@ export default function LoaderFullscreenPreview({
 
       return (
         <div 
-          ref={containerRef}
+          key={`loader-${loaderName}-${stylesReady}`}
           dangerouslySetInnerHTML={{ __html: htmlContent }}
           className="absolute inset-0"
           style={{ 

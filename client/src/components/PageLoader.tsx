@@ -44,15 +44,9 @@ export default function PageLoader() {
         document.head.appendChild(styleElement);
       }
 
-      // Set HTML content
+      // Set HTML content immediately
       setLoaderHtml(randomLoader.cssCode);
-
-      // Wait for styles to be applied, then show loader
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setStylesReady(true);
-        });
-      });
+      setStylesReady(true);
 
       // Hide loader after a delay (e.g., 2 seconds minimum, or when page is ready)
       const minDisplayTime = 2000;
@@ -84,13 +78,14 @@ export default function PageLoader() {
     };
   }, [activeLoaders, isLoadingLoaders]);
 
-  // Show loader container immediately if we have loaders, even while loading
-  if (!activeLoaders || activeLoaders.length === 0) {
+  // Don't show anything if no loaders are active
+  if (!isLoadingLoaders && (!activeLoaders || activeLoaders.length === 0)) {
     return null;
   }
 
-  // Show loader container while fetching or loading
-  if (isLoadingLoaders || !loaderHtml) {
+  // Show loader container
+  if (!loaderHtml) {
+    // Still loading loaders, show black background
     return (
       <div
         className="fixed inset-0 z-[9999] bg-black"
@@ -117,7 +112,7 @@ export default function PageLoader() {
     >
       {htmlContent && (
         <div
-          key={`page-loader-${stylesReady}`}
+          key={`page-loader-${loaderHtml.substring(0, 50)}`}
           className="absolute inset-0"
           dangerouslySetInnerHTML={{ __html: htmlContent }}
         />

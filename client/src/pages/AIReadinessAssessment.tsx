@@ -93,7 +93,6 @@ export default function AIReadinessAssessment() {
   const currentQuestion = QUESTIONS[currentQuestionIndex];
   const totalQuestions = QUESTIONS.length;
   const isLastQuestion = currentQuestionIndex === totalQuestions - 1;
-  const canGoNext = answers[currentQuestion.id] !== undefined;
 
   const handleStart = () => {
     setState('quiz');
@@ -122,20 +121,7 @@ export default function AIReadinessAssessment() {
     }, 600);
   };
 
-  const handleNext = () => {
-    playClick();
-    
-    if (isLastQuestion) {
-      // Calculate scores and show email capture before results
-      const assessmentResults = calculateScores(answers);
-      setResults(assessmentResults);
-      setState('email-capture');
-      setShowEmailModal(true);
-    } else {
-      setCurrentQuestionIndex(prev => prev + 1);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
+  // handleNext removed - auto-advance only
 
   const handlePrevious = () => {
     playClick();

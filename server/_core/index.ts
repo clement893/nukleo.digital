@@ -230,6 +230,9 @@ async function startServer() {
       
       const { seedCreativeLoaders } = await import("../seed-creative-loaders");
       await seedCreativeLoaders();
+      
+      const { seedCrazyLoaders } = await import("../seed-crazy-loaders");
+      await seedCrazyLoaders();
     } catch (error) {
       logger.error("Failed to seed loaders:", error);
     }

@@ -58,7 +58,9 @@ export default function Header() {
                 decoding="async"
                 className="h-8 w-auto object-contain mb-1"
               />
-              <span className="text-[10px] text-white/60 font-medium tracking-wider">
+              <span className={`text-[10px] text-white/60 font-medium tracking-wider transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                isScrolled ? 'opacity-0 h-0 mb-0 overflow-hidden' : 'opacity-100 h-auto mb-0'
+              }`}>
                 {t('header.tagline')}
               </span>
             </Link>

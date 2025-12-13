@@ -225,19 +225,24 @@ export const startProjectRouter = router({
       try {
         // Save to database first
         const db = await getDb();
-        if (db) {
+        if (!db) {
+          console.error("[StartProject] Database connection not available");
+        } else {
           try {
-            await db.insert(startProjectSubmissions).values({
+            const result = await db.insert(startProjectSubmissions).values({
               name,
               email,
               company,
               projectType,
               budget,
               description,
-            });
-            console.log(`[StartProject] Successfully saved submission for ${name} (${email})`);
+            }).returning({ id: startProjectSubmissions.id });
+            console.log(`[StartProject] Successfully saved submission for ${name} (${email})`, result);
           } catch (dbError: any) {
             console.error("[StartProject] Database error:", dbError);
+            console.error("[StartProject] Error message:", dbError?.message);
+            console.error("[StartProject] Error code:", dbError?.code);
+            console.error("[StartProject] Full error:", JSON.stringify(dbError, Object.getOwnPropertyNames(dbError), 2));
             // Continue even if DB save fails - still try to send emails
           }
         }

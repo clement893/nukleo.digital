@@ -102,16 +102,16 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
     }
   };
   
-  // Track session creation
+  // Track session creation - create when chat opens
   useEffect(() => {
-    if (isOpen && messages.length > 0 && !createSessionMutation.isSuccess) {
-      // Create session on first interaction
+    if (isOpen && sessionId && !createSessionMutation.isSuccess && !createSessionMutation.isPending) {
+      // Create session when chat opens
       createSessionMutation.mutate({
         sessionId,
         pageContext: pageContext || 'default',
       });
     }
-  }, [isOpen, messages.length, sessionId, pageContext]);
+  }, [isOpen, sessionId, pageContext]);
   
   // Update session on message count change
   useEffect(() => {

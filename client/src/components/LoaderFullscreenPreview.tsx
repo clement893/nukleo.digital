@@ -109,11 +109,6 @@ export default function LoaderFullscreenPreview({
 
   if (!isOpen) return null;
 
-  // Extract HTML content for rendering
-  const htmlContent = loaderType.includes('<style>')
-    ? loaderType.replace(/<style>[\s\S]*?<\/style>/g, '').trim()
-    : '';
-
   // Extract HTML content (without style tags) for custom loaders
   const getHtmlContent = () => {
     if (loaderType.includes('<style>')) {

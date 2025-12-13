@@ -111,14 +111,6 @@ export default function Resources() {
       date: '2025-01-10'
     },
     {
-      id: 'ai-trends-2025',
-      category: 'industryInsights',
-      title: t('resources.articles.aiTrends2025.title'),
-      description: t('resources.articles.aiTrends2025.description'),
-      readTime: t('resources.articles.aiTrends2025.readTime'),
-      date: '2025-01-08'
-    },
-    {
       id: 'roi-ai-investment',
       category: 'strategy',
       title: t('resources.articles.roiInvestment.title'),

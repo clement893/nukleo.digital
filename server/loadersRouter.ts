@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { router, publicProcedure } from "./_core/trpc";
-import * as loadersDb from "../loaders";
+import * as loadersDb from "./loaders";
 
 export const loadersRouter = router({
   // Get all loaders (admin only)

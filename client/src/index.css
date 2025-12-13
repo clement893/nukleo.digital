@@ -388,7 +388,7 @@
     content: '';
     position: absolute;
     top: 0;
-    left: -100%;
+    left: 0;
     width: 100%;
     height: 100%;
     background: linear-gradient(
@@ -397,12 +397,14 @@
       rgba(255, 255, 255, 0.1),
       transparent
     );
+    transform: translateX(-100%);
+    will-change: transform;
     animation: shimmer-slide 3s infinite;
   }
 
   @keyframes shimmer-slide {
-    0% { left: -100%; }
-    100% { left: 100%; }
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
   }
 
   /* Text glow */
@@ -473,16 +475,17 @@
   /* LEO Avatar Animation */
   .animate-pulse-subtle {
     animation: pulse-subtle 3s ease-in-out infinite;
+    will-change: transform, opacity;
   }
 
   @keyframes pulse-subtle {
     0%, 100% { 
-      transform: scale(1);
-      filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.4)) drop-shadow(0 0 16px rgba(236, 72, 153, 0.3));
+      transform: scale(1) translateZ(0);
+      opacity: 0.9;
     }
     50% { 
-      transform: scale(1.05);
-      filter: drop-shadow(0 0 12px rgba(139, 92, 246, 0.6)) drop-shadow(0 0 24px rgba(236, 72, 153, 0.5));
+      transform: scale(1.05) translateZ(0);
+      opacity: 1;
     }
   }
 

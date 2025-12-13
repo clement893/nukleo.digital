@@ -1620,3 +1620,13 @@
 - [ ] Réduire le TBT mobile (100ms) - 4 long tasks détectées
 - [ ] Optimiser le FCP mobile (1.7s → 1.0s)
 - [ ] Réduire le JavaScript inutilisé (173 KiB) - vendor et react-dom
+
+## Nouvelles Optimisations Mobile (Score: 80 → Objectif: 90+)
+- [x] Corriger les animations non-composited - pulse-subtle et shimmer-slide
+- [x] Optimiser pulse-subtle - Remplacé filter par opacity + transform
+- [x] Optimiser shimmer-slide - Remplacé left par transform: translateX
+- [x] Ajouter will-change sur animations pour forcer GPU
+- [ ] Optimiser le Render Blocking CSS (170ms) - Inline CSS critique
+- [ ] Réduire le LCP (4.4s → 2.5s) - Element Render Delay de 400ms
+- [ ] Réduire le FCP (2.3s → 1.8s) - CSS bloquant
+- [ ] Réduire le JavaScript inutilisé (173 KiB) - vendor et react-dom

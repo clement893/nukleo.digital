@@ -193,10 +193,8 @@ export default function PageLoader() {
           setIsFirstLoad(false);
           // Show body content immediately - hero should be visible without animations
           document.body.classList.add('loaded');
-          // Force hide loader after a brief moment to ensure it's gone
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 50);
+          // Clear loader HTML to ensure logo disappears
+          setLoaderHtml(null);
         } else {
           setTimeout(checkReady, 50);
         }
@@ -215,6 +213,9 @@ export default function PageLoader() {
       if (styleElement) {
         styleElement.remove();
       }
+      // Ensure loader is hidden when component unmounts or location changes
+      setIsLoading(false);
+      setLoaderHtml(null);
     };
   }, [activeLoaders, isLoadingLoaders, isAdminArea, location, isFirstLoad]);
 
@@ -262,29 +263,30 @@ export default function PageLoader() {
         visibility: isLoading ? "visible" : "hidden",
       }}
     >
-      {/* Logo blanc fixe au centre */}
-      <div
-        className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[10000] pointer-events-none"
-        style={{
-          width: '300px',
-          height: 'auto',
-        }}
-      >
-        <img 
-          src="/Nukleo_blanc_RVB.svg" 
-          alt="Nukleo Digital - AI Transformation Agency" 
-          width="300"
-          height="75"
-          fetchPriority="high"
-          loading="eager"
-          className="w-full h-auto"
+      {/* Logo blanc fixe au centre - seulement visible quand isLoading est true */}
+      {isLoading && (
+        <div
+          className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[10000] pointer-events-none"
           style={{
-            opacity: 1,
+            width: '300px',
+            height: 'auto',
+            opacity: isLoading ? 1 : 0,
+            transition: 'opacity 0.2s ease-out',
           }}
-        />
-      </div>
+        >
+          <img 
+            src="/Nukleo_blanc_RVB.svg" 
+            alt="Nukleo Digital - AI Transformation Agency" 
+            width="300"
+            height="75"
+            fetchPriority="high"
+            loading="eager"
+            className="w-full h-auto"
+          />
+        </div>
+      )}
       
-      {htmlContent && (
+      {htmlContent && isLoading && (
         <div
           key={`page-loader-${loaderHtml.substring(0, 50)}`}
           className="fixed inset-0"

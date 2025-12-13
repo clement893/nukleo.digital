@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { router, publicProcedure } from "../trpc";
-import { db } from "../_core/db";
+import { router, publicProcedure } from "../_core/trpc";
+import { getDb } from "../db";
 import { radarTechnologies, radarPositions, type InsertRadarTechnology, type InsertRadarPosition } from "../../drizzle/schema";
 import { eq, desc, and, gte, lte } from "drizzle-orm";
 import { invokeLLM } from "../_core/llm";
@@ -20,6 +20,8 @@ const INITIAL_TECHNOLOGIES = [
 // Get current radar data (latest positions for all technologies)
 export const radarRouter = router({
   getCurrent: publicProcedure.query(async () => {
+    const db = await getDb();
+    if (!db) throw new Error("Database connection failed");
     // Get latest position for each technology
     const technologies = await db.select().from(radarTechnologies).orderBy(radarTechnologies.name);
     
@@ -49,6 +51,8 @@ export const radarRouter = router({
       endDate: z.date().optional(),
     }))
     .query(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new Error("Database connection failed");
       let query = db.select().from(radarPositions);
       
       if (input.technologyId) {
@@ -69,6 +73,8 @@ export const radarRouter = router({
   getTechnology: publicProcedure
     .input(z.object({ slug: z.string() }))
     .query(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new Error("Database connection failed");
       const tech = await db
         .select()
         .from(radarTechnologies)
@@ -92,6 +98,8 @@ export const radarRouter = router({
 
   // Generate daily refresh - should be called by cron job
   refreshDaily: publicProcedure.mutation(async () => {
+    const db = await getDb();
+    if (!db) throw new Error("Database connection failed");
     const technologies = await db.select().from(radarTechnologies);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -239,6 +247,11 @@ Réponds en JSON avec cette structure exacte:
 
 // Seed initial technologies
 export async function seedRadarTechnologies() {
+  const db = await getDb();
+  if (!db) {
+    console.error("Database connection failed, skipping radar seed");
+    return;
+  }
   const existing = await db.select().from(radarTechnologies);
   if (existing.length > 0) {
     // Check if we need to generate initial positions
@@ -271,7 +284,14 @@ export async function seedRadarTechnologies() {
     }
     return; // Already seeded
   }
+  
+  // db is already defined above, no need to redefine
 
+  const db = await getDb();
+  if (!db) {
+    console.error("Database connection failed, skipping radar seed");
+    return;
+  }
   for (const tech of INITIAL_TECHNOLOGIES) {
     const [inserted] = await db.insert(radarTechnologies).values(tech).returning();
     

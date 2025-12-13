@@ -67,7 +67,7 @@ export default function Footer() {
 
           {/* Navigation */}
           <div className="lg:col-span-2">
-            <h3 className="text-sm font-bold tracking-wider mb-4">Navigation</h3>
+            <h3 className="text-sm font-bold tracking-wider mb-4">{t('footer.navigation')}</h3>
             <ul className="space-y-3">
               {navigation.map((item) => (
                 <li key={item.href}>
@@ -84,7 +84,7 @@ export default function Footer() {
 
           {/* Services */}
           <div className="lg:col-span-3">
-            <h3 className="text-sm font-bold tracking-wider mb-4">Services</h3>
+            <h3 className="text-sm font-bold tracking-wider mb-4">{t('footer.services')}</h3>
             <ul className="space-y-3">
               {services.map((item) => (
                 <li key={item.href}>
@@ -101,7 +101,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div className="lg:col-span-3">
-            <h3 className="text-sm font-bold tracking-wider mb-4">Contact</h3>
+            <h3 className="text-sm font-bold tracking-wider mb-4">{t('footer.contact')}</h3>
             <div className="space-y-4 text-sm">
               <div>
                 <div className="text-white font-medium mb-1">Montréal</div>
@@ -131,18 +131,18 @@ export default function Footer() {
         {/* Newsletter */}
         <div className="border-t border-white/10 pt-12 mb-12">
           <div className="max-w-2xl">
-            <h3 className="text-xl font-bold mb-2">Stay Ahead of the AI Curve</h3>
+            <h3 className="text-xl font-bold mb-2">{t('footer.newsletterTitle')}</h3>
             <p className="text-white/60 text-sm mb-6">
-              Subscribe to receive our latest insights, technical guides, and industry analysis.
+              {t('footer.newsletterDescription')}
             </p>
             <form className="flex gap-3">
               <Input
                 type="email"
-                placeholder="Enter your email"
+                placeholder={t('footer.newsletterPlaceholder')}
                 className="bg-white/10 border-white/20 text-white placeholder:text-white/40"
               />
               <Button className="bg-violet-600 hover:bg-violet-700 text-white px-8">
-                Subscribe
+                {t('footer.newsletterButton')}
               </Button>
             </form>
           </div>

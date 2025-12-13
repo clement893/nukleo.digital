@@ -42,7 +42,14 @@
       "terms": "Terms",
       "cookies": "Cookies"
     },
-    "copyright": "© {{year}} Nukleo Digital. All rights reserved."
+    "copyright": "© {{year}} Nukleo Digital. All rights reserved.",
+    "navigation": "Navigation",
+    "services": "Services",
+    "contact": "Contact",
+    "newsletterTitle": "Stay Ahead of the AI Curve",
+    "newsletterDescription": "Subscribe to receive our latest insights, technical guides, and industry analysis.",
+    "newsletterPlaceholder": "Enter your email",
+    "newsletterButton": "Subscribe"
   },
   "home": {
     "beyondAI": "Beyond AI",
@@ -68,6 +75,100 @@
     "message": "Message",
     "send": "Send",
     "success": "Message sent successfully!"
+  },
+  "about": {
+    "title": "About",
+    "subtitle": "Our Team",
+    "description": "Meet the experts behind Nukleo Digital",
+    "aboutUs": "ABOUT US",
+    "heroTitle1": "Strategy.",
+    "heroTitle2": "Creativity.",
+    "heroTitle3": "Technology.",
+    "manifesto": "MANIFESTO",
+    "nukleoSpirit": "Nukleo Spirit",
+    "nukleoSpiritText": "At <strong>Nukleo</strong>, we believe technology should drive growth, not slow it down. We turn digital tools into real performance powerhouses that are smart, human, and results-focused.",
+    "ourApproach": "Our Approach",
+    "ourApproachText": "We're a passionate, curious team that loves solving problems creatively. From strategy to design, from development to launch, we bring together all the right skills to move your project forward and make it shine.",
+    "whatSetsUsApart": "What Sets Us Apart",
+    "whatSetsUsApartText": "No jargon. No chaos. Just true partners who listen, guide, and deliver. We don't just take on a project, we build lasting collaborations that make a real impact.",
+    "ourTeam": "OUR TEAM",
+    "ourOffices": "OUR OFFICES",
+    "montreal": "MONTRÉAL",
+    "montrealDescription": "In the heart of Little Italy, we'd be delighted to meet at Jean Talon Market to discuss!",
+    "halifax": "HALIFAX",
+    "halifaxDescription": "In the heart of downtown Halifax, we'd be happy to meet by the waterfront to discuss!",
+    "letsTalk": "Let's talk"
+  },
+  "services": {
+    "title": "Services",
+    "subtitle": "We are by your side to help you grow.",
+    "description": "Comprehensive AI services: Strategy & Marketing, Digital Platforms, Intelligent Operations.",
+    "ourServices": "Our Services",
+    "heroTitle": "We are by your side",
+    "heroSubtitle": "to help you grow.",
+    "heroDescription": "Three specialized studios working in harmony to transform your vision into reality. From strategy to creativity, from innovation to execution.",
+    "bureau": {
+      "category": "The Bureau",
+      "subtitle": "Strategic Headquarters",
+      "description": "Your strategic headquarters. Here, we transform data into decisions, insights into actions, and opportunities into measurable results."
+    },
+    "lab": {
+      "category": "The Lab",
+      "subtitle": "Innovation Laboratory",
+      "description": "Welcome to our innovation laboratory. Here, we transform cutting-edge technologies into tangible competitive advantages."
+    },
+    "studio": {
+      "category": "The Studio",
+      "subtitle": "Creative Workshop",
+      "description": "Welcome to the workshop where ideas become reality. Our Creative Studio fuses strategy and creativity to create brand experiences that captivate."
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Ready to transform your business with AI?",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "company": "Company",
+    "message": "Message",
+    "send": "Send",
+    "success": "Message sent successfully!",
+    "sectionNumber": "07 — Contact",
+    "heroTitle": "Let's Start",
+    "heroSubtitle": "Your Transformation",
+    "heroDescription": "Ready to become an AI-native leader? Get in touch and let's discuss how we can help you thrive in the age of artificial intelligence.",
+    "sendMessage": "Send us a message",
+    "successMessage": "✓ Message sent successfully! We'll get back to you within 24 hours.",
+    "errorMessage": "✗ Failed to send message. Please try again.",
+    "firstNamePlaceholder": "John",
+    "lastNamePlaceholder": "Doe",
+    "emailPlaceholder": "john@company.com",
+    "companyPlaceholder": "Your company",
+    "messagePlaceholder": "Tell us about your project...",
+    "getInTouch": "Get in Touch",
+    "contactDescription": "Ready to transform your business with AI? Contact us for expert consultation.",
+    "montreal": "Montréal",
+    "halifax": "Halifax",
+    "emailUs": "Email us",
+    "phone": "Phone"
+  },
+  "projects": {
+    "title": "Projects",
+    "sectionNumber": "02 — Projects",
+    "heroTitle": "Transformations",
+    "heroSubtitle": "that Resonate",
+    "filterAll": "All",
+    "noProjects": "No projects found"
+  },
+  "expertise": {
+    "title": "Expertise",
+    "sectionNumber": "04 — Expertise"
+  },
+  "resources": {
+    "title": "Resources"
+  },
+  "faq": {
+    "title": "FAQ"
   },
   "seo": {
     "home": {

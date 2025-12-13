@@ -42,7 +42,14 @@
       "terms": "Conditions",
       "cookies": "Cookies"
     },
-    "copyright": "© {{year}} Nukleo Digital. Tous droits réservés."
+    "copyright": "© {{year}} Nukleo Digital. Tous droits réservés.",
+    "navigation": "Navigation",
+    "services": "Services",
+    "contact": "Contact",
+    "newsletterTitle": "Restez à l'Avant-Garde de l'IA",
+    "newsletterDescription": "Abonnez-vous pour recevoir nos derniers insights, guides techniques et analyses de l'industrie.",
+    "newsletterPlaceholder": "Entrez votre email",
+    "newsletterButton": "S'abonner"
   },
   "home": {
     "beyondAI": "Au-delà de l'IA",
@@ -68,6 +75,100 @@
     "message": "Message",
     "send": "Envoyer",
     "success": "Message envoyé avec succès !"
+  },
+  "about": {
+    "title": "À propos",
+    "subtitle": "Notre équipe",
+    "description": "Découvrez les experts derrière Nukleo Digital",
+    "aboutUs": "À PROPOS DE NOUS",
+    "heroTitle1": "Stratégie.",
+    "heroTitle2": "Créativité.",
+    "heroTitle3": "Technologie.",
+    "manifesto": "MANIFESTE",
+    "nukleoSpirit": "Esprit Nukleo",
+    "nukleoSpiritText": "Chez <strong>Nukleo</strong>, nous croyons que la technologie doit stimuler la croissance, pas la ralentir. Nous transformons les outils numériques en véritables moteurs de performance qui sont intelligents, humains et axés sur les résultats.",
+    "ourApproach": "Notre Approche",
+    "ourApproachText": "Nous sommes une équipe passionnée et curieuse qui aime résoudre les problèmes de manière créative. De la stratégie au design, du développement au lancement, nous rassemblons toutes les compétences nécessaires pour faire avancer votre projet et le faire briller.",
+    "whatSetsUsApart": "Ce qui Nous Distingue",
+    "whatSetsUsApartText": "Pas de jargon. Pas de chaos. Juste de vrais partenaires qui écoutent, guident et livrent. Nous ne prenons pas seulement un projet en charge, nous construisons des collaborations durables qui ont un impact réel.",
+    "ourTeam": "NOTRE ÉQUIPE",
+    "ourOffices": "NOS BUREAUX",
+    "montreal": "MONTRÉAL",
+    "montrealDescription": "Au cœur de la Petite Italie, nous serions ravis de nous rencontrer au marché Jean-Talon pour discuter !",
+    "halifax": "HALIFAX",
+    "halifaxDescription": "Au cœur du centre-ville de Halifax, nous serions heureux de nous rencontrer au bord de l'eau pour discuter !",
+    "letsTalk": "Parlons-en"
+  },
+  "services": {
+    "title": "Services",
+    "subtitle": "Nous sommes à vos côtés pour vous aider à grandir.",
+    "description": "Services IA complets : Stratégie & Marketing, Plateformes Numériques, Opérations Intelligentes.",
+    "ourServices": "Nos Services",
+    "heroTitle": "Nous sommes à vos côtés",
+    "heroSubtitle": "pour vous aider à grandir.",
+    "heroDescription": "Trois studios spécialisés travaillant en harmonie pour transformer votre vision en réalité. De la stratégie à la créativité, de l'innovation à l'exécution.",
+    "bureau": {
+      "category": "The Bureau",
+      "subtitle": "Quartier Général Stratégique",
+      "description": "Votre quartier général stratégique. Ici, nous transformons les données en décisions, les insights en actions, et les opportunités en résultats mesurables."
+    },
+    "lab": {
+      "category": "The Lab",
+      "subtitle": "Laboratoire d'Innovation",
+      "description": "Bienvenue dans notre laboratoire d'innovation. Ici, nous transformons les technologies de pointe en avantages concurrentiels tangibles."
+    },
+    "studio": {
+      "category": "The Studio",
+      "subtitle": "Atelier Créatif",
+      "description": "Bienvenue dans l'atelier où les idées deviennent réalité. Notre Studio Créatif fusionne stratégie et créativité pour créer des expériences de marque captivantes."
+    }
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "subtitle": "Prêt à transformer votre entreprise avec l'IA ?",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "email": "Email",
+    "company": "Entreprise",
+    "message": "Message",
+    "send": "Envoyer",
+    "success": "Message envoyé avec succès !",
+    "sectionNumber": "07 — Contact",
+    "heroTitle": "Commençons",
+    "heroSubtitle": "Votre Transformation",
+    "heroDescription": "Prêt à devenir un leader axé sur l'IA ? Contactez-nous et discutons de la façon dont nous pouvons vous aider à prospérer à l'ère de l'intelligence artificielle.",
+    "sendMessage": "Envoyez-nous un message",
+    "successMessage": "✓ Message envoyé avec succès ! Nous vous répondrons dans les 24 heures.",
+    "errorMessage": "✗ Échec de l'envoi du message. Veuillez réessayer.",
+    "firstNamePlaceholder": "Jean",
+    "lastNamePlaceholder": "Dupont",
+    "emailPlaceholder": "jean@entreprise.com",
+    "companyPlaceholder": "Votre entreprise",
+    "messagePlaceholder": "Parlez-nous de votre projet...",
+    "getInTouch": "Contactez-nous",
+    "contactDescription": "Prêt à transformer votre entreprise avec l'IA ? Contactez-nous pour une consultation experte.",
+    "montreal": "Montréal",
+    "halifax": "Halifax",
+    "emailUs": "Écrivez-nous",
+    "phone": "Téléphone"
+  },
+  "projects": {
+    "title": "Projets",
+    "sectionNumber": "02 — Projets",
+    "heroTitle": "Transformations",
+    "heroSubtitle": "qui Résonnent",
+    "filterAll": "Tous",
+    "noProjects": "Aucun projet trouvé"
+  },
+  "expertise": {
+    "title": "Expertise",
+    "sectionNumber": "04 — Expertise"
+  },
+  "resources": {
+    "title": "Ressources"
+  },
+  "faq": {
+    "title": "FAQ"
   },
   "seo": {
     "home": {

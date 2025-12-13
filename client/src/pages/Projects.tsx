@@ -5,8 +5,10 @@ import { Filter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import PageLayout from '@/components/PageLayout';
 import Breadcrumb from '@/components/Breadcrumb';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Projects() {
+  const { t } = useLanguage();
   const [activeFilter, setActiveFilter] = useState('all');
 
   const filters = ['all', 'AI Platforms', 'Marketing', 'Web Apps', 'Strategy'];
@@ -61,14 +63,14 @@ export default function Projects() {
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">
         <div className="container">
-          <Breadcrumb items={[{ name: 'Projects', url: '/projects' }]} />
+          <Breadcrumb items={[{ name: t('nav.projects'), url: '/projects' }]} />
           <span className="font-mono text-accent text-sm mb-8 block tracking-widest">
-            02 — Projects
+            {t('projects.sectionNumber')}
           </span>
 
           <h1 className="text-white mb-8">
-            Transformations<br />
-            in Action
+            {t('projects.heroTitle')}<br />
+            {t('projects.heroSubtitle')}
           </h1>
 
           <p className="text-white/75 text-lg lg:text-xl leading-relaxed max-w-3xl">
@@ -91,7 +93,7 @@ export default function Projects() {
                     : 'glass text-white/75 hover:text-white hover:bg-white/10'
                 }`}
               >
-                {filter === 'all' ? 'All Projects' : filter}
+                {filter === 'all' ? t('projects.filterAll') : filter}
               </button>
             ))}
           </div>

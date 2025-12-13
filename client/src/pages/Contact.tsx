@@ -7,8 +7,13 @@ import SEO from '@/components/SEO';
 import UniversalLEO from '@/components/UniversalLEO';
 import StructuredData from '@/components/StructuredData';
 import Breadcrumb from '@/components/Breadcrumb';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 export default function Contact() {
+  const { t } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
+  
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -88,8 +93,8 @@ export default function Contact() {
   return (
     <PageLayout>
       <SEO 
-        title="Contact Nukleo Digital | Start Your AI Transformation"
-        description="Ready to transform with AI? Contact Nukleo Digital for expert consultation. Offices in Montréal & Halifax. Get tailored AI solutions for your business today."
+        title={t('seo.contact.title')}
+        description={t('seo.contact.description')}
         keywords="contact AI agency, AI consultation, Montréal AI services, Halifax AI agency, AI transformation contact"
       />
       <StructuredData data={contactPageSchema} />
@@ -97,18 +102,18 @@ export default function Contact() {
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">
         <div className="container">
-          <Breadcrumb items={[{ name: 'Contact', url: '/contact' }]} />
+          <Breadcrumb items={[{ name: t('nav.contact'), url: '/contact' }]} />
           <span className="font-mono text-accent text-sm mb-8 block tracking-widest">
-            07 — Contact
+            {t('contact.sectionNumber')}
           </span>
 
           <h1 className="text-white mb-8">
-            Let's Start<br />
-            Your Transformation
+            {t('contact.heroTitle')}<br />
+            {t('contact.heroSubtitle')}
           </h1>
 
           <p className="text-white/75 text-lg lg:text-xl leading-relaxed max-w-3xl">
-            Ready to become an AI-native leader? Get in touch and let's discuss how we can help you thrive in the age of artificial intelligence.
+            {t('contact.heroDescription')}
           </p>
         </div>
       </section>
@@ -120,13 +125,13 @@ export default function Contact() {
             {/* Contact Form */}
             <div className="glass rounded-3xl p-8 lg:p-12">
               <h2 className="text-2xl lg:text-3xl font-bold text-white mb-8">
-                Send us a message
+                {t('contact.sendMessage')}
               </h2>
 
               {isSubmitted && (
                 <div className="mb-6 p-4 bg-green-500/20 border border-green-500/50 rounded-xl">
                   <p className="text-green-400 font-medium">
-                    ✓ Message sent successfully! We'll get back to you within 24 hours.
+                    {t('contact.successMessage')}
                   </p>
                 </div>
               )}
@@ -134,7 +139,7 @@ export default function Contact() {
               {sendMessage.error && (
                 <div className="mb-6 p-4 bg-red-500/20 border border-red-500/50 rounded-xl">
                   <p className="text-red-400 font-medium">
-                    ✗ Failed to send message. Please try again.
+                    {t('contact.errorMessage')}
                   </p>
                 </div>
               )}
@@ -143,7 +148,7 @@ export default function Contact() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-white/90 text-sm mb-2 font-medium">
-                      First Name
+                      {t('contact.firstName')}
                     </label>
                     <input
                       type="text"
@@ -152,12 +157,12 @@ export default function Contact() {
                       onChange={handleChange}
                       required
                       className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/50 focus:outline-none focus:border-accent transition-colors"
-                      placeholder="John"
+                      placeholder={t('contact.firstNamePlaceholder')}
                     />
                   </div>
                   <div>
                     <label className="block text-white/90 text-sm mb-2 font-medium">
-                      Last Name
+                      {t('contact.lastName')}
                     </label>
                     <input
                       type="text"
@@ -166,14 +171,14 @@ export default function Contact() {
                       onChange={handleChange}
                       required
                       className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/50 focus:outline-none focus:border-accent transition-colors"
-                      placeholder="Doe"
+                      placeholder={t('contact.lastNamePlaceholder')}
                     />
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-white/90 text-sm mb-2 font-medium">
-                    Email
+                    {t('contact.email')}
                   </label>
                   <input
                     type="email"
@@ -182,13 +187,13 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/50 focus:outline-none focus:border-accent transition-colors"
-                    placeholder="john@company.com"
+                    placeholder={t('contact.emailPlaceholder')}
                   />
                 </div>
 
                 <div>
                   <label className="block text-white/90 text-sm mb-2 font-medium">
-                    Company
+                    {t('contact.company')}
                   </label>
                   <input
                     type="text"
@@ -197,13 +202,13 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/50 focus:outline-none focus:border-accent transition-colors"
-                    placeholder="Your Company"
+                    placeholder={t('contact.companyPlaceholder')}
                   />
                 </div>
 
                 <div>
                   <label className="block text-white/90 text-sm mb-2 font-medium">
-                    Message
+                    {t('contact.message')}
                   </label>
                   <textarea
                     name="message"
@@ -212,7 +217,7 @@ export default function Contact() {
                     required
                     rows={6}
                     className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/50 focus:outline-none focus:border-accent transition-colors resize-none"
-                    placeholder="Tell us about your project..."
+                    placeholder={t('contact.messagePlaceholder')}
                   />
                 </div>
 
@@ -221,7 +226,7 @@ export default function Contact() {
                   disabled={sendMessage.isPending}
                   className="w-full py-6 text-base"
                 >
-                  {sendMessage.isPending ? 'Sending...' : 'Send Message'}
+                  {sendMessage.isPending ? t('common.loading') : t('contact.send')}
                 </Button>
               </form>
             </div>
@@ -258,7 +263,7 @@ export default function Contact() {
               <div className="glass rounded-3xl p-8 lg:p-12">
                 <div className="flex items-center gap-3 mb-4">
                   <Mail className="w-6 h-6 text-accent" />
-                  <h3 className="text-xl font-bold text-white">Email</h3>
+                  <h3 className="text-xl font-bold text-white">{t('contact.emailUs')}</h3>
                 </div>
                 <a
                   href="mailto:hello@nukleo.ai"
@@ -272,7 +277,7 @@ export default function Contact() {
               <div className="glass rounded-3xl p-8 lg:p-12">
                 <div className="flex items-center gap-3 mb-4">
                   <Phone className="w-6 h-6 text-accent" />
-                  <h3 className="text-xl font-bold text-white">Phone</h3>
+                  <h3 className="text-xl font-bold text-white">{t('contact.phone')}</h3>
                 </div>
                 <a
                   href="tel:+15147771234"

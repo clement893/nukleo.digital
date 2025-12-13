@@ -3,6 +3,8 @@ import SEO from '@/components/SEO';
 import UniversalLEO from '@/components/UniversalLEO';
 import { Linkedin } from 'lucide-react';
 import Breadcrumb from '@/components/Breadcrumb';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 const teamMembers = [
   {
@@ -113,65 +115,58 @@ const teamMembers = [
 ];
 
 export default function About() {
+  const { t } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
+  
   return (
     <PageLayout>
       <SEO 
-        title="About Nukleo Digital | AI Transformation Experts"
-        description="Meet the Nukleo Digital team: 15+ AI experts transforming businesses across Canada. Based in Montréal & Halifax, we deliver cutting-edge AI solutions since 2020."
+        title={t('seo.about.title')}
+        description={t('seo.about.description')}
         keywords="AI experts, AI transformation team, AI consulting experts, Montréal AI agency, Halifax AI services"
         ogImage="https://nukleo.digital/og-about.jpg"
       />
       <div className="min-h-screen bg-gradient-to-br from-violet-950 via-fuchsia-950 to-rose-950">
         {/* Hero Section */}
         <section className="container mx-auto px-4 pt-32 pb-20">
-          <Breadcrumb items={[{ name: 'About', url: '/about' }]} />
+          <Breadcrumb items={[{ name: t('nav.about'), url: '/about' }]} />
           <div className="text-center mb-16">
-            <p className="text-violet-300 uppercase tracking-widest text-sm mb-4">ABOUT US</p>
+            <p className="text-violet-300 uppercase tracking-widest text-sm mb-4">{t('about.aboutUs')}</p>
             <h1 className="text-6xl md:text-8xl font-bold mb-8">
-              <span className="text-white">Strategy.</span>
+              <span className="text-white">{t('about.heroTitle1')}</span>
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-400">Creativity.</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-400">{t('about.heroTitle2')}</span>
               <br />
-              <span className="text-white">Technology.</span>
+              <span className="text-white">{t('about.heroTitle3')}</span>
             </h1>
           </div>
         </section>
 
         {/* Manifesto Section */}
         <section className="container mx-auto px-4 py-20">
-          <p className="text-violet-300 uppercase tracking-widest text-sm mb-12 text-center">MANIFESTO</p>
+          <p className="text-violet-300 uppercase tracking-widest text-sm mb-12 text-center">{t('about.manifesto')}</p>
           
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold text-fuchsia-400 mb-4">Nukleo Spirit</h3>
-              <p className="text-gray-300 leading-relaxed">
-                At <strong>Nukleo</strong>, we believe technology should drive growth, not slow it down.
-                We turn digital tools into real performance powerhouses that are smart, human, and results-focused.
-              </p>
+              <h3 className="text-2xl font-bold text-fuchsia-400 mb-4">{t('about.nukleoSpirit')}</h3>
+              <p className="text-gray-300 leading-relaxed" dangerouslySetInnerHTML={{ __html: t('about.nukleoSpiritText') }} />
             </div>
 
             <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold text-fuchsia-400 mb-4">Our Approach</h3>
-              <p className="text-gray-300 leading-relaxed">
-                We're a passionate, curious team that loves solving problems creatively.
-                From strategy to design, from development to launch, we bring together all the right skills to move your project forward and make it shine.
-              </p>
+              <h3 className="text-2xl font-bold text-fuchsia-400 mb-4">{t('about.ourApproach')}</h3>
+              <p className="text-gray-300 leading-relaxed">{t('about.ourApproachText')}</p>
             </div>
 
             <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold text-fuchsia-400 mb-4">What Sets Us Apart</h3>
-              <p className="text-gray-300 leading-relaxed">
-                No jargon. No chaos.
-                Just true partners who listen, guide, and deliver.
-                We don't just take on a project, we build lasting collaborations that make a real impact.
-              </p>
+              <h3 className="text-2xl font-bold text-fuchsia-400 mb-4">{t('about.whatSetsUsApart')}</h3>
+              <p className="text-gray-300 leading-relaxed">{t('about.whatSetsUsApartText')}</p>
             </div>
           </div>
         </section>
 
         {/* Team Section */}
         <section className="container mx-auto px-4 py-20">
-          <p className="text-violet-300 uppercase tracking-widest text-sm mb-12 text-center">OUR TEAM</p>
+          <p className="text-violet-300 uppercase tracking-widest text-sm mb-12 text-center">{t('about.ourTeam')}</p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
             {teamMembers.map((member, index) => (
@@ -210,40 +205,40 @@ export default function About() {
 
         {/* Offices Section */}
         <section className="container mx-auto px-4 py-20">
-          <p className="text-violet-300 uppercase tracking-widest text-sm mb-12 text-center">OUR OFFICES</p>
+          <p className="text-violet-300 uppercase tracking-widest text-sm mb-12 text-center">{t('about.ourOffices')}</p>
           
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
-              <h3 className="text-3xl font-bold text-white mb-4">MONTRÉAL</h3>
+              <h3 className="text-3xl font-bold text-white mb-4">{t('about.montreal')}</h3>
               <p className="text-gray-300 mb-6">
-                In the heart of Little Italy, we'd be delighted to meet at Jean Talon Market to discuss!
+                {t('about.montrealDescription')}
               </p>
               <p className="text-gray-400 mb-6">
                 7236 Rue Waverly Montréal<br />
                 QC H2R 0C2
               </p>
               <a 
-                href="/contact" 
+                href={getLocalizedPath('/contact')} 
                 className="inline-block px-6 py-3 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-fuchsia-500/50 transition-all duration-300"
               >
-                Let's talk
+                {t('about.letsTalk')}
               </a>
             </div>
 
             <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
-              <h3 className="text-3xl font-bold text-white mb-4">HALIFAX</h3>
+              <h3 className="text-3xl font-bold text-white mb-4">{t('about.halifax')}</h3>
               <p className="text-gray-300 mb-6">
-                In the heart of downtown Halifax, we'd be happy to meet by the waterfront to discuss!
+                {t('about.halifaxDescription')}
               </p>
               <p className="text-gray-400 mb-6">
                 1800 Argyle St Unit 801 Halifax<br />
                 NS B3J 3N8
               </p>
               <a 
-                href="/contact" 
+                href={getLocalizedPath('/contact')} 
                 className="inline-block px-6 py-3 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-fuchsia-500/50 transition-all duration-300"
               >
-                Let's talk
+                {t('about.letsTalk')}
               </a>
             </div>
           </div>

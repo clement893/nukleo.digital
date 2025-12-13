@@ -5,14 +5,19 @@ import { Link } from 'wouter';
 import PageLayout from '../components/PageLayout';
 import StructuredData, { serviceSchema } from '@/components/StructuredData';
 import Breadcrumb from '@/components/Breadcrumb';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 export default function Services() {
+  const { t } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
+  
   const services = [
     {
-      category: 'The Bureau',
-      subtitle: 'Strategic Headquarters',
+      category: t('services.bureau.category'),
+      subtitle: t('services.bureau.subtitle'),
       icon: Layers,
-      description: 'Your strategic headquarters. Here, we transform data into decisions, insights into actions, and opportunities into measurable results. Our Strategic Bureau orchestrates your digital success with precision, agility, and an obsession for ROI.',
+      description: t('services.bureau.description'),
       link: '/services/strategic-bureau',
       services: [
         {
@@ -38,10 +43,10 @@ export default function Services() {
       ],
     },
     {
-      category: 'The Lab',
-      subtitle: 'Innovation Laboratory',
+      category: t('services.lab.category'),
+      subtitle: t('services.lab.subtitle'),
       icon: BarChart3,
-      description: 'Welcome to our innovation laboratory. Here, we transform cutting-edge technologies into tangible competitive advantages. Web development, custom platforms, e-commerce, AI, automation—we build the solutions that propel your growth and give you a head start.',
+      description: t('services.lab.description'),
       link: '/services/ai-lab',
       services: [
         {
@@ -67,10 +72,10 @@ export default function Services() {
       ],
     },
     {
-      category: 'The Studio',
-      subtitle: 'Creative Workshop',
+      category: t('services.studio.category'),
+      subtitle: t('services.studio.subtitle'),
       icon: Palette,
-      description: 'Welcome to the workshop where ideas become reality. Our Creative Studio fuses strategy and creativity to create brand experiences that captivate, designs that convert, and campaigns that leave a mark. We don\'t just create beautiful, we create beautiful that performs.',
+      description: t('services.studio.description'),
       link: '/services/creative-studio',
       services: [
         {
@@ -100,32 +105,32 @@ export default function Services() {
   return (
     <PageLayout>
       <SEO 
-        title="AI Services | Strategy, Platforms & Intelligent Operations"
-        description="Comprehensive AI services: Strategy & Marketing, Digital Platforms, Intelligent Operations. 12 specialized solutions to accelerate your AI transformation. Explore now."
+        title={t('seo.services.title')}
+        description={t('seo.services.description')}
         keywords="AI services, AI strategy, digital platforms, intelligent operations, AI transformation"
         ogImage="https://nukleo.digital/og-services.jpg"
       />
       <StructuredData data={serviceSchema} />
       <div className="min-h-screen pt-24 pb-20 px-4">
         <div className="max-w-6xl mx-auto">
-          <Breadcrumb items={[{ name: 'Services', url: '/services' }]} />
+          <Breadcrumb items={[{ name: t('nav.services'), url: '/services' }]} />
         </div>
         {/* Hero Section */}
         <div className="max-w-6xl mx-auto mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-8">
-            <span className="text-sm font-medium text-white/90">Our Services</span>
+            <span className="text-sm font-medium text-white/90">{t('services.ourServices')}</span>
           </div>
           
           <h1 className="text-6xl md:text-8xl font-bold text-white mb-8 leading-tight italic">
-            We are by your side
+            {t('services.heroTitle')}
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">
-              to help you grow.
+              {t('services.heroSubtitle')}
             </span>
           </h1>
           
           <p className="text-2xl text-white/70 max-w-3xl leading-relaxed">
-            Three specialized studios working in harmony to transform your vision into reality. From strategy to creativity, from innovation to execution.
+            {t('services.heroDescription')}
           </p>
         </div>
 

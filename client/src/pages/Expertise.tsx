@@ -2,8 +2,10 @@ import { Brain, Code, Palette, TrendingUp, Database, Sparkles } from 'lucide-rea
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import Breadcrumb from '@/components/Breadcrumb';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Expertise() {
+  const { t } = useLanguage();
   const expertiseAreas = [
     {
       icon: Brain,

@@ -42,6 +42,7 @@ const Media = lazy(() => import("./pages/Media"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));
 const CookiePolicy = lazy(() => import("./pages/CookiePolicy"));
+const FAQ = lazy(() => import("./pages/FAQ"));
 const ArtsCulture = lazy(() => import("./pages/ArtsCulture"));
 const Lab = lazy(() => import("./pages/Lab"));
 const Bureau = lazy(() => import("./pages/Bureau"));
@@ -111,6 +112,7 @@ function App() {
               <Route path="/fr/privacy-policy" component={PrivacyPolicy} />
               <Route path="/fr/terms-of-service" component={TermsOfService} />
               <Route path="/fr/cookie-policy" component={CookiePolicy} />
+              <Route path="/fr/faq" component={FAQ} />
               <Route path="/fr/arts-culture" component={ArtsCulture} />
               <Route path="/fr/lab" component={Lab} />
               <Route path="/fr/bureau" component={Bureau} />
@@ -148,6 +150,7 @@ function App() {
             <Route path="/privacy-policy" component={PrivacyPolicy} />
             <Route path="/terms-of-service" component={TermsOfService} />
             <Route path="/cookie-policy" component={CookiePolicy} />
+            <Route path="/faq" component={FAQ} />
             <Route path="/arts-culture" component={ArtsCulture} />
             <Route path="/lab" component={Lab} />
             <Route path="/bureau" component={Bureau} />

@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
+import { X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface LoaderPreviewProps {
   cssCode: string;
   isOpen: boolean;
   onClose: () => void;
+  loaderName?: string;
 }
 
 export default function LoaderPreview({
   cssCode,
   isOpen,
   onClose,
+  loaderName,
 }: LoaderPreviewProps) {
   const [isReady, setIsReady] = useState(false);
 
@@ -85,12 +89,32 @@ export default function LoaderPreview({
             dangerouslySetInnerHTML={{ __html: htmlContent }}
           />
         )}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-white bg-black/50 hover:bg-black/70 px-4 py-2 rounded"
+        
+        {/* Close button */}
+        <Button
+          variant="ghost"
+          size="icon"
+          className="absolute top-4 right-4 z-50 text-white hover:bg-white/10 bg-black/50"
+          onClick={(e) => {
+            e.stopPropagation();
+            onClose();
+          }}
         >
-          Fermer
-        </button>
+          <X className="w-6 h-6" />
+        </Button>
+
+        {/* Loader name */}
+        {loaderName && (
+          <div className="absolute top-4 left-4 z-50 text-white bg-black/50 px-4 py-2 rounded">
+            <p className="text-sm opacity-60">Prévisualisation</p>
+            <p className="text-lg font-bold">{loaderName}</p>
+          </div>
+        )}
+
+        {/* Close hint */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-50 text-white/60 text-sm bg-black/50 px-4 py-2 rounded">
+          Cliquez n'importe où ou appuyez sur ESC pour fermer
+        </div>
       </div>
     </div>
   );

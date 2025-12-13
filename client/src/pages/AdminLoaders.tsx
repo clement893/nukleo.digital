@@ -15,7 +15,7 @@ import LoaderPreview from "@/components/LoaderPreview";
 
 export default function AdminLoaders() {
   const utils = trpc.useUtils();
-  const [previewLoader, setPreviewLoader] = useState<string | null>(null);
+  const [previewLoader, setPreviewLoader] = useState<{ cssCode: string; name: string } | null>(null);
 
   // Fetch all loaders
   const { data: loaders, isLoading, error } = trpc.loaders.getAll.useQuery();
@@ -45,8 +45,8 @@ export default function AdminLoaders() {
     }
   };
 
-  const handlePreview = (cssCode: string) => {
-    setPreviewLoader(cssCode);
+  const handlePreview = (cssCode: string, name: string) => {
+    setPreviewLoader({ cssCode, name });
   };
 
   if (isLoading) {
@@ -196,7 +196,7 @@ export default function AdminLoaders() {
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => handlePreview(loader.cssCode)}
+                        onClick={() => handlePreview(loader.cssCode, loader.name)}
                       >
                         <Eye className="w-4 h-4 mr-2" />
                         Prévisualiser
@@ -245,7 +245,8 @@ export default function AdminLoaders() {
       {/* Preview Modal */}
       {previewLoader && (
         <LoaderPreview
-          cssCode={previewLoader}
+          cssCode={previewLoader.cssCode}
+          loaderName={previewLoader.name}
           isOpen={true}
           onClose={() => setPreviewLoader(null)}
         />

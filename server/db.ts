@@ -1,4 +1,5 @@
 import { eq, desc } from "drizzle-orm";
+import { sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 import { InsertUser, users, leoContacts, InsertLeoContact, leoSessions, InsertLeoSession, agencyLeads, InsertAgencyLead, adminUsers, InsertAdminUser } from "../drizzle/schema";
@@ -70,14 +71,24 @@ export async function saveLeoContact(contact: InsertLeoContact): Promise<void> {
 
 // LEO Session functions for analytics
 export async function createLeoSession(session: InsertLeoSession): Promise<void> {
-  const db = await getDb();
-  if (!db) {
+  const database = await getDb();
+  if (!database) {
     console.warn("[Database] Cannot create LEO session: database not available");
     return;
   }
 
   try {
-    await db.insert(leoSessions).values(session);
+    // Check if session already exists
+    const existing = await database
+      .select()
+      .from(leoSessions)
+      .where(eq(leoSessions.sessionId, session.sessionId))
+      .limit(1);
+    
+    if (existing.length === 0) {
+      // Only insert if session doesn't exist
+      await database.insert(leoSessions).values(session);
+    }
   } catch (error) {
     console.error("[Database] Error creating LEO session:", error);
     throw error;

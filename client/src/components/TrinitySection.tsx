@@ -37,7 +37,7 @@ export default function TrinitySection() {
   ];
 
   return (
-    <section className="py-40 bg-gradient-deep-purple text-white relative overflow-hidden gradient-mesh">
+    <section className="py-40 text-white relative overflow-hidden gradient-mesh" style={{ backgroundColor: '#29292B' }}>
       {/* Grid Pattern Overlay */}
       <div className="absolute inset-0 bg-grid-pattern opacity-5 invert" />
 

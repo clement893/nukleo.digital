@@ -262,6 +262,25 @@ export default function PageLoader() {
         visibility: isLoading ? "visible" : "hidden",
       }}
     >
+      {/* Logo blanc fixe au centre */}
+      <div
+        className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[10000] pointer-events-none"
+        style={{
+          width: '200px',
+          height: 'auto',
+        }}
+      >
+        <img 
+          src="/Nukleo_blanc_RVB.svg" 
+          alt="Nukleo Digital" 
+          className="w-full h-auto"
+          style={{
+            filter: 'brightness(0) invert(1)',
+            opacity: 1,
+          }}
+        />
+      </div>
+      
       {htmlContent && (
         <div
           key={`page-loader-${loaderHtml.substring(0, 50)}`}

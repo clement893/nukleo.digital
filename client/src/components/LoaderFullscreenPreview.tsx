@@ -25,10 +25,17 @@ export default function LoaderFullscreenPreview({
     if (!loaderType.includes('<div') && !loaderType.includes('<style>')) return;
 
     // Clear container
-    containerRef.current.innerHTML = '';
+    if (containerRef.current.shadowRoot) {
+      containerRef.current.shadowRoot.innerHTML = '';
+    } else {
+      containerRef.current.innerHTML = '';
+    }
 
-    // Create shadow root for style isolation
-    const shadowRoot = containerRef.current.attachShadow({ mode: 'open' });
+    // Create shadow root for style isolation (if not already created)
+    let shadowRoot = containerRef.current.shadowRoot;
+    if (!shadowRoot) {
+      shadowRoot = containerRef.current.attachShadow({ mode: 'open' });
+    }
 
     // Extract styles and HTML
     const styleMatch = loaderType.match(/<style>([\s\S]*?)<\/style>/);
@@ -49,9 +56,7 @@ export default function LoaderFullscreenPreview({
 
     // Cleanup
     return () => {
-      if (containerRef.current && containerRef.current.shadowRoot) {
-        containerRef.current.shadowRoot.innerHTML = '';
-      }
+      // Don't cleanup shadow root, just clear it for next render
     };
   }, [loaderType, isOpen]);
 

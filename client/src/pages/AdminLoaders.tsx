@@ -82,6 +82,23 @@ function LoaderMiniPreview({ cssCode, loaderId }: { cssCode: string; loaderId: n
 
   return (
     <div className="relative w-full h-48 bg-black rounded-lg overflow-hidden border border-gray-800">
+      {/* Logo blanc fixe au centre pour la prévisualisation miniature */}
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none"
+        style={{
+          width: '90px',
+          height: 'auto',
+        }}
+      >
+        <img 
+          src="/Nukleo_blanc_RVB.svg" 
+          alt="nukleo" 
+          className="w-full h-auto"
+          style={{
+            opacity: 1,
+          }}
+        />
+      </div>
       <div
         id={`loader-mini-container-${loaderId}`}
         className="absolute inset-0 flex items-center justify-center"

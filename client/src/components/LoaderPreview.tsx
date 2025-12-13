@@ -126,7 +126,7 @@ export default function LoaderPreview({
               }}
             >
               <img 
-                src="/nukleo-logo-white.svg" 
+                src="/Nukleo_blanc_RVB.svg" 
                 alt="nukleo" 
                 className="w-full h-auto"
                 style={{

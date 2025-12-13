@@ -185,6 +185,7 @@ function App() {
             <Route component={NotFound404} />
           </Switch>
         </Suspense>
+        </LanguageProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );

@@ -71,21 +71,17 @@ export default defineConfig({
             if (id.includes('@tanstack/react-query')) {
               return 'react-query-vendor';
             }
-            // Animation libraries - lazy load
+            // Animation libraries
             if (id.includes('framer-motion')) {
               return 'animation-vendor';
             }
-            // Router - small, can be in main bundle
+            // Router
             if (id.includes('wouter')) {
               return 'router-vendor';
             }
-            // Markdown rendering (used in LEO) - lazy load
+            // Markdown rendering (used in LEO)
             if (id.includes('streamdown') || id.includes('react-markdown')) {
               return 'markdown-vendor';
-            }
-            // UI components (Radix, etc.) - lazy load
-            if (id.includes('@radix-ui')) {
-              return 'ui-vendor';
             }
             // Other node_modules go to vendor chunk
             return 'vendor';
@@ -103,7 +99,6 @@ export default defineConfig({
           if (id.includes('/components/glossary/')) {
             return 'glossary';
           }
-          // LEO components - large, lazy load
           if (id.includes('/components/UniversalLEO') || id.includes('/components/Leo') || id.includes('/pages/Leo')) {
             return 'leo';
           }

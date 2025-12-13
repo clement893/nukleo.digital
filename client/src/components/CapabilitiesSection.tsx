@@ -38,9 +38,7 @@ export default function CapabilitiesSection() {
             {t('capabilities.sectionLabel')}
           </span>
 
-          <h2 className="text-white mb-4 sm:mb-6 text-4xl sm:text-5xl lg:text-6xl">
-            {t('capabilities.title')}
-          </h2>
+          <h2 className="text-white mb-4 sm:mb-6 text-4xl sm:text-5xl lg:text-6xl" dangerouslySetInnerHTML={{ __html: t('capabilities.title') }} />
 
           <p className="text-white/75 text-base sm:text-lg lg:text-xl leading-relaxed max-w-3xl">
             {t('capabilities.description')}

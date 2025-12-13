@@ -44,9 +44,7 @@ export default function TrinitySection() {
       <div className="container relative z-10">
         {/* Section Header */}
         <div className="flex justify-between items-end mb-24 border-b border-black/10 pb-8">
-          <h2 className="text-8xl font-heading font-bold tracking-tighter">
-            {t('trinity.title')}
-          </h2>
+          <h2 className="text-8xl font-heading font-bold tracking-tighter" dangerouslySetInnerHTML={{ __html: t('trinity.title') }} />
 
           <p className="text-xl max-w-sm font-light text-white/80 pb-2">
             {t('trinity.description')}

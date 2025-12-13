@@ -15,9 +15,7 @@ export default function ManifestoSection() {
               {t('manifesto.sectionLabel')}
             </span>
 
-            <h2 className="text-white mb-6 sm:mb-8 text-4xl sm:text-5xl lg:text-6xl">
-              {t('manifesto.title')}
-            </h2>
+            <h2 className="text-white mb-6 sm:mb-8 text-4xl sm:text-5xl lg:text-6xl" dangerouslySetInnerHTML={{ __html: t('manifesto.title') }} />
 
             <p className="text-white/75 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8">
               {t('manifesto.description')}

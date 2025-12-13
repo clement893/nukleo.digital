@@ -26,13 +26,13 @@
     "artsCulture": "Arts & Culture"
   },
   "header": {
-    "tagline": "Choisir l'Intelligence"
+    "tagline": "Choisir l'intelligence"
   },
   "hero": {
-    "title": "Rejoignez La",
+    "title": "Rejoignez la",
     "titleHighlight": "Révolution IA",
     "subtitle": "Commencez votre parcours de transformation avec nous.",
-    "cta": "Rejoindre Les Leaders",
+    "cta": "Rejoindre les leaders",
     "services": [
       "Stratégie IA",
       "Plateformes Numériques",
@@ -83,7 +83,7 @@
     }
   },
   "home": {
-    "beyondAI": "Au-Delà De L'IA",
+    "beyondAI": "Au-delà de l'IA",
     "beyondAIDescription": "Nous créons des écosystèmes numériques complets de la stratégie et des plateformes au contenu créatif et à l'automatisation intelligente."
   },
   "capabilities": {
@@ -91,19 +91,19 @@
     "title": "Infrastructure<br />Native IA",
     "description": "Nous ne construisons pas seulement des sites web ou des applications. Nous concevons des écosystèmes intelligents où chaque point de contact numérique est alimenté par des agents autonomes.",
     "aiWebsites": {
-      "title": "Sites Web Basés Sur L'IA",
+      "title": "Sites web basés sur l'IA",
       "description": "Expériences web auto-optimisantes qui adaptent le contenu et la mise en page en temps réel en fonction du comportement et de l'intention de l'utilisateur."
     },
     "intelligentPlatforms": {
-      "title": "Plateformes Intelligentes",
+      "title": "Plateformes intelligentes",
       "description": "Outils SaaS et internes construits sur une architecture agentique, automatisant les flux de travail complexes et la prise de décision."
     },
     "nextGenApps": {
-      "title": "Applications De Nouvelle Génération",
+      "title": "Applications de nouvelle génération",
       "description": "Applications mobiles et de bureau avec des cœurs IA intégrés, offrant des fonctionnalités prédictives et des interfaces en langage naturel."
     },
     "automatedMarketing": {
-      "title": "Marketing Automatisé",
+      "title": "Marketing automatisé",
       "description": "Gestion de campagnes de bout en bout par des agents IA de la génération de contenu à l'achat de publicité et à l'analyse des performances."
     }
   },
@@ -142,15 +142,15 @@
     "explore": "Explorer"
   },
   "cta": {
-    "title": "Prêt À<br />S'Élever ?",
-    "description": "L'Ère Du Marketing Agentique Est Arrivée. Définissez Votre Feuille De Route Pour Devenir Un Leader Natif IA.",
-    "button": "Démarrer Votre Transformation"
+    "title": "Prêt à<br />s'élever ?",
+    "description": "L'ère du Marketing Agentique est arrivée. Définissez votre feuille de route pour devenir un leader natif IA.",
+    "button": "Démarrer votre transformation"
   },
   "testimonials": {
-    "sectionLabel": "Histoires De Succès Clients",
-    "title": "Ce Que Disent Nos Clients",
+    "sectionLabel": "Histoires de succès clients",
+    "title": "Ce que disent nos clients",
     "description": "Fait confiance par des organisations du monde entier pour offrir des résultats exceptionnels de transformation IA",
-    "seeAll": "Voir Tous Les Témoignages Clients"
+    "seeAll": "Voir tous les témoignages clients"
   },
   "whoWeServe": {
     "subtitle": "Champions Des Petites Organisations",
@@ -242,19 +242,19 @@
       "description": "Votre quartier général stratégique. Ici, nous transformons les données en décisions, les insights en actions, et les opportunités en résultats mesurables.",
       "services": {
         "aiStrategy": {
-          "title": "Consultation En Stratégie IA",
+          "title": "Consultation en stratégie IA",
           "description": "Définissez votre feuille de route IA avec des conseils d'experts sur la sélection de technologies, la planification de l'implémentation et l'optimisation du ROI."
         },
         "conversationalAI": {
-          "title": "IA Conversationnelle",
+          "title": "IA conversationnelle",
           "description": "Déployez des chatbots intelligents et des assistants virtuels qui comprennent le contexte, apprennent des interactions et offrent des expériences personnalisées."
         },
         "marketingAutomation": {
-          "title": "Automatisation Marketing",
+          "title": "Automatisation marketing",
           "description": "Automatisez vos flux de travail marketing avec des campagnes alimentées par l'IA, le scoring de leads et la livraison de contenu personnalisé."
         },
         "predictiveAnalytics": {
-          "title": "Analytique Prédictive",
+          "title": "Analytique prédictive",
           "description": "Exploitez l'IA pour prévoir les tendances, prédire le comportement des clients et prendre des décisions basées sur les données en toute confiance."
         }
       }
@@ -265,19 +265,19 @@
       "description": "Bienvenue dans notre laboratoire d'innovation. Ici, nous transformons les technologies de pointe en avantages concurrentiels tangibles.",
       "services": {
         "customWebApps": {
-          "title": "Applications Web Sur Mesure",
+          "title": "Applications web sur mesure",
           "description": "Développez des plateformes web sur mesure avec des fonctionnalités alimentées par l'IA, la collaboration en temps réel et des intégrations transparentes."
         },
         "apiDevelopment": {
-          "title": "Développement et Intégration d'API",
+          "title": "Développement et intégration d'API",
           "description": "Créez des API robustes et intégrez des services tiers pour construire des écosystèmes connectés et intelligents."
         },
         "uxDesign": {
-          "title": "Design d'Expérience Utilisateur",
+          "title": "Design d'expérience utilisateur",
           "description": "Concevez des interfaces intuitives qui combinent le design centré sur l'humain avec la personnalisation alimentée par l'IA."
         },
         "security": {
-          "title": "Sécurité et Conformité",
+          "title": "Sécurité et conformité",
           "description": "Implémentez une sécurité de niveau entreprise, des contrôles de confidentialité des données et des cadres de conformité pour vos plateformes numériques."
         }
       }
@@ -288,7 +288,7 @@
       "description": "Bienvenue dans l'atelier où les idées deviennent réalité. Notre Studio Créatif fusionne stratégie et créativité pour créer des expériences de marque captivantes.",
       "services": {
         "brandIdentity": {
-          "title": "Identité et Stratégie de Marque",
+          "title": "Identité et stratégie de marque",
           "description": "Créez des identités de marque convaincantes qui résonnent avec votre audience et vous différencient sur le marché."
         },
         "uiuxDesign": {
@@ -296,11 +296,11 @@
           "description": "Concevez des interfaces époustouflantes qui allient esthétique et fonctionnalité, créant des expériences que les utilisateurs adorent."
         },
         "contentCreation": {
-          "title": "Création de Contenu",
+          "title": "Création de contenu",
           "description": "Produisez du contenu visuel et écrit à fort impact qui raconte votre histoire et stimule l'engagement."
         },
         "campaignDesign": {
-          "title": "Design de Campagne",
+          "title": "Design de campagne",
           "description": "Concevez des campagnes marketing intégrées qui captent l'attention et offrent des résultats mesurables."
         }
       }
@@ -324,7 +324,7 @@
     "success": "Message envoyé avec succès !",
     "sectionNumber": "07 Contact",
     "heroTitle": "Commençons",
-    "heroSubtitle": "Votre Transformation",
+    "heroSubtitle": "votre transformation",
     "heroDescription": "Prêt à devenir un leader axé sur l'IA ? Contactez-nous et discutons de la façon dont nous pouvons vous aider à prospérer à l'ère de l'intelligence artificielle.",
     "sendMessage": "Envoyez-nous un message",
     "successMessage": "✓ Message envoyé avec succès ! Nous vous répondrons dans les 24 heures.",
@@ -345,7 +345,7 @@
     "title": "Projets",
     "sectionNumber": "02 Projets",
     "heroTitle": "Transformations",
-    "heroSubtitle": "Qui Résonnent",
+    "heroSubtitle": "qui résonnent",
     "description": "Résultats réels d'organisations qui ont choisi de mener plutôt que de suivre. Chaque projet représente une réimagination complète des opérations grâce à l'IA agentique.",
     "filterAll": "Tous",
     "noProjects": "Aucun projet trouvé",

@@ -1,0 +1,210 @@
+import { AssessmentResults } from './scoring';
+import { getRecommendationsForLevel } from './recommendations';
+import { EmailCaptureData } from '@/components/assessment/EmailCaptureModal';
+
+// Note: This will use jsPDF and html2canvas when installed
+// For now, we'll create a placeholder that can be completed
+
+export async function generatePDFReport(
+  results: AssessmentResults,
+  userData: EmailCaptureData
+): Promise<void> {
+  // Dynamic import to avoid SSR issues
+  const [{ default: jsPDF }] = await Promise.all([
+    import('jspdf'),
+  ]);
+
+  const pdf = new jsPDF('p', 'mm', 'a4');
+  const pageWidth = pdf.internal.pageSize.getWidth();
+  const pageHeight = pdf.internal.pageSize.getHeight();
+  const margin = 20;
+  let yPosition = margin;
+
+  // Helper function to add new page if needed
+  const checkNewPage = (requiredHeight: number) => {
+    if (yPosition + requiredHeight > pageHeight - margin) {
+      pdf.addPage();
+      yPosition = margin;
+    }
+  };
+
+  // Page 1: Cover
+  pdf.setFillColor(139, 92, 246); // Purple
+  pdf.rect(0, 0, pageWidth, pageHeight, 'F');
+  
+  pdf.setTextColor(255, 255, 255);
+  pdf.setFontSize(32);
+  pdf.text('Évaluation de Maturité IA', pageWidth / 2, 80, { align: 'center' });
+  
+  pdf.setFontSize(18);
+  pdf.text(userData.company, pageWidth / 2, 100, { align: 'center' });
+  
+  pdf.setFontSize(14);
+  pdf.text(new Date().toLocaleDateString('fr-FR', { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  }), pageWidth / 2, 115, { align: 'center' });
+
+  // Maturity level badge
+  const maturityColor = getMaturityColorHex(results.maturityLevel);
+  pdf.setFillColor(...maturityColor);
+  pdf.roundedRect(pageWidth / 2 - 40, 130, 80, 20, 5, 5, 'F');
+  pdf.setTextColor(255, 255, 255);
+  pdf.setFontSize(16);
+  pdf.text(results.maturityLevel, pageWidth / 2, 142, { align: 'center' });
+
+  pdf.addPage();
+
+  // Page 2: Executive Summary
+  yPosition = margin;
+  pdf.setTextColor(0, 0, 0);
+  pdf.setFontSize(24);
+  pdf.text('Résumé Exécutif', margin, yPosition);
+  yPosition += 15;
+
+  // Global Score
+  pdf.setFontSize(48);
+  pdf.setTextColor(139, 92, 246);
+  pdf.text(`${results.globalScore}`, margin, yPosition);
+  pdf.setFontSize(18);
+  pdf.setTextColor(100, 100, 100);
+  pdf.text('/100', margin + 30, yPosition - 5);
+  yPosition += 20;
+
+  pdf.setFontSize(12);
+  pdf.setTextColor(0, 0, 0);
+  pdf.text(`Niveau de maturité: ${results.maturityLevel}`, margin, yPosition);
+  yPosition += 10;
+
+  pdf.setFontSize(11);
+  pdf.text(results.maturityDescription, margin, yPosition, { 
+    maxWidth: pageWidth - 2 * margin,
+    align: 'left'
+  });
+  yPosition += 20;
+
+  // Dimension Scores
+  pdf.setFontSize(16);
+  pdf.text('Scores par Dimension', margin, yPosition);
+  yPosition += 10;
+
+  results.dimensionScores.forEach((dim) => {
+    checkNewPage(15);
+    pdf.setFontSize(11);
+    pdf.setTextColor(0, 0, 0);
+    pdf.text(dim.label, margin, yPosition);
+    
+    // Score bar
+    const barWidth = 100;
+    const barHeight = 5;
+    const scoreWidth = (dim.score / 100) * barWidth;
+    
+    pdf.setFillColor(200, 200, 200);
+    pdf.rect(pageWidth - margin - barWidth, yPosition - 4, barWidth, barHeight, 'F');
+    
+    const scoreColor = getScoreColorHex(dim.score);
+    pdf.setFillColor(...scoreColor);
+    pdf.rect(pageWidth - margin - barWidth, yPosition - 4, scoreWidth, barHeight, 'F');
+    
+    pdf.text(`${dim.score}/100`, pageWidth - margin - barWidth - 25, yPosition);
+    yPosition += 12;
+  });
+
+  pdf.addPage();
+  yPosition = margin;
+
+  // Page 3+: Recommendations
+  const recommendations = getRecommendationsForLevel(results.maturityLevel);
+  
+  pdf.setFontSize(20);
+  pdf.text('Recommandations Prioritaires', margin, yPosition);
+  yPosition += 15;
+
+  recommendations.topRecommendations.forEach((rec, idx) => {
+    checkNewPage(40);
+    
+    pdf.setFontSize(14);
+    pdf.setTextColor(139, 92, 246);
+    pdf.text(`${idx + 1}. ${rec.title}`, margin, yPosition);
+    yPosition += 8;
+
+    pdf.setFontSize(10);
+    pdf.setTextColor(0, 0, 0);
+    pdf.text(rec.description, margin, yPosition, { 
+      maxWidth: pageWidth - 2 * margin 
+    });
+    yPosition += 10;
+
+    pdf.setFontSize(9);
+    pdf.setTextColor(100, 100, 100);
+    pdf.text(`Impact: ${rec.impact} | Effort: ${rec.effort} | Timeline: ${rec.timeline}`, margin, yPosition);
+    yPosition += 12;
+  });
+
+  pdf.addPage();
+  yPosition = margin;
+
+  // Next Steps
+  pdf.setFontSize(20);
+  pdf.text('Prochaines Étapes', margin, yPosition);
+  yPosition += 15;
+
+  recommendations.nextSteps.forEach((step, idx) => {
+    checkNewPage(15);
+    pdf.setFontSize(12);
+    pdf.setTextColor(0, 0, 0);
+    pdf.text(`${idx + 1}. ${step.title}`, margin + 10, yPosition);
+    pdf.setFontSize(10);
+    pdf.setTextColor(100, 100, 100);
+    pdf.text(`(${step.duration})`, pageWidth - margin - 50, yPosition);
+    yPosition += 12;
+  });
+
+  // About Nukleo
+  pdf.addPage();
+  yPosition = margin;
+  
+  pdf.setFontSize(20);
+  pdf.text('À Propos de Nukleo Digital', margin, yPosition);
+  yPosition += 15;
+
+  pdf.setFontSize(11);
+  pdf.setTextColor(0, 0, 0);
+  const aboutText = `Nukleo Digital est une agence de transformation IA spécialisée dans l'accompagnement des entreprises québécoises et canadiennes dans leur parcours d'adoption de l'intelligence artificielle.
+
+Nous offrons:
+• Stratégie IA alignée avec vos objectifs business
+• Développement de solutions IA sur mesure
+• Formation et accompagnement de vos équipes
+• Plateformes MLOps et gouvernance IA
+
+Pour discuter de votre roadmap IA personnalisée, contactez-nous:
+hello@nukleo.digital
+www.nukleo.digital`;
+
+  pdf.text(aboutText, margin, yPosition, { 
+    maxWidth: pageWidth - 2 * margin,
+    align: 'left'
+  });
+
+  // Save PDF
+  pdf.save(`nukleo-ai-readiness-report-${userData.company.replace(/\s+/g, '-')}-${Date.now()}.pdf`);
+}
+
+function getMaturityColorHex(level: string): [number, number, number] {
+  switch (level) {
+    case 'Explorer': return [239, 68, 68]; // red
+    case 'Experimenter': return [245, 158, 11]; // orange
+    case 'Adopter': return [234, 179, 8]; // yellow
+    case 'Integrator': return [132, 204, 22]; // lime
+    case 'AI Leader': return [34, 197, 94]; // green
+    default: return [139, 92, 246]; // purple
+  }
+}
+
+function getScoreColorHex(score: number): [number, number, number] {
+  if (score < 40) return [239, 68, 68]; // red
+  if (score < 70) return [234, 179, 8]; // yellow
+  return [34, 197, 94]; // green
+}

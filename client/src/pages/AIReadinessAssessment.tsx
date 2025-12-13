@@ -7,6 +7,7 @@ import QuestionCard from '@/components/assessment/QuestionCard';
 import ProgressBar from '@/components/assessment/ProgressBar';
 import ResultsRadar from '@/components/assessment/ResultsRadar';
 import ResultsSummary from '@/components/assessment/ResultsSummary';
+import RecommendationsSection from '@/components/assessment/RecommendationsSection';
 import EmailCaptureModal, { EmailCaptureData } from '@/components/assessment/EmailCaptureModal';
 import { ArrowLeft, ArrowRight, Download, CheckCircle } from 'lucide-react';
 import { useSound } from '@/hooks/useSound';
@@ -59,6 +60,15 @@ export default function AIReadinessAssessment() {
         maturityLevel: results.maturityLevel,
         answers: answers,
       });
+
+      // Generate and download PDF
+      try {
+        const { generatePDFReport } = await import('@/lib/assessment/pdfGenerator');
+        await generatePDFReport(results, data);
+      } catch (pdfError) {
+        console.warn('PDF generation failed:', pdfError);
+        // Continue even if PDF fails
+      }
 
       setIsSaved(true);
       setShowEmailModal(false);
@@ -214,6 +224,11 @@ export default function AIReadinessAssessment() {
               <div>
                 <ResultsRadar dimensionScores={results.dimensionScores} />
               </div>
+            </div>
+
+            {/* Recommendations Section */}
+            <div className="mb-12">
+              <RecommendationsSection results={results} />
             </div>
 
             {/* CTA Section */}

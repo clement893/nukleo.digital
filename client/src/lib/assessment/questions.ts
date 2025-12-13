@@ -280,3 +280,40 @@ export const DIMENSION_LABELS: Record<Dimension, string> = {
   governance: 'Processes & Governance',
   culture: 'Culture & Change',
 };
+
+// Contextual questions (asked before main assessment)
+export interface ContextualQuestion {
+  id: string;
+  question: string;
+  type: 'select' | 'radio';
+  options: { label: string; value: string }[];
+}
+
+export const CONTEXTUAL_QUESTIONS: ContextualQuestion[] = [
+  {
+    id: 'companySize',
+    question: 'Quelle est la taille de votre organisation?',
+    type: 'radio',
+    options: [
+      { label: '1-10 employés', value: '1-10' },
+      { label: '11-50 employés', value: '11-50' },
+      { label: '51-200 employés', value: '51-200' },
+      { label: '201-1000 employés', value: '201-1000' },
+      { label: '+1000 employés', value: '1000+' },
+    ],
+  },
+  {
+    id: 'industry',
+    question: 'Dans quel secteur opérez-vous?',
+    type: 'select',
+    options: [
+      { label: 'E-commerce & Retail', value: 'ecommerce-retail' },
+      { label: 'Services financiers', value: 'financial-services' },
+      { label: 'Santé & Pharma', value: 'healthcare-pharma' },
+      { label: 'Manufacturing', value: 'manufacturing' },
+      { label: 'Services professionnels', value: 'professional-services' },
+      { label: 'Technologie SaaS', value: 'saas-tech' },
+      { label: 'Autre', value: 'other' },
+    ],
+  },
+];

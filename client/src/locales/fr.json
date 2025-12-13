@@ -262,6 +262,62 @@
   "faq": {
     "title": "FAQ"
   },
+  "bureau": {
+    "title": "The Strategic Bureau",
+    "subtitle": "Transformation Orchestration",
+    "heroDescription": "Nous définissons la stratégie, pilotons la transformation et mesurons l'impact de l'IA dans votre organisation. De la vision à l'exécution, nous orchestrons votre parcours de curieux de l'IA à natif de l'IA.",
+    "mission": "Notre Mission",
+    "missionText": "Guider votre organisation à travers le parcours complexe de <strong>transformation IA</strong>. Nous ne créons pas seulement des stratégies, nous orchestrons le changement, alignons les parties prenantes et garantissons que vos initiatives IA génèrent une valeur commerciale mesurable à chaque étape.",
+    "services": {
+      "title": "Services Stratégiques",
+      "aiMaturity": {
+        "title": "Audit de Maturité IA & Feuille de Route",
+        "description": "Évaluation de votre position actuelle dans le paysage IA et tracé d'un chemin clair vers le leadership IA. Nous évaluons vos capacités, identifions les écarts et créons une feuille de route de transformation de 9 à 12 mois."
+      },
+      "transformationStrategy": {
+        "title": "Stratégie de Transformation Agentique",
+        "description": "Redéfinition de votre modèle opérationnel avec l'IA au centre. Nous vous aidons à passer de l'expérimentation à la transformation à l'échelle de l'entreprise, intégrant l'IA agentique comme fondation de la croissance."
+      },
+      "governance": {
+        "title": "Gouvernance & Éthique IA",
+        "description": "Mise en place des garde-fous pour une IA responsable et performante. Nous établissons des cadres pour l'utilisation éthique de l'IA, la conformité, la gestion des risques et la prise de décision transparente."
+      },
+      "performanceAnalysis": {
+        "title": "Analyse de Performance & ROI",
+        "description": "Mesure de l'impact tangible de l'IA sur vos objectifs commerciaux. Nous suivons les KPI, analysons les résultats et optimisons continuellement vos investissements IA pour maximiser le retour et la valeur stratégique."
+      }
+    },
+    "journey": {
+      "title": "Le Parcours de Transformation",
+      "discovery": {
+        "title": "Découverte & Évaluation",
+        "description": "Nous effectuons un audit complet de maturité IA, évaluant vos capacités actuelles, la préparation des données, la culture organisationnelle et le positionnement concurrentiel. Cette évaluation de base identifie les opportunités et les contraintes."
+      },
+      "strategy": {
+        "title": "Stratégie & Feuille de Route",
+        "description": "Nous concevons votre stratégie de transformation agentique, définissant des objectifs clairs, priorisant les cas d'usage et créant une feuille de route par phases. Cela inclut les cadres de gouvernance, la planification des ressources et les stratégies de gestion du changement."
+      },
+      "execution": {
+        "title": "Exécution & Optimisation",
+        "description": "Nous orchestrons l'implémentation dans votre organisation, coordonnant avec The Lab et The Studio. Nous mesurons continuellement les performances, suivons le ROI et ajustons la stratégie pour maximiser l'impact commercial."
+      },
+      "scale": {
+        "title": "Mise à l'Échelle & Leadership",
+        "description": "Nous vous aidons à mettre à l'échelle les pilotes réussis à l'échelle de l'entreprise et à positionner votre organisation comme un leader IA dans votre industrie. Cela inclut le leadership d'opinion, les programmes d'innovation et le développement continu des capacités."
+      }
+    },
+    "impact": {
+      "title": "Impact Attendu",
+      "roi": "ROI sur les investissements IA en 12 mois",
+      "timeToMarket": "Réduction du temps de mise sur le marché pour les nouvelles initiatives",
+      "efficiency": "Augmentation de l'efficacité opérationnelle"
+    },
+    "cta": {
+      "title": "Prêt à Mener votre Transformation ?",
+      "description": "Discutons de la façon dont The Strategic Bureau peut orchestrer votre parcours de l'expérimentation IA à la transformation à l'échelle de l'entreprise.",
+      "button": "Commencer votre Parcours"
+    }
+  },
   "seo": {
     "home": {
       "title": "Agence de Transformation IA | Solutions d'IA Agentique",

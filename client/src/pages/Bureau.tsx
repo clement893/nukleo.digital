@@ -2,36 +2,40 @@ import SEO from '../components/SEO';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Compass, Target, Shield, TrendingUp } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 export default function Bureau() {
+  const { t } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
   const services = [
     {
       icon: Target,
-      title: 'AI Maturity Audit & Roadmap',
-      description: 'Assessing your current position in the AI landscape and charting a clear path to AI leadership. We evaluate your capabilities, identify gaps, and create a 9-to-12-month transformation roadmap.'
+      title: t('bureau.services.aiMaturity.title'),
+      description: t('bureau.services.aiMaturity.description')
     },
     {
       icon: Compass,
-      title: 'Agentic Transformation Strategy',
-      description: 'Redefining your operating model with AI at its center. We help you transition from experimentation to enterprise-wide transformation, embedding agentic AI as the foundation for growth.'
+      title: t('bureau.services.transformationStrategy.title'),
+      description: t('bureau.services.transformationStrategy.description')
     },
     {
       icon: Shield,
-      title: 'AI Governance & Ethics',
-      description: 'Implementing the guardrails for responsible and high-performing AI. We establish frameworks for ethical AI use, compliance, risk management, and transparent decision-making.'
+      title: t('bureau.services.governance.title'),
+      description: t('bureau.services.governance.description')
     },
     {
       icon: TrendingUp,
-      title: 'Performance Analysis & ROI',
-      description: 'Measuring the tangible impact of AI on your business goals. We track KPIs, analyze outcomes, and continuously optimize your AI investments to maximize return and strategic value.'
+      title: t('bureau.services.performanceAnalysis.title'),
+      description: t('bureau.services.performanceAnalysis.description')
     }
   ];
 
   return (
     <>
       <SEO 
-        title="The Strategic Bureau | Transformation Orchestration | Nukleo Digital"
-        description="Defining strategy, driving transformation, and measuring AI impact. From maturity audits to agentic transformation strategy and AI governance."
+        title={t('bureau.title') + ' | ' + t('bureau.subtitle') + ' | Nukleo Digital'}
+        description={t('bureau.heroDescription')}
         keywords="AI strategy, digital transformation, AI governance, AI maturity, transformation orchestration, AI consulting"
       />
       
@@ -47,17 +51,15 @@ export default function Bureau() {
               </div>
               
               <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-                The Strategic Bureau
+                {t('bureau.title')}
               </h1>
               
               <p className="text-2xl md:text-3xl text-accent font-medium mb-8">
-                Transformation Orchestration
+                {t('bureau.subtitle')}
               </p>
               
               <p className="text-xl md:text-2xl text-white/70 leading-relaxed max-w-3xl">
-                We define the strategy, drive the transformation, and measure the impact of AI across 
-                your organization. From vision to execution, we orchestrate your journey from AI-curious 
-                to AI-native.
+                {t('bureau.heroDescription')}
               </p>
             </div>
           </div>
@@ -67,15 +69,10 @@ export default function Bureau() {
         <section className="py-24 bg-white/5">
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
-              <h2 className="text-4xl md:text-5xl font-bold mb-12">Our Mission</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-12">{t('bureau.mission')}</h2>
               
               <div className="p-12 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-sm">
-                <p className="text-2xl text-white/90 leading-relaxed">
-                  To guide your organization through the complex journey of 
-                  <span className="text-accent font-semibold"> AI transformation</span>. We don't just create strategies we 
-                  orchestrate change, align stakeholders, and ensure your AI initiatives deliver measurable 
-                  business value at every stage.
-                </p>
+                <p className="text-2xl text-white/90 leading-relaxed" dangerouslySetInnerHTML={{ __html: t('bureau.missionText') }} />
               </div>
             </div>
           </div>
@@ -85,7 +82,7 @@ export default function Bureau() {
         <section className="py-24">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <h2 className="text-4xl md:text-5xl font-bold mb-16">Strategic Services</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-16">{t('bureau.services.title')}</h2>
               
               <div className="grid md:grid-cols-2 gap-8">
                 {services.map((service, index) => {
@@ -113,7 +110,7 @@ export default function Bureau() {
         <section className="py-24 bg-white/5">
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
-              <h2 className="text-4xl md:text-5xl font-bold mb-16">The Transformation Journey</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-16">{t('bureau.journey.title')}</h2>
               
               <div className="space-y-12">
                 <div className="relative pl-16">
@@ -121,11 +118,9 @@ export default function Bureau() {
                     <span className="text-white font-bold">1</span>
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold mb-3">Discovery & Assessment</h3>
+                    <h3 className="text-2xl font-bold mb-3">{t('bureau.journey.discovery.title')}</h3>
                     <p className="text-white/70 leading-relaxed">
-                      We conduct a comprehensive AI maturity audit, evaluating your current capabilities, 
-                      data readiness, organizational culture, and competitive positioning. This baseline 
-                      assessment identifies opportunities and constraints.
+                      {t('bureau.journey.discovery.description')}
                     </p>
                   </div>
                 </div>
@@ -135,11 +130,9 @@ export default function Bureau() {
                     <span className="text-white font-bold">2</span>
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold mb-3">Strategy & Roadmap</h3>
+                    <h3 className="text-2xl font-bold mb-3">{t('bureau.journey.strategy.title')}</h3>
                     <p className="text-white/70 leading-relaxed">
-                      We design your agentic transformation strategy, defining clear objectives, prioritizing 
-                      use cases, and creating a phased roadmap. This includes governance frameworks, resource 
-                      planning, and change management strategies.
+                      {t('bureau.journey.strategy.description')}
                     </p>
                   </div>
                 </div>
@@ -149,11 +142,9 @@ export default function Bureau() {
                     <span className="text-white font-bold">3</span>
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold mb-3">Execution & Optimization</h3>
+                    <h3 className="text-2xl font-bold mb-3">{t('bureau.journey.execution.title')}</h3>
                     <p className="text-white/70 leading-relaxed">
-                      We orchestrate implementation across your organization, coordinating with The Lab and 
-                      The Studio. We continuously measure performance, track ROI, and adjust the strategy 
-                      to maximize business impact.
+                      {t('bureau.journey.execution.description')}
                     </p>
                   </div>
                 </div>
@@ -163,11 +154,9 @@ export default function Bureau() {
                     <span className="text-white font-bold">4</span>
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold mb-3">Scale & Leadership</h3>
+                    <h3 className="text-2xl font-bold mb-3">{t('bureau.journey.scale.title')}</h3>
                     <p className="text-white/70 leading-relaxed">
-                      We help you scale successful pilots enterprise-wide and position your organization 
-                      as an AI leader in your industry. This includes thought leadership, innovation programs, 
-                      and continuous capability building.
+                      {t('bureau.journey.scale.description')}
                     </p>
                   </div>
                 </div>
@@ -180,22 +169,22 @@ export default function Bureau() {
         <section className="py-24">
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
-              <h2 className="text-4xl md:text-5xl font-bold mb-12">Expected Impact</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-12">{t('bureau.impact.title')}</h2>
               
               <div className="grid md:grid-cols-3 gap-8">
                 <div className="p-8 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm text-center">
                   <div className="text-5xl font-bold text-accent mb-3">3x</div>
-                  <p className="text-white/70">ROI on AI investments within 12 months</p>
+                  <p className="text-white/70">{t('bureau.impact.roi')}</p>
                 </div>
                 
                 <div className="p-8 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm text-center">
                   <div className="text-5xl font-bold text-accent mb-3">50%</div>
-                  <p className="text-white/70">Reduction in time-to-market for new initiatives</p>
+                  <p className="text-white/70">{t('bureau.impact.timeToMarket')}</p>
                 </div>
                 
                 <div className="p-8 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm text-center">
                   <div className="text-5xl font-bold text-accent mb-3">10x</div>
-                  <p className="text-white/70">Increase in operational efficiency</p>
+                  <p className="text-white/70">{t('bureau.impact.efficiency')}</p>
                 </div>
               </div>
             </div>
@@ -209,17 +198,16 @@ export default function Bureau() {
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-4xl md:text-6xl font-bold mb-8">
-                Ready to Lead Your Transformation?
+                {t('bureau.cta.title')}
               </h2>
               <p className="text-xl text-white/70 mb-12 leading-relaxed">
-                Let's discuss how The Strategic Bureau can orchestrate your journey 
-                from AI experimentation to enterprise-wide transformation.
+                {t('bureau.cta.description')}
               </p>
               <a 
-                href="/contact" 
+                href={getLocalizedPath('/contact')} 
                 className="inline-block px-8 py-4 bg-white text-purple-950 font-bold rounded-full hover:bg-white/90 transition-all duration-300 hover:scale-[1.022]"
               >
-                Begin Your Journey
+                {t('bureau.cta.button')}
               </a>
             </div>
           </div>

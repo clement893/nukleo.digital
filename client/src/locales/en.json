@@ -262,6 +262,62 @@
   "faq": {
     "title": "FAQ"
   },
+  "bureau": {
+    "title": "The Strategic Bureau",
+    "subtitle": "Transformation Orchestration",
+    "heroDescription": "We define the strategy, drive the transformation, and measure the impact of AI across your organization. From vision to execution, we orchestrate your journey from AI-curious to AI-native.",
+    "mission": "Our Mission",
+    "missionText": "To guide your organization through the complex journey of <strong>AI transformation</strong>. We don't just create strategies we orchestrate change, align stakeholders, and ensure your AI initiatives deliver measurable business value at every stage.",
+    "services": {
+      "title": "Strategic Services",
+      "aiMaturity": {
+        "title": "AI Maturity Audit & Roadmap",
+        "description": "Assessing your current position in the AI landscape and charting a clear path to AI leadership. We evaluate your capabilities, identify gaps, and create a 9-to-12-month transformation roadmap."
+      },
+      "transformationStrategy": {
+        "title": "Agentic Transformation Strategy",
+        "description": "Redefining your operating model with AI at its center. We help you transition from experimentation to enterprise-wide transformation, embedding agentic AI as the foundation for growth."
+      },
+      "governance": {
+        "title": "AI Governance & Ethics",
+        "description": "Implementing the guardrails for responsible and high-performing AI. We establish frameworks for ethical AI use, compliance, risk management, and transparent decision-making."
+      },
+      "performanceAnalysis": {
+        "title": "Performance Analysis & ROI",
+        "description": "Measuring the tangible impact of AI on your business goals. We track KPIs, analyze outcomes, and continuously optimize your AI investments to maximize return and strategic value."
+      }
+    },
+    "journey": {
+      "title": "The Transformation Journey",
+      "discovery": {
+        "title": "Discovery & Assessment",
+        "description": "We conduct a comprehensive AI maturity audit, evaluating your current capabilities, data readiness, organizational culture, and competitive positioning. This baseline assessment identifies opportunities and constraints."
+      },
+      "strategy": {
+        "title": "Strategy & Roadmap",
+        "description": "We design your agentic transformation strategy, defining clear objectives, prioritizing use cases, and creating a phased roadmap. This includes governance frameworks, resource planning, and change management strategies."
+      },
+      "execution": {
+        "title": "Execution & Optimization",
+        "description": "We orchestrate implementation across your organization, coordinating with The Lab and The Studio. We continuously measure performance, track ROI, and adjust the strategy to maximize business impact."
+      },
+      "scale": {
+        "title": "Scale & Leadership",
+        "description": "We help you scale successful pilots enterprise-wide and position your organization as an AI leader in your industry. This includes thought leadership, innovation programs, and continuous capability building."
+      }
+    },
+    "impact": {
+      "title": "Expected Impact",
+      "roi": "ROI on AI investments within 12 months",
+      "timeToMarket": "Reduction in time-to-market for new initiatives",
+      "efficiency": "Increase in operational efficiency"
+    },
+    "cta": {
+      "title": "Ready to Lead Your Transformation?",
+      "description": "Let's discuss how The Strategic Bureau can orchestrate your journey from AI experimentation to enterprise-wide transformation.",
+      "button": "Begin Your Journey"
+    }
+  },
   "seo": {
     "home": {
       "title": "AI Transformation Agency | Agentic AI Solutions",

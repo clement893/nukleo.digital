@@ -97,7 +97,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
               fetchPriority="high"
               className="h-8 w-auto object-contain"
             />
-          </a>
+          </Link>
 
           {/* Close Button and CTA */}
           <div className="flex items-center gap-4">

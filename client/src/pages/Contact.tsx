@@ -237,7 +237,7 @@ export default function Contact() {
               <div className="glass rounded-3xl p-8 lg:p-12">
                 <div className="flex items-center gap-3 mb-6">
                   <MapPin className="w-6 h-6 text-accent" />
-                  <h3 className="text-xl font-bold text-white">Our Offices</h3>
+                  <h3 className="text-xl font-bold text-white">{t('contact.ourOffices')}</h3>
                 </div>
 
                 <div className="space-y-6">

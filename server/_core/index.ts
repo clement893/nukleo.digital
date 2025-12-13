@@ -233,10 +233,55 @@ async function startServer() {
       
       const { seedCrazyLoaders } = await import("../seed-crazy-loaders");
       await seedCrazyLoaders();
+      
+      // Seed radar technologies
+      const { seedRadarTechnologies } = await import("../routers/radar");
+      await seedRadarTechnologies();
     } catch (error) {
       logger.error("Failed to seed loaders:", error);
     }
+    
+    // Setup daily radar refresh cron job
+    setupRadarDailyRefresh();
   });
+}
+
+// Setup daily refresh for radar (runs at 2 AM UTC daily)
+function setupRadarDailyRefresh() {
+  const refreshRadar = async () => {
+    try {
+      const { appRouter } = await import("../routers");
+      const { createContext } = await import("./context");
+      const mockReq = { headers: {}, cookies: {} } as any;
+      const mockRes = { setHeader: () => {}, cookie: () => {} } as any;
+      const context = await createContext({ req: mockReq, res: mockRes });
+      const caller = appRouter.createCaller(context);
+      await caller.radar.refreshDaily();
+      logger.info("Radar daily refresh completed successfully");
+    } catch (error) {
+      logger.error("Radar daily refresh failed:", error);
+    }
+  };
+  
+  // Calculate milliseconds until next 2 AM UTC
+  const now = new Date();
+  const utcNow = new Date(now.getTime() + (now.getTimezoneOffset() * 60000));
+  const nextRefresh = new Date(utcNow);
+  nextRefresh.setUTCHours(2, 0, 0, 0);
+  if (nextRefresh <= utcNow) {
+    nextRefresh.setUTCDate(nextRefresh.getUTCDate() + 1);
+  }
+  
+  const msUntilRefresh = nextRefresh.getTime() - utcNow.getTime();
+  
+  // Schedule first refresh
+  setTimeout(() => {
+    refreshRadar();
+    // Then refresh every 24 hours
+    setInterval(refreshRadar, 24 * 60 * 60 * 1000);
+  }, msUntilRefresh);
+  
+  logger.info(`Radar daily refresh scheduled for ${nextRefresh.toISOString()}`);
 }
 
 startServer().catch(console.error);

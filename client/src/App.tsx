@@ -58,6 +58,7 @@ const Contact = lazy(() => import("./pages/Contact"));
 const Leo = lazy(() => import("./pages/Leo"));
 const Manifesto = lazy(() => import("./pages/Manifesto"));
 const Radar = lazy(() => import("./pages/RadarNew").then(m => ({ default: m.RadarNew })));
+const AITrendRadar = lazy(() => import("./pages/AITrendRadar"));
 const AIReadinessAssessment = lazy(() => import("./pages/AIReadinessAssessment"));
 const AIStrategyMarketing = lazy(() => import("./pages/services/AIStrategyMarketing"));
 const DigitalPlatforms = lazy(() => import("./pages/services/DigitalPlatforms"));
@@ -131,6 +132,7 @@ function App() {
               <Route path="/fr/leo" component={Leo} />
               <Route path="/fr/manifesto" component={Manifesto} />
               <Route path="/fr/radar" component={Radar} />
+              <Route path="/fr/ai-trend-radar" component={AITrendRadar} />
               <Route path="/fr/assessment" component={AIReadinessAssessment} />
               <Route path="/fr/services/ai-strategy-marketing" component={AIStrategyMarketing} />
               <Route path="/fr/services/digital-platforms" component={DigitalPlatforms} />
@@ -169,6 +171,7 @@ function App() {
             <Route path="/leo" component={Leo} />
             <Route path="/manifesto" component={Manifesto} />
             <Route path="/radar" component={Radar} />
+            <Route path="/ai-trend-radar" component={AITrendRadar} />
             <Route path="/assessment" component={AIReadinessAssessment} />
             <Route path="/services/ai-strategy-marketing" component={AIStrategyMarketing} />
             <Route path="/services/digital-platforms" component={DigitalPlatforms} />

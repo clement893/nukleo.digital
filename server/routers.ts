@@ -15,6 +15,7 @@ import { adminAuthRouter } from "./routers/adminAuth";
 import { adminRouter } from "./routers/admin";
 import { loadersRouter } from "./loadersRouter";
 import { testimonialsRouter } from "./routers/testimonials";
+import { radarRouter } from "./routers/radar";
 import { saveLeoContact, createLeoSession, updateLeoSession } from "./db";
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -29,6 +30,7 @@ export const appRouter = router({
   admin: adminRouter,
   loaders: loadersRouter,
   testimonials: testimonialsRouter,
+  radar: radarRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {

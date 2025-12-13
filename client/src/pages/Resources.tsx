@@ -60,6 +60,14 @@ export default function Resources() {
       buttonText: t('resources.tools.aiReadiness.buttonText')
     },
     {
+      badge: 'AI Trend Radar',
+      title: 'AI Trend Radar',
+      description: 'Visualisez l\'évolution des technologies IA selon leur maturité et leur impact business. Mise à jour quotidienne avec analyse générée par IA.',
+      tags: ['Tendances IA', 'Technologies émergentes', 'Impact business', 'Maturité technologique'],
+      link: getLocalizedPath('/ai-trend-radar'),
+      buttonText: 'Explorer le Radar'
+    },
+    {
       badge: t('resources.tools.radar.badge'),
       title: t('resources.tools.radar.title'),
       description: t('resources.tools.radar.description'),

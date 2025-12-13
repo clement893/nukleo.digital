@@ -137,6 +137,45 @@ export async function initDatabase(req: Request, res: Response) {
       );
     `);
 
+    // Create radar_technologies table
+    await db.execute(sql`
+      CREATE TABLE IF NOT EXISTS radar_technologies (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) NOT NULL UNIQUE,
+        slug VARCHAR(255) NOT NULL UNIQUE,
+        description TEXT NOT NULL,
+        "createdAt" TIMESTAMP DEFAULT NOW() NOT NULL,
+        "updatedAt" TIMESTAMP DEFAULT NOW() NOT NULL
+      );
+    `);
+
+    // Create radar_positions table
+    await db.execute(sql`
+      CREATE TABLE IF NOT EXISTS radar_positions (
+        id SERIAL PRIMARY KEY,
+        "technologyId" INTEGER NOT NULL REFERENCES radar_technologies(id) ON DELETE CASCADE,
+        date TIMESTAMP NOT NULL,
+        "maturityScore" INTEGER NOT NULL CHECK ("maturityScore" >= 0 AND "maturityScore" <= 100),
+        "impactScore" INTEGER NOT NULL CHECK ("impactScore" >= 0 AND "impactScore" <= 100),
+        definition TEXT NOT NULL,
+        "useCases" TEXT NOT NULL,
+        "maturityLevel" VARCHAR(50) NOT NULL,
+        "maturityJustification" TEXT NOT NULL,
+        "impactBusiness" TEXT NOT NULL,
+        "adoptionBarriers" TEXT NOT NULL,
+        recommendations TEXT NOT NULL,
+        "aiGeneratedAt" TIMESTAMP DEFAULT NOW() NOT NULL,
+        "createdAt" TIMESTAMP DEFAULT NOW() NOT NULL,
+        "updatedAt" TIMESTAMP DEFAULT NOW() NOT NULL
+      );
+    `);
+
+    // Create index for faster queries
+    await db.execute(sql`
+      CREATE INDEX IF NOT EXISTS idx_radar_positions_technology_date 
+      ON radar_positions("technologyId", date DESC);
+    `);
+
     res.json({ 
       message: "Database initialized successfully! All tables created.",
       tables: [
@@ -146,7 +185,9 @@ export async function initDatabase(req: Request, res: Response) {
         "ai_assessments",
         "media_assets",
         "agency_leads",
-        "admin_users"
+        "admin_users",
+        "radar_technologies",
+        "radar_positions"
       ]
     });
   } catch (error) {

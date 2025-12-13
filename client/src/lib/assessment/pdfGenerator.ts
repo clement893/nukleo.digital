@@ -2,18 +2,103 @@ import { AssessmentResults } from './scoring';
 import { getRecommendationsForLevel } from './recommendations';
 import { EmailCaptureData } from '@/components/assessment/EmailCaptureModal';
 
-// Note: This will use jsPDF and html2canvas when installed
-// For now, we'll create a placeholder that can be completed
-
 export async function generatePDFReport(
   results: AssessmentResults,
   userData: EmailCaptureData
 ): Promise<void> {
-  // Dynamic import to avoid SSR issues
-  const [{ default: jsPDF }] = await Promise.all([
-    import('jspdf'),
-  ]);
+  // Try to dynamically import jspdf - if not available, fallback to text download
+  let jsPDF: any;
+  try {
+    const jsPDFModule = await import('jspdf');
+    jsPDF = jsPDFModule.default || jsPDFModule;
+  } catch (error) {
+    console.warn('jsPDF not available, falling back to text report');
+    // Fallback: download as text file
+    const recommendations = getRecommendationsForLevel(results.maturityLevel);
+    const reportText = `
+╔══════════════════════════════════════════════════════════════╗
+║         ÉVALUATION DE MATURITÉ IA - RAPPORT COMPLET          ║
+╚══════════════════════════════════════════════════════════════╝
 
+Entreprise: ${userData.company}
+Date: ${new Date().toLocaleDateString('fr-FR', { 
+  year: 'numeric', 
+  month: 'long', 
+  day: 'numeric' 
+})}
+Contact: ${userData.firstName} ${userData.lastName} (${userData.email})
+
+═══════════════════════════════════════════════════════════════
+
+SCORE GLOBAL: ${results.globalScore}/100
+NIVEAU DE MATURITÉ: ${results.maturityLevel}
+
+${results.maturityDescription}
+
+═══════════════════════════════════════════════════════════════
+
+SCORES PAR DIMENSION:
+
+${results.dimensionScores.map(d => {
+  const bar = '█'.repeat(Math.floor(d.score / 5)) + '░'.repeat(20 - Math.floor(d.score / 5));
+  return `${d.label.padEnd(30)} ${bar} ${d.score}/100`;
+}).join('\n')}
+
+═══════════════════════════════════════════════════════════════
+
+CARACTÉRISTIQUES DE VOTRE NIVEAU:
+
+${recommendations.characteristics.map(c => `• ${c}`).join('\n')}
+
+═══════════════════════════════════════════════════════════════
+
+RECOMMANDATIONS PRIORITAIRES:
+
+${recommendations.topRecommendations.map((rec, idx) => `
+${idx + 1}. ${rec.title}
+   Impact: ${rec.impact} | Effort: ${rec.effort} | Timeline: ${rec.timeline}
+   ${rec.description}
+`).join('\n')}
+
+═══════════════════════════════════════════════════════════════
+
+PROCHAINES ÉTAPES:
+
+${recommendations.nextSteps.map((step, idx) => `${idx + 1}. ${step.title} (${step.duration})`).join('\n')}
+
+═══════════════════════════════════════════════════════════════
+
+À PROPOS DE NUKLEO DIGITAL
+
+Nukleo Digital est une agence de transformation IA spécialisée dans 
+l'accompagnement des entreprises québécoises et canadiennes dans leur 
+parcours d'adoption de l'intelligence artificielle.
+
+Services:
+• Stratégie IA alignée avec vos objectifs business
+• Développement de solutions IA sur mesure
+• Formation et accompagnement de vos équipes
+• Plateformes MLOps et gouvernance IA
+
+Contact: hello@nukleo.digital
+Site web: www.nukleo.digital
+
+═══════════════════════════════════════════════════════════════
+    `.trim();
+    
+    const blob = new Blob([reportText], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `nukleo-ai-readiness-report-${userData.company.replace(/\s+/g, '-')}-${Date.now()}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    return;
+  }
+
+  // If jsPDF is available, generate PDF
   const pdf = new jsPDF('p', 'mm', 'a4');
   const pageWidth = pdf.internal.pageSize.getWidth();
   const pageHeight = pdf.internal.pageSize.getHeight();

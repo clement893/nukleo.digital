@@ -38,9 +38,9 @@ export default function CapabilitiesSection() {
             {t('capabilities.sectionLabel')}
           </span>
 
-          <h2 className="text-white mb-4 sm:mb-6 text-4xl sm:text-5xl lg:text-6xl" dangerouslySetInnerHTML={{ __html: t('capabilities.title') }} />
+          <h2 className="text-white mb-4 sm:mb-6 text-4xl sm:text-5xl lg:text-6xl font-heading" dangerouslySetInnerHTML={{ __html: t('capabilities.title') }} />
 
-          <p className="text-white/75 text-base sm:text-lg lg:text-xl leading-relaxed max-w-3xl">
+          <p className="text-white/75 text-base sm:text-lg leading-relaxed max-w-3xl">
             {t('capabilities.description')}
           </p>
         </div>
@@ -54,22 +54,25 @@ export default function CapabilitiesSection() {
                 key={index}
                 onClick={playClick}
                 onMouseEnter={playHover}
-                className="group p-6 sm:p-8 glass transition-all duration-500 cursor-pointer h-full rounded-2xl sm:rounded-3xl overflow-hidden hover:scale-[1.009] hover:shadow-xl hover:shadow-purple-500/10"
+                className="group p-6 sm:p-6 lg:p-8 glass transition-all duration-500 cursor-pointer h-full rounded-2xl overflow-hidden hover:scale-[1.009] hover:shadow-xl hover:shadow-purple-500/10"
               >
                 {/* Glassmorphism overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 
-                <div className="relative z-10 mb-6 text-accent transition-colors duration-300">
-                  <Icon className="w-10 h-10 stroke-1" />
+                <div className="relative z-10">
+                  {/* Icon Badge */}
+                  <div className="mb-4 w-12 h-12 bg-accent/20 flex items-center justify-center rounded-lg">
+                    <Icon className="w-6 h-6 text-accent" />
+                  </div>
+
+                  <h3 className="text-xl lg:text-2xl font-bold text-white mb-3">
+                    {capability.title}
+                  </h3>
+
+                  <p className="text-white/75 text-sm lg:text-base leading-relaxed">
+                    {capability.description}
+                  </p>
                 </div>
-
-                <h3 className="relative z-10 text-xl font-bold text-white mb-3 group-hover:text-accent transition-colors">
-                  {capability.title}
-                </h3>
-
-                <p className="relative z-10 text-white/75 text-sm leading-relaxed group-hover:text-white/80 transition-colors">
-                  {capability.description}
-                </p>
               </div>
             );
           })}

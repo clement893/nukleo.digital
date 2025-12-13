@@ -46,7 +46,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
           {/* Logo and Description */}
           <div className="lg:col-span-4">
-            <Link href={getLocalizedPath('/')} className="text-2xl font-bold font-['Space_Grotesk'] mb-4 block">
+            <Link href={getLocalizedPath('/')} className="text-2xl font-bold font-heading mb-4 block">
               nukleo.
             </Link>
             <p className="text-white/60 text-sm leading-relaxed mb-6">

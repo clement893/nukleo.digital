@@ -61,13 +61,13 @@ export default function AIReadinessAssessment() {
         answers: answers,
       });
 
-      // Generate and download PDF
+      // Generate and download PDF (optional - will fallback to text if jspdf not available)
       try {
         const { generatePDFReport } = await import('@/lib/assessment/pdfGenerator');
         await generatePDFReport(results, data);
       } catch (pdfError) {
-        console.warn('PDF generation failed:', pdfError);
-        // Continue even if PDF fails
+        console.warn('PDF generation failed, report saved to database:', pdfError);
+        // Continue - report is saved and email sent
       }
 
       setIsSaved(true);

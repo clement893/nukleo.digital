@@ -285,13 +285,7 @@ export async function seedRadarTechnologies() {
     return; // Already seeded
   }
   
-  // db is already defined above, no need to redefine
-
-  const db = await getDb();
-  if (!db) {
-    console.error("Database connection failed, skipping radar seed");
-    return;
-  }
+  // db is already defined above, continue with seeding
   for (const tech of INITIAL_TECHNOLOGIES) {
     const [inserted] = await db.insert(radarTechnologies).values(tech).returning();
     

@@ -447,7 +447,93 @@
     "heroSubtitle": "Expertise"
   },
   "resources": {
-    "title": "Resources"
+    "seoTitle": "Resources | AI Insights, Guides & Research",
+    "seoDescription": "Insights, guides, and research from the frontlines of AI transformation. Stay ahead with expert analysis, practical frameworks, and interactive tools.",
+    "seoKeywords": "AI resources, AI guides, AI research, AI insights, AI tools, AI readiness assessment, AI trend radar, AI glossary, ROI calculator, AI transformation",
+    "badge": "Knowledge Base",
+    "title": "RESOURCES",
+    "description": "Insights, guides, and research from the frontlines of AI transformation. Stay ahead with expert analysis and practical frameworks.",
+    "tools": {
+      "sectionLabel": "Interactive Tools",
+      "title": "Explore Our AI Tools",
+      "description": "Free diagnostic and research tools to accelerate your AI transformation journey",
+      "aiReadiness": {
+        "badge": "Diagnostic Tool",
+        "title": "AI Readiness Assessment",
+        "description": "Discover where you stand in your AI transformation journey. Get personalized insights across 6 key dimensions with instant results.",
+        "tags": ["20 Questions", "5 Maturity Levels", "Instant Results"],
+        "buttonText": "Start Assessment"
+      },
+      "radar": {
+        "badge": "Research Tool",
+        "title": "AI Trend Radar",
+        "description": "Explore our interactive radar of emerging and established AI technologies. Monthly updates to guide your investment decisions.",
+        "tags": ["10+ Technologies", "Monthly Updates", "Interactive Map"],
+        "buttonText": "Explore Radar"
+      },
+      "glossary": {
+        "badge": "Knowledge Base",
+        "title": "AI Glossary",
+        "description": "Your complete guide to AI terminology. 100+ terms with real-world examples, from beginner to advanced concepts.",
+        "tags": ["100+ Terms", "Real Examples", "Searchable"],
+        "buttonText": "Browse Glossary"
+      }
+    },
+    "filter": {
+      "label": "Filter by:",
+      "all": "All",
+      "industryInsights": "Industry Insights",
+      "technicalGuide": "Technical Guide",
+      "strategy": "Strategy",
+      "caseStudy": "Case Study"
+    },
+    "articles": {
+      "agenticPlaybook": {
+        "category": "Technical Guide",
+        "title": "The Agentic AI Playbook",
+        "description": "A comprehensive guide to implementing autonomous AI agents in your organization. From architecture to deployment.",
+        "readTime": "15 min"
+      },
+      "pilotToScale": {
+        "category": "Strategy",
+        "title": "From Pilot to Scale: AI Transformation Framework",
+        "description": "Strategic framework for moving beyond experimentation to enterprise-wide AI adoption with measurable results.",
+        "readTime": "20 min"
+      },
+      "agenticMarketing": {
+        "category": "Industry Insights",
+        "title": "The Future of Agentic Marketing",
+        "description": "How AI agents are reshaping marketing operations and customer experiences. Real-world case studies and ROI metrics.",
+        "readTime": "12 min"
+      },
+      "buildingAgentic": {
+        "category": "Technical Guide",
+        "title": "Building Agentic Systems",
+        "description": "Technical deep-dive into designing, building, and deploying autonomous AI agent systems at scale.",
+        "readTime": "18 min"
+      },
+      "aiTrends2025": {
+        "category": "Industry Insights",
+        "title": "2025 AI Trends",
+        "description": "The most important AI trends shaping business in 2025. From multimodal models to agentic workflows.",
+        "readTime": "14 min"
+      },
+      "roiInvestment": {
+        "category": "Strategy",
+        "title": "Measuring ROI on AI Investments",
+        "description": "Practical frameworks and metrics for measuring the return on investment of your AI initiatives.",
+        "readTime": "10 min"
+      }
+    },
+    "newsletter": {
+      "title": "STAY AHEAD OF<br />THE AI CURVE",
+      "description": "Subscribe to receive our latest insights, technical guides, and industry analysis directly in your inbox.",
+      "placeholder": "Enter your email address",
+      "subscribe": "Subscribe",
+      "subscribing": "Subscribing...",
+      "success": "✓ Successfully subscribed! Check your email for confirmation.",
+      "error": "✗ Failed to subscribe. Please try again."
+    }
   },
   "faq": {
     "seoTitle": "AI Transformation FAQ | Common Questions Answered",

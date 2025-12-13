@@ -447,7 +447,93 @@
     "heroSubtitle": "Approfondie"
   },
   "resources": {
-    "title": "Ressources"
+    "seoTitle": "Ressources | Insights IA, guides & recherche",
+    "seoDescription": "Insights, guides et recherche des premières lignes de la transformation IA. Restez en avance avec des analyses d'experts, des cadres pratiques et des outils interactifs.",
+    "seoKeywords": "ressources IA, guides IA, recherche IA, insights IA, outils IA, évaluation de préparation IA, radar de tendances IA, glossaire IA, calculateur ROI, transformation IA",
+    "badge": "Base de connaissances",
+    "title": "Ressources",
+    "description": "Insights, guides et recherche des premières lignes de la transformation IA. Restez en avance avec des analyses d'experts et des cadres pratiques.",
+    "tools": {
+      "sectionLabel": "Outils interactifs",
+      "title": "Explorez nos outils IA",
+      "description": "Outils de diagnostic et de recherche gratuits pour accélérer votre parcours de transformation IA",
+      "aiReadiness": {
+        "badge": "Outil de diagnostic",
+        "title": "Évaluation de préparation IA",
+        "description": "Découvrez où vous en êtes dans votre parcours de transformation IA. Obtenez des insights personnalisés sur 6 dimensions clés avec des résultats instantanés.",
+        "tags": ["20 questions", "5 niveaux de maturité", "Résultats instantanés"],
+        "buttonText": "Commencer l'évaluation"
+      },
+      "radar": {
+        "badge": "Outil de recherche",
+        "title": "Radar des tendances IA",
+        "description": "Explorez notre radar interactif des technologies IA émergentes et établies. Mises à jour mensuelles pour guider vos décisions d'investissement.",
+        "tags": ["10+ technologies", "Mises à jour mensuelles", "Carte interactive"],
+        "buttonText": "Explorer le radar"
+      },
+      "glossary": {
+        "badge": "Base de connaissances",
+        "title": "Glossaire IA",
+        "description": "Votre guide complet de la terminologie IA. 100+ termes avec des exemples du monde réel, des concepts débutants aux avancés.",
+        "tags": ["100+ termes", "Exemples réels", "Rechercheable"],
+        "buttonText": "Parcourir le glossaire"
+      }
+    },
+    "filter": {
+      "label": "Filtrer par :",
+      "all": "Tout",
+      "industryInsights": "Insights industrie",
+      "technicalGuide": "Guide technique",
+      "strategy": "Stratégie",
+      "caseStudy": "Étude de cas"
+    },
+    "articles": {
+      "agenticPlaybook": {
+        "category": "Guide technique",
+        "title": "Le guide de l'IA agentique",
+        "description": "Un guide complet pour implémenter des agents IA autonomes dans votre organisation. De l'architecture au déploiement.",
+        "readTime": "15 min"
+      },
+      "pilotToScale": {
+        "category": "Stratégie",
+        "title": "Du pilote à l'échelle : cadre de transformation IA",
+        "description": "Cadre stratégique pour passer de l'expérimentation à l'adoption IA à l'échelle de l'entreprise avec des résultats mesurables.",
+        "readTime": "20 min"
+      },
+      "agenticMarketing": {
+        "category": "Insights industrie",
+        "title": "L'avenir du marketing agentique",
+        "description": "Comment les agents IA transforment les opérations marketing et les expériences client. Études de cas réelles et métriques ROI.",
+        "readTime": "12 min"
+      },
+      "buildingAgentic": {
+        "category": "Guide technique",
+        "title": "Construire des systèmes agentiques",
+        "description": "Plongée technique dans la conception, la construction et le déploiement de systèmes d'agents IA autonomes à grande échelle.",
+        "readTime": "18 min"
+      },
+      "aiTrends2025": {
+        "category": "Insights industrie",
+        "title": "Tendances IA 2025",
+        "description": "Les tendances IA les plus importantes qui façonnent les entreprises en 2025. Des modèles multimodaux aux flux de travail agentiques.",
+        "readTime": "14 min"
+      },
+      "roiInvestment": {
+        "category": "Stratégie",
+        "title": "Mesurer le ROI sur les investissements IA",
+        "description": "Cadres pratiques et métriques pour mesurer le retour sur investissement de vos initiatives IA.",
+        "readTime": "10 min"
+      }
+    },
+    "newsletter": {
+      "title": "Restez en avance<br />de la courbe IA",
+      "description": "Abonnez-vous pour recevoir nos derniers insights, guides techniques et analyses de l'industrie directement dans votre boîte de réception.",
+      "placeholder": "Entrez votre adresse email",
+      "subscribe": "S'abonner",
+      "subscribing": "Abonnement...",
+      "success": "✓ Abonnement réussi ! Vérifiez votre email pour confirmation.",
+      "error": "✗ Échec de l'abonnement. Veuillez réessayer."
+    }
   },
   "faq": {
     "seoTitle": "FAQ Transformation IA | Questions Répondues",

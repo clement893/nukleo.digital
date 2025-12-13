@@ -1,5 +1,8 @@
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { Link } from 'wouter';
 
 const clients = [
   {
@@ -101,12 +104,15 @@ const clients = [
 ];
 
 export default function Clients() {
+  const { t } = useLanguage();
+  const { getLocalizedPath } = useLocalizedPath();
+
   return (
     <PageLayout>
       <SEO 
-        title="Our Clients | Trusted by Industry Leaders"
-        description="Trusted by 12+ industry leaders: MBAM, Summit Law, Affilia, GoCoupons & more. See how we transformed operations across 8+ industries with AI. View case studies."
-        keywords="AI clients, AI case studies, industry leaders AI, AI transformation success stories, AI portfolio"
+        title={t('clients.seoTitle')}
+        description={t('clients.seoDescription')}
+        keywords={t('clients.seoKeywords')}
       />
       
       <div className="min-h-screen bg-gradient-to-br from-violet-950 via-fuchsia-950 to-rose-950">
@@ -114,19 +120,19 @@ export default function Clients() {
         <section className="container mx-auto px-4 pt-32 pb-20">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-6">
-              <span className="text-sm font-medium text-white/90">Trusted by Industry Leaders</span>
+              <span className="text-sm font-medium text-white/90">{t('clients.badge')}</span>
             </div>
             
             <h1 className="text-5xl md:text-7xl font-bold mb-8">
-              <span className="text-white">Our</span>
+              <span className="text-white">{t('clients.title')}</span>
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">
-                Clients
+                {t('clients.titleHighlight')}
               </span>
             </h1>
             
             <p className="text-xl text-white/70 max-w-3xl mx-auto">
-              From museums to tech startups, we've helped organizations across diverse industries transform their operations with AI-powered solutions. Here are some of the amazing companies we've had the privilege to work with.
+              {t('clients.description')}
             </p>
           </div>
 
@@ -137,7 +143,7 @@ export default function Clients() {
                 12+
               </div>
               <div className="text-white/70 text-lg">
-                Trusted Clients
+                {t('clients.stats.clients')}
               </div>
             </div>
             
@@ -146,7 +152,7 @@ export default function Clients() {
                 8+
               </div>
               <div className="text-white/70 text-lg">
-                Industries Served
+                {t('clients.stats.industries')}
               </div>
             </div>
             
@@ -155,7 +161,7 @@ export default function Clients() {
                 340%
               </div>
               <div className="text-white/70 text-lg">
-                Average ROI Increase
+                {t('clients.stats.roi')}
               </div>
             </div>
           </div>
@@ -189,7 +195,7 @@ export default function Clients() {
 
                 {/* Services */}
                 <div className="mb-6">
-                  <p className="text-xs text-white/50 uppercase tracking-wider mb-3">Services Provided</p>
+                  <p className="text-xs text-white/50 uppercase tracking-wider mb-3">{t('clients.labels.servicesProvided')}</p>
                   <div className="flex flex-wrap gap-2">
                     {client.services.map((service, idx) => (
                       <span
@@ -204,7 +210,7 @@ export default function Clients() {
 
                 {/* Results */}
                 <div>
-                  <p className="text-xs text-white/50 uppercase tracking-wider mb-3">Key Results</p>
+                  <p className="text-xs text-white/50 uppercase tracking-wider mb-3">{t('clients.labels.keyResults')}</p>
                   <ul className="space-y-2">
                     {client.results.map((result, idx) => (
                       <li key={idx} className="text-sm text-white/70 flex items-start gap-2">
@@ -223,17 +229,16 @@ export default function Clients() {
         <section className="container mx-auto px-4 pb-20">
           <div className="max-w-4xl mx-auto text-center bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg border border-white/20 rounded-3xl p-12">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Ready to Join Them?
+              {t('clients.cta.title')}
             </h2>
             <p className="text-xl text-white/70 mb-8 max-w-2xl mx-auto">
-              Let's discuss how our AI services can transform your business and accelerate your growth.
+              {t('clients.cta.description')}
             </p>
-            <a
-              href="/contact"
-              className="inline-block bg-white text-purple-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/90 transition-all hover:scale-[1.022]"
-            >
-              Start Your Transformation
-            </a>
+            <Link href={getLocalizedPath('/contact')}>
+              <a className="inline-block bg-white text-purple-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/90 transition-all hover:scale-[1.022]">
+                {t('clients.cta.button')}
+              </a>
+            </Link>
           </div>
         </section>
       </div>

@@ -10,7 +10,7 @@ import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 export default function Resources() {
   const { t, language } = useLanguage();
-  const { getLocalizedPath } = useLocalizedPath();
+  const getLocalizedPath = useLocalizedPath();
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('all');

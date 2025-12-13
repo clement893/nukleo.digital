@@ -6,7 +6,7 @@ import { Link } from 'wouter';
 
 export default function Manifesto() {
   const { t, language } = useLanguage();
-  const { getLocalizedPath } = useLocalizedPath();
+  const getLocalizedPath = useLocalizedPath();
 
   // Helper to get array from translations
   const getTranslationArray = (key: string): string[] => {

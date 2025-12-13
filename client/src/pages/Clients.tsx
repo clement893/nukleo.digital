@@ -105,7 +105,7 @@ const clients = [
 
 export default function Clients() {
   const { t } = useLanguage();
-  const { getLocalizedPath } = useLocalizedPath();
+  const getLocalizedPath = useLocalizedPath();
 
   return (
     <PageLayout>

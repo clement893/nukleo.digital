@@ -7,7 +7,7 @@ import { Link } from 'wouter';
 
 export default function Testimonials() {
   const { t, language } = useLanguage();
-  const { getLocalizedPath } = useLocalizedPath();
+  const getLocalizedPath = useLocalizedPath();
 
   return (
     <>

@@ -5,6 +5,8 @@ import { useSound } from '@/hooks/useSound';
 interface EmailCaptureModalProps {
   onSubmit: (data: EmailCaptureData) => void;
   onClose: () => void;
+  onSkip?: () => void;
+  showSkip?: boolean;
 }
 
 export interface EmailCaptureData {
@@ -19,7 +21,7 @@ export interface EmailCaptureData {
   consent: boolean;
 }
 
-export default function EmailCaptureModal({ onSubmit, onClose }: EmailCaptureModalProps) {
+export default function EmailCaptureModal({ onSubmit, onClose, onSkip, showSkip = false }: EmailCaptureModalProps) {
   const { playClick } = useSound();
   const [formData, setFormData] = useState<EmailCaptureData>({
     firstName: '',
@@ -91,7 +93,9 @@ export default function EmailCaptureModal({ onSubmit, onClose }: EmailCaptureMod
             Get Your Full AI Readiness Report
           </h2>
           <p className="text-white/70">
-            Enter your details below to receive your comprehensive assessment report with personalized recommendations.
+            {showSkip 
+              ? 'Enter your details to unlock your personalized AI Readiness Report with detailed recommendations, implementation roadmap, and downloadable PDF.'
+              : 'Enter your details below to receive your comprehensive assessment report with personalized recommendations.'}
           </p>
         </div>
 
@@ -269,6 +273,19 @@ export default function EmailCaptureModal({ onSubmit, onClose }: EmailCaptureMod
           >
             Get My Full Report
           </button>
+
+          {showSkip && onSkip && (
+            <button
+              type="button"
+              onClick={() => {
+                playClick();
+                onSkip();
+              }}
+              className="w-full py-3 text-white/60 hover:text-white font-medium rounded-xl hover:bg-white/5 transition-all duration-300"
+            >
+              Skip and view results
+            </button>
+          )}
 
           <p className="text-center text-white/40 text-sm">
             * Required fields

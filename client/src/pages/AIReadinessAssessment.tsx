@@ -17,7 +17,7 @@ import { Menu } from 'lucide-react';
 import { useState as useMenuState } from 'react';
 import FullScreenMenu from '@/components/FullScreenMenu';
 
-type AssessmentState = 'intro' | 'quiz' | 'results';
+type AssessmentState = 'intro' | 'quiz' | 'email-capture' | 'results';
 
 export default function AIReadinessAssessment() {
   const [menuOpen, setMenuOpen] = useMenuState(false);
@@ -27,6 +27,7 @@ export default function AIReadinessAssessment() {
   const [results, setResults] = useState<AssessmentResults | null>(null);
   const [showEmailModal, setShowEmailModal] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+  const [emailData, setEmailData] = useState<EmailCaptureData | null>(null);
   const { playClick } = useSound();
 
   const saveAssessment = trpc.assessment.save.useMutation();
@@ -71,12 +72,22 @@ export default function AIReadinessAssessment() {
       }
 
       setIsSaved(true);
+      setEmailData(data);
       setShowEmailModal(false);
+      // Move to results after email capture
+      setState('results');
       playClick();
     } catch (error) {
       console.error('Failed to save assessment:', error);
       alert('Failed to save assessment. Please try again.');
     }
+  };
+
+  const handleEmailCaptureSkip = () => {
+    // Allow skipping email capture, but still show results
+    setShowEmailModal(false);
+    setState('results');
+    playClick();
   };
 
   const currentQuestion = QUESTIONS[currentQuestionIndex];
@@ -99,7 +110,9 @@ export default function AIReadinessAssessment() {
       if (isLastQuestion) {
         const assessmentResults = calculateScores({ ...answers, [currentQuestion.id]: points });
         setResults(assessmentResults);
-        setState('results');
+        // Show email capture before results
+        setState('email-capture');
+        setShowEmailModal(true);
       } else {
         setCurrentQuestionIndex(prev => prev + 1);
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -112,10 +125,11 @@ export default function AIReadinessAssessment() {
     playClick();
     
     if (isLastQuestion) {
-      // Calculate scores and show results
+      // Calculate scores and show email capture before results
       const assessmentResults = calculateScores(answers);
       setResults(assessmentResults);
-      setState('results');
+      setState('email-capture');
+      setShowEmailModal(true);
     } else {
       setCurrentQuestionIndex(prev => prev + 1);
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -194,9 +208,22 @@ export default function AIReadinessAssessment() {
                 disabled={!canGoNext}
                 className="group inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-violet-500 to-rose-500 text-white font-bold rounded-full hover:shadow-[0_0_40px_rgba(139,92,246,0.5)] disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-300"
               >
-                {isLastQuestion ? 'View Results' : 'Next'}
+                {isLastQuestion ? 'Complete Assessment' : 'Next'}
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
+            </div>
+          </div>
+        )}
+
+        {state === 'email-capture' && (
+          <div className="w-full max-w-4xl mx-auto text-center">
+            <div className="mb-8">
+              <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+                Almost There!
+              </h2>
+              <p className="text-xl text-white/70">
+                Enter your details to receive your personalized AI Readiness Report
+              </p>
             </div>
           </div>
         )}
@@ -271,6 +298,8 @@ export default function AIReadinessAssessment() {
           setShowEmailModal(false);
           playClick();
         }}
+        onSkip={handleEmailCaptureSkip}
+        showSkip={true}
       />
     )}
     </>

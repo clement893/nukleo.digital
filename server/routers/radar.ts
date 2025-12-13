@@ -21,27 +21,54 @@ const INITIAL_TECHNOLOGIES = [
 export const radarRouter = router({
   getCurrent: publicProcedure.query(async () => {
     const db = await getDb();
-    if (!db) throw new Error("Database connection failed");
-    // Get latest position for each technology
-    const technologies = await db.select().from(radarTechnologies).orderBy(radarTechnologies.name);
+    if (!db) {
+      console.warn('[Radar] Database connection failed');
+      return [];
+    }
     
-    const positions = await Promise.all(
-      technologies.map(async (tech) => {
-        const latestPosition = await db
-          .select()
-          .from(radarPositions)
-          .where(eq(radarPositions.technologyId, tech.id))
-          .orderBy(desc(radarPositions.date))
-          .limit(1);
-        
-        return {
-          technology: tech,
-          position: latestPosition[0] || null,
-        };
-      })
-    );
+    try {
+      // Get latest position for each technology
+      const technologies = await db.select().from(radarTechnologies).orderBy(radarTechnologies.name);
+      
+      if (!technologies || technologies.length === 0) {
+        return [];
+      }
+    
+      const positions = await Promise.all(
+        technologies.map(async (tech) => {
+          const latestPosition = await db
+            .select()
+            .from(radarPositions)
+            .where(eq(radarPositions.technologyId, tech.id))
+            .orderBy(desc(radarPositions.date))
+            .limit(1);
+          
+          return {
+            technology: tech,
+            position: latestPosition[0] || null,
+          };
+        })
+      );
 
-    return positions.filter(p => p.position !== null);
+      return positions.filter(p => p.position !== null);
+    } catch (error: any) {
+      // If table doesn't exist, return empty array
+      const errorMessage = error?.message || '';
+      const errorCode = error?.code || '';
+      
+      if (
+        errorMessage.includes('does not exist') || 
+        errorMessage.includes('relation') ||
+        errorCode === '42P01' ||
+        errorMessage.includes('radar_technologies')
+      ) {
+        console.warn('[Radar] Tables not initialized yet, returning empty array. Error:', errorMessage);
+        return [];
+      }
+      
+      console.error('[Radar] Error fetching radar data:', error);
+      throw error;
+    }
   }),
 
   getHistory: publicProcedure
@@ -52,8 +79,10 @@ export const radarRouter = router({
     }))
     .query(async ({ input }) => {
       const db = await getDb();
-      if (!db) throw new Error("Database connection failed");
-      let query = db.select().from(radarPositions);
+      if (!db) return [];
+      
+      try {
+        let query = db.select().from(radarPositions);
       
       if (input.technologyId) {
         query = query.where(eq(radarPositions.technologyId, input.technologyId));
@@ -67,33 +96,51 @@ export const radarRouter = router({
         query = query.where(lte(radarPositions.date, input.endDate));
       }
       
-      return query.orderBy(desc(radarPositions.date));
+        return query.orderBy(desc(radarPositions.date));
+      } catch (error: any) {
+        const errorMessage = error?.message || '';
+        if (errorMessage.includes('does not exist') || errorMessage.includes('relation') || error?.code === '42P01') {
+          console.warn('[Radar] Tables not initialized yet, returning empty array');
+          return [];
+        }
+        throw error;
+      }
     }),
 
   getTechnology: publicProcedure
     .input(z.object({ slug: z.string() }))
     .query(async ({ input }) => {
       const db = await getDb();
-      if (!db) throw new Error("Database connection failed");
-      const tech = await db
-        .select()
-        .from(radarTechnologies)
-        .where(eq(radarTechnologies.slug, input.slug))
-        .limit(1);
+      if (!db) return null;
       
-      if (!tech[0]) return null;
-      
-      const latestPosition = await db
-        .select()
-        .from(radarPositions)
-        .where(eq(radarPositions.technologyId, tech[0].id))
-        .orderBy(desc(radarPositions.date))
-        .limit(1);
-      
-      return {
-        technology: tech[0],
-        position: latestPosition[0] || null,
-      };
+      try {
+        const tech = await db
+          .select()
+          .from(radarTechnologies)
+          .where(eq(radarTechnologies.slug, input.slug))
+          .limit(1);
+        
+        if (!tech[0]) return null;
+        
+        const latestPosition = await db
+          .select()
+          .from(radarPositions)
+          .where(eq(radarPositions.technologyId, tech[0].id))
+          .orderBy(desc(radarPositions.date))
+          .limit(1);
+        
+        return {
+          technology: tech[0],
+          position: latestPosition[0] || null,
+        };
+      } catch (error: any) {
+        const errorMessage = error?.message || '';
+        if (errorMessage.includes('does not exist') || errorMessage.includes('relation') || error?.code === '42P01') {
+          console.warn('[Radar] Tables not initialized yet, returning null');
+          return null;
+        }
+        throw error;
+      }
     }),
 
   // Generate daily refresh - should be called by cron job

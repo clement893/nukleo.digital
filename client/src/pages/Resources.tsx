@@ -52,14 +52,6 @@ export default function Resources() {
 
   const tools = [
     {
-      badge: t('resources.tools.aiReadiness.badge'),
-      title: t('resources.tools.aiReadiness.title'),
-      description: t('resources.tools.aiReadiness.description'),
-      tags: getArrayTranslation('resources.tools.aiReadiness.tags'),
-      link: getLocalizedPath('/ai-readiness'),
-      buttonText: t('resources.tools.aiReadiness.buttonText')
-    },
-    {
       badge: 'AI Trend Radar',
       title: 'AI Trend Radar',
       description: 'Visualisez l\'évolution des technologies IA selon leur maturité et leur impact business. Mise à jour quotidienne avec analyse générée par IA.',

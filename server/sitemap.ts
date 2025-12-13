@@ -20,7 +20,6 @@ router.get('/sitemap.xml', (req, res) => {
     { url: '/ai-readiness', priority: '0.7', changefreq: 'monthly' },
     { url: '/contact', priority: '0.6', changefreq: 'monthly' },
     { url: '/manifesto', priority: '0.7', changefreq: 'monthly' },
-    { url: '/faq', priority: '0.6', changefreq: 'monthly' },
     { url: '/services/ai-strategy-marketing', priority: '0.8', changefreq: 'monthly' },
     { url: '/services/digital-platforms', priority: '0.8', changefreq: 'monthly' },
     { url: '/services/intelligent-operations', priority: '0.8', changefreq: 'monthly' },

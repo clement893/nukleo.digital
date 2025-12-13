@@ -15,7 +15,6 @@ export default function Footer() {
     { label: t('nav.expertise'), href: '/expertise' },
     { label: t('footer.nav.clients'), href: '/clients' },
     { label: t('nav.resources'), href: '/resources' },
-    { label: t('footer.nav.faq'), href: '/faq' },
     { label: t('nav.contact'), href: '/contact' },
     { label: t('footer.nav.media'), href: '/media' },
     { label: t('footer.nav.agencies'), href: '/agencies' },

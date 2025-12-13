@@ -103,6 +103,7 @@ export const adminRouter = router({
     try {
       const db = await getDb();
       if (!db) {
+        console.error("[Admin] Database connection not available");
         throw new Error("Database not available");
       }
       
@@ -112,9 +113,13 @@ export const adminRouter = router({
         .from(startProjectSubmissions)
         .orderBy(desc(startProjectSubmissions.createdAt));
 
+      console.log(`[Admin] Fetched ${submissions.length} start project submissions`);
       return submissions;
-    } catch (error) {
+    } catch (error: any) {
       console.error("[Admin] Error fetching start project submissions:", error);
+      console.error("[Admin] Error message:", error?.message);
+      console.error("[Admin] Error code:", error?.code);
+      console.error("[Admin] Full error:", JSON.stringify(error, Object.getOwnPropertyNames(error), 2));
       return [];
     }
   }),

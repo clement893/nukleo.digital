@@ -35,10 +35,10 @@ export default function QuestionCard({ question, selectedOption, onSelectOption 
               key={index}
               onClick={() => handleOptionClick(option)}
               className={`
-                w-full text-left p-6 rounded-2xl border-2 transition-all duration-300
+                w-full text-left p-6 rounded-2xl border-2 transition-all duration-200 ease-out
                 ${isSelected 
-                  ? 'border-accent bg-accent/10 backdrop-blur-xl' 
-                  : 'border-white/10 bg-white/5 backdrop-blur-xl hover:border-white/30 hover:bg-white/10'
+                  ? 'border-accent bg-accent/10 backdrop-blur-xl scale-[1.02] shadow-lg shadow-accent/20' 
+                  : 'border-white/10 bg-white/5 backdrop-blur-xl hover:border-white/30 hover:bg-white/10 hover:scale-[1.01]'
                 }
               `}
             >

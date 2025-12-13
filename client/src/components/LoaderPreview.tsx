@@ -62,6 +62,20 @@ export default function LoaderPreview({
     };
   }, [cssCode, isOpen]);
 
+  // Handle ESC key
+  useEffect(() => {
+    if (!isOpen) return;
+    
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+    
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const htmlContent = cssCode.includes("<style>")

@@ -224,44 +224,44 @@ export default function FAQ() {
         keywords={currentContent.seoKeywords}
       />
       
-      <div className="min-h-screen bg-gradient-to-br from-violet-950 via-fuchsia-950 to-rose-950">
-        <div className="container mx-auto px-4 py-32 max-w-5xl">
-          <div className="text-center mb-16">
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
+      <div className="min-h-screen bg-[#0a0a0a]">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 max-w-5xl">
+          <div className="text-center mb-20">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
               {language === 'fr' ? (
                 <>
-                  Questions <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Fréquentes</span>
+                  Questions <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-purple-500">Fréquentes</span>
                 </>
               ) : (
                 <>
-                  Frequently Asked <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Questions</span>
+                  Frequently Asked <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-purple-500">Questions</span>
                 </>
               )}
             </h1>
-            <p className="text-white/70 text-lg max-w-2xl mx-auto">
+            <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
               {currentContent.subtitle}
             </p>
           </div>
 
-          <div className="space-y-12">
+          <div className="space-y-10 md:space-y-14">
             {faqs.map((category, categoryIndex) => (
-              <div key={categoryIndex} className="space-y-6">
-                <h2 className="text-2xl md:text-3xl font-bold text-white border-b border-white/20 pb-4">
+              <div key={categoryIndex} className="space-y-5">
+                <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white border-b border-gray-800 pb-3">
                   {category.category}
                 </h2>
                 
-                <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl overflow-hidden">
+                <div className="bg-[#111111] border border-gray-800 rounded-xl overflow-hidden shadow-xl">
                   <Accordion type="single" collapsible className="w-full">
                     {category.questions.map((faq, faqIndex) => (
                       <AccordionItem 
                         key={faqIndex} 
                         value={`item-${categoryIndex}-${faqIndex}`}
-                        className="border-white/10 px-6"
+                        className="border-b border-gray-800 last:border-b-0"
                       >
-                        <AccordionTrigger className="text-left text-white hover:text-cyan-400 py-6 text-lg font-semibold">
+                        <AccordionTrigger className="text-left text-gray-100 hover:text-cyan-400 py-5 px-6 md:px-8 text-base md:text-lg font-semibold transition-colors">
                           {faq.question}
                         </AccordionTrigger>
-                        <AccordionContent className="text-white/70 leading-relaxed pb-6">
+                        <AccordionContent className="text-gray-300 leading-relaxed pb-6 px-6 md:px-8 text-base md:text-lg">
                           {faq.answer}
                         </AccordionContent>
                       </AccordionItem>
@@ -272,16 +272,16 @@ export default function FAQ() {
             ))}
           </div>
 
-          <div className="mt-16 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8 text-center">
-            <h3 className="text-2xl font-bold text-white mb-4">
+          <div className="mt-20 bg-gradient-to-br from-[#111111] to-[#0a0a0a] border border-gray-800 rounded-xl p-8 md:p-12 text-center shadow-2xl">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
               {currentContent.ctaTitle}
             </h3>
-            <p className="text-white/70 mb-6">
+            <p className="text-gray-300 mb-8 text-lg">
               {currentContent.ctaText}
             </p>
             <a 
               href={getLocalizedPath('/contact')}
-              className="inline-block px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-semibold rounded-lg hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105"
+              className="inline-block px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-semibold rounded-lg hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-cyan-500/50"
             >
               {currentContent.ctaButton}
             </a>

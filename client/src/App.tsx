@@ -57,6 +57,7 @@ const AdminLEOContacts = lazy(() => import("./pages/admin/AdminLEOContacts"));
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const CreateFirstAdmin = lazy(() => import("./pages/CreateFirstAdmin"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
+const AdminLoaders = lazy(() => import("./pages/AdminLoaders"));
 const AdminHome = lazy(() => import("./pages/admin/AdminHome"));
 import { ProtectedAdminRoute } from "./components/ProtectedAdminRoute";
 
@@ -126,6 +127,9 @@ function App() {
             </Route>
             <Route path="/admin/dashboard">
               <ProtectedAdminRoute><AdminDashboard /></ProtectedAdminRoute>
+            </Route>
+            <Route path="/admin/loaders">
+              <ProtectedAdminRoute><AdminLoaders /></ProtectedAdminRoute>
             </Route>
             <Route path="/create-first-admin" component={CreateFirstAdmin} />
             <Route component={NotFound404} />

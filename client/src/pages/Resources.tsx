@@ -58,6 +58,14 @@ export default function Resources() {
       tags: ['Tendances IA', 'Technologies émergentes', 'Impact business', 'Maturité technologique'],
       link: getLocalizedPath('/ai-trend-radar'),
       buttonText: 'Explorer le Radar'
+    },
+    {
+      badge: 'AI Readiness Assessment',
+      title: 'AI Readiness Assessment',
+      description: 'Évaluez la maturité IA de votre organisation en 5 minutes. Obtenez un rapport détaillé avec des recommandations personnalisées pour votre roadmap IA.',
+      tags: ['Évaluation', 'Maturité IA', 'Roadmap', 'Recommandations'],
+      link: getLocalizedPath('/ai-readiness-assessment'),
+      buttonText: 'Commencer l\'Évaluation'
     }
   ];
 
@@ -174,7 +182,7 @@ export default function Resources() {
             </div>
 
             {/* Tools Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-8 max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
               {tools.map((tool, index) => (
                 <div key={index} className="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-10 md:p-12 flex flex-col">
                   {/* Badge */}

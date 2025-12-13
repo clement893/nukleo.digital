@@ -47,12 +47,13 @@ export default function PageLoader() {
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const prevLocationRef = useRef(location);
 
-  // Don't show loader in admin area or contact page
+  // Don't show loader in admin area, contact page, or manifesto page
   const isAdminArea = location.startsWith("/admin");
   const isContactPage = location === "/contact" || location === "/fr/contact" || location.startsWith("/contact/") || location.startsWith("/fr/contact/");
-  const shouldSkipLoader = isAdminArea || isContactPage;
+  const isManifestoPage = location === "/manifesto" || location === "/fr/manifesto" || location.startsWith("/manifesto/") || location.startsWith("/fr/manifesto/");
+  const shouldSkipLoader = isAdminArea || isContactPage || isManifestoPage;
 
-  // If in admin area or contact page, show body immediately and don't fetch loaders
+  // If in admin area, contact page, or manifesto page, show body immediately and don't fetch loaders
   useEffect(() => {
     if (shouldSkipLoader) {
       setIsLoading(false);
@@ -62,7 +63,7 @@ export default function PageLoader() {
     }
   }, [shouldSkipLoader]);
 
-  // Fetch active loaders (only if not in admin area or contact page)
+  // Fetch active loaders (only if not in admin area, contact page, or manifesto page)
   const { data: activeLoaders, isLoading: isLoadingLoaders } = trpc.loaders.getActive.useQuery(undefined, {
     staleTime: 5 * 60 * 1000, // Cache for 5 minutes
     refetchOnWindowFocus: false,
@@ -86,7 +87,7 @@ export default function PageLoader() {
       prevLocationRef.current = location;
     }
 
-    // Don't show loader in admin area or contact page - show body immediately
+    // Don't show loader in admin area, contact page, or manifesto page - show body immediately
     if (shouldSkipLoader) {
       setIsLoading(false);
       setIsFirstLoad(false);
@@ -247,7 +248,7 @@ export default function PageLoader() {
     };
   }, [activeLoaders, isLoadingLoaders, shouldSkipLoader, location, isFirstLoad]);
 
-  // Don't show loader in admin area or contact page
+  // Don't show loader in admin area, contact page, or manifesto page
   if (shouldSkipLoader) {
     return null;
   }

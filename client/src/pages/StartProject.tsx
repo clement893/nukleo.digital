@@ -1,6 +1,7 @@
 // StartProject.tsx
 import { useState } from 'react';
 import SEO from '@/components/SEO';
+import PageLayout from '@/components/PageLayout';
 import Breadcrumb from '@/components/Breadcrumb';
 import { Button } from '@/components/ui/button';
 import { trpc } from '@/lib/trpc';
@@ -62,7 +63,7 @@ export default function StartProject() {
   };
 
   return (
-    <>
+    <PageLayout>
       <SEO
         title="Start Your AI Project | Transform Your Business with AI"
         description="Ready to transform your business with AI? Start your project with Nukleo Digital. Expert guidance from strategy to implementation. Get a free consultation and custom AI roadmap."
@@ -248,6 +249,6 @@ export default function StartProject() {
         </div>
       </div>
     </div>
-    </>
+    </PageLayout>
   );
 }

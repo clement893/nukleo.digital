@@ -15,9 +15,9 @@ export default function NotFound404() {
     <div className="min-h-screen bg-gradient-to-br from-[rgb(60,15,15)] via-[rgb(40,60,120)] to-[rgb(60,15,15)] relative overflow-hidden">
       {/* Grain texture overlay */}
       <div 
-        className="fixed inset-0 opacity-50 mix-blend-overlay pointer-events-none z-10"
+        className="fixed inset-0 opacity-75 mix-blend-overlay pointer-events-none z-10"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='3.5' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
         }}
       />
 

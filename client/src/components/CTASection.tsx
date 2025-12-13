@@ -17,7 +17,7 @@ export default function CTASection() {
 
           <a href={getLocalizedPath('/start-project')}>
             <Button
-              className="rounded-full text-lg px-10 py-8 bg-white text-purple-900 hover:bg-white/90 transition-all duration-500 font-bold tracking-wider hover:scale-[1.022] shimmer"
+              className="rounded-full text-base px-8 py-6 bg-white text-purple-900 hover:bg-white/90 transition-all duration-500 font-bold tracking-wider hover:scale-[1.022] shimmer"
             >
               {t('cta.button')}
             </Button>

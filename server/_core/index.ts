@@ -21,7 +21,7 @@ import connectPgSimple from "connect-pg-simple";
 import passport from "passport";
 import { configureGoogleAuth, requireAdminAuth } from "./googleAuth";
 import { getDb } from "../db";
-import { sql } from "drizzle-orm";
+import postgres from "postgres";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -238,22 +238,24 @@ async function startServer() {
       
       // Initialize radar tables if they don't exist
       try {
-        const db = await getDb();
-        if (db) {
+        if (process.env.DATABASE_URL) {
+          const client = postgres(process.env.DATABASE_URL);
+          
           // Check if radar_technologies table exists
-          const tableCheck = await db.execute(sql`
+          const tableCheck = await client`
             SELECT EXISTS (
               SELECT FROM information_schema.tables 
               WHERE table_schema = 'public' 
               AND table_name = 'radar_technologies'
             );
-          `);
+          `;
           
-          const tableExists = tableCheck.rows[0]?.exists;
+          const tableExists = tableCheck[0]?.exists;
           if (!tableExists) {
             logger.info("Radar tables not found, creating them...");
-            // Create tables
-            await db.execute(sql`
+            
+            // Create tables using raw SQL
+            await client.unsafe(`
               CREATE TABLE IF NOT EXISTS radar_technologies (
                 id SERIAL PRIMARY KEY,
                 name VARCHAR(255) NOT NULL UNIQUE,
@@ -264,7 +266,7 @@ async function startServer() {
               );
             `);
             
-            await db.execute(sql`
+            await client.unsafe(`
               CREATE TABLE IF NOT EXISTS radar_positions (
                 id SERIAL PRIMARY KEY,
                 "technologyId" INTEGER NOT NULL REFERENCES radar_technologies(id) ON DELETE CASCADE,
@@ -284,12 +286,15 @@ async function startServer() {
               );
             `);
             
-            await db.execute(sql`
+            await client.unsafe(`
               CREATE INDEX IF NOT EXISTS idx_radar_positions_technology_date 
               ON radar_positions("technologyId", date DESC);
             `);
             
+            await client.end();
             logger.info("Radar tables created successfully");
+          } else {
+            await client.end();
           }
         }
       } catch (error) {

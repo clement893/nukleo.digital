@@ -10,10 +10,8 @@ export function usePageTransition() {
   const [location] = useLocation();
 
   useEffect(() => {
-    // Ensure body is visible during transition
-    if (!document.body.classList.contains('loaded')) {
-      document.body.classList.add('loaded');
-    }
+    // Ensure body is always visible - never hide it
+    document.body.classList.add('loaded');
     
     // Add animation trigger class
     document.body.classList.add('page-transitioning');
@@ -21,10 +19,10 @@ export function usePageTransition() {
     // Force reflow to restart animations
     void document.body.offsetHeight;
     
-    // Remove class after a short delay
+    // Remove class after animations complete
     const timer = setTimeout(() => {
       document.body.classList.remove('page-transitioning');
-    }, 100);
+    }, 300);
 
     return () => clearTimeout(timer);
   }, [location]);

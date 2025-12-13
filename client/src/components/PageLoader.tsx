@@ -152,8 +152,12 @@ export default function PageLoader() {
           setIsLoading(false);
           // Show body content immediately - hero should be visible without animations
           document.body.classList.add('loaded');
+          // Force hide loader after a brief moment to ensure it's gone
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 50);
         } else {
-          setTimeout(checkReady, 100);
+          setTimeout(checkReady, 50);
         }
       };
 
@@ -217,7 +221,7 @@ export default function PageLoader() {
       style={{
         opacity: isLoading ? 1 : 0,
         pointerEvents: isLoading ? "all" : "none",
-        transition: "opacity 0.5s ease-out",
+        transition: isLoading ? "opacity 0.3s ease-out" : "opacity 0.1s ease-in",
         visibility: isLoading ? "visible" : "hidden",
       }}
     >

@@ -335,5 +335,51 @@
       "title": "Contact Nukleo Digital | Start Your AI Transformation",
       "description": "Ready to transform with AI? Contact Nukleo Digital for expert consultation. Offices in Montréal & Halifax."
     }
+  },
+  "lab": {
+    "title": "The AI Lab",
+    "subtitle": "Technology Foundation",
+    "heroDescription": "We build the robust and flexible technological foundation that powers your AI transformation. From intelligent data platforms to custom AI agents, we create the infrastructure that makes AI-native operations possible.",
+    "mission": "Our Mission",
+    "missionText": "To build the technological backbone that enables your organization to operate as an <strong>AI-native company</strong>. We don't just implement tools we architect systems that learn, adapt, and scale with your ambitions.",
+    "capabilities": {
+      "title": "Core Capabilities",
+      "dataPlatforms": {
+        "title": "Intelligent Data Platforms",
+        "description": "Unifying and preparing your data ecosystem for AI. We build robust data architectures that serve as the foundation for intelligent systems, ensuring data quality, accessibility, and governance."
+      },
+      "customAgents": {
+        "title": "Custom AI Agent Development",
+        "description": "Creating autonomous agents tailored to your specific business needs. From customer service bots to intelligent process assistants, we develop AI agents that learn, adapt, and deliver value continuously."
+      },
+      "integration": {
+        "title": "Third-Party AI Integration",
+        "description": "Orchestrating the best AI models and services on the market. We integrate leading solutions from OpenAI, Anthropic, Mistral, and others to create a powerful AI stack customized for your operations."
+      },
+      "automation": {
+        "title": "Intelligent Process Automation (IPA)",
+        "description": "Moving beyond simple RPA with adaptive workflows. We implement intelligent automation that understands context, makes decisions, and continuously optimizes itself based on outcomes."
+      }
+    },
+    "approach": {
+      "title": "Our Approach",
+      "assess": {
+        "title": "Assess & Design",
+        "description": "We start by understanding your current infrastructure, data landscape, and business objectives. Then we design an AI architecture that aligns with your strategic goals."
+      },
+      "build": {
+        "title": "Build & Integrate",
+        "description": "We develop custom AI solutions and integrate best-in-class third-party services, creating a cohesive ecosystem that works seamlessly with your existing systems."
+      },
+      "optimize": {
+        "title": "Optimize & Scale",
+        "description": "We continuously monitor, refine, and enhance your AI infrastructure, ensuring it evolves with your needs and delivers measurable ROI at every stage."
+      }
+    },
+    "cta": {
+      "title": "Ready to Build Your AI Foundation?",
+      "description": "Let's discuss how The AI Lab can architect the technological infrastructure that powers your transformation.",
+      "button": "Start the Conversation"
+    }
   }
 }

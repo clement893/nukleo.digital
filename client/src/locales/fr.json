@@ -335,5 +335,51 @@
       "title": "Contactez Nukleo Digital | Démarrez votre Transformation IA",
       "description": "Prêt à transformer avec l'IA ? Contactez Nukleo Digital pour une consultation experte. Bureaux à Montréal & Halifax."
     }
+  },
+  "lab": {
+    "title": "The AI Lab",
+    "subtitle": "Technology Foundation",
+    "heroDescription": "Nous construisons la fondation technologique robuste et flexible qui alimente votre transformation IA. Des plateformes de données intelligentes aux agents IA sur mesure, nous créons l'infrastructure qui rend les opérations natives IA possibles.",
+    "mission": "Notre Mission",
+    "missionText": "Construire l'épine dorsale technologique qui permet à votre organisation d'opérer comme une <strong>entreprise native IA</strong>. Nous n'implémentons pas seulement des outils, nous architecturons des systèmes qui apprennent, s'adaptent et évoluent avec vos ambitions.",
+    "capabilities": {
+      "title": "Capacités Principales",
+      "dataPlatforms": {
+        "title": "Plateformes de Données Intelligentes",
+        "description": "Unification et préparation de votre écosystème de données pour l'IA. Nous construisons des architectures de données robustes qui servent de fondation pour les systèmes intelligents, garantissant la qualité, l'accessibilité et la gouvernance des données."
+      },
+      "customAgents": {
+        "title": "Développement d'Agents IA Sur Mesure",
+        "description": "Création d'agents autonomes adaptés à vos besoins commerciaux spécifiques. Des bots de service client aux assistants de processus intelligents, nous développons des agents IA qui apprennent, s'adaptent et génèrent de la valeur en continu."
+      },
+      "integration": {
+        "title": "Intégration d'IA Tiers",
+        "description": "Orchestration des meilleurs modèles et services IA du marché. Nous intégrons les solutions leaders d'OpenAI, Anthropic, Mistral et d'autres pour créer une pile IA puissante personnalisée pour vos opérations."
+      },
+      "automation": {
+        "title": "Automatisation Intelligente des Processus (IPA)",
+        "description": "Dépasser la RPA simple avec des flux de travail adaptatifs. Nous implémentons une automatisation intelligente qui comprend le contexte, prend des décisions et s'optimise continuellement en fonction des résultats."
+      }
+    },
+    "approach": {
+      "title": "Notre Approche",
+      "assess": {
+        "title": "Évaluer & Concevoir",
+        "description": "Nous commençons par comprendre votre infrastructure actuelle, votre paysage de données et vos objectifs commerciaux. Ensuite, nous concevons une architecture IA alignée avec vos objectifs stratégiques."
+      },
+      "build": {
+        "title": "Construire & Intégrer",
+        "description": "Nous développons des solutions IA sur mesure et intégrons les meilleurs services tiers, créant un écosystème cohérent qui fonctionne parfaitement avec vos systèmes existants."
+      },
+      "optimize": {
+        "title": "Optimiser & Mettre à l'Échelle",
+        "description": "Nous surveillons, affinons et améliorons continuellement votre infrastructure IA, garantissant qu'elle évolue avec vos besoins et génère un ROI mesurable à chaque étape."
+      }
+    },
+    "cta": {
+      "title": "Prêt à Construire votre Fondation IA ?",
+      "description": "Discutons de la façon dont The AI Lab peut architecturer l'infrastructure technologique qui alimente votre transformation.",
+      "button": "Commencer la Conversation"
+    }
   }
 }

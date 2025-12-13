@@ -2,36 +2,40 @@ import SEO from '../components/SEO';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Cpu, Database, Cog, Workflow } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 export default function Lab() {
+  const { t } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
   const capabilities = [
     {
       icon: Database,
-      title: 'Intelligent Data Platforms',
-      description: 'Unifying and preparing your data ecosystem for AI. We build robust data architectures that serve as the foundation for intelligent systems, ensuring data quality, accessibility, and governance.'
+      title: t('lab.capabilities.dataPlatforms.title'),
+      description: t('lab.capabilities.dataPlatforms.description')
     },
     {
       icon: Cpu,
-      title: 'Custom AI Agent Development',
-      description: 'Creating autonomous agents tailored to your specific business needs. From customer service bots to intelligent process assistants, we develop AI agents that learn, adapt, and deliver value continuously.'
+      title: t('lab.capabilities.customAgents.title'),
+      description: t('lab.capabilities.customAgents.description')
     },
     {
       icon: Cog,
-      title: 'Third-Party AI Integration',
-      description: 'Orchestrating the best AI models and services on the market. We integrate leading solutions from OpenAI, Anthropic, Mistral, and others to create a powerful AI stack customized for your operations.'
+      title: t('lab.capabilities.integration.title'),
+      description: t('lab.capabilities.integration.description')
     },
     {
       icon: Workflow,
-      title: 'Intelligent Process Automation (IPA)',
-      description: 'Moving beyond simple RPA with adaptive workflows. We implement intelligent automation that understands context, makes decisions, and continuously optimizes itself based on outcomes.'
+      title: t('lab.capabilities.automation.title'),
+      description: t('lab.capabilities.automation.description')
     }
   ];
 
   return (
     <>
       <SEO 
-        title="The AI Lab | Technology Foundation | Nukleo Digital"
-        description="Building robust and flexible technological foundations for AI integration. Custom AI agents, intelligent data platforms, and intelligent process automation."
+        title={t('lab.title') + ' | ' + t('lab.subtitle') + ' | Nukleo Digital'}
+        description={t('lab.heroDescription')}
         keywords="AI lab, AI development, custom AI agents, intelligent automation, AI infrastructure, data platforms"
       />
       
@@ -47,17 +51,15 @@ export default function Lab() {
               </div>
               
               <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-                The AI Lab
+                {t('lab.title')}
               </h1>
               
               <p className="text-2xl md:text-3xl text-accent font-medium mb-8">
-                Technology Foundation
+                {t('lab.subtitle')}
               </p>
               
               <p className="text-xl md:text-2xl text-white/70 leading-relaxed max-w-3xl">
-                We build the robust and flexible technological foundation that powers your AI transformation. 
-                From intelligent data platforms to custom AI agents, we create the infrastructure that makes 
-                AI-native operations possible.
+                {t('lab.heroDescription')}
               </p>
             </div>
           </div>
@@ -67,14 +69,10 @@ export default function Lab() {
         <section className="py-24 bg-white/5">
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
-              <h2 className="text-4xl md:text-5xl font-bold mb-12">Our Mission</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-12">{t('lab.mission')}</h2>
               
               <div className="p-12 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-sm">
-                <p className="text-2xl text-white/90 leading-relaxed">
-                  To build the technological backbone that enables your organization to operate as an 
-                  <span className="text-accent font-semibold"> AI-native company</span>. We don't just implement tools we 
-                  architect systems that learn, adapt, and scale with your ambitions.
-                </p>
+                <p className="text-2xl text-white/90 leading-relaxed" dangerouslySetInnerHTML={{ __html: t('lab.missionText') }} />
               </div>
             </div>
           </div>
@@ -84,7 +82,7 @@ export default function Lab() {
         <section className="py-24">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <h2 className="text-4xl md:text-5xl font-bold mb-16">Core Capabilities</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-16">{t('lab.capabilities.title')}</h2>
               
               <div className="grid md:grid-cols-2 gap-8">
                 {capabilities.map((capability, index) => {
@@ -112,7 +110,7 @@ export default function Lab() {
         <section className="py-24 bg-white/5">
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
-              <h2 className="text-4xl md:text-5xl font-bold mb-16">Our Approach</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-16">{t('lab.approach.title')}</h2>
               
               <div className="space-y-8">
                 <div className="flex gap-6">
@@ -120,10 +118,9 @@ export default function Lab() {
                     <span className="text-accent font-bold">01</span>
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold mb-3">Assess & Design</h3>
+                    <h3 className="text-2xl font-bold mb-3">{t('lab.approach.assess.title')}</h3>
                     <p className="text-white/70 leading-relaxed">
-                      We start by understanding your current infrastructure, data landscape, and business objectives. 
-                      Then we design an AI architecture that aligns with your strategic goals.
+                      {t('lab.approach.assess.description')}
                     </p>
                   </div>
                 </div>
@@ -133,10 +130,9 @@ export default function Lab() {
                     <span className="text-accent font-bold">02</span>
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold mb-3">Build & Integrate</h3>
+                    <h3 className="text-2xl font-bold mb-3">{t('lab.approach.build.title')}</h3>
                     <p className="text-white/70 leading-relaxed">
-                      We develop custom AI solutions and integrate best-in-class third-party services, 
-                      creating a cohesive ecosystem that works seamlessly with your existing systems.
+                      {t('lab.approach.build.description')}
                     </p>
                   </div>
                 </div>
@@ -146,10 +142,9 @@ export default function Lab() {
                     <span className="text-accent font-bold">03</span>
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold mb-3">Optimize & Scale</h3>
+                    <h3 className="text-2xl font-bold mb-3">{t('lab.approach.optimize.title')}</h3>
                     <p className="text-white/70 leading-relaxed">
-                      We continuously monitor, refine, and enhance your AI infrastructure, ensuring it evolves 
-                      with your needs and delivers measurable ROI at every stage.
+                      {t('lab.approach.optimize.description')}
                     </p>
                   </div>
                 </div>
@@ -165,17 +160,16 @@ export default function Lab() {
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-4xl md:text-6xl font-bold mb-8">
-                Ready to Build Your AI Foundation?
+                {t('lab.cta.title')}
               </h2>
               <p className="text-xl text-white/70 mb-12 leading-relaxed">
-                Let's discuss how The AI Lab can architect the technological infrastructure 
-                that powers your transformation.
+                {t('lab.cta.description')}
               </p>
               <a 
-                href="/contact" 
+                href={getLocalizedPath('/contact')} 
                 className="inline-block px-8 py-4 bg-white text-purple-950 font-bold rounded-full hover:bg-white/90 transition-all duration-300 hover:scale-[1.022]"
               >
-                Start the Conversation
+                {t('lab.cta.button')}
               </a>
             </div>
           </div>

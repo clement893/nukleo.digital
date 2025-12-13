@@ -87,14 +87,14 @@ export default function Expertise() {
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">
         <div className="container">
-          <Breadcrumb items={[{ name: 'Expertise', url: '/expertise' }]} />
+          <Breadcrumb items={[{ name: t('nav.expertise'), url: '/expertise' }]} />
           <span className="font-mono text-accent text-sm mb-8 block tracking-widest">
-            04 — Expertise
+            {t('expertise.sectionNumber')}
           </span>
 
           <h1 className="text-white mb-8">
-            Deep<br />
-            Expertise
+            {t('expertise.heroTitle')}<br />
+            {t('expertise.heroSubtitle')}
           </h1>
 
           <p className="text-white/75 text-lg lg:text-xl leading-relaxed max-w-3xl">

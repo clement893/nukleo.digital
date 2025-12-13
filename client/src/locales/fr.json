@@ -162,7 +162,9 @@
   },
   "expertise": {
     "title": "Expertise",
-    "sectionNumber": "04 — Expertise"
+    "sectionNumber": "04 — Expertise",
+    "heroTitle": "Expertise",
+    "heroSubtitle": "Approfondie"
   },
   "resources": {
     "title": "Ressources"

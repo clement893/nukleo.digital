@@ -334,9 +334,8 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
       emailCaptured: 1,
       capturedEmail: emailInput,
       conversationDuration,
-        completedAt: new Date(),
-      }),
-    }).catch(err => console.error('Failed to update session:', err));
+      completedAt: new Date(),
+    });
     
     // Save contact
     if (pageContext === 'agencies') {

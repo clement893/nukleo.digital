@@ -16,57 +16,44 @@ export default function LoaderFullscreenPreview({
   onClose,
 }: LoaderFullscreenPreviewProps) {
   const [progress, setProgress] = useState(0);
-  const [htmlContent, setHtmlContent] = useState<string>('');
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [iframeSrc, setIframeSrc] = useState<string>('');
   const LOADING_DURATION = 4000; // 4 secondes
 
-  // Extract and inject styles, then render HTML
+  // Prepare iframe content with full HTML document
   useEffect(() => {
     if (!isOpen) {
-      setHtmlContent('');
-      // Cleanup styles when preview closes
-      const styleToRemove = document.getElementById('loader-preview-styles');
-      if (styleToRemove) {
-        styleToRemove.remove();
-      }
+      setIframeSrc('');
       return;
     }
 
     if (!loaderType.includes('<div') && !loaderType.includes('<style>')) {
-      setHtmlContent('');
+      setIframeSrc('');
       return;
     }
 
-    // Extract styles and HTML
-    const styleMatch = loaderType.match(/<style>([\s\S]*?)<\/style>/);
-    const styles = styleMatch ? styleMatch[1] : '';
-    const htmlWithoutStyles = loaderType.replace(/<style>[\s\S]*?<\/style>/g, '').trim();
+    // Create a complete HTML document with the loader content
+    const fullHTML = `<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loader Preview</title>
+  ${loaderType.match(/<style>([\s\S]*?)<\/style>/)?.[1] ? `<style>${loaderType.match(/<style>([\s\S]*?)<\/style>/)?.[1]}</style>` : ''}
+</head>
+<body style="margin: 0; padding: 0; overflow: hidden; width: 100vw; height: 100vh;">
+  ${loaderType.replace(/<style>[\s\S]*?<\/style>/g, '')}
+</body>
+</html>`;
 
-    // Inject styles into document head first
-    if (styles) {
-      const styleId = 'loader-preview-styles';
-      const existingStyle = document.getElementById(styleId);
-      if (existingStyle) {
-        existingStyle.remove();
-      }
+    // Convert to data URL for iframe
+    const blob = new Blob([fullHTML], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    setIframeSrc(url);
 
-      const styleElement = document.createElement('style');
-      styleElement.id = styleId;
-      styleElement.textContent = styles;
-      document.head.appendChild(styleElement);
-    }
-
-    // Set HTML content after styles are injected
-    // Use setTimeout to ensure styles are applied before rendering
-    setTimeout(() => {
-      setHtmlContent(htmlWithoutStyles);
-    }, 100);
-
-    // Cleanup
+    // Cleanup blob URL when component unmounts or loader changes
     return () => {
-      const styleToRemove = document.getElementById('loader-preview-styles');
-      if (styleToRemove) {
-        styleToRemove.remove();
+      if (url) {
+        URL.revokeObjectURL(url);
       }
     };
   }, [loaderType, isOpen]);
@@ -110,9 +97,9 @@ export default function LoaderFullscreenPreview({
   if (!isOpen) return null;
 
   const renderLoader = () => {
-    // If loaderType contains HTML/CSS (starts with <div or contains <style>), render directly
+    // If loaderType contains HTML/CSS (starts with <div or contains <style>), use iframe
     if (loaderType.includes('<div') || loaderType.includes('<style>')) {
-      if (!htmlContent) {
+      if (!iframeSrc) {
         return (
           <div className="absolute inset-0 flex items-center justify-center bg-gray-900">
             <div className="text-white">Chargement du loader...</div>
@@ -121,18 +108,19 @@ export default function LoaderFullscreenPreview({
       }
 
       return (
-        <div 
-          ref={containerRef}
-          dangerouslySetInnerHTML={{ __html: htmlContent }}
-          className="absolute inset-0"
+        <iframe
+          src={iframeSrc}
+          className="absolute inset-0 w-full h-full border-0"
           style={{ 
             position: 'fixed',
             top: 0,
             left: 0,
             right: 0,
             bottom: 0,
-            zIndex: 9998
+            zIndex: 9998,
+            pointerEvents: 'none'
           }}
+          sandbox="allow-same-origin"
         />
       );
     }

@@ -43,7 +43,23 @@ export default function LoaderPreview({
 
       const styleElement = document.createElement("style");
       styleElement.id = "loader-preview-styles";
-      styleElement.textContent = cssStyles;
+      // Add CSS to fix logo in center and prevent it from moving in preview
+      styleElement.textContent = cssStyles + `
+        /* Fix logo in center for preview - prevent movement */
+        img[src*="Nukleo"], img[src*="nukleo"], img[alt*="Nukleo"], img[alt*="nukleo"],
+        svg[viewBox*="1451"], svg[viewBox*="1781"],
+        .logo, [class*="logo"], [id*="logo"] {
+          position: fixed !important;
+          top: 50% !important;
+          left: 50% !important;
+          transform: translate(-50%, -50%) !important;
+          z-index: 10001 !important;
+          pointer-events: none !important;
+          will-change: auto !important;
+          animation: none !important;
+          transition: none !important;
+        }
+      `;
       document.head.appendChild(styleElement);
     }
 
@@ -104,15 +120,16 @@ export default function LoaderPreview({
           />
         )}
         
-        {/* Close button */}
+        {/* Close button - Fixed position, always visible */}
         <Button
           variant="ghost"
           size="icon"
-          className="absolute top-4 right-4 z-50 text-white hover:bg-white/10 bg-black/50"
+          className="fixed top-4 right-4 z-[10002] text-white hover:bg-white/20 bg-black/70 backdrop-blur-sm border border-white/20 rounded-full w-12 h-12"
           onClick={(e) => {
             e.stopPropagation();
             onClose();
           }}
+          aria-label="Fermer la prévisualisation"
         >
           <X className="w-6 h-6" />
         </Button>

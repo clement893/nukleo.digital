@@ -16,11 +16,13 @@ export default function LoaderFullscreenPreview({
   onClose,
 }: LoaderFullscreenPreviewProps) {
   const [progress, setProgress] = useState(0);
+  const [stylesInjected, setStylesInjected] = useState(false);
   const LOADING_DURATION = 4000; // 4 secondes
 
   // Extract and inject styles when preview opens
   useEffect(() => {
     if (!isOpen) {
+      setStylesInjected(false);
       // Cleanup styles when preview closes
       const styleToRemove = document.getElementById('loader-preview-styles');
       if (styleToRemove) {
@@ -29,10 +31,16 @@ export default function LoaderFullscreenPreview({
       return;
     }
 
-    if (!loaderType.includes('<style>')) return;
+    if (!loaderType.includes('<style>')) {
+      setStylesInjected(true);
+      return;
+    }
 
     const styleMatch = loaderType.match(/<style>([\s\S]*?)<\/style>/);
-    if (!styleMatch) return;
+    if (!styleMatch) {
+      setStylesInjected(true);
+      return;
+    }
 
     const styles = styleMatch[1];
     const styleId = 'loader-preview-styles';
@@ -43,13 +51,16 @@ export default function LoaderFullscreenPreview({
       existingStyle.remove();
     }
 
-    // Inject styles into document head - use requestAnimationFrame to ensure DOM is ready
-    requestAnimationFrame(() => {
-      const styleElement = document.createElement('style');
-      styleElement.id = styleId;
-      styleElement.textContent = styles;
-      document.head.appendChild(styleElement);
-    });
+    // Inject styles into document head immediately
+    const styleElement = document.createElement('style');
+    styleElement.id = styleId;
+    styleElement.textContent = styles;
+    document.head.appendChild(styleElement);
+    
+    // Force a small delay to ensure styles are applied before rendering HTML
+    setTimeout(() => {
+      setStylesInjected(true);
+    }, 50);
 
     // Cleanup on unmount or when preview closes
     return () => {
@@ -57,6 +68,7 @@ export default function LoaderFullscreenPreview({
       if (styleToRemove) {
         styleToRemove.remove();
       }
+      setStylesInjected(false);
     };
   }, [loaderType, isOpen]);
 
@@ -101,11 +113,21 @@ export default function LoaderFullscreenPreview({
   const renderLoader = () => {
     // If loaderType contains HTML/CSS (starts with <div or contains <style>), render it directly
     if (loaderType.includes('<div') || loaderType.includes('<style>')) {
+      // Wait for styles to be injected before rendering HTML
+      if (!stylesInjected && loaderType.includes('<style>')) {
+        return (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-white">Chargement...</div>
+          </div>
+        );
+      }
+
       // Remove <style> tags from HTML (styles are injected via useEffect into document head)
       const htmlWithoutStyles = loaderType.replace(/<style>[\s\S]*?<\/style>/g, '').trim();
       
       return (
         <div 
+          key={`loader-${loaderName}-${stylesInjected}`}
           dangerouslySetInnerHTML={{ __html: htmlWithoutStyles }}
           className="absolute inset-0"
           style={{ 

@@ -18,9 +18,18 @@ export default function LoaderFullscreenPreview({
   const [progress, setProgress] = useState(0);
   const LOADING_DURATION = 4000; // 4 secondes
 
-  // Extract and inject styles when loaderType changes
+  // Extract and inject styles when preview opens
   useEffect(() => {
-    if (!isOpen || !loaderType.includes('<style>')) return;
+    if (!isOpen) {
+      // Cleanup styles when preview closes
+      const styleToRemove = document.getElementById('loader-preview-styles');
+      if (styleToRemove) {
+        styleToRemove.remove();
+      }
+      return;
+    }
+
+    if (!loaderType.includes('<style>')) return;
 
     const styleMatch = loaderType.match(/<style>([\s\S]*?)<\/style>/);
     if (!styleMatch) return;
@@ -34,13 +43,15 @@ export default function LoaderFullscreenPreview({
       existingStyle.remove();
     }
 
-    // Inject styles into document head with scoped selectors
-    const styleElement = document.createElement('style');
-    styleElement.id = styleId;
-    styleElement.textContent = styles;
-    document.head.appendChild(styleElement);
+    // Inject styles into document head - use requestAnimationFrame to ensure DOM is ready
+    requestAnimationFrame(() => {
+      const styleElement = document.createElement('style');
+      styleElement.id = styleId;
+      styleElement.textContent = styles;
+      document.head.appendChild(styleElement);
+    });
 
-    // Cleanup on unmount or when loaderType changes
+    // Cleanup on unmount or when preview closes
     return () => {
       const styleToRemove = document.getElementById(styleId);
       if (styleToRemove) {
@@ -90,30 +101,20 @@ export default function LoaderFullscreenPreview({
   const renderLoader = () => {
     // If loaderType contains HTML/CSS (starts with <div or contains <style>), render it directly
     if (loaderType.includes('<div') || loaderType.includes('<style>')) {
-      // Use iframe to properly isolate and render the loader with its styles
-      const fullHTML = `<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  ${loaderType.match(/<style>([\s\S]*?)<\/style>/)?.[1] ? `<style>${loaderType.match(/<style>([\s\S]*?)<\/style>/)?.[1]}</style>` : ''}
-</head>
-<body style="margin: 0; padding: 0; overflow: hidden;">
-  ${loaderType.replace(/<style>[\s\S]*?<\/style>/g, '')}
-</body>
-</html>`;
-      
-      const blob = new Blob([fullHTML], { type: 'text/html' });
-      const url = URL.createObjectURL(blob);
+      // Remove <style> tags from HTML (styles are injected via useEffect into document head)
+      const htmlWithoutStyles = loaderType.replace(/<style>[\s\S]*?<\/style>/g, '').trim();
       
       return (
-        <iframe
-          src={url}
-          className="absolute inset-0 w-full h-full border-0"
-          style={{ pointerEvents: 'none' }}
-          onLoad={() => {
-            // Cleanup blob URL after a delay
-            setTimeout(() => URL.revokeObjectURL(url), 1000);
+        <div 
+          dangerouslySetInnerHTML={{ __html: htmlWithoutStyles }}
+          className="absolute inset-0"
+          style={{ 
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 9998
           }}
         />
       );

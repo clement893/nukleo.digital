@@ -127,7 +127,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
 
   const storageKey = `leo-${pageContext}-interacted`;
 
-  // Auto-open after 10 seconds if not interacted
+  // Auto-open disabled - Leo will only open when user clicks the button
   useEffect(() => {
     const hasSeenBefore = localStorage.getItem(storageKey);
     if (hasSeenBefore) {
@@ -135,18 +135,19 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
       return;
     }
 
-    const timer = setTimeout(() => {
-      if (!hasInteracted) {
-        setIsOpen(true);
-        // Add welcome message
-        setMessages([{
-          role: 'assistant',
-          content: welcomeMessages[pageContext],
-        }]);
-      }
-    }, 10000);
+    // Auto-open functionality disabled
+    // const timer = setTimeout(() => {
+    //   if (!hasInteracted) {
+    //     setIsOpen(true);
+    //     // Add welcome message
+    //     setMessages([{
+    //       role: 'assistant',
+    //       content: welcomeMessages[pageContext],
+    //     }]);
+    //   }
+    // }, 10000);
 
-    return () => clearTimeout(timer);
+    // return () => clearTimeout(timer);
   }, [hasInteracted, pageContext, storageKey]);
 
   // Scroll to bottom when new messages arrive

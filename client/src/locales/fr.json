@@ -208,10 +208,89 @@
     "button": "Démarrer votre transformation"
   },
   "testimonials": {
+    "seoTitle": "Témoignages clients | Nukleo Digital",
+    "seoDescription": "Lisez ce que nos clients disent de leur collaboration avec Nukleo. Fait confiance par des startups, PME et entreprises pour la transformation IA et l'innovation numérique.",
+    "seoKeywords": "témoignages clients, avis, études de cas, histoires de succès clients, transformation IA",
     "sectionLabel": "Histoires de succès clients",
     "title": "Ce que disent nos clients",
     "description": "Fait confiance par des organisations du monde entier pour offrir des résultats exceptionnels de transformation IA",
-    "seeAll": "Voir tous les témoignages clients"
+    "seeAll": "Voir tous les témoignages clients",
+    "page": {
+      "badge": "Histoires clients",
+      "title": "Fait confiance par des organisations",
+      "subtitle": "du monde entier",
+      "description": "Des startups aux entreprises établies, nos clients nous font confiance pour offrir des résultats exceptionnels. Voici ce qu'ils disent de leur collaboration avec Nukleo.",
+      "cta": {
+        "title": "Prêt à les rejoindre ?",
+        "description": "Créons quelque chose d'exceptionnel ensemble. Démarrez votre parcours de transformation IA avec Nukleo.",
+        "button": "Démarrer votre projet"
+      }
+    }
+  },
+  "media": {
+    "seoTitle": "Médias & presse | Dernières actualités et ressources",
+    "seoDescription": "Accédez aux derniers communiqués de presse, kit média et actualités de Nukleo Digital. Téléchargez logos, guides de marque et contactez notre équipe presse.",
+    "seoKeywords": "presse Nukleo, kit média, communiqués de presse, actualités entreprise, actifs de marque",
+    "badge": "Presse & Médias",
+    "title": "Centre",
+    "titleHighlight": "Médias",
+    "description": "Dernières actualités, communiqués de presse et ressources médias de Nukleo Digital. Pour les demandes de presse, contactez-nous à",
+    "pressReleases": {
+      "title": "Derniers communiqués de presse",
+      "categories": {
+        "productLaunch": "Lancement produit",
+        "partnership": "Partenariat",
+        "companyNews": "Actualités entreprise"
+      },
+      "items": {
+        "smbServices": {
+          "title": "Nukleo Digital lance des services de transformation IA pour les PME",
+          "excerpt": "Nouvelle suite de solutions alimentées par l'IA conçues pour aider les petites et moyennes entreprises à rivaliser à l'ère numérique.",
+          "date": "2024-12-01"
+        },
+        "partnership": {
+          "title": "Annonce de partenariat : Nukleo & entreprises technologiques leaders",
+          "excerpt": "Partenariats stratégiques pour offrir des solutions IA de pointe dans plusieurs industries.",
+          "date": "2024-11-15"
+        },
+        "expansion": {
+          "title": "Nukleo Digital étend sa pratique de conseil IA",
+          "excerpt": "Équipe croissante d'experts IA pour répondre à la demande croissante de solutions d'automatisation intelligente.",
+          "date": "2024-10-20"
+        }
+      }
+    },
+    "mediaKit": {
+      "title": "Kit média",
+      "description": "Téléchargez nos actifs de marque, logos et informations sur l'entreprise pour la couverture médiatique.",
+      "items": {
+        "logo": {
+          "name": "Logo entreprise (PNG)",
+          "size": "2.4 MB",
+          "type": "Image"
+        },
+        "guidelines": {
+          "name": "Guide de marque",
+          "size": "1.8 MB",
+          "type": "PDF"
+        },
+        "bios": {
+          "name": "Biographies dirigeants",
+          "size": "450 KB",
+          "type": "PDF"
+        },
+        "screenshots": {
+          "name": "Captures d'écran produits",
+          "size": "5.2 MB",
+          "type": "ZIP"
+        }
+      }
+    },
+    "contact": {
+      "title": "Demandes de presse",
+      "description": "Pour les demandes médiatiques, interviews ou informations supplémentaires, veuillez contacter notre équipe presse.",
+      "button": "Contacter l'équipe presse"
+    }
   },
   "whoWeServe": {
     "subtitle": "Champions des petites organisations",

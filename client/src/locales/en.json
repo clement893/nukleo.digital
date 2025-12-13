@@ -208,10 +208,89 @@
     "button": "Start Your Transformation"
   },
   "testimonials": {
+    "seoTitle": "Client Testimonials | Nukleo Digital",
+    "seoDescription": "Read what our clients say about working with Nukleo. Trusted by startups, SMBs, and enterprises for AI transformation and digital innovation.",
+    "seoKeywords": "client testimonials, reviews, case studies, client success stories, AI transformation",
     "sectionLabel": "Client Success Stories",
     "title": "What Our Clients Say",
     "description": "Trusted by organizations worldwide to deliver exceptional AI transformation results",
-    "seeAll": "See all client testimonials"
+    "seeAll": "See all client testimonials",
+    "page": {
+      "badge": "CLIENT STORIES",
+      "title": "Trusted by Organizations",
+      "subtitle": "Around the World",
+      "description": "From startups to established enterprises, our clients trust us to deliver exceptional results. Here's what they have to say about working with Nukleo.",
+      "cta": {
+        "title": "Ready to Join Them?",
+        "description": "Let's build something exceptional together. Start your AI transformation journey with Nukleo.",
+        "button": "Start Your Project"
+      }
+    }
+  },
+  "media": {
+    "seoTitle": "Media & Press | Latest News and Resources",
+    "seoDescription": "Access Nukleo Digital's latest press releases, media kit, and company news. Download logos, brand guidelines, and connect with our press team.",
+    "seoKeywords": "Nukleo press, media kit, press releases, company news, brand assets",
+    "badge": "Press & Media",
+    "title": "Media",
+    "titleHighlight": "Center",
+    "description": "Latest news, press releases, and media resources from Nukleo Digital. For press inquiries, contact us at",
+    "pressReleases": {
+      "title": "Latest Press Releases",
+      "categories": {
+        "productLaunch": "Product Launch",
+        "partnership": "Partnership",
+        "companyNews": "Company News"
+      },
+      "items": {
+        "smbServices": {
+          "title": "Nukleo Digital Launches AI Transformation Services for SMBs",
+          "excerpt": "New suite of AI-powered solutions designed to help small and medium businesses compete in the digital age.",
+          "date": "2024-12-01"
+        },
+        "partnership": {
+          "title": "Partnership Announcement: Nukleo & Leading Tech Firms",
+          "excerpt": "Strategic partnerships to deliver cutting-edge AI solutions across multiple industries.",
+          "date": "2024-11-15"
+        },
+        "expansion": {
+          "title": "Nukleo Digital Expands AI Consulting Practice",
+          "excerpt": "Growing team of AI experts to meet increasing demand for intelligent automation solutions.",
+          "date": "2024-10-20"
+        }
+      }
+    },
+    "mediaKit": {
+      "title": "Media Kit",
+      "description": "Download our brand assets, logos, and company information for media coverage.",
+      "items": {
+        "logo": {
+          "name": "Company Logo (PNG)",
+          "size": "2.4 MB",
+          "type": "Image"
+        },
+        "guidelines": {
+          "name": "Brand Guidelines",
+          "size": "1.8 MB",
+          "type": "PDF"
+        },
+        "bios": {
+          "name": "Executive Bios",
+          "size": "450 KB",
+          "type": "PDF"
+        },
+        "screenshots": {
+          "name": "Product Screenshots",
+          "size": "5.2 MB",
+          "type": "ZIP"
+        }
+      }
+    },
+    "contact": {
+      "title": "Press Inquiries",
+      "description": "For media inquiries, interviews, or additional information, please contact our press team.",
+      "button": "Contact Press Team"
+    }
   },
   "whoWeServe": {
     "subtitle": "Champions of Smaller Organizations",

@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { Link } from 'wouter';
 import Header from '@/components/Header';
@@ -22,13 +22,27 @@ export default function FAQ() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const { playHover, playClick } = useSound();
+  const [translations, setTranslations] = useState<any>(null);
+
+  // Load translations
+  useEffect(() => {
+    import(`../locales/${language || 'en'}.json`)
+      .then((module) => {
+        setTranslations(module.default);
+      })
+      .catch(() => {
+        import('../locales/en.json')
+          .then((module) => setTranslations(module.default))
+          .catch(() => setTranslations({}));
+      });
+  }, [language]);
 
   // Helper to get array/object from translations
   const getTranslationArray = (key: string): any[] => {
+    if (!translations) return [];
     try {
-      const translations = require(`../locales/${language || 'en'}.json`);
       const keys = key.split('.');
-      let value: any = translations.default || translations;
+      let value: any = translations;
       for (const k of keys) {
         if (value && typeof value === 'object' && k in value) {
           value = value[k];
@@ -46,91 +60,130 @@ export default function FAQ() {
   const faqs: FAQItem[] = useMemo(() => {
     const allFaqs: FAQItem[] = [];
     
-    // Agentic AI
-    const agenticAI = getTranslationArray('faq.questions.agenticAI');
-    agenticAI.forEach((item: any) => {
-      allFaqs.push({
-        question: item.question,
-        answer: item.answer,
-        category: t('faq.categories.agenticAI'),
-        categoryKey: 'agenticAI'
-      });
-    });
+    try {
+      // Agentic AI
+      const agenticAI = getTranslationArray('faq.questions.agenticAI');
+      if (Array.isArray(agenticAI)) {
+        agenticAI.forEach((item: any) => {
+          if (item && typeof item === 'object' && item.question && item.answer) {
+            allFaqs.push({
+              question: String(item.question),
+              answer: String(item.answer),
+              category: String(t('faq.categories.agenticAI') || 'Agentic AI'),
+              categoryKey: 'agenticAI'
+            });
+          }
+        });
+      }
 
-    // Transformation
-    const transformation = getTranslationArray('faq.questions.transformation');
-    transformation.forEach((item: any) => {
-      allFaqs.push({
-        question: item.question,
-        answer: item.answer,
-        category: t('faq.categories.transformation'),
-        categoryKey: 'transformation'
-      });
-    });
+      // Transformation
+      const transformation = getTranslationArray('faq.questions.transformation');
+      if (Array.isArray(transformation)) {
+        transformation.forEach((item: any) => {
+          if (item && typeof item === 'object' && item.question && item.answer) {
+            allFaqs.push({
+              question: String(item.question),
+              answer: String(item.answer),
+              category: String(t('faq.categories.transformation') || 'Transformation'),
+              categoryKey: 'transformation'
+            });
+          }
+        });
+      }
 
-    // ROI
-    const roi = getTranslationArray('faq.questions.roi');
-    roi.forEach((item: any) => {
-      allFaqs.push({
-        question: item.question,
-        answer: item.answer,
-        category: t('faq.categories.roi'),
-        categoryKey: 'roi'
-      });
-    });
+      // ROI
+      const roi = getTranslationArray('faq.questions.roi');
+      if (Array.isArray(roi)) {
+        roi.forEach((item: any) => {
+          if (item && typeof item === 'object' && item.question && item.answer) {
+            allFaqs.push({
+              question: String(item.question),
+              answer: String(item.answer),
+              category: String(t('faq.categories.roi') || 'ROI'),
+              categoryKey: 'roi'
+            });
+          }
+        });
+      }
 
-    // Technical
-    const technical = getTranslationArray('faq.questions.technical');
-    technical.forEach((item: any) => {
-      allFaqs.push({
-        question: item.question,
-        answer: item.answer,
-        category: t('faq.categories.technical'),
-        categoryKey: 'technical'
-      });
-    });
+      // Technical
+      const technical = getTranslationArray('faq.questions.technical');
+      if (Array.isArray(technical)) {
+        technical.forEach((item: any) => {
+          if (item && typeof item === 'object' && item.question && item.answer) {
+            allFaqs.push({
+              question: String(item.question),
+              answer: String(item.answer),
+              category: String(t('faq.categories.technical') || 'Technical'),
+              categoryKey: 'technical'
+            });
+          }
+        });
+      }
 
-    // Use Cases
-    const useCases = getTranslationArray('faq.questions.useCases');
-    useCases.forEach((item: any) => {
-      allFaqs.push({
-        question: item.question,
-        answer: item.answer,
-        category: t('faq.categories.useCases'),
-        categoryKey: 'useCases'
-      });
-    });
+      // Use Cases
+      const useCases = getTranslationArray('faq.questions.useCases');
+      if (Array.isArray(useCases)) {
+        useCases.forEach((item: any) => {
+          if (item && typeof item === 'object' && item.question && item.answer) {
+            allFaqs.push({
+              question: String(item.question),
+              answer: String(item.answer),
+              category: String(t('faq.categories.useCases') || 'Use Cases'),
+              categoryKey: 'useCases'
+            });
+          }
+        });
+      }
 
-    // About Nukleo
-    const aboutNukleo = getTranslationArray('faq.questions.aboutNukleo');
-    aboutNukleo.forEach((item: any) => {
-      allFaqs.push({
-        question: item.question,
-        answer: item.answer,
-        category: t('faq.categories.aboutNukleo'),
-        categoryKey: 'aboutNukleo'
-      });
-    });
+      // About Nukleo
+      const aboutNukleo = getTranslationArray('faq.questions.aboutNukleo');
+      if (Array.isArray(aboutNukleo)) {
+        aboutNukleo.forEach((item: any) => {
+          if (item && typeof item === 'object' && item.question && item.answer) {
+            allFaqs.push({
+              question: String(item.question),
+              answer: String(item.answer),
+              category: String(t('faq.categories.aboutNukleo') || 'About Nukleo'),
+              categoryKey: 'aboutNukleo'
+            });
+          }
+        });
+      }
+    } catch (error) {
+      console.error('Error building FAQs:', error);
+    }
 
     return allFaqs;
-  }, [t, language]);
+  }, [t, language, translations]);
 
-  const categories = [
-    { key: "all", label: t('faq.categories.all') },
-    { key: "agenticAI", label: t('faq.categories.agenticAI') },
-    { key: "transformation", label: t('faq.categories.transformation') },
-    { key: "roi", label: t('faq.categories.roi') },
-    { key: "technical", label: t('faq.categories.technical') },
-    { key: "useCases", label: t('faq.categories.useCases') },
-    { key: "aboutNukleo", label: t('faq.categories.aboutNukleo') }
-  ];
+  const categories = useMemo(() => [
+    { key: "all", label: String(t('faq.categories.all') || 'All') },
+    { key: "agenticAI", label: String(t('faq.categories.agenticAI') || 'Agentic AI') },
+    { key: "transformation", label: String(t('faq.categories.transformation') || 'Transformation') },
+    { key: "roi", label: String(t('faq.categories.roi') || 'ROI') },
+    { key: "technical", label: String(t('faq.categories.technical') || 'Technical') },
+    { key: "useCases", label: String(t('faq.categories.useCases') || 'Use Cases') },
+    { key: "aboutNukleo", label: String(t('faq.categories.aboutNukleo') || 'About Nukleo') }
+  ], [t]);
 
   const filteredFaqs = selectedCategory === "all" 
     ? faqs 
     : faqs.filter(faq => faq.categoryKey === selectedCategory);
 
   // Build structured data
-  const structuredDataFaqs = faqs.map(faq => ({ question: faq.question, answer: faq.answer }));
+  const structuredDataFaqs = useMemo(() => {
+    return faqs.map(faq => ({ question: String(faq.question), answer: String(faq.answer) }));
+  }, [faqs]);
+
+  // Don't render until translations are loaded
+  if (!translations || faqs.length === 0) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-[#1a0b2e] via-[#2d1b4e] to-[#1a0b2e] flex items-center justify-center">
+        <div className="text-white">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#1a0b2e] via-[#2d1b4e] to-[#1a0b2e]">
@@ -149,7 +202,7 @@ export default function FAQ() {
             {t('faq.sectionLabel')}
           </span>
 
-          <h1 className="text-5xl lg:text-6xl font-bold text-white mb-8" dangerouslySetInnerHTML={{ __html: t('faq.title') }} />
+          <h1 className="text-5xl lg:text-6xl font-bold text-white mb-8" dangerouslySetInnerHTML={{ __html: String(t('faq.title') || 'FAQ') }} />
 
           <p className="text-white/75 text-lg lg:text-xl leading-relaxed max-w-3xl">
             {t('faq.description')}

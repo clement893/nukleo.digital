@@ -2,27 +2,37 @@ import { AssessmentResults } from './scoring';
 import { getRecommendationsForLevel } from './recommendations';
 import { EmailCaptureData } from '@/components/assessment/EmailCaptureModal';
 
-// Lazy load jsPDF only when needed - try npm package first, then CDN fallback
+// Lazy load jsPDF only when needed - use string-based dynamic import to avoid Vite resolution
 async function loadJsPDF() {
+  // Check if already loaded globally (from CDN)
+  if (typeof window !== 'undefined' && (window as any).jspdf) {
+    return (window as any).jspdf.jsPDF;
+  }
+  
   try {
-    // Try to import from node_modules
-    const module = await import('jspdf');
-    return module.default || module;
+    // Try to import from node_modules using Function constructor to avoid static analysis
+    const importFunc = new Function('specifier', 'return import(specifier)');
+    const module = await importFunc('jspdf');
+    return module.default || module.jsPDF || module;
   } catch (npmError) {
     try {
       // Fallback: load from CDN
       console.log('Loading jsPDF from CDN...');
-      await new Promise((resolve, reject) => {
+      await new Promise<void>((resolve, reject) => {
+        if ((window as any).jspdf) {
+          resolve();
+          return;
+        }
         const script = document.createElement('script');
         script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js';
-        script.onload = resolve;
-        script.onerror = reject;
+        script.onload = () => resolve();
+        script.onerror = () => reject(new Error('Failed to load jsPDF from CDN'));
         document.head.appendChild(script);
       });
       // @ts-ignore - jsPDF loaded from CDN
-      return window.jspdf || (window as any).jspdf;
+      return (window as any).jspdf.jsPDF;
     } catch (cdnError) {
-      console.warn('Failed to load jsPDF from both npm and CDN:', { npmError, cdnError });
+      console.warn('Failed to load jsPDF:', { npmError, cdnError });
       return null;
     }
   }

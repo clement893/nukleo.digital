@@ -7,7 +7,9 @@ import {
   leoContacts, 
   mediaAssets, 
   users,
-  aiNewsSubscribers
+  aiNewsSubscribers,
+  startProjectSubmissions,
+  contactMessages
 } from "../../drizzle/schema";
 import { count, desc } from "drizzle-orm";
 
@@ -93,6 +95,46 @@ export const adminRouter = router({
       return subscribers;
     } catch (error) {
       console.error("[Admin] Error fetching AI News subscribers:", error);
+      return [];
+    }
+  }),
+
+  getStartProjectSubmissions: publicProcedure.query(async () => {
+    try {
+      const db = await getDb();
+      if (!db) {
+        throw new Error("Database not available");
+      }
+      
+      // Get all start project submissions ordered by creation date (newest first)
+      const submissions = await db
+        .select()
+        .from(startProjectSubmissions)
+        .orderBy(desc(startProjectSubmissions.createdAt));
+
+      return submissions;
+    } catch (error) {
+      console.error("[Admin] Error fetching start project submissions:", error);
+      return [];
+    }
+  }),
+
+  getContactMessages: publicProcedure.query(async () => {
+    try {
+      const db = await getDb();
+      if (!db) {
+        throw new Error("Database not available");
+      }
+      
+      // Get all contact messages ordered by creation date (newest first)
+      const messages = await db
+        .select()
+        .from(contactMessages)
+        .orderBy(desc(contactMessages.createdAt));
+
+      return messages;
+    } catch (error) {
+      console.error("[Admin] Error fetching contact messages:", error);
       return [];
     }
   }),

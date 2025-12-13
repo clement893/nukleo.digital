@@ -95,6 +95,18 @@ export default function AdminHome() {
       icon: <Volume2 className="w-6 h-6 text-primary" />,
       href: "/admin/sounds",
     },
+    {
+      title: "Start Project Submissions",
+      description: "Gérer les demandes de projets soumises via Start Project",
+      icon: <Building2 className="w-6 h-6 text-primary" />,
+      href: "/admin/start-project-submissions",
+    },
+    {
+      title: "Contact Messages",
+      description: "Gérer les messages reçus via le formulaire de contact",
+      icon: <MessageSquare className="w-6 h-6 text-primary" />,
+      href: "/admin/contact-messages",
+    },
   ];
 
   return (

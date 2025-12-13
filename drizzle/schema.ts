@@ -1,4 +1,4 @@
-import { boolean, integer, pgEnum, pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
+import { boolean, integer, pgEnum, pgTable, serial, text, timestamp, varchar } from "drizzle-orm/pg-core";
 
 /**
  * Core user table backing auth flow.
@@ -222,12 +222,42 @@ export type InsertRadarPosition = typeof radarPositions.$inferInsert;
 
 // AI News Newsletter Subscribers table
 export const aiNewsSubscribers = pgTable("ai_news_subscribers", {
-  id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
+  id: serial("id").primaryKey(),
   email: varchar("email", { length: 320 }).notNull().unique(),
   source: varchar("source", { length: 100 }).default("ai-trend-radar").notNull(), // Track where subscription came from
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
+export const startProjectSubmissions = pgTable("start_project_submissions", {
+  id: serial("id").primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  email: varchar("email", { length: 320 }).notNull(),
+  company: varchar("company", { length: 255 }).notNull(),
+  projectType: varchar("projectType", { length: 100 }).notNull(),
+  budget: varchar("budget", { length: 50 }).notNull(),
+  description: text("description").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+});
+
+export type StartProjectSubmission = typeof startProjectSubmissions.$inferSelect;
+export type InsertStartProjectSubmission = typeof startProjectSubmissions.$inferInsert;
+
 export type AINewsSubscriber = typeof aiNewsSubscribers.$inferSelect;
 export type InsertAINewsSubscriber = typeof aiNewsSubscribers.$inferInsert;
+
+// Contact Messages table
+export const contactMessages = pgTable("contact_messages", {
+  id: serial("id").primaryKey(),
+  firstName: varchar("firstName", { length: 255 }).notNull(),
+  lastName: varchar("lastName", { length: 255 }).notNull(),
+  email: varchar("email", { length: 320 }).notNull(),
+  company: varchar("company", { length: 255 }).notNull(),
+  message: text("message").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+});
+
+export type ContactMessage = typeof contactMessages.$inferSelect;
+export type InsertContactMessage = typeof contactMessages.$inferInsert;

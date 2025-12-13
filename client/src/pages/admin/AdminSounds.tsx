@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Volume2, VolumeX, Play, Save, RotateCcw } from 'lucide-react';
 import { useSound } from '@/hooks/useSound';
+import { cn } from '@/lib/utils';
 
 export type SoundType = 'hover' | 'click';
 
@@ -27,131 +28,289 @@ export interface SoundConfig {
   };
 }
 
-const SOUND_PRESETS: SoundConfig[] = [
+export interface SoundLibrary {
+  id: string;
+  name: string;
+  description: string;
+  icon?: string;
+  presets: SoundConfig[];
+}
+
+const SOUND_LIBRARIES: SoundLibrary[] = [
   {
-    name: 'Moderne (Par défaut)',
-    description: 'Sons subtils et professionnels, parfaits pour une interface moderne',
-    hover: {
-      frequencyStart: 1200,
-      frequencyEnd: 1500,
-      duration: 0.08,
-      volume: 0.03,
-      type: 'sine',
-    },
-    click: {
-      frequencyStart: 800,
-      frequencyMid: 1000,
-      frequencyEnd: 600,
-      duration: 0.12,
-      volume: 0.06,
-      type: 'sine',
-    },
+    id: 'professional',
+    name: 'Professionnel',
+    description: 'Sons subtils et élégants pour un environnement professionnel',
+    presets: [
+      {
+        name: 'Moderne (Par défaut)',
+        description: 'Sons subtils et professionnels, parfaits pour une interface moderne',
+        hover: {
+          frequencyStart: 1200,
+          frequencyEnd: 1500,
+          duration: 0.08,
+          volume: 0.03,
+          type: 'sine',
+        },
+        click: {
+          frequencyStart: 800,
+          frequencyMid: 1000,
+          frequencyEnd: 600,
+          duration: 0.12,
+          volume: 0.06,
+          type: 'sine',
+        },
+      },
+      {
+        name: 'Classique',
+        description: 'Sons plus traditionnels et rassurants',
+        hover: {
+          frequencyStart: 800,
+          frequencyEnd: 1000,
+          duration: 0.1,
+          volume: 0.05,
+          type: 'sine',
+        },
+        click: {
+          frequencyStart: 600,
+          frequencyMid: 800,
+          frequencyEnd: 500,
+          duration: 0.15,
+          volume: 0.08,
+          type: 'sine',
+        },
+      },
+      {
+        name: 'Doux',
+        description: 'Sons très doux et discrets',
+        hover: {
+          frequencyStart: 1000,
+          frequencyEnd: 1200,
+          duration: 0.12,
+          volume: 0.02,
+          type: 'sine',
+        },
+        click: {
+          frequencyStart: 700,
+          frequencyMid: 850,
+          frequencyEnd: 600,
+          duration: 0.18,
+          volume: 0.04,
+          type: 'sine',
+        },
+      },
+    ],
   },
   {
-    name: 'Classique',
-    description: 'Sons plus traditionnels et rassurants',
-    hover: {
-      frequencyStart: 800,
-      frequencyEnd: 1000,
-      duration: 0.1,
-      volume: 0.05,
-      type: 'sine',
-    },
-    click: {
-      frequencyStart: 600,
-      frequencyMid: 800,
-      frequencyEnd: 500,
-      duration: 0.15,
-      volume: 0.08,
-      type: 'sine',
-    },
+    id: 'creative',
+    name: 'Créatif',
+    description: 'Sons énergiques et expressifs pour des interfaces créatives',
+    presets: [
+      {
+        name: 'Électronique',
+        description: 'Sons plus électroniques et futuristes',
+        hover: {
+          frequencyStart: 1500,
+          frequencyEnd: 2000,
+          duration: 0.06,
+          volume: 0.04,
+          type: 'square',
+        },
+        click: {
+          frequencyStart: 1000,
+          frequencyMid: 1500,
+          frequencyEnd: 800,
+          duration: 0.1,
+          volume: 0.07,
+          type: 'square',
+        },
+      },
+      {
+        name: 'Dynamique',
+        description: 'Sons plus énergiques et réactifs',
+        hover: {
+          frequencyStart: 1400,
+          frequencyEnd: 1800,
+          duration: 0.05,
+          volume: 0.05,
+          type: 'sine',
+        },
+        click: {
+          frequencyStart: 900,
+          frequencyMid: 1200,
+          frequencyEnd: 700,
+          duration: 0.08,
+          volume: 0.09,
+          type: 'sine',
+        },
+      },
+      {
+        name: 'Vibrant',
+        description: 'Sons riches et expressifs avec beaucoup de caractère',
+        hover: {
+          frequencyStart: 1300,
+          frequencyEnd: 1700,
+          duration: 0.07,
+          volume: 0.06,
+          type: 'sawtooth',
+        },
+        click: {
+          frequencyStart: 850,
+          frequencyMid: 1100,
+          frequencyEnd: 750,
+          duration: 0.11,
+          volume: 0.1,
+          type: 'sawtooth',
+        },
+      },
+    ],
   },
   {
-    name: 'Électronique',
-    description: 'Sons plus électroniques et futuristes',
-    hover: {
-      frequencyStart: 1500,
-      frequencyEnd: 2000,
-      duration: 0.06,
-      volume: 0.04,
-      type: 'square',
-    },
-    click: {
-      frequencyStart: 1000,
-      frequencyMid: 1500,
-      frequencyEnd: 800,
-      duration: 0.1,
-      volume: 0.07,
-      type: 'square',
-    },
+    id: 'minimalist',
+    name: 'Minimaliste',
+    description: 'Sons discrets et épurés pour une expérience zen',
+    presets: [
+      {
+        name: 'Ultra Doux',
+        description: 'Sons presque imperceptibles, pour une expérience très subtile',
+        hover: {
+          frequencyStart: 1100,
+          frequencyEnd: 1300,
+          duration: 0.15,
+          volume: 0.015,
+          type: 'sine',
+        },
+        click: {
+          frequencyStart: 750,
+          frequencyMid: 900,
+          frequencyEnd: 650,
+          duration: 0.2,
+          volume: 0.03,
+          type: 'sine',
+        },
+      },
+      {
+        name: 'Silencieux',
+        description: 'Désactive tous les sons',
+        hover: {
+          frequencyStart: 0,
+          frequencyEnd: 0,
+          duration: 0,
+          volume: 0,
+          type: 'sine',
+        },
+        click: {
+          frequencyStart: 0,
+          frequencyMid: 0,
+          frequencyEnd: 0,
+          duration: 0,
+          volume: 0,
+          type: 'sine',
+        },
+      },
+      {
+        name: 'Naturel',
+        description: 'Sons organiques et apaisants',
+        hover: {
+          frequencyStart: 900,
+          frequencyEnd: 1100,
+          duration: 0.13,
+          volume: 0.025,
+          type: 'sine',
+        },
+        click: {
+          frequencyStart: 650,
+          frequencyMid: 800,
+          frequencyEnd: 550,
+          duration: 0.16,
+          volume: 0.045,
+          type: 'sine',
+        },
+      },
+    ],
   },
   {
-    name: 'Doux',
-    description: 'Sons très doux et discrets',
-    hover: {
-      frequencyStart: 1000,
-      frequencyEnd: 1200,
-      duration: 0.12,
-      volume: 0.02,
-      type: 'sine',
-    },
-    click: {
-      frequencyStart: 700,
-      frequencyMid: 850,
-      frequencyEnd: 600,
-      duration: 0.18,
-      volume: 0.04,
-      type: 'sine',
-    },
-  },
-  {
-    name: 'Dynamique',
-    description: 'Sons plus énergiques et réactifs',
-    hover: {
-      frequencyStart: 1400,
-      frequencyEnd: 1800,
-      duration: 0.05,
-      volume: 0.05,
-      type: 'sine',
-    },
-    click: {
-      frequencyStart: 900,
-      frequencyMid: 1200,
-      frequencyEnd: 700,
-      duration: 0.08,
-      volume: 0.09,
-      type: 'sine',
-    },
-  },
-  {
-    name: 'Silencieux',
-    description: 'Désactive tous les sons',
-    hover: {
-      frequencyStart: 0,
-      frequencyEnd: 0,
-      duration: 0,
-      volume: 0,
-      type: 'sine',
-    },
-    click: {
-      frequencyStart: 0,
-      frequencyMid: 0,
-      frequencyEnd: 0,
-      duration: 0,
-      volume: 0,
-      type: 'sine',
-    },
+    id: 'gaming',
+    name: 'Gaming',
+    description: 'Sons réactifs et satisfaisants pour une expérience immersive',
+    presets: [
+      {
+        name: 'Arcade',
+        description: 'Sons rétro et nostalgiques style arcade',
+        hover: {
+          frequencyStart: 1600,
+          frequencyEnd: 1900,
+          duration: 0.04,
+          volume: 0.06,
+          type: 'square',
+        },
+        click: {
+          frequencyStart: 1100,
+          frequencyMid: 1400,
+          frequencyEnd: 900,
+          duration: 0.07,
+          volume: 0.11,
+          type: 'square',
+        },
+      },
+      {
+        name: 'Sci-Fi',
+        description: 'Sons futuristes et high-tech',
+        hover: {
+          frequencyStart: 1800,
+          frequencyEnd: 2200,
+          duration: 0.05,
+          volume: 0.05,
+          type: 'sawtooth',
+        },
+        click: {
+          frequencyStart: 1200,
+          frequencyMid: 1600,
+          frequencyEnd: 1000,
+          duration: 0.09,
+          volume: 0.09,
+          type: 'sawtooth',
+        },
+      },
+      {
+        name: 'Impact',
+        description: 'Sons puissants et percutants',
+        hover: {
+          frequencyStart: 1400,
+          frequencyEnd: 2000,
+          duration: 0.03,
+          volume: 0.07,
+          type: 'sine',
+        },
+        click: {
+          frequencyStart: 950,
+          frequencyMid: 1300,
+          frequencyEnd: 800,
+          duration: 0.06,
+          volume: 0.12,
+          type: 'sine',
+        },
+      },
+    ],
   },
 ];
 
 const STORAGE_KEY = 'nukleo-sound-config';
+const STORAGE_LIBRARY_KEY = 'nukleo-sound-library';
 
 export default function AdminSounds() {
   const { playHover, playClick } = useSound();
+  const [selectedLibrary, setSelectedLibrary] = useState<string>(SOUND_LIBRARIES[0].id);
   const [selectedPreset, setSelectedPreset] = useState<SoundConfig | null>(null);
   const [soundsEnabled, setSoundsEnabled] = useState(true);
 
   useEffect(() => {
+    // Load saved library from localStorage
+    const savedLibrary = localStorage.getItem(STORAGE_LIBRARY_KEY);
+    if (savedLibrary && SOUND_LIBRARIES.find(lib => lib.id === savedLibrary)) {
+      setSelectedLibrary(savedLibrary);
+    }
+
     // Load saved config from localStorage
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
@@ -162,8 +321,9 @@ export default function AdminSounds() {
         console.error('Failed to load sound config:', e);
       }
     } else {
-      // Default to first preset
-      setSelectedPreset(SOUND_PRESETS[0]);
+      // Default to first preset of first library
+      const firstLibrary = SOUND_LIBRARIES[0];
+      setSelectedPreset(firstLibrary.presets[0]);
     }
 
     // Load sounds enabled state
@@ -173,6 +333,8 @@ export default function AdminSounds() {
     }
   }, []);
 
+  const currentLibrary = SOUND_LIBRARIES.find(lib => lib.id === selectedLibrary) || SOUND_LIBRARIES[0];
+
   const handleSelectPreset = (preset: SoundConfig) => {
     setSelectedPreset(preset);
   };
@@ -180,6 +342,7 @@ export default function AdminSounds() {
   const handleSave = () => {
     if (selectedPreset) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(selectedPreset));
+      localStorage.setItem(STORAGE_LIBRARY_KEY, selectedLibrary);
       localStorage.setItem('nukleo-sounds-enabled', String(soundsEnabled));
       alert('Configuration des sons sauvegardée ! La page sera rechargée pour appliquer les changements.');
       window.location.reload();
@@ -188,8 +351,10 @@ export default function AdminSounds() {
 
   const handleReset = () => {
     localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(STORAGE_LIBRARY_KEY);
     localStorage.setItem('nukleo-sounds-enabled', 'true');
-    setSelectedPreset(SOUND_PRESETS[0]);
+    setSelectedLibrary(SOUND_LIBRARIES[0].id);
+    setSelectedPreset(SOUND_LIBRARIES[0].presets[0]);
     setSoundsEnabled(true);
     alert('Configuration réinitialisée ! La page sera rechargée.');
     window.location.reload();
@@ -299,59 +464,91 @@ export default function AdminSounds() {
           </CardContent>
         </Card>
 
-        {/* Sound Presets */}
+        {/* Sound Libraries Tabs */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-6">Préréglages de sons</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {SOUND_PRESETS.map((preset, index) => (
-              <Card
-                key={index}
-                className={`cursor-pointer transition-all ${
-                  selectedPreset?.name === preset.name
-                    ? 'ring-2 ring-primary shadow-lg'
-                    : 'hover:shadow-md'
-                }`}
-                onClick={() => handleSelectPreset(preset)}
+          <h2 className="text-2xl font-bold mb-6">Bibliothèques de sons</h2>
+          
+          {/* Tabs */}
+          <div className="flex flex-wrap gap-2 mb-6 border-b border-border pb-4">
+            {SOUND_LIBRARIES.map((library) => (
+              <button
+                key={library.id}
+                onClick={() => setSelectedLibrary(library.id)}
+                className={cn(
+                  "px-4 py-2 rounded-lg font-medium transition-all",
+                  selectedLibrary === library.id
+                    ? "bg-primary text-primary-foreground shadow-md"
+                    : "bg-muted text-muted-foreground hover:bg-muted/80"
+                )}
               >
-                <CardHeader>
-                  <CardTitle className="flex items-center justify-between">
-                    {preset.name}
-                    {selectedPreset?.name === preset.name && (
-                      <div className="w-3 h-3 bg-primary rounded-full" />
-                    )}
-                  </CardTitle>
-                  <CardDescription>{preset.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex gap-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleTestSound('hover', preset);
-                      }}
-                      disabled={!soundsEnabled}
-                    >
-                      <Play className="w-3 h-3 mr-1" />
-                      Hover
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleTestSound('click', preset);
-                      }}
-                      disabled={!soundsEnabled}
-                    >
-                      <Play className="w-3 h-3 mr-1" />
-                      Click
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+                {library.name}
+              </button>
             ))}
+          </div>
+
+          {/* Library Description */}
+          <Card className="mb-6">
+            <CardHeader>
+              <CardTitle>{currentLibrary.name}</CardTitle>
+              <CardDescription>{currentLibrary.description}</CardDescription>
+            </CardHeader>
+          </Card>
+
+          {/* Presets for Selected Library */}
+          <div className="mb-8">
+            <h3 className="text-xl font-semibold mb-4">Variantes disponibles</h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {currentLibrary.presets.map((preset, index) => (
+                <Card
+                  key={index}
+                  className={cn(
+                    "cursor-pointer transition-all",
+                    selectedPreset?.name === preset.name
+                      ? 'ring-2 ring-primary shadow-lg'
+                      : 'hover:shadow-md'
+                  )}
+                  onClick={() => handleSelectPreset(preset)}
+                >
+                  <CardHeader>
+                    <CardTitle className="flex items-center justify-between">
+                      {preset.name}
+                      {selectedPreset?.name === preset.name && (
+                        <div className="w-3 h-3 bg-primary rounded-full" />
+                      )}
+                    </CardTitle>
+                    <CardDescription>{preset.description}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleTestSound('hover', preset);
+                        }}
+                        disabled={!soundsEnabled}
+                      >
+                        <Play className="w-3 h-3 mr-1" />
+                        Hover
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleTestSound('click', preset);
+                        }}
+                        disabled={!soundsEnabled}
+                      >
+                        <Play className="w-3 h-3 mr-1" />
+                        Click
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
         </div>
 

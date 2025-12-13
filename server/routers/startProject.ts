@@ -1,6 +1,8 @@
 import { router, publicProcedure } from "../_core/trpc";
 import { z } from "zod";
 import { sendEmail } from "../_core/sendgrid";
+import { getDb } from "../db";
+import { startProjectSubmissions } from "../../drizzle/schema";
 
 export const startProjectRouter = router({
   submit: publicProcedure
@@ -221,6 +223,25 @@ export const startProjectRouter = router({
       `;
 
       try {
+        // Save to database first
+        const db = await getDb();
+        if (db) {
+          try {
+            await db.insert(startProjectSubmissions).values({
+              name,
+              email,
+              company,
+              projectType,
+              budget,
+              description,
+            });
+            console.log(`[StartProject] Successfully saved submission for ${name} (${email})`);
+          } catch (dbError: any) {
+            console.error("[StartProject] Database error:", dbError);
+            // Continue even if DB save fails - still try to send emails
+          }
+        }
+
         // Send email to admin
         const adminEmailSent = await sendEmail({
           to: "clement@nukleo.com",
@@ -244,7 +265,7 @@ export const startProjectRouter = router({
           message: "Project request submitted successfully",
         };
       } catch (error) {
-        console.error("[StartProject] Error sending emails:", error);
+        console.error("[StartProject] Error:", error);
         throw new Error("Failed to submit project request");
       }
     }),

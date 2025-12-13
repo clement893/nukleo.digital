@@ -187,6 +187,35 @@ export async function initDatabase(req: Request, res: Response) {
       );
     `);
 
+    // Create start_project_submissions table
+    await db.execute(sql`
+      CREATE TABLE IF NOT EXISTS start_project_submissions (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        email VARCHAR(320) NOT NULL,
+        company VARCHAR(255) NOT NULL,
+        "projectType" VARCHAR(100) NOT NULL,
+        budget VARCHAR(50) NOT NULL,
+        description TEXT NOT NULL,
+        "createdAt" TIMESTAMP DEFAULT NOW() NOT NULL,
+        "updatedAt" TIMESTAMP DEFAULT NOW() NOT NULL
+      );
+    `);
+
+    // Create contact_messages table
+    await db.execute(sql`
+      CREATE TABLE IF NOT EXISTS contact_messages (
+        id SERIAL PRIMARY KEY,
+        "firstName" VARCHAR(255) NOT NULL,
+        "lastName" VARCHAR(255) NOT NULL,
+        email VARCHAR(320) NOT NULL,
+        company VARCHAR(255) NOT NULL,
+        message TEXT NOT NULL,
+        "createdAt" TIMESTAMP DEFAULT NOW() NOT NULL,
+        "updatedAt" TIMESTAMP DEFAULT NOW() NOT NULL
+      );
+    `);
+
     res.json({ 
       message: "Database initialized successfully! All tables created.",
       tables: [
@@ -199,7 +228,9 @@ export async function initDatabase(req: Request, res: Response) {
         "admin_users",
         "radar_technologies",
         "radar_positions",
-        "ai_news_subscribers"
+        "ai_news_subscribers",
+        "start_project_submissions",
+        "contact_messages"
       ]
     });
   } catch (error) {

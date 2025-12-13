@@ -175,12 +175,12 @@ export default function StartProject() {
                     <SelectTrigger className="bg-white/10 border-white/20 text-white focus:border-accent focus:ring-accent">
                       <SelectValue placeholder="Select a project type" />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="ai-strategy">AI Strategy & Consulting</SelectItem>
-                      <SelectItem value="agentic-ai">Agentic AI Development</SelectItem>
-                      <SelectItem value="ai-integration">AI Integration</SelectItem>
-                      <SelectItem value="ai-training">AI Training & Workshops</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
+                    <SelectContent className="bg-slate-900 border-white/20 backdrop-blur-xl">
+                      <SelectItem value="ai-strategy" className="text-white hover:bg-white/10">AI Strategy & Consulting</SelectItem>
+                      <SelectItem value="agentic-ai" className="text-white hover:bg-white/10">Agentic AI Development</SelectItem>
+                      <SelectItem value="ai-integration" className="text-white hover:bg-white/10">AI Integration</SelectItem>
+                      <SelectItem value="ai-training" className="text-white hover:bg-white/10">AI Training & Workshops</SelectItem>
+                      <SelectItem value="other" className="text-white hover:bg-white/10">Other</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -198,12 +198,12 @@ export default function StartProject() {
                     <SelectTrigger className="bg-white/10 border-white/20 text-white focus:border-accent focus:ring-accent">
                       <SelectValue placeholder="Select a budget range" />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="10k-25k">$10k - $25k</SelectItem>
-                      <SelectItem value="25k-50k">$25k - $50k</SelectItem>
-                      <SelectItem value="50k-100k">$50k - $100k</SelectItem>
-                      <SelectItem value="100k+">$100k+</SelectItem>
-                      <SelectItem value="not-sure">Not sure yet</SelectItem>
+                    <SelectContent className="bg-slate-900 border-white/20 backdrop-blur-xl">
+                      <SelectItem value="10k-25k" className="text-white hover:bg-white/10">$10k - $25k</SelectItem>
+                      <SelectItem value="25k-50k" className="text-white hover:bg-white/10">$25k - $50k</SelectItem>
+                      <SelectItem value="50k-100k" className="text-white hover:bg-white/10">$50k - $100k</SelectItem>
+                      <SelectItem value="100k+" className="text-white hover:bg-white/10">$100k+</SelectItem>
+                      <SelectItem value="not-sure" className="text-white hover:bg-white/10">Not sure yet</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -227,7 +227,7 @@ export default function StartProject() {
                 <Button
                   type="submit"
                   disabled={submitProject.isPending}
-                  className="w-full bg-gradient-to-r from-accent to-pink-500 hover:from-accent/90 hover:to-pink-500/90 text-white font-semibold py-6 text-lg group"
+                  className="w-full bg-gradient-to-r from-violet-600 to-rose-600 hover:from-violet-700 hover:to-rose-700 text-white font-bold py-4 text-base rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group disabled:opacity-50"
                 >
                   {submitProject.isPending ? (
                     'Sending...'

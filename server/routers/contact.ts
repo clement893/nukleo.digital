@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { publicProcedure, router } from '../_core/trpc';
 import { sendEmail } from '../_core/sendgrid';
 import { getDb } from '../db';
-import { aiNewsSubscribers } from '../../drizzle/schema';
+import { aiNewsSubscribers, contactMessages } from '../../drizzle/schema';
 
 const contactSchema = z.object({
   firstName: z.string().min(1, 'First name is required'),
@@ -21,6 +21,24 @@ export const contactRouter = router({
     .input(contactSchema)
     .mutation(async ({ input }) => {
       try {
+        // Save to database first
+        const db = await getDb();
+        if (db) {
+          try {
+            await db.insert(contactMessages).values({
+              firstName: input.firstName,
+              lastName: input.lastName,
+              email: input.email,
+              company: input.company,
+              message: input.message,
+            });
+            console.log(`[Contact] Successfully saved message from ${input.firstName} ${input.lastName} (${input.email})`);
+          } catch (dbError: any) {
+            console.error('[Contact] Database error:', dbError);
+            // Continue even if DB save fails - still try to send emails
+          }
+        }
+
         // Send email to Nukleo team
         const emailSent = await sendEmail({
           to: process.env.SENDGRID_FROM_EMAIL || 'hello@nukleo.digital',
@@ -32,12 +50,18 @@ export const contactRouter = router({
           throw new Error('Failed to send email');
         }
 
-        // Send confirmation email to user
-        await sendEmail({
-          to: input.email,
-          subject: 'Thank you for contacting Nukleo Digital',
-          html: generateConfirmationEmail(input.firstName),
-        });
+        // Send confirmation email to user (non-blocking)
+        try {
+          await sendEmail({
+            to: input.email,
+            subject: 'Thank you for contacting Nukleo Digital',
+            html: generateConfirmationEmail(input.firstName),
+          });
+          console.log(`[Contact] Confirmation email sent to ${input.email}`);
+        } catch (emailError) {
+          console.warn('[Contact] Failed to send confirmation email:', emailError);
+          // Don't fail the submission if confirmation email fails
+        }
 
         return {
           success: true,
@@ -61,24 +85,37 @@ export const contactRouter = router({
         // Save to database (ignore duplicate email errors)
         let isNewSubscriber = true;
         try {
-          await db.insert(aiNewsSubscribers).values({
+          // Insert without specifying id - let database auto-generate it
+          const result = await db.insert(aiNewsSubscribers).values({
             email: input.email,
             source: 'ai-trend-radar',
-          });
-          console.log(`[Newsletter] Successfully saved subscription for ${input.email}`);
+          }).returning({ id: aiNewsSubscribers.id });
+          console.log(`[Newsletter] Successfully saved subscription for ${input.email}`, result);
         } catch (dbError: any) {
           // If email already exists, that's okay - just continue
-          const isDuplicate = dbError?.message?.includes('unique') || 
-                             dbError?.code?.includes('23505') ||
-                             dbError?.code === '23505' ||
-                             dbError?.constraint === 'ai_news_subscribers_email_unique';
+          const errorMessage = dbError?.message || dbError?.toString() || '';
+          const errorCode = dbError?.code || '';
+          const errorConstraint = dbError?.constraint || '';
+          
+          const isDuplicate = 
+            errorMessage.includes('unique') || 
+            errorMessage.includes('duplicate') ||
+            errorMessage.includes('already exists') ||
+            errorCode.includes('23505') ||
+            errorCode === '23505' ||
+            errorConstraint === 'ai_news_subscribers_email_unique' ||
+            errorConstraint?.includes('email_unique');
           
           if (isDuplicate) {
             console.log(`[Newsletter] Email ${input.email} already subscribed, skipping insert`);
             isNewSubscriber = false;
           } else {
             console.error('[Newsletter] Database error:', dbError);
-            throw new Error(`Database error: ${dbError?.message || 'Unknown error'}`);
+            console.error('[Newsletter] Error message:', errorMessage);
+            console.error('[Newsletter] Error code:', errorCode);
+            console.error('[Newsletter] Error constraint:', errorConstraint);
+            console.error('[Newsletter] Full error:', JSON.stringify(dbError, Object.getOwnPropertyNames(dbError), 2));
+            throw new Error(`Database error: ${errorMessage || 'Unknown error'}`);
           }
         }
 

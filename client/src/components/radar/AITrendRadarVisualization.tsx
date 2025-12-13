@@ -129,6 +129,7 @@ export function AITrendRadarVisualization({ data, onTechnologyClick }: AITrendRa
             return (
               <g key={item.technology.id}>
                 <circle
+                  data-tech-slug={item.technology.slug}
                   cx={x}
                   cy={y}
                   r={isSelected ? 25 : isHovered ? 20 : 15}

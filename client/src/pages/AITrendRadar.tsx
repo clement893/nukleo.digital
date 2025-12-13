@@ -11,6 +11,7 @@ import { Loader2 } from 'lucide-react';
 export default function AITrendRadar() {
   const { t } = useLanguage();
   const { data: radarData, isLoading, error } = trpc.radar.getCurrent.useQuery();
+  const { data: latestNews, isLoading: isLoadingNews } = trpc.radar.getLatestNews.useQuery({ limit: 5 });
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
   const handleTechnologyClick = (tech: any) => {
@@ -52,6 +53,71 @@ export default function AITrendRadar() {
             Mise à jour quotidienne avec analyse générée par IA.
           </p>
         </div>
+
+        {/* Latest News Section */}
+        {latestNews && latestNews.length > 0 && (
+          <div className="mb-16">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-3xl md:text-4xl font-bold text-white">
+                Dernières nouvelles
+              </h2>
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-500/20 border border-purple-500/50 rounded-full text-purple-300 text-sm">
+                <span className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
+                Mise à jour quotidienne
+              </div>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {latestNews.map((news) => (
+                <div
+                  key={news.id}
+                  className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 group cursor-pointer"
+                  onClick={() => {
+                    // Scroll to technology in radar
+                    const element = document.querySelector(`[data-tech-slug="${news.technologySlug}"]`);
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                  }}
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <span className="px-3 py-1 bg-purple-500/20 border border-purple-500/50 rounded-full text-purple-300 text-xs font-semibold">
+                      {news.technology}
+                    </span>
+                    <span className="text-white/40 text-xs">
+                      {new Date(news.date).toLocaleDateString('fr-FR', { 
+                        day: 'numeric', 
+                        month: 'short' 
+                      })}
+                    </span>
+                  </div>
+                  
+                  <h3 className="text-white font-bold text-lg mb-3 group-hover:text-purple-300 transition-colors line-clamp-2">
+                    {news.title}
+                  </h3>
+                  
+                  <p className="text-white/70 text-sm leading-relaxed line-clamp-3">
+                    {news.summary}
+                  </p>
+                  
+                  <div className="mt-4 flex items-center gap-2 text-purple-300 text-xs font-semibold">
+                    <span>En savoir plus</span>
+                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {isLoadingNews && (
+          <div className="mb-16 flex items-center justify-center py-8">
+            <Loader2 className="w-6 h-6 text-purple-400 animate-spin" />
+            <span className="ml-3 text-white/70">Chargement des dernières nouvelles...</span>
+          </div>
+        )}
 
         {/* Radar Visualization */}
         {isLoading && (

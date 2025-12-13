@@ -143,6 +143,55 @@ export const radarRouter = router({
       }
     }),
 
+  // Get latest AI news related to radar technologies
+  getLatestNews: publicProcedure
+    .input(z.object({ limit: z.number().min(1).max(10).default(5) }).optional())
+    .query(async ({ input }) => {
+      const db = await getDb();
+      if (!db) return [];
+      
+      try {
+        const technologies = await db.select().from(radarTechnologies).orderBy(radarTechnologies.name);
+        
+        if (technologies.length === 0) {
+          return [];
+        }
+        
+        // Generate news using AI for the latest technologies
+        const limit = input?.limit || 5;
+        const selectedTechs = technologies.slice(0, limit);
+        
+        const newsItems = await Promise.all(
+          selectedTechs.map(async (tech) => {
+            try {
+              const latestPosition = await db
+                .select()
+                .from(radarPositions)
+                .where(eq(radarPositions.technologyId, tech.id))
+                .orderBy(desc(radarPositions.date))
+                .limit(1);
+              
+              const news = await generateNewsForTechnology(tech, latestPosition[0] || null);
+              return news;
+            } catch (error) {
+              console.error(`Error generating news for ${tech.name}:`, error);
+              return null;
+            }
+          })
+        );
+        
+        return newsItems.filter((item): item is NonNullable<typeof item> => item !== null);
+      } catch (error: any) {
+        const errorMessage = error?.message || '';
+        if (errorMessage.includes('does not exist') || errorMessage.includes('relation') || error?.code === '42P01') {
+          console.warn('[Radar] Tables not initialized yet, returning empty array');
+          return [];
+        }
+        console.error('[Radar] Error fetching news:', error);
+        return [];
+      }
+    }),
+
   // Generate daily refresh - should be called by cron job
   refreshDaily: publicProcedure.mutation(async () => {
     const db = await getDb();
@@ -199,6 +248,94 @@ export const radarRouter = router({
     return { results, date: today };
   }),
 });
+
+// Helper function to generate news for a technology
+async function generateNewsForTechnology(
+  technology: { name: string; description: string; slug: string },
+  latestPosition: RadarPosition | null
+): Promise<{
+  id: string;
+  title: string;
+  summary: string;
+  technology: string;
+  technologySlug: string;
+  date: Date;
+  source: string;
+  url?: string;
+}> {
+  const prompt = `Tu es un expert en intelligence artificielle et tendances technologiques pour le marché canadien francophone.
+
+Génère une nouvelle brève et pertinente (style article de blog/news) sur la technologie suivante :
+
+Technologie: ${technology.name}
+Description: ${technology.description}
+
+${latestPosition ? `
+Contexte actuel:
+- Maturité: ${latestPosition.maturityScore}/100 (${latestPosition.maturityLevel})
+- Impact: ${latestPosition.impactScore}/100
+` : ''}
+
+Génère une nouvelle récente et pertinente (comme si c'était une actualité récente) avec:
+1. Un titre accrocheur (max 80 caractères)
+2. Un résumé de 2-3 phrases (max 200 caractères)
+3. Un ton professionnel mais accessible
+4. Focus sur les développements récents, cas d'usage concrets, ou implications business
+
+Réponds en JSON avec cette structure exacte:
+{
+  "title": "titre accrocheur",
+  "summary": "résumé de 2-3 phrases",
+  "source": "Nukleo Digital AI Radar"
+}`;
+
+  try {
+    const response = await invokeLLM({
+      messages: [
+        {
+          role: "system",
+          content: "Tu es un journaliste spécialisé en IA et tendances technologiques. Tu génères des nouvelles brèves et pertinentes en JSON.",
+        },
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
+      responseFormat: {
+        type: "json_object",
+      },
+      maxTokens: 500,
+    });
+
+    const content = response.choices[0]?.message?.content;
+    if (!content || typeof content !== "string") {
+      throw new Error("Invalid AI response");
+    }
+
+    const parsed = JSON.parse(content);
+    
+    return {
+      id: `news-${technology.slug}-${Date.now()}`,
+      title: parsed.title,
+      summary: parsed.summary,
+      technology: technology.name,
+      technologySlug: technology.slug,
+      date: new Date(),
+      source: parsed.source || "Nukleo Digital AI Radar",
+    };
+  } catch (error) {
+    // Fallback news if AI generation fails
+    return {
+      id: `news-${technology.slug}-${Date.now()}`,
+      title: `${technology.name}: Tendances et développements récents`,
+      summary: `Découvrez les dernières évolutions et cas d'usage de ${technology.name} dans le contexte canadien.`,
+      technology: technology.name,
+      technologySlug: technology.slug,
+      date: new Date(),
+      source: "Nukleo Digital AI Radar",
+    };
+  }
+}
 
 // Helper function to generate radar position using AI
 async function generateRadarPosition(

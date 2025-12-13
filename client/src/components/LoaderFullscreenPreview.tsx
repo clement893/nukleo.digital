@@ -59,11 +59,23 @@ export default function LoaderFullscreenPreview({
   const renderLoader = () => {
     // If loaderType contains HTML/CSS (starts with <div or contains <style>), render it directly
     if (loaderType.includes('<div') || loaderType.includes('<style>')) {
+      // Extract styles from <style> tag and inject them
+      const styleMatch = loaderType.match(/<style>([\s\S]*?)<\/style>/);
+      const styles = styleMatch ? styleMatch[1] : '';
+      
+      // Remove <style> tags from HTML
+      const htmlWithoutStyles = loaderType.replace(/<style>[\s\S]*?<\/style>/g, '');
+      
       return (
-        <div 
-          dangerouslySetInnerHTML={{ __html: loaderType }}
-          className="absolute inset-0"
-        />
+        <>
+          {styles && (
+            <style dangerouslySetInnerHTML={{ __html: styles }} />
+          )}
+          <div 
+            dangerouslySetInnerHTML={{ __html: htmlWithoutStyles }}
+            className="absolute inset-0"
+          />
+        </>
       );
     }
 

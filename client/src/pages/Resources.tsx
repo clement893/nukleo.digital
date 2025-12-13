@@ -74,14 +74,6 @@ export default function Resources() {
       tags: getArrayTranslation('resources.tools.aiGlossary.tags'),
       link: getLocalizedPath('/ai-glossary'),
       buttonText: t('resources.tools.aiGlossary.buttonText')
-    },
-    {
-      badge: t('resources.tools.glossary.badge'),
-      title: t('resources.tools.glossary.title'),
-      description: t('resources.tools.glossary.description'),
-      tags: getArrayTranslation('resources.tools.glossary.tags'),
-      link: getLocalizedPath('/glossary'),
-      buttonText: t('resources.tools.glossary.buttonText')
     }
   ];
 

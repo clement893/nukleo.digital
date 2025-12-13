@@ -54,57 +54,78 @@ export const contactRouter = router({
       try {
         const db = await getDb();
         if (!db) {
+          console.error('[Newsletter] Database connection failed');
           throw new Error('Database connection failed');
         }
 
         // Save to database (ignore duplicate email errors)
+        let isNewSubscriber = true;
         try {
           await db.insert(aiNewsSubscribers).values({
             email: input.email,
             source: 'ai-trend-radar',
           });
+          console.log(`[Newsletter] Successfully saved subscription for ${input.email}`);
         } catch (dbError: any) {
           // If email already exists, that's okay - just continue
-          if (!dbError?.message?.includes('unique') && !dbError?.code?.includes('23505')) {
-            console.error('Database error:', dbError);
-            throw dbError;
+          const isDuplicate = dbError?.message?.includes('unique') || 
+                             dbError?.code?.includes('23505') ||
+                             dbError?.code === '23505' ||
+                             dbError?.constraint === 'ai_news_subscribers_email_unique';
+          
+          if (isDuplicate) {
+            console.log(`[Newsletter] Email ${input.email} already subscribed, skipping insert`);
+            isNewSubscriber = false;
+          } else {
+            console.error('[Newsletter] Database error:', dbError);
+            throw new Error(`Database error: ${dbError?.message || 'Unknown error'}`);
           }
         }
 
-        // Send notification to Nukleo team
-        const emailSent = await sendEmail({
-          to: process.env.SENDGRID_FROM_EMAIL || 'hello@nukleo.digital',
-          subject: `New AI News Newsletter Subscription: ${input.email}`,
-          html: `
-            <h2>New AI News Newsletter Subscription</h2>
-            <p><strong>Email:</strong> ${input.email}</p>
-            <p><strong>Source:</strong> AI Trend Radar</p>
-            <p><strong>Date:</strong> ${new Date().toLocaleString()}</p>
-          `,
-        });
+        // Send notification to Nukleo team (non-blocking)
+        try {
+          const emailSent = await sendEmail({
+            to: process.env.SENDGRID_FROM_EMAIL || 'hello@nukleo.digital',
+            subject: `New AI News Newsletter Subscription: ${input.email}`,
+            html: `
+              <h2>New AI News Newsletter Subscription</h2>
+              <p><strong>Email:</strong> ${input.email}</p>
+              <p><strong>Source:</strong> AI Trend Radar</p>
+              <p><strong>Date:</strong> ${new Date().toLocaleString()}</p>
+              <p><strong>New Subscriber:</strong> ${isNewSubscriber ? 'Yes' : 'No (already subscribed)'}</p>
+            `,
+          });
 
-        if (!emailSent) {
-          console.warn('Failed to send notification email, but subscription was saved to DB');
+          if (!emailSent) {
+            console.warn('[Newsletter] Failed to send notification email, but subscription was saved to DB');
+          }
+        } catch (emailError) {
+          console.warn('[Newsletter] Error sending notification email:', emailError);
+          // Don't fail the subscription if notification email fails
         }
 
-        // Send welcome email to subscriber
+        // Send welcome email to subscriber (non-blocking)
         try {
           await sendEmail({
             to: input.email,
             subject: 'Welcome to Nukleo Digital AI News Newsletter',
             html: generateWelcomeEmail(),
           });
+          console.log(`[Newsletter] Welcome email sent to ${input.email}`);
         } catch (emailError) {
-          console.warn('Failed to send welcome email:', emailError);
+          console.warn('[Newsletter] Failed to send welcome email:', emailError);
           // Don't fail the subscription if welcome email fails
         }
 
         return {
           success: true,
+          message: isNewSubscriber ? 'Successfully subscribed!' : 'You are already subscribed!',
         };
-      } catch (error) {
-        console.error('Newsletter subscription error:', error);
-        throw new Error('Failed to subscribe. Please try again.');
+      } catch (error: any) {
+        console.error('[Newsletter] Subscription error:', error);
+        // Return more specific error message
+        const errorMessage = error?.message || 'Failed to subscribe. Please try again.';
+        throw new Error(errorMessage);
       }
     }),
 });

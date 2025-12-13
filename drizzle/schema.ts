@@ -222,7 +222,7 @@ export type InsertRadarPosition = typeof radarPositions.$inferInsert;
 
 // AI News Newsletter Subscribers table
 export const aiNewsSubscribers = pgTable("ai_news_subscribers", {
-  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
   email: varchar("email", { length: 320 }).notNull().unique(),
   source: varchar("source", { length: 100 }).default("ai-trend-radar").notNull(), // Track where subscription came from
   createdAt: timestamp("createdAt").defaultNow().notNull(),

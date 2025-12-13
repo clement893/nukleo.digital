@@ -11,21 +11,22 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-// Default language detection
-function detectLanguage(): Language {
-  // Check localStorage first
+// Default language detection from URL
+function detectLanguageFromURL(): Language {
+  // Check URL first (most reliable)
+  const path = window.location.pathname;
+  const langMatch = path.match(/^\/(fr|en)/);
+  if (langMatch) {
+    return langMatch[1] as Language;
+  }
+  
+  // Check localStorage
   const saved = localStorage.getItem('nukleo-language');
   if (saved === 'fr' || saved === 'en') {
     return saved;
   }
   
-  // Check browser language
-  const browserLang = navigator.language.split('-')[0];
-  if (browserLang === 'fr') {
-    return 'fr';
-  }
-  
-  // Default to English
+  // Default to English for routes without language prefix
   return 'en';
 }
 
@@ -35,7 +36,7 @@ interface LanguageProviderProps {
 
 export function LanguageProvider({ children }: LanguageProviderProps) {
   const [location, setLocation] = useLocation();
-  const [language, setLanguageState] = useState<Language>(detectLanguage);
+  const [language, setLanguageState] = useState<Language>(detectLanguageFromURL);
   const [translations, setTranslations] = useState<Record<string, string>>({});
 
   // Load translations based on current language
@@ -70,13 +71,11 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
         localStorage.setItem('nukleo-language', urlLang);
       }
     } else {
-      // No language prefix, default to English
-      if (language !== 'en') {
-        setLanguageState('en');
-        localStorage.setItem('nukleo-language', 'en');
-      }
+      // No language prefix, force English for all routes without /fr/ prefix
+      setLanguageState('en');
+      localStorage.setItem('nukleo-language', 'en');
     }
-  }, [location, language]);
+  }, [location]);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);

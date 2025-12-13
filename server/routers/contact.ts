@@ -41,7 +41,7 @@ export const contactRouter = router({
 
         // Send email to Nukleo team
         const emailSent = await sendEmail({
-          to: process.env.SENDGRID_FROM_EMAIL || 'hello@nukleo.digital',
+          to: 'clement@nukleo.com',
           subject: `New Contact Form Submission from ${input.firstName} ${input.lastName}`,
           html: generateContactEmail(input),
         });

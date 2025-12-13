@@ -18,6 +18,37 @@ export default function LoaderFullscreenPreview({
   const [progress, setProgress] = useState(0);
   const LOADING_DURATION = 4000; // 4 secondes
 
+  // Extract and inject styles when loaderType changes
+  useEffect(() => {
+    if (!loaderType.includes('<style>')) return;
+
+    const styleMatch = loaderType.match(/<style>([\s\S]*?)<\/style>/);
+    if (!styleMatch) return;
+
+    const styles = styleMatch[1];
+    const styleId = 'loader-preview-styles';
+    
+    // Remove existing style tag if any
+    const existingStyle = document.getElementById(styleId);
+    if (existingStyle) {
+      existingStyle.remove();
+    }
+
+    // Inject styles into document head
+    const styleElement = document.createElement('style');
+    styleElement.id = styleId;
+    styleElement.textContent = styles;
+    document.head.appendChild(styleElement);
+
+    // Cleanup on unmount or when loaderType changes
+    return () => {
+      const styleToRemove = document.getElementById(styleId);
+      if (styleToRemove) {
+        styleToRemove.remove();
+      }
+    };
+  }, [loaderType]);
+
   // Simulate loading progress
   useEffect(() => {
     if (!isOpen) {
@@ -59,23 +90,14 @@ export default function LoaderFullscreenPreview({
   const renderLoader = () => {
     // If loaderType contains HTML/CSS (starts with <div or contains <style>), render it directly
     if (loaderType.includes('<div') || loaderType.includes('<style>')) {
-      // Extract styles from <style> tag and inject them
-      const styleMatch = loaderType.match(/<style>([\s\S]*?)<\/style>/);
-      const styles = styleMatch ? styleMatch[1] : '';
-      
-      // Remove <style> tags from HTML
+      // Remove <style> tags from HTML (styles are injected via useEffect)
       const htmlWithoutStyles = loaderType.replace(/<style>[\s\S]*?<\/style>/g, '');
       
       return (
-        <>
-          {styles && (
-            <style dangerouslySetInnerHTML={{ __html: styles }} />
-          )}
-          <div 
-            dangerouslySetInnerHTML={{ __html: htmlWithoutStyles }}
-            className="absolute inset-0"
-          />
-        </>
+        <div 
+          dangerouslySetInnerHTML={{ __html: htmlWithoutStyles }}
+          className="absolute inset-0"
+        />
       );
     }
 

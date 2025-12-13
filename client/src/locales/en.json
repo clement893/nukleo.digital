@@ -381,5 +381,75 @@
       "description": "Let's discuss how The AI Lab can architect the technological infrastructure that powers your transformation.",
       "button": "Start the Conversation"
     }
+  },
+  "studio": {
+    "title": "The Creative Studio",
+    "subtitle": "Augmented Content & Experiences",
+    "heroDescription": "We use AI to create brand experiences and content at unparalleled scale and relevance. From generative content to autonomous marketing campaigns, we help you connect with audiences in ways that were previously impossible.",
+    "mission": "Our Mission",
+    "missionText": "To harness the creative power of AI to deliver <strong>hyper-personalized experiences at scale</strong>. We don't replace human creativity we amplify it, enabling your brand to create meaningful connections with every customer, in every moment.",
+    "capabilities": {
+      "title": "Creative Capabilities",
+      "contentCreation": {
+        "title": "Augmented Content Creation",
+        "description": "Producing content (text, image, video) at unprecedented scale, personalized in real-time. We leverage generative AI to create brand-aligned content that resonates with each audience segment."
+      },
+      "personalizedExperiences": {
+        "title": "AI-Personalized Customer Experiences",
+        "description": "Creating unique and dynamic customer journeys powered by AI. From personalized recommendations to adaptive interfaces, we design experiences that evolve with each interaction."
+      },
+      "agenticMarketing": {
+        "title": "Agentic Marketing Campaigns",
+        "description": "Deploying autonomous campaigns that continuously optimize themselves. Our AI agents test, learn, and adapt in real-time, maximizing engagement and conversion across all channels."
+      },
+      "brandIdentity": {
+        "title": "Brand Identity in the AI Era",
+        "description": "Defining how your brand interacts and is perceived in a world of AI assistants and agents. We help you establish a distinctive voice and presence in AI-mediated experiences."
+      }
+    },
+    "revolution": {
+      "title": "The Agentic Marketing Revolution",
+      "description": "We're entering the era of <strong>Agentic Marketing</strong> where autonomous AI systems don't just execute campaigns, they learn, decide, and act independently to achieve your business objectives.",
+      "traditional": {
+        "title": "Traditional Marketing",
+        "items": [
+          "Manual campaign setup",
+          "Periodic optimization",
+          "One-size-fits-all messaging",
+          "Delayed insights",
+          "Limited personalization"
+        ]
+      },
+      "agentic": {
+        "title": "Agentic Marketing",
+        "items": [
+          "Autonomous campaign orchestration",
+          "Real-time continuous optimization",
+          "Hyper-personalized at scale",
+          "Instant insights and actions",
+          "Adaptive to each customer"
+        ]
+      }
+    },
+    "useCases": {
+      "title": "Use Cases",
+      "dynamicContent": {
+        "title": "Dynamic Content Generation",
+        "description": "Generate thousands of unique product descriptions, blog posts, and social media content tailored to different audience segments all while maintaining brand voice and quality standards."
+      },
+      "personalizedJourneys": {
+        "title": "Personalized Customer Journeys",
+        "description": "Create unique experiences for each visitor based on their behavior, preferences, and context. AI agents adapt content, recommendations, and interfaces in real-time to maximize engagement and conversion."
+      },
+      "autonomousOptimization": {
+        "title": "Autonomous Campaign Optimization",
+        "description": "Deploy marketing campaigns that continuously test, learn, and optimize themselves across channels. AI agents adjust messaging, timing, targeting, and budget allocation to maximize ROI without manual intervention."
+      }
+    },
+    "cta": {
+      "title": "Ready to Amplify Your Creativity?",
+      "description": "Let's explore how The Creative Studio can help you create experiences and content that captivate audiences at unprecedented scale.",
+      "button": "Let's Create Together"
+    }
   }
 }

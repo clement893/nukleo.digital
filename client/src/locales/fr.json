@@ -381,5 +381,75 @@
       "description": "Discutons de la façon dont The AI Lab peut architecturer l'infrastructure technologique qui alimente votre transformation.",
       "button": "Commencer la Conversation"
     }
+  },
+  "studio": {
+    "title": "The Creative Studio",
+    "subtitle": "Augmented Content & Experiences",
+    "heroDescription": "Nous utilisons l'IA pour créer des expériences de marque et du contenu à une échelle et une pertinence sans précédent. Du contenu génératif aux campagnes marketing autonomes, nous vous aidons à vous connecter avec les audiences de manières auparavant impossibles.",
+    "mission": "Notre Mission",
+    "missionText": "Exploiter le pouvoir créatif de l'IA pour offrir des <strong>expériences hyper-personnalisées à grande échelle</strong>. Nous ne remplaçons pas la créativité humaine, nous l'amplifions, permettant à votre marque de créer des connexions significatives avec chaque client, à chaque instant.",
+    "capabilities": {
+      "title": "Capacités Créatives",
+      "contentCreation": {
+        "title": "Création de Contenu Augmenté",
+        "description": "Production de contenu (texte, image, vidéo) à une échelle sans précédent, personnalisé en temps réel. Nous exploitons l'IA générative pour créer du contenu aligné avec la marque qui résonne avec chaque segment d'audience."
+      },
+      "personalizedExperiences": {
+        "title": "Expériences Client Personnalisées par IA",
+        "description": "Création de parcours clients uniques et dynamiques alimentés par l'IA. Des recommandations personnalisées aux interfaces adaptatives, nous concevons des expériences qui évoluent avec chaque interaction."
+      },
+      "agenticMarketing": {
+        "title": "Campagnes Marketing Agentiques",
+        "description": "Déploiement de campagnes autonomes qui s'optimisent continuellement. Nos agents IA testent, apprennent et s'adaptent en temps réel, maximisant l'engagement et la conversion sur tous les canaux."
+      },
+      "brandIdentity": {
+        "title": "Identité de Marque à l'Ère de l'IA",
+        "description": "Définition de la façon dont votre marque interagit et est perçue dans un monde d'assistants et d'agents IA. Nous vous aidons à établir une voix et une présence distinctives dans les expériences médiées par l'IA."
+      }
+    },
+    "revolution": {
+      "title": "La Révolution du Marketing Agentique",
+      "description": "Nous entrons dans l'ère du <strong>Marketing Agentique</strong> où les systèmes IA autonomes n'exécutent pas seulement des campagnes, ils apprennent, décident et agissent indépendamment pour atteindre vos objectifs commerciaux.",
+      "traditional": {
+        "title": "Marketing Traditionnel",
+        "items": [
+          "Configuration manuelle des campagnes",
+          "Optimisation périodique",
+          "Messagerie unique pour tous",
+          "Insights retardés",
+          "Personnalisation limitée"
+        ]
+      },
+      "agentic": {
+        "title": "Marketing Agentique",
+        "items": [
+          "Orchestration autonome des campagnes",
+          "Optimisation continue en temps réel",
+          "Hyper-personnalisé à grande échelle",
+          "Insights et actions instantanés",
+          "Adaptatif à chaque client"
+        ]
+      }
+    },
+    "useCases": {
+      "title": "Cas d'Usage",
+      "dynamicContent": {
+        "title": "Génération de Contenu Dynamique",
+        "description": "Générez des milliers de descriptions de produits, articles de blog et contenus de médias sociaux uniques adaptés à différents segments d'audience tout en maintenant la voix de la marque et les standards de qualité."
+      },
+      "personalizedJourneys": {
+        "title": "Parcours Client Personnalisés",
+        "description": "Créez des expériences uniques pour chaque visiteur basées sur leur comportement, préférences et contexte. Les agents IA adaptent le contenu, les recommandations et les interfaces en temps réel pour maximiser l'engagement et la conversion."
+      },
+      "autonomousOptimization": {
+        "title": "Optimisation Autonome des Campagnes",
+        "description": "Déployez des campagnes marketing qui testent, apprennent et s'optimisent continuellement sur tous les canaux. Les agents IA ajustent le message, le timing, le ciblage et l'allocation budgétaire pour maximiser le ROI sans intervention manuelle."
+      }
+    },
+    "cta": {
+      "title": "Prêt à Amplifier votre Créativité ?",
+      "description": "Explorons comment The Creative Studio peut vous aider à créer des expériences et du contenu qui captivent les audiences à une échelle sans précédent.",
+      "button": "Créons Ensemble"
+    }
   }
 }

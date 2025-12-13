@@ -2,36 +2,59 @@ import SEO from '../components/SEO';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Sparkles, Palette, Zap, Users } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 export default function Studio() {
+  const { t, language } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
+  
+  // Helper to get array translations
+  const getArrayTranslation = (key: string): string[] => {
+    try {
+      const translations = require(`../locales/${language}.json`);
+      const keys = key.split('.');
+      let value: any = translations.default || translations;
+      for (const k of keys) {
+        if (value && typeof value === 'object' && k in value) {
+          value = value[k];
+        } else {
+          return [];
+        }
+      }
+      return Array.isArray(value) ? value : [];
+    } catch {
+      return [];
+    }
+  };
   const capabilities = [
     {
       icon: Palette,
-      title: 'Augmented Content Creation',
-      description: 'Producing content (text, image, video) at unprecedented scale, personalized in real-time. We leverage generative AI to create brand-aligned content that resonates with each audience segment.'
+      title: t('studio.capabilities.contentCreation.title'),
+      description: t('studio.capabilities.contentCreation.description')
     },
     {
       icon: Users,
-      title: 'AI-Personalized Customer Experiences',
-      description: 'Creating unique and dynamic customer journeys powered by AI. From personalized recommendations to adaptive interfaces, we design experiences that evolve with each interaction.'
+      title: t('studio.capabilities.personalizedExperiences.title'),
+      description: t('studio.capabilities.personalizedExperiences.description')
     },
     {
       icon: Zap,
-      title: 'Agentic Marketing Campaigns',
-      description: 'Deploying autonomous campaigns that continuously optimize themselves. Our AI agents test, learn, and adapt in real-time, maximizing engagement and conversion across all channels.'
+      title: t('studio.capabilities.agenticMarketing.title'),
+      description: t('studio.capabilities.agenticMarketing.description')
     },
     {
       icon: Sparkles,
-      title: 'Brand Identity in the AI Era',
-      description: 'Defining how your brand interacts and is perceived in a world of AI assistants and agents. We help you establish a distinctive voice and presence in AI-mediated experiences.'
+      title: t('studio.capabilities.brandIdentity.title'),
+      description: t('studio.capabilities.brandIdentity.description')
     }
   ];
 
   return (
     <>
       <SEO 
-        title="The Creative Studio | Augmented Content & Experiences | Nukleo Digital"
-        description="Using AI to create brand experiences and content at unparalleled scale and relevance. From augmented content creation to agentic marketing campaigns."
+        title={t('studio.title') + ' | ' + t('studio.subtitle') + ' | Nukleo Digital'}
+        description={t('studio.heroDescription')}
         keywords="AI content creation, agentic marketing, personalized experiences, AI creative studio, generative AI, content automation"
       />
       
@@ -47,17 +70,15 @@ export default function Studio() {
               </div>
               
               <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-                The Creative Studio
+                {t('studio.title')}
               </h1>
               
               <p className="text-2xl md:text-3xl text-accent font-medium mb-8">
-                Augmented Content & Experiences
+                {t('studio.subtitle')}
               </p>
               
               <p className="text-xl md:text-2xl text-white/70 leading-relaxed max-w-3xl">
-                We use AI to create brand experiences and content at unparalleled scale and relevance. 
-                From generative content to autonomous marketing campaigns, we help you connect with 
-                audiences in ways that were previously impossible.
+                {t('studio.heroDescription')}
               </p>
             </div>
           </div>
@@ -67,15 +88,10 @@ export default function Studio() {
         <section className="py-24 bg-white/5">
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
-              <h2 className="text-4xl md:text-5xl font-bold mb-12">Our Mission</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-12">{t('studio.mission')}</h2>
               
               <div className="p-12 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-sm">
-                <p className="text-2xl text-white/90 leading-relaxed">
-                  To harness the creative power of AI to deliver 
-                  <span className="text-accent font-semibold"> hyper-personalized experiences at scale</span>. 
-                  We don't replace human creativity we amplify it, enabling your brand to create 
-                  meaningful connections with every customer, in every moment.
-                </p>
+                <p className="text-2xl text-white/90 leading-relaxed" dangerouslySetInnerHTML={{ __html: t('studio.missionText') }} />
               </div>
             </div>
           </div>
@@ -85,7 +101,7 @@ export default function Studio() {
         <section className="py-24">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
-              <h2 className="text-4xl md:text-5xl font-bold mb-16">Creative Capabilities</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-16">{t('studio.capabilities.title')}</h2>
               
               <div className="grid md:grid-cols-2 gap-8">
                 {capabilities.map((capability, index) => {
@@ -113,35 +129,27 @@ export default function Studio() {
         <section className="py-24 bg-white/5">
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
-              <h2 className="text-4xl md:text-5xl font-bold mb-12">The Agentic Marketing Revolution</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-12">{t('studio.revolution.title')}</h2>
               
               <div className="space-y-8">
-                <p className="text-xl text-white/80 leading-relaxed">
-                  We're entering the era of <span className="text-accent font-semibold">Agentic Marketing</span> where 
-                  autonomous AI systems don't just execute campaigns, they learn, decide, and act independently 
-                  to achieve your business objectives.
-                </p>
+                <p className="text-xl text-white/80 leading-relaxed" dangerouslySetInnerHTML={{ __html: t('studio.revolution.description') }} />
 
                 <div className="grid md:grid-cols-2 gap-8 mt-12">
                   <div className="p-8 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm">
-                    <h3 className="text-2xl font-bold mb-4 text-accent">Traditional Marketing</h3>
+                    <h3 className="text-2xl font-bold mb-4 text-accent">{t('studio.revolution.traditional.title')}</h3>
                     <ul className="space-y-3 text-white/70">
-                      <li>• Manual campaign setup</li>
-                      <li>• Periodic optimization</li>
-                      <li>• One-size-fits-all messaging</li>
-                      <li>• Delayed insights</li>
-                      <li>• Limited personalization</li>
+                      {getArrayTranslation('studio.revolution.traditional.items').map((item: string, idx: number) => (
+                        <li key={idx}>• {item}</li>
+                      ))}
                     </ul>
                   </div>
 
                   <div className="p-8 rounded-2xl border border-accent/30 bg-gradient-to-br from-accent/10 to-purple-600/10 backdrop-blur-sm">
-                    <h3 className="text-2xl font-bold mb-4 text-accent">Agentic Marketing</h3>
+                    <h3 className="text-2xl font-bold mb-4 text-accent">{t('studio.revolution.agentic.title')}</h3>
                     <ul className="space-y-3 text-white/90">
-                      <li>• Autonomous campaign orchestration</li>
-                      <li>• Real-time continuous optimization</li>
-                      <li>• Hyper-personalized at scale</li>
-                      <li>• Instant insights and actions</li>
-                      <li>• Adaptive to each customer</li>
+                      {getArrayTranslation('studio.revolution.agentic.items').map((item: string, idx: number) => (
+                        <li key={idx}>• {item}</li>
+                      ))}
                     </ul>
                   </div>
                 </div>
@@ -154,7 +162,7 @@ export default function Studio() {
         <section className="py-24">
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
-              <h2 className="text-4xl md:text-5xl font-bold mb-16">Use Cases</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-16">{t('studio.useCases.title')}</h2>
               
               <div className="space-y-8">
                 <div className="p-8 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm hover:border-accent/50 transition-all duration-300">
@@ -163,11 +171,9 @@ export default function Studio() {
                       <span className="text-accent font-bold">01</span>
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold mb-3">Dynamic Content Generation</h3>
+                      <h3 className="text-2xl font-bold mb-3">{t('studio.useCases.dynamicContent.title')}</h3>
                       <p className="text-white/70 leading-relaxed">
-                        Generate thousands of unique product descriptions, blog posts, and social media 
-                        content tailored to different audience segments all while maintaining brand voice 
-                        and quality standards.
+                        {t('studio.useCases.dynamicContent.description')}
                       </p>
                     </div>
                   </div>
@@ -179,11 +185,9 @@ export default function Studio() {
                       <span className="text-accent font-bold">02</span>
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold mb-3">Personalized Customer Journeys</h3>
+                      <h3 className="text-2xl font-bold mb-3">{t('studio.useCases.personalizedJourneys.title')}</h3>
                       <p className="text-white/70 leading-relaxed">
-                        Create unique experiences for each visitor based on their behavior, preferences, 
-                        and context. AI agents adapt content, recommendations, and interfaces in real-time 
-                        to maximize engagement and conversion.
+                        {t('studio.useCases.personalizedJourneys.description')}
                       </p>
                     </div>
                   </div>
@@ -195,11 +199,9 @@ export default function Studio() {
                       <span className="text-accent font-bold">03</span>
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold mb-3">Autonomous Campaign Optimization</h3>
+                      <h3 className="text-2xl font-bold mb-3">{t('studio.useCases.autonomousOptimization.title')}</h3>
                       <p className="text-white/70 leading-relaxed">
-                        Deploy marketing campaigns that continuously test, learn, and optimize themselves 
-                        across channels. AI agents adjust messaging, timing, targeting, and budget allocation 
-                        to maximize ROI without manual intervention.
+                        {t('studio.useCases.autonomousOptimization.description')}
                       </p>
                     </div>
                   </div>
@@ -216,17 +218,16 @@ export default function Studio() {
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-4xl md:text-6xl font-bold mb-8">
-                Ready to Amplify Your Creativity?
+                {t('studio.cta.title')}
               </h2>
               <p className="text-xl text-white/70 mb-12 leading-relaxed">
-                Let's explore how The Creative Studio can help you create experiences and 
-                content that captivate audiences at unprecedented scale.
+                {t('studio.cta.description')}
               </p>
               <a 
-                href="/contact" 
+                href={getLocalizedPath('/contact')} 
                 className="inline-block px-8 py-4 bg-white text-purple-950 font-bold rounded-full hover:bg-white/90 transition-all duration-300 hover:scale-[1.022]"
               >
-                Let's Create Together
+                {t('studio.cta.button')}
               </a>
             </div>
           </div>

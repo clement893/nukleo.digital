@@ -15,7 +15,7 @@ export default function ManifestoSection() {
               {t('manifesto.sectionLabel')}
             </span>
 
-            <h2 className="text-white mb-6 sm:mb-8 text-4xl sm:text-5xl lg:text-6xl" dangerouslySetInnerHTML={{ __html: t('manifesto.title') }} />
+            <h2 className="text-white mb-6 sm:mb-8 text-4xl sm:text-5xl lg:text-6xl font-heading" dangerouslySetInnerHTML={{ __html: t('manifesto.title') }} />
 
             <p className="text-white/75 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8">
               {t('manifesto.description')}
@@ -31,49 +31,47 @@ export default function ManifestoSection() {
           </div>
 
           {/* Right: Manifesto Cards */}
-          <div className="space-y-6">
+          <div className="space-y-4">
             {/* Card 1 */}
-            <div className="group relative p-6 sm:p-8 lg:p-12 glass rounded-3xl overflow-hidden transition-all duration-500 hover:scale-[1.009] hover:shadow-xl hover:shadow-purple-500/10">
+            <div className="group relative p-6 sm:p-6 lg:p-8 glass rounded-2xl overflow-hidden transition-all duration-500 hover:scale-[1.009] hover:shadow-xl hover:shadow-purple-500/10">
               {/* Glassmorphism overlay on hover */}
               <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               
-              <div className="absolute top-0 right-0 p-8 opacity-20 group-hover:opacity-100 transition-opacity duration-500 relative z-10">
-                <Zap className="w-16 h-16 lg:w-24 lg:h-24 text-accent stroke-1" />
+              <div className="relative z-10">
+                {/* Icon Badge - Single icon */}
+                <div className="mb-4 w-12 h-12 bg-accent/20 flex items-center justify-center rounded-lg">
+                  <Zap className="w-6 h-6 text-accent" />
+                </div>
+
+                <h3 className="text-xl lg:text-2xl font-bold text-white mb-3">
+                  {t('manifesto.card1.title')}
+                </h3>
+
+                <p className="text-white/75 text-sm lg:text-base leading-relaxed">
+                  {t('manifesto.card1.description')}
+                </p>
               </div>
-
-              <div className="mb-6 w-16 h-16 bg-accent/20 flex items-center justify-center rounded-full">
-                <Zap className="w-8 h-8 text-accent" />
-              </div>
-
-              <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">
-                {t('manifesto.card1.title')}
-              </h3>
-
-              <p className="text-white/75 text-base lg:text-lg leading-relaxed">
-                {t('manifesto.card1.description')}
-              </p>
             </div>
 
             {/* Card 2 */}
-            <div className="group relative p-8 lg:p-12 glass rounded-3xl overflow-hidden transition-all duration-500 hover:scale-[1.009] hover:shadow-xl hover:shadow-purple-500/10">
+            <div className="group relative p-6 sm:p-6 lg:p-8 glass rounded-2xl overflow-hidden transition-all duration-500 hover:scale-[1.009] hover:shadow-xl hover:shadow-purple-500/10">
               {/* Glassmorphism overlay on hover */}
               <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               
-              <div className="absolute top-0 right-0 p-8 opacity-20 group-hover:opacity-100 transition-opacity duration-500 relative z-10">
-                <Settings className="w-16 h-16 lg:w-24 lg:h-24 text-accent stroke-1" />
+              <div className="relative z-10">
+                {/* Icon Badge - Single icon */}
+                <div className="mb-4 w-12 h-12 bg-accent/20 flex items-center justify-center rounded-lg">
+                  <Settings className="w-6 h-6 text-accent" />
+                </div>
+
+                <h3 className="text-xl lg:text-2xl font-bold text-white mb-3">
+                  {t('manifesto.card2.title')}
+                </h3>
+
+                <p className="text-white/75 text-sm lg:text-base leading-relaxed">
+                  {t('manifesto.card2.description')}
+                </p>
               </div>
-
-              <div className="mb-6 w-16 h-16 bg-accent/20 flex items-center justify-center rounded-full">
-                <Settings className="w-8 h-8 text-accent" />
-              </div>
-
-              <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">
-                {t('manifesto.card2.title')}
-              </h3>
-
-              <p className="text-white/75 text-base lg:text-lg leading-relaxed">
-                {t('manifesto.card2.description')}
-              </p>
             </div>
           </div>
         </div>

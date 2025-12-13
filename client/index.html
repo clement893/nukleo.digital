@@ -64,8 +64,9 @@
       }
       body.loaded { visibility: visible; }
       #nukleo-arrow-inline { display: none !important; }
-      /* Show loader immediately if present */
-      #root > div > div[style*="z-[9999]"] {
+      /* Show loader immediately if present - override body visibility */
+      #root > div > div[style*="z-[9999]"],
+      #root > div > div[style*="z-[9999]"] > div {
         visibility: visible !important;
       }
     </style>

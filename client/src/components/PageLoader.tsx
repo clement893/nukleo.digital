@@ -109,13 +109,17 @@ export default function PageLoader() {
         opacity: isLoading ? 1 : 0,
         pointerEvents: isLoading ? "all" : "none",
         transition: "opacity 0.5s ease-out",
+        visibility: isLoading ? "visible" : "hidden",
       }}
     >
       {htmlContent && (
         <div
           key={`page-loader-${loaderHtml.substring(0, 50)}`}
           className="fixed inset-0"
-          style={{ zIndex: 9999 }}
+          style={{ 
+            zIndex: 9999,
+            visibility: "visible",
+          }}
           dangerouslySetInnerHTML={{ __html: htmlContent }}
         />
       )}

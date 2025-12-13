@@ -25,11 +25,28 @@
     "talkToLeo": "Parler à Leo",
     "artsCulture": "Arts & Culture"
   },
+  "header": {
+    "tagline": "Choisir l'Intelligence"
+  },
   "hero": {
-    "title": "Rejoignez la",
+    "title": "Rejoignez La",
     "titleHighlight": "Révolution IA",
     "subtitle": "Commencez votre parcours de transformation avec nous.",
-    "cta": "Rejoindre les Leaders"
+    "cta": "Rejoindre Les Leaders",
+    "services": [
+      "Stratégie IA",
+      "Plateformes Numériques",
+      "Applications Mobiles",
+      "Studio Créatif",
+      "Solutions CRM",
+      "Portails",
+      "Marketing",
+      "Communication",
+      "Opérations",
+      "Sécurité",
+      "Analytique",
+      "Solutions Cloud"
+    ]
   },
   "footer": {
     "description": "Transformez votre entreprise avec des solutions alimentées par l'IA.",
@@ -52,17 +69,84 @@
     "newsletterButton": "S'abonner"
   },
   "home": {
-    "beyondAI": "Au-delà de l'IA",
+    "beyondAI": "Au-Delà De L'IA",
     "beyondAIDescription": "Nous créons des écosystèmes numériques complets de la stratégie et des plateformes au contenu créatif et à l'automatisation intelligente."
   },
+  "capabilities": {
+    "sectionLabel": "Capacités",
+    "title": "Infrastructure<br />Native IA",
+    "description": "Nous ne construisons pas seulement des sites web ou des applications. Nous concevons des écosystèmes intelligents où chaque point de contact numérique est alimenté par des agents autonomes.",
+    "aiWebsites": {
+      "title": "Sites Web Basés Sur L'IA",
+      "description": "Expériences web auto-optimisantes qui adaptent le contenu et la mise en page en temps réel en fonction du comportement et de l'intention de l'utilisateur."
+    },
+    "intelligentPlatforms": {
+      "title": "Plateformes Intelligentes",
+      "description": "Outils SaaS et internes construits sur une architecture agentique, automatisant les flux de travail complexes et la prise de décision."
+    },
+    "nextGenApps": {
+      "title": "Applications De Nouvelle Génération",
+      "description": "Applications mobiles et de bureau avec des cœurs IA intégrés, offrant des fonctionnalités prédictives et des interfaces en langage naturel."
+    },
+    "automatedMarketing": {
+      "title": "Marketing Automatisé",
+      "description": "Gestion de campagnes de bout en bout par des agents IA de la génération de contenu à l'achat de publicité et à l'analyse des performances."
+    }
+  },
+  "manifesto": {
+    "sectionLabel": "01 Manifeste",
+    "title": "Passez Du<br /><span class=\"text-white/40\">Pilote À</span><br />L'Échelle.",
+    "description": "L'écart se creuse. Pendant que d'autres expérimentent, les leaders réarchitecturent toute leur opération autour de l'IA Agentique.",
+    "readMore": "Lire Le Manifeste Complet",
+    "card1": {
+      "title": "Leader, Pas Suiveur",
+      "description": "Intégrez des capacités d'IA agentique qui peuvent tripler votre ROI, votre vitesse et votre volume de production."
+    },
+    "card2": {
+      "title": "Opérations Réinventées",
+      "description": "Réarchitecturer les flux de travail autour d'agents intelligents qui automatisent et optimisent en continu."
+    }
+  },
+  "whoWeServe": {
+    "subtitle": "Champions Des Petites Organisations",
+    "title": "Qui Nous Servons",
+    "description": "Nous sommes là pour aider <strong>TOUT LE MONDE</strong> à se transformer. La grande technologie a l'IA maintenant c'est votre tour. Nous apportons l'IA de niveau entreprise aux startups, PME et organisations à but non lucratif qui refusent d'être laissées pour compte.",
+    "startups": {
+      "title": "Startups & Scale-Ups",
+      "description": "Lancez-vous plus rapidement et évoluez plus intelligemment avec l'automatisation alimentée par l'IA, les fonctionnalités intelligentes et les insights basés sur les données qui vous donnent un avantage concurrentiel dès le premier jour.",
+      "highlights": [
+        "Développement Rapide De MVP",
+        "Architecture IA Évolutive",
+        "Accélération De La Croissance"
+      ]
+    },
+    "smbs": {
+      "title": "PME",
+      "description": "Transformez votre entreprise avec des solutions IA pratiques et rentables qui génèrent un vrai ROI de l'automatisation des tâches répétitives au déblocage des insights clients.",
+      "highlights": [
+        "Solutions IA Abordables",
+        "Gains Rapides Et ROI Rapide",
+        "Pas De Complexité D'Entreprise"
+      ]
+    },
+    "nonprofits": {
+      "title": "Organisations À But Non Lucratif",
+      "description": "Amplifiez votre impact avec des outils IA qui vous aident à servir plus de personnes, à opérer plus efficacement et à raconter votre histoire plus puissamment sans casser le budget.",
+      "highlights": [
+        "IA Axée Sur La Mission",
+        "Outils D'Engagement Des Donateurs",
+        "Efficacité Opérationnelle"
+      ]
+    }
+  },
   "about": {
-    "title": "À propos",
-    "subtitle": "Notre équipe",
-    "description": "Découvrez les experts derrière Nukleo Digital"
+    "title": "À Propos",
+    "subtitle": "Notre Équipe",
+    "description": "Découvrez Les Experts Derrière Nukleo Digital"
   },
   "services": {
     "title": "Services",
-    "subtitle": "Nous sommes à vos côtés pour vous aider à grandir.",
+    "subtitle": "Nous Sommes À Vos Côtés Pour Vous Aider À Grandir.",
     "description": "Services IA complets : Stratégie & Marketing, Plateformes Numériques, Opérations Intelligentes."
   },
   "contact": {
@@ -104,8 +188,8 @@
     "subtitle": "Nous sommes à vos côtés pour vous aider à grandir.",
     "description": "Services IA complets : Stratégie & Marketing, Plateformes Numériques, Opérations Intelligentes.",
     "ourServices": "Nos Services",
-    "heroTitle": "Nous sommes à vos côtés",
-    "heroSubtitle": "pour vous aider à grandir.",
+    "heroTitle": "Nous Sommes À Vos Côtés",
+    "heroSubtitle": "Pour Vous Aider À Grandir.",
     "heroDescription": "Trois studios spécialisés travaillant en harmonie pour transformer votre vision en réalité. De la stratégie à la créativité, de l'innovation à l'exécution.",
     "bureau": {
       "category": "The Bureau",
@@ -113,7 +197,7 @@
       "description": "Votre quartier général stratégique. Ici, nous transformons les données en décisions, les insights en actions, et les opportunités en résultats mesurables.",
       "services": {
         "aiStrategy": {
-          "title": "Consultation en Stratégie IA",
+          "title": "Consultation En Stratégie IA",
           "description": "Définissez votre feuille de route IA avec des conseils d'experts sur la sélection de technologies, la planification de l'implémentation et l'optimisation du ROI."
         },
         "conversationalAI": {
@@ -132,7 +216,7 @@
     },
     "lab": {
       "category": "The Lab",
-      "subtitle": "Laboratoire d'Innovation",
+      "subtitle": "Laboratoire D'Innovation",
       "description": "Bienvenue dans notre laboratoire d'innovation. Ici, nous transformons les technologies de pointe en avantages concurrentiels tangibles.",
       "services": {
         "customWebApps": {
@@ -216,7 +300,7 @@
     "title": "Projets",
     "sectionNumber": "02 Projets",
     "heroTitle": "Transformations",
-    "heroSubtitle": "qui Résonnent",
+    "heroSubtitle": "Qui Résonnent",
     "description": "Résultats réels d'organisations qui ont choisi de mener plutôt que de suivre. Chaque projet représente une réimagination complète des opérations grâce à l'IA agentique.",
     "filterAll": "Tous",
     "noProjects": "Aucun projet trouvé",

@@ -1,24 +1,45 @@
 import { Rocket, Building2, Heart } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function WhoWeServeSection() {
+  const { t, language } = useLanguage();
+  
+  const getArrayTranslation = (key: string): string[] => {
+    try {
+      const translations = require(`../locales/${language || 'en'}.json`);
+      const keys = key.split('.');
+      let value: any = translations.default || translations;
+      for (const k of keys) {
+        if (value && typeof value === 'object' && k in value) {
+          value = value[k];
+        } else {
+          return [];
+        }
+      }
+      return Array.isArray(value) ? value : [];
+    } catch {
+      return [];
+    }
+  };
+  
   const segments = [
     {
       icon: Rocket,
-      title: 'Startups & Scale-ups',
-      description: 'Launch faster and scale smarter with AI-powered automation, intelligent features, and data-driven insights that give you a competitive edge from day one.',
-      highlights: ['Rapid MVP development', 'Scalable AI architecture', 'Growth acceleration']
+      title: t('whoWeServe.startups.title'),
+      description: t('whoWeServe.startups.description'),
+      highlights: getArrayTranslation('whoWeServe.startups.highlights')
     },
     {
       icon: Building2,
-      title: 'SMBs',
-      description: 'Transform your business with practical, cost-effective AI solutions that deliver real ROI from automating repetitive tasks to unlocking customer insights.',
-      highlights: ['Affordable AI solutions', 'Quick wins & fast ROI', 'No enterprise complexity']
+      title: t('whoWeServe.smbs.title'),
+      description: t('whoWeServe.smbs.description'),
+      highlights: getArrayTranslation('whoWeServe.smbs.highlights')
     },
     {
       icon: Heart,
-      title: 'Non-Profits',
-      description: 'Amplify your impact with AI tools that help you serve more people, operate more efficiently, and tell your story more powerfully without breaking the budget.',
-      highlights: ['Mission-driven AI', 'Donor engagement tools', 'Operational efficiency']
+      title: t('whoWeServe.nonprofits.title'),
+      description: t('whoWeServe.nonprofits.description'),
+      highlights: getArrayTranslation('whoWeServe.nonprofits.highlights')
     }
   ];
 
@@ -28,14 +49,12 @@ export default function WhoWeServeSection() {
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16 lg:mb-20">
           <p className="text-sm font-mono tracking-widest text-purple-400 mb-4">
-            Champions of Smaller Organizations
+            {t('whoWeServe.subtitle')}
           </p>
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
-            Who We Serve
+            {t('whoWeServe.title')}
           </h2>
-          <p className="text-base sm:text-lg lg:text-xl text-white/70 max-w-3xl mx-auto px-4">
-            We're here to help <span className="text-white font-bold">EVERYONE</span> transform. Big tech has AI now it's your turn. We bring enterprise-grade AI to startups, SMBs, and non-profits who refuse to be left behind.
-          </p>
+          <p className="text-base sm:text-lg lg:text-xl text-white/70 max-w-3xl mx-auto px-4" dangerouslySetInnerHTML={{ __html: t('whoWeServe.description') }} />
         </div>
 
         {/* Segments Grid */}

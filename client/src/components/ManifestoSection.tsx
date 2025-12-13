@@ -1,6 +1,10 @@
 import { Zap, Settings } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 export default function ManifestoSection() {
+  const { t } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
   return (
     <section id="manifesto" className="py-16 sm:py-20 lg:py-32">
       <div className="container">
@@ -8,24 +12,22 @@ export default function ManifestoSection() {
           {/* Left: Title and Description */}
           <div>
             <span className="font-mono text-accent text-sm mb-8 block tracking-widest">
-              01 Manifesto
+              {t('manifesto.sectionLabel')}
             </span>
 
             <h2 className="text-white mb-6 sm:mb-8 text-4xl sm:text-5xl lg:text-6xl">
-              Move From<br />
-              <span className="text-white/40">Pilot to</span><br />
-              Scale.
+              {t('manifesto.title')}
             </h2>
 
             <p className="text-white/75 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8">
-              The gap is widening. While others experiment, leaders are re-architecting their entire operation around Agentic AI.
+              {t('manifesto.description')}
             </p>
 
             <a
-              href="/manifesto"
+              href={getLocalizedPath('/manifesto')}
               className="inline-flex items-center gap-2 text-accent hover:text-accent/80 transition-colors font-medium"
             >
-              Read the full manifesto
+              {t('manifesto.readMore')}
               <span className="text-xl">→</span>
             </a>
           </div>
@@ -47,11 +49,11 @@ export default function ManifestoSection() {
               </div>
 
               <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">
-                Leader, Not Follower
+                {t('manifesto.card1.title')}
               </h3>
 
               <p className="text-white/75 text-base lg:text-lg leading-relaxed">
-                Integrate agentic AI capabilities that can triple your ROI, speed, and output volume.
+                {t('manifesto.card1.description')}
               </p>
             </div>
 
@@ -70,11 +72,11 @@ export default function ManifestoSection() {
               </div>
 
               <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">
-                Operations Reinvented
+                {t('manifesto.card2.title')}
               </h3>
 
               <p className="text-white/75 text-base lg:text-lg leading-relaxed">
-                Re-architect workflows around intelligent agents that automate and optimize continuously.
+                {t('manifesto.card2.description')}
               </p>
             </div>
           </div>

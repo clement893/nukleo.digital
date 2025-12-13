@@ -59,7 +59,7 @@ export default function Header() {
                 className="h-8 w-auto object-contain mb-1"
               />
               <span className="text-[10px] text-white/60 font-medium tracking-wider">
-                Choose Intelligence
+                {t('header.tagline')}
               </span>
             </Link>
 

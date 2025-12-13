@@ -25,11 +25,28 @@
     "talkToLeo": "Talk to Leo",
     "artsCulture": "Arts & Culture"
   },
+  "header": {
+    "tagline": "Choose Intelligence"
+  },
   "hero": {
     "title": "Join the",
     "titleHighlight": "AI Revolution",
     "subtitle": "Start your transformation journey with us.",
-    "cta": "Join the Leaders"
+    "cta": "Join the Leaders",
+    "services": [
+      "AI Strategy",
+      "Digital Platforms",
+      "Mobile Apps",
+      "Creative Studio",
+      "CRM Solutions",
+      "Portals",
+      "Marketing",
+      "Communication",
+      "Operations",
+      "Security",
+      "Analytics",
+      "Cloud Solutions"
+    ]
   },
   "footer": {
     "description": "Transform your business with AI-powered solutions.",
@@ -54,6 +71,73 @@
   "home": {
     "beyondAI": "Beyond AI",
     "beyondAIDescription": "We craft complete digital ecosystems from strategy and platforms to creative content and intelligent automation."
+  },
+  "capabilities": {
+    "sectionLabel": "Capabilities",
+    "title": "AI-Native<br />Infrastructure",
+    "description": "We don't just build websites or apps. We engineer intelligent ecosystems where every digital touchpoint is powered by autonomous agents.",
+    "aiWebsites": {
+      "title": "AI-Base Websites",
+      "description": "Self-optimizing web experiences that adapt content and layout in real-time based on user behavior and intent."
+    },
+    "intelligentPlatforms": {
+      "title": "Intelligent Platforms",
+      "description": "SaaS and internal tools built on agentic architecture, automating complex workflows and decision-making."
+    },
+    "nextGenApps": {
+      "title": "Next-Gen Apps",
+      "description": "Mobile and desktop applications with embedded AI cores, offering predictive features and natural language interfaces."
+    },
+    "automatedMarketing": {
+      "title": "Automated Marketing",
+      "description": "End-to-end campaign management by AI agents from content generation to ad buying and performance analysis."
+    }
+  },
+  "manifesto": {
+    "sectionLabel": "01 Manifesto",
+    "title": "Move From<br /><span class=\"text-white/40\">Pilot to</span><br />Scale.",
+    "description": "The gap is widening. While others experiment, leaders are re-architecting their entire operation around Agentic AI.",
+    "readMore": "Read the full manifesto",
+    "card1": {
+      "title": "Leader, Not Follower",
+      "description": "Integrate agentic AI capabilities that can triple your ROI, speed, and output volume."
+    },
+    "card2": {
+      "title": "Operations Reinvented",
+      "description": "Re-architect workflows around intelligent agents that automate and optimize continuously."
+    }
+  },
+  "whoWeServe": {
+    "subtitle": "Champions of Smaller Organizations",
+    "title": "Who We Serve",
+    "description": "We're here to help <strong>EVERYONE</strong> transform. Big tech has AI now it's your turn. We bring enterprise-grade AI to startups, SMBs, and non-profits who refuse to be left behind.",
+    "startups": {
+      "title": "Startups & Scale-ups",
+      "description": "Launch faster and scale smarter with AI-powered automation, intelligent features, and data-driven insights that give you a competitive edge from day one.",
+      "highlights": [
+        "Rapid MVP development",
+        "Scalable AI architecture",
+        "Growth acceleration"
+      ]
+    },
+    "smbs": {
+      "title": "SMBs",
+      "description": "Transform your business with practical, cost-effective AI solutions that deliver real ROI from automating repetitive tasks to unlocking customer insights.",
+      "highlights": [
+        "Affordable AI solutions",
+        "Quick wins & fast ROI",
+        "No enterprise complexity"
+      ]
+    },
+    "nonprofits": {
+      "title": "Non-Profits",
+      "description": "Amplify your impact with AI tools that help you serve more people, operate more efficiently, and tell your story more powerfully without breaking the budget.",
+      "highlights": [
+        "Mission-driven AI",
+        "Donor engagement tools",
+        "Operational efficiency"
+      ]
+    }
   },
   "about": {
     "title": "About",

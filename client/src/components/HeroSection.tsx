@@ -114,16 +114,24 @@ function HeroSection() {
                   }}
                 >
                   {/* Double the services for seamless loop */}
-                  {[...Array(2)].map((_, setIndex) => (
-                    ['AI Strategy', 'Digital Platforms', 'Mobile Apps', 'Creative Studio', 'CRM Solutions', 'Portals', 'Marketing', 'Communication', 'Operations', 'Security', 'Analytics', 'Cloud Solutions'].map((service, index) => (
+                  {[...Array(2)].map((_, setIndex) => {
+                    const getServices = () => {
+                      try {
+                        const translations = require(`../locales/${language}.json`);
+                        return translations.default?.hero?.services || translations.hero?.services || [];
+                      } catch {
+                        return [];
+                      }
+                    };
+                    return getServices().map((service: string, index: number) => (
                       <span 
                         key={`${setIndex}-${index}`}
                         className="text-white/40 hover:text-white/80 text-lg sm:text-xl font-medium transition-colors duration-300 cursor-default"
                       >
                         {service}
                       </span>
-                    ))
-                  ))}
+                    ));
+                  })}
                 </div>
               </div>
             </div>

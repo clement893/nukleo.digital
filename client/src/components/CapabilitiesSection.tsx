@@ -1,29 +1,31 @@
 import { Globe, Layers, Zap, BarChart3 } from 'lucide-react';
 import { useSound } from '@/hooks/useSound';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function CapabilitiesSection() {
   const { playHover, playClick } = useSound();
+  const { t } = useLanguage();
   
   const capabilities = [
     {
       icon: Globe,
-      title: 'AI-Base Websites',
-      description: 'Self-optimizing web experiences that adapt content and layout in real-time based on user behavior and intent.',
+      title: t('capabilities.aiWebsites.title'),
+      description: t('capabilities.aiWebsites.description'),
     },
     {
       icon: Layers,
-      title: 'Intelligent Platforms',
-      description: 'SaaS and internal tools built on agentic architecture, automating complex workflows and decision-making.',
+      title: t('capabilities.intelligentPlatforms.title'),
+      description: t('capabilities.intelligentPlatforms.description'),
     },
     {
       icon: Zap,
-      title: 'Next-Gen Apps',
-      description: 'Mobile and desktop applications with embedded AI cores, offering predictive features and natural language interfaces.',
+      title: t('capabilities.nextGenApps.title'),
+      description: t('capabilities.nextGenApps.description'),
     },
     {
       icon: BarChart3,
-      title: 'Automated Marketing',
-      description: 'End-to-end campaign management by AI agents from content generation to ad buying and performance analysis.',
+      title: t('capabilities.automatedMarketing.title'),
+      description: t('capabilities.automatedMarketing.description'),
     },
   ];
 
@@ -33,16 +35,15 @@ export default function CapabilitiesSection() {
         {/* Section Header */}
         <div className="mb-10 sm:mb-12 lg:mb-16">
           <span className="font-mono text-accent text-sm mb-8 block tracking-widest">
-            Capabilities
+            {t('capabilities.sectionLabel')}
           </span>
 
           <h2 className="text-white mb-4 sm:mb-6 text-4xl sm:text-5xl lg:text-6xl">
-            AI-Native<br />
-            Infrastructure
+            {t('capabilities.title')}
           </h2>
 
           <p className="text-white/75 text-base sm:text-lg lg:text-xl leading-relaxed max-w-3xl">
-            We don't just build websites or apps. We engineer intelligent ecosystems where every digital touchpoint is powered by autonomous agents.
+            {t('capabilities.description')}
           </p>
         </div>
 

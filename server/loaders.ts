@@ -58,3 +58,17 @@ export async function toggleLoaderActive(id: number): Promise<Loader | undefined
   
   return await updateLoader(id, { isActive: !loader.isActive });
 }
+
+// Delete all loaders
+export async function deleteAllLoaders(): Promise<number> {
+  const db = await getDb();
+  if (!db) return 0;
+  const existing = await getAllLoaders();
+  const count = existing.length;
+  if (count > 0) {
+    for (const loader of existing) {
+      await db.delete(loaders).where(eq(loaders.id, loader.id));
+    }
+  }
+  return count;
+}

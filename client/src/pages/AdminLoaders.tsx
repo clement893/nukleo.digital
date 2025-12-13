@@ -27,6 +27,16 @@ export default function AdminLoaders() {
     },
   });
 
+  const resetMutation = trpc.loaders.reset.useMutation({
+    onSuccess: () => {
+      utils.loaders.getAll.invalidate();
+      alert("✅ Loaders réinitialisés avec succès! 2 nouveaux loaders ont été créés.");
+    },
+    onError: (error) => {
+      alert(`❌ Erreur lors de la réinitialisation: ${error.message}`);
+    },
+  });
+
   const handleToggleActive = (id: number) => {
     toggleActiveMutation.mutate({ id });
   };
@@ -86,10 +96,33 @@ export default function AdminLoaders() {
               Gérez les animations de chargement qui s'affichent au démarrage du site
             </p>
           </div>
-          <Button disabled>
-            <Plus className="w-4 h-4 mr-2" />
-            Ajouter un Loader
-          </Button>
+          <div className="flex gap-3">
+            <Button 
+              onClick={() => {
+                if (confirm("⚠️ Êtes-vous sûr de vouloir réinitialiser tous les loaders ?\n\nCette action va:\n- Supprimer TOUS les loaders existants\n- Créer 2 nouveaux loaders avec votre logo\n\nCette action est irréversible.")) {
+                  resetMutation.mutate();
+                }
+              }}
+              disabled={resetMutation.isPending}
+              variant="outline"
+              className="bg-red-50 hover:bg-red-100 text-red-700 border-red-200"
+            >
+              {resetMutation.isPending ? (
+                <>
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  Réinitialisation...
+                </>
+              ) : (
+                <>
+                  🔄 Réinitialiser les Loaders
+                </>
+              )}
+            </Button>
+            <Button disabled>
+              <Plus className="w-4 h-4 mr-2" />
+              Ajouter un Loader
+            </Button>
+          </div>
         </div>
 
         {/* Statistics Cards */}

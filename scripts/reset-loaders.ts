@@ -1,71 +1,25 @@
-import { z } from "zod";
-import { router, publicProcedure } from "./_core/trpc";
-import * as loadersDb from "../loaders";
+/**
+ * Script pour réinitialiser les loaders
+ * Vide tous les loaders existants et crée 2 nouveaux loaders créatifs avec le logo Nukleo
+ */
 
-export const loadersRouter = router({
-  // Get all loaders (admin only)
-  getAll: publicProcedure.query(async () => {
-    return await loadersDb.getAllLoaders();
-  }),
+import postgres from "postgres";
+import { drizzle } from "drizzle-orm/postgres-js";
+import { loaders } from "../drizzle/schema";
+import { eq } from "drizzle-orm";
 
-  // Get active loaders (public - for rotation)
-  getActive: publicProcedure.query(async () => {
-    return await loadersDb.getActiveLoaders();
-  }),
+const DATABASE_URL = process.env.DATABASE_URL;
 
-  // Create a new loader
-  create: publicProcedure
-    .input(
-      z.object({
-        name: z.string().min(1).max(255),
-        description: z.string().optional(),
-        cssCode: z.string().min(1),
-        isActive: z.boolean().default(true),
-        displayOrder: z.number().default(0),
-      })
-    )
-    .mutation(async ({ input }) => {
-      return await loadersDb.createLoader(input);
-    }),
+if (!DATABASE_URL) {
+  console.error("❌ DATABASE_URL n'est pas défini dans les variables d'environnement");
+  process.exit(1);
+}
 
-  // Update a loader
-  update: publicProcedure
-    .input(
-      z.object({
-        id: z.number(),
-        name: z.string().min(1).max(255).optional(),
-        description: z.string().optional(),
-        cssCode: z.string().min(1).optional(),
-        isActive: z.boolean().optional(),
-        displayOrder: z.number().optional(),
-      })
-    )
-    .mutation(async ({ input }) => {
-      const { id, ...data } = input;
-      return await loadersDb.updateLoader(id, data);
-    }),
+const sql = postgres(DATABASE_URL);
+const db = drizzle(sql);
 
-  // Toggle active status
-  toggleActive: publicProcedure
-    .input(z.object({ id: z.number() }))
-    .mutation(async ({ input }) => {
-      return await loadersDb.toggleLoaderActive(input.id);
-    }),
-
-  // Delete a loader
-  delete: publicProcedure
-    .input(z.object({ id: z.number() }))
-    .mutation(async ({ input }) => {
-      return await loadersDb.deleteLoader(input.id);
-    }),
-
-  // Reset all loaders and create new ones
-  reset: publicProcedure.mutation(async () => {
-    // Delete all existing loaders
-    const deletedCount = await loadersDb.deleteAllLoaders();
-
-    // Loader 1: Logo avec animation de pulse et particules
-    const loader1CSS = `
+// Loader 1: Logo avec animation de pulse et particules
+const loader1CSS = `
 <div class="nukleo-loader-1">
   <style>
     .nukleo-loader-1 {
@@ -189,8 +143,8 @@ export const loadersRouter = router({
 </div>
 `;
 
-    // Loader 2: Logo avec effet de glitch et gradient animé
-    const loader2CSS = `
+// Loader 2: Logo avec effet de glitch et gradient animé
+const loader2CSS = `
 <div class="nukleo-loader-2">
   <style>
     .nukleo-loader-2 {
@@ -381,27 +335,62 @@ export const loadersRouter = router({
 </div>
 `;
 
-    // Create the two new loaders
-    const loader1 = await loadersDb.createLoader({
+async function resetLoaders() {
+  try {
+    console.log("🔄 Début de la réinitialisation des loaders...\n");
+
+    // 1. Récupérer tous les loaders existants
+    const existingLoaders = await db.select().from(loaders);
+    console.log(`📋 ${existingLoaders.length} loader(s) existant(s) trouvé(s)`);
+
+    // 2. Supprimer tous les loaders existants
+    if (existingLoaders.length > 0) {
+      for (const loader of existingLoaders) {
+        await db.delete(loaders).where(eq(loaders.id, loader.id));
+        console.log(`  ❌ Supprimé: "${loader.name}"`);
+      }
+      console.log(`\n✅ Tous les loaders existants ont été supprimés\n`);
+    } else {
+      console.log("ℹ️  Aucun loader existant à supprimer\n");
+    }
+
+    // 3. Créer les 2 nouveaux loaders
+    console.log("✨ Création des nouveaux loaders...\n");
+
+    const loader1 = await db.insert(loaders).values({
       name: "Nukleo Pulse",
       description: "Logo avec animation de pulse élégante et particules flottantes. Design moderne et professionnel.",
       cssCode: loader1CSS,
       isActive: true,
       displayOrder: 1,
-    });
+    }).returning();
 
-    const loader2 = await loadersDb.createLoader({
+    console.log(`  ✅ Créé: "${loader1[0].name}" (ID: ${loader1[0].id})`);
+    console.log(`     Description: ${loader1[0].description}`);
+    console.log(`     Statut: ${loader1[0].isActive ? "Actif" : "Inactif"}`);
+
+    const loader2 = await db.insert(loaders).values({
       name: "Nukleo Glitch",
       description: "Logo avec effet de glitch cyberpunk et gradient animé. Design puissant et futuriste.",
       cssCode: loader2CSS,
       isActive: true,
       displayOrder: 2,
-    });
+    }).returning();
 
-    return {
-      success: true,
-      deleted: deletedCount,
-      created: [loader1, loader2],
-    };
-  }),
-});
+    console.log(`\n  ✅ Créé: "${loader2[0].name}" (ID: ${loader2[0].id})`);
+    console.log(`     Description: ${loader2[0].description}`);
+    console.log(`     Statut: ${loader2[0].isActive ? "Actif" : "Inactif"}`);
+
+    console.log("\n🎉 Réinitialisation terminée avec succès!");
+    console.log("\n📝 Les 2 loaders sont maintenant actifs et s'afficheront en rotation au chargement du site.");
+    console.log("   Vous pouvez les gérer depuis: /admin/loaders\n");
+
+  } catch (error) {
+    console.error("❌ Erreur lors de la réinitialisation:", error);
+    process.exit(1);
+  } finally {
+    await sql.end();
+  }
+}
+
+resetLoaders();

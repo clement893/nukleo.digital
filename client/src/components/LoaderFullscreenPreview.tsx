@@ -90,13 +90,31 @@ export default function LoaderFullscreenPreview({
   const renderLoader = () => {
     // If loaderType contains HTML/CSS (starts with <div or contains <style>), render it directly
     if (loaderType.includes('<div') || loaderType.includes('<style>')) {
-      // Remove <style> tags from HTML (styles are injected via useEffect)
-      const htmlWithoutStyles = loaderType.replace(/<style>[\s\S]*?<\/style>/g, '');
+      // Use iframe to properly isolate and render the loader with its styles
+      const fullHTML = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  ${loaderType.match(/<style>([\s\S]*?)<\/style>/)?.[1] ? `<style>${loaderType.match(/<style>([\s\S]*?)<\/style>/)?.[1]}</style>` : ''}
+</head>
+<body style="margin: 0; padding: 0; overflow: hidden;">
+  ${loaderType.replace(/<style>[\s\S]*?<\/style>/g, '')}
+</body>
+</html>`;
+      
+      const blob = new Blob([fullHTML], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
       
       return (
-        <div 
-          dangerouslySetInnerHTML={{ __html: htmlWithoutStyles }}
-          className="absolute inset-0"
+        <iframe
+          src={url}
+          className="absolute inset-0 w-full h-full border-0"
+          style={{ pointerEvents: 'none' }}
+          onLoad={() => {
+            // Cleanup blob URL after a delay
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+          }}
         />
       );
     }

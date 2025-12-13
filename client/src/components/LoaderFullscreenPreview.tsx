@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 interface LoaderFullscreenPreviewProps {
   loaderType: string;
@@ -16,59 +16,42 @@ export default function LoaderFullscreenPreview({
   onClose,
 }: LoaderFullscreenPreviewProps) {
   const [progress, setProgress] = useState(0);
-  const [stylesInjected, setStylesInjected] = useState(false);
+  const containerRef = React.useRef<HTMLDivElement>(null);
   const LOADING_DURATION = 4000; // 4 secondes
 
-  // Extract and inject styles when preview opens
+  // Render loader HTML/CSS using Shadow DOM for proper style isolation
   useEffect(() => {
-    if (!isOpen) {
-      setStylesInjected(false);
-      // Cleanup styles when preview closes
-      const styleToRemove = document.getElementById('loader-preview-styles');
-      if (styleToRemove) {
-        styleToRemove.remove();
-      }
-      return;
-    }
+    if (!isOpen || !containerRef.current) return;
+    if (!loaderType.includes('<div') && !loaderType.includes('<style>')) return;
 
-    if (!loaderType.includes('<style>')) {
-      setStylesInjected(true);
-      return;
-    }
+    // Clear container
+    containerRef.current.innerHTML = '';
 
+    // Create shadow root for style isolation
+    const shadowRoot = containerRef.current.attachShadow({ mode: 'open' });
+
+    // Extract styles and HTML
     const styleMatch = loaderType.match(/<style>([\s\S]*?)<\/style>/);
-    if (!styleMatch) {
-      setStylesInjected(true);
-      return;
+    const styles = styleMatch ? styleMatch[1] : '';
+    const htmlWithoutStyles = loaderType.replace(/<style>[\s\S]*?<\/style>/g, '').trim();
+
+    // Create style element in shadow DOM
+    if (styles) {
+      const styleElement = document.createElement('style');
+      styleElement.textContent = styles;
+      shadowRoot.appendChild(styleElement);
     }
 
-    const styles = styleMatch[1];
-    const styleId = 'loader-preview-styles';
-    
-    // Remove existing style tag if any
-    const existingStyle = document.getElementById(styleId);
-    if (existingStyle) {
-      existingStyle.remove();
-    }
+    // Create container for HTML content
+    const contentDiv = document.createElement('div');
+    contentDiv.innerHTML = htmlWithoutStyles;
+    shadowRoot.appendChild(contentDiv);
 
-    // Inject styles into document head immediately
-    const styleElement = document.createElement('style');
-    styleElement.id = styleId;
-    styleElement.textContent = styles;
-    document.head.appendChild(styleElement);
-    
-    // Force a small delay to ensure styles are applied before rendering HTML
-    setTimeout(() => {
-      setStylesInjected(true);
-    }, 50);
-
-    // Cleanup on unmount or when preview closes
+    // Cleanup
     return () => {
-      const styleToRemove = document.getElementById(styleId);
-      if (styleToRemove) {
-        styleToRemove.remove();
+      if (containerRef.current && containerRef.current.shadowRoot) {
+        containerRef.current.shadowRoot.innerHTML = '';
       }
-      setStylesInjected(false);
     };
   }, [loaderType, isOpen]);
 
@@ -111,43 +94,21 @@ export default function LoaderFullscreenPreview({
   if (!isOpen) return null;
 
   const renderLoader = () => {
-    // If loaderType contains HTML/CSS (starts with <div or contains <style>), render it directly
+    // If loaderType contains HTML/CSS (starts with <div or contains <style>), use Shadow DOM
     if (loaderType.includes('<div') || loaderType.includes('<style>')) {
-      // Wait for styles to be injected before rendering HTML
-      if (!stylesInjected && loaderType.includes('<style>')) {
-        return (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-white">Chargement...</div>
-          </div>
-        );
-      }
-
-      // Extract styles and HTML separately
-      const styleMatch = loaderType.match(/<style>([\s\S]*?)<\/style>/);
-      const styles = styleMatch ? styleMatch[1] : '';
-      const htmlWithoutStyles = loaderType.replace(/<style>[\s\S]*?<\/style>/g, '').trim();
-      
       return (
-        <>
-          {/* Inject styles directly in component */}
-          {styles && (
-            <style dangerouslySetInnerHTML={{ __html: styles }} />
-          )}
-          <div 
-            key={`loader-${loaderName}-${Date.now()}`}
-            dangerouslySetInnerHTML={{ __html: htmlWithoutStyles }}
-            className="absolute inset-0"
-            style={{ 
-              position: 'fixed',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              zIndex: 9998,
-              isolation: 'isolate'
-            }}
-          />
-        </>
+        <div 
+          ref={containerRef}
+          className="absolute inset-0"
+          style={{ 
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 9998
+          }}
+        />
       );
     }
 

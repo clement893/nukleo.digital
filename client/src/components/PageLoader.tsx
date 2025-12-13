@@ -11,6 +11,16 @@ export default function PageLoader() {
   // Don't show loader in admin area
   const isAdminArea = location.startsWith("/admin");
 
+  // If in admin area, show body immediately and don't fetch loaders
+  useEffect(() => {
+    if (isAdminArea) {
+      setIsLoading(false);
+      if (!document.body.classList.contains('loaded')) {
+        document.body.classList.add('loaded');
+      }
+    }
+  }, [isAdminArea]);
+
   // Fetch active loaders (only if not in admin area)
   const { data: activeLoaders, isLoading: isLoadingLoaders } = trpc.loaders.getActive.useQuery(undefined, {
     staleTime: 5 * 60 * 1000, // Cache for 5 minutes
@@ -19,10 +29,13 @@ export default function PageLoader() {
   });
 
   useEffect(() => {
-    // Don't show loader in admin area
+    // Don't show loader in admin area - show body immediately
     if (isAdminArea) {
       setIsLoading(false);
-      document.body.classList.add('loaded');
+      // Make body visible immediately in admin area
+      if (!document.body.classList.contains('loaded')) {
+        document.body.classList.add('loaded');
+      }
       return;
     }
 

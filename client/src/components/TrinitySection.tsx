@@ -62,7 +62,6 @@ export default function TrinitySection() {
               >
                 {/* Glassmorphism overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                <div className="absolute inset-0 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 
                 {/* Background Icon (appears on hover) */}
                 <div className="absolute top-10 right-10 opacity-0 group-hover:opacity-20 transition-opacity duration-500">

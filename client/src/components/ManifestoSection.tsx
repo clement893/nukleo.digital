@@ -36,7 +36,6 @@ export default function ManifestoSection() {
             <div className="group relative p-6 sm:p-8 lg:p-12 glass rounded-3xl overflow-hidden transition-all duration-500 hover:scale-[1.009] hover:shadow-xl hover:shadow-purple-500/10">
               {/* Glassmorphism overlay on hover */}
               <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-              <div className="absolute inset-0 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               
               <div className="absolute top-0 right-0 p-8 opacity-20 group-hover:opacity-100 transition-opacity duration-500 relative z-10">
                 <Zap className="w-16 h-16 lg:w-24 lg:h-24 text-accent stroke-1" />
@@ -59,7 +58,6 @@ export default function ManifestoSection() {
             <div className="group relative p-8 lg:p-12 glass rounded-3xl overflow-hidden transition-all duration-500 hover:scale-[1.009] hover:shadow-xl hover:shadow-purple-500/10">
               {/* Glassmorphism overlay on hover */}
               <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-              <div className="absolute inset-0 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               
               <div className="absolute top-0 right-0 p-8 opacity-20 group-hover:opacity-100 transition-opacity duration-500 relative z-10">
                 <Settings className="w-16 h-16 lg:w-24 lg:h-24 text-accent stroke-1" />

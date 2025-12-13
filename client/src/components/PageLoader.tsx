@@ -266,16 +266,15 @@ export default function PageLoader() {
       <div
         className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[10000] pointer-events-none"
         style={{
-          width: '200px',
+          width: '300px',
           height: 'auto',
         }}
       >
         <img 
-          src="/Nukleo_blanc_RVB.svg" 
-          alt="Nukleo Digital" 
+          src="/nukleo-logo-white.svg" 
+          alt="nukleo" 
           className="w-full h-auto"
           style={{
-            filter: 'brightness(0) invert(1)',
             opacity: 1,
           }}
         />

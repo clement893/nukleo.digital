@@ -23,15 +23,6 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const { playHover, playClick } = useSound();
   const [translationsData, setTranslationsData] = useState<any>(null);
-  
-  // Ensure t is a function
-  if (typeof t !== 'function') {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-[#1a0b2e] via-[#2d1b4e] to-[#1a0b2e] flex items-center justify-center">
-        <div className="text-white">Erreur de chargement...</div>
-      </div>
-    );
-  }
 
   // Load translations dynamically
   useEffect(() => {
@@ -210,8 +201,8 @@ export default function FAQ() {
     return faqs.map(faq => ({ question: String(faq.question), answer: String(faq.answer) }));
   }, [faqs]);
 
-  // Show loading state if translations aren't loaded yet
-  if (!translationsData || faqs.length === 0 || categories.length === 0) {
+  // Show loading state if translations aren't loaded yet or t is not a function
+  if (typeof t !== 'function' || !translationsData || faqs.length === 0 || categories.length === 0) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-[#1a0b2e] via-[#2d1b4e] to-[#1a0b2e] flex items-center justify-center">
         <div className="text-white">Chargement...</div>

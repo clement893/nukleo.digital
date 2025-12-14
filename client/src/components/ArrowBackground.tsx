@@ -8,7 +8,10 @@
  * - No animation (static)
  * - Positioned behind all content (z-index: 0)
  * - Optimized for performance: first arrow uses preloaded SVG, others lazy load
+ * - Mobile optimized: only 1 arrow on mobile for better performance
  */
+
+import { useState, useEffect } from 'react';
 
 interface ArrowBackgroundProps {
   variant?: 'default' | 'alternate';
@@ -29,13 +32,12 @@ export default function ArrowBackground({ variant = 'default' }: ArrowBackground
       ];
 
   // Reduce arrows on mobile for better performance - only show first arrow
-  // Use CSS media query approach for better SSR compatibility
-  const [isMobile, setIsMobile] = React.useState(() => {
+  const [isMobile, setIsMobile] = useState(() => {
     if (typeof window === 'undefined') return false;
     return window.innerWidth < 768;
   });
   
-  React.useEffect(() => {
+  useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener('resize', checkMobile, { passive: true });
     return () => window.removeEventListener('resize', checkMobile);

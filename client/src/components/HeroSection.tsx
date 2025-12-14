@@ -125,18 +125,6 @@ function HeroSection() {
               </Link>
             </div>
 
-            {/* Beyond AI Text - Now before services */}
-            <div className="mt-12 sm:mt-16">
-              <div className="text-left max-w-3xl">
-                <p className="text-white/60 text-xs sm:text-sm font-mono uppercase tracking-widest mb-3">
-                  {t('home.beyondAI')}
-                </p>
-                <p className="text-white/70 text-sm sm:text-base max-w-2xl leading-relaxed">
-                  {t('home.beyondAIDescription')}
-                </p>
-              </div>
-            </div>
-
             {/* Services Carousel - Text Only */}
             <div className="mt-8">
               <div className="relative max-w-6xl mx-auto overflow-hidden py-4">

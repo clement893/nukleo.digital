@@ -65,7 +65,12 @@ export default function PageLoader() {
 
   // Fetch active loaders (only if not in admin area, contact page, or manifesto page)
   // Use lower priority on mobile to improve initial load
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
+  
   const { data: activeLoaders, isLoading: isLoadingLoaders } = trpc.loaders.getActive.useQuery(undefined, {
     staleTime: 5 * 60 * 1000, // Cache for 5 minutes
     refetchOnWindowFocus: false,
@@ -113,7 +118,15 @@ export default function PageLoader() {
     }
 
     // Wait for loaders to be fetched (only on first load)
-    if (isLoadingLoaders) return;
+    // On mobile, skip loader wait for faster initial render
+    if (isLoadingLoaders && !isMobile) return;
+    if (isLoadingLoaders && isMobile) {
+      // On mobile, show content immediately without waiting for loader
+      setIsLoading(false);
+      setIsFirstLoad(false);
+      document.body.classList.add('loaded');
+      return;
+    }
 
     if (!activeLoaders || activeLoaders.length === 0) {
       // No active loaders, show body content immediately

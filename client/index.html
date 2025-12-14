@@ -100,6 +100,15 @@
         -moz-osx-font-smoothing: grayscale;
         text-rendering: optimizeLegibility;
       }
+      /* Optimize rendering on mobile */
+      @media (max-width: 767px) {
+        * {
+          -webkit-tap-highlight-color: transparent;
+        }
+        img {
+          content-visibility: auto;
+        }
+      }
     </style>
     <!-- Inline LCP SVG for mobile performance (eliminates 1650ms Resource Load Delay) -->
     <!-- Hidden until React mounts to prevent flash -->

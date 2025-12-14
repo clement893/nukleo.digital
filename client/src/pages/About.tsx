@@ -109,7 +109,7 @@ export default function About() {
         title={t('seo.about.title')}
         description={t('seo.about.description')}
         keywords="AI experts, AI transformation team, AI consulting experts, Montréal AI agency, Halifax AI services"
-        ogImage="https://nukleo.digital/og-about.jpg"
+        ogImage="https://nukleodigital-production.up.railway.app/og-about.jpg"
       />
       <div className="min-h-screen bg-gradient-to-br from-violet-950 via-fuchsia-950 to-rose-950">
         {/* Hero Section */}

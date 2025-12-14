@@ -87,8 +87,8 @@ export default function Clients() {
   return (
     <PageLayout>
       <SEO 
-        title={t('clients.seoTitle')}
-        description={t('clients.seoDescription')}
+        title={t('seo.clients.title') || t('clients.seoTitle')}
+        description={t('seo.clients.description') || t('clients.seoDescription')}
         keywords={t('clients.seoKeywords')}
       />
       

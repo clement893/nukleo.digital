@@ -36,10 +36,10 @@ export default function Expertise() {
   return (
     <PageLayout>
       <SEO 
-        title="Our AI Expertise | Agentic AI, Platforms & Strategy"
-        description="Discover our AI expertise: Agentic AI systems, AI-native platforms, transformation strategy, creative studio & intelligent data. Proven 4-phase methodology for success."
+        title={t('seo.expertise.title') || "Our AI Expertise | Agentic AI, Platforms & Strategy"}
+        description={t('seo.expertise.description') || "Discover our AI expertise: Agentic AI systems, AI-native platforms, transformation strategy, creative studio & intelligent data. Proven 4-phase methodology for success."}
         keywords="AI expertise, agentic AI systems, AI-native platforms, AI transformation strategy, AI methodology"
-        ogImage="https://nukleo.digital/og-expertise.jpg"
+        ogImage="https://nukleodigital-production.up.railway.app/og-expertise.jpg"
       />
     <div className="min-h-screen bg-gradient-nukleo">
       {/* Hero Section */}

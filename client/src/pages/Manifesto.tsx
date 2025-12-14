@@ -31,8 +31,8 @@ export default function Manifesto() {
   return (
     <PageLayout>
       <SEO 
-        title={t('manifesto.seoTitle')}
-        description={t('manifesto.seoDescription')}
+        title={t('seo.manifesto.title') || t('manifesto.seoTitle')}
+        description={t('seo.manifesto.description') || t('manifesto.seoDescription')}
         keywords={t('manifesto.seoKeywords')}
       />
       <div className="min-h-screen pt-24 pb-20 px-4">

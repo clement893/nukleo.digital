@@ -33,7 +33,7 @@ export default function Breadcrumb({ items }: BreadcrumbProps) {
   const structuredData = createBreadcrumbSchema(
     breadcrumbItems.map(item => ({
       name: item.name,
-      url: `https://nukleo.digital${item.url}`,
+      url: `https://nukleodigital-production.up.railway.app${item.url}`,
     }))
   );
 

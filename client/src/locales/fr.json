@@ -1093,5 +1093,35 @@
         "results": ["Transformation numérique accélérée", "Analyses pilotées par l'IA", "Avantage concurrentiel"]
       }
     }
+  },
+  "seo": {
+    "home": {
+      "title": "Agence de transformation IA | Nukleo Digital",
+      "description": "Transformez votre entreprise avec des solutions IA agentic. Stratégie, plateforme, et automatisation intelligente."
+    },
+    "manifesto": {
+      "title": "Manifeste | Transformation IA | Nukleo Digital",
+      "description": "Découvrez notre manifeste sur la transformation IA. Passez de l'expérimentation à l'échelle avec les agents IA."
+    },
+    "about": {
+      "title": "À propos | Équipe Nukleo Digital",
+      "description": "Rencontrez l'équipe de Nukleo Digital. Experts en transformation IA avec bureaux à Montréal et Halifax."
+    },
+    "expertise": {
+      "title": "Expertise IA | Services Nukleo Digital",
+      "description": "Nos services : stratégie IA, plateformes intelligentes, applications mobiles, marketing automatisé."
+    },
+    "clients": {
+      "title": "Clients | Nukleo Digital",
+      "description": "Découvrez les clients qui nous font confiance pour leur transformation IA."
+    },
+    "resources": {
+      "title": "Ressources IA | Guides et outils | Nukleo Digital",
+      "description": "Guides, whitepapers et ressources sur la transformation IA."
+    },
+    "contact": {
+      "title": "Contact | Nukleo Digital",
+      "description": "Contactez Nukleo Digital pour discuter de votre projet de transformation IA."
+    }
   }
 }

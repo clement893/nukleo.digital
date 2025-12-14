@@ -23,11 +23,11 @@ interface SEOProps {
 }
 
 const DEFAULT_SEO = {
-  title: 'Nukleo Digital | AI Transformation Agency | Agentic AI Solutions',
-  description: 'Transform your business with AI-powered solutions. We help startups, SMBs, enterprises, and governments unlock the power of artificial intelligence through strategic consulting, intelligent platforms, and automated operations.',
+  title: 'AI Transformation Agency | Nukleo Digital',
+  description: 'Transformez votre entreprise avec des solutions IA agentic. Stratégie, plateforme, et automatisation intelligente.',
   keywords: 'AI transformation, artificial intelligence consulting, agentic AI, AI strategy, machine learning, AI automation, digital transformation, AI agency, enterprise AI, AI solutions',
-  ogImage: 'https://nukleo.digital/og-image.jpg',
-  siteUrl: 'https://nukleo.digital',
+  ogImage: 'https://nukleodigital-production.up.railway.app/og-image.jpg',
+  siteUrl: 'https://nukleodigital-production.up.railway.app',
   siteName: 'Nukleo Digital',
   twitterHandle: '@nukleodigital',
 };

@@ -871,5 +871,35 @@
       "description": "Let's discuss how our AI services can transform your business and accelerate your growth.",
       "button": "Start Your Transformation"
     }
+  },
+  "seo": {
+    "home": {
+      "title": "AI Transformation Agency | Nukleo Digital",
+      "description": "Transform your business with agentic AI solutions. Strategy, platform, and intelligent automation."
+    },
+    "manifesto": {
+      "title": "Manifesto | AI Transformation | Nukleo Digital",
+      "description": "Discover our manifesto on AI transformation. Move from experimentation to scale with AI agents."
+    },
+    "about": {
+      "title": "About | Nukleo Digital Team",
+      "description": "Meet the Nukleo Digital team. AI transformation experts with offices in Montréal and Halifax."
+    },
+    "expertise": {
+      "title": "AI Expertise | Nukleo Digital Services",
+      "description": "Our services: AI strategy, intelligent platforms, mobile applications, automated marketing."
+    },
+    "clients": {
+      "title": "Clients | Nukleo Digital",
+      "description": "Discover the clients who trust us for their AI transformation."
+    },
+    "resources": {
+      "title": "AI Resources | Guides and Tools | Nukleo Digital",
+      "description": "Guides, whitepapers and resources on AI transformation."
+    },
+    "contact": {
+      "title": "Contact | Nukleo Digital",
+      "description": "Contact Nukleo Digital to discuss your AI transformation project."
+    }
   }
 }

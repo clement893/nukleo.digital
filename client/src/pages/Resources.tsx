@@ -135,8 +135,8 @@ export default function Resources() {
   return (
     <PageLayout>
       <SEO 
-        title={t('resources.seoTitle')}
-        description={t('resources.seoDescription')}
+        title={t('seo.resources.title') || t('resources.seoTitle')}
+        description={t('seo.resources.description') || t('resources.seoDescription')}
         keywords={t('resources.seoKeywords')}
       />
       <div className="min-h-screen bg-gradient-nukleo">

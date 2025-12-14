@@ -28,30 +28,36 @@ export const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'Nukleo Digital',
-  url: 'https://nukleo.digital',
-  logo: 'https://nukleo.digital/logo.png',
-  description: 'AI transformation agency specializing in agentic AI solutions for startups, SMBs, enterprises, and governments.',
+  url: 'https://nukleodigital-production.up.railway.app',
+  logo: 'https://nukleodigital-production.up.railway.app/Nukleo_blanc_RVB.svg',
+  description: 'AI Transformation Agency',
   sameAs: [
-    'https://twitter.com/nukleodigital',
-    'https://linkedin.com/company/nukleo-digital',
-    'https://github.com/nukleo-digital',
+    'https://www.linkedin.com/company/nukleo-group',
   ],
   contactPoint: {
     '@type': 'ContactPoint',
-    contactType: 'Sales',
+    contactType: 'Customer Service',
     email: 'hello@nukleo.digital',
     availableLanguage: ['English', 'French'],
   },
-  address: {
-    '@type': 'PostalAddress',
-    addressCountry: 'CA',
-    addressLocality: 'Montreal',
-    addressRegion: 'QC',
-  },
-  founder: {
-    '@type': 'Person',
-    name: 'Nukleo Team',
-  },
+  address: [
+    {
+      '@type': 'PostalAddress',
+      streetAddress: '7236 Rue Waverly',
+      addressLocality: 'Montréal',
+      addressRegion: 'QC',
+      postalCode: 'H2R 0C2',
+      addressCountry: 'CA',
+    },
+    {
+      '@type': 'PostalAddress',
+      streetAddress: '1800 Argyle St Unit 801',
+      addressLocality: 'Halifax',
+      addressRegion: 'NS',
+      postalCode: 'B3J 3N8',
+      addressCountry: 'CA',
+    },
+  ],
   areaServed: {
     '@type': 'Place',
     name: 'Worldwide',
@@ -62,19 +68,19 @@ export const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: 'Nukleo Digital',
-  url: 'https://nukleo.digital',
+  url: 'https://nukleodigital-production.up.railway.app',
   description: 'AI transformation agency helping organizations unlock the power of artificial intelligence',
   publisher: {
     '@type': 'Organization',
     name: 'Nukleo Digital',
     logo: {
       '@type': 'ImageObject',
-      url: 'https://nukleo.digital/logo.png',
+      url: 'https://nukleodigital-production.up.railway.app/Nukleo_blanc_RVB.svg',
     },
   },
   potentialAction: {
     '@type': 'SearchAction',
-    target: 'https://nukleo.digital/glossary?q={search_term_string}',
+    target: 'https://nukleodigital-production.up.railway.app/glossary?q={search_term_string}',
     'query-input': 'required name=search_term_string',
   },
 };
@@ -106,10 +112,10 @@ export function createArticleSchema(article: {
       name: 'Nukleo Digital',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://nukleo.digital/logo.png',
+        url: 'https://nukleodigital-production.up.railway.app/Nukleo_blanc_RVB.svg',
       },
     },
-    image: article.image || 'https://nukleo.digital/og-image.jpg',
+    image: article.image || 'https://nukleodigital-production.up.railway.app/og-image.jpg',
     keywords: article.keywords?.join(', '),
   };
 }
@@ -182,6 +188,24 @@ export const serviceSchema = {
     ],
   },
 };
+
+export function createServiceSchema(service: {
+  name: string;
+  description: string;
+  url?: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: service.name,
+    description: service.description,
+    provider: {
+      '@type': 'Organization',
+      name: 'Nukleo Digital',
+    },
+    url: service.url || 'https://nukleodigital-production.up.railway.app',
+  };
+}
 
 export function createReviewSchema(reviews: Array<{ author: string; rating: number; text: string; date?: string }>) {
   return {

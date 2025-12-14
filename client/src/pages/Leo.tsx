@@ -420,7 +420,7 @@ export default function Leo() {
         title="Chat with LEO - AI Assistant | Get Instant AI Consultation"
         description="Talk to LEO, Nukleo Digital's AI assistant. Get instant answers about AI transformation, strategy, and implementation for your business. Free AI consultation chatbot."
         keywords="AI chatbot, AI assistant, AI consultation, AI strategy, AI transformation help, AI implementation guide, free AI consultation, AI advisor"
-        ogImage="https://nukleo.digital/og-image.jpg"
+        ogImage="https://nukleodigital-production.up.railway.app/og-image.jpg"
       />
       <div className="min-h-screen bg-gradient-to-br from-[oklch(0.35_0.15_300)] via-[oklch(0.40_0.15_320)] to-[oklch(0.35_0.15_340)] flex flex-col">
       {/* Breadcrumb */}

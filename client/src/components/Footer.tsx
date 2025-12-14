@@ -131,10 +131,7 @@ function Footer() {
 
           {/* Services */}
           <div className="sm:col-span-1 lg:col-span-3">
-            <h3 className="text-xs sm:text-sm font-bold tracking-wider mb-3 sm:mb-4">{(() => {
-              const servicesLabel = t('footer.services');
-              return typeof servicesLabel === 'string' ? servicesLabel : 'Services';
-            })()}</h3>
+            <h3 className="text-xs sm:text-sm font-bold tracking-wider mb-3 sm:mb-4">{t('footer.servicesLabel') || 'Services'}</h3>
             <ul className="space-y-2 sm:space-y-3">
               {services.map((item) => (
                 <li key={item.href}>

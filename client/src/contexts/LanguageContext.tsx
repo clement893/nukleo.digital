@@ -108,7 +108,12 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
     
     // If returnObjects is true and value is an object/array, return it directly
     if (returnObjects) {
-      return value || [];
+      // Ensure we return an array if value exists, otherwise empty array
+      if (Array.isArray(value)) {
+        return value;
+      }
+      // If value exists but is not an array, return empty array to prevent .map() errors
+      return [];
     }
     
     // Otherwise, return as string

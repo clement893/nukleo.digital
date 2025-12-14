@@ -27,7 +27,10 @@
     "faq": "FAQ"
   },
   "header": {
-    "tagline": "Choose Intelligence"
+    "tagline": "Choose Intelligence",
+    "menu": "Menu",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "hero": {
     "title": "Join the",

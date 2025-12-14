@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, memo } from 'react';
-import { Menu } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link, useLocation } from 'wouter';
 import FullScreenMenu from './FullScreenMenu';
@@ -109,12 +109,42 @@ function Header() {
 
               {/* Burger Menu Button */}
               <button
-                onClick={handleMenuOpen}
+                onClick={isMenuOpen ? handleMenuClose : handleMenuOpen}
                 onMouseEnter={playHover}
-                className="text-white active:bg-white/20 sm:hover:bg-white/10 transition-colors p-2 rounded-lg touch-manipulation"
-                aria-label="Open menu"
+                className="
+                  flex items-center gap-2 sm:gap-3
+                  text-white 
+                  active:bg-white/20 sm:hover:bg-white/10 
+                  transition-all duration-300 
+                  px-3 sm:px-4 py-2 sm:py-2.5 
+                  rounded-lg 
+                  touch-manipulation
+                  font-medium
+                  text-sm sm:text-base
+                  border border-white/20 sm:hover:border-white/30
+                  backdrop-blur-sm
+                "
+                aria-label={isMenuOpen ? t('header.closeMenu') : t('header.openMenu')}
               >
-                <Menu className="w-5 h-5 sm:w-6 sm:h-6" />
+                <div className="relative w-6 h-6 sm:w-7 sm:h-7">
+                  <Menu 
+                    className={`
+                      absolute inset-0 w-full h-full
+                      transition-all duration-300 ease-in-out
+                      ${isMenuOpen ? 'opacity-0 rotate-90 scale-0' : 'opacity-100 rotate-0 scale-100'}
+                    `}
+                  />
+                  <X 
+                    className={`
+                      absolute inset-0 w-full h-full
+                      transition-all duration-300 ease-in-out
+                      ${isMenuOpen ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 rotate-90 scale-0'}
+                    `}
+                  />
+                </div>
+                <span className="hidden sm:inline-block whitespace-nowrap">
+                  {isMenuOpen ? t('header.closeMenu') : t('header.menu')}
+                </span>
               </button>
             </div>
           </div>

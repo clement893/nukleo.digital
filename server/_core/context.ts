@@ -28,8 +28,8 @@ export async function createContext(
 
   // If no regular user, check for admin JWT cookie
   if (!user) {
-    const adminToken = opts.req.cookies[ADMIN_COOKIE_NAME];
-    if (adminToken) {
+    const adminToken = opts.req.cookies?.[ADMIN_COOKIE_NAME];
+    if (adminToken && ADMIN_JWT_SECRET && ADMIN_JWT_SECRET !== "-admin") {
       try {
         const decoded = jwt.verify(adminToken, ADMIN_JWT_SECRET) as {
           id: number;
@@ -40,17 +40,21 @@ export async function createContext(
         // Create a User object with admin role
         // Note: This is a minimal user object for admin authentication
         // The admin user exists in admin_users table, not users table
+        const now = new Date();
         user = {
           id: decoded.id,
           openId: `admin-${decoded.id}`, // Synthetic openId for admin
-          email: decoded.email,
-          name: decoded.username,
+          email: decoded.email || null,
+          name: decoded.username || null,
+          loginMethod: "admin" as any,
           role: "admin" as const,
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          createdAt: now,
+          updatedAt: now,
+          lastSignedIn: now,
         } as User;
       } catch (error) {
         // Invalid admin token, continue with user = null
+        // Silently fail - don't log to avoid noise
         user = null;
       }
     }

@@ -1,23 +1,28 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, memo } from 'react';
 import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link, useLocation } from 'wouter';
 import FullScreenMenu from './FullScreenMenu';
 import { useSound } from '@/hooks/useSound';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
-export default function Header() {
+function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { playHover, playClick } = useSound();
-  const { language, t } = useLanguage();
-  const [location] = useLocation();
+  const { t } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
   
-  // Helper to get localized path
-  const getLocalizedPath = (path: string) => {
-    const basePath = path === '/' ? '' : path;
-    return language === 'fr' ? `/fr${basePath}` : basePath;
-  };
+  // Memoize handlers to prevent re-renders
+  const handleMenuOpen = useCallback(() => {
+    playClick();
+    setIsMenuOpen(true);
+  }, [playClick]);
+  
+  const handleMenuClose = useCallback(() => {
+    setIsMenuOpen(false);
+  }, []);
 
   useEffect(() => {
     // Optimize scroll handler for mobile - use passive listener and throttle
@@ -104,7 +109,7 @@ export default function Header() {
 
               {/* Burger Menu Button */}
               <button
-                onClick={() => { playClick(); setIsMenuOpen(true); }}
+                onClick={handleMenuOpen}
                 onMouseEnter={playHover}
                 className="text-white active:bg-white/20 sm:hover:bg-white/10 transition-colors p-2 rounded-lg touch-manipulation"
                 aria-label="Open menu"
@@ -117,7 +122,9 @@ export default function Header() {
       </header>
 
       {/* Full Screen Menu */}
-      <FullScreenMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+      <FullScreenMenu isOpen={isMenuOpen} onClose={handleMenuClose} />
     </>
   );
 }
+
+export default memo(Header);

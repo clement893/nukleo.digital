@@ -1,17 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo, memo } from 'react';
 
-export default function CustomCursor() {
+function CustomCursor() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [hidden, setHidden] = useState(true);
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  
+  // Detect touch device once - memoized
+  const isTouchDevice = useMemo(() => 
+    typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0),
+    []
+  );
 
   useEffect(() => {
-    // Detect touch device and disable cursor on mobile for better performance
-    const touchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    setIsTouchDevice(touchDevice);
-    
     // Early return for touch devices
-    if (touchDevice) return;
+    if (isTouchDevice) return;
 
     // Optimize mouse move handler with requestAnimationFrame throttling
     let rafId: number;
@@ -37,7 +38,7 @@ export default function CustomCursor() {
       document.body.removeEventListener('mouseleave', handleMouseLeave);
       document.body.removeEventListener('mouseenter', handleMouseEnter);
     };
-  }, []);
+  }, [isTouchDevice]);
 
   // Don't render on touch devices or when hidden
   if (isTouchDevice || hidden) return null;
@@ -52,3 +53,5 @@ export default function CustomCursor() {
     />
   );
 }
+
+export default memo(CustomCursor);

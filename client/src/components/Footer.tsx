@@ -31,13 +31,10 @@ export default function Footer() {
   return (
     <footer 
       className="text-white py-8 sm:py-10 md:py-12 lg:py-16 relative overflow-hidden"
-      style={{
+      style={useMemo(() => ({
         backgroundColor: '#21242E',
-        // Optimize background image loading - use CSS instead of inline style for better caching
-        // Disable background pattern on mobile for better performance
-        backgroundImage: typeof window !== 'undefined' && window.innerWidth >= 768 
-          ? 'url(/arrow-brand.png)' 
-          : 'none',
+        // Optimize background image loading - disable on mobile for better performance
+        backgroundImage: !isMobile ? 'url(/arrow-brand.png)' : 'none',
         backgroundSize: '80px 80px',
         backgroundRepeat: 'repeat',
         backgroundPosition: 'center',
@@ -46,7 +43,7 @@ export default function Footer() {
         // Optimize rendering on mobile
         willChange: 'auto',
         transform: 'translateZ(0)'
-      }}
+      }), [isMobile])}
     >
       {/* Overlay pour atténuer le pattern */}
       <div className="absolute inset-0 bg-[#21242E]/60 pointer-events-none" />

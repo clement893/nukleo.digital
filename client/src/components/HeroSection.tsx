@@ -3,33 +3,33 @@ import { Button } from '@/components/ui/button';
 import { useSound } from '@/hooks/useSound';
 import { Link } from 'wouter';
 import { useLanguage } from '@/contexts/LanguageContext';
-
-import { useEffect, useState, useRef, memo } from 'react';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { useIsMobile } from '@/hooks/useIsMobile';
+import { useEffect, useState, useRef, memo, useMemo, useCallback } from 'react';
 
 function HeroSection() {
   const { playHover, playClick } = useSound();
   const { language, t } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
+  const isMobile = useIsMobile(640);
   const [scrollPosition, setScrollPosition] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [services, setServices] = useState<string[]>([]);
   
-  // Load services safely with fallback
-  useEffect(() => {
+  // Load services safely with fallback - memoized
+  const servicesValue = useMemo(() => {
     try {
-      const servicesValue = t('hero.services', { returnObjects: true });
-      const servicesArray = Array.isArray(servicesValue) ? servicesValue : [];
-      setServices(servicesArray);
+      const value = t('hero.services', { returnObjects: true });
+      return Array.isArray(value) ? value : [];
     } catch (error) {
       console.error('Error loading services:', error);
-      setServices([]);
+      return [];
     }
   }, [t, language]);
-  
-  // Helper to get localized path
-  const getLocalizedPath = (path: string) => {
-    const basePath = path === '/' ? '' : path;
-    return language === 'fr' ? `/fr${basePath}` : basePath;
-  };
+
+  useEffect(() => {
+    setServices(servicesValue);
+  }, [servicesValue]);
   
 
   
@@ -40,7 +40,6 @@ function HeroSection() {
     let animationFrameId: number | null = null;
     let lastTimestamp = 0;
     const speed = 0.5;
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
     const frameInterval = isMobile ? 32 : 16; // ~30fps mobile, ~60fps desktop
     
     const animate = (timestamp: number) => {
@@ -94,7 +93,7 @@ function HeroSection() {
       }
       observer?.disconnect();
     };
-  }, []);
+  }, [isMobile]);
   
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 px-4 sm:px-6">
@@ -112,12 +111,12 @@ function HeroSection() {
                 }
                 font-bold leading-[1.05] sm:leading-[1.1] tracking-tighter text-white mb-4 sm:mb-6 md:mb-8 italic
               `}
-              style={{
+              style={useMemo(() => ({
                 // Prevent layout shift by reserving space - responsive
-                minHeight: typeof window !== 'undefined' && window.innerWidth < 640 
+                minHeight: isMobile 
                   ? (language === 'fr' ? '2.5rem' : '2.75rem')
                   : (language === 'fr' ? '3rem' : '3.5rem'),
-              }}
+              }), [isMobile, language])}
             >
               {t('hero.title')}
               <br />
@@ -174,18 +173,17 @@ function HeroSection() {
                     transform: `translateX(-${scrollPosition}px)`,
                     transition: 'none'
                   }}
-                  onTransitionEnd={() => {
+                  onTransitionEnd={useCallback(() => {
                     // Avoid forced layout reflow - use cached width or estimate
                     // Calculate width only when needed, not on every transition
                     if (scrollRef.current && services.length > 0) {
                       // Estimate width based on services count and screen size to avoid forced layout
-                      const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
                       const estimatedWidth = services.length * (isMobile ? 150 : 200); // Smaller on mobile
                       if (scrollPosition >= estimatedWidth) {
                         setScrollPosition(0);
                       }
                     }
-                  }}
+                  }, [services.length, isMobile, scrollPosition])}
                 >
                   {/* Double the services for seamless loop */}
                   {services.length > 0 && [...Array(2)].flatMap((_, setIndex) => 

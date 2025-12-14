@@ -11,15 +11,16 @@
  * - Mobile optimized: only 1 arrow on mobile for better performance
  */
 
-import { useState, useEffect } from 'react';
+import { useMemo, memo } from 'react';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 interface ArrowBackgroundProps {
   variant?: 'default' | 'alternate';
 }
 
-export default function ArrowBackground({ variant = 'default' }: ArrowBackgroundProps) {
-  // Two different positioning patterns for variety across pages
-  const positions = variant === 'default' 
+function ArrowBackground({ variant = 'default' }: ArrowBackgroundProps) {
+  // Two different positioning patterns for variety across pages - memoized
+  const positions = useMemo(() => variant === 'default' 
     ? [
         { top: '15%', left: '5%', size: 250, opacity: 0.025 },
         { bottom: '20%', right: '8%', size: 280, opacity: 0.03 },
@@ -29,21 +30,14 @@ export default function ArrowBackground({ variant = 'default' }: ArrowBackground
         { top: '25%', right: '10%', size: 260, opacity: 0.028 },
         { bottom: '15%', left: '6%', size: 240, opacity: 0.022 },
         { top: '60%', right: '35%', size: 220, opacity: 0.025 },
-      ];
+      ], [variant]);
 
   // Reduce arrows on mobile for better performance - only show first arrow
-  const [isMobile, setIsMobile] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    return window.innerWidth < 768;
-  });
-  
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener('resize', checkMobile, { passive: true });
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-  
-  const arrowsToRender = isMobile ? positions.slice(0, 1) : positions;
+  const isMobile = useIsMobile(768);
+  const arrowsToRender = useMemo(() => 
+    isMobile ? positions.slice(0, 1) : positions,
+    [isMobile, positions]
+  );
 
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
@@ -75,3 +69,5 @@ export default function ArrowBackground({ variant = 'default' }: ArrowBackground
     </div>
   );
 }
+
+export default memo(ArrowBackground);

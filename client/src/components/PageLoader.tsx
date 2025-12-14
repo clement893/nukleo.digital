@@ -1,6 +1,7 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import { useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 // Preload critical resources during loader display
 function preloadResources() {
@@ -47,11 +48,13 @@ export default function PageLoader() {
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const prevLocationRef = useRef(location);
 
-  // Don't show loader in admin area, contact page, or manifesto page
-  const isAdminArea = location.startsWith("/admin");
-  const isContactPage = location === "/contact" || location === "/fr/contact" || location.startsWith("/contact/") || location.startsWith("/fr/contact/");
-  const isManifestoPage = location === "/manifesto" || location === "/fr/manifesto" || location.startsWith("/manifesto/") || location.startsWith("/fr/manifesto/");
-  const shouldSkipLoader = isAdminArea || isContactPage || isManifestoPage;
+  // Don't show loader in admin area, contact page, or manifesto page - memoized
+  const shouldSkipLoader = useMemo(() => {
+    const isAdminArea = location.startsWith("/admin");
+    const isContactPage = location === "/contact" || location === "/fr/contact" || location.startsWith("/contact/") || location.startsWith("/fr/contact/");
+    const isManifestoPage = location === "/manifesto" || location === "/fr/manifesto" || location.startsWith("/manifesto/") || location.startsWith("/fr/manifesto/");
+    return isAdminArea || isContactPage || isManifestoPage;
+  }, [location]);
 
   // If in admin area, contact page, or manifesto page, show body immediately and don't fetch loaders
   useEffect(() => {
@@ -65,11 +68,7 @@ export default function PageLoader() {
 
   // Fetch active loaders (only if not in admin area, contact page, or manifesto page)
   // Use lower priority on mobile to improve initial load
-  const [isMobile, setIsMobile] = useState(false);
-  
-  useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
-  }, []);
+  const isMobile = useIsMobile(768);
   
   const { data: activeLoaders, isLoading: isLoadingLoaders } = trpc.loaders.getActive.useQuery(undefined, {
     staleTime: 5 * 60 * 1000, // Cache for 5 minutes

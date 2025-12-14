@@ -1,4 +1,4 @@
-import { Suspense, lazy, useState, useEffect } from "react";
+import { Suspense, lazy } from "react";
 import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import CustomCursor from "./components/CustomCursor";
@@ -34,16 +34,11 @@ function getPageContext(pathname: string): 'home' | 'agencies' | 'services' | 'c
 }
 
 // Global LEO component that detects page context - disabled on mobile for performance
+import { useIsMobile } from './hooks/useIsMobile';
+
 function GlobalLEO() {
   const [location] = useLocation();
-  const [isMobile, setIsMobile] = useState(false);
-  
-  useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener('resize', handleResize, { passive: true });
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const isMobile = useIsMobile(768);
   
   if (isMobile) return null;
   

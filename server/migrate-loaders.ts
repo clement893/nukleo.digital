@@ -85,17 +85,8 @@ async function migrateLoaders() {
   }
 }
 
-// Run migration if this file is executed directly
-if (require.main === module) {
-  migrateLoaders()
-    .then(() => {
-      console.log("\n✅ Script completed");
-      process.exit(0);
-    })
-    .catch((error) => {
-      console.error("\n❌ Script failed:", error);
-      process.exit(1);
-    });
-}
+// Note: This file is only imported, never executed directly in production
+// To run as a script, use: npx tsx server/migrate-loaders.ts
+// The check for direct execution is removed to avoid ES module errors
 
 export { migrateLoaders };

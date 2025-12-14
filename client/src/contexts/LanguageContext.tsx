@@ -102,8 +102,17 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
         value = value[k];
       } else {
         // Key not found, return the key itself or empty array/object based on returnObjects
+        // Log missing translation in development
+        if (process.env.NODE_ENV === 'development') {
+          console.warn(`Translation missing for key: ${key}`);
+        }
         return returnObjects ? [] : key;
       }
+    }
+    
+    // If we reached here but value is undefined/null, return key or empty array
+    if (value === undefined || value === null) {
+      return returnObjects ? [] : key;
     }
     
     // If returnObjects is true and value is an object/array, return it directly

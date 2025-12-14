@@ -30,6 +30,10 @@ export default defineConfig({
     cssMinify: true,
     // Reduce inline limit for mobile - smaller initial HTML
     assetsInlineLimit: 1024, // Further reduced for mobile
+    // Optimize CSS loading - defer non-critical CSS
+    css: {
+      devSourcemap: false,
+    },
     reportCompressedSize: false,
     // Optimize chunk size for mobile
     chunkSizeWarningLimit: 400, // Further reduced

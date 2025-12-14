@@ -38,7 +38,7 @@ function HeroSection() {
     };
     
     // Use Intersection Observer to pause animation when not visible
-    if (typeof window !== 'undefined' && 'IntersectionObserver' in window) {
+    if (typeof window !== 'undefined' && 'IntersectionObserver' in window && scrollRef.current) {
       const observer = new IntersectionObserver(
         (entries) => {
           if (entries[0].isIntersecting) {
@@ -50,9 +50,7 @@ function HeroSection() {
         { threshold: 0 }
       );
       
-      if (scrollRef.current) {
-        observer.observe(scrollRef.current);
-      }
+      observer.observe(scrollRef.current);
       
       return () => {
         observer.disconnect();

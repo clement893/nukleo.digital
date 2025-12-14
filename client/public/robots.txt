@@ -28,7 +28,7 @@ Allow: /*.jpg$
 Allow: /*.svg$
 
 # Sitemap location
-Sitemap: https://nukleo.digital/sitemap.xml
+Sitemap: https://nukleodigital-production.up.railway.app/sitemap.xml
 
 # Crawl-delay to prevent server overload (optional, 1 second)
 Crawl-delay: 1

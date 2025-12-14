@@ -62,16 +62,25 @@ export default function Privacy() {
                 We retain your personal information for as long as necessary to fulfill the purposes outlined in this privacy policy, unless a longer retention period is required by law.
               </p>
 
-              <h2>6. Your Rights</h2>
-              <p>You have the right to:</p>
+              <h2>6. Your Rights (GDPR & CCPA Compliance)</h2>
+              <p>
+                In accordance with the General Data Protection Regulation (GDPR) and the California Consumer Privacy Act (CCPA), 
+                you have the following rights regarding your personal information:
+              </p>
               <ul>
-                <li>Access your personal information</li>
-                <li>Correct inaccurate data</li>
-                <li>Request deletion of your data</li>
-                <li>Object to processing of your data</li>
-                <li>Request data portability</li>
-                <li>Withdraw consent at any time</li>
+                <li><strong>Right of Access:</strong> Access your personal information</li>
+                <li><strong>Right to Rectification:</strong> Correct inaccurate or incomplete data</li>
+                <li><strong>Right to Erasure:</strong> Request deletion of your data ("right to be forgotten")</li>
+                <li><strong>Right to Object:</strong> Object to processing of your data</li>
+                <li><strong>Right to Restrict Processing:</strong> Request restriction of processing</li>
+                <li><strong>Right to Data Portability:</strong> Request data portability in a structured format</li>
+                <li><strong>Right to Withdraw Consent:</strong> Withdraw consent at any time</li>
+                <li><strong>Right to Lodge a Complaint:</strong> File a complaint with a supervisory authority</li>
               </ul>
+              <p>
+                To exercise any of these rights, please contact us at <a href="mailto:hello@nukleo.digital" className="text-purple-600 hover:text-purple-700">hello@nukleo.digital</a>. 
+                We will respond to your request within 30 days.
+              </p>
 
               <h2>7. Cookies and Tracking</h2>
               <p>

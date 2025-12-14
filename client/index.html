@@ -31,9 +31,9 @@
     <link rel="preload" href="/fonts/AktivGrotesk-Medium.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/AktivGrotesk-Bold.woff2" as="font" type="font/woff2" crossorigin />
     
-    <!-- Preload LCP images with explicit dimensions to prevent layout shift -->
-    <link rel="preload" href="/nukleo-arrow.svg" as="image" type="image/svg+xml" fetchpriority="high" />
+    <!-- Preload only critical LCP image - logo is more important than decorative arrow -->
     <link rel="preload" href="/Nukleo_blanc_RVB.svg" as="image" type="image/svg+xml" fetchpriority="high" />
+    <!-- Defer decorative arrow SVG - not critical for LCP -->
     
     <!-- Translations are preloaded synchronously in LanguageContext - no need for preload here -->
     

@@ -329,7 +329,8 @@ export default function PageLoader() {
             width="300"
             height="75"
             fetchPriority="high"
-            loading="eager"
+            loading="lazy"
+            fetchPriority="low"
             className="w-full h-auto"
           />
         </div>

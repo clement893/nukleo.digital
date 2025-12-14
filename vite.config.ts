@@ -65,13 +65,15 @@ export default defineConfig({
             if (id.includes('react/') && !id.includes('react-dom')) {
               return 'react-core';
             }
-            // React DOM - large, split separately
+            // React DOM - large, split separately and lazy load
+            // Only load react-dom when needed (not on initial page load)
             if (id.includes('react-dom')) {
               // Split react-dom further if possible
               if (id.includes('react-dom/client')) {
                 return 'react-dom-client';
               }
-              return 'react-dom';
+              // Defer react-dom loading - it's large and not needed immediately
+              return 'react-dom-deferred';
             }
             // Scheduler - separate chunk
             if (id.includes('scheduler')) {

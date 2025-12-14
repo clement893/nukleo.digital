@@ -42,7 +42,8 @@ export default function ArrowBackground({ variant = 'default' }: ArrowBackground
           width={arrow.size}
           height={arrow.size}
           className="absolute"
-          loading={i === 0 ? 'eager' : 'lazy'}
+          loading="lazy"
+          fetchPriority={i === 0 ? 'low' : 'auto'}
           fetchPriority={i === 0 ? 'high' : 'low'}
           decoding="async"
           style={{

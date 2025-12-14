@@ -75,7 +75,7 @@
       "agencies": "Agences"
     },
     "services": {
-      "agenticAI": "Systèmes IA agentiques",
+      "agenticAI": "Systèmes d'agents IA autonomes",
       "aiNative": "Plateformes natives IA",
       "transformation": "Stratégie de transformation",
       "creativeStudio": "Studio créatif",
@@ -595,7 +595,7 @@
     "description": "Notre approche multidisciplinaire combine la technologie IA de pointe avec la réflexion stratégique et l'exécution créative.",
     "areas": {
       "agenticAI": {
-        "title": "Systèmes IA Agentiques",
+        "title": "Systèmes d'agents IA autonomes",
         "description": "Conception et mise en œuvre d'agents IA autonomes qui peuvent raisonner, planifier et exécuter des tâches complexes de manière indépendante.",
         "capabilities": [
           "Orchestration multi-agents",

@@ -33,12 +33,16 @@ export default function Footer() {
       className="text-white py-12 lg:py-16 relative overflow-hidden"
       style={{
         backgroundColor: '#21242E',
+        // Optimize background image loading - use CSS instead of inline style for better caching
         backgroundImage: 'url(/arrow-brand.png)',
         backgroundSize: '80px 80px',
         backgroundRepeat: 'repeat',
         backgroundPosition: 'center',
         backgroundBlendMode: 'overlay',
-        opacity: 0.95
+        opacity: 0.95,
+        // Optimize rendering on mobile
+        willChange: 'auto',
+        transform: 'translateZ(0)'
       }}
     >
       {/* Overlay pour atténuer le pattern */}

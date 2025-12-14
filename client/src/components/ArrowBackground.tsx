@@ -28,9 +28,13 @@ export default function ArrowBackground({ variant = 'default' }: ArrowBackground
         { top: '60%', right: '35%', size: 220, opacity: 0.025 },
       ];
 
+  // Reduce arrows on mobile for better performance
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const arrowsToRender = isMobile ? positions.slice(0, 1) : positions;
+
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
-      {positions.map((arrow, i) => (
+      {arrowsToRender.map((arrow, i) => (
         <img
           key={i}
           src="/nukleo-arrow.svg"

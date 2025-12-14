@@ -1,4 +1,5 @@
 import SEO from '@/components/SEO';
+import StructuredData, { createArticleSchema } from '@/components/StructuredData';
 import PageLayout from '@/components/PageLayout';
 import Breadcrumb from '@/components/Breadcrumb';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -28,13 +29,34 @@ export default function Manifesto() {
     }
   };
 
+  const manifestoArticleSchema = createArticleSchema({
+    title: t('seo.manifesto.title') || t('manifesto.seoTitle') || 'Notre Manifeste | De l\'Expérimentation à la Mise à l\'Échelle',
+    description: t('seo.manifesto.description') || t('manifesto.seoDescription') || 'Découvrez le manifeste Nukleo : notre vision pour la transformation IA qui dépasse les pilotes pour des solutions prêtes pour la production et évolutives.',
+    url: 'https://nukleodigital-production.up.railway.app/manifesto',
+    datePublished: '2024-01-01T00:00:00Z',
+    dateModified: new Date().toISOString(),
+    author: 'Nukleo Digital',
+    section: 'Manifesto',
+    keywords: ['AI transformation', 'manifesto', 'agentic AI', 'AI strategy'],
+    image: 'https://nukleodigital-production.up.railway.app/og-image.jpg',
+  });
+
   return (
     <PageLayout>
       <SEO 
         title={t('seo.manifesto.title') || t('manifesto.seoTitle')}
         description={t('seo.manifesto.description') || t('manifesto.seoDescription')}
         keywords={t('manifesto.seoKeywords')}
+        ogType="article"
+        article={{
+          publishedTime: '2024-01-01T00:00:00Z',
+          modifiedTime: new Date().toISOString(),
+          author: 'Nukleo Digital',
+          section: 'Manifesto',
+          tags: ['AI transformation', 'manifesto', 'agentic AI'],
+        }}
       />
+      <StructuredData data={manifestoArticleSchema} />
       <div className="min-h-screen pt-24 pb-20 px-4">
         {/* Breadcrumb */}
         <div className="max-w-6xl mx-auto mb-6">

@@ -1,5 +1,6 @@
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
+import StructuredData from '@/components/StructuredData';
 import Breadcrumb from '@/components/Breadcrumb';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
@@ -84,6 +85,26 @@ export default function Clients() {
   const { t } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
 
+  const clientsCollectionSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: t('seo.clients.title') || t('clients.seoTitle') || 'Nos Clients',
+    description: t('seo.clients.description') || t('clients.seoDescription') || 'Fait confiance par 12+ leaders de l\'industrie',
+    url: 'https://nukleodigital-production.up.railway.app/clients',
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: clients.map((client, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': 'Organization',
+          name: client.fullName,
+          description: `${client.industry} client`,
+        },
+      })),
+    },
+  };
+
   return (
     <PageLayout>
       <SEO 
@@ -91,6 +112,7 @@ export default function Clients() {
         description={t('seo.clients.description') || t('clients.seoDescription')}
         keywords={t('clients.seoKeywords')}
       />
+      <StructuredData data={clientsCollectionSchema} />
       
       <div className="min-h-screen bg-gradient-to-br from-violet-950 via-fuchsia-950 to-rose-950">
         {/* Breadcrumb */}

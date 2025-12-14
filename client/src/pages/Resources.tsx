@@ -2,6 +2,7 @@ import { Filter } from 'lucide-react';
 import PageLayout from '@/components/PageLayout';
 import { useState } from 'react';
 import SEO from '@/components/SEO';
+import StructuredData from '@/components/StructuredData';
 import Breadcrumb from '@/components/Breadcrumb';
 import { trpc } from '@/lib/trpc';
 import { Button } from '@/components/ui/button';
@@ -132,6 +133,27 @@ export default function Resources() {
     ? resources 
     : resources.filter(r => r.category === selectedCategory);
 
+  const resourcesCollectionSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: t('seo.resources.title') || t('resources.seoTitle') || 'Resources',
+    description: t('seo.resources.description') || t('resources.seoDescription') || 'Analyses, guides et recherche des premières lignes de la transformation IA',
+    url: 'https://nukleodigital-production.up.railway.app/resources',
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: resources.map((resource, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': 'Article',
+          headline: resource.title,
+          description: resource.description,
+          datePublished: resource.date,
+        },
+      })),
+    },
+  };
+
   return (
     <PageLayout>
       <SEO 
@@ -139,6 +161,7 @@ export default function Resources() {
         description={t('seo.resources.description') || t('resources.seoDescription')}
         keywords={t('resources.seoKeywords')}
       />
+      <StructuredData data={resourcesCollectionSchema} />
       <div className="min-h-screen bg-gradient-nukleo">
         {/* Hero Section */}
         <section className="relative min-h-[60vh] flex flex-col justify-center pt-32 pb-20 overflow-hidden">

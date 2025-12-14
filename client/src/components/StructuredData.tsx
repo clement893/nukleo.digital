@@ -28,18 +28,45 @@ export const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'Nukleo Digital',
+  alternateName: 'Nukleo',
   url: 'https://nukleodigital-production.up.railway.app',
-  logo: 'https://nukleodigital-production.up.railway.app/Nukleo_blanc_RVB.svg',
-  description: 'AI Transformation Agency',
+  logo: {
+    '@type': 'ImageObject',
+    url: 'https://nukleodigital-production.up.railway.app/Nukleo_blanc_RVB.svg',
+    width: 120,
+    height: 32,
+  },
+  image: 'https://nukleodigital-production.up.railway.app/Nukleo_blanc_RVB.svg',
+  description: 'AI Transformation Agency helping organizations unlock the power of artificial intelligence through agentic AI systems, AI-native platforms, and intelligent operations.',
+  foundingDate: '2020',
+  foundingLocation: {
+    '@type': 'Place',
+    addressLocality: 'Montréal',
+    addressRegion: 'QC',
+    addressCountry: 'CA',
+  },
+  numberOfEmployees: {
+    '@type': 'QuantitativeValue',
+    value: '15+',
+  },
   sameAs: [
     'https://www.linkedin.com/company/nukleo-group',
   ],
-  contactPoint: {
-    '@type': 'ContactPoint',
-    contactType: 'Customer Service',
-    email: 'hello@nukleo.digital',
-    availableLanguage: ['English', 'French'],
-  },
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      contactType: 'Customer Service',
+      email: 'hello@nukleo.digital',
+      availableLanguage: ['English', 'French'],
+      areaServed: 'Worldwide',
+    },
+    {
+      '@type': 'ContactPoint',
+      contactType: 'Sales',
+      email: 'hello@nukleo.digital',
+      availableLanguage: ['English', 'French'],
+    },
+  ],
   address: [
     {
       '@type': 'PostalAddress',
@@ -62,6 +89,14 @@ export const organizationSchema = {
     '@type': 'Place',
     name: 'Worldwide',
   },
+  knowsAbout: [
+    'Artificial Intelligence',
+    'Agentic AI',
+    'AI Strategy',
+    'Digital Transformation',
+    'Machine Learning',
+    'AI Automation',
+  ],
 };
 
 export const websiteSchema = {

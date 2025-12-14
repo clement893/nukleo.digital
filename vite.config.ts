@@ -33,15 +33,6 @@ export default defineConfig({
     reportCompressedSize: false,
     // Optimize chunk size for mobile
     chunkSizeWarningLimit: 400, // Further reduced
-    // Reduce initial bundle size - more aggressive splitting
-    rollupOptions: {
-      ...this.rollupOptions,
-      output: {
-        ...this.rollupOptions?.output,
-        // More aggressive chunking for smaller initial bundle
-        experimentalMinChunkSize: 10000,
-      },
-    },
     rollupOptions: {
       output: {
         // Optimize chunk names for better caching

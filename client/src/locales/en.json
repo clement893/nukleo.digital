@@ -42,9 +42,9 @@
     "iconCreativeStudio": "The Creative Studio Icon"
   },
   "hero": {
-    "title": "Start your transformation ",
-    "titleHighlight": "with us",
-    "subtitle": "Benefit from AI today",
+    "title": "Start your transformation",
+    "titleHighlight": "",
+    "subtitle": "Benefit from artificial intelligence today",
     "cta": "Join the Leaders",
     "services": [
       "AI Strategy",

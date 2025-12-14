@@ -56,7 +56,12 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
     }
 
     // Load translations asynchronously but cache them
-    setTranslationsLoaded(false);
+    // Don't set loaded to false if we're switching languages and have a fallback
+    const hasFallback = translationCache.en || translationCache.fr;
+    if (!hasFallback) {
+      setTranslationsLoaded(false);
+    }
+    
     import(`../locales/${language}.json`)
       .then((module) => {
         if (module.default && typeof module.default === 'object') {

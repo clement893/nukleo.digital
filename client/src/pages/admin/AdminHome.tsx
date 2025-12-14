@@ -12,7 +12,9 @@ import {
   Mail,
   Volume2,
   Globe,
-  Database
+  Database,
+  TrendingUp,
+  FileText
 } from "lucide-react";
 
 interface AdminCardProps {
@@ -54,72 +56,103 @@ function AdminCard({ title, description, icon, href, badge }: AdminCardProps) {
 }
 
 export default function AdminHome() {
-  const adminSections = [
+  // Organiser les sections par catégories
+  const adminCategories = [
     {
-      title: "Dashboard",
-      description: "Vue d'ensemble des statistiques et métriques principales",
-      icon: <LayoutDashboard className="w-6 h-6 text-primary" />,
-      href: "/admin/dashboard",
+      title: "📊 Analytics & Tracking",
+      description: "Suivi et analyses des performances",
+      sections: [
+        {
+          title: "Dashboard",
+          description: "Vue d'ensemble des statistiques et métriques principales",
+          icon: <LayoutDashboard className="w-6 h-6 text-primary" />,
+          href: "/admin/dashboard",
+        },
+        {
+          title: "Analytics & Tracking",
+          description: "Configurer Google Analytics, Facebook Pixel, LinkedIn Insight Tag",
+          icon: <TrendingUp className="w-6 h-6 text-primary" />,
+          href: "/admin/analytics",
+        },
+        {
+          title: "LEO Analytics",
+          description: "Statistiques et analyses des interactions avec LEO",
+          icon: <BarChart3 className="w-6 h-6 text-primary" />,
+          href: "/admin/leo-analytics",
+        },
+      ],
     },
     {
-      title: "LEO Analytics",
-      description: "Statistiques et analyses des interactions avec LEO",
-      icon: <BarChart3 className="w-6 h-6 text-primary" />,
-      href: "/admin/leo-analytics",
+      title: "💬 Gestion des Contacts & Leads",
+      description: "Gérer les contacts, leads et messages",
+      sections: [
+        {
+          title: "LEO Contacts",
+          description: "Gérer les contacts et conversations LEO",
+          icon: <MessageSquare className="w-6 h-6 text-primary" />,
+          href: "/admin/leo-contacts",
+        },
+        {
+          title: "Agency Leads",
+          description: "Gérer les leads et demandes des agences",
+          icon: <Building2 className="w-6 h-6 text-primary" />,
+          href: "/admin/agency-leads",
+        },
+        {
+          title: "Contact Messages",
+          description: "Gérer les messages reçus via le formulaire de contact",
+          icon: <MessageSquare className="w-6 h-6 text-primary" />,
+          href: "/admin/contact-messages",
+        },
+        {
+          title: "Start Project Submissions",
+          description: "Gérer les demandes de projets soumises via Start Project",
+          icon: <FileText className="w-6 h-6 text-primary" />,
+          href: "/admin/start-project-submissions",
+        },
+        {
+          title: "AI News Subscribers",
+          description: "Gérer les abonnés à la newsletter AI News",
+          icon: <Mail className="w-6 h-6 text-primary" />,
+          href: "/admin/ai-news-subscribers",
+        },
+      ],
     },
     {
-      title: "LEO Contacts",
-      description: "Gérer les contacts et conversations LEO",
-      icon: <MessageSquare className="w-6 h-6 text-primary" />,
-      href: "/admin/leo-contacts",
+      title: "⚙️ Configuration & Paramètres",
+      description: "Paramètres du site et configuration",
+      sections: [
+        {
+          title: "Visibilité des Pages",
+          description: "Contrôler quelles pages sont accessibles sur le site",
+          icon: <Globe className="w-6 h-6 text-primary" />,
+          href: "/admin/page-visibility",
+        },
+        {
+          title: "Gestion des Loaders",
+          description: "Gérer les animations de chargement et leur rotation",
+          icon: <Loader2 className="w-6 h-6 text-primary" />,
+          href: "/admin/loaders",
+        },
+        {
+          title: "Gestion des Sons",
+          description: "Personnaliser les sons interactifs de l'interface",
+          icon: <Volume2 className="w-6 h-6 text-primary" />,
+          href: "/admin/sounds",
+        },
+      ],
     },
     {
-      title: "Agency Leads",
-      description: "Gérer les leads et demandes des agences",
-      icon: <Building2 className="w-6 h-6 text-primary" />,
-      href: "/admin/agency-leads",
-    },
-    {
-      title: "Gestion des Loaders",
-      description: "Gérer les animations de chargement et leur rotation",
-      icon: <Loader2 className="w-6 h-6 text-primary" />,
-      href: "/admin/loaders",
-    },
-    {
-      title: "AI News Subscribers",
-      description: "Gérer les abonnés à la newsletter AI News",
-      icon: <Mail className="w-6 h-6 text-primary" />,
-      href: "/admin/ai-news-subscribers",
-    },
-    {
-      title: "Gestion des Sons",
-      description: "Personnaliser les sons interactifs de l'interface",
-      icon: <Volume2 className="w-6 h-6 text-primary" />,
-      href: "/admin/sounds",
-    },
-    {
-      title: "Start Project Submissions",
-      description: "Gérer les demandes de projets soumises via Start Project",
-      icon: <Building2 className="w-6 h-6 text-primary" />,
-      href: "/admin/start-project-submissions",
-    },
-    {
-      title: "Contact Messages",
-      description: "Gérer les messages reçus via le formulaire de contact",
-      icon: <MessageSquare className="w-6 h-6 text-primary" />,
-      href: "/admin/contact-messages",
-    },
-    {
-      title: "Visibilité des Pages",
-      description: "Contrôler quelles pages sont accessibles sur le site",
-      icon: <Globe className="w-6 h-6 text-primary" />,
-      href: "/admin/page-visibility",
-    },
-    {
-      title: "Migration DB",
-      description: "Créer la table page_visibility (une seule fois)",
-      icon: <Database className="w-6 h-6 text-primary" />,
-      href: "/admin/run-migration",
+      title: "🔧 Outils de Développement",
+      description: "Outils techniques et migrations",
+      sections: [
+        {
+          title: "Migration DB",
+          description: "Créer les tables nécessaires (page_visibility, analytics)",
+          icon: <Database className="w-6 h-6 text-primary" />,
+          href: "/admin/run-migration",
+        },
+      ],
     },
   ];
 
@@ -142,7 +175,9 @@ export default function AdminHome() {
           <Card>
             <CardHeader className="pb-3">
               <CardDescription>Pages Admin</CardDescription>
-              <CardTitle className="text-3xl">{adminSections.length}</CardTitle>
+              <CardTitle className="text-3xl">
+                {adminCategories.reduce((sum, cat) => sum + cat.sections.length, 0)}
+              </CardTitle>
             </CardHeader>
           </Card>
           <Card>
@@ -156,8 +191,8 @@ export default function AdminHome() {
           </Card>
           <Card>
             <CardHeader className="pb-3">
-              <CardDescription>Loaders Actifs</CardDescription>
-              <CardTitle className="text-3xl">-</CardTitle>
+              <CardDescription>Catégories</CardDescription>
+              <CardTitle className="text-3xl">{adminCategories.length}</CardTitle>
             </CardHeader>
           </Card>
           <Card>
@@ -168,11 +203,20 @@ export default function AdminHome() {
           </Card>
         </div>
 
-        {/* Admin Sections Grid */}
-        <div className="space-y-4">
-          <h2 className="text-2xl font-bold mb-6">Sections d'administration</h2>
-          {adminSections.map((section) => (
-            <AdminCard key={section.href} {...section} />
+        {/* Admin Sections by Category */}
+        <div className="space-y-8">
+          {adminCategories.map((category, categoryIndex) => (
+            <div key={categoryIndex}>
+              <div className="mb-4">
+                <h2 className="text-2xl font-bold mb-2">{category.title}</h2>
+                <p className="text-muted-foreground">{category.description}</p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {category.sections.map((section) => (
+                  <AdminCard key={section.href} {...section} />
+                ))}
+              </div>
+            </div>
           ))}
         </div>
 

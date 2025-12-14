@@ -534,9 +534,104 @@
     }
   },
   "expertise": {
-    "title": "Expertise",
-    "heroTitle": "Deep",
-    "heroSubtitle": "Expertise"
+    "seo": {
+      "title": "Our AI Expertise | Agentic AI Systems, Platforms & Strategy",
+      "description": "From strategy to production, we create complete AI ecosystems that integrate your web, communications, and internal systems for sustainable transformation.",
+      "keywords": "AI ecosystems, AI expertise, AI strategy, internal systems AI, communication AI"
+    },
+    "heroTitle": "Architects of Your",
+    "heroSubtitle": "AI Ecosystem",
+    "description": "At Nukleo, we go beyond point solutions. We design, build, and manage complete artificial intelligence ecosystems that unify your web presence, communications, and internal systems. Our holistic approach ensures coherent, sustainable transformation aligned with your business objectives.",
+    "areas": {
+      "agenticAI": {
+        "title": "Agentic AI Systems",
+        "description": "We develop autonomous AI agents that automate your processes, from customer relationship management to internal operations optimization, creating an intelligent backbone for your organization.",
+        "capabilities": [
+          "Business Process Automation (BPA)",
+          "CRM and ERP Integration",
+          "Supply Chain Optimization",
+          "Autonomous Customer Support"
+        ]
+      },
+      "aiNative": {
+        "title": "Intelligent Web Platforms",
+        "description": "Your website becomes a conversion agent. We create platforms that personalize user experience in real-time, anticipate needs, and actively guide visitors toward their goals.",
+        "capabilities": [
+          "Self-optimizing websites (CRO)",
+          "Real-time content personalization",
+          "Semantic search engines",
+          "Predictive user behavior analytics"
+        ]
+      },
+      "transformation": {
+        "title": "Augmented Communication & Marketing",
+        "description": "We unify your message across all channels. Our AI systems generate relevant content, manage your advertising campaigns, and analyze performance for maximum impact and consistent brand voice.",
+        "capabilities": [
+          "Multi-channel content generation",
+          "Autonomous advertising campaign management",
+          "Sentiment analysis and brand monitoring",
+          "Social media engagement optimization"
+        ]
+      },
+      "creativeStudio": {
+        "title": "Creative Studio",
+        "description": "Our creative studio uses AI to produce brand experiences and content at unparalleled scale and relevance. From augmented content creation to agentic marketing campaigns.",
+        "capabilities": [
+          "Augmented content creation",
+          "Agentic marketing campaigns",
+          "Dynamic brand identity",
+          "AI-assisted video production"
+        ]
+      },
+      "dataPlatforms": {
+        "title": "Intelligent Data Platforms",
+        "description": "We build the robust and flexible data foundation for AI integration. From intelligent data platforms to custom AI agents and intelligent process automation.",
+        "capabilities": [
+          "Data pipeline architecture",
+          "Vector databases and RAG",
+          "Real-time stream processing",
+          "Data governance and quality"
+        ]
+      },
+      "aiConsulting": {
+        "title": "AI Consulting",
+        "description": "We define strategy, drive transformation, and measure AI impact. From AI maturity audits to agentic transformation strategy and AI governance.",
+        "capabilities": [
+          "AI maturity audit",
+          "AI transformation roadmap",
+          "AI governance and ethics",
+          "AI ROI analysis"
+        ]
+      }
+    },
+    "process": {
+      "title": "Our Transformation Approach",
+      "description": "We follow a four-step process to ensure your transformation success, from discovery to scale.",
+      "steps": {
+        "discover": {
+          "title": "Discovery",
+          "description": "We dive into your organization to understand your challenges, objectives, and opportunities."
+        },
+        "design": {
+          "title": "Design",
+          "description": "We design a strategic roadmap and technical architecture for your AI ecosystem."
+        },
+        "develop": {
+          "title": "Development",
+          "description": "We build, test, and integrate each component of your ecosystem with rigorous agility."
+        },
+        "deploy": {
+          "title": "Deployment & Evolution",
+          "description": "We deploy the solution and ensure its continuous evolution to maximize your return on investment."
+        }
+      }
+    },
+    "cta": {
+      "title": "Ready to Build Your Ecosystem?",
+      "description": "Let's discuss how an integrated AI approach can unify and transform your business.",
+      "viewServices": "View Our Services",
+      "getInTouch": "Get In Touch"
+    }
   },
   "resources": {
     "seoTitle": "Resources | AI Insights, Guides & Research",

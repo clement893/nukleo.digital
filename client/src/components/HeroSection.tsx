@@ -89,12 +89,14 @@ function HeroSection() {
 
             {/* Beyond AI Text - Now before services */}
             <div className="mt-12 sm:mt-16">
-              <h3 className="text-center text-white font-semibold text-xl sm:text-2xl mb-4">
-                {t('home.beyondAI')}
-              </h3>
-              <p className="text-center text-white/80 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-8">
-                {t('home.beyondAIDescription')}
-              </p>
+              <div className="text-center max-w-3xl mx-auto">
+                <p className="text-white/60 text-xs sm:text-sm font-mono uppercase tracking-widest mb-3">
+                  {t('home.beyondAI')}
+                </p>
+                <p className="text-white/70 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+                  {t('home.beyondAIDescription')}
+                </p>
+              </div>
             </div>
 
             {/* Services Carousel - Text Only */}

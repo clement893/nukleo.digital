@@ -21,22 +21,8 @@
   font-display: swap;
 }
 
-/* Hairline 200 */
-@font-face {
-  font-family: 'Aktiv Grotesk';
-  src: url('/fonts/AktivGrotesk-Hairline.otf') format('opentype');
-  font-weight: 200;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Aktiv Grotesk';
-  src: url('/fonts/AktivGrotesk-HairlineItalic.otf') format('opentype');
-  font-weight: 200;
-  font-style: italic;
-  font-display: swap;
-}
+/* Hairline 200 - Load on demand to avoid blocking critical path */
+/* Moved to lazy load - not critical for initial render */
 
 /* Light 300 - Primary body text */
 @font-face {

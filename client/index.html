@@ -44,8 +44,11 @@
     <!-- Performance hints -->
     <link rel="dns-prefetch" href="https://nukleodigital-production.up.railway.app" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
-    <!-- Preconnect to API for faster requests -->
+    <!-- Preconnect to API for faster requests - critical for TTFB -->
     <link rel="preconnect" href="https://nukleodigital-production.up.railway.app" crossorigin />
+    <!-- Preconnect to fonts domain early -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
     <!-- Inline critical font-face for instant rendering -->
     <style>

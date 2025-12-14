@@ -112,6 +112,10 @@ function HeroSection() {
                 }
                 font-bold leading-[1.1] tracking-tighter text-white mb-6 sm:mb-8 italic
               `}
+              style={{
+                // Prevent layout shift by reserving space
+                minHeight: language === 'fr' ? '3rem' : '3.5rem',
+              }}
             >
               {t('hero.title')}
               <br />
@@ -169,9 +173,12 @@ function HeroSection() {
                     transition: 'none'
                   }}
                   onTransitionEnd={() => {
-                    if (scrollRef.current) {
-                      const width = scrollRef.current.scrollWidth / 2;
-                      if (scrollPosition >= width) {
+                    // Avoid forced layout reflow - use cached width or estimate
+                    // Calculate width only when needed, not on every transition
+                    if (scrollRef.current && services.length > 0) {
+                      // Estimate width based on services count to avoid forced layout
+                      const estimatedWidth = services.length * 200; // Approximate width per service
+                      if (scrollPosition >= estimatedWidth) {
                         setScrollPosition(0);
                       }
                     }

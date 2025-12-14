@@ -34,11 +34,6 @@ export default defineConfig({
     // Optimize chunk size for mobile
     chunkSizeWarningLimit: 400, // Further reduced
     rollupOptions: {
-      treeshake: {
-        moduleSideEffects: 'no-external',
-        propertyReadSideEffects: false,
-        tryCatchDeoptimization: false,
-      },
       output: {
         // Optimize chunk names for better caching
         chunkFileNames: 'assets/js/[name]-[hash].js',

@@ -69,7 +69,10 @@
     </style>
     
     <!-- Defer Google Fonts - load after critical content -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'; this.onload=null;" />
+    <!-- Load asynchronously using external script to avoid CSP violation -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" as="style" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" media="print" id="google-fonts-stylesheet" />
+    <script src="/load-google-fonts.js" defer></script>
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" /></noscript>
   </head>
 

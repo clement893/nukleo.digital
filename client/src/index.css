@@ -4,22 +4,8 @@
 
 /* Aktiv Grotesk Font Family - Complete System */
 
-/* Thin 100 */
-@font-face {
-  font-family: 'Aktiv Grotesk';
-  src: url('/fonts/AktivGrotesk-Thin.otf') format('opentype');
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Aktiv Grotesk';
-  src: url('/fonts/AktivGrotesk-ThinItalic.otf') format('opentype');
-  font-weight: 100;
-  font-style: italic;
-  font-display: swap;
-}
+/* Thin 100 - Load on demand to avoid blocking critical path */
+/* Not critical for initial render - moved to lazy load */
 
 /* Hairline 200 - Load on demand to avoid blocking critical path */
 /* Moved to lazy load - not critical for initial render */

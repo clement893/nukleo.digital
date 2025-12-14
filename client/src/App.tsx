@@ -61,6 +61,7 @@ const Projects = lazy(() => import("./pages/Projects"));
 const About = lazy(() => import("./pages/About"));
 const Expertise = lazy(() => import("./pages/Expertise"));
 const Resources = lazy(() => import("./pages/Resources"));
+const ResourceArticle = lazy(() => import("./pages/resources/ResourceArticle"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Leo = lazy(() => import("./pages/Leo"));
 const Manifesto = lazy(() => import("./pages/Manifesto"));
@@ -148,6 +149,7 @@ function App() {
               <Route path="/fr/about" component={withPageVisibility(About, "/fr/about")} />
               <Route path="/fr/expertise" component={withPageVisibility(Expertise, "/fr/expertise")} />
               <Route path="/fr/resources" component={withPageVisibility(Resources, "/fr/resources")} />
+              <Route path="/fr/resources/:id" component={withPageVisibility(ResourceArticle, "/fr/resources")} />
               <Route path="/fr/contact" component={withPageVisibility(Contact, "/fr/contact")} />
               <Route path="/fr/leo" component={withPageVisibility(Leo, "/fr/leo")} />
               <Route path="/fr/manifesto" component={withPageVisibility(Manifesto, "/fr/manifesto")} />
@@ -190,6 +192,7 @@ function App() {
             <Route path="/about" component={withPageVisibility(About, "/about")} />
             <Route path="/expertise" component={withPageVisibility(Expertise, "/expertise")} />
             <Route path="/resources" component={withPageVisibility(Resources, "/resources")} />
+            <Route path="/resources/:id" component={withPageVisibility(ResourceArticle, "/resources")} />
             <Route path="/contact" component={withPageVisibility(Contact, "/contact")} />
             <Route path="/leo" component={withPageVisibility(Leo, "/leo")} />
             <Route path="/manifesto" component={withPageVisibility(Manifesto, "/manifesto")} />

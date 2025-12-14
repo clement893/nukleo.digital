@@ -49,12 +49,11 @@
     "services": [
       "AI Strategy",
       "Digital Platforms",
+      "Marketing",
       "Mobile Apps",
-      "Creative Studio",
+      "Communication",
       "CRM Solutions",
       "Portals",
-      "Marketing",
-      "Communication",
       "Operations",
       "Security",
       "Analytics",
@@ -382,6 +381,9 @@
     "montrealDescription": "In the heart of Little Italy, we'd be delighted to meet at Jean Talon Market to discuss!",
     "halifax": "HALIFAX",
     "halifaxDescription": "In the heart of downtown Halifax, we'd be happy to meet by the waterfront to discuss!",
+    "remote": "REMOTE",
+    "remoteDescription": "Our team works remotely across North America. We're always available for virtual meetings and consultations.",
+    "remoteLocation": "Available worldwide via video conference",
     "letsTalk": "Let's talk"
   },
   "services": {
@@ -710,37 +712,36 @@
         "category": "Technical Guide",
         "title": "The Agentic AI Playbook",
         "description": "A comprehensive guide to implementing autonomous AI agents in your organization. From architecture to deployment.",
-        "readTime": "15 min"
+        "readTime": "15 min",
+        "content": "<p>Agentic AI represents the next evolution in artificial intelligence—systems that can autonomously plan, execute, and adapt to achieve complex goals. This playbook provides a practical framework for organizations looking to implement agentic AI solutions.</p><h2>Understanding Agentic AI</h2><p>Unlike traditional AI systems that respond to specific prompts, agentic AI systems can break down complex tasks into subtasks, make decisions, and iterate until objectives are met. They combine large language models with reasoning capabilities, tool use, and memory systems.</p><h2>Implementation Framework</h2><p>Our four-phase approach ensures successful deployment: Discovery (assessing readiness), Design (architecting the system), Development (building and testing), and Deployment (scaling and optimization).</p><h2>Key Considerations</h2><p>Success with agentic AI requires careful attention to data quality, governance frameworks, and change management. Organizations must also establish clear success metrics and monitoring systems.</p>"
       },
       "pilotToScale": {
         "category": "Strategy",
         "title": "From Pilot to Scale: AI Transformation Framework",
         "description": "Strategic framework for moving beyond experimentation to enterprise-wide AI adoption with measurable results.",
-        "readTime": "20 min"
+        "readTime": "20 min",
+        "content": "<p>Many organizations successfully pilot AI projects but struggle to scale them across the enterprise. This framework provides a proven path from proof-of-concept to production-scale deployment.</p><h2>The Scaling Challenge</h2><p>Pilot projects often succeed in controlled environments but fail when scaled due to infrastructure limitations, organizational resistance, or unclear ROI. Our framework addresses these challenges systematically.</p><h2>Four Pillars of Scale</h2><p>Successful scaling requires four foundational elements: Technical Infrastructure (scalable architecture), Organizational Readiness (change management), Governance (policies and oversight), and Measurement (KPIs and ROI tracking).</p><h2>Implementation Roadmap</h2><p>We outline a 12-month roadmap that takes organizations from pilot success to enterprise-wide transformation, with clear milestones and success criteria at each stage.</p>"
       },
       "agenticMarketing": {
         "category": "Industry Insights",
         "title": "The Future of Agentic Marketing",
         "description": "How AI agents are reshaping marketing operations and customer experiences. Real-world case studies and ROI metrics.",
-        "readTime": "12 min"
+        "readTime": "12 min",
+        "content": "<p>Agentic AI is revolutionizing marketing by enabling autonomous campaign management, personalized content generation, and real-time optimization at unprecedented scale.</p><h2>The Marketing Revolution</h2><p>Traditional marketing automation follows predefined rules. Agentic marketing systems can adapt strategies in real-time based on performance data, customer behavior, and market conditions.</p><h2>Real-World Applications</h2><p>We explore case studies where agentic AI has transformed marketing operations: from content generation to campaign optimization, customer segmentation to predictive analytics.</p><h2>ROI and Metrics</h2><p>Organizations implementing agentic marketing see average improvements of 340% in ROI, 75% reduction in time-to-market, and 10x increase in campaign output. We break down how these metrics are achieved.</p>"
       },
       "buildingAgentic": {
         "category": "Technical Guide",
         "title": "Building Agentic Systems",
         "description": "Technical deep-dive into designing, building, and deploying autonomous AI agent systems at scale.",
-        "readTime": "18 min"
-      },
-      "aiTrends2025": {
-        "category": "Industry Insights",
-        "title": "2025 AI Trends",
-        "description": "The most important AI trends shaping business in 2025. From multimodal models to agentic workflows.",
-        "readTime": "14 min"
+        "readTime": "18 min",
+        "content": "<p>This technical guide covers the architecture, tools, and best practices for building production-ready agentic AI systems.</p><h2>System Architecture</h2><p>Agentic systems require a robust architecture combining LLMs, vector databases, tool interfaces, and orchestration layers. We detail each component and how they integrate.</p><h2>Development Stack</h2><p>We review the essential tools and frameworks: LangChain for orchestration, vector databases for memory, API integrations for tool use, and monitoring systems for observability.</p><h2>Best Practices</h2><p>Key considerations include prompt engineering, error handling, safety guardrails, and performance optimization. We provide practical examples and code patterns.</p><h2>Deployment Strategies</h2><p>Moving from prototype to production requires careful planning around infrastructure, scaling, monitoring, and cost management. We share lessons learned from real deployments.</p>"
       },
       "roiInvestment": {
         "category": "Strategy",
         "title": "Measuring ROI on AI Investments",
         "description": "Practical frameworks and metrics for measuring the return on investment of your AI initiatives.",
-        "readTime": "10 min"
+        "readTime": "10 min",
+        "content": "<p>Measuring AI ROI requires a comprehensive framework that captures both quantitative and qualitative benefits across multiple dimensions.</p><h2>The ROI Challenge</h2><p>Traditional ROI calculations often miss the strategic value of AI investments. We present a multi-dimensional framework that captures efficiency gains, revenue impact, and strategic positioning.</p><h2>Key Metrics</h2><p>Our framework tracks metrics across six dimensions: Operational Efficiency, Revenue Impact, Cost Reduction, Quality Improvement, Strategic Positioning, and Innovation Capacity.</p><h2>Calculation Framework</h2><p>We provide practical formulas and tools for calculating ROI, including baseline establishment, measurement intervals, and attribution methods.</p><h2>Case Studies</h2><p>Real-world examples demonstrate how organizations have achieved 200-450% ROI on AI investments, with detailed breakdowns of how these returns were measured and achieved.</p>"
       }
     },
     "newsletter": {

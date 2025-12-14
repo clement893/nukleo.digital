@@ -281,7 +281,7 @@ export default function FAQ() {
             </p>
             <a 
               href={getLocalizedPath('/contact')}
-              className="inline-block px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-semibold rounded-lg hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-cyan-500/50"
+              className="inline-flex items-center justify-center px-10 py-6 bg-white text-purple-900 hover:bg-white/90 transition-all duration-500 font-bold tracking-wider rounded-full shadow-xl hover:shadow-2xl hover:scale-[1.022] text-lg"
             >
               {currentContent.ctaButton}
             </a>

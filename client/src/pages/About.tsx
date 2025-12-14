@@ -206,7 +206,7 @@ export default function About() {
                     className="text-violet-400 hover:text-white transition-colors"
                     aria-label={`${member.name}'s LinkedIn profile`}
                   >
-                    <Linkedin className="w-5 h-5" />
+                    <Linkedin className="w-5 h-5" fill="currentColor" strokeWidth={0} />
                   </a>
                 </div>
                 <p className="text-fuchsia-400 text-sm font-semibold mb-3 uppercase tracking-wide">
@@ -241,7 +241,7 @@ export default function About() {
         <section className="container mx-auto px-4 py-20">
           <p className="text-violet-300 uppercase tracking-widest text-sm mb-12 text-center">{t('about.ourOffices')}</p>
           
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
               <h3 className="text-3xl font-bold text-white mb-4">{t('about.montreal')}</h3>
               <p className="text-gray-300 mb-6">
@@ -267,6 +267,22 @@ export default function About() {
               <p className="text-gray-400 mb-6">
                 1800 Argyle St Unit 801 Halifax<br />
                 NS B3J 3N8
+              </p>
+              <a 
+                href={getLocalizedPath('/contact')} 
+                className="inline-block px-6 py-3 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-fuchsia-500/50 transition-all duration-300"
+              >
+                {t('about.letsTalk')}
+              </a>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
+              <h3 className="text-3xl font-bold text-white mb-4">{t('about.remote')}</h3>
+              <p className="text-gray-300 mb-6">
+                {t('about.remoteDescription')}
+              </p>
+              <p className="text-gray-400 mb-6">
+                {t('about.remoteLocation')}
               </p>
               <a 
                 href={getLocalizedPath('/contact')} 

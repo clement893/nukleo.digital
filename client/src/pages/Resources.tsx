@@ -287,7 +287,7 @@ export default function Resources() {
                 const categoryLabel = categories.find(c => c.key === resource.category)?.label || resource.category;
                 return (
                   <Link key={resource.id} href={getLocalizedPath(`/resources/${resource.id}`)}>
-                    <div className="bg-gray-50 p-12 hover:bg-purple-50 border border-gray-200 hover:border-accent transition-all duration-500 group cursor-pointer h-full flex flex-col rounded-3xl">
+                    <div className="bg-gray-50 p-12 hover:bg-white hover:shadow-xl border border-gray-200 hover:border-accent transition-all duration-500 group cursor-pointer h-full flex flex-col rounded-3xl">
                       {/* Badge */}
                       <div className="mb-6">
                         <span className="inline-block px-3 py-1 text-xs font-mono uppercase tracking-wider bg-purple-100 text-accent group-hover:bg-accent group-hover:text-white transition-colors rounded-full">
@@ -301,7 +301,7 @@ export default function Resources() {
                       </h3>
 
                       {/* Description */}
-                      <p className="text-base text-gray-600 leading-relaxed mb-8 flex-grow">
+                      <p className="text-base text-gray-700 leading-relaxed mb-8 flex-grow group-hover:text-gray-900 transition-colors">
                         {resource.description}
                       </p>
 

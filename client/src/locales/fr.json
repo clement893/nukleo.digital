@@ -49,12 +49,11 @@
     "services": [
       "Stratégie IA",
       "Plateformes Numériques",
+      "Marketing",
       "Applications Mobiles",
-      "Studio Créatif",
+      "Communication",
       "Solutions CRM",
       "Portails",
-      "Marketing",
-      "Communication",
       "Opérations",
       "Sécurité",
       "Analytique",
@@ -402,6 +401,15 @@
     "teamDescription": "Une fusion unique de talents créatifs, stratégiques et techniques.",
     "officesTitle": "Nos Bureaux",
     "officesDescription": "Basés à Montréal et Halifax, nous servons des clients partout en Amérique du Nord.",
+    "ourOffices": "NOS BUREAUX",
+    "montreal": "MONTRÉAL",
+    "montrealDescription": "Au cœur de la Petite Italie, nous serions ravis de vous rencontrer au marché Jean-Talon pour discuter !",
+    "halifax": "HALIFAX",
+    "halifaxDescription": "Au cœur du centre-ville de Halifax, nous serions heureux de vous rencontrer près du front de mer pour discuter !",
+    "remote": "DISTANCE",
+    "remoteDescription": "Notre équipe travaille à distance partout en Amérique du Nord. Nous sommes toujours disponibles pour des réunions virtuelles et des consultations.",
+    "remoteLocation": "Disponible partout dans le monde via vidéoconférence",
+    "letsTalk": "Parlons-en",
     "ctaTitle": "Rejoignez notre équipe",
     "ctaDescription": "Nous sommes toujours à la recherche de talents passionnés pour rejoindre notre mission. Consultez nos offres d'emploi et aidez-nous à construire l'avenir.",
     "ctaButton": "Voir les carrières"
@@ -491,7 +499,61 @@
     "articles": "Articles",
     "guides": "Guides",
     "tools": "Outils",
-    "readMore": "Lire la suite"
+    "readMore": "Lire la suite",
+    "filter": {
+      "label": "Filtrer par :",
+      "all": "Tout",
+      "industryInsights": "Aperçus de l'industrie",
+      "technicalGuide": "Guide technique",
+      "strategy": "Stratégie",
+      "caseStudy": "Étude de cas"
+    },
+    "articles": {
+      "agenticPlaybook": {
+        "category": "Guide technique",
+        "title": "Le Guide de l'IA Agentic",
+        "description": "Un guide complet pour implémenter des agents IA autonomes dans votre organisation. De l'architecture au déploiement.",
+        "readTime": "15 min",
+        "content": "<p>L'IA agentic représente la prochaine évolution de l'intelligence artificielle—des systèmes qui peuvent planifier, exécuter et s'adapter de manière autonome pour atteindre des objectifs complexes. Ce guide fournit un cadre pratique pour les organisations qui cherchent à implémenter des solutions d'IA agentic.</p><h2>Comprendre l'IA Agentic</h2><p>Contrairement aux systèmes IA traditionnels qui répondent à des invites spécifiques, les systèmes d'IA agentic peuvent décomposer des tâches complexes en sous-tâches, prendre des décisions et itérer jusqu'à ce que les objectifs soient atteints. Ils combinent de grands modèles de langage avec des capacités de raisonnement, l'utilisation d'outils et des systèmes de mémoire.</p><h2>Cadre d'implémentation</h2><p>Notre approche en quatre phases assure un déploiement réussi : Découverte (évaluation de la préparation), Conception (architecture du système), Développement (construction et test), et Déploiement (mise à l'échelle et optimisation).</p><h2>Considérations clés</h2><p>Le succès avec l'IA agentic nécessite une attention particulière à la qualité des données, aux cadres de gouvernance et à la gestion du changement. Les organisations doivent également établir des métriques de succès claires et des systèmes de surveillance.</p>"
+      },
+      "pilotToScale": {
+        "category": "Stratégie",
+        "title": "Du pilote à l'échelle : Cadre de transformation IA",
+        "description": "Cadre stratégique pour passer de l'expérimentation à l'adoption de l'IA à l'échelle de l'entreprise avec des résultats mesurables.",
+        "readTime": "20 min",
+        "content": "<p>De nombreuses organisations réussissent à piloter des projets IA mais peinent à les mettre à l'échelle dans toute l'entreprise. Ce cadre fournit un chemin éprouvé de la preuve de concept au déploiement à l'échelle de la production.</p><h2>Le défi de la mise à l'échelle</h2><p>Les projets pilotes réussissent souvent dans des environnements contrôlés mais échouent lors de la mise à l'échelle en raison de limitations d'infrastructure, de résistance organisationnelle ou de ROI peu clair. Notre cadre aborde ces défis de manière systématique.</p><h2>Quatre piliers de l'échelle</h2><p>Une mise à l'échelle réussie nécessite quatre éléments fondamentaux : Infrastructure technique (architecture évolutive), Préparation organisationnelle (gestion du changement), Gouvernance (politiques et supervision), et Mesure (KPIs et suivi du ROI).</p><h2>Feuille de route d'implémentation</h2><p>Nous décrivons une feuille de route de 12 mois qui mène les organisations du succès du pilote à la transformation à l'échelle de l'entreprise, avec des jalons clairs et des critères de succès à chaque étape.</p>"
+      },
+      "agenticMarketing": {
+        "category": "Aperçus de l'industrie",
+        "title": "L'avenir du marketing agentic",
+        "description": "Comment les agents IA transforment les opérations marketing et les expériences client. Études de cas réelles et métriques de ROI.",
+        "readTime": "12 min",
+        "content": "<p>L'IA agentic révolutionne le marketing en permettant la gestion autonome de campagnes, la génération de contenu personnalisé et l'optimisation en temps réel à une échelle sans précédent.</p><h2>La révolution marketing</h2><p>L'automatisation marketing traditionnelle suit des règles prédéfinies. Les systèmes de marketing agentic peuvent adapter les stratégies en temps réel en fonction des données de performance, du comportement client et des conditions du marché.</p><h2>Applications réelles</h2><p>Nous explorons des études de cas où l'IA agentic a transformé les opérations marketing : de la génération de contenu à l'optimisation de campagnes, de la segmentation client à l'analyse prédictive.</p><h2>ROI et métriques</h2><p>Les organisations qui implémentent le marketing agentic voient des améliorations moyennes de 340% du ROI, une réduction de 75% du temps de mise sur le marché et une augmentation de 10x de la production de campagnes. Nous décomposons comment ces métriques sont atteintes.</p>"
+      },
+      "buildingAgentic": {
+        "category": "Guide technique",
+        "title": "Construire des systèmes agentic",
+        "description": "Plongée technique approfondie dans la conception, la construction et le déploiement de systèmes d'agents IA autonomes à l'échelle.",
+        "readTime": "18 min",
+        "content": "<p>Ce guide technique couvre l'architecture, les outils et les meilleures pratiques pour construire des systèmes d'IA agentic prêts pour la production.</p><h2>Architecture système</h2><p>Les systèmes agentic nécessitent une architecture robuste combinant LLMs, bases de données vectorielles, interfaces d'outils et couches d'orchestration. Nous détaillons chaque composant et comment ils s'intègrent.</p><h2>Stack de développement</h2><p>Nous passons en revue les outils et frameworks essentiels : LangChain pour l'orchestration, bases de données vectorielles pour la mémoire, intégrations API pour l'utilisation d'outils, et systèmes de surveillance pour l'observabilité.</p><h2>Meilleures pratiques</h2><p>Les considérations clés incluent l'ingénierie de prompts, la gestion d'erreurs, les garde-fous de sécurité et l'optimisation des performances. Nous fournissons des exemples pratiques et des modèles de code.</p><h2>Stratégies de déploiement</h2><p>Passer du prototype à la production nécessite une planification minutieuse autour de l'infrastructure, de la mise à l'échelle, de la surveillance et de la gestion des coûts. Nous partageons les leçons apprises de déploiements réels.</p>"
+      },
+      "roiInvestment": {
+        "category": "Stratégie",
+        "title": "Mesurer le ROI des investissements IA",
+        "description": "Cadres pratiques et métriques pour mesurer le retour sur investissement de vos initiatives IA.",
+        "readTime": "10 min",
+        "content": "<p>Mesurer le ROI de l'IA nécessite un cadre complet qui capture à la fois les avantages quantitatifs et qualitatifs sur plusieurs dimensions.</p><h2>Le défi du ROI</h2><p>Les calculs de ROI traditionnels manquent souvent la valeur stratégique des investissements IA. Nous présentons un cadre multidimensionnel qui capture les gains d'efficacité, l'impact sur les revenus et le positionnement stratégique.</p><h2>Métriques clés</h2><p>Notre cadre suit les métriques sur six dimensions : Efficacité opérationnelle, Impact sur les revenus, Réduction des coûts, Amélioration de la qualité, Positionnement stratégique et Capacité d'innovation.</p><h2>Cadre de calcul</h2><p>Nous fournissons des formules et outils pratiques pour calculer le ROI, y compris l'établissement de références, les intervalles de mesure et les méthodes d'attribution.</p><h2>Études de cas</h2><p>Des exemples réels démontrent comment les organisations ont atteint 200-450% de ROI sur les investissements IA, avec des décompositions détaillées de la façon dont ces retours ont été mesurés et atteints.</p>"
+      }
+    },
+    "newsletter": {
+      "title": "RESTEZ À L'AVANT-GARDE<br />DE L'IA",
+      "description": "Abonnez-vous pour recevoir nos dernières analyses, guides techniques et études de l'industrie directement dans votre boîte de réception.",
+      "placeholder": "Entrez votre adresse email",
+      "subscribe": "S'abonner",
+      "subscribing": "Abonnement...",
+      "success": "✓ Abonnement réussi ! Vérifiez votre email pour confirmation.",
+      "error": "✗ Échec de l'abonnement. Veuillez réessayer."
+    }
   },
   "faq": {
     "seoTitle": "FAQ | Questions fréquentes sur la transformation IA",

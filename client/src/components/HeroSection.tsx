@@ -11,6 +11,19 @@ function HeroSection() {
   const { language, t } = useLanguage();
   const [scrollPosition, setScrollPosition] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [services, setServices] = useState<string[]>([]);
+  
+  // Load services safely with fallback
+  useEffect(() => {
+    try {
+      const servicesValue = t('hero.services', { returnObjects: true });
+      const servicesArray = Array.isArray(servicesValue) ? servicesValue : [];
+      setServices(servicesArray);
+    } catch (error) {
+      console.error('Error loading services:', error);
+      setServices([]);
+    }
+  }, [t, language]);
   
   // Helper to get localized path
   const getLocalizedPath = (path: string) => {
@@ -144,28 +157,16 @@ function HeroSection() {
                   }}
                 >
                   {/* Double the services for seamless loop */}
-                  {(() => {
-                    // Use translation hook with returnObjects support
-                    const servicesValue = t('hero.services', { returnObjects: true });
-                    const services = Array.isArray(servicesValue) ? servicesValue : [];
-                    
-                    // Return empty if no services
-                    if (services.length === 0) {
-                      return null;
-                    }
-                    
-                    // Double the services for seamless loop - flatten the result
-                    return [...Array(2)].flatMap((_, setIndex) => 
-                      services.map((service: string, index: number) => (
-                        <span 
-                          key={`${setIndex}-${index}`}
-                          className="text-white/40 hover:text-white/80 text-lg sm:text-xl font-medium transition-colors duration-300 cursor-default"
-                        >
-                          {service}
-                        </span>
-                      ))
-                    );
-                  })()}
+                  {services.length > 0 && [...Array(2)].flatMap((_, setIndex) => 
+                    services.map((service: string, index: number) => (
+                      <span 
+                        key={`${setIndex}-${index}`}
+                        className="text-white/40 hover:text-white/80 text-lg sm:text-xl font-medium transition-colors duration-300 cursor-default"
+                      >
+                        {service}
+                      </span>
+                    ))
+                  )}
                 </div>
               </div>
             </div>

@@ -161,12 +161,12 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/60">
-          <div>{t('footer.copyright', { year: new Date().getFullYear() })}</div>
-          <div className="flex gap-6">
-            <Link href={getLocalizedPath('/privacy')} className="hover:text-white transition-colors">{t('footer.links.privacy')}</Link>
-            <Link href={getLocalizedPath('/terms')} className="hover:text-white transition-colors">{t('footer.links.terms')}</Link>
-            <Link href={getLocalizedPath('/cookies')} className="hover:text-white transition-colors">{t('footer.links.cookies')}</Link>
+        <div className="border-t border-white/10 pt-4 sm:pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4 text-xs sm:text-sm text-white/60">
+          <div className="text-center sm:text-left">{t('footer.copyright', { year: new Date().getFullYear() })}</div>
+          <div className="flex flex-wrap justify-center sm:justify-end gap-4 sm:gap-6">
+            <Link href={getLocalizedPath('/privacy')} className="active:text-white sm:hover:text-white transition-colors touch-manipulation">{t('footer.links.privacy')}</Link>
+            <Link href={getLocalizedPath('/terms')} className="active:text-white sm:hover:text-white transition-colors touch-manipulation">{t('footer.links.terms')}</Link>
+            <Link href={getLocalizedPath('/cookies')} className="active:text-white sm:hover:text-white transition-colors touch-manipulation">{t('footer.links.cookies')}</Link>
           </div>
         </div>
       </div>

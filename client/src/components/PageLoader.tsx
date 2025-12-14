@@ -2,6 +2,7 @@ import { useEffect, useState, useRef, useMemo } from "react";
 import { useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import { sanitizeLoaderHTML, sanitizeLoaderDOM } from "@/utils/htmlSanitizer";
 
 // Preload critical resources during loader display
 function preloadResources() {
@@ -296,9 +297,28 @@ export default function PageLoader() {
     );
   }
 
-  const htmlContent = loaderHtml.includes("<style>")
-    ? loaderHtml.replace(/<style>[\s\S]*?<\/style>/g, "").trim()
-    : loaderHtml;
+  // Sanitize HTML content before rendering
+  const sanitizedHtml = useMemo(() => {
+    if (!loaderHtml) return '';
+    const htmlWithoutStyles = loaderHtml.includes("<style>")
+      ? loaderHtml.replace(/<style>[\s\S]*?<\/style>/g, "").trim()
+      : loaderHtml;
+    return sanitizeLoaderHTML(htmlWithoutStyles);
+  }, [loaderHtml]);
+
+  // Sanitize DOM after HTML is injected (fallback)
+  useEffect(() => {
+    if (isLoading && sanitizedHtml) {
+      const timer = setTimeout(() => {
+        const loaderContainer = document.querySelector('[data-page-loader]') as HTMLElement;
+        if (loaderContainer) {
+          sanitizeLoaderDOM(loaderContainer);
+        }
+      }, 100); // Small delay to ensure DOM is ready
+      
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading, sanitizedHtml]);
 
   return (
     <div
@@ -334,7 +354,7 @@ export default function PageLoader() {
         </div>
       )}
       
-      {htmlContent && isLoading && (
+      {sanitizedHtml && isLoading && (
         <div
           data-page-loader
           key={`page-loader-${loaderHtml.substring(0, 50)}`}
@@ -343,7 +363,7 @@ export default function PageLoader() {
             zIndex: 9999,
             visibility: "visible",
           }}
-          dangerouslySetInnerHTML={{ __html: htmlContent }}
+          dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
         />
       )}
     </div>

@@ -158,6 +158,12 @@ export default function AdminHome() {
           icon: <Database className="w-6 h-6 text-primary" />,
           href: "/admin/run-migration",
         },
+        {
+          title: "Migration Loaders",
+          description: "Sanitiser les loaders HTML pour l'accessibilité et le SEO",
+          icon: <Database className="w-6 h-6 text-primary" />,
+          href: "/admin/loader-migration",
+        },
       ],
     },
   ];

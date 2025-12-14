@@ -1,6 +1,8 @@
 import { z } from "zod";
-import { router, publicProcedure } from "./_core/trpc";
+import { router, publicProcedure, adminProcedure } from "./_core/trpc";
 import * as loadersDb from "./loaders";
+import { validateLoaderHTML } from "./html-sanitizer";
+import { migrateLoaders } from "./migrate-loaders";
 
 export const loadersRouter = router({
   getAll: publicProcedure.query(async () => {
@@ -59,4 +61,43 @@ export const loadersRouter = router({
     .mutation(async ({ input }) => {
       return await loadersDb.toggleLoaderActive(input.id);
     }),
+
+  validate: publicProcedure
+    .input(z.object({ cssCode: z.string() }))
+    .query(async ({ input }) => {
+      return validateLoaderHTML(input.cssCode);
+    }),
+
+  // Admin routes
+  checkAll: adminProcedure.query(async () => {
+    const allLoaders = await loadersDb.getAllLoaders();
+    const results = allLoaders.map(loader => {
+      const validation = validateLoaderHTML(loader.cssCode);
+      return {
+        id: loader.id,
+        name: loader.name,
+        isActive: loader.isActive,
+        ...validation,
+      };
+    });
+    
+    const needsMigration = results.filter(r => !r.isValid || r.errors.length > 0 || r.warnings.length > 0);
+    
+    return {
+      total: results.length,
+      needsMigration: needsMigration.length,
+      results,
+      summary: {
+        valid: results.filter(r => r.isValid && r.errors.length === 0 && r.warnings.length === 0).length,
+        hasErrors: results.filter(r => r.errors.length > 0).length,
+        hasWarnings: results.filter(r => r.warnings.length > 0).length,
+      },
+    };
+  }),
+
+  migrateAll: adminProcedure.mutation(async () => {
+    // Execute migration
+    await migrateLoaders();
+    return { success: true, message: "Migration completed. Check server logs for details." };
+  }),
 });

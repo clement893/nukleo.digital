@@ -112,6 +112,7 @@ const AdminPageVisibility = lazy(() => import("./pages/admin/AdminPageVisibility
 const AdminAnalytics = lazy(() => import("./pages/admin/AdminAnalytics"));
 const AdminTestimonials = lazy(() => import("./pages/admin/AdminTestimonials"));
 const RunMigration = lazy(() => import("./pages/admin/RunMigration"));
+const AdminLoaderMigration = lazy(() => import("./pages/admin/AdminLoaderMigration"));
 const AdminHome = lazy(() => import("./pages/admin/AdminHome"));
 import { ProtectedAdminRoute } from "./components/ProtectedAdminRoute";
 import { withPageVisibility } from "./components/ProtectedRoute";
@@ -269,6 +270,9 @@ function App() {
                 </Route>
                 <Route path="/admin/run-migration">
                   <ProtectedAdminRoute><RunMigration /></ProtectedAdminRoute>
+                </Route>
+                <Route path="/admin/loader-migration">
+                  <ProtectedAdminRoute><AdminLoaderMigration /></ProtectedAdminRoute>
                 </Route>
             <Route path="/create-first-admin" component={CreateFirstAdmin} />
             <Route component={NotFound404} />

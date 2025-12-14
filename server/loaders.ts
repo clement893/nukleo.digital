@@ -1,6 +1,7 @@
 import { eq, desc } from "drizzle-orm";
 import { getDb } from "./db";
 import { loaders, type InsertLoader, type Loader } from "../drizzle/schema";
+import { sanitizeLoaderHTML } from "./html-sanitizer";
 
 export async function getAllLoaders(): Promise<Loader[]> {
   const database = await getDb();
@@ -32,10 +33,17 @@ export async function getLoaderById(id: number): Promise<Loader | null> {
 export async function createLoader(data: InsertLoader): Promise<Loader> {
   const database = await getDb();
   if (!database) throw new Error("Database not available");
+  
+  // Sanitize HTML content before storing
+  const sanitizedData = {
+    ...data,
+    cssCode: data.cssCode ? sanitizeLoaderHTML(data.cssCode) : data.cssCode,
+  };
+  
   const result = await database
     .insert(loaders)
     .values({
-      ...data,
+      ...sanitizedData,
       updatedAt: new Date(),
     })
     .returning();
@@ -48,10 +56,17 @@ export async function updateLoader(
 ): Promise<Loader> {
   const database = await getDb();
   if (!database) throw new Error("Database not available");
+  
+  // Sanitize HTML content if cssCode is being updated
+  const sanitizedData = {
+    ...data,
+    cssCode: data.cssCode ? sanitizeLoaderHTML(data.cssCode) : data.cssCode,
+  };
+  
   const result = await database
     .update(loaders)
     .set({
-      ...data,
+      ...sanitizedData,
       updatedAt: new Date(),
     })
     .where(eq(loaders.id, id))

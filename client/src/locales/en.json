@@ -337,6 +337,11 @@
         "Donor engagement tools",
         "Operational efficiency"
       ]
+    },
+    "cta": {
+      "title": "Ready to Transform?",
+      "subtitle": "Start Your Project",
+      "button": "Start Your Project"
     }
   },
   "about": {

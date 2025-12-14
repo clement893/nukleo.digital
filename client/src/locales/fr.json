@@ -249,6 +249,11 @@
         "Outils d'engagement des donateurs",
         "Efficacité opérationnelle"
       ]
+    },
+    "cta": {
+      "title": "Prêt à transformer ?",
+      "subtitle": "Commencer votre projet",
+      "button": "Commencer votre projet"
     }
   },
   "clients": {

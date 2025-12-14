@@ -1,8 +1,10 @@
 import { Rocket, Building2, Heart } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 export default function WhoWeServeSection() {
   const { t, language } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
   
   const getArrayTranslation = (key: string): string[] => {
     try {
@@ -107,7 +109,7 @@ export default function WhoWeServeSection() {
             </span>
           </p>
           <a
-            href="/contact"
+            href={getLocalizedPath('/start-project')}
             className="inline-flex items-center gap-3 px-10 py-5 rounded-full bg-white hover:bg-white/90 text-purple-900 font-bold text-lg transition-all duration-300 hover:scale-[1.05] shadow-xl shadow-purple-500/20"
           >
             {t('whoWeServe.cta.button')}

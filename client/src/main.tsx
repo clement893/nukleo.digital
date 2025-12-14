@@ -102,4 +102,20 @@ if (typeof window !== 'undefined') {
   } else {
     setTimeout(showInlineSVG, 0);
   }
+  
+  // Load non-critical fonts lazily after initial render
+  const loadNonCriticalFonts = () => {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = '/fonts-lazy.css';
+    link.media = 'print';
+    link.onload = () => { link.media = 'all'; };
+    document.head.appendChild(link);
+  };
+  
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(loadNonCriticalFonts, { timeout: 2000 });
+  } else {
+    setTimeout(loadNonCriticalFonts, 2000);
+  }
 }

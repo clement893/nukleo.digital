@@ -194,18 +194,7 @@ async function startServer() {
   if (process.env.NODE_ENV === "development") {
     await setupVite(app, server);
   } else {
-    // Cache static assets aggressively in production
-    app.use('/assets', (req, res, next) => {
-      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
-      next();
-    });
-    app.use((req, res, next) => {
-      // Cache images, fonts, and other static files
-      if (req.url.match(/\.(jpg|jpeg|png|gif|webp|svg|woff|woff2|ttf|eot|ico)$/)) {
-        res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
-      }
-      next();
-    });
+    // serveStatic now handles all cache headers internally
     serveStatic(app);
   }
   

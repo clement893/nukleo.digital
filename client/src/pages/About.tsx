@@ -162,7 +162,9 @@ export default function About() {
                 <div className="aspect-square rounded-xl overflow-hidden mb-4">
                   <img 
                     src={member.image} 
-                    alt={`${member.name} - ${member.role} at Nukleo Digital`}
+                    alt={(t('alt.teamMember') || '{{name}} - {{role}} chez Nukleo Digital')
+                      .replace('{{name}}', member.name)
+                      .replace('{{role}}', t(`about.team.${member.translationKey}.role`) || member.translationKey)}
                     width="400"
                     height="400"
                     loading="lazy"

@@ -435,7 +435,7 @@ export default function Leo() {
             <Link href="/">
               <img 
                 src="/Nukleo_blanc_RVB.svg" 
-                alt="Nukleo Digital - AI Transformation Agency" 
+                alt={t('alt.logo') || 'Logo Nukleo Digital - Agence de transformation IA'} 
                 width="120"
                 height="32"
                 fetchPriority="high"

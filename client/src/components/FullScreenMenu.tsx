@@ -138,7 +138,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
           >
             <img 
               src="/Nukleo_blanc_RVB.svg" 
-              alt="Nukleo Digital - AI Transformation Agency" 
+              alt={t('alt.logo') || 'Logo Nukleo Digital - Agence de transformation IA'} 
               width="120"
               height="32"
               fetchPriority="high"
@@ -147,8 +147,8 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
           </Link>
 
           {/* Close Button and CTA */}
-          <div className="flex items-center gap-4">
-            <Link href={getLocalizedPath('/start-project')}>
+          <div className="flex items-center gap-3 sm:gap-4">
+            <Link href={getLocalizedPath('/start-project')} className="hidden sm:block">
               <Button
                 className="
                   rounded-full 
@@ -174,10 +174,24 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
             </Link>
             <button
               onClick={onClose}
-              className="text-white hover:bg-white/10 transition-colors p-2 rounded-lg"
-              aria-label="Close menu"
+              className="
+                flex items-center gap-2 sm:gap-3
+                text-white 
+                hover:bg-white/10 
+                active:bg-white/20
+                transition-all duration-300 
+                px-4 py-2.5 sm:px-3 sm:py-2 
+                rounded-lg 
+                touch-manipulation
+                font-medium
+                text-sm sm:text-base
+                border border-white/20 sm:border-0
+                backdrop-blur-sm sm:backdrop-blur-0
+              "
+              aria-label={t('header.closeMenu') || 'Close menu'}
             >
-              <X className="w-6 h-6" />
+              <X className="w-5 h-5 sm:w-6 sm:h-6" />
+              <span className="sm:hidden">{t('header.closeMenu') || 'Fermer'}</span>
             </button>
           </div>
         </div>
@@ -186,7 +200,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
       {/* Menu Content */}
       <div className="h-full flex items-center justify-center relative z-10">
         <nav className="container px-6 md:px-12">
-          <ul className="space-y-2 md:space-y-3 max-w-2xl mx-auto">
+          <ul className="space-y-3 sm:space-y-4 md:space-y-3 max-w-2xl mx-auto">
             {navItems.map((item, itemIdx) => (
                       <li
                         key={item.path}
@@ -211,30 +225,34 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
                             className="
                               w-full group 
                               flex items-center gap-4 md:gap-6 
-                              py-2 md:py-3 px-4 md:px-6 
+                              py-3 sm:py-4 md:py-2 px-4 sm:px-6 md:px-4 
                               rounded-xl 
                               hover:bg-white/10 
+                              active:bg-white/15
                               transition-all duration-500
                               cursor-pointer
                               relative
                               overflow-hidden
+                              touch-manipulation
+                              min-h-[56px] sm:min-h-[64px] md:min-h-0
                             "
                           >
                             <span 
                               className="
-                                text-xs md:text-sm 
+                                text-sm sm:text-xs md:text-sm 
                                 font-mono 
                                 text-accent 
                                 opacity-60 
                                 group-hover:opacity-100 
                                 transition-opacity
+                                flex-shrink-0
                               "
                             >
                               {item.number}
                             </span>
                             <span 
                               className={`
-                                text-2xl md:text-3xl lg:text-4xl 
+                                text-xl sm:text-2xl md:text-3xl lg:text-4xl 
                                 font-bold 
                                 transition-all duration-500
                                 ${normalizePath(location) === item.path 

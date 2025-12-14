@@ -48,7 +48,7 @@ function ArrowBackground({ variant = 'default' }: ArrowBackgroundProps) {
           <img
             key={i}
             src="/nukleo-arrow.svg"
-            alt=""
+            alt="Flèche décorative Nukleo Digital"
             width={arrow.size}
             height={arrow.size}
             className="absolute"

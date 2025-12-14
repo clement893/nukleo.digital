@@ -32,6 +32,15 @@
     "openMenu": "Open menu",
     "closeMenu": "Close menu"
   },
+  "alt": {
+    "logo": "Nukleo Digital Logo - AI Transformation Agency",
+    "clientLogo": "{{name}} Logo",
+    "teamMember": "{{name}} - {{role}} at Nukleo Digital",
+    "office": "Nukleo Digital office in {{city}}",
+    "iconAILab": "The AI Lab Icon",
+    "iconStrategicBureau": "The Strategic Bureau Icon",
+    "iconCreativeStudio": "The Creative Studio Icon"
+  },
   "hero": {
     "title": "Join the",
     "titleHighlight": "AI Revolution",

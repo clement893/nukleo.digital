@@ -93,7 +93,7 @@ function Footer() {
           {/* Logo and Description */}
           <div className="sm:col-span-2 lg:col-span-4">
             <Link href={getLocalizedPath('/')} className="mb-3 sm:mb-4 block touch-manipulation">
-              <img src="/Nukleo_blanc_RVB.svg" alt="Nukleo" className="h-7 sm:h-8 w-auto" width="120" height="32" loading="lazy" />
+              <img src="/Nukleo_blanc_RVB.svg" alt={t('alt.logo') || 'Logo Nukleo Digital - Agence de transformation IA'} className="h-7 sm:h-8 w-auto" width="120" height="32" loading="lazy" />
             </Link>
             <p className="text-white/60 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6">
               {t('footer.description')}

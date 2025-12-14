@@ -324,7 +324,7 @@ export default function PageLoader() {
         >
           <img 
             src="/Nukleo_blanc_RVB.svg" 
-            alt="Nukleo Digital - AI Transformation Agency" 
+            alt="Logo Nukleo Digital - Agence de transformation IA" 
             width="300"
             height="75"
             loading="lazy"

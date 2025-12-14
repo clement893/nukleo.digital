@@ -44,7 +44,7 @@ export default function ClientLogos() {
                   {client.logo ? (
                     <img 
                       src={client.logo} 
-                      alt={client.name} 
+                      alt={(t('alt.clientLogo') || 'Logo {{name}}').replace('{{name}}', client.name)} 
                       className="h-8 w-auto object-contain opacity-100 hover:opacity-80 transition-opacity"
                     />
                   ) : (

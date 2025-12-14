@@ -11,4 +11,6 @@ export const ENV = {
   googleClientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
   adminAllowedEmails: process.env.ADMIN_ALLOWED_EMAILS ?? "",
   baseUrl: process.env.BASE_URL ?? "http://localhost:3000",
+  internalPlatformUrl: process.env.INTERNAL_PLATFORM_URL ?? "", // URL de la plateforme interne pour récupérer les témoignages
+  internalPlatformApiKey: process.env.INTERNAL_PLATFORM_API_KEY ?? "", // Clé API optionnelle pour l'authentification
 };

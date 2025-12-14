@@ -46,10 +46,13 @@ function HeroSection() {
           <div className="max-w-5xl">
             {/* Main Heading */}
             <h1 
-              className="
-                text-[3rem] sm:text-[5rem] md:text-[7rem] lg:text-[10rem] 
+              className={`
+                ${language === 'fr' 
+                  ? 'text-[2.5rem] sm:text-[4rem] md:text-[5.5rem] lg:text-[8rem]' 
+                  : 'text-[3rem] sm:text-[5rem] md:text-[7rem] lg:text-[10rem]'
+                }
                 font-bold leading-[1.1] tracking-tighter text-white mb-6 sm:mb-8 italic
-              "
+              `}
             >
               {t('hero.title')}
               <br />

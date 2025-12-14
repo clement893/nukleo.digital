@@ -116,6 +116,12 @@ export default function AdminHome() {
           icon: <Mail className="w-6 h-6 text-primary" />,
           href: "/admin/ai-news-subscribers",
         },
+        {
+          title: "Témoignages",
+          description: "Synchroniser les témoignages depuis la plateforme interne",
+          icon: <MessageSquare className="w-6 h-6 text-primary" />,
+          href: "/admin/testimonials",
+        },
       ],
     },
     {

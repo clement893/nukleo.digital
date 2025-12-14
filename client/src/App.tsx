@@ -110,6 +110,7 @@ const AdminContactMessages = lazy(() => import("./pages/admin/AdminContactMessag
 const AdminSounds = lazy(() => import("./pages/admin/AdminSounds"));
 const AdminPageVisibility = lazy(() => import("./pages/admin/AdminPageVisibility"));
 const AdminAnalytics = lazy(() => import("./pages/admin/AdminAnalytics"));
+const AdminTestimonials = lazy(() => import("./pages/admin/AdminTestimonials"));
 const RunMigration = lazy(() => import("./pages/admin/RunMigration"));
 const AdminHome = lazy(() => import("./pages/admin/AdminHome"));
 import { ProtectedAdminRoute } from "./components/ProtectedAdminRoute";
@@ -260,12 +261,15 @@ function App() {
             <Route path="/admin/page-visibility">
               <ProtectedAdminRoute><AdminPageVisibility /></ProtectedAdminRoute>
             </Route>
-            <Route path="/admin/analytics">
-              <ProtectedAdminRoute><AdminAnalytics /></ProtectedAdminRoute>
-            </Route>
-            <Route path="/admin/run-migration">
-              <ProtectedAdminRoute><RunMigration /></ProtectedAdminRoute>
-            </Route>
+                <Route path="/admin/analytics">
+                  <ProtectedAdminRoute><AdminAnalytics /></ProtectedAdminRoute>
+                </Route>
+                <Route path="/admin/testimonials">
+                  <ProtectedAdminRoute><AdminTestimonials /></ProtectedAdminRoute>
+                </Route>
+                <Route path="/admin/run-migration">
+                  <ProtectedAdminRoute><RunMigration /></ProtectedAdminRoute>
+                </Route>
             <Route path="/create-first-admin" component={CreateFirstAdmin} />
             <Route component={NotFound404} />
           </Switch>

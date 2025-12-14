@@ -9,9 +9,12 @@ import {
   users,
   aiNewsSubscribers,
   startProjectSubmissions,
-  contactMessages
+  contactMessages,
+  testimonials,
+  InsertTestimonial
 } from "../../drizzle/schema";
-import { count, desc, sql } from "drizzle-orm";
+import { count, desc, sql, eq, or, and } from "drizzle-orm";
+import { ENV } from "../_core/env";
 
 export const adminRouter = router({
   getStats: adminProcedure.query(async () => {
@@ -158,4 +161,200 @@ export const adminRouter = router({
       return [];
     }
   }),
+
+  // Synchroniser les témoignages depuis la plateforme interne
+  syncTestimonials: adminProcedure.mutation(async () => {
+    if (!ENV.internalPlatformUrl) {
+      throw new Error("INTERNAL_PLATFORM_URL n'est pas configurée");
+    }
+
+    const db = await getDb();
+    if (!db) {
+      throw new Error("Database not available");
+    }
+
+    try {
+      // Récupérer les témoignages depuis la plateforme interne (FR et EN)
+      const [frTestimonials, enTestimonials] = await Promise.all([
+        fetchTestimonialsFromExternalPlatform('fr'),
+        fetchTestimonialsFromExternalPlatform('en'),
+      ]);
+
+      // Combiner les témoignages FR et EN par ID
+      const testimonialsMap = new Map<number, any>();
+      
+      // Traiter les témoignages français
+      frTestimonials.forEach((t) => {
+        const id = t.id || 0;
+        if (!testimonialsMap.has(id)) {
+          testimonialsMap.set(id, {
+            id,
+            client: t.client,
+            contact: t.contact,
+            title: t.title,
+            company: t.company,
+            textFr: t.textFr || t.text || '',
+            textEn: '',
+            displayOrder: t.displayOrder || 0,
+            isActive: t.isActive !== false,
+          });
+        } else {
+          const existing = testimonialsMap.get(id)!;
+          existing.textFr = t.textFr || t.text || existing.textFr;
+        }
+      });
+
+      // Traiter les témoignages anglais
+      enTestimonials.forEach((t) => {
+        const id = t.id || 0;
+        if (!testimonialsMap.has(id)) {
+          testimonialsMap.set(id, {
+            id,
+            client: t.client,
+            contact: t.contact,
+            title: t.title,
+            company: t.company,
+            textFr: '',
+            textEn: t.textEn || t.text || '',
+            displayOrder: t.displayOrder || 0,
+            isActive: t.isActive !== false,
+          });
+        } else {
+          const existing = testimonialsMap.get(id)!;
+          existing.textEn = t.textEn || t.text || existing.textEn;
+        }
+      });
+
+      const testimonialsToSync = Array.from(testimonialsMap.values());
+
+      if (testimonialsToSync.length === 0) {
+        return {
+          success: false,
+          message: "Aucun témoignage trouvé sur la plateforme interne",
+          synced: 0,
+        };
+      }
+
+      // Synchroniser chaque témoignage
+      let synced = 0;
+      let updated = 0;
+      let created = 0;
+
+      for (const testimonial of testimonialsToSync) {
+        // Vérifier si le témoignage existe déjà (par client+contact, car l'ID externe peut ne pas correspondre)
+        const existing = await db
+          .select()
+          .from(testimonials)
+          .where(
+            and(
+              eq(testimonials.client, testimonial.client),
+              eq(testimonials.contact, testimonial.contact)
+            )
+          )
+          .limit(1);
+
+        const testimonialData: InsertTestimonial = {
+          client: testimonial.client,
+          contact: testimonial.contact,
+          title: testimonial.title,
+          company: testimonial.company,
+          textEn: testimonial.textEn || '',
+          textFr: testimonial.textFr || '',
+          displayOrder: testimonial.displayOrder,
+          isActive: testimonial.isActive,
+        };
+
+        if (existing.length > 0) {
+          // Mettre à jour le témoignage existant
+          await db
+            .update(testimonials)
+            .set({
+              ...testimonialData,
+              updatedAt: new Date(),
+            })
+            .where(eq(testimonials.id, existing[0].id));
+          updated++;
+        } else {
+          // Créer un nouveau témoignage
+          await db.insert(testimonials).values(testimonialData);
+          created++;
+        }
+        synced++;
+      }
+
+      return {
+        success: true,
+        message: `Synchronisation réussie : ${synced} témoignages synchronisés (${created} créés, ${updated} mis à jour)`,
+        synced,
+        created,
+        updated,
+      };
+    } catch (error: any) {
+      console.error("[Admin] Error syncing testimonials:", error);
+      throw new Error(`Erreur lors de la synchronisation : ${error.message}`);
+    }
+  }),
 });
+
+// Fonction helper pour récupérer les témoignages depuis la plateforme interne
+async function fetchTestimonialsFromExternalPlatform(language: 'fr' | 'en'): Promise<any[]> {
+  if (!ENV.internalPlatformUrl) {
+    return [];
+  }
+
+  try {
+    const url = `${ENV.internalPlatformUrl}/api/testimonials?language=${language}`;
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+    };
+
+    if (ENV.internalPlatformApiKey) {
+      headers['Authorization'] = `Bearer ${ENV.internalPlatformApiKey}`;
+    }
+
+    const response = await fetch(url, {
+      method: 'GET',
+      headers,
+      signal: AbortSignal.timeout(10000), // Timeout de 10 secondes pour la synchronisation
+    });
+
+    if (!response.ok) {
+      throw new Error(`API returned ${response.status}: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    
+    if (Array.isArray(data)) {
+      return data.map((item: any) => ({
+        id: item.id,
+        client: item.client || item.company || '',
+        contact: item.contact || item.name || '',
+        title: item.title || '',
+        company: item.company || item.client || '',
+        textEn: item.textEn || item.text || '',
+        textFr: item.textFr || item.text || '',
+        displayOrder: item.displayOrder || item.order || 0,
+        isActive: item.isActive !== false,
+      }));
+    }
+
+    if (data.testimonials && Array.isArray(data.testimonials)) {
+      return data.testimonials.map((item: any) => ({
+        id: item.id,
+        client: item.client || item.company || '',
+        contact: item.contact || item.name || '',
+        title: item.title || '',
+        company: item.company || item.client || '',
+        textEn: item.textEn || item.text || '',
+        textFr: item.textFr || item.text || '',
+        displayOrder: item.displayOrder || item.order || 0,
+        isActive: item.isActive !== false,
+      }));
+    }
+
+    return [];
+  } catch (error: any) {
+    console.error(`[Admin] Error fetching testimonials (${language}):`, error.message);
+    throw error;
+  }
+}

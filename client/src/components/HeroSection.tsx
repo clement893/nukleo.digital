@@ -116,7 +116,7 @@ function HeroSection() {
                 minHeight: isMobile 
                   ? (language === 'fr' ? '2.5rem' : '2.75rem')
                   : (language === 'fr' ? '3rem' : '3.5rem'),
-              }), [isMobile, language])}
+              }), [isMobile, language]) as React.CSSProperties}
             >
               {t('hero.title')}
               <br />

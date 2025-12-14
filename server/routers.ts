@@ -16,6 +16,8 @@ import { adminRouter } from "./routers/admin";
 import { loadersRouter } from "./loadersRouter";
 import { testimonialsRouter } from "./routers/testimonials";
 import { radarRouter } from "./routers/radar";
+import { pageVisibilityRouter } from "./routers/pageVisibility";
+import { migrateRouter } from "./routers/migrate";
 import { saveLeoContact, createLeoSession, updateLeoSession } from "./db";
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -31,6 +33,8 @@ export const appRouter = router({
   loaders: loadersRouter,
   testimonials: testimonialsRouter,
   radar: radarRouter,
+  pageVisibility: pageVisibilityRouter,
+  migrate: migrateRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {

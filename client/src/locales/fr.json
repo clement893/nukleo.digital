@@ -112,8 +112,13 @@
     "seoDescription": "Découvrez le manifeste Nukleo : notre vision pour la transformation IA qui dépasse les pilotes pour des solutions prêtes pour la production et évolutives. Lisez notre approche du succès IA.",
     "seoKeywords": "manifeste transformation IA, vision IA, philosophie IA, approche IA, mise à l'échelle solutions IA",
     "sectionLabel": "Manifeste",
+<<<<<<< HEAD
     "title": "Passez du test<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">à la production.</span>",
     "description": "L'écart se creuse. Pendant que certains expérimentent, les leaders réarchitecturent toute leur opération autour d'agents IA autonomes.",
+=======
+    "title": "Passez du pilote<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">à l'échelle.</span>",
+    "description": "L'écart se creuse. Pendant que certains expérimentent, les leaders réarchitecturent toute leur opération autour de l'IA agentique.",
+>>>>>>> a571104 (feat: Ajout de la gestion de visibilitÃ© des pages dans l'admin)
     "readMore": "Lire le manifeste complet",
     "card1": {
       "title": "Leader, pas suiveur",

@@ -225,6 +225,7 @@ export const aiNewsSubscribers = pgTable("ai_news_subscribers", {
   id: serial("id").primaryKey(),
   email: varchar("email", { length: 320 }).notNull().unique(),
   source: varchar("source", { length: 100 }).default("ai-trend-radar").notNull(), // Track where subscription came from
+  consent: boolean("consent").default(true).notNull(), // User consent to receive emails
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
@@ -237,6 +238,7 @@ export const startProjectSubmissions = pgTable("start_project_submissions", {
   projectType: varchar("projectType", { length: 100 }).notNull(),
   budget: varchar("budget", { length: 50 }).notNull(),
   description: text("description").notNull(),
+  consent: boolean("consent").default(true).notNull(), // User consent to be contacted
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
@@ -255,9 +257,23 @@ export const contactMessages = pgTable("contact_messages", {
   email: varchar("email", { length: 320 }).notNull(),
   company: varchar("company", { length: 255 }).notNull(),
   message: text("message").notNull(),
+  consent: boolean("consent").default(true).notNull(), // User consent to be contacted
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
 export type ContactMessage = typeof contactMessages.$inferSelect;
 export type InsertContactMessage = typeof contactMessages.$inferInsert;
+
+// Page Visibility table for managing which pages are visible on the site
+export const pageVisibility = pgTable("page_visibility", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  path: varchar("path", { length: 255 }).notNull().unique(), // e.g., "/manifesto", "/projects", "/fr/manifesto"
+  isVisible: boolean("isVisible").default(true).notNull(), // Whether the page is visible
+  description: text("description"), // Optional description of the page
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+});
+
+export type PageVisibility = typeof pageVisibility.$inferSelect;
+export type InsertPageVisibility = typeof pageVisibility.$inferInsert;

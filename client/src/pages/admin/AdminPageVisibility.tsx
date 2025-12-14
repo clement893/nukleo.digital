@@ -1,0 +1,290 @@
+import { trpc } from '@/lib/trpc';
+import AdminRoute from '@/components/AdminRoute';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Loader2, Eye, EyeOff, Globe, Save } from 'lucide-react';
+import { AdminHeader } from "@/components/AdminHeader";
+import { Button } from '@/components/ui/button';
+import { useState, useEffect } from 'react';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { toast } from 'sonner';
+
+// Liste de toutes les pages du site avec leurs chemins
+const ALL_PAGES = [
+  { path: '/', label: 'Accueil', description: 'Page d\'accueil principale' },
+  { path: '/fr', label: 'Accueil (FR)', description: 'Page d\'accueil en français' },
+  { path: '/projects', label: 'Projets', description: 'Page des projets' },
+  { path: '/fr/projects', label: 'Projets (FR)', description: 'Page des projets en français' },
+  { path: '/about', label: 'À propos', description: 'Page à propos' },
+  { path: '/fr/about', label: 'À propos (FR)', description: 'Page à propos en français' },
+  { path: '/expertise', label: 'Expertise', description: 'Page expertise' },
+  { path: '/fr/expertise', label: 'Expertise (FR)', description: 'Page expertise en français' },
+  { path: '/resources', label: 'Ressources', description: 'Page ressources' },
+  { path: '/fr/resources', label: 'Ressources (FR)', description: 'Page ressources en français' },
+  { path: '/contact', label: 'Contact', description: 'Page de contact' },
+  { path: '/fr/contact', label: 'Contact (FR)', description: 'Page de contact en français' },
+  { path: '/leo', label: 'LEO', description: 'Page LEO' },
+  { path: '/fr/leo', label: 'LEO (FR)', description: 'Page LEO en français' },
+  { path: '/manifesto', label: 'Manifeste', description: 'Page manifeste' },
+  { path: '/fr/manifesto', label: 'Manifeste (FR)', description: 'Page manifeste en français' },
+  { path: '/radar', label: 'Radar IA', description: 'Page radar des tendances IA' },
+  { path: '/fr/radar', label: 'Radar IA (FR)', description: 'Page radar des tendances IA en français' },
+  { path: '/ai-trend-radar', label: 'AI Trend Radar', description: 'Page AI Trend Radar' },
+  { path: '/fr/ai-trend-radar', label: 'AI Trend Radar (FR)', description: 'Page AI Trend Radar en français' },
+  { path: '/ai-readiness', label: 'AI Readiness', description: 'Page évaluation de préparation IA' },
+  { path: '/fr/ai-readiness', label: 'AI Readiness (FR)', description: 'Page évaluation de préparation IA en français' },
+  { path: '/services', label: 'Services', description: 'Page services' },
+  { path: '/fr/services', label: 'Services (FR)', description: 'Page services en français' },
+  { path: '/clients', label: 'Clients', description: 'Page clients' },
+  { path: '/fr/clients', label: 'Clients (FR)', description: 'Page clients en français' },
+  { path: '/start-project', label: 'Démarrer un projet', description: 'Page démarrer un projet' },
+  { path: '/fr/start-project', label: 'Démarrer un projet (FR)', description: 'Page démarrer un projet en français' },
+  { path: '/testimonials', label: 'Témoignages', description: 'Page témoignages' },
+  { path: '/fr/testimonials', label: 'Témoignages (FR)', description: 'Page témoignages en français' },
+  { path: '/glossary', label: 'Glossaire', description: 'Page glossaire' },
+  { path: '/fr/glossary', label: 'Glossaire (FR)', description: 'Page glossaire en français' },
+  { path: '/ai-glossary', label: 'Glossaire IA', description: 'Page glossaire IA' },
+  { path: '/fr/ai-glossary', label: 'Glossaire IA (FR)', description: 'Page glossaire IA en français' },
+  { path: '/privacy', label: 'Confidentialité', description: 'Page confidentialité' },
+  { path: '/fr/privacy', label: 'Confidentialité (FR)', description: 'Page confidentialité en français' },
+  { path: '/terms', label: 'Conditions', description: 'Page conditions d\'utilisation' },
+  { path: '/fr/terms', label: 'Conditions (FR)', description: 'Page conditions d\'utilisation en français' },
+  { path: '/cookies', label: 'Cookies', description: 'Page politique des cookies' },
+  { path: '/fr/cookies', label: 'Cookies (FR)', description: 'Page politique des cookies en français' },
+  { path: '/faq', label: 'FAQ', description: 'Page FAQ' },
+  { path: '/fr/faq', label: 'FAQ (FR)', description: 'Page FAQ en français' },
+  { path: '/lab', label: 'The Lab', description: 'Page The Lab' },
+  { path: '/fr/lab', label: 'The Lab (FR)', description: 'Page The Lab en français' },
+  { path: '/bureau', label: 'The Bureau', description: 'Page The Bureau' },
+  { path: '/fr/bureau', label: 'The Bureau (FR)', description: 'Page The Bureau en français' },
+  { path: '/studio', label: 'The Studio', description: 'Page The Studio' },
+  { path: '/fr/studio', label: 'The Studio (FR)', description: 'Page The Studio en français' },
+  { path: '/agencies', label: 'Agences', description: 'Page agences' },
+  { path: '/fr/agencies', label: 'Agences (FR)', description: 'Page agences en français' },
+];
+
+export default function AdminPageVisibility() {
+  const { data: pagesVisibility, isLoading, refetch } = trpc.pageVisibility.getAll.useQuery();
+  const updateMutation = trpc.pageVisibility.updateVisibility.useMutation({
+    onSuccess: () => {
+      toast.success('Visibilité mise à jour avec succès');
+      refetch();
+    },
+    onError: (error) => {
+      toast.error(`Erreur: ${error.message}`);
+    },
+  });
+
+  const [localVisibility, setLocalVisibility] = useState<Record<string, boolean>>({});
+  const [hasChanges, setHasChanges] = useState(false);
+
+  // Initialize local state from server data
+  useEffect(() => {
+    if (pagesVisibility) {
+      const visibilityMap: Record<string, boolean> = {};
+      pagesVisibility.forEach((page) => {
+        visibilityMap[page.path] = page.isVisible;
+      });
+      // Set default to true for pages not in DB
+      ALL_PAGES.forEach((page) => {
+        if (!(page.path in visibilityMap)) {
+          visibilityMap[page.path] = true;
+        }
+      });
+      setLocalVisibility(visibilityMap);
+    }
+  }, [pagesVisibility]);
+
+  const toggleVisibility = (path: string) => {
+    setLocalVisibility((prev) => {
+      const newState = { ...prev, [path]: !prev[path] };
+      setHasChanges(true);
+      return newState;
+    });
+  };
+
+  const saveAll = async () => {
+    const updates = ALL_PAGES.map((page) => ({
+      path: page.path,
+      isVisible: localVisibility[page.path] ?? true,
+      description: page.description,
+    }));
+
+    try {
+      await updateMutation.mutateAsync({
+        path: updates[0].path,
+        isVisible: updates[0].isVisible,
+        description: updates[0].description,
+      });
+
+      // Update remaining pages one by one (or use bulk update if available)
+      for (let i = 1; i < updates.length; i++) {
+        await updateMutation.mutateAsync(updates[i]);
+      }
+
+      setHasChanges(false);
+    } catch (error) {
+      console.error('Error saving visibility:', error);
+    }
+  };
+
+  const savePage = async (path: string) => {
+    const page = ALL_PAGES.find((p) => p.path === path);
+    if (!page) return;
+
+    try {
+      await updateMutation.mutateAsync({
+        path,
+        isVisible: localVisibility[path] ?? true,
+        description: page.description,
+      });
+    } catch (error) {
+      console.error('Error saving page visibility:', error);
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <AdminRoute>
+        <AdminHeader />
+        <div className="min-h-screen bg-gradient-to-br from-[oklch(0.25_0.05_300)] to-[oklch(0.15_0.05_340)] flex items-center justify-center">
+          <Loader2 className="w-8 h-8 text-cyan-400 animate-spin" />
+        </div>
+      </AdminRoute>
+    );
+  }
+
+  const visibleCount = Object.values(localVisibility).filter((v) => v).length;
+  const hiddenCount = Object.values(localVisibility).filter((v) => !v).length;
+
+  return (
+    <AdminRoute>
+      <AdminHeader />
+      <div className="min-h-screen bg-gradient-to-br from-[oklch(0.25_0.05_300)] to-[oklch(0.15_0.05_340)] p-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <h1 className="text-4xl font-bold text-white mb-2 flex items-center gap-3">
+                <Globe className="w-8 h-8 text-cyan-400" />
+                Gestion de la Visibilité des Pages
+              </h1>
+              <p className="text-white/60">
+                Contrôlez quelles pages sont accessibles sur le site
+              </p>
+            </div>
+            {hasChanges && (
+              <Button
+                onClick={saveAll}
+                disabled={updateMutation.isPending}
+                className="bg-cyan-500 hover:bg-cyan-600 text-white"
+              >
+                <Save className="w-4 h-4 mr-2" />
+                {updateMutation.isPending ? 'Enregistrement...' : 'Enregistrer tout'}
+              </Button>
+            )}
+          </div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <Card className="bg-white/5 backdrop-blur-md border-white/10">
+              <CardHeader>
+                <CardTitle className="text-white">Total</CardTitle>
+                <CardDescription className="text-white/60">
+                  {ALL_PAGES.length} pages
+                </CardDescription>
+              </CardHeader>
+            </Card>
+            <Card className="bg-white/5 backdrop-blur-md border-white/10">
+              <CardHeader>
+                <CardTitle className="text-green-400 flex items-center gap-2">
+                  <Eye className="w-5 h-5" />
+                  Visibles
+                </CardTitle>
+                <CardDescription className="text-white/60">
+                  {visibleCount} pages
+                </CardDescription>
+              </CardHeader>
+            </Card>
+            <Card className="bg-white/5 backdrop-blur-md border-white/10">
+              <CardHeader>
+                <CardTitle className="text-red-400 flex items-center gap-2">
+                  <EyeOff className="w-5 h-5" />
+                  Cachées
+                </CardTitle>
+                <CardDescription className="text-white/60">
+                  {hiddenCount} pages
+                </CardDescription>
+              </CardHeader>
+            </Card>
+          </div>
+
+          {/* Pages List */}
+          <div className="space-y-4">
+            {ALL_PAGES.map((page) => {
+              const isVisible = localVisibility[page.path] ?? true;
+              return (
+                <Card
+                  key={page.path}
+                  className={`bg-white/5 backdrop-blur-md border-white/10 transition-all ${
+                    !isVisible ? 'opacity-60' : ''
+                  }`}
+                >
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-2">
+                          {isVisible ? (
+                            <Eye className="w-5 h-5 text-green-400" />
+                          ) : (
+                            <EyeOff className="w-5 h-5 text-red-400" />
+                          )}
+                          <h3 className="text-lg font-semibold text-white">
+                            {page.label}
+                          </h3>
+                          <span className="px-2 py-1 bg-purple-500/20 border border-purple-500/50 rounded-full text-purple-300 text-xs font-mono">
+                            {page.path}
+                          </span>
+                        </div>
+                        <p className="text-white/60 text-sm ml-8">
+                          {page.description}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-2">
+                          <Switch
+                            id={`switch-${page.path}`}
+                            checked={isVisible}
+                            onCheckedChange={() => {
+                              toggleVisibility(page.path);
+                              // Auto-save individual page
+                              setTimeout(() => {
+                                const newValue = !isVisible;
+                                setLocalVisibility((prev) => ({ ...prev, [page.path]: newValue }));
+                                updateMutation.mutate({
+                                  path: page.path,
+                                  isVisible: newValue,
+                                  description: page.description,
+                                });
+                              }, 0);
+                            }}
+                          />
+                          <Label
+                            htmlFor={`switch-${page.path}`}
+                            className="text-white cursor-pointer"
+                          >
+                            {isVisible ? 'Visible' : 'Cachée'}
+                          </Label>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </AdminRoute>
+  );
+}

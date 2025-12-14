@@ -327,7 +327,6 @@ export default function PageLoader() {
             alt="Nukleo Digital - AI Transformation Agency" 
             width="300"
             height="75"
-            fetchPriority="high"
             loading="lazy"
             fetchPriority="low"
             className="w-full h-auto"

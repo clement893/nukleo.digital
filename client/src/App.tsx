@@ -107,8 +107,11 @@ const AdminAINewsSubscribers = lazy(() => import("./pages/admin/AdminAINewsSubsc
 const AdminStartProjectSubmissions = lazy(() => import("./pages/admin/AdminStartProjectSubmissions"));
 const AdminContactMessages = lazy(() => import("./pages/admin/AdminContactMessages"));
 const AdminSounds = lazy(() => import("./pages/admin/AdminSounds"));
+const AdminPageVisibility = lazy(() => import("./pages/admin/AdminPageVisibility"));
+const RunMigration = lazy(() => import("./pages/admin/RunMigration"));
 const AdminHome = lazy(() => import("./pages/admin/AdminHome"));
 import { ProtectedAdminRoute } from "./components/ProtectedAdminRoute";
+import { withPageVisibility } from "./components/ProtectedRoute";
 
 // Wrapper component to handle language routes
 function LanguageRoute({ component: Component, ...props }: { component: any; path: string }) {
@@ -136,87 +139,87 @@ function App() {
             <Switch>
               {/* Language routes - French */}
               <Route path="/fr" component={Home} />
-              <Route path="/fr/projects" component={Projects} />
-              <Route path="/fr/about" component={About} />
-              <Route path="/fr/expertise" component={Expertise} />
-              <Route path="/fr/resources" component={Resources} />
-              <Route path="/fr/contact" component={Contact} />
-              <Route path="/fr/leo" component={Leo} />
-              <Route path="/fr/manifesto" component={Manifesto} />
-              <Route path="/fr/radar" component={AITrendRadar} />
-              <Route path="/fr/ai-trend-radar" component={AITrendRadar} />
-              <Route path="/fr/ai-readiness" component={AIReadinessAssessment} />
-              <Route path="/fr/ai-readiness-assessment" component={AIReadinessAssessment} />
-              <Route path="/fr/assessment" component={AIReadinessAssessment} />
-              <Route path="/fr/services/ai-strategy-marketing" component={AIStrategyMarketing} />
-              <Route path="/fr/services/digital-platforms" component={DigitalPlatforms} />
-              <Route path="/fr/services/intelligent-operations" component={IntelligentOperations} />
-              <Route path="/fr/glossary" component={Glossary} />
-              <Route path="/fr/glossary/:slug" component={GlossaryTerm} />
-              <Route path="/fr/ai-glossary" component={AIGlossary} />
-              <Route path="/fr/privacy" component={Privacy} />
-              <Route path="/fr/terms" component={Terms} />
-              <Route path="/fr/cookies" component={Cookies} />
-              <Route path="/fr/testimonials" component={Testimonials} />
-              <Route path="/fr/services" component={Services} />
-              <Route path="/fr/clients" component={Clients} />
-              <Route path="/fr/start-project" component={StartProject} />
-              <Route path="/fr/media-center" component={MediaCenter} />
-              <Route path="/fr/media" component={Media} />
-              <Route path="/fr/privacy-policy" component={PrivacyPolicy} />
-              <Route path="/fr/terms-of-service" component={TermsOfService} />
-              <Route path="/fr/cookie-policy" component={CookiePolicy} />
-              <Route path="/fr/faq" component={FAQ} />
-              <Route path="/fr/arts-culture" component={ArtsCulture} />
-              <Route path="/fr/lab" component={Lab} />
-              <Route path="/fr/bureau" component={Bureau} />
-              <Route path="/fr/studio" component={Studio} />
-              <Route path="/fr/services/ai-lab" component={AILabService} />
-              <Route path="/fr/services/strategic-bureau" component={StrategicBureauService} />
-              <Route path="/fr/services/creative-studio" component={CreativeStudioService} />
-              <Route path="/fr/agencies" component={Agencies} />
+              <Route path="/fr/projects" component={withPageVisibility(Projects, "/fr/projects")} />
+              <Route path="/fr/about" component={withPageVisibility(About, "/fr/about")} />
+              <Route path="/fr/expertise" component={withPageVisibility(Expertise, "/fr/expertise")} />
+              <Route path="/fr/resources" component={withPageVisibility(Resources, "/fr/resources")} />
+              <Route path="/fr/contact" component={withPageVisibility(Contact, "/fr/contact")} />
+              <Route path="/fr/leo" component={withPageVisibility(Leo, "/fr/leo")} />
+              <Route path="/fr/manifesto" component={withPageVisibility(Manifesto, "/fr/manifesto")} />
+              <Route path="/fr/radar" component={withPageVisibility(AITrendRadar, "/fr/radar")} />
+              <Route path="/fr/ai-trend-radar" component={withPageVisibility(AITrendRadar, "/fr/ai-trend-radar")} />
+              <Route path="/fr/ai-readiness" component={withPageVisibility(AIReadinessAssessment, "/fr/ai-readiness")} />
+              <Route path="/fr/ai-readiness-assessment" component={withPageVisibility(AIReadinessAssessment, "/fr/ai-readiness-assessment")} />
+              <Route path="/fr/assessment" component={withPageVisibility(AIReadinessAssessment, "/fr/assessment")} />
+              <Route path="/fr/services/ai-strategy-marketing" component={withPageVisibility(AIStrategyMarketing, "/fr/services/ai-strategy-marketing")} />
+              <Route path="/fr/services/digital-platforms" component={withPageVisibility(DigitalPlatforms, "/fr/services/digital-platforms")} />
+              <Route path="/fr/services/intelligent-operations" component={withPageVisibility(IntelligentOperations, "/fr/services/intelligent-operations")} />
+              <Route path="/fr/glossary" component={withPageVisibility(Glossary, "/fr/glossary")} />
+              <Route path="/fr/glossary/:slug" component={withPageVisibility(GlossaryTerm, "/fr/glossary")} />
+              <Route path="/fr/ai-glossary" component={withPageVisibility(AIGlossary, "/fr/ai-glossary")} />
+              <Route path="/fr/privacy" component={withPageVisibility(Privacy, "/fr/privacy")} />
+              <Route path="/fr/terms" component={withPageVisibility(Terms, "/fr/terms")} />
+              <Route path="/fr/cookies" component={withPageVisibility(Cookies, "/fr/cookies")} />
+              <Route path="/fr/testimonials" component={withPageVisibility(Testimonials, "/fr/testimonials")} />
+              <Route path="/fr/services" component={withPageVisibility(Services, "/fr/services")} />
+              <Route path="/fr/clients" component={withPageVisibility(Clients, "/fr/clients")} />
+              <Route path="/fr/start-project" component={withPageVisibility(StartProject, "/fr/start-project")} />
+              <Route path="/fr/media-center" component={withPageVisibility(MediaCenter, "/fr/media-center")} />
+              <Route path="/fr/media" component={withPageVisibility(Media, "/fr/media")} />
+              <Route path="/fr/privacy-policy" component={withPageVisibility(PrivacyPolicy, "/fr/privacy-policy")} />
+              <Route path="/fr/terms-of-service" component={withPageVisibility(TermsOfService, "/fr/terms-of-service")} />
+              <Route path="/fr/cookie-policy" component={withPageVisibility(CookiePolicy, "/fr/cookie-policy")} />
+              <Route path="/fr/faq" component={withPageVisibility(FAQ, "/fr/faq")} />
+              <Route path="/fr/arts-culture" component={withPageVisibility(ArtsCulture, "/fr/arts-culture")} />
+              <Route path="/fr/lab" component={withPageVisibility(Lab, "/fr/lab")} />
+              <Route path="/fr/bureau" component={withPageVisibility(Bureau, "/fr/bureau")} />
+              <Route path="/fr/studio" component={withPageVisibility(Studio, "/fr/studio")} />
+              <Route path="/fr/services/ai-lab" component={withPageVisibility(AILabService, "/fr/services/ai-lab")} />
+              <Route path="/fr/services/strategic-bureau" component={withPageVisibility(StrategicBureauService, "/fr/services/strategic-bureau")} />
+              <Route path="/fr/services/creative-studio" component={withPageVisibility(CreativeStudioService, "/fr/services/creative-studio")} />
+              <Route path="/fr/agencies" component={withPageVisibility(Agencies, "/fr/agencies")} />
               
               {/* Default routes (English) */}
               <Route path="/" component={Home} />
-              <Route path="/projects" component={Projects} />
-            <Route path="/about" component={About} />
-            <Route path="/expertise" component={Expertise} />
-            <Route path="/resources" component={Resources} />
-            <Route path="/contact" component={Contact} />
-            <Route path="/leo" component={Leo} />
-            <Route path="/manifesto" component={Manifesto} />
-            <Route path="/radar" component={AITrendRadar} />
-            <Route path="/ai-trend-radar" component={AITrendRadar} />
-            <Route path="/ai-readiness" component={AIReadinessAssessment} />
-            <Route path="/ai-readiness-assessment" component={AIReadinessAssessment} />
-            <Route path="/assessment" component={AIReadinessAssessment} />
-            <Route path="/services/ai-strategy-marketing" component={AIStrategyMarketing} />
-            <Route path="/services/digital-platforms" component={DigitalPlatforms} />
-            <Route path="/services/intelligent-operations" component={IntelligentOperations} />
-            <Route path="/glossary" component={Glossary} />
-            <Route path="/glossary/:slug" component={GlossaryTerm} />
-            <Route path="/ai-glossary" component={AIGlossary} />
-            <Route path="/privacy" component={Privacy} />
-            <Route path="/terms" component={Terms} />
-            <Route path="/cookies" component={Cookies} />
-            <Route path="/testimonials" component={Testimonials} />
-            <Route path="/services" component={Services} />
-            <Route path="/clients" component={Clients} />
-            <Route path="/start-project" component={StartProject} />
-            <Route path="/media-center" component={MediaCenter} />
-            <Route path="/media" component={Media} />
-            <Route path="/privacy-policy" component={PrivacyPolicy} />
-            <Route path="/terms-of-service" component={TermsOfService} />
-            <Route path="/cookie-policy" component={CookiePolicy} />
-            <Route path="/faq" component={FAQ} />
-            <Route path="/arts-culture" component={ArtsCulture} />
-            <Route path="/lab" component={Lab} />
-            <Route path="/bureau" component={Bureau} />
-            <Route path="/studio" component={Studio} />
-            <Route path="/services/ai-lab" component={AILabService} />
-            <Route path="/services/strategic-bureau" component={StrategicBureauService} />
-            <Route path="/services/creative-studio" component={CreativeStudioService} />
-            <Route path="/agencies" component={Agencies} />
+              <Route path="/projects" component={withPageVisibility(Projects, "/projects")} />
+            <Route path="/about" component={withPageVisibility(About, "/about")} />
+            <Route path="/expertise" component={withPageVisibility(Expertise, "/expertise")} />
+            <Route path="/resources" component={withPageVisibility(Resources, "/resources")} />
+            <Route path="/contact" component={withPageVisibility(Contact, "/contact")} />
+            <Route path="/leo" component={withPageVisibility(Leo, "/leo")} />
+            <Route path="/manifesto" component={withPageVisibility(Manifesto, "/manifesto")} />
+            <Route path="/radar" component={withPageVisibility(AITrendRadar, "/radar")} />
+            <Route path="/ai-trend-radar" component={withPageVisibility(AITrendRadar, "/ai-trend-radar")} />
+            <Route path="/ai-readiness" component={withPageVisibility(AIReadinessAssessment, "/ai-readiness")} />
+            <Route path="/ai-readiness-assessment" component={withPageVisibility(AIReadinessAssessment, "/ai-readiness-assessment")} />
+            <Route path="/assessment" component={withPageVisibility(AIReadinessAssessment, "/assessment")} />
+            <Route path="/services/ai-strategy-marketing" component={withPageVisibility(AIStrategyMarketing, "/services/ai-strategy-marketing")} />
+            <Route path="/services/digital-platforms" component={withPageVisibility(DigitalPlatforms, "/services/digital-platforms")} />
+            <Route path="/services/intelligent-operations" component={withPageVisibility(IntelligentOperations, "/services/intelligent-operations")} />
+            <Route path="/glossary" component={withPageVisibility(Glossary, "/glossary")} />
+            <Route path="/glossary/:slug" component={withPageVisibility(GlossaryTerm, "/glossary")} />
+            <Route path="/ai-glossary" component={withPageVisibility(AIGlossary, "/ai-glossary")} />
+            <Route path="/privacy" component={withPageVisibility(Privacy, "/privacy")} />
+            <Route path="/terms" component={withPageVisibility(Terms, "/terms")} />
+            <Route path="/cookies" component={withPageVisibility(Cookies, "/cookies")} />
+            <Route path="/testimonials" component={withPageVisibility(Testimonials, "/testimonials")} />
+            <Route path="/services" component={withPageVisibility(Services, "/services")} />
+            <Route path="/clients" component={withPageVisibility(Clients, "/clients")} />
+            <Route path="/start-project" component={withPageVisibility(StartProject, "/start-project")} />
+            <Route path="/media-center" component={withPageVisibility(MediaCenter, "/media-center")} />
+            <Route path="/media" component={withPageVisibility(Media, "/media")} />
+            <Route path="/privacy-policy" component={withPageVisibility(PrivacyPolicy, "/privacy-policy")} />
+            <Route path="/terms-of-service" component={withPageVisibility(TermsOfService, "/terms-of-service")} />
+            <Route path="/cookie-policy" component={withPageVisibility(CookiePolicy, "/cookie-policy")} />
+            <Route path="/faq" component={withPageVisibility(FAQ, "/faq")} />
+            <Route path="/arts-culture" component={withPageVisibility(ArtsCulture, "/arts-culture")} />
+            <Route path="/lab" component={withPageVisibility(Lab, "/lab")} />
+            <Route path="/bureau" component={withPageVisibility(Bureau, "/bureau")} />
+            <Route path="/studio" component={withPageVisibility(Studio, "/studio")} />
+            <Route path="/services/ai-lab" component={withPageVisibility(AILabService, "/services/ai-lab")} />
+            <Route path="/services/strategic-bureau" component={withPageVisibility(StrategicBureauService, "/services/strategic-bureau")} />
+            <Route path="/services/creative-studio" component={withPageVisibility(CreativeStudioService, "/services/creative-studio")} />
+            <Route path="/agencies" component={withPageVisibility(Agencies, "/agencies")} />
           <Route path="/arrow-demo" component={ArrowDemo} />
           <Route path="/arrow-demo-v2" component={ArrowDemoV2} />
           <Route path="/arrow-demo-v3" component={ArrowDemoV3} />
@@ -250,6 +253,12 @@ function App() {
             </Route>
             <Route path="/admin/contact-messages">
               <ProtectedAdminRoute><AdminContactMessages /></ProtectedAdminRoute>
+            </Route>
+            <Route path="/admin/page-visibility">
+              <ProtectedAdminRoute><AdminPageVisibility /></ProtectedAdminRoute>
+            </Route>
+            <Route path="/admin/run-migration">
+              <ProtectedAdminRoute><RunMigration /></ProtectedAdminRoute>
             </Route>
             <Route path="/create-first-admin" component={CreateFirstAdmin} />
             <Route component={NotFound404} />

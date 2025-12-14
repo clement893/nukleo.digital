@@ -10,7 +10,9 @@ import {
   Settings,
   ArrowRight,
   Mail,
-  Volume2
+  Volume2,
+  Globe,
+  Database
 } from "lucide-react";
 
 interface AdminCardProps {
@@ -106,6 +108,18 @@ export default function AdminHome() {
       description: "Gérer les messages reçus via le formulaire de contact",
       icon: <MessageSquare className="w-6 h-6 text-primary" />,
       href: "/admin/contact-messages",
+    },
+    {
+      title: "Visibilité des Pages",
+      description: "Contrôler quelles pages sont accessibles sur le site",
+      icon: <Globe className="w-6 h-6 text-primary" />,
+      href: "/admin/page-visibility",
+    },
+    {
+      title: "Migration DB",
+      description: "Créer la table page_visibility (une seule fois)",
+      icon: <Database className="w-6 h-6 text-primary" />,
+      href: "/admin/run-migration",
     },
   ];
 

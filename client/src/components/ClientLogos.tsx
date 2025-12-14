@@ -81,6 +81,12 @@ export default function ClientLogos() {
           animation: scroll 40s linear infinite;
         }
         
+        @media (max-width: 768px) {
+          .animate-scroll {
+            animation: scroll 80s linear infinite;
+          }
+        }
+        
         .animate-scroll:hover {
           animation-play-state: paused;
         }

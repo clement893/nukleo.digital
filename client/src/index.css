@@ -302,6 +302,13 @@
     50% { transform: scale(1.02); }
   }
 
+  /* Disable breathe animation on mobile to prevent flickering */
+  @media (max-width: 768px) {
+    .breathe {
+      animation: none;
+    }
+  }
+
   /* Shimmer */
   .shimmer {
     position: relative;

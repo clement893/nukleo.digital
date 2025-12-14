@@ -116,9 +116,22 @@
       @media (max-width: 767px) {
         * {
           -webkit-tap-highlight-color: transparent;
+          /* Improve touch responsiveness */
+          touch-action: manipulation;
         }
         img {
           content-visibility: auto;
+        }
+        /* Reduce animations on mobile for better performance */
+        * {
+          animation-duration: 0.01ms !important;
+          animation-delay: -0.01ms !important;
+          transition-duration: 0.01ms !important;
+          transition-delay: -0.01ms !important;
+        }
+        /* Keep essential transitions */
+        button, a, input, textarea, select {
+          transition-duration: 150ms !important;
         }
       }
       /* Critical layout styles to prevent CLS */

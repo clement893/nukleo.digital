@@ -104,18 +104,31 @@ if (typeof window !== 'undefined') {
   }
   
   // Load non-critical fonts lazily after initial render
+  // Use a more reliable method that doesn't block rendering
   const loadNonCriticalFonts = () => {
+    // Only load if fonts-lazy.css exists and hasn't been loaded
+    if (document.querySelector('link[href="/fonts-lazy.css"]')) return;
+    
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = '/fonts-lazy.css';
     link.media = 'print';
-    link.onload = () => { link.media = 'all'; };
+    link.onload = () => { 
+      if (link.media === 'print') {
+        link.media = 'all';
+      }
+    };
+    link.onerror = () => {
+      // Silently fail if fonts-lazy.css doesn't exist
+      console.warn('fonts-lazy.css failed to load');
+    };
     document.head.appendChild(link);
   };
   
+  // Load after a longer delay to ensure it doesn't interfere with LCP
   if ('requestIdleCallback' in window) {
-    requestIdleCallback(loadNonCriticalFonts, { timeout: 2000 });
+    requestIdleCallback(loadNonCriticalFonts, { timeout: 3000 });
   } else {
-    setTimeout(loadNonCriticalFonts, 2000);
+    setTimeout(loadNonCriticalFonts, 3000);
   }
 }

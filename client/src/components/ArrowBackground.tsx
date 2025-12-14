@@ -28,8 +28,19 @@ export default function ArrowBackground({ variant = 'default' }: ArrowBackground
         { top: '60%', right: '35%', size: 220, opacity: 0.025 },
       ];
 
-  // Reduce arrows on mobile for better performance
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  // Reduce arrows on mobile for better performance - only show first arrow
+  // Use CSS media query approach for better SSR compatibility
+  const [isMobile, setIsMobile] = React.useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.innerWidth < 768;
+  });
+  
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', checkMobile, { passive: true });
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+  
   const arrowsToRender = isMobile ? positions.slice(0, 1) : positions;
 
   return (

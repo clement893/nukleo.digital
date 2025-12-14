@@ -30,11 +30,14 @@ export default function Footer() {
 
   return (
     <footer 
-      className="text-white py-12 lg:py-16 relative overflow-hidden"
+      className="text-white py-8 sm:py-10 md:py-12 lg:py-16 relative overflow-hidden"
       style={{
         backgroundColor: '#21242E',
         // Optimize background image loading - use CSS instead of inline style for better caching
-        backgroundImage: 'url(/arrow-brand.png)',
+        // Disable background pattern on mobile for better performance
+        backgroundImage: typeof window !== 'undefined' && window.innerWidth >= 768 
+          ? 'url(/arrow-brand.png)' 
+          : 'none',
         backgroundSize: '80px 80px',
         backgroundRepeat: 'repeat',
         backgroundPosition: 'center',
@@ -48,13 +51,13 @@ export default function Footer() {
       {/* Overlay pour atténuer le pattern */}
       <div className="absolute inset-0 bg-[#21242E]/60 pointer-events-none" />
       <div className="container relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6 sm:gap-8 mb-8 sm:mb-10 md:mb-12">
           {/* Logo and Description */}
-          <div className="lg:col-span-4">
-            <Link href={getLocalizedPath('/')} className="mb-4 block">
-              <img src="/Nukleo_blanc_RVB.svg" alt="Nukleo" className="h-8 w-auto" />
+          <div className="sm:col-span-2 lg:col-span-4">
+            <Link href={getLocalizedPath('/')} className="mb-3 sm:mb-4 block touch-manipulation">
+              <img src="/Nukleo_blanc_RVB.svg" alt="Nukleo" className="h-7 sm:h-8 w-auto" width="120" height="32" loading="lazy" />
             </Link>
-            <p className="text-white/60 text-sm leading-relaxed mb-6">
+            <p className="text-white/60 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6">
               {t('footer.description')}
             </p>
             <div className="flex items-center gap-4">
@@ -72,14 +75,14 @@ export default function Footer() {
           </div>
 
           {/* Navigation */}
-          <div className="lg:col-span-2">
-            <h3 className="text-sm font-bold tracking-wider mb-4">{t('footer.navigation')}</h3>
-            <ul className="space-y-3">
+          <div className="sm:col-span-1 lg:col-span-2">
+            <h3 className="text-xs sm:text-sm font-bold tracking-wider mb-3 sm:mb-4">{t('footer.navigation')}</h3>
+            <ul className="space-y-2 sm:space-y-3">
               {navigation.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={getLocalizedPath(item.href)}
-                    className="text-white/60 hover:text-white transition-colors text-sm"
+                    className="text-white/60 active:text-white sm:hover:text-white transition-colors text-xs sm:text-sm touch-manipulation block"
                   >
                     {item.label}
                   </Link>
@@ -89,17 +92,17 @@ export default function Footer() {
           </div>
 
           {/* Services */}
-          <div className="lg:col-span-3">
-            <h3 className="text-sm font-bold tracking-wider mb-4">{(() => {
+          <div className="sm:col-span-1 lg:col-span-3">
+            <h3 className="text-xs sm:text-sm font-bold tracking-wider mb-3 sm:mb-4">{(() => {
               const servicesLabel = t('footer.services');
               return typeof servicesLabel === 'string' ? servicesLabel : 'Services';
             })()}</h3>
-            <ul className="space-y-3">
+            <ul className="space-y-2 sm:space-y-3">
               {services.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={getLocalizedPath(item.href)}
-                    className="text-white/60 hover:text-white transition-colors text-sm"
+                    className="text-white/60 active:text-white sm:hover:text-white transition-colors text-xs sm:text-sm touch-manipulation block"
                   >
                     {item.label}
                   </Link>

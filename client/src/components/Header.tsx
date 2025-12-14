@@ -42,22 +42,22 @@ export default function Header() {
       <header 
         className={`
           fixed top-0 left-0 right-0 z-40
-          transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]
-          ${isScrolled ? 'px-6 md:px-12 pt-4' : 'px-6 md:px-12 pt-8'}
+          transition-all duration-300 sm:duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]
+          ${isScrolled ? 'px-4 sm:px-6 md:px-12 pt-3 sm:pt-4' : 'px-4 sm:px-6 md:px-12 pt-6 sm:pt-8'}
         `}
       >
         <div 
           className={`
-            transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]
+            transition-all duration-300 sm:duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]
             ${isScrolled 
-              ? 'glass-dark rounded-full px-8 py-4' 
+              ? 'glass-dark rounded-full px-4 sm:px-6 md:px-8 py-3 sm:py-4' 
               : 'bg-transparent'
             }
           `}
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-2 sm:gap-4">
             {/* Logo */}
-            <Link href={getLocalizedPath('/')} className="flex flex-col group cursor-pointer">
+            <Link href={getLocalizedPath('/')} className="flex flex-col group cursor-pointer touch-manipulation">
               <img 
                 src="/Nukleo_blanc_RVB.svg" 
                 alt="Nukleo Digital - AI Transformation Agency" 
@@ -66,10 +66,10 @@ export default function Header() {
                 fetchPriority="high"
                 decoding="async"
                 loading="eager"
-                className="h-8 w-auto object-contain mb-1"
+                className="h-7 sm:h-8 w-auto object-contain mb-0.5 sm:mb-1"
                 style={{ aspectRatio: '120 / 32' }}
               />
-              <span className={`text-[10px] text-white/60 font-medium tracking-wider transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              <span className={`text-[9px] sm:text-[10px] text-white/60 font-medium tracking-wider transition-all duration-300 sm:duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                 isScrolled ? 'opacity-0 h-0 mb-0 overflow-hidden' : 'opacity-100 h-auto mb-0'
               }`}>
                 {t('header.tagline')}
@@ -77,24 +77,25 @@ export default function Header() {
             </Link>
 
             {/* Right: CTA + Burger Menu */}
-            <div className="flex items-center gap-4">
-              <Link href={getLocalizedPath('/start-project')}>
+            <div className="flex items-center gap-2 sm:gap-4">
+              <Link href={getLocalizedPath('/start-project')} className="hidden xs:block">
                 <Button
                   onClick={playClick}
                   onMouseEnter={playHover}
                   className="
                     rounded-full 
-                    px-6 md:px-8 
-                    py-4 md:py-6 
+                    px-4 sm:px-6 md:px-8 
+                    py-2.5 sm:py-4 md:py-6 
                     bg-white 
                     text-purple-900 
-                    hover:bg-white/90 
-                    transition-all duration-500 
+                    active:bg-white/90 sm:hover:bg-white/90 
+                    transition-all duration-300 
                     font-bold 
                     tracking-wider 
-                    text-xs
-                    hover:scale-[1.045]
-                    flex items-center gap-2
+                    text-[10px] sm:text-xs md:text-sm
+                    active:scale-[0.98] sm:hover:scale-[1.045]
+                    flex items-center gap-1.5 sm:gap-2
+                    touch-manipulation
                   "
                 >
                   {t('nav.startProject')}
@@ -105,10 +106,10 @@ export default function Header() {
               <button
                 onClick={() => { playClick(); setIsMenuOpen(true); }}
                 onMouseEnter={playHover}
-                className="text-white hover:bg-white/10 transition-colors p-2 rounded-lg"
+                className="text-white active:bg-white/20 sm:hover:bg-white/10 transition-colors p-2 rounded-lg touch-manipulation"
                 aria-label="Open menu"
               >
-                <Menu className="w-6 h-6" />
+                <Menu className="w-5 h-5 sm:w-6 sm:h-6" />
               </button>
             </div>
           </div>

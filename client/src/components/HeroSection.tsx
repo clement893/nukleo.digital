@@ -97,24 +97,26 @@ function HeroSection() {
   }, []);
   
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-20 px-4 sm:px-6">
+    <section className="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 px-4 sm:px-6">
 
       <div className="container relative z-10 px-4 sm:px-6">
         <div className="flex items-center justify-center">
           {/* Main Title */}
-          <div className="max-w-5xl">
+          <div className="max-w-5xl w-full">
             {/* Main Heading */}
             <h1 
               className={`
                 ${language === 'fr' 
-                  ? 'text-[2.5rem] sm:text-[4rem] md:text-[5.5rem] lg:text-[8rem]' 
-                  : 'text-[3rem] sm:text-[5rem] md:text-[7rem] lg:text-[10rem]'
+                  ? 'text-[2rem] sm:text-[3.5rem] md:text-[5rem] lg:text-[7rem] xl:text-[8rem]' 
+                  : 'text-[2.25rem] sm:text-[4rem] md:text-[6rem] lg:text-[9rem] xl:text-[10rem]'
                 }
-                font-bold leading-[1.1] tracking-tighter text-white mb-6 sm:mb-8 italic
+                font-bold leading-[1.05] sm:leading-[1.1] tracking-tighter text-white mb-4 sm:mb-6 md:mb-8 italic
               `}
               style={{
-                // Prevent layout shift by reserving space
-                minHeight: language === 'fr' ? '3rem' : '3.5rem',
+                // Prevent layout shift by reserving space - responsive
+                minHeight: typeof window !== 'undefined' && window.innerWidth < 640 
+                  ? (language === 'fr' ? '2.5rem' : '2.75rem')
+                  : (language === 'fr' ? '3rem' : '3.5rem'),
               }}
             >
               {t('hero.title')}
@@ -128,46 +130,46 @@ function HeroSection() {
 
             {/* Subtitle */}
             <p 
-              className="text-lg sm:text-xl text-white/70 leading-relaxed font-light mb-8 sm:mb-12 max-w-2xl"
+              className="text-base sm:text-lg md:text-xl text-white/70 leading-relaxed font-light mb-6 sm:mb-8 md:mb-12 max-w-2xl"
             >
               {t('hero.subtitle')}
             </p>
 
             {/* CTAs */}
             <div 
-              className="flex flex-col sm:flex-row items-start sm:items-center gap-6"
+              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6"
             >
-              <Link href={getLocalizedPath('/start-project')}>
+              <Link href={getLocalizedPath('/start-project')} className="w-full sm:w-auto">
                 <Button
                   onClick={playClick}
                   onMouseEnter={playHover}
-                  className="relative rounded-full text-base sm:text-lg px-8 sm:px-12 py-6 sm:py-8 bg-white text-purple-900 hover:bg-white transition-all duration-500 font-bold tracking-wider hover:scale-[1.045] hover:shadow-xl hover:shadow-purple-500/25 group overflow-hidden w-full sm:w-auto"
+                  className="relative rounded-full text-sm sm:text-base md:text-lg px-6 sm:px-8 md:px-12 py-4 sm:py-6 md:py-8 bg-white text-purple-900 hover:bg-white active:bg-white/90 transition-all duration-300 font-bold tracking-wider active:scale-[0.98] sm:hover:scale-[1.045] sm:hover:shadow-xl sm:hover:shadow-purple-500/25 group overflow-hidden w-full sm:w-auto touch-manipulation"
                 >
                   <span className="relative z-10">{t('hero.cta')}</span>
-                  {/* Shimmer effect */}
-                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
+                  {/* Shimmer effect - disabled on mobile for performance */}
+                  <span className="hidden sm:block absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
                 </Button>
               </Link>
             </div>
 
             {/* Beyond AI Text - Now before services */}
-            <div className="mt-12 sm:mt-16">
+            <div className="mt-8 sm:mt-12 md:mt-16">
               <div className="text-left max-w-3xl">
-                <p className="text-white/60 text-xs sm:text-sm font-mono uppercase tracking-widest mb-3">
+                <p className="text-white/60 text-[10px] sm:text-xs md:text-sm font-mono uppercase tracking-widest mb-2 sm:mb-3">
                   {t('home.beyondAI')}
                 </p>
-                <p className="text-white/70 text-sm sm:text-base max-w-2xl leading-relaxed">
+                <p className="text-white/70 text-xs sm:text-sm md:text-base max-w-2xl leading-relaxed">
                   {t('home.beyondAIDescription')}
                 </p>
               </div>
             </div>
 
             {/* Services Carousel - Text Only */}
-            <div className="mt-8">
-              <div className="relative max-w-6xl mx-auto overflow-hidden py-4">
+            <div className="mt-6 sm:mt-8">
+              <div className="relative max-w-6xl mx-auto overflow-hidden py-3 sm:py-4">
                 <div 
                   ref={scrollRef}
-                  className="flex gap-8 whitespace-nowrap"
+                  className="flex gap-4 sm:gap-6 md:gap-8 whitespace-nowrap"
                   style={{
                     transform: `translateX(-${scrollPosition}px)`,
                     transition: 'none'
@@ -176,8 +178,9 @@ function HeroSection() {
                     // Avoid forced layout reflow - use cached width or estimate
                     // Calculate width only when needed, not on every transition
                     if (scrollRef.current && services.length > 0) {
-                      // Estimate width based on services count to avoid forced layout
-                      const estimatedWidth = services.length * 200; // Approximate width per service
+                      // Estimate width based on services count and screen size to avoid forced layout
+                      const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+                      const estimatedWidth = services.length * (isMobile ? 150 : 200); // Smaller on mobile
                       if (scrollPosition >= estimatedWidth) {
                         setScrollPosition(0);
                       }
@@ -189,7 +192,7 @@ function HeroSection() {
                     services.map((service: string, index: number) => (
                       <span 
                         key={`${setIndex}-${index}`}
-                        className="text-white/40 hover:text-white/80 text-lg sm:text-xl font-medium transition-colors duration-300 cursor-default"
+                        className="text-white/40 active:text-white/60 sm:hover:text-white/80 text-sm sm:text-base md:text-lg lg:text-xl font-medium transition-colors duration-300 cursor-default touch-manipulation"
                       >
                         {service}
                       </span>

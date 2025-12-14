@@ -178,11 +178,9 @@ export default function Resources() {
             </div>
 
             {/* Title */}
-            <h1 
-              className="text-[5rem] md:text-[6.5rem] lg:text-[8rem] text-white mb-8 leading-[0.85] font-heading font-bold"
-              dangerouslySetInnerHTML={{ __html: t('resources.title') }}
-              style={{ lineHeight: '1.2' }}
-            />
+            <h1 className="text-[5rem] md:text-[6.5rem] lg:text-[8rem] text-white mb-8 leading-[0.85] font-heading font-bold uppercase">
+              {t('resources.title')}
+            </h1>
 
             {/* Description */}
             <p className="text-2xl text-white/70 font-light leading-relaxed max-w-3xl border-l-2 border-accent pl-6">

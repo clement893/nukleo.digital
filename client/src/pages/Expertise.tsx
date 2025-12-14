@@ -9,69 +9,27 @@ export default function Expertise() {
   const expertiseAreas = [
     {
       icon: Brain,
-      title: 'Agentic AI Systems',
-      description: 'Design and implementation of autonomous AI agents that can reason, plan, and execute complex tasks independently.',
-      capabilities: [
-        'Multi-agent orchestration',
-        'Natural language processing',
-        'Decision-making frameworks',
-        'Continuous learning systems',
-      ],
+      translationKey: 'agenticAI',
     },
     {
       icon: Code,
-      title: 'AI-Native Platforms',
-      description: 'Building intelligent platforms and applications with AI at their core, not as an afterthought.',
-      capabilities: [
-        'Intelligent SaaS development',
-        'Real-time personalization',
-        'Predictive analytics',
-        'Automated workflows',
-      ],
+      translationKey: 'aiNative',
     },
     {
       icon: TrendingUp,
-      title: 'Transformation Strategy',
-      description: 'Strategic planning and execution to help organizations become AI-native leaders in their industries.',
-      capabilities: [
-        'AI readiness assessment',
-        'Roadmap development',
-        'Change management',
-        'ROI optimization',
-      ],
+      translationKey: 'transformation',
     },
     {
       icon: Palette,
-      title: 'Creative Studio',
-      description: 'AI-augmented content creation at scale, producing personalized experiences across all channels.',
-      capabilities: [
-        'Automated content generation',
-        'Brand voice synthesis',
-        'Multi-channel campaigns',
-        'Dynamic personalization',
-      ],
+      translationKey: 'creativeStudio',
     },
     {
       icon: Database,
-      title: 'Intelligent Data Platforms',
-      description: 'Building robust data infrastructure that powers AI-driven insights and decision-making.',
-      capabilities: [
-        'Data pipeline automation',
-        'Real-time analytics',
-        'Predictive modeling',
-        'Knowledge graphs',
-      ],
+      translationKey: 'dataPlatforms',
     },
     {
       icon: Sparkles,
-      title: 'AI Consulting',
-      description: 'Expert guidance on AI strategy, implementation, and optimization for organizations at any stage.',
-      capabilities: [
-        'Technology evaluation',
-        'Vendor selection',
-        'Team training',
-        'Performance optimization',
-      ],
+      translationKey: 'aiConsulting',
     },
   ];
 
@@ -98,7 +56,7 @@ export default function Expertise() {
           </h1>
 
           <p className="text-white/75 text-lg lg:text-xl leading-relaxed max-w-3xl">
-            Our multidisciplinary approach combines cutting-edge AI technology with strategic thinking and creative execution.
+            {t('expertise.description')}
           </p>
         </div>
       </section>
@@ -119,15 +77,15 @@ export default function Expertise() {
                   </div>
 
                   <h3 className="text-2xl font-bold text-white mb-4">
-                    {area.title}
+                    {t(`expertise.areas.${area.translationKey}.title`)}
                   </h3>
 
                   <p className="text-white/75 text-base leading-relaxed mb-6">
-                    {area.description}
+                    {t(`expertise.areas.${area.translationKey}.description`)}
                   </p>
 
                   <div className="space-y-2">
-                    {area.capabilities.map((capability, idx) => (
+                    {t(`expertise.areas.${area.translationKey}.capabilities`, { returnObjects: true }).map((capability: string, idx: number) => (
                       <div
                         key={idx}
                         className="flex items-center gap-2 text-white/60 text-sm"
@@ -149,30 +107,29 @@ export default function Expertise() {
         <div className="container">
           <div className="mb-16">
             <h2 className="text-white mb-6">
-              OUR<br />
-              PROCESS
+              {t('expertise.process.title')}
             </h2>
             <p className="text-white/75 text-lg lg:text-xl leading-relaxed max-w-3xl">
-              A proven methodology for successful AI transformation.
+              {t('expertise.process.description')}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {[
-              { number: '01', title: 'Discover', description: 'Deep dive into your operations, challenges, and opportunities.' },
-              { number: '02', title: 'Design', description: 'Architect the AI-native solution tailored to your needs.' },
-              { number: '03', title: 'Develop', description: 'Build and integrate intelligent systems with precision.' },
-              { number: '04', title: 'Deploy', description: 'Launch, optimize, and scale your transformation.' },
+              { number: '01', translationKey: 'discover' },
+              { number: '02', translationKey: 'design' },
+              { number: '03', translationKey: 'develop' },
+              { number: '04', translationKey: 'deploy' },
             ].map((step, index) => (
               <div key={index} className="glass rounded-3xl p-6 lg:p-8">
                 <div className="text-accent/40 text-sm font-mono mb-4 tracking-widest">
                   {step.number}
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">
-                  {step.title}
+                  {t(`expertise.process.steps.${step.translationKey}.title`)}
                 </h3>
                 <p className="text-white/75 text-sm leading-relaxed">
-                  {step.description}
+                  {t(`expertise.process.steps.${step.translationKey}.description`)}
                 </p>
               </div>
             ))}
@@ -185,12 +142,11 @@ export default function Expertise() {
         <div className="container">
           <div className="glass rounded-3xl p-12 lg:p-16 text-center">
             <h2 className="text-white mb-6">
-              Let's Build<br />
-              Together
+              {t('expertise.cta.title')}
             </h2>
 
             <p className="text-white/75 text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto mb-8">
-              Ready to leverage our expertise for your AI transformation?
+              {t('expertise.cta.description')}
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -198,13 +154,13 @@ export default function Expertise() {
                 href="/services"
                 className="inline-flex items-center gap-2 rounded-full text-lg px-10 py-6 bg-accent/10 border border-accent/30 text-white hover:bg-accent/20 transition-all duration-500 font-bold tracking-wider"
               >
-                View All Services
+                {t('expertise.cta.viewServices')}
               </a>
               <a
                 href="/contact"
                 className="inline-flex items-center gap-2 rounded-full text-lg px-10 py-6 bg-white text-purple-900 hover:bg-white/90 transition-all duration-500 font-bold tracking-wider"
               >
-                Get in Touch
+                {t('expertise.cta.getInTouch')}
               </a>
             </div>
           </div>

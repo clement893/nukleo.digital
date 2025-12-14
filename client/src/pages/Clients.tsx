@@ -9,97 +9,73 @@ const clients = [
     name: 'MBAM',
     fullName: 'Musée des beaux-arts de Montréal',
     industry: 'Museum & Culture',
-    description: 'Transforming visitor experiences through AI-powered personalization and intelligent content delivery.',
-    services: ['AI Strategy', 'Digital Platforms', 'Content Intelligence'],
-    results: ['45% increase in visitor engagement', 'Personalized tours for 100K+ visitors', 'Multilingual AI assistant']
+    translationKey: 'mbam'
   },
   {
     name: 'Summit Law',
     fullName: 'Summit Law Group',
     industry: 'Legal Services',
-    description: 'Streamlining legal operations with intelligent document processing and case management automation.',
-    services: ['Intelligent Operations', 'AI Automation', 'Document Intelligence'],
-    results: ['60% reduction in document processing time', 'Automated contract analysis', 'Enhanced client service']
+    translationKey: 'summitLaw'
   },
   {
     name: 'Affilia',
     fullName: 'Affilia Centre de santé',
     industry: 'Healthcare',
-    description: 'Enhancing patient care with AI-driven appointment scheduling and personalized health recommendations.',
-    services: ['AI Strategy', 'Intelligent Operations', 'Patient Experience'],
-    results: ['40% improvement in appointment efficiency', 'Reduced wait times', 'Better patient outcomes']
+    translationKey: 'affilia'
   },
   {
     name: 'GoCoupons',
     fullName: 'GoCoupons',
     industry: 'E-commerce & Retail',
-    description: 'Powering personalized shopping experiences with AI-driven recommendations and dynamic pricing.',
-    services: ['AI Marketing', 'Recommendation Engine', 'Dynamic Pricing'],
-    results: ['3.5x increase in conversion rate', 'Personalized offers for 500K+ users', '340% ROI increase']
+    translationKey: 'gocoupons'
   },
   {
     name: 'Humankind',
     fullName: 'Humankind',
     industry: 'Social Impact',
-    description: 'Amplifying social impact through AI-powered community engagement and resource optimization.',
-    services: ['AI Strategy', 'Community Intelligence', 'Impact Analytics'],
-    results: ['2x community engagement', 'Optimized resource allocation', 'Data-driven impact measurement']
+    translationKey: 'humankind'
   },
   {
     name: 'CDÉNÉ',
     fullName: 'Centre de développement des entreprises',
     industry: 'Business Development',
-    description: 'Accelerating business growth with AI-driven insights and intelligent matchmaking.',
-    services: ['AI Strategy', 'Business Intelligence', 'Matchmaking Algorithms'],
-    results: ['50% faster business matching', 'Enhanced entrepreneur support', 'Data-driven growth strategies']
+    translationKey: 'cdene'
   },
   {
     name: 'MatchStick',
     fullName: 'MatchStick Marketing',
     industry: 'Marketing Agency',
-    description: 'Scaling creative production with AI-augmented content creation and campaign optimization.',
-    services: ['AI Marketing', 'Content Generation', 'Campaign Intelligence'],
-    results: ['10x content production capacity', 'Automated A/B testing', 'Improved campaign ROI']
+    translationKey: 'matchstick'
   },
   {
     name: 'Recrute Action',
     fullName: 'Recrute Action',
     industry: 'Recruitment',
-    description: 'Revolutionizing talent acquisition with AI-powered candidate matching and screening.',
-    services: ['AI Automation', 'Candidate Intelligence', 'Screening Algorithms'],
-    results: ['70% reduction in screening time', 'Better candidate matches', 'Enhanced recruiter productivity']
+    translationKey: 'recruteAction'
   },
   {
     name: 'Spruce',
     fullName: 'Spruce Technology',
     industry: 'Technology',
-    description: 'Building next-generation AI-native platforms for modern businesses.',
-    services: ['AI-Native Platforms', 'System Architecture', 'Technical Consulting'],
-    results: ['Scalable AI infrastructure', 'Reduced technical debt', 'Faster time-to-market']
+    translationKey: 'spruce'
   },
   {
     name: 'Succès Scolaire',
     fullName: 'Succès Scolaire',
     industry: 'Education',
-    description: 'Personalizing learning experiences with AI-powered tutoring and adaptive content.',
-    services: ['AI Strategy', 'Adaptive Learning', 'Student Intelligence'],
-    results: ['Personalized learning paths', 'Improved student outcomes', 'Efficient tutor matching']
+    translationKey: 'succesScolaire'
   },
   {
     name: 'Toit à moi',
     fullName: 'Toit à moi',
     industry: 'Real Estate',
-    description: 'Transforming property search with AI-driven recommendations and market intelligence.',
-    services: ['AI Marketing', 'Property Intelligence', 'Market Analytics'],
-    results: ['Smarter property matching', 'Market trend predictions', 'Enhanced buyer experience']
+    translationKey: 'toitAMoi'
   },
   {
     name: 'Ukko Solutions',
     fullName: 'Ukko Solutions',
     industry: 'Technology Consulting',
-    description: 'Delivering AI-powered business solutions and digital transformation services.',
-    services: ['AI Strategy', 'Digital Transformation', 'Technical Consulting'],
-    results: ['Accelerated digital transformation', 'AI-driven insights', 'Competitive advantage']
+    translationKey: 'ukkoSolutions'
   },
 ];
 
@@ -190,14 +166,14 @@ export default function Clients() {
 
                 {/* Description */}
                 <p className="text-white/70 mb-6 leading-relaxed">
-                  {client.description}
+                  {t(`clients.clientsData.${client.translationKey}.description`)}
                 </p>
 
                 {/* Services */}
                 <div className="mb-6">
                   <p className="text-xs text-white/50 uppercase tracking-wider mb-3">{t('clients.labels.servicesProvided')}</p>
                   <div className="flex flex-wrap gap-2">
-                    {client.services.map((service, idx) => (
+                    {t(`clients.clientsData.${client.translationKey}.services`, { returnObjects: true }).map((service: string, idx: number) => (
                       <span
                         key={idx}
                         className="text-xs px-3 py-1 rounded-full bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-cyan-500/20 text-cyan-300"
@@ -212,7 +188,7 @@ export default function Clients() {
                 <div>
                   <p className="text-xs text-white/50 uppercase tracking-wider mb-3">{t('clients.labels.keyResults')}</p>
                   <ul className="space-y-2">
-                    {client.results.map((result, idx) => (
+                    {t(`clients.clientsData.${client.translationKey}.results`, { returnObjects: true }).map((result: string, idx: number) => (
                       <li key={idx} className="text-sm text-white/70 flex items-start gap-2">
                         <span className="text-cyan-400 mt-1">✓</span>
                         <span>{result}</span>

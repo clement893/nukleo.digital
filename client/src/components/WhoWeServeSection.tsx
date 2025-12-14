@@ -101,16 +101,16 @@ export default function WhoWeServeSection() {
         {/* Bottom CTA */}
         <div className="text-center mt-16 lg:mt-20">
           <p className="text-white text-xl sm:text-2xl lg:text-3xl font-bold mb-8 leading-tight max-w-3xl mx-auto">
-            You don't need a Fortune 500 budget to access world-class AI.<br />
+            {t('whoWeServe.cta.title')}<br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">
-              Let's level the playing field together.
+              {t('whoWeServe.cta.subtitle')}
             </span>
           </p>
           <a
             href="/contact"
             className="inline-flex items-center gap-3 px-10 py-5 rounded-full bg-white hover:bg-white/90 text-purple-900 font-bold text-lg transition-all duration-300 hover:scale-[1.05] shadow-xl shadow-purple-500/20"
           >
-            Discuss Your Project
+            {t('whoWeServe.cta.button')}
             <span className="text-xl">→</span>
           </a>
         </div>

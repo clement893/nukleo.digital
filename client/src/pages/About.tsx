@@ -9,107 +9,92 @@ import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 const teamMembers = [
   {
     name: "Clément",
-    role: "FOUNDER & CEO",
+    translationKey: "clement",
     image: "/team/Clement.webp",
-    description: "Clément is the core of our team. He connects every part of a project with atomic precision.",
     linkedin: "https://www.linkedin.com/in/clement-roy/"
   },
   {
     name: "Alexei",
-    role: "DIRECTOR OF WEB SERVICES",
+    translationKey: "alexei",
     image: "/team/Alexei.webp",
-    description: "With his strong background in data analysis, Alexei contributes to all your projects with expertise.",
     linkedin: "https://www.linkedin.com/in/alexei-bissonnette-9aa38a23a/"
   },
   {
     name: "Antoine",
-    role: "CHIEF FINANCIAL OFFICER (CFO)",
+    translationKey: "antoine",
     image: "/team/Antoine.webp",
-    description: "Trust Antoine to find the most effective solution to make your experience as efficient as possible.",
     linkedin: "https://www.linkedin.com/in/antoine-doray-55b77b192/"
   },
   {
     name: "Margaux",
-    role: "TEAM MEMBER",
+    translationKey: "margaux",
     image: "/team/Margaux.webp",
-    description: "Margaux contributes her expertise to drive projects forward with dedication.",
     linkedin: "https://www.linkedin.com/in/margaux-goethals-8407a5128/"
   },
   {
     name: "Camille",
-    role: "GRAPHIC DESIGNER",
+    translationKey: "camille",
     image: "/team/Camille.webp",
-    description: "Creative since childhood, Camille brings visual concepts to life with artistic precision.",
     linkedin: "https://www.linkedin.com/in/camillegauthier226/"
   },
   {
     name: "Timothé",
-    role: "DEVELOPER",
+    translationKey: "timothe",
     image: "/team/Timothe.webp",
-    description: "Timothé ensures the rigorous functionality of every project with precision.",
     linkedin: "https://www.linkedin.com/in/timothe-lac/"
   },
   {
     name: "Sarah",
-    role: "WEB DEVELOPER",
+    translationKey: "sarah",
     image: "/team/Sarah.webp",
-    description: "Sarah's passion for web development drives her to create exceptional digital experiences.",
     linkedin: "https://www.linkedin.com/in/sarah-katerji/"
   },
   {
     name: "Séverine",
-    role: "EXECUTIVE ASSISTANT",
+    translationKey: "severine",
     image: "/team/Severine.webp",
-    description: "Dedicated and altruistic, Séverine ensures smooth operations and exceptional support.",
     linkedin: "https://www.linkedin.com/in/s%C3%A9verine-dimambro/"
   },
   {
     name: "Maxime",
-    role: "MARKETING & COMMUNICATIONS COORDINATOR",
+    translationKey: "maxime",
     image: "/team/Maxime.webp",
-    description: "Maxime coordinates marketing strategies and communications to amplify your brand presence.",
     linkedin: "https://www.linkedin.com/in/maxime-besnier/"
   },
   {
     name: "Meriem",
-    role: "DATA ANALYST",
+    translationKey: "meriem",
     image: "/team/Meriem.webp",
-    description: "Organized and proactive, Meriem ensures every message stays consistent as Marketing Coordinator.",
     linkedin: "https://www.linkedin.com/in/meriem-kouidri16/"
   },
   {
     name: "Jean-François",
-    role: "DEVELOPER",
+    translationKey: "jeanFrancois",
     image: "/team/Jean-Francois.webp",
-    description: "A full-stack developer combining creativity and precision, Jean-François enjoys turning concepts into functional solutions.",
     linkedin: "https://www.linkedin.com/in/jeffldev/"
   },
   {
     name: "Hind",
-    role: "AI DEVELOPER",
+    translationKey: "hind",
     image: "/team/Hind.webp",
-    description: "Hind specializes in developing artificial intelligence solutions that automate and optimize processes.",
     linkedin: "https://www.linkedin.com/in/hind-djebien-767288195/"
   },
   {
     name: "Omar",
-    role: "MARKETING, COMMUNICATIONS AND DATA LEAD",
+    translationKey: "omar",
     image: "/team/Omar.webp",
-    description: "Combining a solid background in marketing with advanced skills in data management.",
     linkedin: "https://www.linkedin.com/in/omarhamdi/"
   },
   {
     name: "Ricardo",
-    role: "DEVELOPER",
+    translationKey: "ricardo",
     image: "https://via.placeholder.com/400x400/8B5CF6/FFFFFF?text=R",
-    description: "Driven by rigor and curiosity, Ricardo is a versatile developer who turns ideas into reality.",
     linkedin: "https://www.linkedin.com/in/ricardo-wierzynski/"
   },
   {
     name: "Marie-Claire",
-    role: "UX DESIGNER",
+    translationKey: "marieClaire",
     image: "https://via.placeholder.com/400x400/8B5CF6/FFFFFF?text=MC",
-    description: "Curious and attentive, Marie-Claire crafts user experiences that delight and engage.",
     linkedin: "https://www.linkedin.com/in/marieclairelajeunesse/"
   }
 ];
@@ -196,8 +181,8 @@ export default function About() {
                     <Linkedin className="w-5 h-5" />
                   </a>
                 </div>
-                <p className="text-fuchsia-400 text-sm font-semibold mb-3 uppercase tracking-wide">{member.role}</p>
-                <p className="text-gray-400 text-sm leading-relaxed">{member.description}</p>
+                <p className="text-fuchsia-400 text-sm font-semibold mb-3 uppercase tracking-wide">{t(`about.team.${member.translationKey}.role`)}</p>
+                <p className="text-gray-400 text-sm leading-relaxed">{t(`about.team.${member.translationKey}.description`)}</p>
               </div>
             ))}
           </div>

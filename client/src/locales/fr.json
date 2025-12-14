@@ -65,7 +65,7 @@
     "services": "Services",
     "contact": "Contact",
     "newsletterTitle": "Restez à l'avant-garde de l'IA",
-    "newsletterDescription": "Abonnez-vous pour recevoir nos derniers insights, guides techniques et analyses de l'industrie.",
+    "newsletterDescription": "Abonnez-vous pour recevoir nos dernières analyses, guides techniques et études de l'industrie.",
     "newsletterPlaceholder": "Entrez votre email",
     "newsletterButton": "S'abonner",
     "nav": {
@@ -108,11 +108,11 @@
     }
   },
   "manifesto": {
-    "seoTitle": "Notre manifeste | Passez du pilote à l'échelle",
+    "seoTitle": "Notre manifeste | Passez de l'expérimentation à la mise en œuvre",
     "seoDescription": "Découvrez le manifeste Nukleo : notre vision pour la transformation IA qui dépasse les pilotes pour des solutions prêtes pour la production et évolutives. Lisez notre approche du succès IA.",
     "seoKeywords": "manifeste transformation IA, vision IA, philosophie IA, approche IA, mise à l'échelle solutions IA",
     "sectionLabel": "01 Manifeste",
-    "title": "Passez du pilote<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">à l'échelle.</span>",
+    "title": "Passez de l'expérimentation<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">à la mise en œuvre.</span>",
     "description": "L'écart se creuse. Pendant que certains expérimentent, les leaders réarchitecturent toute leur opération autour de l'IA agentique.",
     "readMore": "Lire le manifeste complet",
     "card1": {
@@ -121,11 +121,11 @@
     },
     "card2": {
       "title": "Opérations réinventées",
-      "description": "Réarchitecturer les flux de travail autour d'agents intelligents qui automatisent et optimisent en continu."
+      "description": "Réarchitecturez vos flux de travail autour d'agents intelligents qui automatisent et optimisent en continu."
     },
     "page": {
       "eraOver": {
-        "title": "L'ère de l'expérimentation est terminée",
+        "title": "L'ère de l'expérimentation est révolue",
         "paragraph1": "Nous avons passé les deux dernières années à tester des chatbots, générer du contenu et explorer les possibilités de l'IA. Ces expériences ont été précieuses, mais elles ne suffisent plus.",
         "paragraph2": "Aujourd'hui, la question n'est plus \"Comment puis-je utiliser l'IA ?\" mais \"Comment puis-je réinventer mon organisation autour de l'IA ?\""
       },
@@ -160,7 +160,7 @@
         },
         "reinvented": {
           "title": "2. Opérations réinventées",
-          "description": "Réarchitecturer vos flux de travail autour d'agents intelligents qui automatisent et optimisent continuellement."
+          "description": "Réarchitecturez vos flux de travail autour d'agents intelligents qui automatisent et optimisent continuellement."
         },
         "limitless": {
           "title": "3. Échelle illimitée",
@@ -189,7 +189,7 @@
     "lab": {
       "title": "Le Laboratoire IA",
       "subtitle": "Fondation Technologique",
-      "description": "Construire la fondation technologique robuste et flexible pour l'intégration IA. Des plateformes de données intelligentes aux agents IA sur mesure et à l'automatisation intelligente des processus."
+      "description": "Nous construisons la fondation technologique robuste et flexible pour l'intégration IA. Des plateformes de données intelligentes aux agents IA sur mesure et à l'automatisation intelligente des processus."
     },
     "bureau": {
       "title": "Le Bureau Stratégique",
@@ -198,8 +198,8 @@
     },
     "studio": {
       "title": "Le Studio Créatif",
-      "subtitle": "Contenu & Expériences Augmentés",
-      "description": "Utiliser l'IA pour créer des expériences de marque et du contenu à une échelle et une pertinence sans précédent. De la création de contenu augmenté aux campagnes marketing agentiques."
+      "subtitle": "Contenu et Expériences Augmentées",
+      "description": "Nous utilisons l'IA pour créer des expériences de marque et du contenu à une échelle et une pertinence sans précédent. De la création de contenu augmenté aux campagnes marketing agentiques."
     },
     "explore": "Explorer"
   },
@@ -294,12 +294,17 @@
     }
   },
   "whoWeServe": {
-    "subtitle": "Champions des petites organisations",
+    "subtitle": "Nous sommes les champions des petites organisations",
     "title": "Qui nous <span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">servons</span>",
-    "description": "Nous sommes là pour aider <strong>TOUT LE MONDE</strong> à se transformer. La grande technologie a l'IA maintenant c'est votre tour. Nous apportons l'IA de niveau entreprise aux startups, PME et organisations à but non lucratif qui refusent d'être laissées pour compte.",
+    "description": "Nous sommes là pour aider <strong>TOUT LE MONDE</strong> à se transformer. Les géants de la technologie ont l'IA, maintenant c'est à votre tour. Nous apportons l'IA de niveau entreprise aux startups, PME et organisations à but non lucratif qui refusent d'être laissées pour compte.",
+    "cta": {
+      "title": "Vous n'avez pas besoin d'un budget de Fortune 500 pour accéder à une IA de classe mondiale.",
+      "subtitle": "Ensemble, rétablissons l'équilibre.",
+      "button": "Discuter de votre projet"
+    },
     "startups": {
       "title": "Startups & Scale-ups",
-      "description": "Lancez-vous plus rapidement et évoluez plus intelligemment avec l'automatisation alimentée par l'IA, les fonctionnalités intelligentes et les insights basés sur les données qui vous donnent un avantage concurrentiel dès le premier jour.",
+      "description": "Lancez-vous plus rapidement et évoluez plus intelligemment avec l'automatisation alimentée par l'IA, les fonctionnalités intelligentes et les informations basées sur les données qui vous donnent un avantage concurrentiel dès le premier jour.",
       "highlights": [
         "Développement Rapide De MVP",
         "Architecture IA Évolutive",
@@ -308,7 +313,7 @@
     },
     "smbs": {
       "title": "PME",
-      "description": "Transformez votre entreprise avec des solutions IA pratiques et rentables qui génèrent un vrai ROI de l'automatisation des tâches répétitives au déblocage des insights clients.",
+      "description": "Transformez votre entreprise avec des solutions IA pratiques et rentables qui génèrent un vrai ROI de l'automatisation des tâches répétitives à l'exploitation des données clients.",
       "highlights": [
         "Solutions IA abordables",
         "Gains rapides et ROI rapide",
@@ -328,7 +333,69 @@
   "about": {
     "title": "À propos",
     "subtitle": "Notre équipe",
-    "description": "Découvrez les experts derrière Nukleo Digital"
+    "description": "Découvrez les experts derrière Nukleo Digital",
+    "team": {
+      "clement": {
+        "role": "FONDATEUR & PDG",
+        "description": "Clément est le cœur de notre équipe. Il connecte chaque partie d'un projet avec une précision atomique."
+      },
+      "alexei": {
+        "role": "DIRECTEUR DES SERVICES WEB",
+        "description": "Avec sa solide expérience en analyse de données, Alexei contribue à tous vos projets avec expertise."
+      },
+      "antoine": {
+        "role": "DIRECTEUR FINANCIER (CFO)",
+        "description": "Faites confiance à Antoine pour trouver la solution la plus efficace et rendre votre expérience aussi fluide que possible."
+      },
+      "margaux": {
+        "role": "MEMBRE DE L'ÉQUIPE",
+        "description": "Margaux contribue son expertise pour faire avancer les projets avec dévouement."
+      },
+      "camille": {
+        "role": "DESIGNER GRAPHIQUE",
+        "description": "Créatif depuis l'enfance, Camille donne vie aux concepts visuels avec une précision artistique."
+      },
+      "timothe": {
+        "role": "DÉVELOPPEUR",
+        "description": "Timothé assure le fonctionnement rigoureux de chaque projet avec précision."
+      },
+      "sarah": {
+        "role": "DÉVELOPPEUSE WEB",
+        "description": "La passion de Sarah pour le développement web la pousse à créer des expériences numériques exceptionnelles."
+      },
+      "severine": {
+        "role": "ASSISTANTE DE DIRECTION",
+        "description": "Dévouée et altruiste, Séverine assure le bon fonctionnement des opérations et un soutien exceptionnel."
+      },
+      "maxime": {
+        "role": "COORDINATEUR MARKETING & COMMUNICATIONS",
+        "description": "Maxime coordonne les stratégies marketing et les communications pour amplifier votre présence de marque."
+      },
+      "meriem": {
+        "role": "ANALYSTE DE DONNÉES",
+        "description": "Organisée et proactive, Meriem assure la cohérence de chaque message en tant que coordinatrice marketing."
+      },
+      "jeanFrancois": {
+        "role": "DÉVELOPPEUR",
+        "description": "Développeur full-stack combinant créativité et précision, Jean-François aime transformer les concepts en solutions fonctionnelles."
+      },
+      "hind": {
+        "role": "DÉVELOPPEUSE IA",
+        "description": "Hind se spécialise dans le développement de solutions d'intelligence artificielle qui automatisent et optimisent les processus."
+      },
+      "omar": {
+        "role": "RESPONSABLE MARKETING, COMMUNICATIONS ET DONNÉES",
+        "description": "Combinant une solide expérience en marketing avec des compétences avancées en gestion de données."
+      },
+      "ricardo": {
+        "role": "DÉVELOPPEUR",
+        "description": "Motivé par la rigueur et la curiosité, Ricardo est un développeur polyvalent qui transforme les idées en réalité."
+      },
+      "marieClaire": {
+        "role": "DESIGNER UX",
+        "description": "Curieuse et attentive, Marie-Claire crée des expériences utilisateur qui ravissent et engagent."
+      }
+    }
   },
   "services": {
     "title": "Services",
@@ -380,7 +447,7 @@
     "bureau": {
       "category": "The Bureau",
       "subtitle": "Quartier général stratégique",
-      "description": "Votre quartier général stratégique. Ici, nous transformons les données en décisions, les insights en actions, et les opportunités en résultats mesurables.",
+      "description": "Votre quartier général stratégique. Ici, nous transformons les données en décisions, les analyses en actions, et les opportunités en résultats mesurables.",
       "services": {
         "aiStrategy": {
           "title": "Consultation en stratégie IA",
@@ -464,9 +531,9 @@
     "send": "Envoyer",
     "success": "Message envoyé avec succès !",
     "sectionNumber": "07 Contact",
-    "heroTitle": "Commençons",
+    "heroTitle": "Débutons",
     "heroSubtitle": "votre transformation",
-    "heroDescription": "Prêt à devenir un leader axé sur l'IA ? Contactez-nous et discutons de la façon dont nous pouvons vous aider à prospérer à l'ère de l'intelligence artificielle.",
+    "heroDescription": "Prêt à devenir un leader en IA ? Contactez-nous et discutons de la façon dont nous pouvons vous aider à prospérer à l'ère de l'intelligence artificielle.",
     "sendMessage": "Envoyez-nous un message",
     "successMessage": "✓ Message envoyé avec succès ! Nous vous répondrons dans les 24 heures.",
     "errorMessage": "✗ Échec de l'envoi du message. Veuillez réessayer.",
@@ -524,15 +591,106 @@
     "title": "Expertise",
     "sectionNumber": "04 Expertise",
     "heroTitle": "Expertise",
-    "heroSubtitle": "Approfondie"
+    "heroSubtitle": "Approfondie",
+    "description": "Notre approche multidisciplinaire combine la technologie IA de pointe avec la réflexion stratégique et l'exécution créative.",
+    "areas": {
+      "agenticAI": {
+        "title": "Systèmes IA Agentiques",
+        "description": "Conception et mise en œuvre d'agents IA autonomes qui peuvent raisonner, planifier et exécuter des tâches complexes de manière indépendante.",
+        "capabilities": [
+          "Orchestration multi-agents",
+          "Traitement du langage naturel",
+          "Cadres de prise de décision",
+          "Systèmes d'apprentissage continu"
+        ]
+      },
+      "aiNative": {
+        "title": "Plateformes Natives IA",
+        "description": "Construire des plateformes et des applications intelligentes avec l'IA au cœur, pas comme une réflexion tardive.",
+        "capabilities": [
+          "Développement SaaS intelligent",
+          "Personnalisation en temps réel",
+          "Analyse prédictive",
+          "Flux de travail automatisés"
+        ]
+      },
+      "transformation": {
+        "title": "Stratégie de Transformation",
+        "description": "Planification et exécution stratégiques pour aider les organisations à devenir des leaders natifs IA dans leurs industries.",
+        "capabilities": [
+          "Évaluation de la maturité IA",
+          "Développement de feuille de route",
+          "Gestion du changement",
+          "Optimisation du ROI"
+        ]
+      },
+      "creativeStudio": {
+        "title": "Studio Créatif",
+        "description": "Création de contenu augmentée par l'IA à grande échelle, produisant des expériences personnalisées sur tous les canaux.",
+        "capabilities": [
+          "Génération de contenu automatisée",
+          "Synthèse de la voix de marque",
+          "Campagnes multi-canaux",
+          "Personnalisation dynamique"
+        ]
+      },
+      "dataPlatforms": {
+        "title": "Plateformes de Données Intelligentes",
+        "description": "Construire une infrastructure de données robuste qui alimente les analyses pilotées par l'IA et la prise de décision.",
+        "capabilities": [
+          "Automatisation des pipelines de données",
+          "Analyse en temps réel",
+          "Modélisation prédictive",
+          "Graphes de connaissances"
+        ]
+      },
+      "aiConsulting": {
+        "title": "Consultation IA",
+        "description": "Conseils d'experts sur la stratégie IA, l'implémentation et l'optimisation pour les organisations à tout stade.",
+        "capabilities": [
+          "Évaluation technologique",
+          "Sélection de fournisseurs",
+          "Formation d'équipe",
+          "Optimisation des performances"
+        ]
+      }
+    },
+    "process": {
+      "title": "NOTRE PROCESSUS",
+      "description": "Une méthodologie éprouvée pour une transformation IA réussie.",
+      "steps": {
+        "discover": {
+          "title": "Découvrir",
+          "description": "Plongée approfondie dans vos opérations, défis et opportunités."
+        },
+        "design": {
+          "title": "Concevoir",
+          "description": "Concevoir la solution native IA adaptée à vos besoins."
+        },
+        "develop": {
+          "title": "Développer",
+          "description": "Construire et intégrer des systèmes intelligents avec précision."
+        },
+        "deploy": {
+          "title": "Déployer",
+          "description": "Lancer, optimiser et mettre à l'échelle votre transformation."
+        }
+      }
+    },
+    "cta": {
+      "title": "Construisons Ensemble",
+      "description": "Êtes-vous prêt à exploiter notre expertise pour votre transformation IA ?",
+      "viewServices": "Voir tous les services",
+      "getInTouch": "Nous contacter"
+    }
   },
   "resources": {
-    "seoTitle": "Ressources | Insights IA, guides & recherche",
-    "seoDescription": "Insights, guides et recherche des premières lignes de la transformation IA. Restez en avance avec des analyses d'experts, des cadres pratiques et des outils interactifs.",
-    "seoKeywords": "ressources IA, guides IA, recherche IA, insights IA, outils IA, évaluation de préparation IA, radar de tendances IA, glossaire IA, calculateur ROI, transformation IA",
+    "seoTitle": "Ressources | Analyses IA, guides & recherche",
+    "seoDescription": "Analyses, guides et recherche des premières lignes de la transformation IA. Restez en avance avec des analyses d'experts, des cadres pratiques et des outils interactifs.",
+    "seoKeywords": "ressources IA, guides IA, recherche IA, analyses IA, outils IA, évaluation de préparation IA, radar de tendances IA, glossaire IA, calculateur ROI, transformation IA",
     "badge": "Base de connaissances",
     "title": "Ressources",
-    "description": "Insights, guides et recherche des premières lignes de la transformation IA. Restez en avance avec des analyses d'experts et des cadres pratiques.",
+    "description": "Analyses, guides et recherche des premières lignes de la transformation IA. Restez en avance avec des analyses d'experts et des cadres pratiques.",
     "tools": {
       "sectionLabel": "Outils interactifs",
       "title": "Explorez nos outils IA",
@@ -540,7 +698,7 @@
       "aiReadiness": {
         "badge": "Outil de diagnostic",
         "title": "Évaluation de préparation IA",
-        "description": "Découvrez où vous en êtes dans votre parcours de transformation IA. Obtenez des insights personnalisés sur 6 dimensions clés avec des résultats instantanés.",
+        "description": "Découvrez où vous en êtes dans votre parcours de transformation IA. Obtenez des analyses personnalisées sur 6 dimensions clés avec des résultats instantanés.",
         "tags": ["20 questions", "5 niveaux de maturité", "Résultats instantanés"],
         "buttonText": "Commencer l'évaluation"
       },
@@ -593,7 +751,7 @@
     "filter": {
       "label": "Filtrer par :",
       "all": "Tout",
-      "industryInsights": "Insights industrie",
+      "industryInsights": "Analyses industrie",
       "technicalGuide": "Guide technique",
       "strategy": "Stratégie",
       "caseStudy": "Étude de cas"
@@ -612,7 +770,7 @@
         "readTime": "20 min"
       },
       "agenticMarketing": {
-        "category": "Insights industrie",
+        "category": "Analyses industrie",
         "title": "L'avenir du marketing agentique",
         "description": "Comment les agents IA transforment les opérations marketing et les expériences client. Études de cas réelles et métriques ROI.",
         "readTime": "12 min"
@@ -624,7 +782,7 @@
         "readTime": "18 min"
       },
       "aiTrends2025": {
-        "category": "Insights industrie",
+        "category": "Analyses industrie",
         "title": "Tendances IA 2025",
         "description": "Les tendances IA les plus importantes qui façonnent les entreprises en 2025. Des modèles multimodaux aux flux de travail agentiques.",
         "readTime": "14 min"
@@ -638,7 +796,7 @@
     },
     "newsletter": {
       "title": "Restez en avance<br />de la courbe IA",
-      "description": "Abonnez-vous pour recevoir nos derniers insights, guides techniques et analyses de l'industrie directement dans votre boîte de réception.",
+      "description": "Abonnez-vous pour recevoir nos dernières analyses, guides techniques et études de l'industrie directement dans votre boîte de réception.",
       "placeholder": "Entrez votre adresse email",
       "subscribe": "S'abonner",
       "subscribing": "Abonnement...",
@@ -800,7 +958,7 @@
           "Configuration manuelle des campagnes",
           "Optimisation périodique",
           "Messagerie unique pour tous",
-          "Insights retardés",
+          "Analyses retardées",
           "Personnalisation limitée"
         ]
       },
@@ -810,7 +968,7 @@
           "Orchestration autonome des campagnes",
           "Optimisation continue en temps réel",
           "Hyper-personnalisé à grande échelle",
-          "Insights et actions instantanés",
+          "Analyses et actions instantanées",
           "Adaptatif à chaque client"
         ]
       }
@@ -857,6 +1015,68 @@
       "title": "Prêt à les rejoindre ?",
       "description": "Discutons de la façon dont nos services IA peuvent transformer votre entreprise et accélérer votre croissance.",
       "button": "Démarrer votre transformation"
+    },
+    "clientsData": {
+      "mbam": {
+        "description": "Transformer les expériences des visiteurs grâce à la personnalisation alimentée par l'IA et la livraison de contenu intelligent.",
+        "services": ["Stratégie IA", "Plateformes Numériques", "Intelligence de Contenu"],
+        "results": ["45% d'augmentation de l'engagement des visiteurs", "Tours personnalisés pour plus de 100 000 visiteurs", "Assistant IA multilingue"]
+      },
+      "summitLaw": {
+        "description": "Rationaliser les opérations juridiques avec le traitement intelligent des documents et l'automatisation de la gestion des dossiers.",
+        "services": ["Opérations Intelligentes", "Automatisation IA", "Intelligence de Documents"],
+        "results": ["60% de réduction du temps de traitement des documents", "Analyse de contrats automatisée", "Service client amélioré"]
+      },
+      "affilia": {
+        "description": "Améliorer les soins aux patients grâce à la planification des rendez-vous pilotée par l'IA et aux recommandations de santé personnalisées.",
+        "services": ["Stratégie IA", "Opérations Intelligentes", "Expérience Patient"],
+        "results": ["40% d'amélioration de l'efficacité des rendez-vous", "Temps d'attente réduits", "Meilleurs résultats pour les patients"]
+      },
+      "gocoupons": {
+        "description": "Alimenter les expériences d'achat personnalisées avec des recommandations pilotées par l'IA et une tarification dynamique.",
+        "services": ["Marketing IA", "Moteur de Recommandation", "Tarification Dynamique"],
+        "results": ["Augmentation de 3,5x du taux de conversion", "Offres personnalisées pour plus de 500 000 utilisateurs", "Augmentation du ROI de 340%"]
+      },
+      "humankind": {
+        "description": "Amplifier l'impact social grâce à l'engagement communautaire alimenté par l'IA et l'optimisation des ressources.",
+        "services": ["Stratégie IA", "Intelligence Communautaire", "Analytique d'Impact"],
+        "results": ["Engagement communautaire 2x", "Allocation des ressources optimisée", "Mesure d'impact pilotée par les données"]
+      },
+      "cdene": {
+        "description": "Accélérer la croissance des entreprises avec des analyses pilotées par l'IA et un appairage intelligent.",
+        "services": ["Stratégie IA", "Intelligence Commerciale", "Algorithmes d'Appairage"],
+        "results": ["Appairage commercial 50% plus rapide", "Soutien amélioré aux entrepreneurs", "Stratégies de croissance pilotées par les données"]
+      },
+      "matchstick": {
+        "description": "Augmenter la production créative avec la création de contenu augmentée par l'IA et l'optimisation des campagnes.",
+        "services": ["Marketing IA", "Génération de Contenu", "Intelligence de Campagne"],
+        "results": ["Capacité de production de contenu 10x", "Tests A/B automatisés", "ROI de campagne amélioré"]
+      },
+      "recruteAction": {
+        "description": "Révolutionner l'acquisition de talents avec l'appairage de candidats alimenté par l'IA et le filtrage.",
+        "services": ["Automatisation IA", "Intelligence de Candidat", "Algorithmes de Filtrage"],
+        "results": ["70% de réduction du temps de filtrage", "Meilleurs appairages de candidats", "Productivité accrue des recruteurs"]
+      },
+      "spruce": {
+        "description": "Construire des plateformes natives IA de nouvelle génération pour les entreprises modernes.",
+        "services": ["Plateformes Natives IA", "Architecture Système", "Consultation Technique"],
+        "results": ["Infrastructure IA évolutive", "Réduction de la dette technique", "Délai de mise sur le marché plus rapide"]
+      },
+      "succesScolaire": {
+        "description": "Personnaliser les expériences d'apprentissage avec le tutorat alimenté par l'IA et le contenu adaptatif.",
+        "services": ["Stratégie IA", "Apprentissage Adaptatif", "Intelligence Étudiante"],
+        "results": ["Parcours d'apprentissage personnalisés", "Résultats étudiants améliorés", "Appairage efficace des tuteurs"]
+      },
+      "toitAMoi": {
+        "description": "Transformer la recherche de propriétés avec des recommandations pilotées par l'IA et l'intelligence de marché.",
+        "services": ["Marketing IA", "Intelligence Immobilière", "Analytique de Marché"],
+        "results": ["Appairage de propriétés plus intelligent", "Prédictions des tendances du marché", "Expérience d'acheteur améliorée"]
+      },
+      "ukkoSolutions": {
+        "description": "Fournir des solutions commerciales alimentées par l'IA et des services de transformation numérique.",
+        "services": ["Stratégie IA", "Transformation Numérique", "Consultation Technique"],
+        "results": ["Transformation numérique accélérée", "Analyses pilotées par l'IA", "Avantage concurrentiel"]
+      }
     }
   }
 }

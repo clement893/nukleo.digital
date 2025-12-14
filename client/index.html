@@ -37,6 +37,8 @@
     <!-- Performance hints -->
     <link rel="dns-prefetch" href="https://nukleodigital-production.up.railway.app" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
+    <!-- Preconnect to API for faster requests -->
+    <link rel="preconnect" href="https://nukleodigital-production.up.railway.app" crossorigin />
     
     <!-- Inline critical font-face for instant rendering -->
     <style>
@@ -50,25 +52,24 @@
       }
     </style>
     
-    <!-- Async load Google Fonts (non-blocking) -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" media="print" id="google-fonts-link" />
+    <!-- Async load Google Fonts (non-blocking) - optimized for mobile -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" /></noscript>
-    <script>
-      (function() {
-        var link = document.getElementById('google-fonts-link');
-        if (link) {
-          link.media = 'all';
-        }
-      })();
-    </script>
+    <!-- Fallback for browsers that don't support preload -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
   </head>
 
   <body>
-    <!-- Prevent flash of unstyled content -->
+    <!-- Prevent flash of unstyled content - optimized for mobile -->
     <style>
-      body { 
+      /* Critical CSS for mobile - inline for instant rendering */
+      * { box-sizing: border-box; }
+      html, body { 
+        margin: 0; 
+        padding: 0; 
+        height: 100%;
         visibility: visible; 
-        /* Fond gradient par défaut */
+        /* Fond gradient par défaut - optimized */
         background: linear-gradient(
           135deg,
           #1e3a8a 0%,
@@ -80,6 +81,8 @@
           #991b1b 100%
         );
         background-attachment: fixed;
+        /* Prevent layout shift */
+        overflow-x: hidden;
       }
       body.loaded { visibility: visible; }
       #nukleo-arrow-inline { display: none !important; }
@@ -87,6 +90,14 @@
       #root > div > div[style*="z-[9999]"],
       #root > div > div[style*="z-[9999]"] > div {
         visibility: visible !important;
+      }
+      /* Prevent FOUC */
+      #root { min-height: 100vh; }
+      /* Optimize font rendering */
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
       }
     </style>
     <!-- Inline LCP SVG for mobile performance (eliminates 1650ms Resource Load Delay) -->

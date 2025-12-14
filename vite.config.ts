@@ -28,8 +28,11 @@ export default defineConfig({
     target: 'es2020',
     cssCodeSplit: true,
     cssMinify: true,
-    assetsInlineLimit: 4096,
+    // Reduce inline limit for mobile - smaller initial HTML
+    assetsInlineLimit: 2048,
     reportCompressedSize: false,
+    // Optimize chunk size for mobile
+    chunkSizeWarningLimit: 500,
     rollupOptions: {
       treeshake: {
         moduleSideEffects: 'no-external',
@@ -37,6 +40,20 @@ export default defineConfig({
         tryCatchDeoptimization: false,
       },
       output: {
+        // Optimize chunk names for better caching
+        chunkFileNames: 'assets/js/[name]-[hash].js',
+        entryFileNames: 'assets/js/[name]-[hash].js',
+        assetFileNames: (assetInfo) => {
+          const info = assetInfo.name?.split('.') || [];
+          const ext = info[info.length - 1];
+          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(ext)) {
+            return 'assets/images/[name]-[hash][extname]';
+          }
+          if (/woff2?|eot|ttf|otf/i.test(ext)) {
+            return 'assets/fonts/[name]-[hash][extname]';
+          }
+          return 'assets/[ext]/[name]-[hash][extname]';
+        },
         manualChunks: (id) => {
           // Vendor chunks - ultra-granular splitting for better caching and smaller initial bundle
           if (id.includes('node_modules')) {
@@ -61,7 +78,7 @@ export default defineConfig({
               return 'icons-vendor';
             }
             // Charts - heavy library, separate (lazy load)
-            if (id.includes('recharts') || id.includes('d3-')) {
+            if (id.includes('recharts') || id.includes('d3-') || id.includes('chart.js')) {
               return 'charts-vendor';
             }
             // tRPC and React Query - split for better caching
@@ -71,17 +88,25 @@ export default defineConfig({
             if (id.includes('@tanstack/react-query')) {
               return 'react-query-vendor';
             }
-            // Animation libraries
+            // Animation libraries - lazy load
             if (id.includes('framer-motion')) {
               return 'animation-vendor';
             }
-            // Router
+            // Router - small, can be in initial bundle
             if (id.includes('wouter')) {
               return 'router-vendor';
             }
-            // Markdown rendering (used in LEO)
+            // Markdown rendering (used in LEO) - lazy load
             if (id.includes('streamdown') || id.includes('react-markdown')) {
               return 'markdown-vendor';
+            }
+            // UI libraries - split Radix UI
+            if (id.includes('@radix-ui')) {
+              return 'radix-vendor';
+            }
+            // Form libraries
+            if (id.includes('react-hook-form') || id.includes('@hookform')) {
+              return 'forms-vendor';
             }
             // Other node_modules go to vendor chunk
             return 'vendor';
@@ -102,10 +127,13 @@ export default defineConfig({
           if (id.includes('/components/UniversalLEO') || id.includes('/components/Leo') || id.includes('/pages/Leo')) {
             return 'leo';
           }
+          // Split large components
+          if (id.includes('/components/TestimonialsCarousel') || id.includes('/components/ClientLogos')) {
+            return 'carousels';
+          }
         },
       },
     },
-    chunkSizeWarningLimit: 1000,
   },
   server: {
     host: true,

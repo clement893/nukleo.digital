@@ -6,13 +6,14 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import { useMemo, memo } from 'react';
+import { trpc } from '@/lib/trpc';
 
 function Footer() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
   const isMobile = useIsMobile(768);
   
-  const navigation = [
+  const allNavigation = useMemo(() => [
     { label: t('footer.nav.manifesto'), href: '/manifesto' },
     { label: t('nav.about'), href: '/about' },
     { label: t('nav.expertise'), href: '/expertise' },
@@ -21,15 +22,52 @@ function Footer() {
     { label: t('nav.contact'), href: '/contact' },
     { label: t('footer.nav.media'), href: '/media' },
     { label: t('footer.nav.agencies'), href: '/agencies' },
-  ];
+  ], [t]);
 
-  const services = [
+  const allServices = useMemo(() => [
     { label: t('footer.services.agenticAI'), href: '/services/agentic-ai' },
     { label: t('footer.services.aiNative'), href: '/services/digital-platforms' },
     { label: t('footer.services.transformation'), href: '/services/ai-strategy-marketing' },
     { label: t('footer.services.creativeStudio'), href: '/services/creative-studio' },
     { label: t('footer.services.aiConsulting'), href: '/services/intelligent-operations' },
-  ];
+  ], [t]);
+
+  // Fetch all page visibilities at once
+  const { data: allVisibilities } = trpc.pageVisibility.getAll.useQuery(undefined, {
+    retry: false,
+    refetchOnWindowFocus: false,
+    staleTime: 60000, // Cache for 1 minute
+  });
+
+  // Create a map of path -> visibility for quick lookup
+  const visibilityMap = useMemo(() => {
+    const map = new Map<string, boolean>();
+    if (allVisibilities) {
+      allVisibilities.forEach(page => {
+        map.set(page.path, page.isVisible);
+      });
+    }
+    return map;
+  }, [allVisibilities]);
+
+  // Filter out hidden pages
+  const navigation = useMemo(() => {
+    return allNavigation.filter((item) => {
+      const path = language === 'fr' ? `/fr${item.href}` : item.href;
+      const isVisible = visibilityMap.get(path);
+      // Default to visible if not in map (page not configured yet)
+      return isVisible !== false;
+    });
+  }, [allNavigation, visibilityMap, language]);
+
+  const services = useMemo(() => {
+    return allServices.filter((item) => {
+      const path = language === 'fr' ? `/fr${item.href}` : item.href;
+      const isVisible = visibilityMap.get(path);
+      // Default to visible if not in map (page not configured yet)
+      return isVisible !== false;
+    });
+  }, [allServices, visibilityMap, language]);
 
   return (
     <footer 

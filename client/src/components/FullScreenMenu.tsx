@@ -1,10 +1,11 @@
 import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link, useLocation } from 'wouter';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useSound } from '@/hooks/useSound';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { trpc } from '@/lib/trpc';
 
 interface FullScreenMenuProps {
   isOpen: boolean;
@@ -14,7 +15,7 @@ interface FullScreenMenuProps {
 export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps) {
   const [location] = useLocation();
   const { playHover, playClick } = useSound();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
   
   // Helper function to normalize paths for comparison (remove language prefix)
@@ -22,7 +23,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
     return path.replace(/^\/(fr|en)/, '') || '/';
   };
   
-  const navItems = [
+  const allNavItems = useMemo(() => [
     { number: '01', label: t('nav.expertise'), path: '/expertise' },
     { number: '02', label: t('nav.projects'), path: '/projects' },
     { number: '03', label: t('nav.about'), path: '/about' },
@@ -31,7 +32,41 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
     { number: '06', label: t('nav.contact'), path: '/contact' },
     { number: '07', label: t('nav.talkToLeo'), path: '/leo' },
     { number: '08', label: t('nav.artsCulture'), path: '/arts-culture' },
-  ];
+  ], [t]);
+
+  // Fetch all page visibilities at once
+  const { data: allVisibilities } = trpc.pageVisibility.getAll.useQuery(undefined, {
+    retry: false,
+    refetchOnWindowFocus: false,
+    staleTime: 60000, // Cache for 1 minute
+  });
+
+  // Create a map of path -> visibility for quick lookup
+  const visibilityMap = useMemo(() => {
+    const map = new Map<string, boolean>();
+    if (allVisibilities) {
+      allVisibilities.forEach(page => {
+        map.set(page.path, page.isVisible);
+      });
+    }
+    return map;
+  }, [allVisibilities]);
+
+  // Filter out hidden pages and renumber visible items
+  const navItems = useMemo(() => {
+    const visibleItems = allNavItems.filter((item) => {
+      const path = language === 'fr' ? `/fr${item.path}` : item.path;
+      const isVisible = visibilityMap.get(path);
+      // Default to visible if not in map (page not configured yet)
+      return isVisible !== false;
+    });
+    
+    // Renumber visible items sequentially
+    return visibleItems.map((item, index) => ({
+      ...item,
+      number: String(index + 1).padStart(2, '0'),
+    }));
+  }, [allNavItems, visibilityMap, language]);
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {

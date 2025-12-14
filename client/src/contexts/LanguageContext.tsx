@@ -21,6 +21,30 @@ const preloadedTranslations: Record<Language, Record<string, any>> = {
   fr: frTranslations,
 };
 
+// Detect browser language
+function detectBrowserLanguage(): Language {
+  if (typeof window !== 'undefined' && navigator.language) {
+    const browserLang = navigator.language.toLowerCase();
+    // Check if browser language starts with 'fr' (fr, fr-CA, fr-FR, etc.)
+    if (browserLang.startsWith('fr')) {
+      return 'fr';
+    }
+    // Check navigator.languages array for more accuracy
+    if (navigator.languages) {
+      for (const lang of navigator.languages) {
+        const langLower = lang.toLowerCase();
+        if (langLower.startsWith('fr')) {
+          return 'fr';
+        }
+        if (langLower.startsWith('en')) {
+          return 'en';
+        }
+      }
+    }
+  }
+  return 'en';
+}
+
 // Default language detection from URL
 function detectLanguageFromURL(): Language {
   // Check URL first (most reliable)
@@ -36,8 +60,8 @@ function detectLanguageFromURL(): Language {
     return saved;
   }
   
-  // Default to English for routes without language prefix
-  return 'en';
+  // Detect browser language
+  return detectBrowserLanguage();
 }
 
 interface LanguageProviderProps {
@@ -73,9 +97,20 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
         localStorage.setItem('nukleo-language', urlLang);
       }
     } else {
-      // No language prefix, force English for all routes without /fr/ prefix
-      setLanguageState('en');
-      localStorage.setItem('nukleo-language', 'en');
+      // No language prefix, detect browser language
+      const browserLang = detectBrowserLanguage();
+      // Check localStorage first, then browser language
+      const saved = localStorage.getItem('nukleo-language');
+      const detectedLang = (saved === 'fr' || saved === 'en') ? saved : browserLang;
+      
+      if (detectedLang !== language) {
+        setLanguageState(detectedLang);
+        localStorage.setItem('nukleo-language', detectedLang);
+        // Redirect to language-prefixed URL for homepage only
+        if (location === '/' && detectedLang === 'fr') {
+          setLocation('/fr');
+        }
+      }
     }
   }, [location]);
 

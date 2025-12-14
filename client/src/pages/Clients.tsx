@@ -173,14 +173,18 @@ export default function Clients() {
                 <div className="mb-6">
                   <p className="text-xs text-white/50 uppercase tracking-wider mb-3">{t('clients.labels.servicesProvided')}</p>
                   <div className="flex flex-wrap gap-2">
-                    {t(`clients.clientsData.${client.translationKey}.services`, { returnObjects: true }).map((service: string, idx: number) => (
-                      <span
-                        key={idx}
-                        className="text-xs px-3 py-1 rounded-full bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-cyan-500/20 text-cyan-300"
-                      >
-                        {service}
-                      </span>
-                    ))}
+                    {(() => {
+                      const services = t(`clients.clientsData.${client.translationKey}.services`, { returnObjects: true });
+                      const servicesArray = Array.isArray(services) ? services : [];
+                      return servicesArray.map((service: string, idx: number) => (
+                        <span
+                          key={idx}
+                          className="text-xs px-3 py-1 rounded-full bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-cyan-500/20 text-cyan-300"
+                        >
+                          {service}
+                        </span>
+                      ));
+                    })()}
                   </div>
                 </div>
 
@@ -188,12 +192,16 @@ export default function Clients() {
                 <div>
                   <p className="text-xs text-white/50 uppercase tracking-wider mb-3">{t('clients.labels.keyResults')}</p>
                   <ul className="space-y-2">
-                    {t(`clients.clientsData.${client.translationKey}.results`, { returnObjects: true }).map((result: string, idx: number) => (
-                      <li key={idx} className="text-sm text-white/70 flex items-start gap-2">
-                        <span className="text-cyan-400 mt-1">✓</span>
-                        <span>{result}</span>
-                      </li>
-                    ))}
+                    {(() => {
+                      const results = t(`clients.clientsData.${client.translationKey}.results`, { returnObjects: true });
+                      const resultsArray = Array.isArray(results) ? results : [];
+                      return resultsArray.map((result: string, idx: number) => (
+                        <li key={idx} className="text-sm text-white/70 flex items-start gap-2">
+                          <span className="text-cyan-400 mt-1">✓</span>
+                          <span>{result}</span>
+                        </li>
+                      ));
+                    })()}
                   </ul>
                 </div>
               </div>

@@ -21,17 +21,44 @@ function HeroSection() {
 
   
   useEffect(() => {
+    // Optimize animation for mobile - reduce frame rate on slower devices
     let animationFrameId: number;
     let lastTimestamp = 0;
     const speed = 0.5; // pixels per frame
+    // Reduce animation on mobile for better performance
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    const frameInterval = isMobile ? 32 : 16; // ~30fps on mobile, ~60fps on desktop
     
     const animate = (timestamp: number) => {
-      if (timestamp - lastTimestamp > 16) { // ~60fps
+      if (timestamp - lastTimestamp > frameInterval) {
         setScrollPosition((prev) => prev + speed);
         lastTimestamp = timestamp;
       }
       animationFrameId = requestAnimationFrame(animate);
     };
+    
+    // Use Intersection Observer to pause animation when not visible
+    if (typeof window !== 'undefined' && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            animationFrameId = requestAnimationFrame(animate);
+          } else {
+            cancelAnimationFrame(animationFrameId);
+          }
+        },
+        { threshold: 0 }
+      );
+      
+      if (scrollRef.current) {
+        observer.observe(scrollRef.current);
+      }
+      
+      return () => {
+        observer.disconnect();
+        cancelAnimationFrame(animationFrameId);
+      };
+    }
     
     animationFrameId = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(animationFrameId);
@@ -120,15 +147,9 @@ function HeroSection() {
                 >
                   {/* Double the services for seamless loop */}
                   {[...Array(2)].map((_, setIndex) => {
-                    const getServices = () => {
-                      try {
-                        const translations = require(`../locales/${language}.json`);
-                        return translations.default?.hero?.services || translations.hero?.services || [];
-                      } catch {
-                        return [];
-                      }
-                    };
-                    return getServices().map((service: string, index: number) => (
+                    // Use translation hook instead of require for better performance
+                    const services = t('hero.services', { returnObjects: true }) as string[] || [];
+                    return services.map((service: string, index: number) => (
                       <span 
                         key={`${setIndex}-${index}`}
                         className="text-white/40 hover:text-white/80 text-lg sm:text-xl font-medium transition-colors duration-300 cursor-default"

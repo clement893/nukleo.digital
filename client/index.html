@@ -109,7 +109,10 @@
       <polygon class="st0" points="667.82 352.09 667.18 351.32 339.5 351.32 795.15 892.73 342.38 1427.85 339.35 1431.42 667.14 1431.42 1099.24 923.39 1099.76 922.78 1099.76 862.84 911.51 640.24 667.82 352.09"/>
     </svg>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <!-- Defer script loading for better mobile performance -->
+    <script type="module" src="/src/main.tsx" defer></script>
     <!-- Content visibility is controlled by main.tsx after React mounts -->
+    <!-- Preload critical resources -->
+    <link rel="modulepreload" href="/src/main.tsx" />
   </body>
 </html>

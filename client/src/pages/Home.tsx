@@ -48,10 +48,10 @@ export default function Home() {
               }}
             />
             
-            {/* Animated Gradient Orbs - GPU optimized */}
-            <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-red-900/10 rounded-full blur-[120px] animate-pulse" style={{ animationDuration: '4s', willChange: 'opacity', transform: 'translateZ(0)' }} />
-            <div className="absolute top-1/2 left-1/2 w-[700px] h-[700px] bg-blue-900/8 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '2s', animationDuration: '5s', willChange: 'opacity', transform: 'translateZ(0)' }} />
-            <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-red-900/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '3s', animationDuration: '4s', willChange: 'opacity', transform: 'translateZ(0)' }} />
+            {/* Animated Gradient Orbs - GPU optimized - reduced on mobile */}
+            <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-red-900/10 rounded-full blur-[120px] animate-pulse max-md:hidden" style={{ animationDuration: '4s', willChange: 'opacity', transform: 'translateZ(0)' }} />
+            <div className="absolute top-1/2 left-1/2 w-[700px] h-[700px] bg-blue-900/8 rounded-full blur-[100px] animate-pulse max-md:hidden" style={{ animationDelay: '2s', animationDuration: '5s', willChange: 'opacity', transform: 'translateZ(0)' }} />
+            <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-red-900/10 rounded-full blur-[120px] animate-pulse max-md:hidden" style={{ animationDelay: '3s', animationDuration: '4s', willChange: 'opacity', transform: 'translateZ(0)' }} />
           </div>
           
           <div className="relative z-10">

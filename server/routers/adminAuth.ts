@@ -27,7 +27,7 @@ export const adminAuthRouter = router({
         { id: admin.id, username: admin.username, email: admin.email },
         ADMIN_JWT_SECRET,
         { expiresIn: "7d" }
-      };
+      );
       
       // Set cookie
       ctx.res.cookie(ADMIN_COOKIE_NAME, token, {

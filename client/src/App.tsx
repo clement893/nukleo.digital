@@ -8,6 +8,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import ScrollToTop from "./components/ScrollToTop";
 import ArrowBackground from "./components/ArrowBackground";
+import AnalyticsLoader from "./components/AnalyticsLoader";
 import { FloatingLanguageToggle } from "./components/FloatingLanguageToggle";
 import { usePageTransition } from "./hooks/usePageTransition";
 import { usePageBackground } from "./hooks/usePageBackground";
@@ -108,6 +109,7 @@ const AdminStartProjectSubmissions = lazy(() => import("./pages/admin/AdminStart
 const AdminContactMessages = lazy(() => import("./pages/admin/AdminContactMessages"));
 const AdminSounds = lazy(() => import("./pages/admin/AdminSounds"));
 const AdminPageVisibility = lazy(() => import("./pages/admin/AdminPageVisibility"));
+const AdminAnalytics = lazy(() => import("./pages/admin/AdminAnalytics"));
 const RunMigration = lazy(() => import("./pages/admin/RunMigration"));
 const AdminHome = lazy(() => import("./pages/admin/AdminHome"));
 import { ProtectedAdminRoute } from "./components/ProtectedAdminRoute";
@@ -132,6 +134,7 @@ function App() {
           <ArrowBackground variant="default" />
           <CustomCursor />
           <ScrollToTop />
+          <AnalyticsLoader />
           <FloatingLanguageToggle />
           {/* Lazy load LEO on mobile - only load on desktop for better mobile performance */}
           {typeof window !== 'undefined' && window.innerWidth >= 768 && <GlobalLEO />}
@@ -256,6 +259,9 @@ function App() {
             </Route>
             <Route path="/admin/page-visibility">
               <ProtectedAdminRoute><AdminPageVisibility /></ProtectedAdminRoute>
+            </Route>
+            <Route path="/admin/analytics">
+              <ProtectedAdminRoute><AdminAnalytics /></ProtectedAdminRoute>
             </Route>
             <Route path="/admin/run-migration">
               <ProtectedAdminRoute><RunMigration /></ProtectedAdminRoute>

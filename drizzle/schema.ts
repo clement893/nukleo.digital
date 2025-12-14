@@ -277,3 +277,17 @@ export const pageVisibility = pgTable("page_visibility", {
 
 export type PageVisibility = typeof pageVisibility.$inferSelect;
 export type InsertPageVisibility = typeof pageVisibility.$inferInsert;
+
+// Analytics Configuration table for managing tracking scripts
+export const analytics = pgTable("analytics", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  provider: varchar("provider", { length: 50 }).notNull().unique(), // 'google-analytics', 'facebook-pixel', 'linkedin-insight'
+  isEnabled: boolean("isEnabled").default(false).notNull(), // Whether this analytics provider is active
+  trackingId: varchar("trackingId", { length: 255 }), // GA4 Measurement ID, Facebook Pixel ID, LinkedIn Partner ID
+  additionalConfig: text("additionalConfig"), // JSON string for additional configuration
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+});
+
+export type Analytics = typeof analytics.$inferSelect;
+export type InsertAnalytics = typeof analytics.$inferInsert;

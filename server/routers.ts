@@ -17,6 +17,7 @@ import { loadersRouter } from "./loadersRouter";
 import { testimonialsRouter } from "./routers/testimonials";
 import { radarRouter } from "./routers/radar";
 import { pageVisibilityRouter } from "./routers/pageVisibility";
+import { analyticsRouter } from "./routers/analytics";
 import { migrateRouter } from "./routers/migrate";
 import { saveLeoContact, createLeoSession, updateLeoSession } from "./db";
 export const appRouter = router({
@@ -34,6 +35,7 @@ export const appRouter = router({
   testimonials: testimonialsRouter,
   radar: radarRouter,
   pageVisibility: pageVisibilityRouter,
+  analytics: analyticsRouter,
   migrate: migrateRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),

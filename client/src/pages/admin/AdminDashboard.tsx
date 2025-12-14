@@ -140,6 +140,20 @@ export default function AdminDashboard() {
                   <div className="text-white font-medium">AI Assessments</div>
                   <div className="text-gray-400 text-sm">Review completed assessments</div>
                 </a>
+                <a
+                  href="/admin/page-visibility"
+                  className="block p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                >
+                  <div className="text-white font-medium">Page Visibility</div>
+                  <div className="text-gray-400 text-sm">Manage page visibility settings</div>
+                </a>
+                <a
+                  href="/admin/analytics"
+                  className="block p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                >
+                  <div className="text-white font-medium">Analytics & Tracking</div>
+                  <div className="text-gray-400 text-sm">Configure Google Analytics, Facebook Pixel, LinkedIn</div>
+                </a>
               </CardContent>
             </Card>
 

@@ -45,7 +45,7 @@
     "title": "Commencer votre ",
     "titleHighlight": "transformation",
     "subtitle": "Nous construisons des écosystèmes numériques et IA complets.",
-    "cta": "Construisons ensemble",
+    "cta": "Commençons ensemble",
     "services": [
       "Stratégie IA",
       "Plateformes Numériques",
@@ -106,7 +106,7 @@
     "description": "Nous ne construisons pas seulement des sites web ou des applications. Nous concevons des écosystèmes intelligents où chaque point de contact numérique est alimenté par des agents autonomes.",
     "aiWebsites": {
       "title": "Sites web basés sur l'IA",
-      "description": "Expériences web auto-optimisantes qui adaptent le contenu et la mise en page en temps réel en fonction du comportement et de l'intention de l'utilisateur."
+      "description": "Expériences web auto-optimisées qui s'adaptent en temps réel au comportement et aux intentions de vos utilisateurs."
     },
     "intelligentPlatforms": {
       "title": "Plateformes intelligentes",
@@ -126,16 +126,16 @@
     "seoDescription": "Découvrez le manifeste Nukleo : notre vision pour la transformation IA qui dépasse les pilotes pour des solutions prêtes pour la production et évolutives. Lisez notre approche du succès IA.",
     "seoKeywords": "manifeste transformation IA, vision IA, philosophie IA, approche IA, mise à l'échelle solutions IA",
     "sectionLabel": "Manifeste",
-    "title": "Passez du pilote<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">à l'échelle.</span>",
+    "title": "Passer du pilote<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">à la croissance.</span>",
     "description": "L'écart se creuse. Pendant que certains expérimentent, les leaders réarchitecturent toute leur opération autour de l'IA agentique.",
     "readMore": "Lire le manifeste complet",
     "card1": {
       "title": "Leader, pas suiveur",
-      "description": "Intégrez des capacités d'agents IA autonomes qui peuvent tripler votre ROI, votre vitesse et votre volume de production."
+      "description": "Intégrez l'IA agentique pour tripler votre ROI, votre vitesse et votre productivité."
     },
     "card2": {
       "title": "Opérations réinventées",
-      "description": "Réarchitecturez vos flux de travail autour d'agents intelligents qui automatisent et optimisent en continu."
+      "description": "Restructurez vos processus autour d'agents intelligents qui automatisent et optimisent continuellement."
     },
     "page": {
       "eraOver": {
@@ -170,11 +170,11 @@
         "title": "Nos principes",
         "leader": {
           "title": "1. Leader, pas suiveur",
-          "description": "Intégrez des capacités d'agents IA autonomes qui peuvent tripler votre ROI, votre vitesse et votre volume de production."
+          "description": "Intégrez l'IA agentique pour tripler votre ROI, votre vitesse et votre productivité."
         },
         "reinvented": {
           "title": "2. Opérations réinventées",
-          "description": "Réarchitecturez vos flux de travail autour d'agents intelligents qui automatisent et optimisent continuellement."
+          "description": "Restructurez vos processus autour d'agents intelligents qui automatisent et optimisent continuellement."
         },
         "limitless": {
           "title": "3. Échelle illimitée",
@@ -187,7 +187,7 @@
       },
       "cta": {
         "title": "Prêt à passer à l'échelle ?",
-        "description": "L'ère du marketing automatisé avec IA est arrivée. Définissez votre feuille de route pour devenir un leader natif IA.",
+        "description": "L'ère du marketing agentique est arrivée. Définissez votre feuille de route pour devenir un leader IA.",
         "button": "Démarrer votre transformation"
       },
       "quote": {
@@ -219,7 +219,7 @@
   },
   "cta": {
     "title": "Prêt à transformer ?",
-    "description": "L'ère du Marketing Automatisé avec IA est arrivée. Définissez votre feuille de route pour devenir un leader natif IA.",
+    "description": "L'ère du marketing agentique est arrivée. Définissez votre feuille de route pour devenir un leader IA.",
     "button": "Démarrer votre transformation"
   },
   "testimonials": {
@@ -232,7 +232,7 @@
   "whoWeServe": {
     "sectionLabel": "Champions des plus petites organisations",
     "title": "Qui nous<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">servons</span>",
-    "description": "Nous sommes là pour aider TOUT LE MONDE à se transformer. La grande technologie a l'IA, maintenant c'est votre tour. Nous apportons l'IA de niveau entreprise aux startups, PME et organisations à but non lucratif qui refusent d'être laissées pour compte.",
+    "description": "Nous sommes là pour aider TOUT LE MONDE à se transformer. Les grandes entreprises utilisent déjà l'IA, maintenant c'est votre tour. Nous apportons l'IA de niveau entreprise aux startups, PME et organisations à but non lucratif qui refusent d'être laissées pour compte.",
     "startups": {
       "title": "Startups & Scale-ups",
       "description": "Lancez-vous plus rapidement et évoluez plus intelligemment avec l'automatisation alimentée par l'IA, des fonctionnalités intelligentes et des informations basées sur les données qui vous donnent un avantage concurrentiel dès le premier jour."

@@ -75,9 +75,19 @@ createRoot(rootElement).render(
   </trpc.Provider>
 );
 
-// Don't show body content immediately - PageLoader will handle it
-// This prevents flash of white/colored content before loader appears
-const svg = document.getElementById('nukleo-arrow-inline');
-if (svg) {
-  svg.style.display = 'block';
+// Optimize LCP - show inline SVG immediately if present
+// Use requestIdleCallback to avoid blocking initial render
+if (typeof window !== 'undefined') {
+  const showInlineSVG = () => {
+    const svg = document.getElementById('nukleo-arrow-inline');
+    if (svg) {
+      svg.style.display = 'block';
+    }
+  };
+  
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(showInlineSVG, { timeout: 500 });
+  } else {
+    setTimeout(showInlineSVG, 0);
+  }
 }

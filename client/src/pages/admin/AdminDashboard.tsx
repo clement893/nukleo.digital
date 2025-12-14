@@ -206,40 +206,40 @@ export default function AdminDashboard() {
             </Card>
           </div>
 
-            <Card className="bg-white/10 backdrop-blur-sm border-white/20">
-              <CardHeader>
-                <CardTitle className="text-white">Recent Activity</CardTitle>
-                <CardDescription className="text-gray-400">
-                  Latest platform updates
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <div className="flex items-start gap-3">
-                    <div className="h-2 w-2 rounded-full bg-green-500 mt-2" />
-                    <div>
-                      <div className="text-white text-sm">System operational</div>
-                      <div className="text-gray-400 text-xs">All services running normally</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="h-2 w-2 rounded-full bg-blue-500 mt-2" />
-                    <div>
-                      <div className="text-white text-sm">Database connected</div>
-                      <div className="text-gray-400 text-xs">PostgreSQL on Railway</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="h-2 w-2 rounded-full bg-purple-500 mt-2" />
-                    <div>
-                      <div className="text-white text-sm">LEO AI active</div>
-                      <div className="text-gray-400 text-xs">Chatbot responding to queries</div>
-                    </div>
+          {/* Recent Activity */}
+          <Card className="bg-white/10 backdrop-blur-sm border-white/20">
+            <CardHeader>
+              <CardTitle className="text-white">Recent Activity</CardTitle>
+              <CardDescription className="text-gray-400">
+                Latest platform updates
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                <div className="flex items-start gap-3">
+                  <div className="h-2 w-2 rounded-full bg-green-500 mt-2" />
+                  <div>
+                    <div className="text-white text-sm">System operational</div>
+                    <div className="text-gray-400 text-xs">All services running normally</div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          </div>
+                <div className="flex items-start gap-3">
+                  <div className="h-2 w-2 rounded-full bg-blue-500 mt-2" />
+                  <div>
+                    <div className="text-white text-sm">Database connected</div>
+                    <div className="text-gray-400 text-xs">PostgreSQL on Railway</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="h-2 w-2 rounded-full bg-purple-500 mt-2" />
+                  <div>
+                    <div className="text-white text-sm">LEO AI active</div>
+                    <div className="text-gray-400 text-xs">Chatbot responding to queries</div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </AdminRoute>

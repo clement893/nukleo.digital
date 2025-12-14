@@ -1,6 +1,10 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useLocation } from 'wouter';
 
+// Preload translations synchronously to prevent showing translation keys
+import enTranslations from '../locales/en.json';
+import frTranslations from '../locales/fr.json';
+
 export type Language = 'fr' | 'en';
 
 interface LanguageContextType {
@@ -10,6 +14,12 @@ interface LanguageContextType {
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+
+// Preloaded translations
+const preloadedTranslations: Record<Language, Record<string, any>> = {
+  en: enTranslations,
+  fr: frTranslations,
+};
 
 // Default language detection from URL
 function detectLanguageFromURL(): Language {
@@ -37,23 +47,15 @@ interface LanguageProviderProps {
 export function LanguageProvider({ children }: LanguageProviderProps) {
   const [location, setLocation] = useLocation();
   const [language, setLanguageState] = useState<Language>(detectLanguageFromURL);
-  const [translations, setTranslations] = useState<Record<string, string>>({});
+  // Use preloaded translations immediately - no async loading needed
+  const [translations, setTranslations] = useState<Record<string, any>>(
+    preloadedTranslations[language] || preloadedTranslations.en
+  );
 
-  // Load translations based on current language
+  // Update translations when language changes
   useEffect(() => {
-    import(`../locales/${language}.json`)
-      .then((module) => {
-        setTranslations(module.default);
-      })
-      .catch((error) => {
-        console.error(`Failed to load translations for ${language}:`, error);
-        // Fallback to English
-        if (language !== 'en') {
-          import('../locales/en.json')
-            .then((module) => setTranslations(module.default))
-            .catch(() => setTranslations({}));
-        }
-      });
+    const newTranslations = preloadedTranslations[language] || preloadedTranslations.en;
+    setTranslations(newTranslations);
   }, [language]);
 
   // Extract language from URL on mount and when location changes
@@ -101,18 +103,17 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
       if (value && typeof value === 'object' && k in value) {
         value = value[k];
       } else {
-        // Key not found, return the key itself or empty array/object based on returnObjects
-        // Log missing translation in development
+        // Key not found, log in development and return empty string/array instead of key
         if (process.env.NODE_ENV === 'development') {
-          console.warn(`Translation missing for key: ${key}`);
+          console.warn(`Translation missing for key: ${key} (language: ${language})`);
         }
-        return returnObjects ? [] : key;
+        return returnObjects ? [] : '';
       }
     }
     
-    // If we reached here but value is undefined/null, return key or empty array
+    // If we reached here but value is undefined/null, return empty string/array
     if (value === undefined || value === null) {
-      return returnObjects ? [] : key;
+      return returnObjects ? [] : '';
     }
     
     // If returnObjects is true and value is an object/array, return it directly
@@ -126,7 +127,7 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
     }
     
     // Otherwise, return as string
-    let translation = typeof value === 'string' ? value : key;
+    let translation = typeof value === 'string' ? value : String(value || '');
     
     // Replace parameters
     if (actualParams) {

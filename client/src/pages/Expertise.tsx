@@ -47,12 +47,14 @@ export default function Expertise() {
         <div className="container">
           <Breadcrumb items={[{ name: t('nav.expertise'), url: '/expertise' }]} />
           <span className="font-mono text-accent text-sm mb-8 block tracking-widest">
-            {t('expertise.sectionNumber')}
+            Expertise
           </span>
 
-          <h1 className="text-white mb-8">
+          <h1 className="text-white mb-8 text-5xl md:text-6xl lg:text-7xl font-bold">
             {t('expertise.heroTitle')}<br />
-            {t('expertise.heroSubtitle')}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">
+              {t('expertise.heroSubtitle')}
+            </span>
           </h1>
 
           <p className="text-white/75 text-lg lg:text-xl leading-relaxed max-w-3xl">

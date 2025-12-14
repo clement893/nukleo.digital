@@ -5,7 +5,7 @@ import PageLayout from '@/components/PageLayout';
 import { trpc } from '@/lib/trpc';
 import SEO from '@/components/SEO';
 import UniversalLEO from '@/components/UniversalLEO';
-import StructuredData from '@/components/StructuredData';
+import StructuredData, { montrealOfficeSchema, halifaxOfficeSchema } from '@/components/StructuredData';
 import Breadcrumb from '@/components/Breadcrumb';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
@@ -170,6 +170,8 @@ export default function Contact() {
         keywords="contact AI agency, AI consultation, Montréal AI services, Halifax AI agency, AI transformation contact"
       />
       <StructuredData data={contactPageSchema} />
+      <StructuredData data={montrealOfficeSchema} />
+      <StructuredData data={halifaxOfficeSchema} />
     <div className="min-h-screen bg-gradient-nukleo">
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">

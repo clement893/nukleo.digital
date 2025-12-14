@@ -236,3 +236,99 @@ export function createReviewSchema(reviews: Array<{ author: string; rating: numb
     })),
   };
 }
+
+// LocalBusiness schema for office locations
+export function createLocalBusinessSchema(location: {
+  name: string;
+  streetAddress: string;
+  addressLocality: string;
+  addressRegion: string;
+  postalCode: string;
+  addressCountry: string;
+  telephone?: string;
+  email?: string;
+  url?: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': `https://nukleodigital-production.up.railway.app#${location.addressLocality.toLowerCase()}`,
+    name: location.name,
+    image: 'https://nukleodigital-production.up.railway.app/Nukleo_blanc_RVB.svg',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: location.streetAddress,
+      addressLocality: location.addressLocality,
+      addressRegion: location.addressRegion,
+      postalCode: location.postalCode,
+      addressCountry: location.addressCountry,
+    },
+    telephone: location.telephone,
+    email: location.email || 'hello@nukleo.digital',
+    url: location.url || 'https://nukleodigital-production.up.railway.app',
+    priceRange: '$$',
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '09:00',
+      closes: '17:00',
+    },
+    areaServed: {
+      '@type': 'Place',
+      name: 'Worldwide',
+    },
+  };
+}
+
+// Person schema for team members
+export function createPersonSchema(person: {
+  name: string;
+  jobTitle: string;
+  image?: string;
+  url?: string;
+  email?: string;
+  sameAs?: string[];
+  worksFor?: {
+    name: string;
+    url: string;
+  };
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: person.name,
+    jobTitle: person.jobTitle,
+    image: person.image,
+    url: person.url,
+    email: person.email,
+    sameAs: person.sameAs || [],
+    worksFor: person.worksFor || {
+      '@type': 'Organization',
+      name: 'Nukleo Digital',
+      url: 'https://nukleodigital-production.up.railway.app',
+    },
+  };
+}
+
+// Predefined LocalBusiness schemas for offices
+export const montrealOfficeSchema = createLocalBusinessSchema({
+  name: 'Nukleo Digital - Montréal',
+  streetAddress: '7236 Rue Waverly',
+  addressLocality: 'Montréal',
+  addressRegion: 'QC',
+  postalCode: 'H2R 0C2',
+  addressCountry: 'CA',
+  email: 'hello@nukleo.digital',
+  url: 'https://nukleodigital-production.up.railway.app',
+});
+
+export const halifaxOfficeSchema = createLocalBusinessSchema({
+  name: 'Nukleo Digital - Halifax',
+  streetAddress: '1800 Argyle St Unit 801',
+  addressLocality: 'Halifax',
+  addressRegion: 'NS',
+  postalCode: 'B3J 3N8',
+  addressCountry: 'CA',
+  email: 'hello@nukleo.digital',
+  url: 'https://nukleodigital-production.up.railway.app',
+});

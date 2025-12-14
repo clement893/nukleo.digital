@@ -722,9 +722,25 @@
       "title": "AI Transformation Agency | Agentic AI Solutions",
       "description": "Transform your business with AI-powered solutions. We help startups, SMBs, enterprises, and governments unlock the power of artificial intelligence."
     },
+    "manifesto": {
+      "title": "Our Manifesto | Move From Pilot to Scale",
+      "description": "Discover the Nukleo manifesto: our vision for AI transformation that moves beyond pilots to production-ready, scalable solutions. Read our approach to AI success."
+    },
     "about": {
       "title": "About Nukleo Digital | AI Transformation Experts",
-      "description": "Meet the Nukleo Digital team: 15+ AI experts transforming businesses across Canada. Based in Montréal & Halifax."
+      "description": "Meet the Nukleo Digital team: 15+ AI experts transforming businesses across Canada. Based in Montréal & Halifax. Expertise in strategy, platforms, and intelligent operations."
+    },
+    "expertise": {
+      "title": "Our AI Expertise | Agentic AI Systems, Platforms & Strategy",
+      "description": "Discover our AI expertise: Agentic AI systems, AI-native platforms, transformation strategy, creative studio & intelligent data. Proven 4-phase methodology for success."
+    },
+    "clients": {
+      "title": "Our Clients | Trusted by Industry Leaders",
+      "description": "Trusted by 12+ industry leaders: MBAM, Summit Law, Affilia, GoCoupons & more. See how we transformed operations across 8+ industries with AI."
+    },
+    "resources": {
+      "title": "Resources | AI Insights, Guides & Research",
+      "description": "Insights, guides, and research from the frontlines of AI transformation. Stay ahead with expert analysis, practical frameworks, and interactive tools."
     },
     "services": {
       "title": "AI Services | Strategy, Platforms & Intelligent Operations",
@@ -732,7 +748,7 @@
     },
     "contact": {
       "title": "Contact Nukleo Digital | Start Your AI Transformation",
-      "description": "Ready to transform with AI? Contact Nukleo Digital for expert consultation. Offices in Montréal & Halifax."
+      "description": "Ready to transform with AI? Contact Nukleo Digital for expert consultation. Offices in Montréal & Halifax. Let's discuss your AI transformation project."
     }
   },
   "lab": {

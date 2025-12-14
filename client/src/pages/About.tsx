@@ -1,5 +1,6 @@
 import PageLayout from "@/components/PageLayout";
 import SEO from '@/components/SEO';
+import StructuredData, { createPersonSchema } from '@/components/StructuredData';
 import UniversalLEO from '@/components/UniversalLEO';
 import { Linkedin } from 'lucide-react';
 import Breadcrumb from '@/components/Breadcrumb';
@@ -104,6 +105,26 @@ export default function About() {
   const { t } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
   
+  // Create Person schemas for team members
+  const teamPersonSchemas = teamMembers.map(member => {
+    const role = t(`about.team.${member.translationKey}.role`) || member.translationKey;
+    const imageUrl = member.image.startsWith('http') 
+      ? member.image 
+      : `https://nukleodigital-production.up.railway.app${member.image}`;
+    
+    return createPersonSchema({
+      name: member.name,
+      jobTitle: typeof role === 'string' ? role : String(role || ''),
+      image: imageUrl,
+      url: member.linkedin,
+      sameAs: [member.linkedin],
+      worksFor: {
+        name: 'Nukleo Digital',
+        url: 'https://nukleodigital-production.up.railway.app',
+      },
+    });
+  });
+  
   return (
     <PageLayout>
       <SEO 
@@ -112,6 +133,9 @@ export default function About() {
         keywords="AI experts, AI transformation team, AI consulting experts, Montréal AI agency, Halifax AI services"
         ogImage="https://nukleodigital-production.up.railway.app/og-about.jpg"
       />
+      {teamPersonSchemas.map((schema, index) => (
+        <StructuredData key={index} data={schema} />
+      ))}
       <div className="min-h-screen bg-gradient-to-br from-violet-950 via-fuchsia-950 to-rose-950">
         {/* Hero Section */}
         <section className="container mx-auto px-4 pt-32 pb-20">

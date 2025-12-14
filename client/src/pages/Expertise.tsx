@@ -1,6 +1,7 @@
 import { Brain, Code, Palette, TrendingUp, Database, Sparkles } from 'lucide-react';
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
+import StructuredData, { createServiceSchema } from '@/components/StructuredData';
 import Breadcrumb from '@/components/Breadcrumb';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -33,6 +34,12 @@ export default function Expertise() {
     },
   ];
 
+  const expertiseServiceSchema = createServiceSchema({
+    name: 'AI Transformation Expertise',
+    description: t('seo.expertise.description') || "Discover our AI expertise: Agentic AI systems, AI-native platforms, transformation strategy, creative studio & intelligent data. Proven 4-phase methodology for success.",
+    url: 'https://nukleodigital-production.up.railway.app/expertise',
+  });
+
   return (
     <PageLayout>
       <SEO 
@@ -41,6 +48,7 @@ export default function Expertise() {
         keywords="AI expertise, agentic AI systems, AI-native platforms, AI transformation strategy, AI methodology"
         ogImage="https://nukleodigital-production.up.railway.app/og-expertise.jpg"
       />
+      <StructuredData data={expertiseServiceSchema} />
     <div className="min-h-screen bg-gradient-nukleo">
       {/* Hero Section */}
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">

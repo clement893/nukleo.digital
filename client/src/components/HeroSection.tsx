@@ -154,8 +154,8 @@ function HeroSection() {
                       return null;
                     }
                     
-                    // Double the services for seamless loop
-                    return [...Array(2)].map((_, setIndex) => 
+                    // Double the services for seamless loop - flatten the result
+                    return [...Array(2)].flatMap((_, setIndex) => 
                       services.map((service: string, index: number) => (
                         <span 
                           key={`${setIndex}-${index}`}

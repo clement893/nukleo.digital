@@ -90,7 +90,10 @@ export default function Footer() {
 
           {/* Services */}
           <div className="lg:col-span-3">
-            <h3 className="text-sm font-bold tracking-wider mb-4">{t('footer.services')}</h3>
+            <h3 className="text-sm font-bold tracking-wider mb-4">{(() => {
+              const servicesLabel = t('footer.services');
+              return typeof servicesLabel === 'string' ? servicesLabel : 'Services';
+            })()}</h3>
             <ul className="space-y-3">
               {services.map((item) => (
                 <li key={item.href}>

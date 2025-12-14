@@ -185,23 +185,23 @@ export default function About() {
                   {(() => {
                     const roleKey = `about.team.${member.translationKey}.role`;
                     const role = t(roleKey);
-                    // If translation returns the key itself, it means translation not found - use fallback
-                    if (role === roleKey || !role || role.trim() === '') {
+                    // If translation returns empty string or key itself, it means translation not found - use fallback
+                    if (!role || role === '' || role === roleKey || (typeof role === 'string' && role.trim() === '')) {
                       // Fallback: use member name or translation key
                       return member.translationKey.toUpperCase().replace(/([A-Z])/g, ' $1').trim();
                     }
-                    return role;
+                    return typeof role === 'string' ? role : String(role || '');
                   })()}
                 </p>
                 <p className="text-gray-400 text-sm leading-relaxed">
                   {(() => {
                     const descKey = `about.team.${member.translationKey}.description`;
                     const description = t(descKey);
-                    // If translation returns the key itself, it means translation not found
-                    if (description === descKey || !description || description.trim() === '') {
+                    // If translation returns empty string or key itself, it means translation not found
+                    if (!description || description === '' || description === descKey || (typeof description === 'string' && description.trim() === '')) {
                       return `Membre de l'équipe Nukleo Digital`;
                     }
-                    return description;
+                    return typeof description === 'string' ? description : String(description || '');
                   })()}
                 </p>
               </div>

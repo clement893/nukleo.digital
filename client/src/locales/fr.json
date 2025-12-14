@@ -27,7 +27,7 @@
     "faq": "FAQ"
   },
   "header": {
-    "tagline": "Choisir l'intelligence"
+    "tagline": "CHOISIR L'INTELLIGENCE"
   },
   "hero": {
     "title": "Rejoignez la ",
@@ -296,7 +296,7 @@
   "whoWeServe": {
     "subtitle": "Nous sommes les champions des petites organisations",
     "title": "Qui nous <span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">servons</span>",
-    "description": "Nous sommes là pour aider <strong>TOUT LE MONDE</strong> à se transformer. Les géants de la technologie ont l'IA, maintenant c'est à votre tour. Nous apportons l'IA de niveau entreprise aux startups, PME et organisations à but non lucratif qui refusent d'être laissées pour compte.",
+    "description": "Nous sommes là pour aider <strong>tout le monde</strong> à se transformer. Les géants de la technologie ont l'IA, maintenant c'est à votre tour. Nous apportons l'IA de niveau entreprise aux startups, PME et organisations à but non lucratif qui refusent d'être laissées pour compte.",
     "cta": {
       "title": "Vous n'avez pas besoin d'un budget de Fortune 500 pour accéder à une IA de classe mondiale.",
       "subtitle": "Ensemble, rétablissons l'équilibre.",
@@ -999,6 +999,8 @@
     "seoDescription": "Fait confiance par 12+ leaders de l'industrie : MBAM, Summit Law, Affilia, GoCoupons & plus. Découvrez comment nous avons transformé les opérations dans 8+ industries avec l'IA. Voir les études de cas.",
     "seoKeywords": "clients IA, études de cas IA, leaders de l'industrie IA, histoires de succès transformation IA, portfolio IA",
     "badge": "Fait confiance par des leaders de l'industrie",
+    "trustedBy": "Recommandé par",
+    "viewAll": "Voir tous les clients",
     "title": "Nos",
     "titleHighlight": "Clients",
     "description": "Des musées aux startups technologiques, nous avons aidé des organisations de diverses industries à transformer leurs opérations avec des solutions alimentées par l'IA. Voici quelques-unes des entreprises formidables avec lesquelles nous avons eu le privilège de travailler.",

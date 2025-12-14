@@ -16,6 +16,7 @@ function Footer() {
   
   const allNavigation = useMemo(() => [
     { label: t('footer.nav.manifesto'), href: '/manifesto' },
+    { label: t('nav.expertise'), href: '/expertise' },
     { label: t('nav.about'), href: '/about' },
     { label: t('footer.nav.clients'), href: '/clients' },
     { label: t('nav.resources'), href: '/resources' },

@@ -29,10 +29,10 @@ export default defineConfig({
     cssCodeSplit: true,
     cssMinify: true,
     // Reduce inline limit for mobile - smaller initial HTML
-    assetsInlineLimit: 2048,
+    assetsInlineLimit: 1024, // Further reduced for mobile
     reportCompressedSize: false,
     // Optimize chunk size for mobile
-    chunkSizeWarningLimit: 500,
+    chunkSizeWarningLimit: 400, // Further reduced
     rollupOptions: {
       treeshake: {
         moduleSideEffects: 'no-external',

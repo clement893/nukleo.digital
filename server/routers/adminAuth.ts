@@ -22,16 +22,12 @@ export const adminAuthRouter = router({
         throw new Error("Invalid credentials");
       }
 
-      console.log("[Admin Auth] Login successful for:", admin.username);
-      
       // Create JWT token
       const token = jwt.sign(
         { id: admin.id, username: admin.username, email: admin.email },
         ADMIN_JWT_SECRET,
         { expiresIn: "7d" }
-      );
-
-      console.log("[Admin Auth] Setting cookie:", ADMIN_COOKIE_NAME);
+      };
       
       // Set cookie
       ctx.res.cookie(ADMIN_COOKIE_NAME, token, {
@@ -60,12 +56,7 @@ export const adminAuthRouter = router({
   checkAuth: publicProcedure.query(({ ctx }) => {
     const token = ctx.req.cookies[ADMIN_COOKIE_NAME];
     
-    console.log("[Admin Auth] checkAuth called");
-    console.log("[Admin Auth] All cookies:", ctx.req.cookies);
-    console.log("[Admin Auth] Admin cookie:", token);
-    
     if (!token) {
-      console.log("[Admin Auth] No token found, returning unauthenticated");
       return { authenticated: false, admin: null };
     }
 
@@ -89,18 +80,37 @@ export const adminAuthRouter = router({
     }
   }),
 
-  // Create first admin (should be protected or removed after first use)
+  // Create first admin - DISABLED FOR SECURITY
+  // This route should only be enabled temporarily during initial setup
+  // To enable: set ENABLE_CREATE_FIRST_ADMIN=true in environment variables
+  // After creating the first admin, remove this route or keep it disabled
   createFirstAdmin: publicProcedure
     .input(
       z.object({
         username: z.string().min(3),
         password: z.string().min(8),
         email: z.string().email(),
+        secret: z.string().optional(), // Optional secret key for additional protection
       })
     )
     .mutation(async ({ input }) => {
+      // Security: Only allow if explicitly enabled via environment variable
+      if (process.env.ENABLE_CREATE_FIRST_ADMIN !== "true") {
+        throw new Error("Admin creation is disabled. Contact system administrator.");
+      }
+
+      // Additional protection: Require a secret key if configured
+      const requiredSecret = process.env.CREATE_ADMIN_SECRET;
+      if (requiredSecret && input.secret !== requiredSecret) {
+        throw new Error("Invalid secret key");
+      }
+
       try {
-        await createAdminUser(input);
+        await createAdminUser({
+          username: input.username,
+          password: input.password,
+          email: input.email,
+        });
         return { success: true };
       } catch (error) {
         console.error("[Admin Auth] Error creating admin:", error);

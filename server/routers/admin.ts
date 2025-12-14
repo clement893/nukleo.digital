@@ -1,4 +1,4 @@
-import { publicProcedure, router } from "../_core/trpc";
+import { adminProcedure, router } from "../_core/trpc";
 import { getDb } from "../db";
 import { 
   agencyLeads, 
@@ -14,7 +14,7 @@ import {
 import { count, desc, sql } from "drizzle-orm";
 
 export const adminRouter = router({
-  getStats: publicProcedure.query(async () => {
+  getStats: adminProcedure.query(async () => {
     try {
       const db = await getDb();
       if (!db) {
@@ -59,7 +59,7 @@ export const adminRouter = router({
     }
   }),
 
-  getLeoContacts: publicProcedure.query(async () => {
+  getLeoContacts: adminProcedure.query(async () => {
     try {
       const db = await getDb();
       if (!db) {
@@ -99,7 +99,7 @@ export const adminRouter = router({
     }
   }),
 
-  getStartProjectSubmissions: publicProcedure.query(async () => {
+  getStartProjectSubmissions: adminProcedure.query(async () => {
     try {
       console.log("[Admin] Starting to fetch start project submissions...");
       const db = await getDb();
@@ -139,7 +139,7 @@ export const adminRouter = router({
     }
   }),
 
-  getContactMessages: publicProcedure.query(async () => {
+  getContactMessages: adminProcedure.query(async () => {
     try {
       const db = await getDb();
       if (!db) {

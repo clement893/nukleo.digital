@@ -1,12 +1,12 @@
-import { publicProcedure, router } from "../_core/trpc";
+import { adminProcedure, publicProcedure, router } from "../_core/trpc";
 import { getDb } from "../db";
 import { pageVisibility } from "../../drizzle/schema";
 import { eq, desc } from "drizzle-orm";
 import { z } from "zod";
 
 export const pageVisibilityRouter = router({
-  // Get all pages visibility
-  getAll: publicProcedure.query(async () => {
+  // Get all pages visibility (admin only)
+  getAll: adminProcedure.query(async () => {
     try {
       const db = await getDb();
       if (!db) {
@@ -25,7 +25,7 @@ export const pageVisibilityRouter = router({
     }
   }),
 
-  // Get visibility for a specific path
+  // Get visibility for a specific path (public - needed for frontend routing)
   getByPath: publicProcedure
     .input(z.object({ path: z.string() }))
     .query(async ({ input }) => {
@@ -50,8 +50,8 @@ export const pageVisibilityRouter = router({
       }
     }),
 
-  // Update visibility for a page
-  updateVisibility: publicProcedure
+  // Update visibility for a page (admin only)
+  updateVisibility: adminProcedure
     .input(
       z.object({
         path: z.string(),
@@ -99,8 +99,8 @@ export const pageVisibilityRouter = router({
       }
     }),
 
-  // Bulk update visibility
-  bulkUpdate: publicProcedure
+  // Bulk update visibility (admin only)
+  bulkUpdate: adminProcedure
     .input(
       z.array(
         z.object({

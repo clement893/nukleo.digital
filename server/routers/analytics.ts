@@ -1,12 +1,12 @@
-import { publicProcedure, router } from "../_core/trpc";
+import { adminProcedure, publicProcedure, router } from "../_core/trpc";
 import { getDb } from "../db";
 import { analytics } from "../../drizzle/schema";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
 
 export const analyticsRouter = router({
-  // Get all analytics configurations
-  getAll: publicProcedure.query(async () => {
+  // Get all analytics configurations (admin only)
+  getAll: adminProcedure.query(async () => {
     try {
       const db = await getDb();
       if (!db) {
@@ -24,7 +24,8 @@ export const analyticsRouter = router({
     }
   }),
 
-  // Get active analytics configurations only
+  // Get active analytics configurations only (public for frontend to load scripts)
+  // This is safe because it only returns enabled configs, not sensitive data
   getActive: publicProcedure.query(async () => {
     try {
       const db = await getDb();
@@ -44,8 +45,8 @@ export const analyticsRouter = router({
     }
   }),
 
-  // Get configuration for a specific provider
-  getByProvider: publicProcedure
+  // Get configuration for a specific provider (admin only)
+  getByProvider: adminProcedure
     .input(z.object({ provider: z.string() }))
     .query(async ({ input }) => {
       try {
@@ -119,8 +120,8 @@ export const analyticsRouter = router({
       }
     }),
 
-  // Delete analytics configuration
-  delete: publicProcedure
+  // Delete analytics configuration (admin only)
+  delete: adminProcedure
     .input(z.object({ provider: z.string() }))
     .mutation(async ({ input }) => {
       try {

@@ -106,13 +106,14 @@ export default defineConfig({
             return 'vendor';
           }
           // Split by page for better lazy loading - admin should NEVER be in initial bundle
-          // Use more efficient string matching
+          // Use more efficient string matching - CRITICAL: admin must be completely separate
           if (id.includes('/pages/admin/') || 
               id.includes('/components/Admin') || 
               id.includes('/components/ProtectedAdminRoute') || 
               id.includes('/components/DashboardLayout') || 
               id.includes('/styles/admin.css') ||
-              id.includes('/hooks/useAdminAuth')) {
+              id.includes('/hooks/useAdminAuth') ||
+              id.includes('admin.css')) {
             return 'admin';
           }
           if (id.includes('/pages/services/')) {

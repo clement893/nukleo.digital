@@ -34,17 +34,20 @@ export default function ArrowBackground({ variant = 'default' }: ArrowBackground
 
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
-      {arrowsToRender.map((arrow, i) => (
-        <img
-          key={i}
-          src="/nukleo-arrow.svg"
-          alt=""
-          width={arrow.size}
-          height={arrow.size}
-          className="absolute"
-          loading="lazy"
-          fetchPriority="low"
-          decoding="async"
+      {arrowsToRender.map((arrow, i) => {
+        // First arrow is LCP element - optimize for immediate rendering
+        const isLCP = i === 0;
+        return (
+          <img
+            key={i}
+            src="/nukleo-arrow.svg"
+            alt=""
+            width={arrow.size}
+            height={arrow.size}
+            className="absolute"
+            loading={isLCP ? "eager" : "lazy"}
+            fetchPriority={isLCP ? "high" : "low"}
+            decoding="async"
           style={{
             ...arrow,
             width: `${arrow.size}px`,

@@ -144,24 +144,28 @@ function HeroSection() {
                   }}
                 >
                   {/* Double the services for seamless loop */}
-                  {[...Array(2)].map((_, setIndex) => {
+                  {(() => {
                     // Use translation hook with returnObjects support
-                    const services = (t('hero.services', { returnObjects: true }) as string[]) || [];
+                    const servicesValue = t('hero.services', { returnObjects: true });
+                    const services = Array.isArray(servicesValue) ? servicesValue : [];
                     
-                    // Ensure services is always an array
-                    if (!Array.isArray(services)) {
+                    // Return empty if no services
+                    if (services.length === 0) {
                       return null;
                     }
                     
-                    return services.map((service: string, index: number) => (
-                      <span 
-                        key={`${setIndex}-${index}`}
-                        className="text-white/40 hover:text-white/80 text-lg sm:text-xl font-medium transition-colors duration-300 cursor-default"
-                      >
-                        {service}
-                      </span>
-                    ));
-                  })}
+                    // Double the services for seamless loop
+                    return [...Array(2)].map((_, setIndex) => 
+                      services.map((service: string, index: number) => (
+                        <span 
+                          key={`${setIndex}-${index}`}
+                          className="text-white/40 hover:text-white/80 text-lg sm:text-xl font-medium transition-colors duration-300 cursor-default"
+                        >
+                          {service}
+                        </span>
+                      ))
+                    );
+                  })()}
                 </div>
               </div>
             </div>

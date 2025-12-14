@@ -85,15 +85,19 @@ export default function Expertise() {
                   </p>
 
                   <div className="space-y-2">
-                    {t(`expertise.areas.${area.translationKey}.capabilities`, { returnObjects: true }).map((capability: string, idx: number) => (
-                      <div
-                        key={idx}
-                        className="flex items-center gap-2 text-white/60 text-sm"
-                      >
-                        <div className="w-1.5 h-1.5 rounded-full bg-accent" />
-                        {capability}
-                      </div>
-                    ))}
+                    {(() => {
+                      const capabilities = t(`expertise.areas.${area.translationKey}.capabilities`, { returnObjects: true });
+                      const capabilitiesArray = Array.isArray(capabilities) ? capabilities : [];
+                      return capabilitiesArray.map((capability: string, idx: number) => (
+                        <div
+                          key={idx}
+                          className="flex items-center gap-2 text-white/60 text-sm"
+                        >
+                          <div className="w-1.5 h-1.5 rounded-full bg-accent" />
+                          {capability}
+                        </div>
+                      ));
+                    })()}
                   </div>
                 </div>
               );

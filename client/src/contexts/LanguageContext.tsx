@@ -1,6 +1,10 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useLocation } from 'wouter';
 
+// Preload translations synchronously for better performance - prevents FCP/LCP delays
+import enTranslations from '../locales/en.json';
+import frTranslations from '../locales/fr.json';
+
 export type Language = 'fr' | 'en';
 
 interface LanguageContextType {
@@ -11,10 +15,10 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-// Cache for loaded translations to avoid re-loading
-const translationCache: Record<Language, Record<string, any> | null> = {
-  en: null,
-  fr: null,
+// Preloaded translations - available immediately for better performance
+const preloadedTranslations: Record<Language, Record<string, any>> = {
+  en: enTranslations,
+  fr: frTranslations,
 };
 
 // Default language detection from URL
@@ -43,86 +47,15 @@ interface LanguageProviderProps {
 export function LanguageProvider({ children }: LanguageProviderProps) {
   const [location, setLocation] = useLocation();
   const [language, setLanguageState] = useState<Language>(detectLanguageFromURL);
-  const [translations, setTranslations] = useState<Record<string, any>>({});
-  const [translationsLoaded, setTranslationsLoaded] = useState(false);
+  // Use preloaded translations immediately - no async loading needed for better performance
+  const [translations, setTranslations] = useState<Record<string, any>>(
+    preloadedTranslations[language] || preloadedTranslations.en
+  );
 
-  // Load translations with caching - prioritize current language
+  // Update translations when language changes - instant, no loading delay
   useEffect(() => {
-    // If translations are already cached, use them immediately
-    if (translationCache[language]) {
-      setTranslations(translationCache[language]!);
-      setTranslationsLoaded(true);
-      return;
-    }
-
-    // Load translations asynchronously but cache them
-    // Don't set loaded to false if we're switching languages and have a fallback
-    const hasFallback = translationCache.en || translationCache.fr;
-    if (!hasFallback) {
-      setTranslationsLoaded(false);
-    }
-    
-    import(`../locales/${language}.json`)
-      .then((module) => {
-        if (module.default && typeof module.default === 'object') {
-          translationCache[language] = module.default;
-          setTranslations(module.default);
-          setTranslationsLoaded(true);
-        } else {
-          console.error(`Invalid translation format for ${language}`);
-          // Fallback to English if available in cache
-          if (translationCache.en) {
-            setTranslations(translationCache.en);
-            setTranslationsLoaded(true);
-          } else {
-            import('../locales/en.json')
-              .then((module) => {
-                translationCache.en = module.default || {};
-                setTranslations(module.default || {});
-                setTranslationsLoaded(true);
-              })
-              .catch(() => {
-                setTranslations({});
-                setTranslationsLoaded(true);
-              });
-          }
-        }
-      })
-      .catch((error) => {
-        console.error(`Failed to load translations for ${language}:`, error);
-        // Fallback to English if available in cache
-        if (translationCache.en) {
-          setTranslations(translationCache.en);
-          setTranslationsLoaded(true);
-        } else {
-          import('../locales/en.json')
-            .then((module) => {
-              translationCache.en = module.default || {};
-              setTranslations(module.default || {});
-              setTranslationsLoaded(true);
-            })
-            .catch(() => {
-              setTranslations({});
-              setTranslationsLoaded(true);
-            });
-        }
-      });
-  }, [language]);
-
-  // Preload the other language in the background for faster switching
-  useEffect(() => {
-    const otherLang: Language = language === 'fr' ? 'en' : 'fr';
-    if (!translationCache[otherLang]) {
-      import(`../locales/${otherLang}.json`)
-        .then((module) => {
-          if (module.default && typeof module.default === 'object') {
-            translationCache[otherLang] = module.default;
-          }
-        })
-        .catch(() => {
-          // Silently fail - we'll load it when needed
-        });
-    }
+    const newTranslations = preloadedTranslations[language] || preloadedTranslations.en;
+    setTranslations(newTranslations);
   }, [language]);
 
   // Extract language from URL on mount and when location changes
@@ -161,12 +94,6 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
     // Check if returnObjects is requested
     const returnObjects = params && typeof params === 'object' && 'returnObjects' in params && params.returnObjects === true;
     const actualParams = returnObjects ? undefined : params as Record<string, string | number> | undefined;
-    
-    // If translations are not loaded yet, return empty string/array to prevent showing keys
-    // This prevents the flash of translation keys while loading
-    if (!translationsLoaded || !translations || Object.keys(translations).length === 0) {
-      return returnObjects ? [] : '';
-    }
     
     // Support nested keys like "hero.title"
     const keys = key.split('.');

@@ -5,8 +5,9 @@ import { eq, desc } from "drizzle-orm";
 import { z } from "zod";
 
 export const pageVisibilityRouter = router({
-  // Get all pages visibility (admin only)
-  getAll: adminProcedure.query(async () => {
+  // Get all pages visibility (public - needed for frontend menu/footer filtering)
+  // This is safe because it only returns visibility status, not sensitive data
+  getAll: publicProcedure.query(async () => {
     try {
       const db = await getDb();
       if (!db) {

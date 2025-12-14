@@ -48,7 +48,7 @@ function HeroSection() {
             <h1 
               className="
                 text-[3rem] sm:text-[5rem] md:text-[7rem] lg:text-[10rem] 
-                font-bold leading-[0.9] tracking-tighter text-white mb-6 sm:mb-8 italic
+                font-bold leading-[1.1] tracking-tighter text-white mb-6 sm:mb-8 italic
               "
             >
               {t('hero.title')}

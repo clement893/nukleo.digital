@@ -37,9 +37,9 @@ export default function WhoWeServeSection() {
     },
     {
       icon: Heart,
-      title: t('whoWeServe.nonprofits.title'),
-      description: t('whoWeServe.nonprofits.description'),
-      highlights: getArrayTranslation('whoWeServe.nonprofits.highlights')
+      title: t('whoWeServe.nonProfits.title'),
+      description: t('whoWeServe.nonProfits.description'),
+      highlights: getArrayTranslation('whoWeServe.nonProfits.highlights')
     }
   ];
 

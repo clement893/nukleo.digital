@@ -42,8 +42,8 @@
     "iconCreativeStudio": "Icône The Creative Studio"
   },
   "hero": {
-    "title": "Rejoignez la ",
-    "titleHighlight": "Révolution IA",
+    "title": "Commencer votre transformation ",
+    "titleHighlight": "avec nous",
     "subtitle": "Profitez de l'IA aujourd'hui",
     "cta": "Rejoindre les leaders",
     "services": [
@@ -244,7 +244,12 @@
     },
     "nonProfits": {
       "title": "Organisations à but non lucratif",
-      "description": "Amplifiez votre impact avec des outils d'IA qui vous aident à servir plus de personnes, à fonctionner plus efficacement et à raconter votre histoire de manière plus puissante sans dépasser votre budget."
+      "description": "Amplifiez votre impact avec des outils d'IA qui vous aident à servir plus de personnes, à fonctionner plus efficacement et à raconter votre histoire de manière plus puissante sans dépasser votre budget.",
+      "highlights": [
+        "IA axée sur la mission",
+        "Outils d'engagement des donateurs",
+        "Efficacité opérationnelle"
+      ]
     }
   },
   "clients": {

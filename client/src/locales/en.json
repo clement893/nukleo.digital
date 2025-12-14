@@ -42,8 +42,8 @@
     "iconCreativeStudio": "The Creative Studio Icon"
   },
   "hero": {
-    "title": "Join the",
-    "titleHighlight": "AI Revolution",
+    "title": "Start your transformation ",
+    "titleHighlight": "with us",
     "subtitle": "Benefit from AI today",
     "cta": "Join the Leaders",
     "services": [
@@ -330,7 +330,7 @@
         "No enterprise complexity"
       ]
     },
-    "nonprofits": {
+    "nonProfits": {
       "title": "Non-Profits",
       "description": "Amplify your impact with AI tools that help you serve more people, operate more efficiently, and tell your story more powerfully without breaking the budget.",
       "highlights": [

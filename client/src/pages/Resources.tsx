@@ -90,44 +90,44 @@ export default function Resources() {
     {
       id: 'agentic-ai-playbook',
       category: 'technicalGuide',
-      title: t('resources.articles.agenticPlaybook.title'),
-      description: t('resources.articles.agenticPlaybook.description'),
-      readTime: t('resources.articles.agenticPlaybook.readTime'),
+      title: t('resources.articles.agenticPlaybook.title') || 'Le Guide de l\'IA Agentic',
+      description: t('resources.articles.agenticPlaybook.description') || 'Un guide complet pour implémenter des agents IA autonomes dans votre organisation.',
+      readTime: t('resources.articles.agenticPlaybook.readTime') || '15 min',
       date: '2025-01-15'
     },
     {
       id: 'pilot-to-scale',
       category: 'strategy',
-      title: t('resources.articles.pilotToScale.title'),
-      description: t('resources.articles.pilotToScale.description'),
-      readTime: t('resources.articles.pilotToScale.readTime'),
+      title: t('resources.articles.pilotToScale.title') || 'Du pilote à l\'échelle : Cadre de transformation IA',
+      description: t('resources.articles.pilotToScale.description') || 'Cadre stratégique pour passer de l\'expérimentation à l\'adoption de l\'IA à l\'échelle de l\'entreprise.',
+      readTime: t('resources.articles.pilotToScale.readTime') || '20 min',
       date: '2025-01-12'
     },
     {
       id: 'agentic-marketing',
       category: 'industryInsights',
-      title: t('resources.articles.agenticMarketing.title'),
-      description: t('resources.articles.agenticMarketing.description'),
-      readTime: t('resources.articles.agenticMarketing.readTime'),
+      title: t('resources.articles.agenticMarketing.title') || 'L\'avenir du marketing agentic',
+      description: t('resources.articles.agenticMarketing.description') || 'Comment les agents IA transforment les opérations marketing et les expériences client.',
+      readTime: t('resources.articles.agenticMarketing.readTime') || '12 min',
       date: '2025-01-10'
     },
     {
       id: 'building-agentic-systems',
       category: 'technicalGuide',
-      title: t('resources.articles.buildingAgentic.title'),
-      description: t('resources.articles.buildingAgentic.description'),
-      readTime: t('resources.articles.buildingAgentic.readTime'),
+      title: t('resources.articles.buildingAgentic.title') || 'Construire des systèmes agentic',
+      description: t('resources.articles.buildingAgentic.description') || 'Plongée technique approfondie dans la conception, la construction et le déploiement de systèmes d\'agents IA autonomes.',
+      readTime: t('resources.articles.buildingAgentic.readTime') || '18 min',
       date: '2025-01-10'
     },
     {
       id: 'roi-ai-investment',
       category: 'strategy',
-      title: t('resources.articles.roiInvestment.title'),
-      description: t('resources.articles.roiInvestment.description'),
-      readTime: t('resources.articles.roiInvestment.readTime'),
+      title: t('resources.articles.roiInvestment.title') || 'Mesurer le ROI des investissements IA',
+      description: t('resources.articles.roiInvestment.description') || 'Cadres pratiques et métriques pour mesurer le retour sur investissement de vos initiatives IA.',
+      readTime: t('resources.articles.roiInvestment.readTime') || '10 min',
       date: '2025-01-05'
     }
-  ];
+  ].filter(resource => resource.title && resource.description && resource.title.trim() !== '' && resource.description.trim() !== ''); // Filter out empty resources
 
   const filteredResources = selectedCategory === 'all' 
     ? resources 
@@ -257,19 +257,19 @@ export default function Resources() {
         <section className="py-12 bg-white border-b border-gray-200">
           <div className="container">
             <div className="flex items-center gap-4 flex-wrap">
-              <div className="flex items-center gap-2 text-gray-700">
+              <div className="flex items-center gap-2 text-gray-900">
                 <Filter className="w-4 h-4" />
-                <span className="text-sm font-mono uppercase tracking-wider">{t('resources.filter.label')}</span>
+                <span className="text-sm font-mono uppercase tracking-wider font-semibold">{t('resources.filter.label')}</span>
               </div>
               {categories.map((category) => (
                 <Button
                   key={category.key}
                   variant={selectedCategory === category.key ? "default" : "outline"}
                   onClick={() => setSelectedCategory(category.key)}
-                  className={`rounded-full text-sm font-mono uppercase tracking-wider transition-all duration-300 ${
+                  className={`rounded-full text-sm font-mono uppercase tracking-wider transition-all duration-300 font-semibold ${
                     selectedCategory === category.key 
-                      ? "bg-purple-900 text-white hover:bg-purple-800" 
-                      : "bg-transparent text-purple-900 border-purple-900/20 hover:bg-purple-50 hover:border-accent"
+                      ? "bg-purple-900 text-white hover:bg-purple-800 border-purple-900" 
+                      : "bg-white text-gray-900 border-gray-300 hover:bg-gray-50 hover:border-purple-500 hover:text-purple-900"
                   }`}
                 >
                   {category.label}
@@ -287,28 +287,33 @@ export default function Resources() {
                 const categoryLabel = categories.find(c => c.key === resource.category)?.label || resource.category;
                 return (
                   <Link key={resource.id} href={getLocalizedPath(`/resources/${resource.id}`)}>
-                    <div className="bg-gray-50 p-12 hover:bg-white hover:shadow-xl border border-gray-200 hover:border-accent transition-all duration-500 group cursor-pointer h-full flex flex-col rounded-3xl">
-                      {/* Badge */}
-                      <div className="mb-6">
-                        <span className="inline-block px-3 py-1 text-xs font-mono uppercase tracking-wider bg-purple-100 text-accent group-hover:bg-accent group-hover:text-white transition-colors rounded-full">
-                          {categoryLabel}
-                        </span>
-                      </div>
+                    <div className="bg-white p-12 hover:bg-white hover:shadow-2xl border-2 border-gray-200 hover:border-accent transition-all duration-300 group cursor-pointer h-full flex flex-col rounded-3xl relative overflow-hidden">
+                      {/* Subtle overlay on hover - doesn't affect text readability */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-purple-50/0 to-cyan-50/0 group-hover:from-purple-50/30 group-hover:to-cyan-50/20 transition-all duration-300 pointer-events-none" />
+                      
+                      <div className="relative z-10">
+                        {/* Badge */}
+                        <div className="mb-6">
+                          <span className="inline-block px-3 py-1 text-xs font-mono uppercase tracking-wider bg-purple-100 text-purple-900 group-hover:bg-accent group-hover:text-white transition-colors rounded-full font-semibold">
+                            {categoryLabel}
+                          </span>
+                        </div>
 
-                      {/* Title */}
-                      <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 group-hover:text-accent transition-colors leading-tight">
-                        {resource.title}
-                      </h3>
+                        {/* Title */}
+                        <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 group-hover:text-purple-900 transition-colors leading-tight">
+                          {resource.title}
+                        </h3>
 
-                      {/* Description */}
-                      <p className="text-base text-gray-700 leading-relaxed mb-8 flex-grow group-hover:text-gray-900 transition-colors">
-                        {resource.description}
-                      </p>
+                        {/* Description */}
+                        <p className="text-base text-gray-700 leading-relaxed mb-8 flex-grow group-hover:text-gray-900 transition-colors">
+                          {resource.description}
+                        </p>
 
-                      {/* Meta */}
-                      <div className="flex items-center justify-between text-sm text-gray-500 pt-6 border-t border-gray-200">
-                        <span>{resource.readTime}</span>
-                        <span>{new Date(resource.date).toLocaleDateString(language === 'fr' ? 'fr-FR' : 'en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                        {/* Meta */}
+                        <div className="flex items-center justify-between text-sm text-gray-600 pt-6 border-t border-gray-200 group-hover:border-gray-300 transition-colors">
+                          <span className="font-medium">{resource.readTime}</span>
+                          <span>{new Date(resource.date).toLocaleDateString(language === 'fr' ? 'fr-FR' : 'en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                        </div>
                       </div>
                     </div>
                   </Link>

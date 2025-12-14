@@ -6,7 +6,7 @@ export type Language = 'fr' | 'en';
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: (key: string, params?: Record<string, string | number>) => string;
+  t: (key: string, params?: Record<string, string | number> | { returnObjects?: boolean }) => string | any;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -88,7 +88,11 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
   };
 
   // Translation function with nested key support (e.g., "hero.title")
-  const t = (key: string, params?: Record<string, string | number>): string => {
+  const t = (key: string, params?: Record<string, string | number> | { returnObjects?: boolean }): string | any => {
+    // Check if returnObjects is requested
+    const returnObjects = params && typeof params === 'object' && 'returnObjects' in params && params.returnObjects === true;
+    const actualParams = returnObjects ? undefined : params as Record<string, string | number> | undefined;
+    
     // Support nested keys like "hero.title"
     const keys = key.split('.');
     let value: any = translations;
@@ -97,16 +101,22 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
       if (value && typeof value === 'object' && k in value) {
         value = value[k];
       } else {
-        // Key not found, return the key itself
-        return key;
+        // Key not found, return the key itself or empty array/object based on returnObjects
+        return returnObjects ? [] : key;
       }
     }
     
+    // If returnObjects is true and value is an object/array, return it directly
+    if (returnObjects) {
+      return value || [];
+    }
+    
+    // Otherwise, return as string
     let translation = typeof value === 'string' ? value : key;
     
     // Replace parameters
-    if (params) {
-      Object.entries(params).forEach(([paramKey, paramValue]) => {
+    if (actualParams) {
+      Object.entries(actualParams).forEach(([paramKey, paramValue]) => {
         translation = translation.replace(new RegExp(`{{${paramKey}}}`, 'g'), String(paramValue));
       });
     }
@@ -128,3 +138,4 @@ export function useLanguage() {
   }
   return context;
 }
+

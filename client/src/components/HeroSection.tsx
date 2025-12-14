@@ -145,8 +145,14 @@ function HeroSection() {
                 >
                   {/* Double the services for seamless loop */}
                   {[...Array(2)].map((_, setIndex) => {
-                    // Use translation hook instead of require for better performance
-                    const services = t('hero.services', { returnObjects: true }) as string[] || [];
+                    // Use translation hook with returnObjects support
+                    const services = (t('hero.services', { returnObjects: true }) as string[]) || [];
+                    
+                    // Ensure services is always an array
+                    if (!Array.isArray(services)) {
+                      return null;
+                    }
+                    
                     return services.map((service: string, index: number) => (
                       <span 
                         key={`${setIndex}-${index}`}

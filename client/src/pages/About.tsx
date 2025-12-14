@@ -181,8 +181,29 @@ export default function About() {
                     <Linkedin className="w-5 h-5" />
                   </a>
                 </div>
-                <p className="text-fuchsia-400 text-sm font-semibold mb-3 uppercase tracking-wide">{t(`about.team.${member.translationKey}.role`)}</p>
-                <p className="text-gray-400 text-sm leading-relaxed">{t(`about.team.${member.translationKey}.description`)}</p>
+                <p className="text-fuchsia-400 text-sm font-semibold mb-3 uppercase tracking-wide">
+                  {(() => {
+                    const roleKey = `about.team.${member.translationKey}.role`;
+                    const role = t(roleKey);
+                    // If translation returns the key itself, it means translation not found - use fallback
+                    if (role === roleKey || !role || role.trim() === '') {
+                      // Fallback: use member name or translation key
+                      return member.translationKey.toUpperCase().replace(/([A-Z])/g, ' $1').trim();
+                    }
+                    return role;
+                  })()}
+                </p>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  {(() => {
+                    const descKey = `about.team.${member.translationKey}.description`;
+                    const description = t(descKey);
+                    // If translation returns the key itself, it means translation not found
+                    if (description === descKey || !description || description.trim() === '') {
+                      return `Membre de l'équipe Nukleo Digital`;
+                    }
+                    return description;
+                  })()}
+                </p>
               </div>
             ))}
           </div>

@@ -1,6 +1,8 @@
 import { Link } from 'wouter';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function ClientLogos() {
+  const { t } = useLanguage();
   // Structure prête pour les logos clients (images ou texte)
   // Pour ajouter des logos images : { name: 'MBAM', logo: '/logos/mbam.svg' }
   const clients = [
@@ -26,7 +28,7 @@ export default function ClientLogos() {
       <div className="container">
         {/* Header */}
         <div className="text-center mb-8">
-          <p className="text-sm text-white mb-2 font-medium">Trusted by</p>
+          <p className="text-sm text-white mb-2 font-medium">{t('clients.trustedBy')}</p>
         </div>
 
         {/* Carousel */}
@@ -58,7 +60,7 @@ export default function ClientLogos() {
         <div className="text-center">
           <Link href="/clients">
             <a className="inline-flex items-center gap-2 text-white hover:text-white/80 transition-colors text-sm underline decoration-white/50 hover:decoration-white">
-              View all clients
+              {t('clients.viewAll')}
               <span className="text-lg">→</span>
             </a>
           </Link>

@@ -140,6 +140,15 @@
         height: 32px;
         aspect-ratio: 120 / 32;
       }
+      /* Prevent layout shift for images */
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+      /* Reserve space for common image sizes to prevent CLS */
+      img[width][height] {
+        aspect-ratio: attr(width) / attr(height);
+      }
       /* Fragment long tasks using will-change for GPU acceleration */
       #root {
         will-change: contents;

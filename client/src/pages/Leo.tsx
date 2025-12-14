@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from 'react';
 import SEO from '@/components/SEO';
 import Breadcrumb from '@/components/Breadcrumb';
+import OptimizedImage from '@/components/OptimizedImage';
 import { Send, Mic, Mail, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -87,15 +88,15 @@ export default function Leo() {
     return 'default';
   };
 
-  // Avatar mapping - using optimized WebP images
-  const getAvatarSrc = (emotion: typeof currentEmotion): string => {
+  // Avatar mapping - using optimized WebP images with fallback
+  const getAvatarSrc = (emotion: typeof currentEmotion): { webp: string; fallback: string } => {
     switch (emotion) {
-      case 'happy': return '/leo-avatar-happy.webp';
-      case 'thinking': return '/leo-avatar-thinking.webp';
-      case 'surprised': return '/leo-avatar-surprised.webp';
-      case 'confused': return '/leo-avatar-confused.webp';
-      case 'excited': return '/leo-avatar-excited.webp';
-      default: return '/leo-avatar.webp';
+      case 'happy': return { webp: '/leo-avatar-happy.webp', fallback: '/leo-avatar-happy.png' };
+      case 'thinking': return { webp: '/leo-avatar-thinking.webp', fallback: '/leo-avatar-thinking.png' };
+      case 'surprised': return { webp: '/leo-avatar-surprised.webp', fallback: '/leo-avatar-surprised.png' };
+      case 'confused': return { webp: '/leo-avatar-confused.webp', fallback: '/leo-avatar-confused.png' };
+      case 'excited': return { webp: '/leo-avatar-excited.webp', fallback: '/leo-avatar-excited.png' };
+      default: return { webp: '/leo-avatar.webp', fallback: '/leo-avatar.png' };
     }
   };
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -508,11 +509,13 @@ export default function Leo() {
                 // Inline Email Form
                 <div className="flex gap-4 justify-start">
                   <div className="flex-shrink-0">
-                    <img 
-                      src={getAvatarSrc('happy')} 
+                    <OptimizedImage 
+                      src={getAvatarSrc('happy').fallback}
+                      webpSrc={getAvatarSrc('happy').webp}
                       alt="Leo" 
-                      width="48"
-                      height="48"
+                      width={48}
+                      height={48}
+                      loading="lazy"
                       className="w-12 h-12 object-contain avatar-happy"
                     />
                   </div>
@@ -568,11 +571,13 @@ export default function Leo() {
                 >
                   {message.role === 'assistant' && (
                     <div className="flex-shrink-0">
-                      <img 
-                        src={getAvatarSrc(index === messages.length - 1 ? currentEmotion : 'default')} 
+                      <OptimizedImage 
+                        src={getAvatarSrc(index === messages.length - 1 ? currentEmotion : 'default').fallback}
+                        webpSrc={getAvatarSrc(index === messages.length - 1 ? currentEmotion : 'default').webp}
                         alt="Leo" 
-                        width="48"
-                        height="48"
+                        width={48}
+                        height={48}
+                        loading="lazy"
                         className={`w-12 h-12 object-contain transition-all duration-300 ${
                           index === messages.length - 1 ? `avatar-${currentEmotion}` : 'avatar-default'
                         }`}
@@ -617,11 +622,13 @@ export default function Leo() {
           {isLoading && !isTyping && (
             <div className="flex gap-4 justify-start">
               <div className="flex-shrink-0">
-                <img 
-                  src={getAvatarSrc('thinking')} 
+                <OptimizedImage 
+                  src={getAvatarSrc('thinking').fallback}
+                  webpSrc={getAvatarSrc('thinking').webp}
                   alt="Leo" 
-                  width="48"
-                  height="48"
+                  width={48}
+                  height={48}
+                  loading="lazy"
                   className="w-12 h-12 object-contain avatar-thinking transition-all duration-300"
                 />
               </div>
@@ -642,11 +649,13 @@ export default function Leo() {
           {isTyping && typingText && (
             <div className="flex gap-4 justify-start">
               <div className="flex-shrink-0">
-                <img 
-                  src={getAvatarSrc(currentEmotion)} 
+                <OptimizedImage 
+                  src={getAvatarSrc(currentEmotion).fallback}
+                  webpSrc={getAvatarSrc(currentEmotion).webp}
                   alt="Leo" 
-                  width="48"
-                  height="48"
+                  width={48}
+                  height={48}
+                  loading="lazy"
                   className={`w-12 h-12 object-contain transition-all duration-300 avatar-${currentEmotion}`}
                 />
               </div>

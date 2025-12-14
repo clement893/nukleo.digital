@@ -3,6 +3,7 @@ import SEO from '@/components/SEO';
 import UniversalLEO from '@/components/UniversalLEO';
 import { Linkedin } from 'lucide-react';
 import Breadcrumb from '@/components/Breadcrumb';
+import OptimizedImage from '@/components/OptimizedImage';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
@@ -160,13 +161,14 @@ export default function About() {
                 className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 group"
               >
                 <div className="aspect-square rounded-xl overflow-hidden mb-4">
-                  <img 
-                    src={member.image} 
+                  <OptimizedImage 
+                    src={member.image.replace('.webp', '.png')}
+                    webpSrc={member.image}
                     alt={(t('alt.teamMember') || '{{name}} - {{role}} chez Nukleo Digital')
                       .replace('{{name}}', member.name)
                       .replace('{{role}}', t(`about.team.${member.translationKey}.role`) || member.translationKey)}
-                    width="400"
-                    height="400"
+                    width={400}
+                    height={400}
                     loading="lazy"
                     className="w-full h-full object-cover"
                   />

@@ -129,7 +129,7 @@ function HeroSection() {
 
             {/* Subtitle */}
             <p 
-              className="text-lg sm:text-xl md:text-2xl text-white/90 leading-relaxed font-medium mb-6 sm:mb-8 md:mb-12 max-w-2xl"
+              className="text-base sm:text-lg md:text-xl text-white/70 leading-relaxed font-light mb-6 sm:mb-8 md:mb-12 max-w-2xl"
             >
               {t('hero.subtitle')}
             </p>

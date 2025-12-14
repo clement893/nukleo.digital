@@ -48,16 +48,17 @@ export default function ArrowBackground({ variant = 'default' }: ArrowBackground
             loading={isLCP ? "eager" : "lazy"}
             fetchPriority={isLCP ? "high" : "low"}
             decoding="async"
-          style={{
-            ...arrow,
-            width: `${arrow.size}px`,
-            height: `${arrow.size}px`,
-            transform: 'rotate(0deg)',
-            filter: 'invert(1)',
-            opacity: arrow.opacity,
-          }}
-        />
-      ))}
+            style={{
+              ...arrow,
+              width: `${arrow.size}px`,
+              height: `${arrow.size}px`,
+              transform: 'rotate(0deg)',
+              filter: 'invert(1)',
+              opacity: arrow.opacity,
+            }}
+          />
+        );
+      })}
     </div>
   );
 }

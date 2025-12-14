@@ -197,8 +197,8 @@
     }
   },
   "trinity": {
-    "sectionLabel": "La Trinité",
-    "title": "La<br />Trinité",
+    "sectionLabel": "Nos départements",
+    "title": "Nos<br />Départements",
     "description": "Trois divisions spécialisées agissant comme les piliers de votre transformation.",
     "lab": {
       "title": "Le Laboratoire IA",
@@ -218,7 +218,7 @@
     "explore": "Explorer"
   },
   "cta": {
-    "title": "Prêt à s'élever ?",
+    "title": "Prêt à transformer ?",
     "description": "L'ère du Marketing Automatisé avec IA est arrivée. Définissez votre feuille de route pour devenir un leader natif IA.",
     "button": "Démarrer votre transformation"
   },

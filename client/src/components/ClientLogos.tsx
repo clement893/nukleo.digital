@@ -1,8 +1,10 @@
 import { Link } from 'wouter';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 export default function ClientLogos() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
   // Structure prête pour les logos clients (images ou texte)
   // Pour ajouter des logos images : { name: 'MBAM', logo: '/logos/mbam.svg' }
   const clients = [
@@ -58,9 +60,9 @@ export default function ClientLogos() {
 
         {/* CTA Button */}
         <div className="text-center">
-          <Link href="/clients">
-            <a className="inline-flex items-center gap-2 text-white hover:text-white/80 transition-colors text-sm underline decoration-white/50 hover:decoration-white">
-              {t('clients.viewAll')}
+          <Link href={getLocalizedPath('/start-project')}>
+            <a className="inline-flex items-center gap-2 text-white hover:text-white/80 transition-colors text-sm underline decoration-white/50 hover:decoration-white font-medium">
+              {language === 'fr' ? 'Commencer votre projet' : 'Start your project'}
               <span className="text-lg">→</span>
             </a>
           </Link>

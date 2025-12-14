@@ -68,7 +68,8 @@ export default function Home() {
           <TrinitySection />
           <TestimonialsCarousel />
           <CTASection />
-          <ClientLogos />
+          {/* ClientLogos temporarily hidden */}
+          {/* <ClientLogos /> */}
         </Suspense>
       </main>
       <Footer />

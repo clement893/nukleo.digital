@@ -12,7 +12,8 @@
     "test": "vitest run",
     "db:push": "drizzle-kit generate && drizzle-kit migrate",
     "migrate:page-visibility": "node migrate-page-visibility.mjs",
-    "migrate:loaders": "tsx server/migrate-loaders.ts"
+    "migrate:loaders": "tsx server/migrate-loaders.ts",
+    "hide:clients": "tsx server/hide-clients-pages.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.907.0",

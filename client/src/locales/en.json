@@ -197,8 +197,8 @@
     }
   },
   "trinity": {
-    "sectionLabel": "The Trinity",
-    "title": "The<br />Trinity",
+    "sectionLabel": "Our Departments",
+    "title": "Our<br />Departments",
     "description": "Three specialized divisions acting as the pillars of your transformation.",
     "lab": {
       "title": "The AI Lab",
@@ -218,7 +218,7 @@
     "explore": "Explore"
   },
   "cta": {
-    "title": "Ready to Ascend?",
+    "title": "Ready to Transform?",
     "description": "The era of Agentic Marketing is here. Define your roadmap to becoming an AI-native leader.",
     "button": "Start Your Transformation"
   },

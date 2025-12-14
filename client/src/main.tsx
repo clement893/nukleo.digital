@@ -10,14 +10,7 @@ import App from "./App";
 import { getLoginUrl } from "./const";
 import { ThemeProvider } from "./contexts/ThemeContext";
 // CSS is loaded async to avoid render blocking - critical CSS is inlined in index.html
-// Use dynamic import for CSS to improve initial load time on mobile
-if (typeof window !== 'undefined') {
-  import("./index.css").catch(() => {
-    // CSS load failed, but app can still function
-  });
-} else {
-  import("./index.css");
-}
+import "./index.css";
 
 const queryClient = new QueryClient();
 

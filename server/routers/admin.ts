@@ -79,7 +79,7 @@ export const adminRouter = router({
     }
   }),
 
-  getAINewsSubscribers: publicProcedure.query(async () => {
+  getAINewsSubscribers: adminProcedure.query(async () => {
     try {
       const db = await getDb();
       if (!db) {

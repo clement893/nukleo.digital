@@ -3,23 +3,19 @@
 
   <head>
     <meta charset="UTF-8" />
+    <!-- CRITICAL: Preconnect MUST be before viewport for early connection -->
+    <link rel="preconnect" href="https://nukleodigital-production.up.railway.app" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=5" />
     <title>Nukleo Digital</title>
     
-    <!-- Performance hints - DNS prefetch and preconnect early -->
-    <!-- Preconnect to own domain FIRST for fonts and assets (critical for LCP) -->
-    <link rel="preconnect" href="https://nukleodigital-production.up.railway.app" crossorigin />
+    <!-- DNS prefetch for other origins -->
     <link rel="dns-prefetch" href="https://nukleodigital-production.up.railway.app" />
-    
-    <!-- Preconnect to Google Fonts (for JetBrains Mono) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
     <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-    
-    <!-- Other origins -->
     <link rel="dns-prefetch" href="https://api.manus.im" />
     
     <!-- Favicons -->

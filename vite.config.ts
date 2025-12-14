@@ -34,18 +34,6 @@ export default defineConfig({
     css: {
       devSourcemap: false,
     },
-    // Optimize chunk loading - reduce Resource Load Delay
-    build: {
-      ...this.build,
-      rollupOptions: {
-        ...this.build?.rollupOptions,
-        output: {
-          ...this.build?.rollupOptions?.output,
-          // Optimize chunk loading order
-          experimentalMinChunkSize: 20000,
-        },
-      },
-    },
     reportCompressedSize: false,
     // Optimize chunk size for mobile
     chunkSizeWarningLimit: 400, // Further reduced

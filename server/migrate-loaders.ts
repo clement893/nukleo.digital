@@ -81,7 +81,7 @@ async function migrateLoaders() {
     }
   } catch (error) {
     console.error("❌ Migration failed:", error);
-    process.exit(1);
+    throw error; // Throw instead of exit since this is called from API
   }
 }
 

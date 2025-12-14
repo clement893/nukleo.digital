@@ -10,7 +10,27 @@ import App from "./App";
 import { getLoginUrl } from "./const";
 import { ThemeProvider } from "./contexts/ThemeContext";
 // CSS is loaded async to avoid render blocking - critical CSS is inlined in index.html
-import "./index.css";
+// Defer non-critical CSS loading using requestIdleCallback
+if (typeof window !== 'undefined') {
+  const loadCSS = () => {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = '/src/index.css';
+    link.media = 'print';
+    link.onload = () => { link.media = 'all'; };
+    document.head.appendChild(link);
+  };
+  
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(loadCSS, { timeout: 2000 });
+  } else {
+    // Fallback for browsers without requestIdleCallback
+    setTimeout(loadCSS, 100);
+  }
+} else {
+  // SSR fallback - import normally
+  import("./index.css");
+}
 
 const queryClient = new QueryClient();
 

@@ -111,8 +111,8 @@ export default defineConfig({
             // Other node_modules go to vendor chunk
             return 'vendor';
           }
-          // Split by page for better lazy loading
-          if (id.includes('/pages/admin/')) {
+          // Split by page for better lazy loading - admin should NEVER be in initial bundle
+          if (id.includes('/pages/admin/') || id.includes('/components/Admin') || id.includes('/components/ProtectedAdminRoute') || id.includes('/components/DashboardLayout') || id.includes('/styles/admin.css')) {
             return 'admin';
           }
           if (id.includes('/pages/services/')) {
@@ -130,6 +130,10 @@ export default defineConfig({
           // Split large components
           if (id.includes('/components/TestimonialsCarousel') || id.includes('/components/ClientLogos')) {
             return 'carousels';
+          }
+          // Split charts completely - heavy library
+          if (id.includes('/components/TrendRadar') || id.includes('/pages/AITrendRadar') || id.includes('/pages/RadarNew')) {
+            return 'radar-charts';
           }
         },
       },

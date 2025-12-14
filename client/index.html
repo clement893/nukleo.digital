@@ -31,9 +31,13 @@
     <link rel="preload" href="/fonts/AktivGrotesk-Medium.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/AktivGrotesk-Bold.woff2" as="font" type="font/woff2" crossorigin />
     
-    <!-- Preload LCP images -->
+    <!-- Preload LCP images with explicit dimensions to prevent layout shift -->
     <link rel="preload" href="/nukleo-arrow.svg" as="image" type="image/svg+xml" fetchpriority="high" />
     <link rel="preload" href="/Nukleo_blanc_RVB.svg" as="image" type="image/svg+xml" fetchpriority="high" />
+    
+    <!-- Preload critical translation files for immediate availability -->
+    <link rel="preload" href="/locales/fr.json" as="fetch" crossorigin />
+    <link rel="preload" href="/locales/en.json" as="fetch" crossorigin />
     
     <!-- Performance hints -->
     <link rel="dns-prefetch" href="https://nukleodigital-production.up.railway.app" />
@@ -108,6 +112,16 @@
         img {
           content-visibility: auto;
         }
+      }
+      /* Critical layout styles to prevent CLS */
+      img[src="/Nukleo_blanc_RVB.svg"] {
+        width: 120px;
+        height: 32px;
+        aspect-ratio: 120 / 32;
+      }
+      /* Fragment long tasks using will-change for GPU acceleration */
+      #root {
+        will-change: contents;
       }
     </style>
     <!-- Inline LCP SVG for mobile performance (eliminates 1650ms Resource Load Delay) -->

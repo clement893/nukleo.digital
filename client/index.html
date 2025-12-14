@@ -8,12 +8,16 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=5" />
     <title>Nukleo Digital</title>
     
-    <!-- DNS prefetch and preconnect for faster loading -->
+    <!-- Performance hints - DNS prefetch and preconnect early -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
     <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
     <link rel="dns-prefetch" href="https://api.manus.im" />
+    <link rel="dns-prefetch" href="https://nukleodigital-production.up.railway.app" />
+    
+    <!-- Preconnect to critical origins - early connection establishment -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://nukleodigital-production.up.railway.app" crossorigin />
     
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -25,30 +29,13 @@
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#7c3aed" />
     
-    <!-- Preload ONLY the most critical font for LCP -->
-    <link rel="preload" href="/fonts/AktivGrotesk-Light.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <!-- Preload critical fonts for LCP - load early to reduce Resource Load Delay -->
+    <link rel="preload" href="/fonts/AktivGrotesk-Light.woff2" as="font" type="font/woff2" crossorigin="anonymous" fetchpriority="high" />
+    <link rel="preload" href="/fonts/AktivGrotesk-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" fetchpriority="high" />
+    <link rel="preload" href="/fonts/AktivGrotesk-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous" fetchpriority="high" />
     
-    <!-- Preload critical LCP image - arrow SVG is the LCP element (not logo) -->
+    <!-- Preload critical LCP image - arrow SVG is the LCP element -->
     <link rel="preload" href="/nukleo-arrow.svg" as="image" type="image/svg+xml" fetchpriority="high" />
-    
-    <!-- Regular font - load after initial render to reduce Resource Load Delay -->
-    <link rel="preload" href="/fonts/AktivGrotesk-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" fetchpriority="low" />
-    
-    <!-- Preload critical JS entry point to reduce Resource Load Delay -->
-    <!-- Note: modulepreload for source files doesn't work in production - Vite handles this -->
-    
-    <!-- Non-critical fonts - don't preload, let browser load on demand -->
-    
-    <!-- Translations are preloaded synchronously in LanguageContext - no need for preload here -->
-    
-    <!-- Performance hints -->
-    <link rel="dns-prefetch" href="https://nukleodigital-production.up.railway.app" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
-    <!-- Preconnect to API for faster requests - critical for TTFB -->
-    <link rel="preconnect" href="https://nukleodigital-production.up.railway.app" crossorigin />
-    <!-- Preconnect to fonts domain early -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
     <!-- Inline critical font-face for instant rendering -->
     <style>
@@ -60,11 +47,25 @@
         font-style: normal;
         font-display: swap;
       }
+      /* Aktiv Grotesk Regular 400 - Used in headings */
+      @font-face {
+        font-family: 'Aktiv Grotesk';
+        src: url('/fonts/AktivGrotesk-Regular.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      /* Aktiv Grotesk Bold 700 - Used in headings */
+      @font-face {
+        font-family: 'Aktiv Grotesk';
+        src: url('/fonts/AktivGrotesk-Bold.woff2') format('woff2');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
     </style>
     
     <!-- Defer Google Fonts - load after critical content -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'; this.onload=null;" />
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" /></noscript>
   </head>

@@ -124,7 +124,8 @@ function App() {
           <CustomCursor />
           <ScrollToTop />
           <FloatingLanguageToggle />
-          <GlobalLEO />
+          {/* Lazy load LEO on mobile - only load on desktop for better mobile performance */}
+          {typeof window !== 'undefined' && window.innerWidth >= 768 && <GlobalLEO />}
           <Suspense fallback={null}>
             <Switch>
               {/* Language routes - French */}

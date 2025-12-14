@@ -65,12 +65,15 @@ export default function PageLoader() {
 
   // Fetch active loaders (only if not in admin area, contact page, or manifesto page)
   // Use lower priority on mobile to improve initial load
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
   const { data: activeLoaders, isLoading: isLoadingLoaders } = trpc.loaders.getActive.useQuery(undefined, {
     staleTime: 5 * 60 * 1000, // Cache for 5 minutes
     refetchOnWindowFocus: false,
-    enabled: !shouldSkipLoader, // Don't fetch if in admin area or contact page
+    enabled: !shouldSkipLoader && !isMobile, // Skip loader fetch on mobile for better performance
     // Reduce timeout on mobile for faster fallback
-    retry: typeof window !== 'undefined' && window.innerWidth < 768 ? 1 : 3,
+    retry: isMobile ? 0 : 3,
+    // Reduce timeout on mobile
+    gcTime: isMobile ? 0 : 5 * 60 * 1000,
   });
 
   // Preload resources as soon as component mounts

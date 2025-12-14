@@ -2,41 +2,11 @@
 /* Google Fonts loaded async in index.html to avoid render blocking */
 /* @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap'); */
 
-/* Aktiv Grotesk Font Family - Complete System */
+/* Aktiv Grotesk Font Family - Optimized for Mobile Performance */
+/* Only critical fonts loaded initially - others loaded on demand */
 
-/* Thin 100 */
-@font-face {
-  font-family: 'Aktiv Grotesk';
-  src: url('/fonts/AktivGrotesk-Thin.otf') format('opentype');
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Aktiv Grotesk';
-  src: url('/fonts/AktivGrotesk-ThinItalic.otf') format('opentype');
-  font-weight: 100;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* Hairline 200 */
-@font-face {
-  font-family: 'Aktiv Grotesk';
-  src: url('/fonts/AktivGrotesk-Hairline.otf') format('opentype');
-  font-weight: 200;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Aktiv Grotesk';
-  src: url('/fonts/AktivGrotesk-HairlineItalic.otf') format('opentype');
-  font-weight: 200;
-  font-style: italic;
-  font-display: swap;
-}
+/* Thin 100 - Loaded on demand (not critical) */
+/* Hairline 200 - Loaded on demand (not critical) */
 
 /* Light 300 - Primary body text */
 @font-face {
@@ -54,7 +24,7 @@
        url('/fonts/AktivGrotesk-LightItalic.otf') format('opentype');
   font-weight: 300;
   font-style: italic;
-  font-display: swap;
+  font-display: optional; /* Loaded on demand - not critical */
 }
 
 /* Regular 400 - Standard body text */
@@ -73,7 +43,7 @@
        url('/fonts/AktivGrotesk-Italic.otf') format('opentype');
   font-weight: 400;
   font-style: italic;
-  font-display: swap;
+  font-display: optional; /* Loaded on demand - not critical */
 }
 
 /* Medium 500 - Labels & emphasis */
@@ -92,7 +62,7 @@
        url('/fonts/AktivGrotesk-MediumItalic.otf') format('opentype');
   font-weight: 500;
   font-style: italic;
-  font-display: swap;
+  font-display: optional; /* Loaded on demand - not critical */
 }
 
 /* Bold 700 - Headings & navigation */
@@ -111,42 +81,11 @@
        url('/fonts/AktivGrotesk-BoldItalic.otf') format('opentype');
   font-weight: 700;
   font-style: italic;
-  font-display: swap;
+  font-display: optional; /* Loaded on demand - not critical */
 }
 
-/* XBold 800 */
-@font-face {
-  font-family: 'Aktiv Grotesk';
-  src: url('/fonts/AktivGrotesk-XBold.otf') format('opentype');
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Aktiv Grotesk';
-  src: url('/fonts/AktivGrotesk-XBoldItalic.otf') format('opentype');
-  font-weight: 800;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* Black 900 */
-@font-face {
-  font-family: 'Aktiv Grotesk';
-  src: url('/fonts/AktivGrotesk-Black.otf') format('opentype');
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Aktiv Grotesk';
-  src: url('/fonts/AktivGrotesk-BlackItalic.otf') format('opentype');
-  font-weight: 900;
-  font-style: italic;
-  font-display: swap;
-}
+/* XBold 800 - Loaded on demand (not critical) */
+/* Black 900 - Loaded on demand (not critical) */
 
 /* Glass Dark Effect for Header */
 .glass-dark {

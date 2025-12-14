@@ -70,9 +70,6 @@ export default function Projects() {
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">
         <div className="container">
           <Breadcrumb items={[{ name: t('nav.projects'), url: '/projects' }]} />
-          <span className="font-mono text-accent text-sm mb-8 block tracking-widest">
-            {t('projects.sectionNumber')}
-          </span>
 
           <h1 className="text-white mb-8">
             {t('projects.heroTitle')}<br />

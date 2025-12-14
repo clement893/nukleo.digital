@@ -19,13 +19,13 @@ export default function Breadcrumb({ items }: BreadcrumbProps) {
   
   // Always include home as first item with localized name
   const homeName = t('nav.home') || 'Home';
-  const homeUrl = getLocalizedPath('/');
+  const homeUrl = getLocalizedPath('/') || '/';
   
   const breadcrumbItems: BreadcrumbItem[] = [
     { name: homeName, url: homeUrl },
     ...items.map(item => ({
       ...item,
-      url: getLocalizedPath(item.url)
+      url: getLocalizedPath(item.url) || item.url
     })),
   ];
 
@@ -48,7 +48,7 @@ export default function Breadcrumb({ items }: BreadcrumbProps) {
             return (
               <li key={item.url} className="flex items-center gap-2">
                 {index === 0 ? (
-                  <Link href={item.url} className="hover:text-white transition-colors">
+                  <Link href={item.url || '/'} className="hover:text-white transition-colors">
                     <Home className="w-4 h-4" aria-hidden="true" />
                     <span className="sr-only">{item.name}</span>
                   </Link>
@@ -61,7 +61,7 @@ export default function Breadcrumb({ items }: BreadcrumbProps) {
                       </span>
                     ) : (
                       <Link 
-                        href={item.url} 
+                        href={item.url || '#'} 
                         className="hover:text-white transition-colors"
                       >
                         {item.name}

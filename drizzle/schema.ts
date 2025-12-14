@@ -177,8 +177,8 @@ export const testimonials = pgTable("testimonials", {
   textFr: text("text_fr").notNull(), // French testimonial text
   displayOrder: integer("display_order").default(0).notNull(), // Order for display
   isActive: boolean("is_active").default(true).notNull(), // Whether to show this testimonial
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
 export type Testimonial = typeof testimonials.$inferSelect;

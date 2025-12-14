@@ -478,7 +478,6 @@
     "message": "Message",
     "send": "Send",
     "success": "Message sent successfully!",
-    "sectionNumber": "07 Contact",
     "heroTitle": "Let's Start",
     "heroSubtitle": "Your Transformation",
     "heroDescription": "Ready to become an AI-native leader? Get in touch and let's discuss how we can help you thrive in the age of artificial intelligence.",
@@ -499,7 +498,6 @@
   },
   "projects": {
     "title": "Projects",
-    "sectionNumber": "02 Projects",
     "heroTitle": "Transformations",
     "heroSubtitle": "that Resonate",
     "description": "Real results from organizations that chose to lead rather than follow. Each project represents a complete reimagining of operations through agentic AI.",
@@ -537,7 +535,6 @@
   },
   "expertise": {
     "title": "Expertise",
-    "sectionNumber": "04 Expertise",
     "heroTitle": "Deep",
     "heroSubtitle": "Expertise"
   },

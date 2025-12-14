@@ -177,9 +177,6 @@ export default function Contact() {
       <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">
         <div className="container">
           <Breadcrumb items={[{ name: t('nav.contact'), url: '/contact' }]} />
-          <span className="font-mono text-accent text-sm mb-8 block tracking-widest">
-            {t('contact.sectionNumber')}
-          </span>
 
           <h1 className="text-white mb-8">
             {t('contact.heroTitle')}<br />

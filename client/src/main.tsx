@@ -9,10 +9,26 @@ import App from "./App";
 
 import { getLoginUrl } from "./const";
 import { ThemeProvider } from "./contexts/ThemeContext";
-// CSS is loaded normally - Vite handles optimization and code splitting
-// Critical CSS is inlined in index.html to prevent render blocking
-// Non-critical CSS (admin) is split into separate chunks
-import "./index.css";
+// CSS is loaded asynchronously to prevent render blocking
+// Critical CSS is inlined in index.html
+// Load main CSS after initial render for better FCP/LCP
+if (typeof window !== 'undefined') {
+  // Use requestIdleCallback to defer CSS loading after critical render
+  const loadCSS = () => {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = '/src/index.css';
+    link.media = 'print';
+    link.onload = () => { link.media = 'all'; };
+    document.head.appendChild(link);
+  };
+  
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(loadCSS, { timeout: 2000 });
+  } else {
+    setTimeout(loadCSS, 0);
+  }
+}
 
 const queryClient = new QueryClient();
 

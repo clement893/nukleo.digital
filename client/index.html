@@ -9,15 +9,18 @@
     <title>Nukleo Digital</title>
     
     <!-- Performance hints - DNS prefetch and preconnect early -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-    <link rel="dns-prefetch" href="https://api.manus.im" />
+    <!-- Preconnect to own domain FIRST for fonts and assets (critical for LCP) -->
+    <link rel="preconnect" href="https://nukleodigital-production.up.railway.app" crossorigin />
     <link rel="dns-prefetch" href="https://nukleodigital-production.up.railway.app" />
     
-    <!-- Preconnect to critical origins - early connection establishment -->
+    <!-- Preconnect to Google Fonts (for JetBrains Mono) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://nukleodigital-production.up.railway.app" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    
+    <!-- Other origins -->
+    <link rel="dns-prefetch" href="https://api.manus.im" />
     
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />

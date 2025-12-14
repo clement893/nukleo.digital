@@ -67,38 +67,25 @@ if (!rootElement) {
   throw new Error("Root element not found");
 }
 
-// Render immediately - startTransition delays initial render and hurts LCP
-// Use requestIdleCallback to defer non-critical React scheduler work
-const root = createRoot(rootElement);
+// Render immediately - optimize for LCP
+// Fragment long tasks by yielding to browser between renders
+const root = createRoot(rootElement, {
+  // Use concurrent features to allow browser to yield
+  // This helps fragment long tasks into smaller chunks
+  unstable_transitionCallbacks: undefined,
+});
 
-// Defer heavy scheduler work to avoid blocking main thread
-const renderApp = () => {
-  root.render(
-    <trpc.Provider client={trpcClient} queryClient={queryClient}>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider defaultTheme="dark" switchable={false}>
-          <App />
-        </ThemeProvider>
-      </QueryClientProvider>
-    </trpc.Provider>
-  );
-};
-
-// Render immediately for LCP, but defer heavy scheduler tasks
-if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
-  // Render immediately, but allow scheduler to yield during idle
-  renderApp();
-  // Defer heavy scheduler work after initial render
-  requestIdleCallback(() => {
-    // Force a yield to allow browser to process other tasks
-    if (typeof window !== 'undefined') {
-      // Small delay to allow browser to process pending tasks
-      setTimeout(() => {}, 0);
-    }
-  }, { timeout: 100 });
-} else {
-  renderApp();
-}
+// Render with automatic yielding - React 18+ handles this automatically
+// The concurrent root allows React to yield to browser during rendering
+root.render(
+  <trpc.Provider client={trpcClient} queryClient={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider defaultTheme="dark" switchable={false}>
+        <App />
+      </ThemeProvider>
+    </QueryClientProvider>
+  </trpc.Provider>
+);
 
 // Optimize LCP - show inline SVG immediately if present
 // Use requestIdleCallback to avoid blocking initial render

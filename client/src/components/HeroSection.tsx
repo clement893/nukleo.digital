@@ -89,11 +89,11 @@ function HeroSection() {
 
             {/* Beyond AI Text - Now before services */}
             <div className="mt-12 sm:mt-16">
-              <div className="text-center max-w-3xl mx-auto">
+              <div className="text-left max-w-3xl">
                 <p className="text-white/60 text-xs sm:text-sm font-mono uppercase tracking-widest mb-3">
                   {t('home.beyondAI')}
                 </p>
-                <p className="text-white/70 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+                <p className="text-white/70 text-sm sm:text-base max-w-2xl leading-relaxed">
                   {t('home.beyondAIDescription')}
                 </p>
               </div>

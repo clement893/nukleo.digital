@@ -4,10 +4,13 @@ import { Input } from '@/components/ui/input';
 import { Link } from 'wouter';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { useIsMobile } from '@/hooks/useIsMobile';
+import { useMemo, memo } from 'react';
 
-export default function Footer() {
+function Footer() {
   const { t } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
+  const isMobile = useIsMobile(768);
   
   const navigation = [
     { label: t('footer.nav.manifesto'), href: '/manifesto' },
@@ -170,3 +173,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+export default memo(Footer);

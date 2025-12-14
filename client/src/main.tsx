@@ -66,15 +66,21 @@ if (!rootElement) {
   throw new Error("Root element not found");
 }
 
-createRoot(rootElement).render(
-  <trpc.Provider client={trpcClient} queryClient={queryClient}>
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="dark" switchable={false}>
-        <App />
-      </ThemeProvider>
-    </QueryClientProvider>
-  </trpc.Provider>
-);
+// Optimize initial render - use startTransition to avoid blocking main thread
+const root = createRoot(rootElement);
+
+// Use startTransition to defer non-critical React updates and reduce TBT
+startTransition(() => {
+  root.render(
+    <trpc.Provider client={trpcClient} queryClient={queryClient}>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider defaultTheme="dark" switchable={false}>
+          <App />
+        </ThemeProvider>
+      </QueryClientProvider>
+    </trpc.Provider>
+  );
+});
 
 // Optimize LCP - show inline SVG immediately if present
 // Use requestIdleCallback to avoid blocking initial render

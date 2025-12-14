@@ -29,10 +29,22 @@ export default defineConfig({
     cssCodeSplit: true,
     cssMinify: true,
     // Reduce inline limit for mobile - smaller initial HTML
-    assetsInlineLimit: 1024, // Further reduced for mobile
+    assetsInlineLimit: 1024,
     // Optimize CSS loading - defer non-critical CSS
     css: {
       devSourcemap: false,
+    },
+    // Optimize chunk loading - reduce Resource Load Delay
+    build: {
+      ...this.build,
+      rollupOptions: {
+        ...this.build?.rollupOptions,
+        output: {
+          ...this.build?.rollupOptions?.output,
+          // Optimize chunk loading order
+          experimentalMinChunkSize: 20000,
+        },
+      },
     },
     reportCompressedSize: false,
     // Optimize chunk size for mobile

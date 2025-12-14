@@ -76,7 +76,7 @@
     },
     "services": {
       "agenticAI": "Systèmes d'agents IA autonomes",
-      "aiNative": "Plateformes natives IA",
+      "aiNative": "Plateformes construites avec l'IA",
       "transformation": "Stratégie de transformation",
       "creativeStudio": "Studio créatif",
       "aiConsulting": "Consultation IA"
@@ -88,7 +88,7 @@
   },
   "capabilities": {
     "sectionLabel": "Capacités",
-    "title": "Infrastructure<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">Native IA</span>",
+    "title": "Infrastructure<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">construite avec l'IA</span>",
     "description": "Nous ne construisons pas seulement des sites web ou des applications. Nous concevons des écosystèmes intelligents où chaque point de contact numérique est alimenté par des agents autonomes.",
     "aiWebsites": {
       "title": "Sites web basés sur l'IA",
@@ -117,7 +117,7 @@
     "readMore": "Lire le manifeste complet",
     "card1": {
       "title": "Leader, pas suiveur",
-      "description": "Intégrez des capacités d'IA agentique qui peuvent tripler votre ROI, votre vitesse et votre volume de production."
+      "description": "Intégrez des capacités d'agents IA autonomes qui peuvent tripler votre ROI, votre vitesse et votre volume de production."
     },
     "card2": {
       "title": "Opérations réinventées",
@@ -131,7 +131,7 @@
       },
       "newParadigm": {
         "title": "Le nouveau paradigme",
-        "description": "L'IA agentique représente un changement fondamental dans la façon dont nous concevons le travail. Il ne s'agit plus d'outils que nous utilisons, mais d'agents autonomes qui collaborent avec nous, apprennent de nous et exécutent des tâches complexes de manière indépendante.",
+        "description": "Les agents IA autonomes représentent un changement fondamental dans la façon dont nous concevons le travail. Il ne s'agit plus d'outils que nous utilisons, mais d'agents autonomes qui collaborent avec nous, apprennent de nous et exécutent des tâches complexes de manière indépendante.",
         "before": "Avant",
         "beforeItems": [
           "Outils passifs",
@@ -156,7 +156,7 @@
         "title": "Nos principes",
         "leader": {
           "title": "1. Leader, pas suiveur",
-          "description": "Intégrez des capacités d'IA agentique qui peuvent tripler votre ROI, votre vitesse et votre volume de production."
+          "description": "Intégrez des capacités d'agents IA autonomes qui peuvent tripler votre ROI, votre vitesse et votre volume de production."
         },
         "reinvented": {
           "title": "2. Opérations réinventées",
@@ -173,7 +173,7 @@
       },
       "cta": {
         "title": "Prêt à passer à l'échelle ?",
-        "description": "L'ère du marketing agentique est arrivée. Définissez votre feuille de route pour devenir un leader natif IA.",
+        "description": "L'ère du marketing automatisé avec IA est arrivée. Définissez votre feuille de route pour devenir un leader natif IA.",
         "button": "Démarrer votre transformation"
       },
       "quote": {
@@ -199,13 +199,13 @@
     "studio": {
       "title": "Le Studio Créatif",
       "subtitle": "Contenu et Expériences Augmentées",
-      "description": "Nous utilisons l'IA pour créer des expériences de marque et du contenu à une échelle et une pertinence sans précédent. De la création de contenu augmenté aux campagnes marketing agentiques."
+      "description": "Nous utilisons l'IA pour créer des expériences de marque et du contenu à une échelle et une pertinence sans précédent. De la création de contenu augmenté aux campagnes marketing automatisées avec IA."
     },
     "explore": "Explorer"
   },
   "cta": {
     "title": "Prêt à s'élever ?",
-    "description": "L'ère du Marketing Agentique est arrivée. Définissez votre feuille de route pour devenir un leader natif IA.",
+    "description": "L'ère du Marketing Automatisé avec IA est arrivée. Définissez votre feuille de route pour devenir un leader natif IA.",
     "button": "Démarrer votre transformation"
   },
   "testimonials": {
@@ -554,7 +554,7 @@
     "sectionNumber": "02 Projets",
     "heroTitle": "Transformations",
     "heroSubtitle": "qui résonnent",
-    "description": "Résultats réels d'organisations qui ont choisi de mener plutôt que de suivre. Chaque projet représente une réimagination complète des opérations grâce à l'IA agentique.",
+    "description": "Résultats réels d'organisations qui ont choisi de mener plutôt que de suivre. Chaque projet représente une réimagination complète des opérations grâce aux agents IA autonomes.",
     "filterAll": "Tous",
     "noProjects": "Aucun projet trouvé",
     "filters": {
@@ -578,7 +578,7 @@
       "enterpriseTransformation": {
         "title": "Transformation IA d'entreprise",
         "category": "Stratégie",
-        "description": "Refonte opérationnelle complète intégrant l'IA agentique dans tous les départements et flux de travail."
+        "description": "Refonte opérationnelle complète intégrant des agents IA autonomes dans tous les départements et flux de travail."
       },
       "contentGeneration": {
         "title": "Moteur de génération de contenu",
@@ -759,7 +759,7 @@
     "articles": {
       "agenticPlaybook": {
         "category": "Guide technique",
-        "title": "Le guide de l'IA agentique",
+        "title": "Le guide des agents IA autonomes",
         "description": "Un guide complet pour implémenter des agents IA autonomes dans votre organisation. De l'architecture au déploiement.",
         "readTime": "15 min"
       },
@@ -771,20 +771,20 @@
       },
       "agenticMarketing": {
         "category": "Analyses industrie",
-        "title": "L'avenir du marketing agentique",
+        "title": "L'avenir du marketing automatisé avec IA",
         "description": "Comment les agents IA transforment les opérations marketing et les expériences client. Études de cas réelles et métriques ROI.",
         "readTime": "12 min"
       },
       "buildingAgentic": {
         "category": "Guide technique",
-        "title": "Construire des systèmes agentiques",
+        "title": "Construire des systèmes d'agents IA",
         "description": "Plongée technique dans la conception, la construction et le déploiement de systèmes d'agents IA autonomes à grande échelle.",
         "readTime": "18 min"
       },
       "aiTrends2025": {
         "category": "Analyses industrie",
         "title": "Tendances IA 2025",
-        "description": "Les tendances IA les plus importantes qui façonnent les entreprises en 2025. Des modèles multimodaux aux flux de travail agentiques.",
+        "description": "Les tendances IA les plus importantes qui façonnent les entreprises en 2025. Des modèles multimodaux aux flux de travail automatisés avec IA.",
         "readTime": "14 min"
       },
       "roiInvestment": {
@@ -817,8 +817,8 @@
         "description": "Évaluation de votre position actuelle dans le paysage IA et tracé d'un chemin clair vers le leadership IA. Nous évaluons vos capacités, identifions les écarts et créons une feuille de route de transformation de 9 à 12 mois."
       },
       "transformationStrategy": {
-        "title": "Stratégie de transformation agentique",
-        "description": "Redéfinition de votre modèle opérationnel avec l'IA au centre. Nous vous aidons à passer de l'expérimentation à la transformation à l'échelle de l'entreprise, intégrant l'IA agentique comme fondation de la croissance."
+        "title": "Stratégie de transformation avec agents IA",
+        "description": "Redéfinition de votre modèle opérationnel avec l'IA au centre. Nous vous aidons à passer de l'expérimentation à la transformation à l'échelle de l'entreprise, intégrant des agents IA autonomes comme fondation de la croissance."
       },
       "governance": {
         "title": "Gouvernance & éthique IA",
@@ -837,7 +837,7 @@
       },
       "strategy": {
         "title": "Stratégie & feuille de route",
-        "description": "Nous concevons votre stratégie de transformation agentique, définissant des objectifs clairs, priorisant les cas d'usage et créant une feuille de route par phases. Cela inclut les cadres de gouvernance, la planification des ressources et les stratégies de gestion du changement."
+        "description": "Nous concevons votre stratégie de transformation avec agents IA, définissant des objectifs clairs, priorisant les cas d'usage et créant une feuille de route par phases. Cela inclut les cadres de gouvernance, la planification des ressources et les stratégies de gestion du changement."
       },
       "execution": {
         "title": "Exécution & optimisation",
@@ -941,7 +941,7 @@
         "description": "Création de parcours clients uniques et dynamiques alimentés par l'IA. Des recommandations personnalisées aux interfaces adaptatives, nous concevons des expériences qui évoluent avec chaque interaction."
       },
       "agenticMarketing": {
-        "title": "Campagnes marketing agentiques",
+        "title": "Campagnes marketing automatisées avec IA",
         "description": "Déploiement de campagnes autonomes qui s'optimisent continuellement. Nos agents IA testent, apprennent et s'adaptent en temps réel, maximisant l'engagement et la conversion sur tous les canaux."
       },
       "brandIdentity": {
@@ -950,8 +950,8 @@
       }
     },
     "revolution": {
-      "title": "La révolution du Marketing Agentique",
-      "description": "Nous entrons dans l'ère du <strong>Marketing Agentique</strong> où les systèmes IA autonomes n'exécutent pas seulement des campagnes, ils apprennent, décident et agissent indépendamment pour atteindre vos objectifs commerciaux.",
+      "title": "La révolution du Marketing Automatisé avec IA",
+      "description": "Nous entrons dans l'ère du <strong>Marketing Automatisé avec IA</strong> où les systèmes IA autonomes n'exécutent pas seulement des campagnes, ils apprennent, décident et agissent indépendamment pour atteindre vos objectifs commerciaux.",
       "traditional": {
         "title": "Marketing traditionnel",
         "items": [
@@ -963,7 +963,7 @@
         ]
       },
       "agentic": {
-        "title": "Marketing agentique",
+        "title": "Marketing automatisé avec IA",
         "items": [
           "Orchestration autonome des campagnes",
           "Optimisation continue en temps réel",

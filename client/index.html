@@ -25,15 +25,19 @@
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#7c3aed" />
     
-    <!-- Preload only critical fonts for better mobile performance -->
-    <link rel="preload" href="/fonts/AktivGrotesk-Light.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/AktivGrotesk-Regular.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/AktivGrotesk-Medium.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/AktivGrotesk-Bold.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- Preload critical fonts FIRST - highest priority for LCP -->
+    <link rel="preload" href="/fonts/AktivGrotesk-Light.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/AktivGrotesk-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
     
-    <!-- Preload only critical LCP image - logo is more important than decorative arrow -->
+    <!-- Preload critical LCP image - logo is the LCP element -->
     <link rel="preload" href="/Nukleo_blanc_RVB.svg" as="image" type="image/svg+xml" fetchpriority="high" />
-    <!-- Defer decorative arrow SVG - not critical for LCP -->
+    
+    <!-- Preload critical JS entry point to reduce Resource Load Delay -->
+    <link rel="modulepreload" href="/src/main.tsx" />
+    
+    <!-- Defer non-critical fonts - load after initial render -->
+    <link rel="preload" href="/fonts/AktivGrotesk-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="/fonts/AktivGrotesk-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
     
     <!-- Translations are preloaded synchronously in LanguageContext - no need for preload here -->
     

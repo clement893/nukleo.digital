@@ -1,5 +1,6 @@
 import SEO from '@/components/SEO';
 import PageLayout from '@/components/PageLayout';
+import Breadcrumb from '@/components/Breadcrumb';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { Link } from 'wouter';
@@ -35,6 +36,11 @@ export default function Manifesto() {
         keywords={t('manifesto.seoKeywords')}
       />
       <div className="min-h-screen pt-24 pb-20 px-4">
+        {/* Breadcrumb */}
+        <div className="max-w-6xl mx-auto mb-6">
+          <Breadcrumb items={[{ name: t('footer.nav.manifesto') || 'Manifeste', url: '/manifesto' }]} />
+        </div>
+        
         {/* Hero Section */}
         <div className="max-w-6xl mx-auto mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-8">

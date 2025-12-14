@@ -1,6 +1,8 @@
 import { Link } from 'wouter';
 import { ChevronRight, Home } from 'lucide-react';
 import StructuredData, { createBreadcrumbSchema } from './StructuredData';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 interface BreadcrumbItem {
   name: string;
@@ -12,10 +14,19 @@ interface BreadcrumbProps {
 }
 
 export default function Breadcrumb({ items }: BreadcrumbProps) {
-  // Always include home as first item
+  const { t, language } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
+  
+  // Always include home as first item with localized name
+  const homeName = t('nav.home') || 'Home';
+  const homeUrl = getLocalizedPath('/');
+  
   const breadcrumbItems: BreadcrumbItem[] = [
-    { name: 'Home', url: '/' },
-    ...items,
+    { name: homeName, url: homeUrl },
+    ...items.map(item => ({
+      ...item,
+      url: getLocalizedPath(item.url)
+    })),
   ];
 
   // Create structured data

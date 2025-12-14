@@ -112,21 +112,21 @@ function Header() {
                 onClick={isMenuOpen ? handleMenuClose : handleMenuOpen}
                 onMouseEnter={playHover}
                 className="
-                  flex items-center gap-2 sm:gap-3
+                  flex items-center gap-1.5 sm:gap-2
                   text-white 
                   active:bg-white/20 sm:hover:bg-white/10 
                   transition-all duration-300 
-                  px-3 sm:px-4 py-2 sm:py-2.5 
+                  px-2.5 sm:px-3 py-1.5 sm:py-2 
                   rounded-lg 
                   touch-manipulation
                   font-medium
-                  text-sm sm:text-base
+                  text-xs sm:text-sm
                   border border-white/20 sm:hover:border-white/30
                   backdrop-blur-sm
                 "
                 aria-label={isMenuOpen ? t('header.closeMenu') : t('header.openMenu')}
               >
-                <div className="relative w-6 h-6 sm:w-7 sm:h-7">
+                <div className="relative w-5 h-5 sm:w-6 sm:h-6">
                   <Menu 
                     className={`
                       absolute inset-0 w-full h-full

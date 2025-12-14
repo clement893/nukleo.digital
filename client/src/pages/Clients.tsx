@@ -1,5 +1,6 @@
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
+import Breadcrumb from '@/components/Breadcrumb';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { Link } from 'wouter';
@@ -92,8 +93,13 @@ export default function Clients() {
       />
       
       <div className="min-h-screen bg-gradient-to-br from-violet-950 via-fuchsia-950 to-rose-950">
+        {/* Breadcrumb */}
+        <div className="container mx-auto px-4 pt-24 pb-4">
+          <Breadcrumb items={[{ name: t('footer.nav.clients') || 'Clients', url: '/clients' }]} />
+        </div>
+        
         {/* Hero Section */}
-        <section className="container mx-auto px-4 pt-32 pb-20">
+        <section className="container mx-auto px-4 pt-8 pb-20">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-6">
               <span className="text-sm font-medium text-white/90">{t('clients.badge')}</span>

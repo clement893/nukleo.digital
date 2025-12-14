@@ -33,7 +33,7 @@
     <link rel="preload" href="/Nukleo_blanc_RVB.svg" as="image" type="image/svg+xml" fetchpriority="high" />
     
     <!-- Preload critical JS entry point to reduce Resource Load Delay -->
-    <link rel="modulepreload" href="/src/main.tsx" />
+    <!-- Note: modulepreload for source files doesn't work in production - Vite handles this -->
     
     <!-- Defer non-critical fonts - load after initial render -->
     <link rel="preload" href="/fonts/AktivGrotesk-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous" />

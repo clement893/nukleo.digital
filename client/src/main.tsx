@@ -1,4 +1,3 @@
-import { startTransition } from "react";
 import { trpc } from "@/lib/trpc";
 import { UNAUTHED_ERR_MSG } from '@shared/const';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -67,21 +66,17 @@ if (!rootElement) {
   throw new Error("Root element not found");
 }
 
-// Optimize initial render - use startTransition to avoid blocking main thread
+// Render immediately - startTransition delays initial render and hurts LCP
 const root = createRoot(rootElement);
-
-// Use startTransition to defer non-critical React updates and reduce TBT
-startTransition(() => {
-  root.render(
-    <trpc.Provider client={trpcClient} queryClient={queryClient}>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider defaultTheme="dark" switchable={false}>
-          <App />
-        </ThemeProvider>
-      </QueryClientProvider>
-    </trpc.Provider>
-  );
-});
+root.render(
+  <trpc.Provider client={trpcClient} queryClient={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider defaultTheme="dark" switchable={false}>
+        <App />
+      </ThemeProvider>
+    </QueryClientProvider>
+  </trpc.Provider>
+);
 
 // Optimize LCP - show inline SVG immediately if present
 // Use requestIdleCallback to avoid blocking initial render

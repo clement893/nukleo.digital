@@ -46,7 +46,7 @@
 /* XBold 800 */
 @font-face {
   font-family: 'Aktiv Grotesk';
-  src: url('/fonts/AktivGrotesk-XBold.otf') format('opentype');
+  src: url('/fonts/AktivGrotesk-XBold.woff2') format('woff2');
   font-weight: 800;
   font-style: normal;
   font-display: optional;
@@ -54,7 +54,7 @@
 
 @font-face {
   font-family: 'Aktiv Grotesk';
-  src: url('/fonts/AktivGrotesk-XBoldItalic.otf') format('opentype');
+  src: url('/fonts/AktivGrotesk-XBoldItalic.woff2') format('woff2');
   font-weight: 800;
   font-style: italic;
   font-display: optional;
@@ -63,7 +63,7 @@
 /* Black 900 */
 @font-face {
   font-family: 'Aktiv Grotesk';
-  src: url('/fonts/AktivGrotesk-Black.otf') format('opentype');
+  src: url('/fonts/AktivGrotesk-Black.woff2') format('woff2');
   font-weight: 900;
   font-style: normal;
   font-display: optional;
@@ -71,7 +71,7 @@
 
 @font-face {
   font-family: 'Aktiv Grotesk';
-  src: url('/fonts/AktivGrotesk-BlackItalic.otf') format('opentype');
+  src: url('/fonts/AktivGrotesk-BlackItalic.woff2') format('woff2');
   font-weight: 900;
   font-style: italic;
   font-display: optional;

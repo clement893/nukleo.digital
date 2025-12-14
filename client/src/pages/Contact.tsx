@@ -185,15 +185,11 @@ export default function Contact() {
         <div className="container">
           <Breadcrumb items={[{ name: t('nav.contact'), url: '/contact' }]} />
 
-          <h1 className="text-white mb-8">
-            <span className="inline-block animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-              {t('contact.heroTitle')}
-            </span>
-            <br />
-            <span className="inline-block animate-fade-in-up bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent" style={{ animationDelay: '0.2s' }}>
-              {t('contact.heroSubtitle')}
-            </span>
-          </h1>
+          <h1 
+            className="text-white mb-8 text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+            dangerouslySetInnerHTML={{ __html: t('contact.heroTitle') }}
+            style={{ lineHeight: '1.2' }}
+          />
 
           <p className="text-white/75 text-lg lg:text-xl leading-relaxed max-w-3xl animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
             {t('contact.heroDescription')}

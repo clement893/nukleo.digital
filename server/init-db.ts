@@ -216,6 +216,44 @@ export async function initDatabase(req: Request, res: Response) {
       );
     `);
 
+    // Create testimonials table
+    await db.execute(sql`
+      CREATE TABLE IF NOT EXISTS testimonials (
+        id SERIAL PRIMARY KEY,
+        client VARCHAR(255) NOT NULL,
+        contact VARCHAR(255) NOT NULL,
+        title VARCHAR(255),
+        company VARCHAR(255),
+        text_en TEXT,
+        text_fr TEXT,
+        display_order INTEGER DEFAULT 0 NOT NULL,
+        is_active BOOLEAN DEFAULT true NOT NULL,
+        "createdAt" TIMESTAMP DEFAULT NOW() NOT NULL,
+        "updatedAt" TIMESTAMP DEFAULT NOW() NOT NULL
+      );
+    `);
+
+    // Create analytics table
+    await db.execute(sql`
+      CREATE TABLE IF NOT EXISTS analytics (
+        id SERIAL PRIMARY KEY,
+        provider VARCHAR(50) NOT NULL UNIQUE,
+        "isEnabled" BOOLEAN DEFAULT false NOT NULL,
+        "trackingId" VARCHAR(255),
+        "additionalConfig" TEXT,
+        "createdAt" TIMESTAMP DEFAULT NOW() NOT NULL,
+        "updatedAt" TIMESTAMP DEFAULT NOW() NOT NULL
+      );
+    `);
+
+    // Create indexes for analytics table
+    await db.execute(sql`
+      CREATE INDEX IF NOT EXISTS idx_analytics_provider ON analytics(provider);
+    `);
+    await db.execute(sql`
+      CREATE INDEX IF NOT EXISTS idx_analytics_enabled ON analytics("isEnabled");
+    `);
+
     res.json({ 
       message: "Database initialized successfully! All tables created.",
       tables: [
@@ -230,7 +268,9 @@ export async function initDatabase(req: Request, res: Response) {
         "radar_positions",
         "ai_news_subscribers",
         "start_project_submissions",
-        "contact_messages"
+        "contact_messages",
+        "testimonials",
+        "analytics"
       ]
     });
   } catch (error) {

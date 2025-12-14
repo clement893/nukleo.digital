@@ -95,10 +95,16 @@ export default function SEO({
     updateMetaTag('og:image', ogImage, true);
     updateMetaTag('og:image:width', ogImageWidth.toString(), true);
     updateMetaTag('og:image:height', ogImageHeight.toString(), true);
+    updateMetaTag('og:image:alt', description.substring(0, 200), true);
     updateMetaTag('og:url', canonicalUrl, true);
     updateMetaTag('og:type', ogType, true);
     updateMetaTag('og:site_name', DEFAULT_SEO.siteName, true);
     updateMetaTag('og:locale', detectedLocale, true);
+    
+    // Additional Open Graph tags for better social sharing
+    if (ogType === 'website') {
+      updateMetaTag('og:image:type', 'image/jpeg', true);
+    }
 
     // Article-specific OG tags
     if (article && ogType === 'article') {
@@ -124,9 +130,11 @@ export default function SEO({
     // Twitter Card
     updateMetaTag('twitter:card', 'summary_large_image');
     updateMetaTag('twitter:site', DEFAULT_SEO.twitterHandle);
+    updateMetaTag('twitter:creator', DEFAULT_SEO.twitterHandle);
     updateMetaTag('twitter:title', fullTitle);
     updateMetaTag('twitter:description', description);
     updateMetaTag('twitter:image', ogImage);
+    updateMetaTag('twitter:image:alt', description.substring(0, 200));
 
     // Canonical URL
     let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement;

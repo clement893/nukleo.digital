@@ -92,10 +92,8 @@ export default defineConfig({
             if (id.includes('framer-motion')) {
               return 'animation-vendor';
             }
-            // Router - small, can be in initial bundle
-            if (id.includes('wouter')) {
-              return 'router-vendor';
-            }
+            // Router - keep in initial bundle for faster navigation
+            // Don't split wouter - it's small and needed immediately
             // Markdown rendering (used in LEO) - lazy load
             if (id.includes('streamdown') || id.includes('react-markdown')) {
               return 'markdown-vendor';
@@ -112,7 +110,13 @@ export default defineConfig({
             return 'vendor';
           }
           // Split by page for better lazy loading - admin should NEVER be in initial bundle
-          if (id.includes('/pages/admin/') || id.includes('/components/Admin') || id.includes('/components/ProtectedAdminRoute') || id.includes('/components/DashboardLayout') || id.includes('/styles/admin.css')) {
+          // Use more efficient string matching
+          if (id.includes('/pages/admin/') || 
+              id.includes('/components/Admin') || 
+              id.includes('/components/ProtectedAdminRoute') || 
+              id.includes('/components/DashboardLayout') || 
+              id.includes('/styles/admin.css') ||
+              id.includes('/hooks/useAdminAuth')) {
             return 'admin';
           }
           if (id.includes('/pages/services/')) {

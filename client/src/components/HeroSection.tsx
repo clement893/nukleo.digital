@@ -34,60 +34,65 @@ function HeroSection() {
 
   
   useEffect(() => {
-    // Optimize animation for mobile - reduce frame rate on slower devices
-    // Use requestIdleCallback to defer animation start for better initial load
-    let animationFrameId: number;
-    let lastTimestamp = 0;
-    const speed = 0.5; // pixels per frame
-    // Reduce animation on mobile for better performance
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-    const frameInterval = isMobile ? 32 : 16; // ~30fps on mobile, ~60fps on desktop
+    if (!scrollRef.current) return;
     
-    const startAnimation = () => {
-      const animate = (timestamp: number) => {
-        if (timestamp - lastTimestamp > frameInterval) {
-          setScrollPosition((prev) => prev + speed);
-          lastTimestamp = timestamp;
-        }
-        animationFrameId = requestAnimationFrame(animate);
-      };
-      
-      // Use Intersection Observer to pause animation when not visible
-      if (typeof window !== 'undefined' && 'IntersectionObserver' in window && scrollRef.current) {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            if (entries[0].isIntersecting) {
-              animationFrameId = requestAnimationFrame(animate);
-            } else {
-              cancelAnimationFrame(animationFrameId);
-            }
-          },
-          { threshold: 0 }
-        );
-        
-        observer.observe(scrollRef.current);
-        
-        return () => {
-          observer.disconnect();
-          cancelAnimationFrame(animationFrameId);
-        };
+    // Optimize animation for mobile - reduce frame rate on slower devices
+    let animationFrameId: number | null = null;
+    let lastTimestamp = 0;
+    const speed = 0.5;
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    const frameInterval = isMobile ? 32 : 16; // ~30fps mobile, ~60fps desktop
+    
+    const animate = (timestamp: number) => {
+      if (timestamp - lastTimestamp >= frameInterval) {
+        setScrollPosition((prev) => prev + speed);
+        lastTimestamp = timestamp;
       }
-      
       animationFrameId = requestAnimationFrame(animate);
     };
     
-    // Defer animation start using requestIdleCallback to avoid blocking initial render
-    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+    // Use Intersection Observer to pause when not visible
+    let observer: IntersectionObserver | null = null;
+    if ('IntersectionObserver' in window && scrollRef.current) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            if (!animationFrameId) {
+              animationFrameId = requestAnimationFrame(animate);
+            }
+          } else {
+            if (animationFrameId) {
+              cancelAnimationFrame(animationFrameId);
+              animationFrameId = null;
+            }
+          }
+        },
+        { threshold: 0 }
+      );
+      observer.observe(scrollRef.current);
+    } else {
+      // Fallback: start immediately if IntersectionObserver not supported
+      animationFrameId = requestAnimationFrame(animate);
+    }
+    
+    // Defer start using requestIdleCallback to avoid blocking initial render
+    const startAnimation = () => {
+      if (scrollRef.current && !animationFrameId) {
+        animationFrameId = requestAnimationFrame(animate);
+      }
+    };
+    
+    if ('requestIdleCallback' in window) {
       requestIdleCallback(startAnimation, { timeout: 1000 });
     } else {
-      // Fallback - start immediately
-      startAnimation();
+      setTimeout(startAnimation, 100);
     }
     
     return () => {
-      if (animationFrameId) {
+      if (animationFrameId !== null) {
         cancelAnimationFrame(animationFrameId);
       }
+      observer?.disconnect();
     };
   }, []);
   

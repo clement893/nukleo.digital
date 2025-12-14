@@ -35,9 +35,7 @@
     <link rel="preload" href="/nukleo-arrow.svg" as="image" type="image/svg+xml" fetchpriority="high" />
     <link rel="preload" href="/Nukleo_blanc_RVB.svg" as="image" type="image/svg+xml" fetchpriority="high" />
     
-    <!-- Preload critical translation files for immediate availability -->
-    <link rel="preload" href="/locales/fr.json" as="fetch" crossorigin />
-    <link rel="preload" href="/locales/en.json" as="fetch" crossorigin />
+    <!-- Translations are preloaded synchronously in LanguageContext - no need for preload here -->
     
     <!-- Performance hints -->
     <link rel="dns-prefetch" href="https://nukleodigital-production.up.railway.app" />

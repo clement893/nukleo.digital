@@ -26,11 +26,14 @@ const redirectToLoginIfUnauthorized = (error: unknown) => {
   window.location.href = getLoginUrl();
 };
 
+// Optimize error handling - only log in development
+const isDev = process.env.NODE_ENV === 'development';
+
 queryClient.getQueryCache().subscribe(event => {
   if (event.type === "updated" && event.action.type === "error") {
     const error = event.query.state.error;
     redirectToLoginIfUnauthorized(error);
-    console.error("[API Query Error]", error);
+    if (isDev) console.error("[API Query Error]", error);
   }
 });
 
@@ -38,7 +41,7 @@ queryClient.getMutationCache().subscribe(event => {
   if (event.type === "updated" && event.action.type === "error") {
     const error = event.mutation.state.error;
     redirectToLoginIfUnauthorized(error);
-    console.error("[API Mutation Error]", error);
+    if (isDev) console.error("[API Mutation Error]", error);
   }
 });
 

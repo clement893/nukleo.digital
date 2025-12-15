@@ -446,7 +446,7 @@
     "subtitle": "We are by your side to help you grow.",
     "description": "Comprehensive AI services: Strategy & Marketing, Digital Platforms, Intelligent Operations.",
     "ourServices": "Our Services",
-    "heroTitle": "Three expertise,",
+    "heroTitle": "Three expertises,",
     "heroSubtitle": "one vision.",
     "heroSubtitleGradient": "Lab · Studio · Bureau",
     "heroDescription": "Development, creation, strategy — three complementary teams to support your digital transformation from A to Z. Choose the expertise you need, or combine them for a complete project.",
@@ -454,11 +454,11 @@
       "category": "The Lab",
       "number": "01",
       "tagline": "Development & Technology",
-      "description": "Our team of developers builds the digital solutions that power your business. Mobile apps, web platforms, integrations, automation.",
+      "description": "Our team of developers builds the digital solutions that power your business. Mobile applications, web platforms, integrations, automation.",
       "services": {
         "mobileApps": {
           "title": "Mobile Applications",
-          "description": "iOS, Android and cross-platform apps with exceptional UX"
+          "description": "iOS, Android, and cross-platform apps with exceptional UX"
         },
         "webApps": {
           "title": "Web Applications",
@@ -473,17 +473,17 @@
           "description": "Automate repetitive tasks to save time"
         }
       },
-      "cta": "Explore the Lab"
+      "cta": "Explore the Lab →"
     },
     "studio": {
       "category": "The Studio",
       "number": "02",
       "tagline": "Design & Creation",
-      "description": "Our creatives bring your ideas to life. Branding, UX/UI, art direction, visual campaigns — brand experiences that make an impact.",
+      "description": "Our creatives bring your ideas to life. Branding, UX/UI, art direction, visual campaigns — brand experiences that leave a lasting impression.",
       "services": {
         "branding": {
           "title": "Branding & Identity",
-          "description": "Memorable logos, brand guidelines and brand universes"
+          "description": "Memorable logos, brand guidelines, and brand universes"
         },
         "uiuxDesign": {
           "title": "UX/UI Design",
@@ -498,7 +498,7 @@
           "description": "Campaign visuals and animations that capture attention"
         }
       },
-      "cta": "Explore the Studio"
+      "cta": "Explore the Studio →"
     },
     "bureau": {
       "category": "The Bureau",
@@ -512,40 +512,40 @@
         },
         "transformation": {
           "title": "Transformation",
-          "description": "Change management and tool adoption support"
+          "description": "Change support and tool adoption"
         },
         "digitalMarketing": {
           "title": "Digital Marketing",
-          "description": "Acquisition, SEO, SEA, Social Ads and analytics"
+          "description": "Acquisition, SEO, SEA, Social Ads, and analytics"
         },
         "communication": {
           "title": "Communication",
-          "description": "Editorial strategy, content and community management"
+          "description": "Editorial strategy, content, and community management"
         }
       },
-      "cta": "Explore the Bureau"
+      "cta": "Explore the Bureau →"
     },
     "howItWorks": {
       "title": "An integrated approach",
       "description": "Our three teams work hand in hand. Depending on your project, you can call on a single entity or combine them for a complete solution.",
       "combinations": {
         "brandLaunch": {
-          "project": "Brand launch",
+          "project": "Brand Launch",
           "teams": "Studio + Bureau",
           "deliverables": "Visual identity + launch strategy + campaign"
         },
         "mobileApp": {
-          "project": "Mobile application",
+          "project": "Mobile Application",
           "teams": "Lab + Studio",
           "deliverables": "Development + UX/UI design"
         },
         "digitalOverhaul": {
-          "project": "Complete digital overhaul",
+          "project": "Complete Digital Overhaul",
           "teams": "Lab + Studio + Bureau",
           "deliverables": "New platform + new branding + marketing strategy"
         },
         "marketingCampaign": {
-          "project": "Marketing campaign",
+          "project": "Marketing Campaign",
           "teams": "Studio + Bureau",
           "deliverables": "Visuals + strategy + deployment"
         }
@@ -553,7 +553,7 @@
     },
     "cta": {
       "title": "Not sure what you need?",
-      "description": "Let's discuss your project. We'll guide you to the right team — or the right combination.",
+      "description": "Let's discuss your project. We'll point you to the right team — or the right combination.",
       "buttonPrimary": "Talk to an expert",
       "buttonSecondary": "See our work"
     }

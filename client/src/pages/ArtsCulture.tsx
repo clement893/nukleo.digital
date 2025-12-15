@@ -4,8 +4,10 @@ import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function ArtsCulture() {
+  const { t } = useLanguage();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [scrollY, setScrollY] = useState(0);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
@@ -41,9 +43,9 @@ export default function ArtsCulture() {
   return (
     <>
       <SEO 
-        title="Arts & Culture | Nukleo Digital"
-        description="Our commitment to supporting arts and culture. Discover how Nukleo invests in cultural innovation and supports artists and institutions."
-        keywords="arts and culture, cultural support, artist support, cultural innovation, Nukleo commitment"
+        title={t('artsCultureCommitment.seoTitle')}
+        description={t('artsCultureCommitment.seoDescription')}
+        keywords={t('artsCultureCommitment.seoKeywords')}
       />
       
       <div className="min-h-screen bg-gradient-to-br from-[rgb(107,23,22)] via-[rgb(40,60,120)] to-[rgb(107,23,22)] text-white overflow-hidden relative">
@@ -168,22 +170,20 @@ export default function ArtsCulture() {
             <div className="text-center mb-16 animate-fade-in">
               <div className="inline-flex items-center gap-2 mb-8 px-5 py-2 rounded-full bg-white/5 border border-white/10 group hover:border-white/20 transition-colors cursor-default">
                 <Sparkles className="w-4 h-4 text-white/60 group-hover:animate-spin" />
-                <span className="text-xs font-mono tracking-wider text-white/60">NUKLEO.ART</span>
+                <span className="text-xs font-mono tracking-wider text-white/60">{t('artsCultureCommitment.hero.badge')}</span>
               </div>
               
               <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-                Culture is Our{' '}
+                {t('artsCultureCommitment.hero.title')}{' '}
                 <span className="relative inline-block">
-                  <span className="text-white/90">Heartbeat</span>
+                  <span className="text-white/90">{t('artsCultureCommitment.hero.titleHighlight')}</span>
                   <svg className="absolute -bottom-2 left-0 w-full h-3" viewBox="0 0 200 10" preserveAspectRatio="none">
                     <path d="M0,5 Q50,0 100,5 T200,5" stroke="currentColor" strokeWidth="2" fill="none" className="text-white/30" />
                   </svg>
                 </span>
               </h1>
               
-              <p className="text-xl text-white/60 max-w-2xl mx-auto leading-relaxed">
-                A story of <span className="italic text-white/80">commitment</span>, <span className="italic text-white/80">action</span>, and <span className="italic text-white/80">impact</span>
-              </p>
+              <p className="text-xl text-white/60 max-w-2xl mx-auto leading-relaxed" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.hero.subtitle') }} />
             </div>
           </div>
         </section>
@@ -196,13 +196,13 @@ export default function ArtsCulture() {
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-12 bg-gradient-to-b from-white/0 to-white/20" />
               
               <div className="inline-block mb-4">
-                <span className="text-sm font-mono tracking-wider text-white/40">ACT I</span>
+                <span className="text-sm font-mono tracking-wider text-white/40">{t('artsCultureCommitment.act1.label')}</span>
               </div>
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                The <span className="font-light italic">Challenge</span>
+                {t('artsCultureCommitment.act1.title')} <span className="font-light italic">{t('artsCultureCommitment.act1.titleHighlight')}</span>
               </h2>
               <p className="text-lg text-white/60 max-w-2xl mx-auto">
-                Culture is facing unprecedented challenges
+                {t('artsCultureCommitment.act1.subtitle')}
               </p>
             </div>
 
@@ -218,14 +218,12 @@ export default function ArtsCulture() {
                 </div>
                 
                 <div className="text-4xl mb-4 inline-block group-hover:animate-bounce">📉</div>
-                <h3 className="text-xl font-semibold mb-3 group-hover:text-red-300 transition-colors">Budget Cuts</h3>
-                <p className="text-white/70 leading-relaxed">
-                  Drastic funding reductions are forcing artists and cultural institutions to make <span className="text-white/90 font-medium">impossible choices</span> between survival and creation.
-                </p>
+                <h3 className="text-xl font-semibold mb-3 group-hover:text-red-300 transition-colors">{t('artsCultureCommitment.act1.budgetCuts.title')}</h3>
+                <p className="text-white/70 leading-relaxed" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.act1.budgetCuts.description') }} />
                 
                 {/* Reveal on hover */}
                 <div className={`mt-4 text-sm text-red-300/80 italic transition-opacity duration-300 ${hoveredCard === 1 ? 'opacity-100' : 'opacity-0'}`}>
-                  → This needs to change
+                  {t('artsCultureCommitment.act1.budgetCuts.hover')}
                 </div>
               </div>
 
@@ -240,14 +238,12 @@ export default function ArtsCulture() {
                 </div>
                 
                 <div className="text-4xl mb-4 inline-block group-hover:animate-bounce">⚠️</div>
-                <h3 className="text-xl font-semibold mb-3 group-hover:text-orange-300 transition-colors">Precarious Conditions</h3>
-                <p className="text-white/70 leading-relaxed">
-                  Artists face unstable income, lack of benefits, and uncertain futures making it harder to focus on what they do best: <span className="text-white/90 font-medium">creating</span>.
-                </p>
+                <h3 className="text-xl font-semibold mb-3 group-hover:text-orange-300 transition-colors">{t('artsCultureCommitment.act1.precariousConditions.title')}</h3>
+                <p className="text-white/70 leading-relaxed" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.act1.precariousConditions.description') }} />
                 
                 {/* Reveal on hover */}
                 <div className={`mt-4 text-sm text-orange-300/80 italic transition-opacity duration-300 ${hoveredCard === 2 ? 'opacity-100' : 'opacity-0'}`}>
-                  → Artists deserve better
+                  {t('artsCultureCommitment.act1.precariousConditions.hover')}
                 </div>
               </div>
             </div>
@@ -258,9 +254,7 @@ export default function ArtsCulture() {
               <div className="absolute top-0 left-0 w-24 h-1 bg-gradient-to-r from-red-400/50 to-transparent" />
               
               <Quote className="w-8 h-8 text-white/30 mb-4 group-hover:text-white/40 transition-colors" />
-              <p className="text-xl text-white/90 leading-relaxed italic">
-                "The fragility of Quebec's cultural sector requires <span className="font-semibold not-italic text-white">concrete efforts</span> to ensure its accessibility and encourage its innovation."
-              </p>
+              <p className="text-xl text-white/90 leading-relaxed italic" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.act1.quote') }} />
             </div>
           </div>
         </section>
@@ -273,14 +267,12 @@ export default function ArtsCulture() {
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-12 bg-gradient-to-b from-white/0 to-white/20" />
               
               <div className="inline-block mb-4">
-                <span className="text-sm font-mono tracking-wider text-white/40">ACT II</span>
+                <span className="text-sm font-mono tracking-wider text-white/40">{t('artsCultureCommitment.act2.label')}</span>
               </div>
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                Our <span className="font-light italic">Belief</span>
+                {t('artsCultureCommitment.act2.title')} <span className="font-light italic">{t('artsCultureCommitment.act2.titleHighlight')}</span>
               </h2>
-              <p className="text-lg text-white/60 max-w-2xl mx-auto">
-                At Nukleo, we believe culture is the <span className="text-white/80 font-medium">beating heart</span> of society
-              </p>
+              <p className="text-lg text-white/60 max-w-2xl mx-auto" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.act2.subtitle') }} />
             </div>
 
             <div className="grid md:grid-cols-3 gap-6 mb-12">
@@ -288,30 +280,24 @@ export default function ArtsCulture() {
                 <div className="absolute top-4 right-4 w-8 h-8 border-t border-r border-white/10 group-hover:border-purple-400/30 transition-colors" />
                 
                 <div className="text-4xl mb-4 inline-block group-hover:scale-[1.045] transition-transform">🏛️</div>
-                <h3 className="text-xl font-semibold mb-3 group-hover:text-purple-300 transition-colors">Heritage</h3>
-                <p className="text-white/70 leading-relaxed">
-                  Culture preserves our <span className="text-white/90">history</span> and <span className="text-white/90">identity</span> for future generations.
-                </p>
+                <h3 className="text-xl font-semibold mb-3 group-hover:text-purple-300 transition-colors">{t('artsCultureCommitment.act2.heritage.title')}</h3>
+                <p className="text-white/70 leading-relaxed" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.act2.heritage.description') }} />
               </div>
 
               <div className="group relative bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-pink-400/30 transition-all duration-300 cursor-default">
                 <div className="absolute top-4 right-4 w-8 h-8 border-t border-r border-white/10 group-hover:border-pink-400/30 transition-colors" />
                 
                 <div className="text-4xl mb-4 inline-block group-hover:scale-[1.045] transition-transform">💡</div>
-                <h3 className="text-xl font-semibold mb-3 group-hover:text-pink-300 transition-colors">Creativity</h3>
-                <p className="text-white/70 leading-relaxed">
-                  Culture inspires <span className="text-white/90">education</span> and stimulates <span className="text-white/90">innovation</span>.
-                </p>
+                <h3 className="text-xl font-semibold mb-3 group-hover:text-pink-300 transition-colors">{t('artsCultureCommitment.act2.creativity.title')}</h3>
+                <p className="text-white/70 leading-relaxed" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.act2.creativity.description') }} />
               </div>
 
               <div className="group relative bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-blue-400/30 transition-all duration-300 cursor-default">
                 <div className="absolute top-4 right-4 w-8 h-8 border-t border-r border-white/10 group-hover:border-blue-400/30 transition-colors" />
                 
                 <div className="text-4xl mb-4 inline-block group-hover:scale-[1.045] transition-transform">🤝</div>
-                <h3 className="text-xl font-semibold mb-3 group-hover:text-blue-300 transition-colors">Community</h3>
-                <p className="text-white/70 leading-relaxed">
-                  Culture creates <span className="text-white/90">connections</span> and fosters <span className="text-white/90">belonging</span>.
-                </p>
+                <h3 className="text-xl font-semibold mb-3 group-hover:text-blue-300 transition-colors">{t('artsCultureCommitment.act2.community.title')}</h3>
+                <p className="text-white/70 leading-relaxed" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.act2.community.description') }} />
               </div>
             </div>
 
@@ -320,9 +306,7 @@ export default function ArtsCulture() {
               <div className="absolute top-0 left-0 w-24 h-1 bg-gradient-to-r from-purple-400/50 to-transparent" />
               
               <Quote className="w-8 h-8 text-white/30 mb-4 group-hover:text-white/40 transition-colors" />
-              <p className="text-xl text-white/90 leading-relaxed italic">
-                "We believe it is imperative to direct our investments with <span className="font-semibold not-italic text-white">discernment</span> to strengthen our cultural growth, as the cultural sector is an <span className="font-semibold not-italic text-white">economic driver</span> and a pillar of our collective identity."
-              </p>
+              <p className="text-xl text-white/90 leading-relaxed italic" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.act2.quote') }} />
             </div>
           </div>
         </section>
@@ -334,15 +318,13 @@ export default function ArtsCulture() {
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-12 bg-gradient-to-b from-white/0 to-white/20" />
               
               <div className="inline-flex items-center gap-2 mb-4">
-                <span className="text-sm font-mono tracking-wider text-white/40">ACT III</span>
+                <span className="text-sm font-mono tracking-wider text-white/40">{t('artsCultureCommitment.act3.label')}</span>
                 <Zap className="w-4 h-4 text-yellow-400/60 animate-pulse" />
               </div>
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                Our <span className="font-light italic">Action</span>
+                {t('artsCultureCommitment.act3.title')} <span className="font-light italic">{t('artsCultureCommitment.act3.titleHighlight')}</span>
               </h2>
-              <p className="text-lg text-white/60 max-w-2xl mx-auto">
-                We don't just <span className="line-through text-white/40">talk</span> about supporting culture we <span className="text-white/80 font-semibold">act</span> on it every day.
-              </p>
+              <p className="text-lg text-white/60 max-w-2xl mx-auto" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.act3.subtitle') }} />
             </div>
 
             {/* Timeline */}
@@ -365,13 +347,11 @@ export default function ArtsCulture() {
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-3">
                         <span className="hidden md:inline text-sm font-mono text-white/40">01</span>
-                        <h3 className="text-2xl font-semibold group-hover:text-green-300 transition-colors">Affordable Pricing</h3>
+                        <h3 className="text-2xl font-semibold group-hover:text-green-300 transition-colors">{t('artsCultureCommitment.act3.affordablePricing.title')}</h3>
                       </div>
-                      <p className="text-white/70 leading-relaxed">
-                        We offer <span className="inline-flex items-baseline gap-1"><strong className="text-3xl font-bold text-green-300">40%</strong><span className="text-white/90">discount</span></span> on our services for cultural organizations, making digital transformation accessible to those who need it most.
-                      </p>
+                      <p className="text-white/70 leading-relaxed" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.act3.affordablePricing.description') }} />
                       <div className="mt-4 text-sm text-green-300/60 italic group-hover:text-green-300/80 transition-colors">
-                        → Because access shouldn't be a barrier
+                        {t('artsCultureCommitment.act3.affordablePricing.hover')}
                       </div>
                     </div>
                   </div>
@@ -395,13 +375,11 @@ export default function ArtsCulture() {
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-3">
                         <span className="hidden md:inline text-sm font-mono text-white/40">02</span>
-                        <h3 className="text-2xl font-semibold group-hover:text-red-300 transition-colors">Financial Support</h3>
+                        <h3 className="text-2xl font-semibold group-hover:text-red-300 transition-colors">{t('artsCultureCommitment.act3.financialSupport.title')}</h3>
                       </div>
-                      <p className="text-white/70 leading-relaxed">
-                        We dedicate <span className="inline-flex items-baseline gap-1"><strong className="text-3xl font-bold text-red-300">1%</strong><span className="text-white/90">of our annual revenue</span></span> as direct donations to cultural organizations, and mobilize other entrepreneurs to join us.
-                      </p>
+                      <p className="text-white/70 leading-relaxed" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.act3.financialSupport.description') }} />
                       <div className="mt-4 text-sm text-red-300/60 italic group-hover:text-red-300/80 transition-colors">
-                        → Small percentage, big impact
+                        {t('artsCultureCommitment.act3.financialSupport.hover')}
                       </div>
                     </div>
                   </div>
@@ -425,13 +403,11 @@ export default function ArtsCulture() {
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-3">
                         <span className="hidden md:inline text-sm font-mono text-white/40">03</span>
-                        <h3 className="text-2xl font-semibold group-hover:text-blue-300 transition-colors">Live Culture</h3>
+                        <h3 className="text-2xl font-semibold group-hover:text-blue-300 transition-colors">{t('artsCultureCommitment.act3.liveCulture.title')}</h3>
                       </div>
-                      <p className="text-white/70 leading-relaxed">
-                        Each team member receives <span className="inline-flex items-baseline gap-1"><strong className="text-3xl font-bold text-blue-300">$350</strong><span className="text-white/90">annually</span></span> for Canadian cultural outings. Because supporting culture starts with <span className="text-white/90 font-medium">experiencing</span> it.
-                      </p>
+                      <p className="text-white/70 leading-relaxed" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.act3.liveCulture.description') }} />
                       <div className="mt-4 text-sm text-blue-300/60 italic group-hover:text-blue-300/80 transition-colors">
-                        → Practice what we preach
+                        {t('artsCultureCommitment.act3.liveCulture.hover')}
                       </div>
                     </div>
                   </div>
@@ -455,13 +431,11 @@ export default function ArtsCulture() {
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-3">
                         <span className="hidden md:inline text-sm font-mono text-white/40">04</span>
-                        <h3 className="text-2xl font-semibold group-hover:text-purple-300 transition-colors">Raise Awareness</h3>
+                        <h3 className="text-2xl font-semibold group-hover:text-purple-300 transition-colors">{t('artsCultureCommitment.act3.raiseAwareness.title')}</h3>
                       </div>
-                      <p className="text-white/70 leading-relaxed">
-                        We actively promote arts and culture within our company, among partners, and in our community staying <span className="text-white/90 font-medium">informed</span> and <span className="text-white/90 font-medium">engaged</span> with contemporary cultural issues.
-                      </p>
+                      <p className="text-white/70 leading-relaxed" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.act3.raiseAwareness.description') }} />
                       <div className="mt-4 text-sm text-purple-300/60 italic group-hover:text-purple-300/80 transition-colors">
-                        → Amplify the voices that matter
+                        {t('artsCultureCommitment.act3.raiseAwareness.hover')}
                       </div>
                     </div>
                   </div>
@@ -478,15 +452,13 @@ export default function ArtsCulture() {
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-12 bg-gradient-to-b from-white/0 to-white/20" />
               
               <div className="inline-flex items-center gap-2 mb-4">
-                <span className="text-sm font-mono tracking-wider text-white/40">ACT IV</span>
+                <span className="text-sm font-mono tracking-wider text-white/40">{t('artsCultureCommitment.act4.label')}</span>
                 <Target className="w-4 h-4 text-green-400/60" />
               </div>
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                The <span className="font-light italic">Impact</span>
+                {t('artsCultureCommitment.act4.title')} <span className="font-light italic">{t('artsCultureCommitment.act4.titleHighlight')}</span>
               </h2>
-              <p className="text-lg text-white/60 max-w-2xl mx-auto">
-                Join us in making a <span className="text-white/80 font-semibold">real</span> difference
-              </p>
+              <p className="text-lg text-white/60 max-w-2xl mx-auto" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.act4.subtitle') }} />
             </div>
 
             {/* Stats Grid */}
@@ -499,7 +471,7 @@ export default function ArtsCulture() {
                   <Award className="w-6 h-6 group-hover:scale-[1.045] transition-transform" />
                 </div>
                 <div className="text-5xl font-bold mb-2 group-hover:text-green-300 transition-colors">40%</div>
-                <div className="text-white/60 text-sm">Discount for cultural projects</div>
+                <div className="text-white/60 text-sm">{t('artsCultureCommitment.act4.stats.discount')}</div>
               </div>
               
               <div className="group text-center p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-red-400/30 transition-all duration-300 cursor-default relative overflow-hidden">
@@ -510,7 +482,7 @@ export default function ArtsCulture() {
                   <Heart className="w-6 h-6 group-hover:scale-[1.045] group-hover:animate-pulse transition-transform" />
                 </div>
                 <div className="text-5xl font-bold mb-2 group-hover:text-red-300 transition-colors">1%</div>
-                <div className="text-white/60 text-sm">Of annual revenue as donations</div>
+                <div className="text-white/60 text-sm">{t('artsCultureCommitment.act4.stats.donations')}</div>
               </div>
               
               <div className="group text-center p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-blue-400/30 transition-all duration-300 cursor-default relative overflow-hidden">
@@ -521,7 +493,7 @@ export default function ArtsCulture() {
                   <TrendingUp className="w-6 h-6 group-hover:scale-[1.045] transition-transform" />
                 </div>
                 <div className="text-5xl font-bold mb-2 group-hover:text-blue-300 transition-colors">$350</div>
-                <div className="text-white/60 text-sm">Per employee for culture</div>
+                <div className="text-white/60 text-sm">{t('artsCultureCommitment.act4.stats.perEmployee')}</div>
               </div>
             </div>
 
@@ -533,14 +505,14 @@ export default function ArtsCulture() {
               
               <Sparkles className="w-10 h-10 mx-auto mb-6 text-white/60 group-hover:animate-spin" />
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Let's grow culture <span className="font-light italic">together</span>
+                {t('artsCultureCommitment.act4.cta.title')} <span className="font-light italic">{t('artsCultureCommitment.act4.cta.titleHighlight')}</span>
               </h2>
               <p className="text-lg text-white/60 mb-8 max-w-2xl mx-auto leading-relaxed">
-                Whether you're an artist, cultural organization, or fellow entrepreneur join us in making a real difference.
+                {t('artsCultureCommitment.act4.cta.description')}
               </p>
               <Link href="/contact">
                 <button className="group/btn bg-white text-[rgb(107,23,22)] px-8 py-4 rounded-full font-semibold hover:bg-white/90 transition-all inline-flex items-center gap-2 hover:gap-3">
-                  <span>Start the Conversation</span>
+                  <span>{t('artsCultureCommitment.act4.cta.button')}</span>
                   <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
                 </button>
               </Link>

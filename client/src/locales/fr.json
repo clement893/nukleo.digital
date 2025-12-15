@@ -1155,5 +1155,95 @@
         "Comment construisez-vous des communautés de pratique IA internes ?"
       ]
     }
+  },
+  "artsCultureCommitment": {
+    "seoTitle": "Arts & Culture | Nukleo Digital",
+    "seoDescription": "Notre engagement à soutenir les arts et la culture. Découvrez comment Nukleo investit dans l'innovation culturelle et soutient les artistes et les institutions.",
+    "seoKeywords": "arts et culture, soutien culturel, soutien aux artistes, innovation culturelle, engagement Nukleo",
+    "hero": {
+      "badge": "NUKLEO.ART",
+      "title": "La culture est notre",
+      "titleHighlight": "battement de cœur",
+      "subtitle": "Une histoire d'<span class=\"italic text-white/80\">engagement</span>, d'<span class=\"italic text-white/80\">action</span> et d'<span class=\"italic text-white/80\">impact</span>"
+    },
+    "act1": {
+      "label": "ACTE I",
+      "title": "Le",
+      "titleHighlight": "Défi",
+      "subtitle": "La culture fait face à des défis sans précédent",
+      "budgetCuts": {
+        "title": "Coupes Budgétaires",
+        "description": "Les réductions drastiques de financement forcent les artistes et les institutions culturelles à faire des <span class=\"text-white/90 font-medium\">choix impossibles</span> entre la survie et la création.",
+        "hover": "→ Il faut que ça change"
+      },
+      "precariousConditions": {
+        "title": "Conditions Précaires",
+        "description": "Les artistes font face à des revenus instables, un manque d'avantages sociaux et des avenirs incertains, ce qui rend plus difficile de se concentrer sur ce qu'ils font de mieux : <span class=\"text-white/90 font-medium\">créer</span>.",
+        "hover": "→ Les artistes méritent mieux"
+      },
+      "quote": "\"La fragilité du secteur culturel québécois nécessite des <span class=\"font-semibold not-italic text-white\">efforts concrets</span> pour assurer son accessibilité et encourager son innovation.\""
+    },
+    "act2": {
+      "label": "ACTE II",
+      "title": "Notre",
+      "titleHighlight": "Croyance",
+      "subtitle": "Chez Nukleo, nous croyons que la culture est le <span class=\"text-white/80 font-medium\">cœur battant</span> de la société",
+      "heritage": {
+        "title": "Patrimoine",
+        "description": "La culture préserve notre <span class=\"text-white/90\">histoire</span> et notre <span class=\"text-white/90\">identité</span> pour les générations futures."
+      },
+      "creativity": {
+        "title": "Créativité",
+        "description": "La culture inspire l'<span class=\"text-white/90\">éducation</span> et stimule l'<span class=\"text-white/90\">innovation</span>."
+      },
+      "community": {
+        "title": "Communauté",
+        "description": "La culture crée des <span class=\"text-white/90\">connexions</span> et favorise l'<span class=\"text-white/90\">appartenance</span>."
+      },
+      "quote": "\"Nous croyons qu'il est impératif d'orienter nos investissements avec <span class=\"font-semibold not-italic text-white\">discernement</span> pour renforcer notre croissance culturelle, car le secteur culturel est un <span class=\"font-semibold not-italic text-white\">moteur économique</span> et un pilier de notre identité collective.\""
+    },
+    "act3": {
+      "label": "ACTE III",
+      "title": "Notre",
+      "titleHighlight": "Action",
+      "subtitle": "Nous ne faisons pas que <span class=\"line-through text-white/40\">parler</span> de soutenir la culture, nous <span class=\"text-white/80 font-semibold\">agissons</span> chaque jour.",
+      "affordablePricing": {
+        "title": "Tarifs Abordables",
+        "description": "Nous offrons une <span class=\"inline-flex items-baseline gap-1\"><strong class=\"text-3xl font-bold text-green-300\">réduction de 40%</strong><span class=\"text-white/90\">sur nos services</span></span> pour les organisations culturelles, rendant la transformation numérique accessible à ceux qui en ont le plus besoin.",
+        "hover": "→ Parce que l'accès ne devrait pas être une barrière"
+      },
+      "financialSupport": {
+        "title": "Soutien Financier",
+        "description": "Nous consacrons <span class=\"inline-flex items-baseline gap-1\"><strong class=\"text-3xl font-bold text-red-300\">1%</strong><span class=\"text-white/90\">de nos revenus annuels</span></span> en dons directs aux organisations culturelles, et mobilisons d'autres entrepreneurs à nous rejoindre.",
+        "hover": "→ Petit pourcentage, grand impact"
+      },
+      "liveCulture": {
+        "title": "Vivre la Culture",
+        "description": "Chaque membre de l'équipe reçoit <span class=\"inline-flex items-baseline gap-1\"><strong class=\"text-3xl font-bold text-blue-300\">350$</strong><span class=\"text-white/90\">par année</span></span> pour des sorties culturelles canadiennes. Parce que soutenir la culture commence par la <span class=\"text-white/90 font-medium\">vivre</span>.",
+        "hover": "→ Pratiquer ce que nous prêchons"
+      },
+      "raiseAwareness": {
+        "title": "Sensibiliser",
+        "description": "Nous promouvons activement les arts et la culture au sein de notre entreprise, parmi nos partenaires et dans notre communauté, en restant <span class=\"text-white/90 font-medium\">informés</span> et <span class=\"text-white/90 font-medium\">engagés</span> avec les enjeux culturels contemporains.",
+        "hover": "→ Amplifier les voix qui comptent"
+      }
+    },
+    "act4": {
+      "label": "ACTE IV",
+      "title": "L'",
+      "titleHighlight": "Impact",
+      "subtitle": "Rejoignez-nous pour faire une <span class=\"text-white/80 font-semibold\">vraie</span> différence",
+      "stats": {
+        "discount": "Réduction pour projets culturels",
+        "donations": "Des revenus annuels en dons",
+        "perEmployee": "Par employé pour la culture"
+      },
+      "cta": {
+        "title": "Faisons grandir la culture",
+        "titleHighlight": "ensemble",
+        "description": "Que vous soyez artiste, organisation culturelle ou entrepreneur, rejoignez-nous pour faire une vraie différence.",
+        "button": "Commencer la Conversation"
+      }
+    }
   }
 }

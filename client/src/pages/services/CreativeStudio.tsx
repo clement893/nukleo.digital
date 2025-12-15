@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useLocalizedPath } from "@/hooks/useLocalizedPath";
+import Breadcrumb from "@/components/Breadcrumb";
 
 export default function CreativeStudioService() {
   const { t, language } = useLanguage();
@@ -32,8 +33,16 @@ export default function CreativeStudioService() {
     <div className="min-h-screen bg-gradient-to-br from-[rgb(107,23,22)] via-[rgb(40,60,120)] to-[rgb(107,23,22)]">
       <Header />
       
+      {/* Breadcrumb */}
+      <div className="container pt-24 pb-4">
+        <Breadcrumb items={[
+          { name: t('nav.services') || 'Services', url: '/services' },
+          { name: t('services.creativeStudio.badge') || 'Le studio créatif', url: '/services/creative-studio' }
+        ]} />
+      </div>
+      
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-4">
+      <section className="relative pt-8 pb-20 px-4">
         <div className="container max-w-6xl">
           <div className="flex items-center gap-2 text-pink-400 mb-6">
             <Sparkles className="w-5 h-5" />

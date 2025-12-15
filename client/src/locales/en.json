@@ -1144,101 +1144,105 @@
   },
   "services": {
     "creativeStudio": {
-      "badge": "The Creative Studio",
-      "heroTitle": "Augmented Content",
-      "heroTitleHighlight": "& Experiences",
-      "heroDescription": "We create AI-augmented content and experiences. From agentic marketing to intelligent multichannel campaigns, we amplify your creative impact with the power of artificial intelligence.",
-      "ctaLaunch": "Launch a Campaign",
-      "ctaLearnMore": "Learn More About the Studio",
-      "coreServicesTitle": "Creative Services",
-      "services": {
-        "agenticMarketing": {
-          "title": "Agentic Marketing",
-          "description": "Deployment of autonomous AI agents to automate and optimize your marketing campaigns: content generation, A/B testing, real-time personalization."
+      "badge": "STUDIO",
+      "heroTitle": "Creativity,",
+      "heroTitleHighlight": "amplified.",
+      "heroSubtitle": "Design & Brand Experiences",
+      "heroDescription": "Passionate creatives who bring your ideas to life. We craft memorable brand identities and digital experiences that leave a lasting impression — with the best tools to go faster and further.",
+      "clientNeeds": {
+        "items": [
+          "You need a strong and distinctive brand identity",
+          "You want a smooth and engaging user experience",
+          "You're looking for creative campaigns that stand out",
+          "You need high-quality visual content at scale"
+        ]
+      },
+      "approachTitle": "Human creativity, modern tools",
+      "approachDescription": "Every project starts with a human idea. Our art directors, designers, and creatives imagine, design, and refine every detail. We use the best tools — including AI — to explore more directions, iterate faster, and deliver impeccable quality. But the vision remains human.",
+      "pillars": {
+        "vision": {
+          "number": "01",
+          "title": "Strategic Vision",
+          "description": "Every creation serves a clear business objective"
         },
-        "contentGeneration": {
-          "title": "Content Generation",
-          "description": "Large-scale content production: blog articles, social posts, newsletters, video scripts, all adapted to your tone and audience."
+        "craft": {
+          "number": "02",
+          "title": "Craft & Detail",
+          "description": "Meticulous execution down to the last pixel"
         },
-        "visualCreation": {
-          "title": "Visual Creation",
-          "description": "AI-powered image, illustration, and design generation: social media visuals, marketing assets, product mockups, and brand assets."
+        "coherence": {
+          "number": "03",
+          "title": "Consistency",
+          "description": "A strong identity across all touchpoints"
         },
-        "videoAnimation": {
-          "title": "Video & Animation",
-          "description": "AI-augmented video creation: automatic editing, voiceover generation, intelligent subtitles, and personalized animations."
-        },
-        "audioVoice": {
-          "title": "Audio & Voice",
-          "description": "AI audio production: natural synthetic voiceovers, automated podcasts, voice translation, and voice cloning for branding."
-        },
-        "omnichannelCampaigns": {
-          "title": "Omnichannel Campaigns",
-          "description": "Orchestration of cohesive omnichannel campaigns with AI personalization across web, social, email, SMS, and programmatic advertising."
+        "impact": {
+          "number": "04",
+          "title": "Impact",
+          "description": "Creations that generate results"
         }
       },
-      "processTitle": "Augmented Creative Process",
-      "processDescription": "Our hybrid approach combines human creativity and AI power to create content that resonates and performs.",
-      "phases": {
-        "ideate": {
-          "title": "Ideate",
-          "description": "AI-augmented brainstorming, trend analysis, and large-scale creative idea generation"
+      "expertiseTitle": "What we create",
+      "expertise": {
+        "branding": {
+          "title": "Branding & Identity",
+          "description": "We create memorable brands that tell your story and connect with your audience.",
+          "deliverables": "Logo, brand guidelines, naming, storytelling"
         },
-        "create": {
-          "title": "Create",
-          "description": "Multi-format content production with AI tools, rapid iteration, and personalized variations"
+        "uiux": {
+          "title": "UX/UI Design",
+          "description": "We design intuitive and aesthetic interfaces that turn users into loyal customers.",
+          "deliverables": "Wireframes, prototypes, design systems, web & mobile interfaces"
         },
-        "optimize": {
-          "title": "Optimize",
-          "description": "Automated A/B testing, real-time performance analysis, and continuous optimization"
+        "artDirection": {
+          "title": "Art Direction",
+          "description": "We define the visual universe of your projects and campaigns for impactful consistency.",
+          "deliverables": "Creative concepts, moodboards, visual guidelines"
         },
-        "scale": {
-          "title": "Scale",
-          "description": "Omnichannel deployment, local adaptation, and intelligent amplification of high-performing content"
+        "campaigns": {
+          "title": "Campaign Design",
+          "description": "We create the visuals and assets for your advertising campaigns across all channels.",
+          "deliverables": "Banners, social visuals, print, billboards, video"
+        },
+        "motion": {
+          "title": "Motion Design",
+          "description": "We bring your messages to life with animations and videos that capture attention.",
+          "deliverables": "Animations, explainer videos, intros, social content"
+        },
+        "production": {
+          "title": "Visual Production",
+          "description": "We produce the visual content you need: photos, illustrations, assets.",
+          "deliverables": "Photo shoots, illustrations, retouching, digital assets"
         }
       },
-      "toolsTitle": "Tools & Platforms",
-      "tools": {
-        "contentGeneration": {
-          "title": "Content Generation",
-          "items": ["GPT-4, Claude, Gemini", "Midjourney, DALL-E, Stable Diffusion", "Runway, Pika, Sora", "ElevenLabs, Descript", "Copy.ai, Jasper"]
+      "teamTitle": "The creatives behind your projects",
+      "teamDescription": "Art directors, UI/UX designers, graphic designers, motion designers — a passionate creative team that turns your ideas into reality. Based in Montreal and Halifax, we work hand in hand with our clients.",
+      "processTitle": "Process",
+      "process": {
+        "discovery": {
+          "step": "01",
+          "title": "Discovery",
+          "description": "Understand your brand, objectives, and audience"
         },
-        "marketingAutomation": {
-          "title": "Marketing Automation",
-          "items": ["HubSpot, Marketo, Salesforce", "Zapier, Make, n8n", "Google Analytics, Mixpanel", "Segment, Amplitude", "Optimizely, VWO"]
+        "concept": {
+          "step": "02",
+          "title": "Concept",
+          "description": "Explore creative directions and define the vision"
         },
-        "distribution": {
-          "title": "Distribution",
-          "items": ["Meta Business Suite", "LinkedIn Campaign Manager", "Google Ads, DV360", "Mailchimp, SendGrid", "Buffer, Hootsuite"]
+        "design": {
+          "step": "03",
+          "title": "Design",
+          "description": "Create, iterate, and refine to perfection"
+        },
+        "delivery": {
+          "step": "04",
+          "title": "Delivery",
+          "description": "Adapt to all necessary formats and platforms"
         }
       },
-      "useCasesTitle": "Use Cases",
-      "useCases": {
-        "contentMarketing": {
-          "title": "Content Marketing at Scale",
-          "description": "Automated generation of hundreds of SEO-optimized blog articles per month, adapted to different audiences and personas.",
-          "impact": "10x content volume, -70% production costs"
-        },
-        "personalizedEmail": {
-          "title": "Personalized Email Campaigns",
-          "description": "Creation of hyper-personalized email campaigns with AI-generated dynamic content based on each lead's profile and behavior.",
-          "impact": "+250% open rate, +180% conversion rate"
-        },
-        "socialMediaAutomation": {
-          "title": "Social Media Automation",
-          "description": "AI agents that automatically create, schedule, and optimize your posts across all social networks with continuous A/B testing.",
-          "impact": "100% daily coverage, +320% engagement"
-        },
-        "dynamicAdCreative": {
-          "title": "Dynamic Ad Creative",
-          "description": "Automatic generation of thousands of ad creative variations tested and optimized in real-time based on performance.",
-          "impact": "-45% CPA, +190% ROAS"
-        }
-      },
-      "ctaTitle": "Ready to amplify your creative impact?",
-      "ctaDescription": "Let's discuss your marketing goals and create campaigns that perform at scale together.",
-      "ctaButton1": "Launch Your First AI Campaign",
-      "ctaButton2": "View Our Work"
+      "ctaTitle": "Ready to bring your vision to life?",
+      "ctaDescription": "Let's discuss your project and create something memorable together.",
+      "ctaButton1": "Start a project",
+      "ctaButton2": "See our work"
     },
     "strategicBureau": {
       "badge": "The Strategic Bureau",

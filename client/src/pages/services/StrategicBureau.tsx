@@ -3,8 +3,31 @@ import { Link } from "wouter";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 
 export default function StrategicBureauService() {
+  const { t, language } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
+  
+  // Helper to get array translations
+  const getArrayTranslation = (key: string): string[] => {
+    try {
+      const translations = require(`../../locales/${language}.json`);
+      const keys = key.split('.');
+      let value: any = translations.default || translations;
+      for (const k of keys) {
+        if (value && typeof value === 'object' && k in value) {
+          value = value[k];
+        } else {
+          return [];
+        }
+      }
+      return Array.isArray(value) ? value : [];
+    } catch {
+      return [];
+    }
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-[rgb(107,23,22)] via-[rgb(40,60,120)] to-[rgb(107,23,22)]">
       <Header />
@@ -14,32 +37,31 @@ export default function StrategicBureauService() {
         <div className="container max-w-6xl">
           <div className="flex items-center gap-2 text-purple-400 mb-6">
             <Compass className="w-5 h-5" />
-            <span className="text-sm font-medium tracking-wider uppercase">The Strategic Bureau</span>
+            <span className="text-sm font-medium tracking-wider uppercase">{t('services.strategicBureau.badge')}</span>
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-            Transformation
+            {t('services.strategicBureau.heroTitle')}
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
-              Orchestration
+              {t('services.strategicBureau.heroTitleHighlight')}
             </span>
           </h1>
           
           <p className="text-xl text-white/80 max-w-3xl mb-8">
-            Nous orchestrons votre transformation AI de bout en bout. De la vision stratégique à l'exécution opérationnelle, 
-            nous alignons technologie, processus et équipes pour créer un impact mesurable et durable.
+            {t('services.strategicBureau.heroDescription')}
           </p>
           
           <div className="flex flex-wrap gap-4">
-            <Link href="/contact">
+            <Link href={getLocalizedPath('/contact')}>
               <Button size="lg" className="bg-purple-500 hover:bg-purple-600 text-white">
-                Start Your Transformation
+                {t('services.strategicBureau.ctaStart')}
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
-            <Link href="/bureau">
+            <Link href={getLocalizedPath('/bureau')}>
               <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
-                En savoir plus sur le Bureau
+                {t('services.strategicBureau.ctaLearnMore')}
               </Button>
             </Link>
           </div>
@@ -49,39 +71,39 @@ export default function StrategicBureauService() {
       {/* Core Services */}
       <section className="py-20 px-4 bg-black/20">
         <div className="container max-w-6xl">
-          <h2 className="text-4xl font-bold text-white mb-12">Strategic Services</h2>
+          <h2 className="text-4xl font-bold text-white mb-12">{t('services.strategicBureau.coreServicesTitle')}</h2>
           
           <div className="grid md:grid-cols-2 gap-8">
             {[
               {
                 icon: Target,
-                title: "AI Strategy & Roadmap",
-                description: "Definition of your AI vision, identification of high-impact opportunities, and construction of a pragmatic and measurable transformation roadmap."
+                title: t('services.strategicBureau.services.aiStrategy.title'),
+                description: t('services.strategicBureau.services.aiStrategy.description')
               },
               {
                 icon: BarChart3,
-                title: "Business Case & ROI",
-                description: "In-depth ROI analysis, financial modeling, and construction of solid business cases to secure investment."
+                title: t('services.strategicBureau.services.businessCase.title'),
+                description: t('services.strategicBureau.services.businessCase.description')
               },
               {
                 icon: Users,
-                title: "Change Management",
-                description: "Support for your teams in AI adoption, training, change management, and creation of a data-driven culture."
+                title: t('services.strategicBureau.services.changeManagement.title'),
+                description: t('services.strategicBureau.services.changeManagement.description')
               },
               {
                 icon: FileCheck,
-                title: "Governance & Compliance",
-                description: "Implementation of AI governance frameworks, ethical use policies, and regulatory compliance (GDPR, AI Act)."
+                title: t('services.strategicBureau.services.governance.title'),
+                description: t('services.strategicBureau.services.governance.description')
               },
               {
                 icon: TrendingUp,
-                title: "Performance Tracking",
-                description: "Definition of relevant KPIs, implementation of tracking dashboards, and continuous data-driven optimization."
+                title: t('services.strategicBureau.services.performanceTracking.title'),
+                description: t('services.strategicBureau.services.performanceTracking.description')
               },
               {
                 icon: Shield,
-                title: "Risk Management",
-                description: "Identification and mitigation of AI-related risks (bias, security, dependency) with robust contingency strategies."
+                title: t('services.strategicBureau.services.riskManagement.title'),
+                description: t('services.strategicBureau.services.riskManagement.description')
               }
             ].map((service, index) => (
               <div key={index} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6 hover:bg-white/10 transition-colors">
@@ -97,28 +119,28 @@ export default function StrategicBureauService() {
       {/* Transformation Framework */}
       <section className="py-20 px-4">
         <div className="container max-w-6xl">
-          <h2 className="text-4xl font-bold text-white mb-6">Framework de Transformation</h2>
+          <h2 className="text-4xl font-bold text-white mb-6">{t('services.strategicBureau.frameworkTitle')}</h2>
           <p className="text-white/70 mb-12 max-w-3xl">
-            Our proven methodology for orchestrating successful AI transformations, from vision to impact.
+            {t('services.strategicBureau.frameworkDescription')}
           </p>
           
           <div className="grid md:grid-cols-4 gap-6">
             {[
               {
-                phase: "Discover",
-                description: "AI maturity audit, opportunity identification, and alignment with business strategy"
+                phase: t('services.strategicBureau.phases.discover.title'),
+                description: t('services.strategicBureau.phases.discover.description')
               },
               {
-                phase: "Define",
-                description: "Construction de la vision AI, priorisation des use cases et définition de la roadmap"
+                phase: t('services.strategicBureau.phases.define.title'),
+                description: t('services.strategicBureau.phases.define.description')
               },
               {
-                phase: "Deploy",
-                description: "Exécution des projets pilotes, scaling des solutions et intégration dans les processus"
+                phase: t('services.strategicBureau.phases.deploy.title'),
+                description: t('services.strategicBureau.phases.deploy.description')
               },
               {
-                phase: "Drive",
-                description: "Optimisation continue, mesure de l'impact et évolution de la stratégie"
+                phase: t('services.strategicBureau.phases.drive.title'),
+                description: t('services.strategicBureau.phases.drive.description')
               }
             ].map((phase, index) => (
               <div key={index} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6">
@@ -133,42 +155,36 @@ export default function StrategicBureauService() {
       {/* Deliverables */}
       <section className="py-20 px-4 bg-black/20">
         <div className="container max-w-6xl">
-          <h2 className="text-4xl font-bold text-white mb-12">Livrables Clés</h2>
+          <h2 className="text-4xl font-bold text-white mb-12">{t('services.strategicBureau.deliverablesTitle')}</h2>
           
           <div className="grid md:grid-cols-3 gap-8">
             <div className="space-y-4">
               <Lightbulb className="w-12 h-12 text-purple-400" />
-              <h3 className="text-xl font-semibold text-white">Stratégiques</h3>
+              <h3 className="text-xl font-semibold text-white">{t('services.strategicBureau.deliverables.strategic.title')}</h3>
               <ul className="space-y-2 text-white/70">
-                <li>• Vision & Roadmap AI</li>
-                <li>• Business Cases détaillés</li>
-                <li>• Framework de gouvernance</li>
-                <li>• Politique d'utilisation éthique</li>
-                <li>• Stratégie de change management</li>
+                {getArrayTranslation('services.strategicBureau.deliverables.strategic.items').map((item: string, idx: number) => (
+                  <li key={idx}>• {item}</li>
+                ))}
               </ul>
             </div>
             
             <div className="space-y-4">
               <BarChart3 className="w-12 h-12 text-purple-400" />
-              <h3 className="text-xl font-semibold text-white">Opérationnels</h3>
+              <h3 className="text-xl font-semibold text-white">{t('services.strategicBureau.deliverables.operational.title')}</h3>
               <ul className="space-y-2 text-white/70">
-                <li>• Plans d'exécution détaillés</li>
-                <li>• Dashboards de suivi KPI</li>
-                <li>• Processus optimisés</li>
-                <li>• Guides d'utilisation</li>
-                <li>• Plans de formation</li>
+                {getArrayTranslation('services.strategicBureau.deliverables.operational.items').map((item: string, idx: number) => (
+                  <li key={idx}>• {item}</li>
+                ))}
               </ul>
             </div>
             
             <div className="space-y-4">
               <Users className="w-12 h-12 text-purple-400" />
-              <h3 className="text-xl font-semibold text-white">Organisationnels</h3>
+              <h3 className="text-xl font-semibold text-white">{t('services.strategicBureau.deliverables.organizational.title')}</h3>
               <ul className="space-y-2 text-white/70">
-                <li>• Organigrammes cibles</li>
-                <li>• Fiches de poste AI</li>
-                <li>• Parcours de formation</li>
-                <li>• Communautés de pratique</li>
-                <li>• Plans de communication</li>
+                {getArrayTranslation('services.strategicBureau.deliverables.organizational.items').map((item: string, idx: number) => (
+                  <li key={idx}>• {item}</li>
+                ))}
               </ul>
             </div>
           </div>
@@ -178,34 +194,34 @@ export default function StrategicBureauService() {
       {/* Approach */}
       <section className="py-20 px-4">
         <div className="container max-w-6xl">
-          <h2 className="text-4xl font-bold text-white mb-12">Notre Approche</h2>
+          <h2 className="text-4xl font-bold text-white mb-12">{t('services.strategicBureau.approachTitle')}</h2>
           
           <div className="space-y-8">
             {[
               {
-                step: "01",
-                title: "Assessment & Vision",
-                description: "Évaluation de votre maturité AI, identification des quick wins et construction d'une vision ambitieuse mais réaliste."
+                step: t('services.strategicBureau.steps.assessment.step'),
+                title: t('services.strategicBureau.steps.assessment.title'),
+                description: t('services.strategicBureau.steps.assessment.description')
               },
               {
-                step: "02",
-                title: "Strategy & Roadmap",
-                description: "Définition de la stratégie AI alignée avec vos objectifs business et construction d'une roadmap de transformation par phases."
+                step: t('services.strategicBureau.steps.strategy.step'),
+                title: t('services.strategicBureau.steps.strategy.title'),
+                description: t('services.strategicBureau.steps.strategy.description')
               },
               {
-                step: "03",
-                title: "Pilot & Validate",
-                description: "Lancement de projets pilotes pour valider l'approche, mesurer l'impact et ajuster la stratégie avant le scaling."
+                step: t('services.strategicBureau.steps.pilot.step'),
+                title: t('services.strategicBureau.steps.pilot.title'),
+                description: t('services.strategicBureau.steps.pilot.description')
               },
               {
-                step: "04",
-                title: "Scale & Integrate",
-                description: "Déploiement à grande échelle, intégration dans les processus existants et formation des équipes pour l'autonomie."
+                step: t('services.strategicBureau.steps.scale.step'),
+                title: t('services.strategicBureau.steps.scale.title'),
+                description: t('services.strategicBureau.steps.scale.description')
               },
               {
-                step: "05",
-                title: "Optimize & Evolve",
-                description: "Mesure continue de la performance, optimisation des solutions et évolution de la stratégie selon les résultats."
+                step: t('services.strategicBureau.steps.optimize.step'),
+                title: t('services.strategicBureau.steps.optimize.title'),
+                description: t('services.strategicBureau.steps.optimize.description')
               }
             ].map((phase, index) => (
               <div key={index} className="flex gap-6 items-start">
@@ -224,21 +240,21 @@ export default function StrategicBureauService() {
       <section className="py-20 px-4 bg-black/20">
         <div className="container max-w-4xl text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Prêt à orchestrer votre transformation AI ?
+            {t('services.strategicBureau.ctaTitle')}
           </h2>
           <p className="text-xl text-white/70 mb-8">
-            Discutons de votre vision et construisons ensemble la stratégie qui transformera votre organisation.
+            {t('services.strategicBureau.ctaDescription')}
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/contact">
+            <Link href={getLocalizedPath('/contact')}>
               <Button size="lg" className="bg-purple-500 hover:bg-purple-600 text-white">
-                Schedule a Diagnostic stratégique
+                {t('services.strategicBureau.ctaButton1')}
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
-            <Link href="/ai-readiness">
+            <Link href={getLocalizedPath('/ai-readiness')}>
               <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
-                Évaluer votre maturité AI
+                {t('services.strategicBureau.ctaButton2')}
               </Button>
             </Link>
           </div>

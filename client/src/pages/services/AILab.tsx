@@ -3,8 +3,31 @@ import { Link } from "wouter";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 
 export default function AILabService() {
+  const { t, language } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
+  
+  // Helper to get array translations
+  const getArrayTranslation = (key: string): string[] => {
+    try {
+      const translations = require(`../../locales/${language}.json`);
+      const keys = key.split('.');
+      let value: any = translations.default || translations;
+      for (const k of keys) {
+        if (value && typeof value === 'object' && k in value) {
+          value = value[k];
+        } else {
+          return [];
+        }
+      }
+      return Array.isArray(value) ? value : [];
+    } catch {
+      return [];
+    }
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-[rgb(107,23,22)] via-[rgb(40,60,120)] to-[rgb(107,23,22)]">
       <Header />
@@ -14,33 +37,31 @@ export default function AILabService() {
         <div className="container max-w-6xl">
           <div className="flex items-center gap-2 text-cyan-400 mb-6">
             <Cpu className="w-5 h-5" />
-            <span className="text-sm font-medium tracking-wider uppercase">The AI Lab</span>
+            <span className="text-sm font-medium tracking-wider uppercase">{t('services.aiLab.badge')}</span>
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-            Technology
+            {t('services.aiLab.heroTitle')}
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
-              Foundation
+              {t('services.aiLab.heroTitleHighlight')}
             </span>
           </h1>
           
           <p className="text-xl text-white/80 max-w-3xl mb-8">
-            Nous construisons l'infrastructure technologique qui alimente votre transformation AI. 
-            Du développement d'agents intelligents à l'architecture de données, nous créons les fondations 
-            techniques de votre avenir augmenté.
+            {t('services.aiLab.heroDescription')}
           </p>
           
           <div className="flex flex-wrap gap-4">
-            <Link href="/contact">
+            <Link href={getLocalizedPath('/contact')}>
               <Button size="lg" className="bg-cyan-500 hover:bg-cyan-600 text-white">
-                Start a Project
+                {t('services.aiLab.ctaStart')}
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
-            <Link href="/lab">
+            <Link href={getLocalizedPath('/lab')}>
               <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
-                En savoir plus sur le Lab
+                {t('services.aiLab.ctaLearnMore')}
               </Button>
             </Link>
           </div>
@@ -50,39 +71,39 @@ export default function AILabService() {
       {/* Core Capabilities */}
       <section className="py-20 px-4 bg-black/20">
         <div className="container max-w-6xl">
-          <h2 className="text-4xl font-bold text-white mb-12">Technical Capabilities</h2>
+          <h2 className="text-4xl font-bold text-white mb-12">{t('services.aiLab.capabilitiesTitle')}</h2>
           
           <div className="grid md:grid-cols-2 gap-8">
             {[
               {
                 icon: Brain,
-                title: "AI Agents & Automation",
-                description: "Development of autonomous intelligent agents capable of executing complex tasks, learning, and adapting to your business environment."
+                title: t('services.aiLab.capabilities.aiAgents.title'),
+                description: t('services.aiLab.capabilities.aiAgents.description')
               },
               {
                 icon: Database,
-                title: "Data Platforms & Pipelines",
-                description: "Architecture and implementation of modern data platforms with ETL/ELT pipelines, data lakes, and optimized data warehouses."
+                title: t('services.aiLab.capabilities.dataPlatforms.title'),
+                description: t('services.aiLab.capabilities.dataPlatforms.description')
               },
               {
                 icon: Network,
-                title: "API & Integration",
-                description: "Design and development of robust APIs and system integrations to seamlessly connect your tools and data."
+                title: t('services.aiLab.capabilities.apiIntegration.title'),
+                description: t('services.aiLab.capabilities.apiIntegration.description')
               },
               {
                 icon: Code2,
-                title: "Custom AI Models",
-                description: "Fine-tuning and deployment of custom AI models tailored to your specific use cases and proprietary data."
+                title: t('services.aiLab.capabilities.customModels.title'),
+                description: t('services.aiLab.capabilities.customModels.description')
               },
               {
                 icon: Zap,
-                title: "Performance Optimization",
-                description: "Performance optimization, scalability, and infrastructure cost reduction for your AI and data systems."
+                title: t('services.aiLab.capabilities.performance.title'),
+                description: t('services.aiLab.capabilities.performance.description')
               },
               {
                 icon: Shield,
-                title: "Security & Compliance",
-                description: "Implementation of robust security measures and regulatory compliance (GDPR, SOC2, ISO) for your AI systems."
+                title: t('services.aiLab.capabilities.security.title'),
+                description: t('services.aiLab.capabilities.security.description')
               }
             ].map((capability, index) => (
               <div key={index} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6 hover:bg-white/10 transition-colors">
@@ -98,42 +119,36 @@ export default function AILabService() {
       {/* Tech Stack */}
       <section className="py-20 px-4">
         <div className="container max-w-6xl">
-          <h2 className="text-4xl font-bold text-white mb-6">Stack Technologique</h2>
+          <h2 className="text-4xl font-bold text-white mb-6">{t('services.aiLab.techStackTitle')}</h2>
           <p className="text-white/70 mb-12 max-w-3xl">
-            We use the most advanced and proven technologies to build robust and scalable solutions.
+            {t('services.aiLab.techStackDescription')}
           </p>
           
           <div className="grid md:grid-cols-3 gap-8">
             <div>
-              <h3 className="text-xl font-semibold text-cyan-400 mb-4">AI & ML</h3>
+              <h3 className="text-xl font-semibold text-cyan-400 mb-4">{t('services.aiLab.techStack.aiMl.title')}</h3>
               <ul className="space-y-2 text-white/70">
-                <li>• OpenAI GPT-4, Claude, Gemini</li>
-                <li>• LangChain, LlamaIndex</li>
-                <li>• TensorFlow, PyTorch</li>
-                <li>• Hugging Face Transformers</li>
-                <li>• Vector Databases (Pinecone, Weaviate)</li>
+                {getArrayTranslation('services.aiLab.techStack.aiMl.items').map((item: string, idx: number) => (
+                  <li key={idx}>• {item}</li>
+                ))}
               </ul>
             </div>
             
             <div>
-              <h3 className="text-xl font-semibold text-cyan-400 mb-4">Data & Infrastructure</h3>
+              <h3 className="text-xl font-semibold text-cyan-400 mb-4">{t('services.aiLab.techStack.dataInfrastructure.title')}</h3>
               <ul className="space-y-2 text-white/70">
-                <li>• AWS, Google Cloud, Azure</li>
-                <li>• Snowflake, BigQuery, Databricks</li>
-                <li>• Apache Airflow, dbt</li>
-                <li>• PostgreSQL, MongoDB, Redis</li>
-                <li>• Docker, Kubernetes</li>
+                {getArrayTranslation('services.aiLab.techStack.dataInfrastructure.items').map((item: string, idx: number) => (
+                  <li key={idx}>• {item}</li>
+                ))}
               </ul>
             </div>
             
             <div>
-              <h3 className="text-xl font-semibold text-cyan-400 mb-4">Development</h3>
+              <h3 className="text-xl font-semibold text-cyan-400 mb-4">{t('services.aiLab.techStack.development.title')}</h3>
               <ul className="space-y-2 text-white/70">
-                <li>• Python, TypeScript, Go</li>
-                <li>• FastAPI, Node.js, React</li>
-                <li>• GraphQL, REST APIs</li>
-                <li>• CI/CD (GitHub Actions, GitLab)</li>
-                <li>• Monitoring (Datadog, Grafana)</li>
+                {getArrayTranslation('services.aiLab.techStack.development.items').map((item: string, idx: number) => (
+                  <li key={idx}>• {item}</li>
+                ))}
               </ul>
             </div>
           </div>
@@ -143,34 +158,34 @@ export default function AILabService() {
       {/* Approach */}
       <section className="py-20 px-4 bg-black/20">
         <div className="container max-w-6xl">
-          <h2 className="text-4xl font-bold text-white mb-12">Notre Approche</h2>
+          <h2 className="text-4xl font-bold text-white mb-12">{t('services.aiLab.approachTitle')}</h2>
           
           <div className="space-y-8">
             {[
               {
-                step: "01",
-                title: "Discovery & Architecture",
-                description: "Audit technique de votre infrastructure existante, identification des besoins et conception de l'architecture cible."
+                step: t('services.aiLab.steps.discovery.step'),
+                title: t('services.aiLab.steps.discovery.title'),
+                description: t('services.aiLab.steps.discovery.description')
               },
               {
-                step: "02",
-                title: "Proof of Concept",
-                description: "Rapid POC development to validate technical feasibility and demonstrate value before full investment."
+                step: t('services.aiLab.steps.poc.step'),
+                title: t('services.aiLab.steps.poc.title'),
+                description: t('services.aiLab.steps.poc.description')
               },
               {
-                step: "03",
-                title: "Development & Integration",
-                description: "Iterative development with continuous integration into your existing systems, rigorous testing, and complete documentation."
+                step: t('services.aiLab.steps.development.step'),
+                title: t('services.aiLab.steps.development.title'),
+                description: t('services.aiLab.steps.development.description')
               },
               {
-                step: "04",
-                title: "Deployment & Optimization",
-                description: "Production deployment with monitoring, performance optimization, and training for your technical teams."
+                step: t('services.aiLab.steps.deployment.step'),
+                title: t('services.aiLab.steps.deployment.title'),
+                description: t('services.aiLab.steps.deployment.description')
               },
               {
-                step: "05",
-                title: "Support & Evolution",
-                description: "Continuous technical support, proactive maintenance, and solution evolution according to your changing needs."
+                step: t('services.aiLab.steps.support.step'),
+                title: t('services.aiLab.steps.support.title'),
+                description: t('services.aiLab.steps.support.description')
               }
             ].map((phase, index) => (
               <div key={index} className="flex gap-6 items-start">
@@ -189,21 +204,21 @@ export default function AILabService() {
       <section className="py-20 px-4">
         <div className="container max-w-4xl text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Ready to build your AI infrastructure?
+            {t('services.aiLab.ctaTitle')}
           </h2>
           <p className="text-xl text-white/70 mb-8">
-            Let's discuss your technical needs and design the solution tailored to your ambitions together.
+            {t('services.aiLab.ctaDescription')}
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/contact">
+            <Link href={getLocalizedPath('/contact')}>
               <Button size="lg" className="bg-cyan-500 hover:bg-cyan-600 text-white">
-                Planifier une consultation technique
+                {t('services.aiLab.ctaButton1')}
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
-            <Link href="/projects">
+            <Link href={getLocalizedPath('/projects')}>
               <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
-                View Our Work
+                {t('services.aiLab.ctaButton2')}
               </Button>
             </Link>
           </div>

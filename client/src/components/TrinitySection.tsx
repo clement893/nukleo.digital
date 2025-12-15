@@ -14,7 +14,7 @@ export default function TrinitySection() {
       title: t('trinity.lab.title'),
       subtitle: t('trinity.lab.subtitle'),
       description: t('trinity.lab.description'),
-      link: '/lab',
+      link: '/services/ai-lab',
     },
     {
       number: '02',
@@ -23,7 +23,7 @@ export default function TrinitySection() {
       title: t('trinity.bureau.title'),
       subtitle: t('trinity.bureau.subtitle'),
       description: t('trinity.bureau.description'),
-      link: '/bureau',
+      link: '/services/strategic-bureau',
     },
     {
       number: '03',
@@ -32,7 +32,7 @@ export default function TrinitySection() {
       title: t('trinity.studio.title'),
       subtitle: t('trinity.studio.subtitle'),
       description: t('trinity.studio.description'),
-      link: '/studio',
+      link: '/services/creative-studio',
     },
   ];
 

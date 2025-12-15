@@ -1251,5 +1251,289 @@
         "button": "Commencer la Conversation"
       }
     }
+  },
+  "services": {
+    "creativeStudio": {
+      "badge": "Le studio créatif",
+      "heroTitle": "Contenu augmenté",
+      "heroTitleHighlight": "& expériences",
+      "heroDescription": "Nous créons du contenu et des expériences augmentés par l'IA. Du marketing agentique aux campagnes multicanales intelligentes, nous amplifions votre impact créatif avec la puissance de l'intelligence artificielle.",
+      "ctaLaunch": "Lancer une campagne",
+      "ctaLearnMore": "En savoir plus sur le studio",
+      "coreServicesTitle": "Services créatifs",
+      "services": {
+        "agenticMarketing": {
+          "title": "Marketing agentique",
+          "description": "Déploiement d'agents IA autonomes pour automatiser et optimiser vos campagnes marketing : génération de contenu, tests A/B, personnalisation en temps réel."
+        },
+        "contentGeneration": {
+          "title": "Génération de contenu",
+          "description": "Production de contenu à grande échelle : articles de blog, posts sociaux, newsletters, scripts vidéo, le tout adapté à votre ton et votre audience."
+        },
+        "visualCreation": {
+          "title": "Création visuelle",
+          "description": "Génération d'images, illustrations et designs alimentés par l'IA : visuels pour réseaux sociaux, assets marketing, maquettes produits et éléments de marque."
+        },
+        "videoAnimation": {
+          "title": "Vidéo & animation",
+          "description": "Création vidéo augmentée par l'IA : montage automatique, génération de voix off, sous-titres intelligents et animations personnalisées."
+        },
+        "audioVoice": {
+          "title": "Audio & voix",
+          "description": "Production audio IA : voix off synthétiques naturelles, podcasts automatisés, traduction vocale et clonage de voix pour le branding."
+        },
+        "omnichannelCampaigns": {
+          "title": "Campagnes omnicanales",
+          "description": "Orchestration de campagnes omnicanales cohérentes avec personnalisation IA sur le web, les réseaux sociaux, l'email, le SMS et la publicité programmatique."
+        }
+      },
+      "processTitle": "Processus créatif augmenté",
+      "processDescription": "Notre approche hybride combine créativité humaine et puissance IA pour créer du contenu qui résonne et performe.",
+      "phases": {
+        "ideate": {
+          "title": "Idéation",
+          "description": "Brainstorming augmenté par l'IA, analyse de tendances et génération d'idées créatives à grande échelle"
+        },
+        "create": {
+          "title": "Création",
+          "description": "Production de contenu multi-format avec outils IA, itération rapide et variations personnalisées"
+        },
+        "optimize": {
+          "title": "Optimisation",
+          "description": "Tests A/B automatisés, analyse de performance en temps réel et optimisation continue"
+        },
+        "scale": {
+          "title": "Mise à l'échelle",
+          "description": "Déploiement omnicanal, adaptation locale et amplification intelligente du contenu performant"
+        }
+      },
+      "toolsTitle": "Outils & plateformes",
+      "tools": {
+        "contentGeneration": {
+          "title": "Génération de contenu",
+          "items": ["GPT-4, Claude, Gemini", "Midjourney, DALL-E, Stable Diffusion", "Runway, Pika, Sora", "ElevenLabs, Descript", "Copy.ai, Jasper"]
+        },
+        "marketingAutomation": {
+          "title": "Automatisation marketing",
+          "items": ["HubSpot, Marketo, Salesforce", "Zapier, Make, n8n", "Google Analytics, Mixpanel", "Segment, Amplitude", "Optimizely, VWO"]
+        },
+        "distribution": {
+          "title": "Distribution",
+          "items": ["Meta Business Suite", "LinkedIn Campaign Manager", "Google Ads, DV360", "Mailchimp, SendGrid", "Buffer, Hootsuite"]
+        }
+      },
+      "useCasesTitle": "Cas d'usage",
+      "useCases": {
+        "contentMarketing": {
+          "title": "Marketing de contenu à grande échelle",
+          "description": "Génération automatisée de centaines d'articles de blog optimisés SEO par mois, adaptés à différentes audiences et personas.",
+          "impact": "10x volume de contenu, -70% coûts de production"
+        },
+        "personalizedEmail": {
+          "title": "Campagnes email personnalisées",
+          "description": "Création de campagnes email hyper-personnalisées avec contenu dynamique généré par IA basé sur le profil et le comportement de chaque lead.",
+          "impact": "+250% taux d'ouverture, +180% taux de conversion"
+        },
+        "socialMediaAutomation": {
+          "title": "Automatisation des réseaux sociaux",
+          "description": "Agents IA qui créent, programment et optimisent automatiquement vos posts sur tous les réseaux sociaux avec tests A/B continus.",
+          "impact": "100% couverture quotidienne, +320% engagement"
+        },
+        "dynamicAdCreative": {
+          "title": "Créatifs publicitaires dynamiques",
+          "description": "Génération automatique de milliers de variations de créatifs publicitaires testés et optimisés en temps réel selon les performances.",
+          "impact": "-45% CPA, +190% ROAS"
+        }
+      },
+      "ctaTitle": "Prêt à amplifier votre impact créatif ?",
+      "ctaDescription": "Discutons de vos objectifs marketing et créons ensemble des campagnes qui performent à grande échelle.",
+      "ctaButton1": "Lancer votre première campagne IA",
+      "ctaButton2": "Voir nos créations"
+    },
+    "strategicBureau": {
+      "badge": "Le bureau stratégique",
+      "heroTitle": "Orchestration",
+      "heroTitleHighlight": "de transformation",
+      "heroDescription": "Nous orchestrons votre transformation IA de bout en bout. De la vision stratégique à l'exécution opérationnelle, nous alignons technologie, processus et équipes pour créer un impact mesurable et durable.",
+      "ctaStart": "Démarrer votre transformation",
+      "ctaLearnMore": "En savoir plus sur le bureau",
+      "coreServicesTitle": "Services stratégiques",
+      "services": {
+        "aiStrategy": {
+          "title": "Stratégie IA & feuille de route",
+          "description": "Définition de votre vision IA, identification des opportunités à fort impact et construction d'une feuille de route de transformation pragmatique et mesurable."
+        },
+        "businessCase": {
+          "title": "Business case & ROI",
+          "description": "Analyse approfondie du ROI, modélisation financière et construction de business cases solides pour sécuriser l'investissement."
+        },
+        "changeManagement": {
+          "title": "Gestion du changement",
+          "description": "Accompagnement de vos équipes dans l'adoption de l'IA, formation, gestion du changement et création d'une culture axée sur les données."
+        },
+        "governance": {
+          "title": "Gouvernance & conformité",
+          "description": "Implémentation de cadres de gouvernance IA, politiques d'utilisation éthique et conformité réglementaire (RGPD, AI Act)."
+        },
+        "performanceTracking": {
+          "title": "Suivi de performance",
+          "description": "Définition de KPI pertinents, implémentation de tableaux de bord de suivi et optimisation continue basée sur les données."
+        },
+        "riskManagement": {
+          "title": "Gestion des risques",
+          "description": "Identification et mitigation des risques liés à l'IA (biais, sécurité, dépendance) avec stratégies de contingence robustes."
+        }
+      },
+      "frameworkTitle": "Cadre de transformation",
+      "frameworkDescription": "Notre méthodologie éprouvée pour orchestrer des transformations IA réussies, de la vision à l'impact.",
+      "phases": {
+        "discover": {
+          "title": "Découverte",
+          "description": "Audit de maturité IA, identification des opportunités et alignement avec la stratégie business"
+        },
+        "define": {
+          "title": "Définition",
+          "description": "Construction de la vision IA, priorisation des use cases et définition de la feuille de route"
+        },
+        "deploy": {
+          "title": "Déploiement",
+          "description": "Exécution des projets pilotes, scaling des solutions et intégration dans les processus"
+        },
+        "drive": {
+          "title": "Pilotage",
+          "description": "Optimisation continue, mesure de l'impact et évolution de la stratégie"
+        }
+      },
+      "deliverablesTitle": "Livrables clés",
+      "deliverables": {
+        "strategic": {
+          "title": "Stratégiques",
+          "items": ["Vision & feuille de route IA", "Business cases détaillés", "Cadre de gouvernance", "Politique d'utilisation éthique", "Stratégie de gestion du changement"]
+        },
+        "operational": {
+          "title": "Opérationnels",
+          "items": ["Plans d'exécution détaillés", "Tableaux de bord de suivi KPI", "Processus optimisés", "Guides d'utilisation", "Plans de formation"]
+        },
+        "organizational": {
+          "title": "Organisationnels",
+          "items": ["Organigrammes cibles", "Fiches de poste IA", "Parcours de formation", "Communautés de pratique", "Plans de communication"]
+        }
+      },
+      "approachTitle": "Notre approche",
+      "steps": {
+        "assessment": {
+          "step": "01",
+          "title": "Évaluation & vision",
+          "description": "Évaluation de votre maturité IA, identification des quick wins et construction d'une vision ambitieuse mais réaliste."
+        },
+        "strategy": {
+          "step": "02",
+          "title": "Stratégie & feuille de route",
+          "description": "Définition de la stratégie IA alignée avec vos objectifs business et construction d'une feuille de route de transformation par phases."
+        },
+        "pilot": {
+          "step": "03",
+          "title": "Pilote & validation",
+          "description": "Lancement de projets pilotes pour valider l'approche, mesurer l'impact et ajuster la stratégie avant le scaling."
+        },
+        "scale": {
+          "step": "04",
+          "title": "Mise à l'échelle & intégration",
+          "description": "Déploiement à grande échelle, intégration dans les processus existants et formation des équipes pour l'autonomie."
+        },
+        "optimize": {
+          "step": "05",
+          "title": "Optimisation & évolution",
+          "description": "Mesure continue de la performance, optimisation des solutions et évolution de la stratégie selon les résultats."
+        }
+      },
+      "ctaTitle": "Prêt à orchestrer votre transformation IA ?",
+      "ctaDescription": "Discutons de votre vision et construisons ensemble la stratégie qui transformera votre organisation.",
+      "ctaButton1": "Planifier un diagnostic stratégique",
+      "ctaButton2": "Évaluer votre maturité IA"
+    },
+    "aiLab": {
+      "badge": "Le laboratoire IA",
+      "heroTitle": "Fondation",
+      "heroTitleHighlight": "technologique",
+      "heroDescription": "Nous construisons l'infrastructure technologique qui alimente votre transformation IA. Du développement d'agents intelligents à l'architecture de données, nous créons les fondations techniques de votre avenir augmenté.",
+      "ctaStart": "Démarrer un projet",
+      "ctaLearnMore": "En savoir plus sur le lab",
+      "capabilitiesTitle": "Capacités techniques",
+      "capabilities": {
+        "aiAgents": {
+          "title": "Agents IA & automatisation",
+          "description": "Développement d'agents intelligents autonomes capables d'exécuter des tâches complexes, d'apprendre et de s'adapter à votre environnement business."
+        },
+        "dataPlatforms": {
+          "title": "Plateformes de données & pipelines",
+          "description": "Architecture et implémentation de plateformes de données modernes avec pipelines ETL/ELT, data lakes et entrepôts de données optimisés."
+        },
+        "apiIntegration": {
+          "title": "API & intégration",
+          "description": "Conception et développement d'API robustes et d'intégrations système pour connecter de manière transparente vos outils et données."
+        },
+        "customModels": {
+          "title": "Modèles IA sur mesure",
+          "description": "Fine-tuning et déploiement de modèles IA personnalisés adaptés à vos cas d'usage spécifiques et données propriétaires."
+        },
+        "performance": {
+          "title": "Optimisation de performance",
+          "description": "Optimisation de performance, scalabilité et réduction des coûts d'infrastructure pour vos systèmes IA et de données."
+        },
+        "security": {
+          "title": "Sécurité & conformité",
+          "description": "Implémentation de mesures de sécurité robustes et conformité réglementaire (RGPD, SOC2, ISO) pour vos systèmes IA."
+        }
+      },
+      "techStackTitle": "Stack technologique",
+      "techStackDescription": "Nous utilisons les technologies les plus avancées et éprouvées pour construire des solutions robustes et scalables.",
+      "techStack": {
+        "aiMl": {
+          "title": "IA & ML",
+          "items": ["OpenAI GPT-4, Claude, Gemini", "LangChain, LlamaIndex", "TensorFlow, PyTorch", "Hugging Face Transformers", "Bases de données vectorielles (Pinecone, Weaviate)"]
+        },
+        "dataInfrastructure": {
+          "title": "Données & infrastructure",
+          "items": ["AWS, Google Cloud, Azure", "Snowflake, BigQuery, Databricks", "Apache Airflow, dbt", "PostgreSQL, MongoDB, Redis", "Docker, Kubernetes"]
+        },
+        "development": {
+          "title": "Développement",
+          "items": ["Python, TypeScript, Go", "FastAPI, Node.js, React", "GraphQL, REST APIs", "CI/CD (GitHub Actions, GitLab)", "Monitoring (Datadog, Grafana)"]
+        }
+      },
+      "approachTitle": "Notre approche",
+      "steps": {
+        "discovery": {
+          "step": "01",
+          "title": "Découverte & architecture",
+          "description": "Audit technique de votre infrastructure existante, identification des besoins et conception de l'architecture cible."
+        },
+        "poc": {
+          "step": "02",
+          "title": "Preuve de concept",
+          "description": "Développement rapide de POC pour valider la faisabilité technique et démontrer la valeur avant investissement complet."
+        },
+        "development": {
+          "step": "03",
+          "title": "Développement & intégration",
+          "description": "Développement itératif avec intégration continue dans vos systèmes existants, tests rigoureux et documentation complète."
+        },
+        "deployment": {
+          "step": "04",
+          "title": "Déploiement & optimisation",
+          "description": "Déploiement en production avec monitoring, optimisation de performance et formation de vos équipes techniques."
+        },
+        "support": {
+          "step": "05",
+          "title": "Support & évolution",
+          "description": "Support technique continu, maintenance proactive et évolution des solutions selon vos besoins changeants."
+        }
+      },
+      "ctaTitle": "Prêt à construire votre infrastructure IA ?",
+      "ctaDescription": "Discutons de vos besoins techniques et concevons ensemble la solution adaptée à vos ambitions.",
+      "ctaButton1": "Planifier une consultation technique",
+      "ctaButton2": "Voir nos réalisations"
+    }
   }
 }

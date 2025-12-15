@@ -3,8 +3,31 @@ import { Link } from "wouter";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 
 export default function CreativeStudioService() {
+  const { t, language } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
+  
+  // Helper to get array translations
+  const getArrayTranslation = (key: string): string[] => {
+    try {
+      const translations = require(`../../locales/${language}.json`);
+      const keys = key.split('.');
+      let value: any = translations.default || translations;
+      for (const k of keys) {
+        if (value && typeof value === 'object' && k in value) {
+          value = value[k];
+        } else {
+          return [];
+        }
+      }
+      return Array.isArray(value) ? value : [];
+    } catch {
+      return [];
+    }
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-[rgb(107,23,22)] via-[rgb(40,60,120)] to-[rgb(107,23,22)]">
       <Header />
@@ -14,32 +37,31 @@ export default function CreativeStudioService() {
         <div className="container max-w-6xl">
           <div className="flex items-center gap-2 text-pink-400 mb-6">
             <Sparkles className="w-5 h-5" />
-            <span className="text-sm font-medium tracking-wider uppercase">The Creative Studio</span>
+            <span className="text-sm font-medium tracking-wider uppercase">{t('services.creativeStudio.badge')}</span>
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-            Augmented Content
+            {t('services.creativeStudio.heroTitle')}
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-orange-500">
-              & Experiences
+              {t('services.creativeStudio.heroTitleHighlight')}
             </span>
           </h1>
           
           <p className="text-xl text-white/80 max-w-3xl mb-8">
-            We create AI-augmented content and experiences. Du marketing agentique aux 
-            campagnes multicanales intelligentes, nous amplifions votre impact créatif avec la puissance de l'intelligence artificielle.
+            {t('services.creativeStudio.heroDescription')}
           </p>
           
           <div className="flex flex-wrap gap-4">
-            <Link href="/contact">
+            <Link href={getLocalizedPath('/contact')}>
               <Button size="lg" className="bg-pink-500 hover:bg-pink-600 text-white">
-                Launch a Campaign
+                {t('services.creativeStudio.ctaLaunch')}
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
-            <Link href="/studio">
+            <Link href={getLocalizedPath('/studio')}>
               <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
-                Learn More About the Studio
+                {t('services.creativeStudio.ctaLearnMore')}
               </Button>
             </Link>
           </div>
@@ -49,39 +71,39 @@ export default function CreativeStudioService() {
       {/* Core Services */}
       <section className="py-20 px-4 bg-black/20">
         <div className="container max-w-6xl">
-          <h2 className="text-4xl font-bold text-white mb-12">Creative Services</h2>
+          <h2 className="text-4xl font-bold text-white mb-12">{t('services.creativeStudio.coreServicesTitle')}</h2>
           
           <div className="grid md:grid-cols-2 gap-8">
             {[
               {
                 icon: Zap,
-                title: "Agentic Marketing",
-                description: "Deployment of autonomous AI agents to automate and optimize your marketing campaigns: content generation, A/B testing, real-time personalization."
+                title: t('services.creativeStudio.services.agenticMarketing.title'),
+                description: t('services.creativeStudio.services.agenticMarketing.description')
               },
               {
                 icon: MessageSquare,
-                title: "Content Generation",
-                description: "Large-scale content production: blog articles, social posts, newsletters, video scripts, all adapted to your tone and audience."
+                title: t('services.creativeStudio.services.contentGeneration.title'),
+                description: t('services.creativeStudio.services.contentGeneration.description')
               },
               {
                 icon: Image,
-                title: "Visual Creation",
-                description: "AI-powered image, illustration, and design generation: social media visuals, marketing assets, product mockups, and brand assets."
+                title: t('services.creativeStudio.services.visualCreation.title'),
+                description: t('services.creativeStudio.services.visualCreation.description')
               },
               {
                 icon: Video,
-                title: "Video & Animation",
-                description: "AI-augmented video creation: automatic editing, voiceover generation, intelligent subtitles, and personalized animations."
+                title: t('services.creativeStudio.services.videoAnimation.title'),
+                description: t('services.creativeStudio.services.videoAnimation.description')
               },
               {
                 icon: Mic,
-                title: "Audio & Voice",
-                description: "AI audio production: natural synthetic voiceovers, automated podcasts, voice translation, and voice cloning for branding."
+                title: t('services.creativeStudio.services.audioVoice.title'),
+                description: t('services.creativeStudio.services.audioVoice.description')
               },
               {
                 icon: Globe,
-                title: "Omnichannel Campaigns",
-                description: "Orchestration of cohesive omnichannel campaigns with AI personalization across web, social, email, SMS, and programmatic advertising."
+                title: t('services.creativeStudio.services.omnichannelCampaigns.title'),
+                description: t('services.creativeStudio.services.omnichannelCampaigns.description')
               }
             ].map((service, index) => (
               <div key={index} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6 hover:bg-white/10 transition-colors">
@@ -97,28 +119,28 @@ export default function CreativeStudioService() {
       {/* Creative Process */}
       <section className="py-20 px-4">
         <div className="container max-w-6xl">
-          <h2 className="text-4xl font-bold text-white mb-6">Augmented Creative Process</h2>
+          <h2 className="text-4xl font-bold text-white mb-6">{t('services.creativeStudio.processTitle')}</h2>
           <p className="text-white/70 mb-12 max-w-3xl">
-            Our hybrid approach combines human creativity and AI power to create content that resonates and performs.
+            {t('services.creativeStudio.processDescription')}
           </p>
           
           <div className="grid md:grid-cols-4 gap-6">
             {[
               {
-                phase: "Ideate",
-                description: "AI-augmented brainstorming, trend analysis, and large-scale creative idea generation"
+                phase: t('services.creativeStudio.phases.ideate.title'),
+                description: t('services.creativeStudio.phases.ideate.description')
               },
               {
-                phase: "Create",
-                description: "Multi-format content production with AI tools, rapid iteration, and personalized variations"
+                phase: t('services.creativeStudio.phases.create.title'),
+                description: t('services.creativeStudio.phases.create.description')
               },
               {
-                phase: "Optimize",
-                description: "Automated A/B testing, real-time performance analysis, and continuous optimization"
+                phase: t('services.creativeStudio.phases.optimize.title'),
+                description: t('services.creativeStudio.phases.optimize.description')
               },
               {
-                phase: "Scale",
-                description: "Omnichannel deployment, local adaptation, and intelligent amplification of high-performing content"
+                phase: t('services.creativeStudio.phases.scale.title'),
+                description: t('services.creativeStudio.phases.scale.description')
               }
             ].map((phase, index) => (
               <div key={index} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6">
@@ -133,42 +155,36 @@ export default function CreativeStudioService() {
       {/* Tools & Platforms */}
       <section className="py-20 px-4 bg-black/20">
         <div className="container max-w-6xl">
-          <h2 className="text-4xl font-bold text-white mb-12">Tools Outils & Plateformes Platforms</h2>
+          <h2 className="text-4xl font-bold text-white mb-12">{t('services.creativeStudio.toolsTitle')}</h2>
           
           <div className="grid md:grid-cols-3 gap-8">
             <div className="space-y-4">
               <Palette className="w-12 h-12 text-pink-400" />
-              <h3 className="text-xl font-semibold text-white">Content Generation</h3>
+              <h3 className="text-xl font-semibold text-white">{t('services.creativeStudio.tools.contentGeneration.title')}</h3>
               <ul className="space-y-2 text-white/70">
-                <li>• GPT-4, Claude, Gemini</li>
-                <li>• Midjourney, DALL-E, Stable Diffusion</li>
-                <li>• Runway, Pika, Sora</li>
-                <li>• ElevenLabs, Descript</li>
-                <li>• Copy.ai, Jasper</li>
+                {getArrayTranslation('services.creativeStudio.tools.contentGeneration.items').map((item: string, idx: number) => (
+                  <li key={idx}>• {item}</li>
+                ))}
               </ul>
             </div>
             
             <div className="space-y-4">
               <Zap className="w-12 h-12 text-pink-400" />
-              <h3 className="text-xl font-semibold text-white">Marketing Automation</h3>
+              <h3 className="text-xl font-semibold text-white">{t('services.creativeStudio.tools.marketingAutomation.title')}</h3>
               <ul className="space-y-2 text-white/70">
-                <li>• HubSpot, Marketo, Salesforce</li>
-                <li>• Zapier, Make, n8n</li>
-                <li>• Google Analytics, Mixpanel</li>
-                <li>• Segment, Amplitude</li>
-                <li>• Optimizely, VWO</li>
+                {getArrayTranslation('services.creativeStudio.tools.marketingAutomation.items').map((item: string, idx: number) => (
+                  <li key={idx}>• {item}</li>
+                ))}
               </ul>
             </div>
             
             <div className="space-y-4">
               <Globe className="w-12 h-12 text-pink-400" />
-              <h3 className="text-xl font-semibold text-white">Distribution</h3>
+              <h3 className="text-xl font-semibold text-white">{t('services.creativeStudio.tools.distribution.title')}</h3>
               <ul className="space-y-2 text-white/70">
-                <li>• Meta Business Suite</li>
-                <li>• LinkedIn Campaign Manager</li>
-                <li>• Google Ads, DV360</li>
-                <li>• Mailchimp, SendGrid</li>
-                <li>• Buffer, Hootsuite</li>
+                {getArrayTranslation('services.creativeStudio.tools.distribution.items').map((item: string, idx: number) => (
+                  <li key={idx}>• {item}</li>
+                ))}
               </ul>
             </div>
           </div>
@@ -178,29 +194,29 @@ export default function CreativeStudioService() {
       {/* Use Cases */}
       <section className="py-20 px-4">
         <div className="container max-w-6xl">
-          <h2 className="text-4xl font-bold text-white mb-12">Use Cases</h2>
+          <h2 className="text-4xl font-bold text-white mb-12">{t('services.creativeStudio.useCasesTitle')}</h2>
           
           <div className="space-y-6">
             {[
               {
-                title: "Content Marketing at Scale",
-                description: "Automated generation of hundreds of SEO-optimized blog articles per month, adapted to different audiences and personas.",
-                impact: "10x content volume, -70% production costs"
+                title: t('services.creativeStudio.useCases.contentMarketing.title'),
+                description: t('services.creativeStudio.useCases.contentMarketing.description'),
+                impact: t('services.creativeStudio.useCases.contentMarketing.impact')
               },
               {
-                title: "Personalized Email Campaigns",
-                description: "Creation of hyper-personalized email campaigns with AI-generated dynamic content based on each lead's profile and behavior.",
-                impact: "+250% open rate, +180% conversion rate"
+                title: t('services.creativeStudio.useCases.personalizedEmail.title'),
+                description: t('services.creativeStudio.useCases.personalizedEmail.description'),
+                impact: t('services.creativeStudio.useCases.personalizedEmail.impact')
               },
               {
-                title: "Social Media Automation",
-                description: "AI agents that automatically create, schedule, and optimize your posts across all social networks with continuous A/B testing.",
-                impact: "100% daily coverage, +320% engagement"
+                title: t('services.creativeStudio.useCases.socialMediaAutomation.title'),
+                description: t('services.creativeStudio.useCases.socialMediaAutomation.description'),
+                impact: t('services.creativeStudio.useCases.socialMediaAutomation.impact')
               },
               {
-                title: "Dynamic Ad Creative",
-                description: "Automatic generation of thousands of ad creative variations tested and optimized in real-time based on performance.",
-                impact: "-45% CPA, +190% ROAS"
+                title: t('services.creativeStudio.useCases.dynamicAdCreative.title'),
+                description: t('services.creativeStudio.useCases.dynamicAdCreative.description'),
+                impact: t('services.creativeStudio.useCases.dynamicAdCreative.impact')
               }
             ].map((useCase, index) => (
               <div key={index} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6">
@@ -219,21 +235,21 @@ export default function CreativeStudioService() {
       <section className="py-20 px-4 bg-black/20">
         <div className="container max-w-4xl text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Ready to amplify your creative impact?
+            {t('services.creativeStudio.ctaTitle')}
           </h2>
           <p className="text-xl text-white/70 mb-8">
-            Let's discuss your marketing goals and create campaigns that perform at scale together.
+            {t('services.creativeStudio.ctaDescription')}
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/contact">
+            <Link href={getLocalizedPath('/contact')}>
               <Button size="lg" className="bg-pink-500 hover:bg-pink-600 text-white">
-                Lancer votre première campagne AI
+                {t('services.creativeStudio.ctaButton1')}
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
-            <Link href="/projects">
+            <Link href={getLocalizedPath('/projects')}>
               <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
-                Voir nos créations
+                {t('services.creativeStudio.ctaButton2')}
               </Button>
             </Link>
           </div>

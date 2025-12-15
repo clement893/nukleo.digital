@@ -448,6 +448,127 @@
     "ctaDescription": "Nous sommes toujours à la recherche de talents passionnés pour rejoindre notre mission. Consultez nos offres d'emploi et aidez-nous à construire l'avenir.",
     "ctaButton": "Voir les carrières"
   },
+  "services": {
+    "title": "Services",
+    "subtitle": "Nous sommes à vos côtés pour vous aider à grandir.",
+    "description": "Services IA complets : Stratégie & Marketing, Plateformes Numériques, Opérations Intelligentes.",
+    "ourServices": "Nos Services",
+    "heroTitle": "Nous sommes à vos côtés",
+    "heroSubtitle": "pour vous aider à grandir.",
+    "heroDescription": "Trois studios spécialisés travaillant en harmonie pour transformer votre vision en réalité. De la stratégie à la créativité, de l'innovation à l'exécution.",
+    "bureau": {
+      "category": "Le Bureau",
+      "subtitle": "Quartier Général Stratégique",
+      "description": "Votre quartier général stratégique. Ici, nous transformons les données en décisions, les insights en actions, et les opportunités en résultats mesurables.",
+      "services": {
+        "aiStrategy": {
+          "title": "Consultation en Stratégie IA",
+          "description": "Définissez votre feuille de route IA avec des conseils d'experts sur la sélection de technologies, la planification de l'implémentation et l'optimisation du ROI."
+        },
+        "conversationalAI": {
+          "title": "IA Conversationnelle",
+          "description": "Déployez des chatbots intelligents et des assistants virtuels qui comprennent le contexte, apprennent des interactions et offrent des expériences personnalisées."
+        },
+        "marketingAutomation": {
+          "title": "Automatisation Marketing",
+          "description": "Automatisez vos flux de travail marketing avec des campagnes alimentées par l'IA, le scoring de leads et la livraison de contenu personnalisé."
+        },
+        "predictiveAnalytics": {
+          "title": "Analytique Prédictive",
+          "description": "Tirez parti de l'IA pour prévoir les tendances, prédire le comportement des clients et prendre des décisions basées sur les données en toute confiance."
+        }
+      }
+    },
+    "lab": {
+      "category": "Le Lab",
+      "subtitle": "Laboratoire d'Innovation",
+      "description": "Bienvenue dans notre laboratoire d'innovation. Ici, nous transformons les technologies de pointe en avantages concurrentiels tangibles.",
+      "services": {
+        "customWebApps": {
+          "title": "Applications Web Sur Mesure",
+          "description": "Développez des plateformes web sur mesure avec des fonctionnalités alimentées par l'IA, la collaboration en temps réel et des intégrations transparentes."
+        },
+        "apiDevelopment": {
+          "title": "Développement & Intégration d'API",
+          "description": "Créez des API robustes et intégrez des services tiers pour construire des écosystèmes connectés et intelligents."
+        },
+        "uxDesign": {
+          "title": "Design d'Expérience Utilisateur",
+          "description": "Concevez des interfaces intuitives qui combinent le design centré sur l'humain avec la personnalisation alimentée par l'IA."
+        },
+        "security": {
+          "title": "Sécurité & Conformité",
+          "description": "Implémentez une sécurité de niveau entreprise, des contrôles de confidentialité des données et des cadres de conformité pour vos plateformes numériques."
+        }
+      }
+    },
+    "studio": {
+      "category": "Le Studio",
+      "subtitle": "Atelier Créatif",
+      "description": "Bienvenue dans l'atelier où les idées deviennent réalité. Notre Studio Créatif fusionne stratégie et créativité pour créer des expériences de marque captivantes.",
+      "services": {
+        "brandIdentity": {
+          "title": "Identité de Marque & Stratégie",
+          "description": "Créez des identités de marque convaincantes qui résonnent avec votre audience et vous différencient sur le marché."
+        },
+        "uiuxDesign": {
+          "title": "Design UI/UX",
+          "description": "Concevez des interfaces époustouflantes qui allient esthétique et fonctionnalité, créant des expériences que les utilisateurs adorent."
+        },
+        "contentCreation": {
+          "title": "Création de Contenu",
+          "description": "Produisez du contenu visuel et écrit à fort impact qui raconte votre histoire et stimule l'engagement."
+        },
+        "campaignDesign": {
+          "title": "Design de Campagne",
+          "description": "Concevez des campagnes marketing intégrées qui captent l'attention et livrent des résultats mesurables."
+        }
+      }
+    },
+    "explore": "Explorer",
+    "cta": {
+      "title": "Prêt à commencer ?",
+      "description": "Discutons de la manière dont nos services IA peuvent transformer votre entreprise et accélérer votre croissance.",
+      "button": "Démarrer votre transformation"
+    }
+  },
+  "projects": {
+    "title": "Projets",
+    "heroTitle": "Transformations",
+    "heroSubtitle": "qui Résonnent",
+    "description": "Résultats réels d'organisations qui ont choisi de mener plutôt que de suivre. Chaque projet représente une réinvention complète des opérations grâce à l'IA agentique.",
+    "filterAll": "Tout",
+    "noProjects": "Aucun projet trouvé",
+    "filters": {
+      "all": "Tout",
+      "aiPlatforms": "Plateformes IA",
+      "marketing": "Marketing",
+      "webApps": "Applications Web",
+      "strategy": "Stratégie"
+    },
+    "items": {
+      "autonomousMarketing": {
+        "title": "Plateforme Marketing Autonome",
+        "category": "Plateformes IA",
+        "description": "Gestion de campagnes de bout en bout alimentée par des agents IA, de la génération de contenu à l'optimisation des performances."
+      },
+      "intelligentEcommerce": {
+        "title": "Écosystème E-Commerce Intelligent",
+        "category": "Applications Web",
+        "description": "Expérience d'achat auto-optimisante avec personnalisation alimentée par l'IA et gestion prédictive des stocks."
+      },
+      "enterpriseTransformation": {
+        "title": "Transformation IA d'Entreprise",
+        "category": "Stratégie",
+        "description": "Refonte opérationnelle complète intégrant l'IA agentique dans tous les départements et flux de travail."
+      },
+      "contentGeneration": {
+        "title": "Moteur de Génération de Contenu",
+        "category": "Marketing",
+        "description": "Système de création de contenu automatisé produisant des campagnes personnalisées multi-canaux à grande échelle."
+      }
+    }
+  },
   "contact": {
     "seoTitle": "Contactez-nous | Démarrons votre projet IA",
     "seoDescription": "Prêt à commencer votre transformation IA ? Contactez notre équipe d'experts à Montréal ou Halifax pour discuter de votre projet. Remplissez notre formulaire ou appelez-nous.",
@@ -465,12 +586,24 @@
       "success": "Merci ! Votre message a été envoyé. Nous vous répondrons sous peu.",
       "error": "Une erreur s'est produite. Veuillez réessayer."
     },
+    "sendMessage": "Envoyez-nous un message",
+    "successMessage": "✓ Message envoyé avec succès ! Nous vous répondrons dans les 24 heures.",
+    "errorMessage": "✗ Échec de l'envoi du message. Veuillez réessayer.",
+    "firstNamePlaceholder": "Jean",
+    "lastNamePlaceholder": "Dupont",
+    "emailPlaceholder": "jean@entreprise.com",
+    "companyPlaceholder": "Votre entreprise",
+    "messagePlaceholder": "Parlez-nous de votre projet...",
+    "getInTouch": "Prendre contact",
+    "contactDescription": "Prêt à transformer votre entreprise avec l'IA ? Contactez-nous pour une consultation d'experts.",
     "infoTitle": "Nos coordonnées",
     "montreal": "Montréal",
     "halifax": "Halifax",
     "addressMontreal": "7236 Rue Waverly, Montréal, QC H2R 0C2",
     "addressHalifax": "1800 Argyle St Unit 801, Halifax, NS B3J 3N8",
-    "email": "hello@nukleo.digital"
+    "email": "hello@nukleo.digital",
+    "emailUs": "Envoyez-nous un email",
+    "phone": "Téléphone"
   },
   "startProject": {
     "seoTitle": "Démarrer un projet | Nukleo Digital",

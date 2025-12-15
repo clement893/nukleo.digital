@@ -54,12 +54,6 @@ const ALL_PAGES = [
   { path: '/fr/cookies', label: 'Cookies (FR)', description: 'Page politique des cookies en français' },
   { path: '/faq', label: 'FAQ', description: 'Page FAQ' },
   { path: '/fr/faq', label: 'FAQ (FR)', description: 'Page FAQ en français' },
-  { path: '/lab', label: 'The Lab', description: 'Page The Lab' },
-  { path: '/fr/lab', label: 'The Lab (FR)', description: 'Page The Lab en français' },
-  { path: '/bureau', label: 'The Bureau', description: 'Page The Bureau' },
-  { path: '/fr/bureau', label: 'The Bureau (FR)', description: 'Page The Bureau en français' },
-  { path: '/studio', label: 'The Studio', description: 'Page The Studio' },
-  { path: '/fr/studio', label: 'The Studio (FR)', description: 'Page The Studio en français' },
   { path: '/agencies', label: 'Agences', description: 'Page agences' },
   { path: '/fr/agencies', label: 'Agences (FR)', description: 'Page agences en français' },
 ];

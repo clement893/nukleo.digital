@@ -59,7 +59,7 @@ export default function StrategicBureauService() {
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
-            <Link href={getLocalizedPath('/bureau')}>
+            <Link href={getLocalizedPath('/services/strategic-bureau')}>
               <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
                 {t('services.strategicBureau.ctaLearnMore')}
               </Button>

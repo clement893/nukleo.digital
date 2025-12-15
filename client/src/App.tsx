@@ -88,9 +88,6 @@ const TermsOfService = lazy(() => import("./pages/TermsOfService"));
 const CookiePolicy = lazy(() => import("./pages/CookiePolicy"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 const ArtsCulture = lazy(() => import("./pages/ArtsCulture"));
-const Lab = lazy(() => import("./pages/Lab"));
-const Bureau = lazy(() => import("./pages/Bureau"));
-const Studio = lazy(() => import("./pages/Studio"));
 const AILabService = lazy(() => import("./pages/services/AILab"));
 const StrategicBureauService = lazy(() => import("./pages/services/StrategicBureau"));
 const CreativeStudioService = lazy(() => import("./pages/services/CreativeStudio"));
@@ -178,9 +175,6 @@ function App() {
               <Route path="/fr/cookie-policy" component={withPageVisibility(CookiePolicy, "/fr/cookie-policy")} />
               <Route path="/fr/faq" component={withPageVisibility(FAQ, "/fr/faq")} />
               <Route path="/fr/arts-culture" component={withPageVisibility(ArtsCulture, "/fr/arts-culture")} />
-              <Route path="/fr/lab" component={withPageVisibility(Lab, "/fr/lab")} />
-              <Route path="/fr/bureau" component={withPageVisibility(Bureau, "/fr/bureau")} />
-              <Route path="/fr/studio" component={withPageVisibility(Studio, "/fr/studio")} />
               <Route path="/fr/services/ai-lab" component={withPageVisibility(AILabService, "/fr/services/ai-lab")} />
               <Route path="/fr/services/strategic-bureau" component={withPageVisibility(StrategicBureauService, "/fr/services/strategic-bureau")} />
               <Route path="/fr/services/creative-studio" component={withPageVisibility(CreativeStudioService, "/fr/services/creative-studio")} />
@@ -221,9 +215,6 @@ function App() {
             <Route path="/cookie-policy" component={withPageVisibility(CookiePolicy, "/cookie-policy")} />
             <Route path="/faq" component={withPageVisibility(FAQ, "/faq")} />
             <Route path="/arts-culture" component={withPageVisibility(ArtsCulture, "/arts-culture")} />
-            <Route path="/lab" component={withPageVisibility(Lab, "/lab")} />
-            <Route path="/bureau" component={withPageVisibility(Bureau, "/bureau")} />
-            <Route path="/studio" component={withPageVisibility(Studio, "/studio")} />
             <Route path="/services/ai-lab" component={withPageVisibility(AILabService, "/services/ai-lab")} />
             <Route path="/services/strategic-bureau" component={withPageVisibility(StrategicBureauService, "/services/strategic-bureau")} />
             <Route path="/services/creative-studio" component={withPageVisibility(CreativeStudioService, "/services/creative-studio")} />

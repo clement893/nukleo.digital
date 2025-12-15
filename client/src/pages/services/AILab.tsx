@@ -59,7 +59,7 @@ export default function AILabService() {
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
-            <Link href={getLocalizedPath('/lab')}>
+            <Link href={getLocalizedPath('/services/ai-lab')}>
               <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
                 {t('services.aiLab.ctaLearnMore')}
               </Button>

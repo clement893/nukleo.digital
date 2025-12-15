@@ -59,7 +59,7 @@ export default function CreativeStudioService() {
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
-            <Link href={getLocalizedPath('/studio')}>
+            <Link href={getLocalizedPath('/services/creative-studio')}>
               <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
                 {t('services.creativeStudio.ctaLearnMore')}
               </Button>

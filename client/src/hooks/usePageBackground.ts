@@ -25,12 +25,6 @@ const pageBackgrounds: Record<string, string> = {
   '/fr/faq': 'black',
   '/services': 'gradient',
   '/fr/services': 'gradient',
-  '/studio': 'black',
-  '/fr/studio': 'black',
-  '/lab': 'black',
-  '/fr/lab': 'black',
-  '/bureau': 'black',
-  '/fr/bureau': 'black',
 };
 
 const gradientStyle = `linear-gradient(

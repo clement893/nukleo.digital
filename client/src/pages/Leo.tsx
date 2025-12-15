@@ -19,17 +19,27 @@ interface Message {
 
 export default function Leo() {
   const { t } = useLanguage();
+  const welcomeMessage = t('leo.welcomeMessage') || "I'm here to help architect your AI transformation. To begin, what should I call you?";
+  
   // Load messages from localStorage on mount
   const loadMessages = (): Message[] => {
     try {
       const saved = localStorage.getItem('leo-chat-history');
       if (saved) {
         const parsed = JSON.parse(saved);
-        // Convert timestamp strings back to Date objects
-        return parsed.map((msg: any) => ({
-          ...msg,
-          timestamp: new Date(msg.timestamp),
-        }));
+        // Convert timestamp strings back to Date objects and update welcome message if it's the default English one
+        return parsed.map((msg: any) => {
+          const message = {
+            ...msg,
+            timestamp: new Date(msg.timestamp),
+          };
+          // If this is the default welcome message (in English), replace it with translated version
+          if (msg.role === 'assistant' && 
+              msg.content === "I'm here to help architect your AI transformation. To begin, what should I call you?") {
+            message.content = welcomeMessage;
+          }
+          return message;
+        });
       }
     } catch (error) {
       console.error('Error loading chat history:', error);
@@ -38,13 +48,13 @@ export default function Leo() {
     return [
       {
         role: 'assistant',
-        content: t('leo.welcomeMessage') || "I'm here to help architect your AI transformation. To begin, what should I call you?",
+        content: welcomeMessage,
         timestamp: new Date(),
       },
     ];
   };
 
-  const [messages, setMessages] = useState<Message[]>(loadMessages);
+  const [messages, setMessages] = useState<Message[]>(() => loadMessages());
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
@@ -243,6 +253,24 @@ export default function Leo() {
     setSuggestions(newSuggestions);
   }, [messages, isExpertMode]);
 
+  // Update welcome message if it's the default English one
+  useEffect(() => {
+    if (messages.length > 0 && messages[0].role === 'assistant') {
+      const firstMessage = messages[0];
+      const englishWelcome = "I'm here to help architect your AI transformation. To begin, what should I call you?";
+      if (firstMessage.content === englishWelcome) {
+        setMessages(prev => {
+          const updated = [...prev];
+          updated[0] = {
+            ...updated[0],
+            content: welcomeMessage,
+          };
+          return updated;
+        });
+      }
+    }
+  }, [welcomeMessage]);
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -269,7 +297,7 @@ export default function Leo() {
     const defaultMessages: Message[] = [
       {
         role: 'assistant',
-        content: t('leo.welcomeMessage') || "I'm here to help architect your AI transformation. To begin, what should I call you?",
+        content: welcomeMessage,
         timestamp: new Date(),
       },
     ];

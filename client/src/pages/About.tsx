@@ -187,7 +187,7 @@ export default function About() {
                 <div className="aspect-square rounded-xl overflow-hidden mb-4">
                   <OptimizedImage 
                     src={member.image.endsWith('.webp') ? member.image.replace('.webp', '.png') : member.image}
-                    webpSrc={member.image.endsWith('.png') ? member.image.replace('.png', '.webp') : member.image}
+                    webpSrc={member.image.endsWith('.webp') ? member.image : (member.image.endsWith('.png') && member.image !== '/team/Ricardo.png' && member.image !== '/team/Marie-Claire.png' ? member.image.replace('.png', '.webp') : undefined)}
                     alt={(t('alt.teamMember') || '{{name}} - {{role}} chez Nukleo Digital')
                       .replace('{{name}}', member.name)
                       .replace('{{role}}', t(`about.team.${member.translationKey}.role`) || member.translationKey)}

@@ -54,11 +54,11 @@ function GlobalLEO() {
 
 // Eager load only critical pages
 import Home from "./pages/Home";
+import About from "./pages/About";
 import NotFound404 from "@/pages/NotFound404";
 
 // Lazy load all other pages
 const Projects = lazy(() => import("./pages/Projects"));
-const About = lazy(() => import("./pages/About"));
 const Expertise = lazy(() => import("./pages/Expertise"));
 const Resources = lazy(() => import("./pages/Resources"));
 const ResourceArticle = lazy(() => import("./pages/resources/ResourceArticle"));

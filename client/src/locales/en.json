@@ -253,9 +253,37 @@
     "seoDescription": "Access Nukleo Digital's latest press releases, media kit, and company news. Download logos, brand guidelines, and connect with our press team.",
     "seoKeywords": "Nukleo press, media kit, press releases, company news, brand assets",
     "badge": "Press & Media",
-    "title": "Media",
-    "titleHighlight": "Center",
-    "description": "Latest news, press releases, and media resources from Nukleo Digital. For press inquiries, contact us at",
+    "heroTitle": "Media",
+    "heroTitleHighlight": "Center",
+    "heroDescription": "Latest news, press releases, and media resources from Nukleo Digital. For press inquiries, contact us at",
+    "contactForm": {
+      "title": "Media Contact Form",
+      "description": "Fill out this form for any interview requests, information, or collaboration inquiries.",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "mediaOutlet": "Media Outlet",
+      "subject": "Subject",
+      "message": "Message",
+      "submit": "Send",
+      "success": "Thank you! Your message has been sent. We will respond within 24 hours.",
+      "error": "An error occurred. Please try again."
+    },
+    "mediaContact": {
+      "title": "Media Contact",
+      "description": "For any interview requests, information, or collaboration inquiries, contact our media relations team.",
+      "email": "press@nukleo.digital",
+      "responseTime": "We typically respond within 24 hours"
+    },
+    "pressArticles": {
+      "title": "Press Articles",
+      "description": "Discover articles and media coverage about Nukleo Digital"
+    },
+    "linkedinFeed": {
+      "title": "LinkedIn News",
+      "description": "Follow our latest news and publications on LinkedIn",
+      "followUs": "Follow us on LinkedIn"
+    },
     "pressReleases": {
       "title": "Latest Press Releases",
       "categories": {

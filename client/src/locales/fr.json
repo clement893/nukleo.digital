@@ -916,16 +916,38 @@
     "seoTitle": "Espace Média | Nukleo Digital",
     "seoDescription": "Accédez à nos communiqués de presse, à notre kit média et aux dernières nouvelles de Nukleo Digital. Pour toute demande des médias, contactez notre équipe.",
     "seoKeywords": "espace média Nukleo Digital, communiqués de presse IA, contact presse Nukleo, kit média agence IA",
-    "title": "Espace<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">Média</span>",
-    "description": "Retrouvez ici nos dernières annonces, nos communiqués de presse et les ressources pour les journalistes et les professionnels des médias.",
-    "pressReleases": "Communiqués de presse",
-    "inTheNews": "Nukleo dans les médias",
-    "mediaKit": "Kit Média",
-    "mediaKitDescription": "Téléchargez notre kit média complet comprenant notre logo, des photos de l'équipe de direction et des informations sur l'entreprise.",
-    "mediaKitButton": "Télécharger le kit média",
-    "mediaContactTitle": "Contact Média",
-    "mediaContactDescription": "Pour toute demande d'interview, d'information ou de collaboration, veuillez contacter notre équipe des relations avec les médias.",
-    "mediaContactEmail": "presse@nukleo.digital"
+    "badge": "Médias",
+    "heroTitle": "Espace",
+    "heroTitleHighlight": "Média",
+    "heroDescription": "Retrouvez ici nos dernières annonces, nos communiqués de presse et les ressources pour les journalistes et les professionnels des médias.",
+    "contactForm": {
+      "title": "Formulaire de contact média",
+      "description": "Remplissez ce formulaire pour toute demande d'interview, d'information ou de collaboration.",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "email": "Email",
+      "mediaOutlet": "Organe de presse",
+      "subject": "Sujet",
+      "message": "Message",
+      "submit": "Envoyer",
+      "success": "Merci ! Votre message a été envoyé. Nous vous répondrons dans les 24 heures.",
+      "error": "Une erreur s'est produite. Veuillez réessayer."
+    },
+    "mediaContact": {
+      "title": "Contact média",
+      "description": "Pour toute demande d'interview, d'information ou de collaboration, contactez notre équipe des relations avec les médias.",
+      "email": "presse@nukleo.digital",
+      "responseTime": "Nous répondons généralement dans les 24 heures"
+    },
+    "pressArticles": {
+      "title": "Articles de presse",
+      "description": "Découvrez les articles et couvertures médiatiques sur Nukleo Digital"
+    },
+    "linkedinFeed": {
+      "title": "Actualités LinkedIn",
+      "description": "Suivez nos dernières actualités et publications sur LinkedIn",
+      "followUs": "Suivez-nous sur LinkedIn"
+    }
   },
   "lab": {
     "title": "Le laboratoire IA",

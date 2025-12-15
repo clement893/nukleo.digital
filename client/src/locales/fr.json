@@ -968,53 +968,73 @@
     }
   },
   "studio": {
-    "seoTitle": "Le Studio Créatif | Contenu augmenté par l'IA | Nukleo Digital",
-    "seoDescription": "Découvrez comment notre Studio Créatif utilise l'IA pour créer des expériences de marque et du contenu à une échelle et une pertinence sans précédent. De la création de contenu augmenté aux campagnes marketing agentiques.",
-    "seoKeywords": "studio créatif IA, contenu augmenté IA, marketing agentique, création de contenu IA, expériences de marque IA",
-    "title": "Le Studio<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">Créatif</span>",
-    "subtitle": "Contenu et Expériences Augmentés",
-    "description": "Le Studio Créatif est l'endroit où la technologie rencontre l'art. Nous utilisons l'IA non pas pour remplacer la créativité, mais pour l'augmenter, permettant de créer des expériences de marque et du contenu à une échelle, une vitesse et une pertinence auparavant impossibles. Nous fusionnons l'intuition humaine avec la puissance de l'IA pour créer des campagnes qui résonnent.",
-    "servicesTitle": "Nos services créatifs augmentés",
-    "services": {
+    "title": "Le Studio Créatif",
+    "subtitle": "Contenu & Expériences Augmentés",
+    "heroDescription": "Nous utilisons l'IA pour créer des expériences de marque et du contenu à une échelle et une pertinence sans précédent. Du contenu génératif aux campagnes marketing autonomes, nous vous aidons à vous connecter avec les audiences de manières auparavant impossibles.",
+    "mission": "Notre Mission",
+    "missionText": "Exploiter le pouvoir créatif de l'IA pour livrer des <strong>expériences hyper-personnalisées à grande échelle</strong>. Nous ne remplaçons pas la créativité humaine, nous l'amplifions, permettant à votre marque de créer des connexions significatives avec chaque client, à chaque instant.",
+    "capabilities": {
+      "title": "Capacités Créatives",
       "contentCreation": {
-        "title": "Création de contenu à l'échelle",
-        "description": "Nous générons des milliers de variations de textes, d'images et de vidéos, personnalisées pour chaque segment d'audience et chaque canal de distribution."
+        "title": "Création de Contenu Augmenté",
+        "description": "Produire du contenu (texte, image, vidéo) à une échelle sans précédent, personnalisé en temps réel. Nous tirons parti de l'IA générative pour créer du contenu aligné avec la marque qui résonne avec chaque segment d'audience."
       },
-      "agenticCampaigns": {
-        "title": "Campagnes marketing agentiques",
-        "description": "Nous déployons des agents IA qui gèrent vos campagnes de A à Z : de l'analyse d'audience à l'achat média, en passant par l'optimisation en temps réel des créations."
+      "personalizedExperiences": {
+        "title": "Expériences Client Personnalisées par IA",
+        "description": "Créer des parcours clients uniques et dynamiques alimentés par l'IA. Des recommandations personnalisées aux interfaces adaptatives, nous concevons des expériences qui évoluent avec chaque interaction."
       },
-      "brandExperiences": {
-        "title": "Expériences de marque interactives",
-        "description": "Nous créons des expériences immersives, des installations interactives aux assistants de marque virtuels, qui engagent votre public de manière nouvelle et mémorable."
+      "agenticMarketing": {
+        "title": "Campagnes Marketing Agentiques",
+        "description": "Déployer des campagnes autonomes qui s'optimisent continuellement. Nos agents IA testent, apprennent et s'adaptent en temps réel, maximisant l'engagement et la conversion sur tous les canaux."
       },
-      "hyperPersonalization": {
-        "title": "Hyper-personnalisation",
-        "description": "Nous allons au-delà du simple [Prénom]. Nous personnalisons chaque point de contact, du contenu de votre site web à vos emails, en fonction du comportement et des préférences de chaque utilisateur."
+      "brandIdentity": {
+        "title": "Identité de Marque à l'Ère de l'IA",
+        "description": "Définir comment votre marque interagit et est perçue dans un monde d'assistants et d'agents IA. Nous vous aidons à établir une voix et une présence distinctives dans les expériences médiées par l'IA."
       }
     },
-    "processTitle": "Notre processus créatif",
-    "processDescription": "Une fusion de la stratégie, de la data et de la créativité.",
-    "process": {
-      "ideation": {
-        "title": "1. Idéation augmentée",
-        "description": "Nous utilisons l'IA pour explorer des milliers de concepts créatifs et identifier les plus prometteurs."
+    "revolution": {
+      "title": "La Révolution du Marketing Agentique",
+      "description": "Nous entrons dans l'ère du <strong>Marketing Agentique</strong> où les systèmes IA autonomes n'exécutent pas simplement des campagnes, ils apprennent, décident et agissent indépendamment pour atteindre vos objectifs commerciaux.",
+      "traditional": {
+        "title": "Marketing Traditionnel",
+        "items": [
+          "Configuration manuelle des campagnes",
+          "Optimisation périodique",
+          "Messagerie unique pour tous",
+          "Insights retardés",
+          "Personnalisation limitée"
+        ]
       },
-      "production": {
-        "title": "2. Production à l'échelle",
-        "description": "Nous produisons du contenu de haute qualité à une vitesse et un volume inégalés."
-      },
-      "distribution": {
-        "title": "3. Distribution intelligente",
-        "description": "Nous déployons le bon contenu, à la bonne personne, au bon moment, sur le bon canal."
-      },
-      "optimization": {
-        "title": "4. Optimisation continue",
-        "description": "Nos agents analysent la performance en temps réel et optimisent les campagnes pour un ROI maximal."
+      "agentic": {
+        "title": "Marketing Agentique",
+        "items": [
+          "Orchestration autonome des campagnes",
+          "Optimisation continue en temps réel",
+          "Hyper-personnalisation à grande échelle",
+          "Insights et actions instantanés",
+          "Adaptatif à chaque client"
+        ]
       }
     },
-    "ctaTitle": "Prêt à augmenter votre créativité ?",
-    "ctaDescription": "Découvrez comment l'IA peut transformer votre marketing et votre communication. Parlons de votre prochain grand projet.",
-    "ctaButton": "Lancer un projet créatif"
+    "useCases": {
+      "title": "Cas d'Usage",
+      "dynamicContent": {
+        "title": "Génération de Contenu Dynamique",
+        "description": "Générer des milliers de descriptions de produits uniques, d'articles de blog et de contenu pour les réseaux sociaux adaptés à différents segments d'audience tout en maintenant la voix de marque et les standards de qualité."
+      },
+      "personalizedJourneys": {
+        "title": "Parcours Client Personnalisés",
+        "description": "Créer des expériences uniques pour chaque visiteur basées sur leur comportement, leurs préférences et leur contexte. Les agents IA adaptent le contenu, les recommandations et les interfaces en temps réel pour maximiser l'engagement et la conversion."
+      },
+      "autonomousOptimization": {
+        "title": "Optimisation Autonome des Campagnes",
+        "description": "Déployer des campagnes marketing qui testent, apprennent et s'optimisent continuellement sur tous les canaux. Les agents IA ajustent le message, le timing, le ciblage et l'allocation budgétaire pour maximiser le ROI sans intervention manuelle."
+      }
+    },
+    "cta": {
+      "title": "Prêt à Amplifier Votre Créativité ?",
+      "description": "Explorons comment Le Studio Créatif peut vous aider à créer des expériences et du contenu qui captivent les audiences à une échelle sans précédent.",
+      "button": "Créons Ensemble"
+    }
   }
 }

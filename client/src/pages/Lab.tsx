@@ -43,7 +43,7 @@ export default function Lab() {
       
       <main className="min-h-screen pt-24">
         {/* Hero Section */}
-        <section className="relative py-32 overflow-hidden">
+        <section className="relative py-32 overflow-hidden bg-gradient-to-br from-slate-950 via-purple-950/20 to-slate-950">
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
               <div className="inline-block mb-6 px-4 py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm">

@@ -912,54 +912,60 @@
     }
   },
   "bureau": {
-    "seoTitle": "Le Bureau Stratégique | Transformation IA | Nukleo Digital",
-    "seoDescription": "Découvrez comment notre Bureau Stratégique pilote votre transformation IA, de l'audit de maturité à la gouvernance, en passant par la feuille de route stratégique.",
-    "seoKeywords": "bureau stratégique IA, transformation IA, stratégie IA, gouvernance IA, audit maturité IA",
-    "title": "Le Bureau<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">Stratégique</span>",
-    "subtitle": "Pilotage de votre transformation",
-    "description": "Le Bureau Stratégique est votre partenaire pour naviguer dans la complexité de la transformation IA. Nous ne nous contentons pas de donner des conseils ; nous pilotons le changement, nous mesurons l'impact et nous nous assurons que chaque initiative IA est profondément alignée avec vos objectifs commerciaux.",
-    "servicesTitle": "Nos services stratégiques",
+    "title": "Le Bureau Stratégique",
+    "subtitle": "Pilotage de la Transformation",
+    "heroDescription": "Nous définissons la stratégie, pilotons la transformation et mesurons l'impact de l'IA dans votre organisation. De la vision à l'exécution, nous orchestrons votre parcours de l'IA-curieux à l'IA-natif.",
+    "mission": "Notre Mission",
+    "missionText": "Guider votre organisation à travers le parcours complexe de la <strong>transformation IA</strong>. Nous ne créons pas simplement des stratégies, nous orchestrons le changement, alignons les parties prenantes et assurons que vos initiatives IA livrent une valeur commerciale mesurable à chaque étape.",
     "services": {
-      "maturityAudit": {
-        "title": "Audit de maturité IA",
-        "description": "Nous évaluons vos capacités actuelles en matière de données, de technologie et de talents pour identifier les opportunités et les risques de votre parcours IA."
+      "title": "Services Stratégiques",
+      "aiMaturity": {
+        "title": "Audit de Maturité IA & Feuille de Route",
+        "description": "Évaluer votre position actuelle dans le paysage IA et tracer un chemin clair vers le leadership IA. Nous évaluons vos capacités, identifions les écarts et créons une feuille de route de transformation de 9 à 12 mois."
       },
-      "roadmap": {
-        "title": "Feuille de route de transformation IA",
-        "description": "Nous co-créons une feuille de route détaillée, priorisée en fonction de la valeur commerciale et de la faisabilité technique, pour guider votre transformation."
+      "transformationStrategy": {
+        "title": "Stratégie de Transformation Agentique",
+        "description": "Redéfinir votre modèle opérationnel avec l'IA au centre. Nous vous aidons à passer de l'expérimentation à la transformation à l'échelle de l'entreprise, en intégrant l'IA agentique comme fondation de la croissance."
       },
       "governance": {
-        "title": "Gouvernance et gestion du changement",
-        "description": "Nous vous aidons à mettre en place les structures, les processus et la culture nécessaires pour soutenir une organisation axée sur l'IA."
+        "title": "Gouvernance & Éthique IA",
+        "description": "Implémenter les garde-fous pour une IA responsable et performante. Nous établissons des cadres pour l'utilisation éthique de l'IA, la conformité, la gestion des risques et la prise de décision transparente."
       },
-      "roi": {
-        "title": "Mesure du ROI et de l'impact",
-        "description": "Nous définissons des indicateurs de performance clairs et mettons en place des tableaux de bord pour suivre l'impact commercial de vos investissements en IA."
+      "performanceAnalysis": {
+        "title": "Analyse de Performance & ROI",
+        "description": "Mesurer l'impact tangible de l'IA sur vos objectifs commerciaux. Nous suivons les KPI, analysons les résultats et optimisons continuellement vos investissements IA pour maximiser le retour et la valeur stratégique."
       }
     },
-    "methodologyTitle": "Notre méthodologie",
-    "methodologyDescription": "Une approche structurée pour un impact maximal.",
-    "methodology": {
-      "align": {
-        "title": "1. Aligner",
-        "description": "Nous alignons la stratégie IA sur vos objectifs commerciaux globaux."
+    "journey": {
+      "title": "Le Parcours de Transformation",
+      "discovery": {
+        "title": "Découverte & Évaluation",
+        "description": "Nous menons un audit complet de maturité IA, évaluant vos capacités actuelles, la préparation des données, la culture organisationnelle et le positionnement concurrentiel. Cette évaluation de base identifie les opportunités et les contraintes."
       },
-      "identify": {
-        "title": "2. Identifier",
-        "description": "Nous identifions les cas d'usage à plus fort potentiel de retour sur investissement."
+      "strategy": {
+        "title": "Stratégie & Feuille de Route",
+        "description": "Nous concevons votre stratégie de transformation agentique, définissant des objectifs clairs, priorisant les cas d'usage et créant une feuille de route par phases. Cela inclut les cadres de gouvernance, la planification des ressources et les stratégies de gestion du changement."
       },
-      "prioritize": {
-        "title": "3. Prioriser",
-        "description": "Nous priorisons les initiatives en fonction de leur impact et de leur complexité."
+      "execution": {
+        "title": "Exécution & Optimisation",
+        "description": "Nous orchestrons l'implémentation dans votre organisation, coordonnant avec Le Lab et Le Studio. Nous mesurons continuellement la performance, suivons le ROI et ajustons la stratégie pour maximiser l'impact commercial."
       },
-      "execute": {
-        "title": "4. Exécuter",
-        "description": "Nous pilotons l'exécution, en assurant la livraison de valeur à chaque étape."
+      "scale": {
+        "title": "Évolution & Leadership",
+        "description": "Nous vous aidons à faire évoluer les pilotes réussis à l'échelle de l'entreprise et à positionner votre organisation comme un leader IA dans votre industrie. Cela inclut le leadership d'opinion, les programmes d'innovation et le développement continu des capacités."
       }
     },
-    "ctaTitle": "Prêt à définir votre stratégie IA ?",
-    "ctaDescription": "Une transformation réussie commence par une stratégie claire. Laissez-nous vous aider à construire la vôtre.",
-    "ctaButton": "Planifier une consultation stratégique"
+    "impact": {
+      "title": "Impact Attendu",
+      "roi": "ROI sur les investissements IA dans les 12 mois",
+      "timeToMarket": "Réduction du temps de mise sur le marché pour les nouvelles initiatives",
+      "efficiency": "Augmentation de l'efficacité opérationnelle"
+    },
+    "cta": {
+      "title": "Prêt à Piloter Votre Transformation ?",
+      "description": "Discutons de la manière dont Le Bureau Stratégique peut orchestrer votre parcours de l'expérimentation IA à la transformation à l'échelle de l'entreprise.",
+      "button": "Commencer Votre Parcours"
+    }
   },
   "studio": {
     "seoTitle": "Le Studio Créatif | Contenu augmenté par l'IA | Nukleo Digital",

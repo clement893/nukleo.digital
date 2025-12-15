@@ -1483,86 +1483,106 @@
       "ctaButton2": "Évaluer votre maturité IA"
     },
     "aiLab": {
-      "badge": "Le laboratoire IA",
-      "heroTitle": "Fondation",
-      "heroTitleHighlight": "technologique",
-      "heroDescription": "Nous construisons l'infrastructure technologique qui alimente votre transformation IA. Du développement d'agents intelligents à l'architecture de données, nous créons les fondations techniques de votre avenir augmenté.",
-      "ctaStart": "Démarrer un projet",
-      "ctaLearnMore": "En savoir plus sur le lab",
-      "capabilitiesTitle": "Capacités techniques",
-      "capabilities": {
-        "aiAgents": {
-          "title": "Agents IA & automatisation",
-          "description": "Développement d'agents intelligents autonomes capables d'exécuter des tâches complexes, d'apprendre et de s'adapter à votre environnement business."
+      "badge": "STUDIO",
+      "heroTitle": "La créativité,",
+      "heroTitleHighlight": "amplifiée.",
+      "heroSubtitle": "Design & Brand Experiences",
+      "heroDescription": "Des créatifs passionnés qui donnent vie à vos idées. Nous concevons des identités de marque mémorables et des expériences digitales qui marquent les esprits — avec les meilleurs outils pour aller plus vite et plus loin.",
+      "clientNeeds": {
+        "title": "Besoins clients",
+        "items": [
+          "Vous avez besoin d'une identité de marque forte et distinctive",
+          "Vous voulez une expérience utilisateur fluide et engageante",
+          "Vous cherchez des campagnes créatives qui se démarquent",
+          "Vous avez besoin de contenus visuels de qualité, à grande échelle"
+        ]
+      },
+      "approachTitle": "Créativité humaine, outils modernes",
+      "approachDescription": "Chaque projet commence par une idée humaine. Nos directeurs artistiques, designers et créatifs imaginent, conçoivent et peaufinent chaque détail. Nous utilisons les meilleurs outils — y compris l'IA — pour explorer plus de pistes, itérer plus vite et livrer une qualité irréprochable. Mais la vision reste humaine.",
+      "pillars": {
+        "title": "4 piliers",
+        "vision": {
+          "number": "01",
+          "title": "Vision stratégique",
+          "description": "Chaque création sert un objectif business clair"
         },
-        "dataPlatforms": {
-          "title": "Plateformes de données & pipelines",
-          "description": "Architecture et implémentation de plateformes de données modernes avec pipelines ETL/ELT, data lakes et entrepôts de données optimisés."
+        "craft": {
+          "number": "02",
+          "title": "Craft & détail",
+          "description": "Une exécution soignée jusqu'au dernier pixel"
         },
-        "apiIntegration": {
-          "title": "API & intégration",
-          "description": "Conception et développement d'API robustes et d'intégrations système pour connecter de manière transparente vos outils et données."
+        "coherence": {
+          "number": "03",
+          "title": "Cohérence",
+          "description": "Une identité forte sur tous les points de contact"
         },
-        "customModels": {
-          "title": "Modèles IA sur mesure",
-          "description": "Fine-tuning et déploiement de modèles IA personnalisés adaptés à vos cas d'usage spécifiques et données propriétaires."
-        },
-        "performance": {
-          "title": "Optimisation de performance",
-          "description": "Optimisation de performance, scalabilité et réduction des coûts d'infrastructure pour vos systèmes IA et de données."
-        },
-        "security": {
-          "title": "Sécurité & conformité",
-          "description": "Implémentation de mesures de sécurité robustes et conformité réglementaire (RGPD, SOC2, ISO) pour vos systèmes IA."
+        "impact": {
+          "number": "04",
+          "title": "Impact",
+          "description": "Des créations qui génèrent des résultats"
         }
       },
-      "techStackTitle": "Stack technologique",
-      "techStackDescription": "Nous utilisons les technologies les plus avancées et éprouvées pour construire des solutions robustes et scalables.",
-      "techStack": {
-        "aiMl": {
-          "title": "IA & ML",
-          "items": ["OpenAI GPT-4, Claude, Gemini", "LangChain, LlamaIndex", "TensorFlow, PyTorch", "Hugging Face Transformers", "Bases de données vectorielles (Pinecone, Weaviate)"]
+      "expertiseTitle": "Ce que nous créons",
+      "expertise": {
+        "branding": {
+          "title": "Branding & Identité",
+          "description": "Nous créons des marques mémorables qui racontent votre histoire et connectent avec votre audience.",
+          "deliverables": "Logo, charte graphique, brand guidelines, naming, storytelling"
         },
-        "dataInfrastructure": {
-          "title": "Données & infrastructure",
-          "items": ["AWS, Google Cloud, Azure", "Snowflake, BigQuery, Databricks", "Apache Airflow, dbt", "PostgreSQL, MongoDB, Redis", "Docker, Kubernetes"]
+        "uiux": {
+          "title": "UX/UI Design",
+          "description": "Nous concevons des interfaces intuitives et esthétiques qui transforment les utilisateurs en clients fidèles.",
+          "deliverables": "Wireframes, prototypes, design systems, interfaces web & mobile"
         },
-        "development": {
-          "title": "Développement",
-          "items": ["Python, TypeScript, Go", "FastAPI, Node.js, React", "GraphQL, REST APIs", "CI/CD (GitHub Actions, GitLab)", "Monitoring (Datadog, Grafana)"]
+        "artDirection": {
+          "title": "Direction Artistique",
+          "description": "Nous définissons l'univers visuel de vos projets et campagnes pour une cohérence impactante.",
+          "deliverables": "Concepts créatifs, moodboards, guidelines visuelles"
+        },
+        "campaigns": {
+          "title": "Design de Campagnes",
+          "description": "Nous créons les visuels et assets de vos campagnes publicitaires sur tous les canaux.",
+          "deliverables": "Bannières, visuels social, print, affichage, vidéo"
+        },
+        "motion": {
+          "title": "Motion Design",
+          "description": "Nous donnons vie à vos messages avec des animations et vidéos qui captent l'attention.",
+          "deliverables": "Animations, vidéos explicatives, intros, contenus social"
+        },
+        "production": {
+          "title": "Production Visuelle",
+          "description": "Nous produisons les contenus visuels dont vous avez besoin : photos, illustrations, assets.",
+          "deliverables": "Shooting photo, illustrations, retouches, assets digitaux"
         }
       },
-      "approachTitle": "Notre approche",
-      "steps": {
+      "teamTitle": "Les créatifs derrière vos projets",
+      "teamDescription": "Directeurs artistiques, designers UI/UX, graphistes, motion designers — une équipe créative passionnée qui transforme vos idées en réalité. Basés à Montréal et Halifax, nous travaillons main dans la main avec nos clients.",
+      "processTitle": "Processus",
+      "process": {
         "discovery": {
           "step": "01",
-          "title": "Découverte & architecture",
-          "description": "Audit technique de votre infrastructure existante, identification des besoins et conception de l'architecture cible."
+          "title": "Discovery",
+          "description": "Comprendre votre marque, vos objectifs et votre audience"
         },
-        "poc": {
+        "concept": {
           "step": "02",
-          "title": "Preuve de concept",
-          "description": "Développement rapide de POC pour valider la faisabilité technique et démontrer la valeur avant investissement complet."
+          "title": "Concept",
+          "description": "Explorer les directions créatives et définir la vision"
         },
-        "development": {
+        "design": {
           "step": "03",
-          "title": "Développement & intégration",
-          "description": "Développement itératif avec intégration continue dans vos systèmes existants, tests rigoureux et documentation complète."
+          "title": "Design",
+          "description": "Créer, itérer et peaufiner jusqu'à la perfection"
         },
-        "deployment": {
+        "delivery": {
           "step": "04",
-          "title": "Déploiement & optimisation",
-          "description": "Déploiement en production avec monitoring, optimisation de performance et formation de vos équipes techniques."
-        },
-        "support": {
-          "step": "05",
-          "title": "Support & évolution",
-          "description": "Support technique continu, maintenance proactive et évolution des solutions selon vos besoins changeants."
+          "title": "Livraison",
+          "description": "Décliner sur tous les supports et formats nécessaires"
         }
       },
-      "ctaTitle": "Prêt à construire votre infrastructure IA ?",
-      "ctaDescription": "Discutons de vos besoins techniques et concevons ensemble la solution adaptée à vos ambitions.",
-      "ctaButton1": "Planifier une consultation technique",
+      "ctaTitle": "Prêt à donner vie à votre vision ?",
+      "ctaDescription": "Discutons de votre projet et créons ensemble quelque chose de mémorable.",
+      "ctaButton1": "Démarrer un projet",
       "ctaButton2": "Voir nos réalisations"
     }
   }

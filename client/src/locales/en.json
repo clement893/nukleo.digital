@@ -1343,87 +1343,88 @@
       "ctaButton2": "Assess Your AI Maturity"
     },
     "aiLab": {
-      "badge": "The AI Lab",
-      "heroTitle": "Technology",
-      "heroTitleHighlight": "Foundation",
-      "heroDescription": "We build the technological infrastructure that powers your AI transformation. From intelligent agent development to data architecture, we create the technical foundations of your augmented future.",
-      "ctaStart": "Start a Project",
-      "ctaLearnMore": "Learn More About the Lab",
-      "capabilitiesTitle": "Technical Capabilities",
-      "capabilities": {
-        "aiAgents": {
-          "title": "AI Agents & Automation",
-          "description": "Development of autonomous intelligent agents capable of executing complex tasks, learning, and adapting to your business environment."
+      "badge": "LAB",
+      "heroTitle": "Code that",
+      "heroTitleHighlight": "delivers.",
+      "heroSubtitle": "Development & Technology",
+      "heroDescription": "We build the digital solutions that power your business. Mobile applications, web platforms, integrations, automation — a team of senior developers who deliver clean code and products that work.",
+      "clientNeeds": {
+        "items": [
+          "You need a mobile application for iOS and/or Android",
+          "You want a custom web platform for your business",
+          "You're looking to automate repetitive processes",
+          "You need to integrate your tools together"
+        ]
+      },
+      "approachTitle": "Pragmatic engineering",
+      "approachDescription": "We don't build technology for technology's sake. Every line of code is designed to solve a real problem and create value. Our team combines sharp technical expertise with business understanding. We speak your language, not just the machines'.",
+      "expertiseTitle": "What we build",
+      "expertise": {
+        "mobileApps": {
+          "title": "Mobile Applications",
+          "description": "We develop native and cross-platform apps with exceptional UX.",
+          "technologies": "iOS, Android, React Native, Flutter"
         },
-        "dataPlatforms": {
-          "title": "Data Platforms & Pipelines",
-          "description": "Architecture and implementation of modern data platforms with ETL/ELT pipelines, data lakes, and optimized data warehouses."
+        "webApps": {
+          "title": "Web Applications",
+          "description": "We build robust and scalable web platforms tailored to your needs.",
+          "technologies": "React, Node.js, Python, PostgreSQL"
         },
-        "apiIntegration": {
-          "title": "API & Integration",
-          "description": "Design and development of robust APIs and system integrations to seamlessly connect your tools and data."
+        "ecommerce": {
+          "title": "E-commerce",
+          "description": "We create high-performing online stores that convert.",
+          "technologies": "Shopify, WooCommerce, custom solutions"
         },
-        "customModels": {
-          "title": "Custom AI Models",
-          "description": "Fine-tuning and deployment of custom AI models tailored to your specific use cases and proprietary data."
+        "integrations": {
+          "title": "Integrations & APIs",
+          "description": "We connect your tools — CRM, ERP, business tools — for a seamless ecosystem.",
+          "technologies": "REST, GraphQL, webhooks, middleware"
         },
-        "performance": {
-          "title": "Performance Optimization",
-          "description": "Performance optimization, scalability, and infrastructure cost reduction for your AI and data systems."
+        "automation": {
+          "title": "Automation",
+          "description": "We automate your repetitive tasks to free up your team's time.",
+          "technologies": "Zapier, Make, n8n, custom scripts"
         },
-        "security": {
-          "title": "Security & Compliance",
-          "description": "Implementation of robust security measures and regulatory compliance (GDPR, SOC2, ISO) for your AI systems."
+        "data": {
+          "title": "Data & Analytics",
+          "description": "We structure your data and create dashboards to drive your business.",
+          "technologies": "SQL, ETL, BI tools, data pipelines"
         }
       },
-      "techStackTitle": "Technology Stack",
-      "techStackDescription": "We use the most advanced and proven technologies to build robust and scalable solutions.",
-      "techStack": {
-        "aiMl": {
-          "title": "AI & ML",
-          "items": ["OpenAI GPT-4, Claude, Gemini", "LangChain, LlamaIndex", "TensorFlow, PyTorch", "Hugging Face Transformers", "Vector Databases (Pinecone, Weaviate)"]
-        },
-        "dataInfrastructure": {
-          "title": "Data & Infrastructure",
-          "items": ["AWS, Google Cloud, Azure", "Snowflake, BigQuery, Databricks", "Apache Airflow, dbt", "PostgreSQL, MongoDB, Redis", "Docker, Kubernetes"]
-        },
-        "development": {
-          "title": "Development",
-          "items": ["Python, TypeScript, Go", "FastAPI, Node.js, React", "GraphQL, REST APIs", "CI/CD (GitHub Actions, GitLab)", "Monitoring (Datadog, Grafana)"]
-        }
-      },
-      "approachTitle": "Our Approach",
-      "steps": {
-        "discovery": {
+      "teamTitle": "Developers, not salespeople",
+      "teamDescription": "Full-stack developers, mobile engineers, data engineers, DevOps — a senior technical team that codes, tests, and delivers. We've built products for startups and large enterprises alike.",
+      "processTitle": "Process",
+      "process": {
+        "scoping": {
           "step": "01",
-          "title": "Discovery & Architecture",
-          "description": "Technical audit of your existing infrastructure, needs identification and target architecture design."
+          "title": "Scoping",
+          "description": "Understand the need, define scope and constraints"
         },
-        "poc": {
+        "prototype": {
           "step": "02",
-          "title": "Proof of Concept",
-          "description": "Rapid POC development to validate technical feasibility and demonstrate value before full investment."
+          "title": "Prototype",
+          "description": "Validate quickly with an MVP or POC"
         },
         "development": {
           "step": "03",
-          "title": "Development & Integration",
-          "description": "Iterative development with continuous integration into your existing systems, rigorous testing, and complete documentation."
+          "title": "Development",
+          "description": "Build in sprints with regular deliverables"
         },
         "deployment": {
           "step": "04",
-          "title": "Deployment & Optimization",
-          "description": "Production deployment with monitoring, performance optimization, and training for your technical teams."
+          "title": "Deployment",
+          "description": "Launch to production and train users"
         },
-        "support": {
+        "evolution": {
           "step": "05",
-          "title": "Support & Evolution",
-          "description": "Continuous technical support, proactive maintenance, and solution evolution according to your changing needs."
+          "title": "Evolution",
+          "description": "Maintain, optimize, and evolve"
         }
       },
-      "ctaTitle": "Ready to build your AI infrastructure?",
-      "ctaDescription": "Let's discuss your technical needs and design the solution tailored to your ambitions together.",
-      "ctaButton1": "Schedule a Technical Consultation",
-      "ctaButton2": "View Our Work"
+      "ctaTitle": "Got a project to build?",
+      "ctaDescription": "Let's discuss your idea and build the right solution together.",
+      "ctaButton1": "Talk to a developer",
+      "ctaButton2": "See our work"
     }
   }
 }

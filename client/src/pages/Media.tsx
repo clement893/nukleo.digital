@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, ExternalLink, Linkedin, FileText, Calendar } from 'lucide-react';
+import { Mail, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -86,27 +86,6 @@ export default function Media() {
       });
     }
   };
-
-  const pressArticles = [
-    {
-      outlet: 'TechCrunch',
-      title: 'Comment Nukleo Digital redéfinit la stratégie IA pour les entreprises',
-      date: '2024-11-28',
-      link: 'https://techcrunch.com',
-    },
-    {
-      outlet: 'Forbes',
-      title: "L'avenir de l'IA agentique : Une interview avec Nukleo Digital",
-      date: '2024-11-10',
-      link: 'https://forbes.com',
-    },
-    {
-      outlet: 'VentureBeat',
-      title: "L'approche de Nukleo Digital pour les opérations intelligentes",
-      date: '2024-10-25',
-      link: 'https://venturebeat.com',
-    },
-  ];
 
   return (
     <PageLayout>
@@ -295,52 +274,6 @@ export default function Media() {
                   {t('media.mediaContact.responseTime')}
                 </p>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Press Articles Section */}
-        <section className="container mx-auto px-4 pb-20">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex items-center gap-3 mb-8">
-              <FileText className="w-8 h-8 text-cyan-400" />
-              <h2 className="text-3xl md:text-4xl font-bold text-white">
-                {t('media.pressArticles.title')}
-              </h2>
-            </div>
-            <p className="text-white/70 mb-12">
-              {t('media.pressArticles.description')}
-            </p>
-
-            <div className="space-y-6">
-              {pressArticles.map((article, index) => (
-                <a
-                  key={index}
-                  href={article.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8 hover:bg-white/10 hover:border-white/20 transition-all duration-300 group"
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-3">
-                        <span className="text-cyan-400 text-sm font-semibold">{article.outlet}</span>
-                        <span className="text-white/50 text-sm">
-                          {new Date(article.date).toLocaleDateString('fr-FR', {
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric',
-                          })}
-                        </span>
-                      </div>
-                      <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">
-                        {article.title}
-                      </h3>
-                    </div>
-                    <ExternalLink className="w-5 h-5 text-white/50 group-hover:text-cyan-400 transition-colors shrink-0" />
-                  </div>
-                </a>
-              ))}
             </div>
           </div>
         </section>

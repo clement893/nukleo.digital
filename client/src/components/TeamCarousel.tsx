@@ -159,20 +159,20 @@ export default function TeamCarousel() {
   };
 
   return (
-    <section className="py-32 relative overflow-hidden">
+    <section className="py-12 md:py-16 relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-violet-900/30 via-fuchsia-900/20 to-rose-900/30" />
       
       <div className="container px-6 md:px-12 relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-block px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-6">
-            <span className="text-sm font-mono text-white/70">{t('home.team.sectionLabel') || 'NOTRE ÉQUIPE'}</span>
+        <div className="text-center mb-8">
+          <div className="inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-3">
+            <span className="text-xs font-mono text-white/70">{t('home.team.sectionLabel') || 'NOTRE ÉQUIPE'}</span>
           </div>
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
             {t('home.team.title') || 'Rencontrez Notre Équipe'}
           </h2>
-          <p className="text-xl text-white/70 max-w-2xl mx-auto">
+          <p className="text-sm md:text-base text-white/70 max-w-2xl mx-auto">
             {t('home.team.description') || 'Des experts passionnés qui transforment votre vision en réalité.'}
           </p>
         </div>
@@ -182,18 +182,18 @@ export default function TeamCarousel() {
           {/* Navigation Buttons */}
           <button
             onClick={goToPrevious}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 z-20 w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all flex items-center justify-center group"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-4 z-20 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all flex items-center justify-center group"
             aria-label="Previous"
           >
-            <ChevronLeft className="w-6 h-6 md:w-8 md:h-8 text-white group-hover:scale-110 transition-transform" />
+            <ChevronLeft className="w-4 h-4 md:w-5 md:h-5 text-white group-hover:scale-110 transition-transform" />
           </button>
 
           <button
             onClick={goToNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 z-20 w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all flex items-center justify-center group"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-4 z-20 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all flex items-center justify-center group"
             aria-label="Next"
           >
-            <ChevronRight className="w-6 h-6 md:w-8 md:h-8 text-white group-hover:scale-110 transition-transform" />
+            <ChevronRight className="w-4 h-4 md:w-5 md:h-5 text-white group-hover:scale-110 transition-transform" />
           </button>
 
           {/* Team Members Grid */}
@@ -209,22 +209,22 @@ export default function TeamCarousel() {
                 return (
                   <div
                     key={slideIndex}
-                    className="min-w-full flex-shrink-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-2"
+                    className="min-w-full flex-shrink-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 px-2"
                   >
                     {slideMembers.map((member, memberIndex) => (
                       <div
                         key={memberIndex}
-                        className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 group"
+                        className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-3 md:p-4 hover:bg-white/10 transition-all duration-300 group"
                       >
-                        <div className="aspect-square rounded-xl overflow-hidden mb-4">
+                        <div className="aspect-square rounded-lg overflow-hidden mb-2 md:mb-3">
                           {member.image === '/team/Ricardo.png' || member.image === '/team/Marie-Claire.png' ? (
                             <img 
                               src={member.image}
                               alt={(t('alt.teamMember') || '{{name}} - {{role}} chez Nukleo Digital')
                                 .replace('{{name}}', member.name)
                                 .replace('{{role}}', t(`about.team.${member.translationKey}.role`) || member.translationKey)}
-                              width={400}
-                              height={400}
+                              width={200}
+                              height={200}
                               loading="lazy"
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                             />
@@ -235,17 +235,17 @@ export default function TeamCarousel() {
                               alt={(t('alt.teamMember') || '{{name}} - {{role}} chez Nukleo Digital')
                                 .replace('{{name}}', member.name)
                                 .replace('{{role}}', t(`about.team.${member.translationKey}.role`) || member.translationKey)}
-                              width={400}
-                              height={400}
+                              width={200}
+                              height={200}
                               loading="lazy"
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                             />
                           )}
                         </div>
                         <div className="flex items-start justify-between">
-                          <div>
-                            <h3 className="text-xl font-bold text-white mb-1">{member.name}</h3>
-                            <p className="text-sm text-white/60">
+                          <div className="flex-1 min-w-0">
+                            <h3 className="text-sm md:text-base font-bold text-white mb-0.5 truncate">{member.name}</h3>
+                            <p className="text-xs md:text-sm text-white/60 line-clamp-2">
                               {t(`about.team.${member.translationKey}.role`) || member.translationKey}
                             </p>
                           </div>
@@ -256,7 +256,7 @@ export default function TeamCarousel() {
                             className="text-violet-400 hover:text-white transition-colors flex-shrink-0 ml-2"
                             aria-label={`${member.name}'s LinkedIn profile`}
                           >
-                            <Linkedin className="w-5 h-5" fill="currentColor" strokeWidth={0} />
+                            <Linkedin className="w-4 h-4 md:w-4 md:h-4" fill="currentColor" strokeWidth={0} />
                           </a>
                         </div>
                       </div>
@@ -268,15 +268,15 @@ export default function TeamCarousel() {
           </div>
 
           {/* Dots Indicator */}
-          <div className="flex justify-center gap-2 mt-8">
+          <div className="flex justify-center gap-1.5 mt-4 md:mt-6">
             {Array.from({ length: totalSlides }).map((_, index) => (
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
-                className={`w-2 h-2 rounded-full transition-all ${
+                className={`h-1.5 rounded-full transition-all ${
                   index === currentIndex
-                    ? 'bg-white w-8'
-                    : 'bg-white/30 hover:bg-white/50'
+                    ? 'bg-white w-6'
+                    : 'bg-white/30 hover:bg-white/50 w-1.5'
                 }`}
                 aria-label={`Go to slide ${index + 1}`}
               />
@@ -285,11 +285,11 @@ export default function TeamCarousel() {
         </div>
 
         {/* CTA Link to About Page */}
-        <div className="text-center mt-12">
+        <div className="text-center mt-6 md:mt-8">
           <Link href={getLocalizedPath('/about')}>
-            <button className="px-8 py-4 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-fuchsia-500/50 transition-all duration-300 inline-flex items-center gap-2">
+            <button className="px-4 py-2 md:px-6 md:py-3 text-sm md:text-base bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-fuchsia-500/50 transition-all duration-300 inline-flex items-center gap-2">
               <span>{t('home.team.cta') || 'Voir Toute l\'Équipe'}</span>
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
             </button>
           </Link>
         </div>

@@ -185,17 +185,30 @@ export default function About() {
                 className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 group"
               >
                 <div className="aspect-square rounded-xl overflow-hidden mb-4">
-                  <OptimizedImage 
-                    src={member.image.endsWith('.webp') ? member.image.replace('.webp', '.png') : member.image}
-                    webpSrc={member.image.endsWith('.webp') ? member.image : (member.image.endsWith('.png') && member.image !== '/team/Ricardo.png' && member.image !== '/team/Marie-Claire.png' ? member.image.replace('.png', '.webp') : undefined)}
-                    alt={(t('alt.teamMember') || '{{name}} - {{role}} chez Nukleo Digital')
-                      .replace('{{name}}', member.name)
-                      .replace('{{role}}', t(`about.team.${member.translationKey}.role`) || member.translationKey)}
-                    width={400}
-                    height={400}
-                    loading="lazy"
-                    className="w-full h-full object-cover"
-                  />
+                  {member.image === '/team/Ricardo.png' || member.image === '/team/Marie-Claire.png' ? (
+                    <img 
+                      src={member.image}
+                      alt={(t('alt.teamMember') || '{{name}} - {{role}} chez Nukleo Digital')
+                        .replace('{{name}}', member.name)
+                        .replace('{{role}}', t(`about.team.${member.translationKey}.role`) || member.translationKey)}
+                      width={400}
+                      height={400}
+                      loading="lazy"
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <OptimizedImage 
+                      src={member.image.endsWith('.webp') ? member.image.replace('.webp', '.png') : member.image}
+                      webpSrc={member.image.endsWith('.webp') ? member.image : (member.image.endsWith('.png') ? member.image.replace('.png', '.webp') : undefined)}
+                      alt={(t('alt.teamMember') || '{{name}} - {{role}} chez Nukleo Digital')
+                        .replace('{{name}}', member.name)
+                        .replace('{{role}}', t(`about.team.${member.translationKey}.role`) || member.translationKey)}
+                      width={400}
+                      height={400}
+                      loading="lazy"
+                      className="w-full h-full object-cover"
+                    />
+                  )}
                 </div>
                 <div className="flex items-start justify-between">
                   <h3 className="text-xl font-bold text-white">{member.name}</h3>

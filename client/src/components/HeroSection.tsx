@@ -96,12 +96,12 @@ function HeroSection() {
   }, [isMobile]);
   
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 px-4 sm:px-6 lg:px-8 xl:px-16 2xl:px-20 overflow-x-hidden">
+    <section className="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20" style={{ paddingLeft: 'clamp(1rem, 4vw, 4rem)', paddingRight: 'clamp(1rem, 8vw, 12rem)', overflowX: 'visible' }}>
 
-      <div className="relative z-10 w-full" style={{ maxWidth: '100vw', paddingLeft: 'clamp(1rem, 4vw, 4rem)', paddingRight: 'clamp(1rem, 5vw, 8rem)' }}>
-        <div className="flex items-center justify-center w-full">
+      <div className="relative z-10 w-full" style={{ maxWidth: '100%', overflow: 'visible' }}>
+        <div className="flex items-center justify-start w-full">
           {/* Main Title */}
-          <div className="w-full" style={{ maxWidth: '100%', overflow: 'visible' }}>
+          <div className="w-full" style={{ overflow: 'visible', maxWidth: '100%', paddingRight: '0' }}>
             {/* Main Heading */}
             <h1 
               className={`
@@ -119,22 +119,24 @@ function HeroSection() {
                 overflowWrap: 'normal',
                 wordBreak: 'normal',
                 paddingRight: isMobile 
-                  ? '1rem' 
+                  ? '3rem' 
                   : language === 'fr' 
-                    ? 'clamp(2rem, 5vw, 4rem)' 
-                    : 'clamp(3rem, 6vw, 5rem)',
+                    ? 'clamp(6rem, 15vw, 12rem)' 
+                    : 'clamp(8rem, 18vw, 15rem)',
                 width: '100%',
                 maxWidth: '100%',
                 boxSizing: 'border-box',
+                display: 'block',
               }), [isMobile, language]) as React.CSSProperties}
             >
               {t('hero.title')}
               <br />
               <span 
-                className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent"
+                className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent inline-block"
                 style={{
                   overflowWrap: 'normal',
                   wordBreak: 'normal',
+                  maxWidth: '100%',
                 }}
               >
                 {t('hero.titleHighlight')}

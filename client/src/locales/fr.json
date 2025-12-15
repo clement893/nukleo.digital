@@ -866,48 +866,50 @@
     "mediaContactEmail": "presse@nukleo.digital"
   },
   "lab": {
-    "seoTitle": "Le Laboratoire IA | R&D et Innovation | Nukleo Digital",
-    "seoDescription": "Explorez le Laboratoire IA de Nukleo, notre division R&D dédiée à la construction de la fondation technologique pour l'intégration de l'IA. Découvrez nos projets en cours.",
-    "seoKeywords": "laboratoire IA, R&D IA, innovation IA, fondation technologique IA, projets IA",
-    "title": "Le Laboratoire<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">IA</span>",
+    "title": "Le Laboratoire IA",
     "subtitle": "Fondation Technologique",
-    "description": "Le Laboratoire IA est le cœur de notre innovation. C'est ici que nous expérimentons, que nous construisons et que nous perfectionnons les briques technologiques qui alimentent les écosystèmes intelligents de nos clients. Notre mission : transformer les avancées de la recherche en solutions de production robustes et scalables.",
-    "focusAreasTitle": "Nos domaines de recherche",
-    "focusAreas": {
-      "agenticFrameworks": {
-        "title": "Cadres agentiques",
-        "description": "Nous développons des cadres propriétaires pour l'orchestration d'agents IA, permettant une collaboration complexe et une exécution de tâches fiables."
+    "heroDescription": "Nous construisons la fondation technologique robuste et flexible qui alimente votre transformation IA. Des plateformes de données intelligentes aux agents IA sur mesure, nous créons l'infrastructure qui rend les opérations natives IA possibles.",
+    "mission": "Notre Mission",
+    "missionText": "Construire la colonne vertébrale technologique qui permet à votre organisation d'opérer comme une <strong>entreprise native IA</strong>. Nous n'implémentons pas simplement des outils, nous architecturons des systèmes qui apprennent, s'adaptent et évoluent avec vos ambitions.",
+    "capabilities": {
+      "title": "Capacités Principales",
+      "dataPlatforms": {
+        "title": "Plateformes de Données Intelligentes",
+        "description": "Unifier et préparer votre écosystème de données pour l'IA. Nous construisons des architectures de données robustes qui servent de fondation pour les systèmes intelligents, garantissant la qualité, l'accessibilité et la gouvernance des données."
       },
-      "trustAndSafety": {
-        "title": "Confiance et sécurité de l'IA",
-        "description": "Nous créons des outils et des méthodologies pour détecter les biais, assurer l'explicabilité et garantir la sécurité des systèmes IA."
+      "customAgents": {
+        "title": "Développement d'Agents IA Sur Mesure",
+        "description": "Créer des agents autonomes adaptés à vos besoins commerciaux spécifiques. Des bots de service client aux assistants de processus intelligents, nous développons des agents IA qui apprennent, s'adaptent et livrent de la valeur en continu."
       },
-      "multimodalAI": {
-        "title": "IA multimodale",
-        "description": "Nous explorons les frontières de l'IA qui comprend et génère non seulement du texte, mais aussi des images, du son et de la vidéo."
+      "integration": {
+        "title": "Intégration IA Tiers",
+        "description": "Orchestrer les meilleurs modèles et services IA du marché. Nous intégrons les solutions leaders d'OpenAI, Anthropic, Mistral et d'autres pour créer une stack IA puissante personnalisée pour vos opérations."
       },
-      "efficientAI": {
-        "title": "IA efficace",
-        "description": "Nous travaillons sur des techniques pour réduire l'empreinte carbone et les coûts de calcul des modèles d'IA, sans compromettre la performance."
+      "automation": {
+        "title": "Automatisation Intelligente des Processus (IPA)",
+        "description": "Aller au-delà de la RPA simple avec des flux de travail adaptatifs. Nous implémentons une automatisation intelligente qui comprend le contexte, prend des décisions et s'optimise continuellement en fonction des résultats."
       }
     },
-    "projectsTitle": "Projets en cours",
-    "projectsDescription": "Un aperçu de ce sur quoi nous travaillons actuellement.",
-    "projectLeo": {
-      "title": "Projet LEO",
-      "description": "Notre assistant IA conversationnel de nouvelle génération, conçu pour une intégration profonde dans les systèmes d'entreprise."
+    "approach": {
+      "title": "Notre Approche",
+      "assess": {
+        "title": "Évaluer & Concevoir",
+        "description": "Nous commençons par comprendre votre infrastructure actuelle, votre paysage de données et vos objectifs commerciaux. Ensuite, nous concevons une architecture IA qui s'aligne avec vos objectifs stratégiques."
+      },
+      "build": {
+        "title": "Construire & Intégrer",
+        "description": "Nous développons des solutions IA sur mesure et intégrons les meilleurs services tiers, créant un écosystème cohérent qui fonctionne parfaitement avec vos systèmes existants."
+      },
+      "optimize": {
+        "title": "Optimiser & Évoluer",
+        "description": "Nous surveillons, affinons et améliorons continuellement votre infrastructure IA, garantissant qu'elle évolue avec vos besoins et livre un ROI mesurable à chaque étape."
+      }
     },
-    "projectHelios": {
-      "title": "Projet Helios",
-      "description": "Un cadre d'évaluation automatisé pour mesurer la performance, la fiabilité et la sécurité des systèmes d'agents IA."
-    },
-    "projectOrion": {
-      "title": "Projet Orion",
-      "description": "Une plateforme de données optimisée pour les charges de travail RAG (Retrieval-Augmented Generation) à grande échelle."
-    },
-    "ctaTitle": "Vous avez un défi technique complexe ?",
-    "ctaDescription": "Notre Laboratoire IA adore les défis. Contactez-nous pour discuter de la manière dont nous pouvons vous aider à repousser les limites de la technologie.",
-    "ctaButton": "Contacter le labo"
+    "cta": {
+      "title": "Prêt à Construire Votre Fondation IA ?",
+      "description": "Discutons de la manière dont Le Laboratoire IA peut architecturer l'infrastructure technologique qui alimente votre transformation.",
+      "button": "Démarrer la Conversation"
+    }
   },
   "bureau": {
     "seoTitle": "Le Bureau Stratégique | Transformation IA | Nukleo Digital",

@@ -475,6 +475,47 @@
       "button": "Start Your Transformation"
     }
   },
+  "startProject": {
+    "seoTitle": "Start Your AI Project | Transform Your Business with AI",
+    "seoDescription": "Ready to transform your business with AI? Start your project with Nukleo Digital. Expert guidance from strategy to implementation. Get a free consultation and custom AI roadmap.",
+    "seoKeywords": "start AI project, AI consultation, AI implementation, AI strategy, AI transformation, AI project planning, AI roadmap, AI business transformation",
+    "backToHome": "Back to Home",
+    "pageTitle": "Start Your AI Journey",
+    "pageDescription": "Tell us about your project and let's build something extraordinary together.",
+    "form": {
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "John Doe",
+      "emailAddress": "Email Address",
+      "emailPlaceholder": "john@company.com",
+      "companyName": "Company Name",
+      "companyPlaceholder": "Your Company",
+      "projectType": "Project Type",
+      "projectTypePlaceholder": "Select a project type",
+      "projectTypes": {
+        "aiStrategy": "AI Strategy & Consulting",
+        "agenticAI": "Agentic AI Development",
+        "aiIntegration": "AI Integration",
+        "aiTraining": "AI Training & Workshops",
+        "other": "Other"
+      },
+      "estimatedBudget": "Estimated Budget",
+      "budgetPlaceholder": "Select a budget range",
+      "budgetRanges": {
+        "10k25k": "$10k - $25k",
+        "25k50k": "$25k - $50k",
+        "50k100k": "$50k - $100k",
+        "100kPlus": "$100k+",
+        "notSure": "Not sure yet"
+      },
+      "projectDescription": "Project Description",
+      "projectDescriptionPlaceholder": "Tell us about your project, goals, and challenges...",
+      "sending": "Sending...",
+      "submit": "Submit Project Request",
+      "thankYou": "Thank You!",
+      "successMessage": "We've received your project request. Our team will get back to you within 24 hours.",
+      "privacyNotice": "By submitting this form, you agree to our privacy policy and terms of service."
+    }
+  },
   "contact": {
     "title": "Contact Us",
     "subtitle": "Ready to transform your business with AI?",

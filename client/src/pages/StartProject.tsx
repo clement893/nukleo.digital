@@ -65,9 +65,9 @@ export default function StartProject() {
   return (
     <PageLayout>
       <SEO
-        title="Start Your AI Project | Transform Your Business with AI"
-        description="Ready to transform your business with AI? Start your project with Nukleo Digital. Expert guidance from strategy to implementation. Get a free consultation and custom AI roadmap."
-        keywords="start AI project, AI consultation, AI implementation, AI strategy, AI transformation, AI project planning, AI roadmap, AI business transformation"
+        title={t('startProject.seoTitle')}
+        description={t('startProject.seoDescription')}
+        keywords={t('startProject.seoKeywords')}
         ogImage="https://nukleo.digital/og-image.jpg"
       />
       <div className="min-h-screen bg-gradient-to-br from-purple-950 via-purple-900 to-purple-950 relative overflow-hidden">
@@ -89,17 +89,17 @@ export default function StartProject() {
             className="text-white/70 hover:text-white hover:bg-white/10 transition-colors"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Home
+            {t('startProject.backToHome')}
           </Button>
         </div>
 
         {/* Header */}
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
-            Start Your AI Journey
+            {t('startProject.pageTitle')}
           </h1>
           <p className="text-lg md:text-xl text-white/70">
-            Tell us about your project and let's build something extraordinary together.
+            {t('startProject.pageDescription')}
           </p>
         </div>
 
@@ -110,10 +110,10 @@ export default function StartProject() {
               <div className="text-center py-12">
                 <CheckCircle2 className="w-16 h-16 text-green-400 mx-auto mb-6 animate-bounce" />
                 <h3 className="text-2xl font-bold text-white mb-4">
-                  Thank You!
+                  {t('startProject.form.thankYou')}
                 </h3>
                 <p className="text-white/70">
-                  We've received your project request. Our team will get back to you within 24 hours.
+                  {t('startProject.form.successMessage')}
                 </p>
               </div>
             ) : (
@@ -121,7 +121,7 @@ export default function StartProject() {
                 {/* Name */}
                 <div className="space-y-2">
                   <Label htmlFor="name" className="text-white text-sm font-medium">
-                    Full Name *
+                    {t('startProject.form.fullName')} *
                   </Label>
                   <Input
                     id="name"
@@ -129,14 +129,14 @@ export default function StartProject() {
                     value={formData.name}
                     onChange={(e) => handleChange('name', e.target.value)}
                     className="bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:border-accent focus:ring-accent"
-                    placeholder="John Doe"
+                    placeholder={t('startProject.form.fullNamePlaceholder')}
                   />
                 </div>
 
                 {/* Email */}
                 <div className="space-y-2">
                   <Label htmlFor="email" className="text-white text-sm font-medium">
-                    Email Address *
+                    {t('startProject.form.emailAddress')} *
                   </Label>
                   <Input
                     id="email"
@@ -145,28 +145,28 @@ export default function StartProject() {
                     value={formData.email}
                     onChange={(e) => handleChange('email', e.target.value)}
                     className="bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:border-accent focus:ring-accent"
-                    placeholder="john@company.com"
+                    placeholder={t('startProject.form.emailPlaceholder')}
                   />
                 </div>
 
                 {/* Company */}
                 <div className="space-y-2">
                   <Label htmlFor="company" className="text-white text-sm font-medium">
-                    Company Name
+                    {t('startProject.form.companyName')}
                   </Label>
                   <Input
                     id="company"
                     value={formData.company}
                     onChange={(e) => handleChange('company', e.target.value)}
                     className="bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:border-accent focus:ring-accent"
-                    placeholder="Your Company"
+                    placeholder={t('startProject.form.companyPlaceholder')}
                   />
                 </div>
 
                 {/* Project Type */}
                 <div className="space-y-2">
                   <Label htmlFor="projectType" className="text-white text-sm font-medium">
-                    Project Type *
+                    {t('startProject.form.projectType')} *
                   </Label>
                   <Select
                     required
@@ -174,14 +174,14 @@ export default function StartProject() {
                     onValueChange={(value) => handleChange('projectType', value)}
                   >
                     <SelectTrigger className="bg-white/10 border-white/20 text-white focus:border-accent focus:ring-accent">
-                      <SelectValue placeholder="Select a project type" />
+                      <SelectValue placeholder={t('startProject.form.projectTypePlaceholder')} />
                     </SelectTrigger>
                     <SelectContent className="bg-slate-900 border-white/20 backdrop-blur-xl">
-                      <SelectItem value="ai-strategy" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">AI Strategy & Consulting</SelectItem>
-                      <SelectItem value="agentic-ai" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">Agentic AI Development</SelectItem>
-                      <SelectItem value="ai-integration" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">AI Integration</SelectItem>
-                      <SelectItem value="ai-training" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">AI Training & Workshops</SelectItem>
-                      <SelectItem value="other" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">Other</SelectItem>
+                      <SelectItem value="ai-strategy" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">{t('startProject.form.projectTypes.aiStrategy')}</SelectItem>
+                      <SelectItem value="agentic-ai" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">{t('startProject.form.projectTypes.agenticAI')}</SelectItem>
+                      <SelectItem value="ai-integration" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">{t('startProject.form.projectTypes.aiIntegration')}</SelectItem>
+                      <SelectItem value="ai-training" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">{t('startProject.form.projectTypes.aiTraining')}</SelectItem>
+                      <SelectItem value="other" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">{t('startProject.form.projectTypes.other')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -189,7 +189,7 @@ export default function StartProject() {
                 {/* Budget */}
                 <div className="space-y-2">
                   <Label htmlFor="budget" className="text-white text-sm font-medium">
-                    Estimated Budget *
+                    {t('startProject.form.estimatedBudget')} *
                   </Label>
                   <Select
                     required
@@ -197,14 +197,14 @@ export default function StartProject() {
                     onValueChange={(value) => handleChange('budget', value)}
                   >
                     <SelectTrigger className="bg-white/10 border-white/20 text-white focus:border-accent focus:ring-accent">
-                      <SelectValue placeholder="Select a budget range" />
+                      <SelectValue placeholder={t('startProject.form.budgetPlaceholder')} />
                     </SelectTrigger>
                     <SelectContent className="bg-slate-900 border-white/20 backdrop-blur-xl">
-                      <SelectItem value="10k-25k" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">$10k - $25k</SelectItem>
-                      <SelectItem value="25k-50k" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">$25k - $50k</SelectItem>
-                      <SelectItem value="50k-100k" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">$50k - $100k</SelectItem>
-                      <SelectItem value="100k+" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">$100k+</SelectItem>
-                      <SelectItem value="not-sure" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">Not sure yet</SelectItem>
+                      <SelectItem value="10k-25k" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">{t('startProject.form.budgetRanges.10k25k')}</SelectItem>
+                      <SelectItem value="25k-50k" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">{t('startProject.form.budgetRanges.25k50k')}</SelectItem>
+                      <SelectItem value="50k-100k" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">{t('startProject.form.budgetRanges.50k100k')}</SelectItem>
+                      <SelectItem value="100k+" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">{t('startProject.form.budgetRanges.100kPlus')}</SelectItem>
+                      <SelectItem value="not-sure" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">{t('startProject.form.budgetRanges.notSure')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -212,7 +212,7 @@ export default function StartProject() {
                 {/* Description */}
                 <div className="space-y-2">
                   <Label htmlFor="description" className="text-white text-sm font-medium">
-                    Project Description *
+                    {t('startProject.form.projectDescription')} *
                   </Label>
                   <Textarea
                     id="description"
@@ -220,7 +220,7 @@ export default function StartProject() {
                     value={formData.description}
                     onChange={(e) => handleChange('description', e.target.value)}
                     className="bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:border-accent focus:ring-accent min-h-[150px]"
-                    placeholder="Tell us about your project, goals, and challenges..."
+                    placeholder={t('startProject.form.projectDescriptionPlaceholder')}
                   />
                 </div>
 
@@ -231,17 +231,17 @@ export default function StartProject() {
                   className="w-full bg-gradient-to-r from-violet-600 to-rose-600 hover:from-violet-700 hover:to-rose-700 text-white font-bold py-4 text-base rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group disabled:opacity-50"
                 >
                   {submitProject.isPending ? (
-                    'Sending...'
+                    t('startProject.form.sending')
                   ) : (
                     <>
-                      Submit Project Request
+                      {t('startProject.form.submit')}
                       <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </>
                   )}
                 </Button>
 
                 <p className="text-white/50 text-sm text-center">
-                  By submitting this form, you agree to our privacy policy and terms of service.
+                  {t('startProject.form.privacyNotice')}
                 </p>
               </form>
             )}

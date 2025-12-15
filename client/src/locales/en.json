@@ -1245,106 +1245,88 @@
       "ctaButton2": "See our work"
     },
     "strategicBureau": {
-      "badge": "The Strategic Bureau",
-      "heroTitle": "Transformation",
-      "heroTitleHighlight": "Orchestration",
-      "heroDescription": "We orchestrate your AI transformation end-to-end. From strategic vision to operational execution, we align technology, processes, and teams to create measurable and lasting impact.",
-      "ctaStart": "Start Your Transformation",
-      "ctaLearnMore": "Learn More About the Bureau",
-      "coreServicesTitle": "Strategic Services",
-      "services": {
-        "aiStrategy": {
-          "title": "AI Strategy & Roadmap",
-          "description": "Definition of your AI vision, identification of high-impact opportunities, and construction of a pragmatic and measurable transformation roadmap."
+      "badge": "BUREAU",
+      "heroTitle": "Clear strategy,",
+      "heroTitleHighlight": "concrete execution.",
+      "heroSubtitle": "Strategy, Transformation & Marketing",
+      "heroDescription": "We drive your digital transformation and orchestrate your communication. From strategy to execution, complete support for measurable results.",
+      "clientNeeds": {
+        "items": [
+          "You need a clear and actionable digital strategy",
+          "You want to structure and professionalize your communication",
+          "You're looking to generate more leads and visibility",
+          "You need a partner who executes, not just advises"
+        ]
+      },
+      "approachTitle": "Consulting + Execution",
+      "approachDescription": "We're not consultants who deliver PowerPoints and disappear. We stay by your side from strategy to execution, with a commitment to results. Our team combines strategic vision with operational expertise.",
+      "expertiseTitle": "How we support you",
+      "expertise": {
+        "digitalStrategy": {
+          "title": "Digital Strategy",
+          "description": "We define your digital vision and build the roadmap to get there.",
+          "deliverables": "Audit, vision, 12-36 month roadmap"
         },
-        "businessCase": {
-          "title": "Business Case & ROI",
-          "description": "In-depth ROI analysis, financial modeling, and construction of solid business cases to secure investment."
+        "transformation": {
+          "title": "Transformation & Change",
+          "description": "We support your teams in adopting new tools and processes.",
+          "deliverables": "Transformation plan, training, change management"
         },
-        "changeManagement": {
-          "title": "Change Management",
-          "description": "Support for your teams in AI adoption, training, change management, and creation of a data-driven culture."
+        "marketingStrategy": {
+          "title": "Marketing Strategy",
+          "description": "We build your customer acquisition and retention strategy.",
+          "deliverables": "Personas, customer journey, marketing plan"
         },
-        "governance": {
-          "title": "Governance & Compliance",
-          "description": "Implementation of AI governance frameworks, ethical use policies, and regulatory compliance (GDPR, AI Act)."
+        "communication": {
+          "title": "Communication",
+          "description": "We structure your communication and create content that carries your message.",
+          "deliverables": "Editorial strategy, content, press relations"
         },
-        "performanceTracking": {
-          "title": "Performance Tracking",
-          "description": "Definition of relevant KPIs, implementation of tracking dashboards, and continuous data-driven optimization."
+        "digitalMarketing": {
+          "title": "Digital Marketing",
+          "description": "We deploy and optimize your campaigns across all digital channels.",
+          "deliverables": "SEO, SEA, Social Ads, Email, Analytics"
         },
-        "riskManagement": {
-          "title": "Risk Management",
-          "description": "Identification and mitigation of AI-related risks (bias, security, dependency) with robust contingency strategies."
+        "communityManagement": {
+          "title": "Community Management",
+          "description": "We animate your communities and manage your social media presence.",
+          "deliverables": "Editorial calendar, content, moderation, reporting"
         }
       },
-      "frameworkTitle": "Transformation Framework",
-      "frameworkDescription": "Our proven methodology for orchestrating successful AI transformations, from vision to impact.",
-      "phases": {
-        "discover": {
-          "title": "Discover",
-          "description": "AI maturity audit, opportunity identification, and alignment with business strategy"
-        },
-        "define": {
-          "title": "Define",
-          "description": "Construction of the AI vision, prioritization of use cases and definition of the roadmap"
-        },
-        "deploy": {
-          "title": "Deploy",
-          "description": "Execution of pilot projects, scaling of solutions and integration into processes"
-        },
-        "drive": {
-          "title": "Drive",
-          "description": "Continuous optimization, impact measurement and strategy evolution"
-        }
-      },
-      "deliverablesTitle": "Key Deliverables",
-      "deliverables": {
-        "strategic": {
-          "title": "Strategic",
-          "items": ["AI Vision & Roadmap", "Detailed Business Cases", "Governance Framework", "Ethical Use Policy", "Change Management Strategy"]
-        },
-        "operational": {
-          "title": "Operational",
-          "items": ["Detailed Execution Plans", "KPI Tracking Dashboards", "Optimized Processes", "User Guides", "Training Plans"]
-        },
-        "organizational": {
-          "title": "Organizational",
-          "items": ["Target Organizational Charts", "AI Job Descriptions", "Training Paths", "Communities of Practice", "Communication Plans"]
-        }
-      },
-      "approachTitle": "Our Approach",
-      "steps": {
-        "assessment": {
+      "teamTitle": "Practitioners, not theorists",
+      "teamDescription": "Senior consultants, project managers, marketing and communication experts — a team that has lived transformations from the inside. We've supported SMBs and large corporations in their strategic projects.",
+      "processTitle": "Process",
+      "process": {
+        "listen": {
           "step": "01",
-          "title": "Assessment & Vision",
-          "description": "Evaluation of your AI maturity, identification of quick wins and construction of an ambitious but realistic vision."
+          "title": "Listen",
+          "description": "Understand your context, challenges, and ambitions"
         },
-        "strategy": {
+        "diagnose": {
           "step": "02",
-          "title": "Strategy & Roadmap",
-          "description": "Definition of the AI strategy aligned with your business objectives and construction of a phased transformation roadmap."
+          "title": "Diagnose",
+          "description": "Analyze your situation and identify opportunities"
         },
-        "pilot": {
+        "plan": {
           "step": "03",
-          "title": "Pilot & Validate",
-          "description": "Launch of pilot projects to validate the approach, measure impact and adjust strategy before scaling."
+          "title": "Plan",
+          "description": "Build the strategy and prioritize actions"
         },
-        "scale": {
+        "execute": {
           "step": "04",
-          "title": "Scale & Integrate",
-          "description": "Large-scale deployment, integration into existing processes and team training for autonomy."
+          "title": "Execute",
+          "description": "Deploy actions and manage projects"
         },
-        "optimize": {
+        "measure": {
           "step": "05",
-          "title": "Optimize & Evolve",
-          "description": "Continuous performance measurement, solution optimization and strategy evolution based on results."
+          "title": "Measure",
+          "description": "Track results and continuously optimize"
         }
       },
-      "ctaTitle": "Ready to orchestrate your AI transformation?",
-      "ctaDescription": "Let's discuss your vision and build together the strategy that will transform your organization.",
-      "ctaButton1": "Schedule a Strategic Diagnostic",
-      "ctaButton2": "Assess Your AI Maturity"
+      "ctaTitle": "Ready to take action?",
+      "ctaDescription": "Let's discuss your challenges and build the strategy that will make the difference.",
+      "ctaButton1": "Book a strategy call",
+      "ctaButton2": "See our case studies"
     },
     "aiLab": {
       "badge": "LAB",

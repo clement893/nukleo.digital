@@ -96,12 +96,12 @@ function HeroSection() {
   }, [isMobile]);
   
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 px-4 sm:px-6 lg:px-8 xl:px-12">
+    <section className="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 px-4 sm:px-6 lg:px-8 xl:px-16 2xl:px-20 overflow-x-hidden">
 
-      <div className="container relative z-10 px-4 sm:px-6 lg:px-8 xl:px-12">
-        <div className="flex items-center justify-center">
+      <div className="relative z-10 w-full" style={{ maxWidth: '100vw', paddingLeft: 'clamp(1rem, 4vw, 4rem)', paddingRight: 'clamp(1rem, 5vw, 8rem)' }}>
+        <div className="flex items-center justify-center w-full">
           {/* Main Title */}
-          <div className="max-w-6xl lg:max-w-7xl xl:max-w-[90%] w-full overflow-x-visible overflow-y-hidden">
+          <div className="w-full" style={{ maxWidth: '100%', overflow: 'visible' }}>
             {/* Main Heading */}
             <h1 
               className={`
@@ -109,16 +109,23 @@ function HeroSection() {
                   ? 'text-[2rem] sm:text-[3.5rem] md:text-[5rem] lg:text-[7rem] xl:text-[8rem]' 
                   : 'text-[2.25rem] sm:text-[4rem] md:text-[6rem] lg:text-[9rem] xl:text-[10rem]'
                 }
-                font-bold leading-[1.05] sm:leading-[1.1] tracking-tighter text-white mb-4 sm:mb-6 md:mb-8 italic pr-2 sm:pr-4 lg:pr-6 xl:pr-8
+                font-bold leading-[1.05] sm:leading-[1.1] tracking-tighter text-white mb-4 sm:mb-6 md:mb-8 italic
               `}
               style={useMemo(() => ({
                 // Prevent layout shift by reserving space - responsive
                 minHeight: isMobile 
                   ? (language === 'fr' ? '2.5rem' : '2.75rem')
                   : (language === 'fr' ? '3rem' : '3.5rem'),
-                maxWidth: '100%',
                 overflowWrap: 'normal',
                 wordBreak: 'normal',
+                paddingRight: isMobile 
+                  ? '1rem' 
+                  : language === 'fr' 
+                    ? 'clamp(2rem, 5vw, 4rem)' 
+                    : 'clamp(3rem, 6vw, 5rem)',
+                width: '100%',
+                maxWidth: '100%',
+                boxSizing: 'border-box',
               }), [isMobile, language]) as React.CSSProperties}
             >
               {t('hero.title')}

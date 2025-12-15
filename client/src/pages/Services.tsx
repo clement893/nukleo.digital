@@ -144,162 +144,176 @@ export default function Services() {
       />
       <StructuredData data={serviceSchema} />
       
-      <div className="min-h-screen bg-[#1a1a1c] pt-24 pb-20">
-        <div className="max-w-6xl mx-auto px-4">
+      <div className="min-h-screen bg-gradient-to-br from-[rgb(107,23,22)] via-[rgb(40,60,120)] to-[rgb(107,23,22)]">
+        {/* Breadcrumb */}
+        <div className="container max-w-6xl mx-auto pt-24 pb-4 px-4">
           <Breadcrumb items={[{ name: t('nav.services'), url: '/services' }]} />
         </div>
         
         {/* Hero Section */}
-        <div className="max-w-6xl mx-auto px-4 mb-24">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-8">
-            <span className="text-sm font-medium text-white/90">
-              {t('services.ourServices')}
-            </span>
+        <section className="relative pt-8 pb-20 px-4">
+          <div className="container max-w-6xl mx-auto">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm mb-8">
+              <span className="text-sm font-medium text-white/90">
+                {t('services.ourServices')}
+              </span>
+            </div>
+            
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight">
+              {t('services.heroTitle')}
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">
+                {t('services.heroSubtitle')}
+              </span>
+            </h1>
+            
+            <p className="text-sm md:text-base text-cyan-400/90 mb-4 font-medium">
+              {t('services.heroSubtitleGradient')}
+            </p>
+            
+            <p className="text-xl md:text-2xl text-white/80 max-w-3xl leading-relaxed">
+              {t('services.heroDescription')}
+            </p>
           </div>
-          
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight">
-            {t('services.heroTitle')}
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">
-              {t('services.heroSubtitle')}
-            </span>
-          </h1>
-          
-          <p className="text-sm md:text-base text-accent/80 mb-4 font-medium">
-            {t('services.heroSubtitleGradient')}
-          </p>
-          
-          <p className="text-xl md:text-2xl text-white/70 max-w-3xl leading-relaxed">
-            {t('services.heroDescription')}
-          </p>
-        </div>
+        </section>
 
         {/* Three Entities Grid */}
-        <div className="max-w-7xl mx-auto px-4 mb-32">
-          <div className="grid lg:grid-cols-3 gap-px bg-white/10">
-            {entities.map((entity) => {
-              const EntityIcon = entity.icon;
-              return (
-                <div 
-                  key={entity.id}
-                  className="bg-[#1a1a1c] p-8 lg:p-10 group hover:bg-white/5 transition-all duration-500"
-                >
-                  {/* Header */}
-                  <div className="flex items-start justify-between mb-6">
-                    <span className="font-mono text-4xl font-bold text-white/10">{entity.number}</span>
-                    <div className="w-14 h-14 border border-white/20 rounded-full flex items-center justify-center group-hover:border-accent transition-colors">
-                      <EntityIcon className="w-7 h-7 text-white/60 group-hover:text-accent transition-colors" />
+        <section className="py-20 px-4 bg-black/20">
+          <div className="container max-w-7xl mx-auto">
+            <div className="grid lg:grid-cols-3 gap-8">
+              {entities.map((entity) => {
+                const EntityIcon = entity.icon;
+                return (
+                  <div 
+                    key={entity.id}
+                    className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 lg:p-10 group hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+                  >
+                    {/* Header */}
+                    <div className="flex items-start justify-between mb-6">
+                      <span className="font-mono text-5xl font-bold text-white/20">{entity.number}</span>
+                      <div className="w-16 h-16 border-2 border-white/30 rounded-full flex items-center justify-center group-hover:border-cyan-400 group-hover:bg-cyan-400/10 transition-all">
+                        <EntityIcon className="w-8 h-8 text-white/70 group-hover:text-cyan-400 transition-colors" />
+                      </div>
                     </div>
-                  </div>
-                  
-                  {/* Title & Tagline */}
-                  <h2 className="text-2xl md:text-3xl font-heading font-bold text-white mb-2">
-                    {entity.name}
-                  </h2>
-                  <p className="text-accent/80 font-medium mb-4">{entity.tagline}</p>
-                  
-                  {/* Description */}
-                  <p className="text-white/60 text-sm leading-relaxed mb-8">
-                    {entity.description}
-                  </p>
-                  
-                  {/* Services List */}
-                  <div className="space-y-4 mb-8">
-                    {entity.services.map((service, idx) => {
-                      const ServiceIcon = service.icon;
-                      return (
-                        <div key={idx} className="flex items-start gap-3">
-                          <ServiceIcon className="w-4 h-4 text-white/40 mt-1 flex-shrink-0" />
-                          <div>
-                            <span className="text-white font-medium text-sm">{service.title}</span>
-                            <p className="text-white/40 text-xs">{service.description}</p>
+                    
+                    {/* Title & Tagline */}
+                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
+                      {entity.name}
+                    </h2>
+                    <p className="text-cyan-400/90 font-semibold mb-6 text-lg">{entity.tagline}</p>
+                    
+                    {/* Description */}
+                    <p className="text-white/70 text-base leading-relaxed mb-8">
+                      {entity.description}
+                    </p>
+                    
+                    {/* Services List */}
+                    <div className="space-y-5 mb-8">
+                      {entity.services.map((service, idx) => {
+                        const ServiceIcon = service.icon;
+                        return (
+                          <div key={idx} className="flex items-start gap-4">
+                            <div className="w-10 h-10 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center flex-shrink-0">
+                              <ServiceIcon className="w-5 h-5 text-cyan-400" />
+                            </div>
+                            <div className="flex-1">
+                              <h3 className="text-white font-semibold text-base mb-1">{service.title}</h3>
+                              <p className="text-white/50 text-sm leading-relaxed">{service.description}</p>
+                            </div>
                           </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
+                    </div>
+                    
+                    {/* CTA */}
+                    <Link href={getLocalizedPath(entity.link)}>
+                      <button className="inline-flex items-center gap-2 text-cyan-400 hover:text-white font-semibold transition-colors group/btn text-lg">
+                        {entity.cta}
+                        <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
+                      </button>
+                    </Link>
                   </div>
-                  
-                  {/* CTA */}
-                  <Link href={getLocalizedPath(entity.link)}>
-                    <button className="inline-flex items-center gap-2 text-accent hover:text-white font-medium transition-colors group/btn">
-                      {entity.cta}
-                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                    </button>
-                  </Link>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
-        </div>
+        </section>
 
         {/* How It Works Section */}
-        <section className="py-20 relative" style={{ backgroundColor: '#29292B' }}>
-          <div className="absolute inset-0 bg-grid-pattern opacity-5 invert" />
-          
-          <div className="container relative z-10 max-w-6xl mx-auto px-4">
+        <section className="py-20 px-4 bg-black/30">
+          <div className="container max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-heading font-bold text-white mb-4">
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
                 {t('services.howItWorks.title')}
               </h2>
-              <p className="text-lg text-white/60 max-w-2xl mx-auto">
+              <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
                 {t('services.howItWorks.description')}
               </p>
             </div>
             
             {/* Combinations Table */}
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-white/10">
-                    <th className="text-left py-4 px-4 text-white/60 font-medium text-sm">
-                      {language === 'fr' ? 'Projet' : 'Project'}
-                    </th>
-                    <th className="text-left py-4 px-4 text-white/60 font-medium text-sm">
-                      {language === 'fr' ? 'Équipes' : 'Teams'}
-                    </th>
-                    <th className="text-left py-4 px-4 text-white/60 font-medium text-sm">
-                      {language === 'fr' ? 'Livrables' : 'Deliverables'}
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {combinations.map((combo, idx) => (
-                    <tr key={idx} className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                      <td className="py-4 px-4 text-white font-medium">{combo.project}</td>
-                      <td className="py-4 px-4">
-                        <span className="text-accent">{combo.teams}</span>
-                      </td>
-                      <td className="py-4 px-4 text-white/60 text-sm">{combo.deliverables}</td>
+            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-white/10 bg-white/5">
+                      <th className="text-left py-5 px-6 text-white/80 font-semibold text-sm uppercase tracking-wider">
+                        {language === 'fr' ? 'Projet' : 'Project'}
+                      </th>
+                      <th className="text-left py-5 px-6 text-white/80 font-semibold text-sm uppercase tracking-wider">
+                        {language === 'fr' ? 'Équipes' : 'Teams'}
+                      </th>
+                      <th className="text-left py-5 px-6 text-white/80 font-semibold text-sm uppercase tracking-wider">
+                        {language === 'fr' ? 'Livrables' : 'Deliverables'}
+                      </th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {combinations.map((combo, idx) => (
+                      <tr key={idx} className="border-b border-white/5 hover:bg-white/5 transition-colors last:border-b-0">
+                        <td className="py-5 px-6 text-white font-semibold text-base">{combo.project}</td>
+                        <td className="py-5 px-6">
+                          <span className="text-cyan-400 font-medium">{combo.teams}</span>
+                        </td>
+                        <td className="py-5 px-6 text-white/60 text-sm leading-relaxed">{combo.deliverables}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="py-24 relative overflow-hidden" style={{ 
-          background: 'linear-gradient(135deg, rgb(60,15,15) 0%, rgb(40,60,120) 50%, rgb(60,15,15) 100%)' 
-        }}>
-          <div className="absolute inset-0 bg-grid-pattern opacity-5 invert" />
+        <section className="py-24 px-4 relative overflow-hidden">
+          <div 
+            className="absolute inset-0 opacity-20"
+            style={{
+              backgroundImage: `
+                linear-gradient(rgba(139, 92, 246, 0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(139, 92, 246, 0.3) 1px, transparent 1px)
+              `,
+              backgroundSize: '50px 50px'
+            }}
+          />
           
-          <div className="container relative z-10 max-w-4xl mx-auto px-4 text-center">
-            <h2 className="text-3xl md:text-5xl font-heading font-bold text-white mb-6">
+          <div className="container relative z-10 max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
               {t('services.cta.title')}
             </h2>
-            <p className="text-xl text-white/70 mb-10 max-w-2xl mx-auto">
+            <p className="text-xl md:text-2xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed">
               {t('services.cta.description')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href={getLocalizedPath('/contact')}>
-                <button className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-black font-bold hover:bg-white/90 transition-all duration-300">
+                <button className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-black font-bold hover:bg-white/90 transition-all duration-300 rounded-full text-lg">
                   {t('services.cta.buttonPrimary')}
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
               </Link>
               <Link href={getLocalizedPath('/projects')}>
-                <button className="inline-flex items-center justify-center gap-3 px-8 py-4 border border-white/30 text-white font-bold hover:bg-white/10 transition-all duration-300">
+                <button className="inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-white/30 text-white font-bold hover:bg-white/10 transition-all duration-300 rounded-full text-lg">
                   {t('services.cta.buttonSecondary')}
                 </button>
               </Link>

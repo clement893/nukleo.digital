@@ -38,7 +38,7 @@ export default function Leo() {
     return [
       {
         role: 'assistant',
-        content: "I'm here to help architect your AI transformation. To begin, what should I call you?",
+        content: t('leo.welcomeMessage') || "I'm here to help architect your AI transformation. To begin, what should I call you?",
         timestamp: new Date(),
       },
     ];
@@ -105,31 +105,31 @@ export default function Leo() {
 
   // Contextual suggestion categories
   const suggestionCategories = {
-    initial: [
+    initial: (t('leo.suggestions.initial') as string[]) || [
       "How can AI transform my business operations?",
       "What's the ROI timeline for AI implementation?",
       "Help me build an AI strategy roadmap",
       "What are the best AI use cases for my industry?",
     ],
-    strategy: [
+    strategy: (t('leo.suggestions.strategy') as string[]) || [
       "How do I create a phased AI implementation plan?",
       "What are the key success factors for AI transformation?",
       "How should I structure my AI team?",
       "What's the typical timeline for AI adoption?",
     ],
-    implementation: [
+    implementation: (t('leo.suggestions.implementation') as string[]) || [
       "What technology stack should I choose for AI?",
       "How do I ensure data quality for AI models?",
       "What are common pitfalls in AI implementation?",
       "How do I integrate AI with existing systems?",
     ],
-    roi: [
+    roi: (t('leo.suggestions.roi') as string[]) || [
       "How long until I see ROI from AI investments?",
       "What metrics should I track for AI success?",
       "How do I calculate the business value of AI?",
       "What are realistic cost expectations for AI projects?",
     ],
-    team: [
+    team: (t('leo.suggestions.team') as string[]) || [
       "What skills do I need to hire for AI projects?",
       "How do I upskill my existing team for AI?",
       "Should I build in-house or partner for AI?",
@@ -180,31 +180,31 @@ export default function Leo() {
 
   // Expert mode suggestion categories (more technical)
   const expertSuggestionCategories = {
-    initial: [
+    initial: (t('leo.expertSuggestions.initial') as string[]) || [
       "What's your approach to MLOps and model governance?",
       "How do you architect multi-agent AI systems?",
       "What's your framework for AI risk assessment and mitigation?",
       "How do you handle data drift and model retraining pipelines?",
     ],
-    strategy: [
+    strategy: (t('leo.expertSuggestions.strategy') as string[]) || [
       "What's your methodology for AI maturity assessment?",
       "How do you design federated learning architectures?",
       "What's your approach to AI ethics frameworks and bias detection?",
       "How do you structure center of excellence for AI?",
     ],
-    implementation: [
+    implementation: (t('leo.expertSuggestions.implementation') as string[]) || [
       "What's your tech stack for real-time inference at scale?",
       "How do you implement model versioning and A/B testing?",
       "What's your approach to feature engineering automation?",
       "How do you handle model explainability and interpretability?",
     ],
-    roi: [
+    roi: (t('leo.expertSuggestions.roi') as string[]) || [
       "How do you calculate TCO for AI infrastructure?",
       "What metrics do you use for model performance vs business KPIs?",
       "How do you quantify the value of data quality improvements?",
       "What's your framework for AI investment portfolio optimization?",
     ],
-    team: [
+    team: (t('leo.expertSuggestions.team') as string[]) || [
       "What's your hiring framework for ML engineers vs data scientists?",
       "How do you structure AI teams (centralized vs embedded)?",
       "What certifications and skills matter for AI practitioners?",
@@ -269,7 +269,7 @@ export default function Leo() {
     const defaultMessages: Message[] = [
       {
         role: 'assistant',
-        content: "I'm here to help architect your AI transformation. To begin, what should I call you?",
+        content: t('leo.welcomeMessage') || "I'm here to help architect your AI transformation. To begin, what should I call you?",
         timestamp: new Date(),
       },
     ];
@@ -341,7 +341,7 @@ export default function Leo() {
             setShowEmailForm(true);
             setMessages((prev) => [...prev, {
               role: 'system',
-              content: "Before we continue, I'd love to send you personalized insights! Could you share your email?",
+              content: t('leo.emailPrompt') || "Before we continue, I'd love to send you personalized insights! Could you share your email?",
               timestamp: new Date(),
               isEmailForm: true,
             }]);
@@ -352,7 +352,7 @@ export default function Leo() {
       console.error('Error sending message:', error);
       const errorMessage: Message = {
         role: 'assistant',
-        content: "Sorry, I'm having trouble connecting right now. Please try again! 🔄",
+        content: t('leo.errorMessage') || "Sorry, I'm having trouble connecting right now. Please try again! 🔄",
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, errorMessage]);
@@ -379,9 +379,12 @@ export default function Leo() {
       
       // Remove email form message and add confirmation
       const messagesWithoutForm = messages.filter(m => !m.isEmailForm);
+      const successMessage = (t('leo.emailSuccess') || "Perfect! Thanks {{name}}! 🎉 I'll send personalized insights to {{email}}. Now, let's continue our conversation!")
+        .replace('{{name}}', nameInput || t('leo.youLabel') || 'there')
+        .replace('{{email}}', emailInput);
       setMessages([...messagesWithoutForm, {
         role: 'assistant',
-        content: `Perfect! Thanks ${nameInput || 'there'}! 🎉 I'll send personalized insights to ${emailInput}. Now, let's continue our conversation!`,
+        content: successMessage,
         timestamp: new Date(),
       }]);
       
@@ -399,7 +402,7 @@ export default function Leo() {
     const messagesWithoutForm = messages.filter(m => !m.isEmailForm);
     setMessages([...messagesWithoutForm, {
       role: 'assistant',
-      content: "No problem! Let's continue our conversation. 😊",
+      content: t('leo.emailSkip') || "No problem! Let's continue our conversation. 😊",
       timestamp: new Date(),
     }]);
   };
@@ -418,9 +421,9 @@ export default function Leo() {
   return (
     <>
       <SEO
-        title="Chat with LEO - AI Assistant | Get Instant AI Consultation"
-        description="Talk to LEO, Nukleo Digital's AI assistant. Get instant answers about AI transformation, strategy, and implementation for your business. Free AI consultation chatbot."
-        keywords="AI chatbot, AI assistant, AI consultation, AI strategy, AI transformation help, AI implementation guide, free AI consultation, AI advisor"
+        title={t('leo.seoTitle') || "Chat with LEO - AI Assistant | Get Instant AI Consultation"}
+        description={t('leo.seoDescription') || "Talk to LEO, Nukleo Digital's AI assistant. Get instant answers about AI transformation, strategy, and implementation for your business. Free AI consultation chatbot."}
+        keywords={t('leo.seoKeywords') || "AI chatbot, AI assistant, AI consultation, AI strategy, AI transformation help, AI implementation guide, free AI consultation, AI advisor"}
         ogImage="https://nukleodigital-production.up.railway.app/og-image.jpg"
       />
       <div className="min-h-screen bg-gradient-to-br from-[oklch(0.35_0.15_300)] via-[oklch(0.40_0.15_320)] to-[oklch(0.35_0.15_340)] flex flex-col">
@@ -451,10 +454,10 @@ export default function Leo() {
               <button
                 onClick={() => setIsExpertMode(!isExpertMode)}
                 className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all"
-                title={isExpertMode ? "Switch to Standard Mode" : "Switch to Expert Mode"}
+                title={isExpertMode ? t('leo.switchToStandard') : t('leo.switchToExpert')}
               >
                 <span className="text-xs font-medium">
-                  {isExpertMode ? '🔬 Expert' : '💡 Standard'}
+                  {isExpertMode ? `🔬 ${t('leo.expertMode')}` : `💡 ${t('leo.standardMode')}`}
                 </span>
               </button>
               <Button
@@ -462,12 +465,12 @@ export default function Leo() {
                 variant="outline"
                 className="bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white"
               >
-                New Chat
+                {t('leo.newChat')}
               </Button>
               <Button
                 className="rounded-full bg-white text-purple-900 hover:bg-white/90 font-bold px-6"
               >
-                START PROJECT
+                {t('leo.startProject')}
               </Button>
               <Link href="/">
                 <button className="text-white hover:text-white/80 transition-colors p-2">
@@ -485,10 +488,10 @@ export default function Leo() {
       <div className="container pt-24 pb-4">
         <div className="flex items-center gap-2 text-sm text-white/60">
           <Link href="/" className="hover:text-white/80 transition-colors">
-            HOME
+            {t('leo.home')}
           </Link>
           <span>/</span>
-          <span className="text-white/90">CHAT WITH LEO</span>
+          <span className="text-white/90">{t('leo.chatWithLeo')}</span>
         </div>
       </div>
 
@@ -496,7 +499,7 @@ export default function Leo() {
       <div className="container pb-4">
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-          <span className="text-xs text-white/60 uppercase tracking-wider">AI Online</span>
+          <span className="text-xs text-white/60 uppercase tracking-wider">{t('leo.aiOnline')}</span>
         </div>
       </div>
 
@@ -520,13 +523,13 @@ export default function Leo() {
                     />
                   </div>
                   <div className="flex flex-col items-start max-w-[70%]">
-                    <span className="text-xs text-white/40 uppercase tracking-wider mb-2">LEO</span>
+                    <span className="text-xs text-white/40 uppercase tracking-wider mb-2">{t('leo.leoLabel')}</span>
                     <div className="px-6 py-4 rounded-2xl bg-white/10 backdrop-blur-md border border-cyan-500/30 text-white">
                       <p className="text-base leading-relaxed mb-4">{message.content}</p>
                       <div className="space-y-3">
                         <input
                           type="text"
-                          placeholder="Your name (optional)"
+                          placeholder={t('leo.namePlaceholder')}
                           value={nameInput}
                           onChange={(e) => setNameInput(e.target.value)}
                           onKeyPress={handleKeyPress}
@@ -534,7 +537,7 @@ export default function Leo() {
                         />
                         <input
                           type="email"
-                          placeholder="your@email.com"
+                          placeholder={t('leo.emailPlaceholder')}
                           value={emailInput}
                           onChange={(e) => setEmailInput(e.target.value)}
                           onKeyPress={handleKeyPress}
@@ -547,7 +550,7 @@ export default function Leo() {
                             size="sm"
                             className="flex-1 border-white/20 text-white hover:bg-white/10 text-xs"
                           >
-                            Skip
+                            {t('leo.skip')}
                           </Button>
                           <Button
                             onClick={handleEmailSubmit}
@@ -555,7 +558,7 @@ export default function Leo() {
                             size="sm"
                             className="flex-1 bg-white text-purple-900 hover:bg-white/90 disabled:opacity-50 text-xs"
                           >
-                            {saveContactMutation.isPending ? 'Saving...' : 'Send'}
+                            {saveContactMutation.isPending ? t('leo.saving') : t('leo.send')}
                           </Button>
                         </div>
                       </div>
@@ -587,7 +590,7 @@ export default function Leo() {
 
                   <div className={`flex flex-col ${message.role === 'user' ? 'items-end' : 'items-start'} max-w-[70%]`}>
                     <span className="text-xs text-white/40 uppercase tracking-wider mb-2">
-                      {message.role === 'assistant' ? 'LEO' : 'YOU'}
+                      {message.role === 'assistant' ? t('leo.leoLabel') : t('leo.youLabel')}
                     </span>
                     <div
                       className={`px-6 py-4 rounded-2xl ${
@@ -674,7 +677,7 @@ export default function Leo() {
           {/* Suggestions */}
           {showSuggestions && messages.length === 2 && (
             <div className="mt-8 space-y-4">
-              <p className="text-sm text-white/60 text-center">Or choose a topic to get started:</p>
+              <p className="text-sm text-white/60 text-center">{t('leo.suggestionsPrompt')}</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {suggestions.map((suggestion, index) => (
                   <button
@@ -705,7 +708,7 @@ export default function Leo() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="Type your response..."
+                placeholder={t('leo.inputPlaceholder')}
                 disabled={isLoading || showEmailForm}
                 className="flex-1 bg-transparent border-0 text-white placeholder:text-white/40 focus-visible:ring-0 focus-visible:ring-offset-0 text-base"
               />
@@ -724,7 +727,7 @@ export default function Leo() {
             {/* Footer links */}
             <div className="flex items-center justify-between mt-4 text-xs text-white/40">
               <a href="#" className="hover:text-white/60 transition-colors uppercase tracking-wider">
-                Privacy Policy
+                {t('leo.privacyPolicy')}
               </a>
               <a href="mailto:hello@nukleo.com" className="hover:text-white/60 transition-colors uppercase tracking-wider">
                 hello@nukleo.com

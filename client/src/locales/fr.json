@@ -23,6 +23,7 @@
     "contact": "Contact",
     "startProject": "Démarrer un projet",
     "talkToLeo": "Parler à Leo",
+    "leo": "Parler à Leo",
     "artsCulture": "Arts & Culture",
     "faq": "FAQ"
   },
@@ -1060,6 +1061,99 @@
       "title": "Prêt à Amplifier Votre Créativité ?",
       "description": "Explorons comment Le Studio Créatif peut vous aider à créer des expériences et du contenu qui captivent les audiences à une échelle sans précédent.",
       "button": "Créons Ensemble"
+    }
+  },
+  "leo": {
+    "seoTitle": "Chat avec LEO - Assistant IA | Consultation IA Instantanée",
+    "seoDescription": "Parlez à LEO, l'assistant IA de Nukleo Digital. Obtenez des réponses instantanées sur la transformation IA, la stratégie et l'implémentation pour votre entreprise. Chatbot de consultation IA gratuit.",
+    "seoKeywords": "chatbot IA, assistant IA, consultation IA, stratégie IA, aide transformation IA, guide implémentation IA, consultation IA gratuite, conseiller IA",
+    "welcomeMessage": "Je suis là pour vous aider à architecturer votre transformation IA. Pour commencer, comment dois-je vous appeler ?",
+    "newChat": "Nouvelle Conversation",
+    "startProject": "DÉMARRER UN PROJET",
+    "home": "ACCUEIL",
+    "chatWithLeo": "PARLER À LEO",
+    "aiOnline": "IA En Ligne",
+    "leoLabel": "LEO",
+    "youLabel": "VOUS",
+    "skip": "Passer",
+    "saving": "Enregistrement...",
+    "send": "Envoyer",
+    "namePlaceholder": "Votre nom (optionnel)",
+    "emailPlaceholder": "votre@email.com",
+    "emailPrompt": "Avant de continuer, j'aimerais vous envoyer des insights personnalisés ! Pourriez-vous partager votre email ?",
+    "emailSuccess": "Parfait ! Merci {{name}} ! 🎉 J'enverrai des insights personnalisés à {{email}}. Maintenant, continuons notre conversation !",
+    "emailSkip": "Pas de problème ! Continuons notre conversation. 😊",
+    "errorMessage": "Désolé, j'ai des difficultés à me connecter en ce moment. Veuillez réessayer ! 🔄",
+    "suggestionsPrompt": "Ou choisissez un sujet pour commencer :",
+    "inputPlaceholder": "Tapez votre réponse...",
+    "privacyPolicy": "Politique de Confidentialité",
+    "expertMode": "Expert",
+    "standardMode": "Standard",
+    "switchToExpert": "Passer en Mode Expert",
+    "switchToStandard": "Passer en Mode Standard",
+    "suggestions": {
+      "initial": [
+        "Comment l'IA peut transformer mes opérations commerciales ?",
+        "Quel est le délai de ROI pour l'implémentation de l'IA ?",
+        "Aidez-moi à construire une feuille de route stratégique IA",
+        "Quels sont les meilleurs cas d'usage IA pour mon industrie ?"
+      ],
+      "strategy": [
+        "Comment créer un plan d'implémentation IA par phases ?",
+        "Quels sont les facteurs clés de succès pour la transformation IA ?",
+        "Comment structurer mon équipe IA ?",
+        "Quel est le délai typique pour l'adoption de l'IA ?"
+      ],
+      "implementation": [
+        "Quelle stack technologique dois-je choisir pour l'IA ?",
+        "Comment assurer la qualité des données pour les modèles IA ?",
+        "Quels sont les pièges courants dans l'implémentation IA ?",
+        "Comment intégrer l'IA avec les systèmes existants ?"
+      ],
+      "roi": [
+        "Combien de temps avant de voir le ROI des investissements IA ?",
+        "Quelles métriques dois-je suivre pour le succès IA ?",
+        "Comment calculer la valeur commerciale de l'IA ?",
+        "Quelles sont les attentes de coût réalistes pour les projets IA ?"
+      ],
+      "team": [
+        "Quelles compétences dois-je recruter pour les projets IA ?",
+        "Comment former mon équipe existante à l'IA ?",
+        "Dois-je construire en interne ou m'associer pour l'IA ?",
+        "Comment créer une culture axée sur l'IA ?"
+      ]
+    },
+    "expertSuggestions": {
+      "initial": [
+        "Quelle est votre approche du MLOps et de la gouvernance des modèles ?",
+        "Comment architecturer des systèmes d'agents IA multi-agents ?",
+        "Quel est votre cadre pour l'évaluation et l'atténuation des risques IA ?",
+        "Comment gérez-vous la dérive des données et les pipelines de réentraînement des modèles ?"
+      ],
+      "strategy": [
+        "Quelle est votre méthodologie pour l'évaluation de la maturité IA ?",
+        "Comment concevez-vous des architectures d'apprentissage fédéré ?",
+        "Quelle est votre approche des cadres d'éthique IA et de la détection des biais ?",
+        "Comment structurez-vous un centre d'excellence pour l'IA ?"
+      ],
+      "implementation": [
+        "Quelle est votre stack technologique pour l'inférence en temps réel à grande échelle ?",
+        "Comment implémentez-vous le versioning des modèles et les tests A/B ?",
+        "Quelle est votre approche de l'automatisation de l'ingénierie des caractéristiques ?",
+        "Comment gérez-vous l'explicabilité et l'interprétabilité des modèles ?"
+      ],
+      "roi": [
+        "Comment calculez-vous le TCO pour l'infrastructure IA ?",
+        "Quelles métriques utilisez-vous pour la performance des modèles vs les KPI commerciaux ?",
+        "Comment quantifiez-vous la valeur des améliorations de qualité des données ?",
+        "Quel est votre cadre pour l'optimisation du portefeuille d'investissements IA ?"
+      ],
+      "team": [
+        "Quel est votre cadre de recrutement pour les ingénieurs ML vs les scientifiques de données ?",
+        "Comment structurez-vous les équipes IA (centralisées vs intégrées) ?",
+        "Quelles certifications et compétences comptent pour les praticiens IA ?",
+        "Comment construisez-vous des communautés de pratique IA internes ?"
+      ]
     }
   }
 }

@@ -36,6 +36,8 @@ export default function TeamCarousel() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+  const autoScrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const checkScroll = () => {
     if (scrollRef.current) {
@@ -58,14 +60,67 @@ export default function TeamCarousel() {
     }
   }, []);
 
+  // Auto-scroll effect
+  useEffect(() => {
+    if (!isAutoScrolling || !scrollRef.current) return;
+
+    const autoScroll = () => {
+      if (!scrollRef.current) return;
+
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      const cardWidth = 192; // w-48 = 192px (12rem * 16)
+      const gap = 24; // gap-6 = 24px (1.5rem * 16)
+      const scrollAmount = cardWidth + gap;
+
+      // Si on est à la fin, revenir au début
+      if (scrollLeft >= scrollWidth - clientWidth - 10) {
+        scrollRef.current.scrollTo({
+          left: 0,
+          behavior: 'smooth'
+        });
+      } else {
+        scrollRef.current.scrollBy({
+          left: scrollAmount,
+          behavior: 'smooth'
+        });
+      }
+    };
+
+    const interval = setInterval(autoScroll, 1000); // Toutes les secondes
+
+    return () => clearInterval(interval);
+  }, [isAutoScrolling]);
+
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
+      // Arrêter l'auto-scroll temporairement
+      setIsAutoScrolling(false);
+      
+      // Reprendre l'auto-scroll après 5 secondes d'inactivité
+      if (autoScrollTimeoutRef.current) {
+        clearTimeout(autoScrollTimeoutRef.current);
+      }
+      autoScrollTimeoutRef.current = setTimeout(() => {
+        setIsAutoScrolling(true);
+      }, 5000);
+
       const scrollAmount = 300;
       scrollRef.current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth'
       });
     }
+  };
+
+  // Arrêter l'auto-scroll quand l'utilisateur scroll manuellement
+  const handleManualScroll = () => {
+    setIsAutoScrolling(false);
+    if (autoScrollTimeoutRef.current) {
+      clearTimeout(autoScrollTimeoutRef.current);
+    }
+    autoScrollTimeoutRef.current = setTimeout(() => {
+      setIsAutoScrolling(true);
+    }, 5000);
   };
 
   return (
@@ -106,6 +161,10 @@ export default function TeamCarousel() {
           {/* Scrollable container */}
           <div
             ref={scrollRef}
+            onScroll={handleManualScroll}
+            onTouchStart={() => setIsAutoScrolling(false)}
+            onMouseEnter={() => setIsAutoScrolling(false)}
+            onMouseLeave={() => setIsAutoScrolling(true)}
             className="flex gap-6 overflow-x-auto scrollbar-hide px-8 py-4"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
@@ -124,8 +183,8 @@ export default function TeamCarousel() {
                         alt={(t('alt.teamMember') || '{{name}} - {{role}} chez Nukleo Digital')
                           .replace('{{name}}', member.name)
                           .replace('{{role}}', t(`about.team.${member.translationKey}.role`) || member.translationKey)}
-                        className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
-                        style={member.objectPosition ? { objectPosition: member.objectPosition } : undefined}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        style={member.objectPosition ? { objectPosition: member.objectPosition } : { objectPosition: 'center top' }}
                         loading="lazy"
                       />
                     ) : (
@@ -137,8 +196,8 @@ export default function TeamCarousel() {
                           .replace('{{role}}', t(`about.team.${member.translationKey}.role`) || member.translationKey)}
                         width={192}
                         height={256}
-                        className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
-                        style={member.objectPosition ? { objectPosition: member.objectPosition } : undefined}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        style={member.objectPosition ? { objectPosition: member.objectPosition } : { objectPosition: 'center top' }}
                         loading="lazy"
                       />
                     )}

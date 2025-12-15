@@ -110,7 +110,6 @@ export default function Services() {
     },
   ];
 
-  // Exemples de combinaisons
   const combinations = [
     {
       project: t('services.howItWorks.combinations.brandLaunch.project'),
@@ -144,22 +143,17 @@ export default function Services() {
       />
       <StructuredData data={serviceSchema} />
       
-      <div className="min-h-screen bg-gradient-to-br from-[rgb(107,23,22)] via-[rgb(40,60,120)] to-[rgb(107,23,22)]">
-        {/* Breadcrumb */}
-        <div className="container max-w-6xl mx-auto pt-24 pb-4 px-4">
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950/20 to-slate-950">
+        <div className="container mx-auto px-4 pt-24 pb-20">
           <Breadcrumb items={[{ name: t('nav.services'), url: '/services' }]} />
-        </div>
-        
-        {/* Hero Section */}
-        <section className="relative pt-8 pb-20 px-4">
-          <div className="container max-w-6xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm mb-8">
-              <span className="text-sm font-medium text-white/90">
-                {t('services.ourServices')}
-              </span>
+          
+          {/* Hero Section */}
+          <div className="max-w-6xl mx-auto mb-20 mt-12">
+            <div className="inline-block px-4 py-2 rounded-full bg-white/10 border border-white/20 mb-8">
+              <span className="text-sm font-medium text-white">{t('services.ourServices')}</span>
             </div>
             
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight">
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
               {t('services.heroTitle')}
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">
@@ -167,69 +161,52 @@ export default function Services() {
               </span>
             </h1>
             
-            <p className="text-sm md:text-base text-cyan-400/90 mb-4 font-medium">
+            <p className="text-lg text-cyan-400 mb-4 font-medium">
               {t('services.heroSubtitleGradient')}
             </p>
             
-            <p className="text-xl md:text-2xl text-white/80 max-w-3xl leading-relaxed">
+            <p className="text-xl text-white/80 max-w-3xl">
               {t('services.heroDescription')}
             </p>
           </div>
-        </section>
 
-        {/* Three Entities Grid */}
-        <section className="py-20 px-4 bg-black/20">
-          <div className="container max-w-7xl mx-auto">
+          {/* Three Entities */}
+          <div className="max-w-7xl mx-auto mb-32">
             <div className="grid lg:grid-cols-3 gap-8">
               {entities.map((entity) => {
                 const EntityIcon = entity.icon;
                 return (
-                  <div 
-                    key={entity.id}
-                    className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 lg:p-10 group hover:bg-white/10 hover:border-white/20 transition-all duration-300"
-                  >
-                    {/* Header */}
+                  <div key={entity.id} className="bg-white/5 border border-white/10 rounded-2xl p-8">
                     <div className="flex items-start justify-between mb-6">
-                      <span className="font-mono text-5xl font-bold text-white/20">{entity.number}</span>
-                      <div className="w-16 h-16 border-2 border-white/30 rounded-full flex items-center justify-center group-hover:border-cyan-400 group-hover:bg-cyan-400/10 transition-all">
-                        <EntityIcon className="w-8 h-8 text-white/70 group-hover:text-cyan-400 transition-colors" />
+                      <span className="text-5xl font-bold text-white/20">{entity.number}</span>
+                      <div className="w-16 h-16 border-2 border-white/30 rounded-full flex items-center justify-center">
+                        <EntityIcon className="w-8 h-8 text-white" />
                       </div>
                     </div>
                     
-                    {/* Title & Tagline */}
-                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
-                      {entity.name}
-                    </h2>
-                    <p className="text-cyan-400/90 font-semibold mb-6 text-lg">{entity.tagline}</p>
+                    <h2 className="text-3xl font-bold text-white mb-2">{entity.name}</h2>
+                    <p className="text-cyan-400 font-semibold mb-4">{entity.tagline}</p>
+                    <p className="text-white/70 mb-8">{entity.description}</p>
                     
-                    {/* Description */}
-                    <p className="text-white/70 text-base leading-relaxed mb-8">
-                      {entity.description}
-                    </p>
-                    
-                    {/* Services List */}
-                    <div className="space-y-5 mb-8">
+                    <div className="space-y-4 mb-8">
                       {entity.services.map((service, idx) => {
                         const ServiceIcon = service.icon;
                         return (
-                          <div key={idx} className="flex items-start gap-4">
-                            <div className="w-10 h-10 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center flex-shrink-0">
-                              <ServiceIcon className="w-5 h-5 text-cyan-400" />
-                            </div>
-                            <div className="flex-1">
-                              <h3 className="text-white font-semibold text-base mb-1">{service.title}</h3>
-                              <p className="text-white/50 text-sm leading-relaxed">{service.description}</p>
+                          <div key={idx} className="flex items-start gap-3">
+                            <ServiceIcon className="w-5 h-5 text-cyan-400 mt-1 flex-shrink-0" />
+                            <div>
+                              <h3 className="text-white font-semibold">{service.title}</h3>
+                              <p className="text-white/50 text-sm">{service.description}</p>
                             </div>
                           </div>
                         );
                       })}
                     </div>
                     
-                    {/* CTA */}
                     <Link href={getLocalizedPath(entity.link)}>
-                      <button className="inline-flex items-center gap-2 text-cyan-400 hover:text-white font-semibold transition-colors group/btn text-lg">
+                      <button className="flex items-center gap-2 text-cyan-400 hover:text-white font-semibold">
                         {entity.cta}
-                        <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
+                        <ArrowRight className="w-4 h-4" />
                       </button>
                     </Link>
                   </div>
@@ -237,89 +214,67 @@ export default function Services() {
               })}
             </div>
           </div>
-        </section>
 
-        {/* How It Works Section */}
-        <section className="py-20 px-4 bg-black/30">
-          <div className="container max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                {t('services.howItWorks.title')}
-              </h2>
-              <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
-                {t('services.howItWorks.description')}
-              </p>
-            </div>
+          {/* How It Works Section */}
+          <div className="max-w-6xl mx-auto mb-32">
+            <h2 className="text-4xl font-bold text-white mb-4 text-center">
+              {t('services.howItWorks.title')}
+            </h2>
+            <p className="text-lg text-white/70 mb-12 text-center max-w-3xl mx-auto">
+              {t('services.howItWorks.description')}
+            </p>
             
-            {/* Combinations Table */}
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b border-white/10 bg-white/5">
-                      <th className="text-left py-5 px-6 text-white/80 font-semibold text-sm uppercase tracking-wider">
-                        {language === 'fr' ? 'Projet' : 'Project'}
-                      </th>
-                      <th className="text-left py-5 px-6 text-white/80 font-semibold text-sm uppercase tracking-wider">
-                        {language === 'fr' ? 'Équipes' : 'Teams'}
-                      </th>
-                      <th className="text-left py-5 px-6 text-white/80 font-semibold text-sm uppercase tracking-wider">
-                        {language === 'fr' ? 'Livrables' : 'Deliverables'}
-                      </th>
+            <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-white/10 bg-white/5">
+                    <th className="text-left py-4 px-6 text-white font-semibold">
+                      {language === 'fr' ? 'Projet' : 'Project'}
+                    </th>
+                    <th className="text-left py-4 px-6 text-white font-semibold">
+                      {language === 'fr' ? 'Équipes' : 'Teams'}
+                    </th>
+                    <th className="text-left py-4 px-6 text-white font-semibold">
+                      {language === 'fr' ? 'Livrables' : 'Deliverables'}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {combinations.map((combo, idx) => (
+                    <tr key={idx} className="border-b border-white/5">
+                      <td className="py-4 px-6 text-white font-medium">{combo.project}</td>
+                      <td className="py-4 px-6 text-cyan-400">{combo.teams}</td>
+                      <td className="py-4 px-6 text-white/60">{combo.deliverables}</td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {combinations.map((combo, idx) => (
-                      <tr key={idx} className="border-b border-white/5 hover:bg-white/5 transition-colors last:border-b-0">
-                        <td className="py-5 px-6 text-white font-semibold text-base">{combo.project}</td>
-                        <td className="py-5 px-6">
-                          <span className="text-cyan-400 font-medium">{combo.teams}</span>
-                        </td>
-                        <td className="py-5 px-6 text-white/60 text-sm leading-relaxed">{combo.deliverables}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
-        </section>
 
-        {/* CTA Section */}
-        <section className="py-24 px-4 relative overflow-hidden">
-          <div 
-            className="absolute inset-0 opacity-20"
-            style={{
-              backgroundImage: `
-                linear-gradient(rgba(139, 92, 246, 0.3) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(139, 92, 246, 0.3) 1px, transparent 1px)
-              `,
-              backgroundSize: '50px 50px'
-            }}
-          />
-          
-          <div className="container relative z-10 max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
+          {/* CTA Section */}
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               {t('services.cta.title')}
             </h2>
-            <p className="text-xl md:text-2xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-xl text-white/80 mb-10 max-w-2xl mx-auto">
               {t('services.cta.description')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href={getLocalizedPath('/contact')}>
-                <button className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-black font-bold hover:bg-white/90 transition-all duration-300 rounded-full text-lg">
+                <button className="px-8 py-4 bg-white text-black font-bold rounded-full hover:bg-white/90 flex items-center justify-center gap-2">
                   {t('services.cta.buttonPrimary')}
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-5 h-5" />
                 </button>
               </Link>
               <Link href={getLocalizedPath('/projects')}>
-                <button className="inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-white/30 text-white font-bold hover:bg-white/10 transition-all duration-300 rounded-full text-lg">
+                <button className="px-8 py-4 border-2 border-white/30 text-white font-bold rounded-full hover:bg-white/10">
                   {t('services.cta.buttonSecondary')}
                 </button>
               </Link>
             </div>
           </div>
-        </section>
+        </div>
       </div>
     </PageLayout>
   );

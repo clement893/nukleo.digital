@@ -109,7 +109,7 @@ function HeroSection() {
                   ? 'text-[2rem] sm:text-[3.5rem] md:text-[5rem] lg:text-[7rem] xl:text-[8rem]' 
                   : 'text-[2.25rem] sm:text-[4rem] md:text-[6rem] lg:text-[9rem] xl:text-[10rem]'
                 }
-                font-bold leading-[1.05] sm:leading-[1.1] tracking-tighter text-white mb-4 sm:mb-6 md:mb-8 italic pr-4 sm:pr-8 md:pr-12 lg:pr-16 xl:pr-20
+                font-bold leading-[1.05] sm:leading-[1.1] tracking-tighter text-white mb-4 sm:mb-6 md:mb-8 italic pr-4 sm:pr-10 md:pr-16 lg:pr-20 xl:pr-24 2xl:pr-28
               `}
               style={useMemo(() => ({
                 // Prevent layout shift by reserving space - responsive
@@ -121,7 +121,7 @@ function HeroSection() {
               {t('hero.title')}
               <br />
               <span 
-                className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent"
+                className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent pr-2 sm:pr-4 md:pr-6 lg:pr-8 xl:pr-10 inline-block"
               >
                 {t('hero.titleHighlight')}
               </span>

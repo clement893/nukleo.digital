@@ -96,12 +96,12 @@ function HeroSection() {
   }, [isMobile]);
   
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 px-4 sm:px-6">
+    <section className="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 px-4 sm:px-6 lg:px-8 xl:px-12">
 
-      <div className="container relative z-10 px-4 sm:px-6">
+      <div className="container relative z-10 px-4 sm:px-6 lg:px-8 xl:px-12">
         <div className="flex items-center justify-center">
           {/* Main Title */}
-          <div className="max-w-5xl w-full overflow-hidden">
+          <div className="max-w-6xl lg:max-w-7xl xl:max-w-[90%] w-full overflow-x-visible overflow-y-hidden">
             {/* Main Heading */}
             <h1 
               className={`
@@ -109,25 +109,25 @@ function HeroSection() {
                   ? 'text-[2rem] sm:text-[3.5rem] md:text-[5rem] lg:text-[7rem] xl:text-[8rem]' 
                   : 'text-[2.25rem] sm:text-[4rem] md:text-[6rem] lg:text-[9rem] xl:text-[10rem]'
                 }
-                font-bold leading-[1.05] sm:leading-[1.1] tracking-tighter text-white mb-4 sm:mb-6 md:mb-8 italic break-words overflow-wrap-anywhere
+                font-bold leading-[1.05] sm:leading-[1.1] tracking-tighter text-white mb-4 sm:mb-6 md:mb-8 italic pr-2 sm:pr-4 lg:pr-6 xl:pr-8
               `}
               style={useMemo(() => ({
                 // Prevent layout shift by reserving space - responsive
                 minHeight: isMobile 
                   ? (language === 'fr' ? '2.5rem' : '2.75rem')
                   : (language === 'fr' ? '3rem' : '3.5rem'),
-                wordBreak: 'break-word',
-                overflowWrap: 'break-word',
                 maxWidth: '100%',
+                overflowWrap: 'normal',
+                wordBreak: 'normal',
               }), [isMobile, language]) as React.CSSProperties}
             >
               {t('hero.title')}
               <br />
               <span 
-                className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent break-words overflow-wrap-anywhere"
+                className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent"
                 style={{
-                  wordBreak: 'break-word',
-                  overflowWrap: 'break-word',
+                  overflowWrap: 'normal',
+                  wordBreak: 'normal',
                 }}
               >
                 {t('hero.titleHighlight')}
@@ -156,6 +156,18 @@ function HeroSection() {
                   <span className="hidden sm:block absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
                 </Button>
               </Link>
+            </div>
+
+            {/* Beyond AI Text - Now before services */}
+            <div className="mt-8 sm:mt-12 md:mt-16">
+              <div className="text-left max-w-3xl">
+                <p className="text-white/60 text-[10px] sm:text-xs md:text-sm font-mono uppercase tracking-widest mb-2 sm:mb-3">
+                  {t('home.beyondAI')}
+                </p>
+                <p className="text-white/70 text-xs sm:text-sm md:text-base max-w-2xl leading-relaxed">
+                  {t('home.beyondAIDescription')}
+                </p>
+              </div>
             </div>
 
             {/* Services Carousel - Text Only */}

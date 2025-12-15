@@ -90,13 +90,13 @@ const teamMembers = [
   {
     name: "Ricardo",
     translationKey: "ricardo",
-    image: "https://via.placeholder.com/400x400/8B5CF6/FFFFFF?text=R",
+    image: "/team/Ricardo.png",
     linkedin: "https://www.linkedin.com/in/ricardo-wierzynski/"
   },
   {
     name: "Marie-Claire",
     translationKey: "marieClaire",
-    image: "https://via.placeholder.com/400x400/8B5CF6/FFFFFF?text=MC",
+    image: "/team/Marie-Claire.png",
     linkedin: "https://www.linkedin.com/in/marieclairelajeunesse/"
   }
 ];
@@ -186,8 +186,8 @@ export default function About() {
               >
                 <div className="aspect-square rounded-xl overflow-hidden mb-4">
                   <OptimizedImage 
-                    src={member.image.replace('.webp', '.png')}
-                    webpSrc={member.image}
+                    src={member.image.endsWith('.webp') ? member.image.replace('.webp', '.png') : member.image}
+                    webpSrc={member.image.endsWith('.png') ? member.image.replace('.png', '.webp') : member.image}
                     alt={(t('alt.teamMember') || '{{name}} - {{role}} chez Nukleo Digital')
                       .replace('{{name}}', member.name)
                       .replace('{{role}}', t(`about.team.${member.translationKey}.role`) || member.translationKey)}

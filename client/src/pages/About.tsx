@@ -197,7 +197,7 @@ export default function About() {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="flex items-start justify-between mb-1">
+                <div className="flex items-start justify-between">
                   <h3 className="text-xl font-bold text-white">{member.name}</h3>
                   <a 
                     href={member.linkedin}
@@ -209,29 +209,6 @@ export default function About() {
                     <Linkedin className="w-5 h-5" fill="currentColor" strokeWidth={0} />
                   </a>
                 </div>
-                <p className="text-fuchsia-400 text-sm font-semibold mb-3 uppercase tracking-wide">
-                  {(() => {
-                    const roleKey = `about.team.${member.translationKey}.role`;
-                    const role = t(roleKey);
-                    // If translation returns empty string or key itself, it means translation not found - use fallback
-                    if (!role || role === '' || role === roleKey || (typeof role === 'string' && role.trim() === '')) {
-                      // Fallback: use member name or translation key
-                      return member.translationKey.toUpperCase().replace(/([A-Z])/g, ' $1').trim();
-                    }
-                    return typeof role === 'string' ? role : String(role || '');
-                  })()}
-                </p>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  {(() => {
-                    const descKey = `about.team.${member.translationKey}.description`;
-                    const description = t(descKey);
-                    // If translation returns empty string or key itself, it means translation not found
-                    if (!description || description === '' || description === descKey || (typeof description === 'string' && description.trim() === '')) {
-                      return `Membre de l'équipe Nukleo Digital`;
-                    }
-                    return typeof description === 'string' ? description : String(description || '');
-                  })()}
-                </p>
               </div>
             ))}
           </div>

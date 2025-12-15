@@ -54,11 +54,12 @@ function GlobalLEO() {
 
 // Eager load only critical pages
 import Home from "./pages/Home";
+import About from "./pages/About";
+import Media from "./pages/Media";
 import NotFound404 from "@/pages/NotFound404";
 
 // Lazy load all other pages
 const Projects = lazy(() => import("./pages/Projects"));
-const About = lazy(() => import("./pages/About"));
 const Expertise = lazy(() => import("./pages/Expertise"));
 const Resources = lazy(() => import("./pages/Resources"));
 const ResourceArticle = lazy(() => import("./pages/resources/ResourceArticle"));
@@ -82,7 +83,6 @@ const Services = lazy(() => import("./pages/Services"));
 const Clients = lazy(() => import("./pages/Clients"));
 const StartProject = lazy(() => import("./pages/StartProject"));
 const MediaCenter = lazy(() => import("./pages/MediaCenter"));
-const Media = lazy(() => import("./pages/Media"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));
 const CookiePolicy = lazy(() => import("./pages/CookiePolicy"));

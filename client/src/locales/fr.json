@@ -1489,86 +1489,88 @@
       "ctaButton2": "Évaluer votre maturité IA"
     },
     "aiLab": {
-      "badge": "Le laboratoire IA",
-      "heroTitle": "Fondation",
-      "heroTitleHighlight": "technologique",
-      "heroDescription": "Nous construisons l'infrastructure technologique qui alimente votre transformation IA. Du développement d'agents intelligents à l'architecture de données, nous créons les fondations techniques de votre avenir augmenté.",
-      "ctaStart": "Démarrer un projet",
-      "ctaLearnMore": "En savoir plus sur le lab",
-      "capabilitiesTitle": "Capacités techniques",
-      "capabilities": {
-        "aiAgents": {
-          "title": "Agents IA & automatisation",
-          "description": "Développement d'agents intelligents autonomes capables d'exécuter des tâches complexes, d'apprendre et de s'adapter à votre environnement business."
+      "badge": "LAB",
+      "heroTitle": "Du code,",
+      "heroTitleHighlight": "des résultats.",
+      "heroSubtitle": "Development & Technology",
+      "heroDescription": "Nous construisons les solutions digitales qui font tourner votre business. Applications mobiles, plateformes web, intégrations, automatisation — une équipe de développeurs seniors qui livre du code propre et des produits qui marchent.",
+      "clientNeeds": {
+        "title": "Besoins clients",
+        "items": [
+          "Vous avez besoin d'une application mobile iOS et/ou Android",
+          "Vous voulez une plateforme web sur mesure pour votre activité",
+          "Vous cherchez à automatiser des processus répétitifs",
+          "Vous avez besoin d'intégrer vos outils entre eux"
+        ]
+      },
+      "approachTitle": "Ingénierie pragmatique",
+      "approachDescription": "Nous ne construisons pas de la technologie pour la technologie. Chaque ligne de code est pensée pour résoudre un problème réel et créer de la valeur. Notre équipe combine expertise technique pointue et compréhension des enjeux métier. On parle votre langage, pas juste celui des machines.",
+      "expertiseTitle": "Ce que nous développons",
+      "expertise": {
+        "mobileApps": {
+          "title": "Applications Mobiles",
+          "description": "Nous développons des apps natives et cross-platform avec une UX exceptionnelle.",
+          "technologies": "iOS, Android, React Native, Flutter"
         },
-        "dataPlatforms": {
-          "title": "Plateformes de données & pipelines",
-          "description": "Architecture et implémentation de plateformes de données modernes avec pipelines ETL/ELT, data lakes et entrepôts de données optimisés."
+        "webApps": {
+          "title": "Applications Web",
+          "description": "Nous construisons des plateformes web robustes et scalables adaptées à vos besoins.",
+          "technologies": "React, Node.js, Python, PostgreSQL"
         },
-        "apiIntegration": {
-          "title": "API & intégration",
-          "description": "Conception et développement d'API robustes et d'intégrations système pour connecter de manière transparente vos outils et données."
+        "ecommerce": {
+          "title": "E-commerce",
+          "description": "Nous créons des boutiques en ligne performantes qui convertissent.",
+          "technologies": "Shopify, WooCommerce, solutions sur mesure"
         },
-        "customModels": {
-          "title": "Modèles IA sur mesure",
-          "description": "Fine-tuning et déploiement de modèles IA personnalisés adaptés à vos cas d'usage spécifiques et données propriétaires."
+        "integrations": {
+          "title": "Intégrations & APIs",
+          "description": "Nous connectons vos outils entre eux — CRM, ERP, outils métier — pour un écosystème fluide.",
+          "technologies": "REST, GraphQL, webhooks, middleware"
         },
-        "performance": {
-          "title": "Optimisation de performance",
-          "description": "Optimisation de performance, scalabilité et réduction des coûts d'infrastructure pour vos systèmes IA et de données."
+        "automation": {
+          "title": "Automatisation",
+          "description": "Nous automatisons vos tâches répétitives pour libérer du temps à vos équipes.",
+          "technologies": "Zapier, Make, n8n, scripts sur mesure"
         },
-        "security": {
-          "title": "Sécurité & conformité",
-          "description": "Implémentation de mesures de sécurité robustes et conformité réglementaire (RGPD, SOC2, ISO) pour vos systèmes IA."
+        "data": {
+          "title": "Data & Analytics",
+          "description": "Nous structurons vos données et créons les dashboards pour piloter votre activité.",
+          "technologies": "SQL, ETL, BI tools, data pipelines"
         }
       },
-      "techStackTitle": "Stack technologique",
-      "techStackDescription": "Nous utilisons les technologies les plus avancées et éprouvées pour construire des solutions robustes et scalables.",
-      "techStack": {
-        "aiMl": {
-          "title": "IA & ML",
-          "items": ["OpenAI GPT-4, Claude, Gemini", "LangChain, LlamaIndex", "TensorFlow, PyTorch", "Hugging Face Transformers", "Bases de données vectorielles (Pinecone, Weaviate)"]
-        },
-        "dataInfrastructure": {
-          "title": "Données & infrastructure",
-          "items": ["AWS, Google Cloud, Azure", "Snowflake, BigQuery, Databricks", "Apache Airflow, dbt", "PostgreSQL, MongoDB, Redis", "Docker, Kubernetes"]
-        },
-        "development": {
-          "title": "Développement",
-          "items": ["Python, TypeScript, Go", "FastAPI, Node.js, React", "GraphQL, REST APIs", "CI/CD (GitHub Actions, GitLab)", "Monitoring (Datadog, Grafana)"]
-        }
-      },
-      "approachTitle": "Notre approche",
-      "steps": {
-        "discovery": {
+      "teamTitle": "Des développeurs, pas des vendeurs",
+      "teamDescription": "Développeurs full-stack, ingénieurs mobile, data engineers, DevOps — une équipe technique senior qui code, teste et livre. On a construit des produits pour des startups et des grandes entreprises.",
+      "processTitle": "Processus",
+      "process": {
+        "scoping": {
           "step": "01",
-          "title": "Découverte & architecture",
-          "description": "Audit technique de votre infrastructure existante, identification des besoins et conception de l'architecture cible."
+          "title": "Cadrage",
+          "description": "Comprendre le besoin, définir le scope et les contraintes"
         },
-        "poc": {
+        "prototype": {
           "step": "02",
-          "title": "Preuve de concept",
-          "description": "Développement rapide de POC pour valider la faisabilité technique et démontrer la valeur avant investissement complet."
+          "title": "Prototype",
+          "description": "Valider rapidement avec un MVP ou POC"
         },
         "development": {
           "step": "03",
-          "title": "Développement & intégration",
-          "description": "Développement itératif avec intégration continue dans vos systèmes existants, tests rigoureux et documentation complète."
+          "title": "Développement",
+          "description": "Construire par sprints avec des livrables réguliers"
         },
         "deployment": {
           "step": "04",
-          "title": "Déploiement & optimisation",
-          "description": "Déploiement en production avec monitoring, optimisation de performance et formation de vos équipes techniques."
+          "title": "Déploiement",
+          "description": "Mettre en production et former les utilisateurs"
         },
-        "support": {
+        "evolution": {
           "step": "05",
-          "title": "Support & évolution",
-          "description": "Support technique continu, maintenance proactive et évolution des solutions selon vos besoins changeants."
+          "title": "Évolution",
+          "description": "Maintenir, optimiser et faire évoluer"
         }
       },
-      "ctaTitle": "Prêt à construire votre infrastructure IA ?",
-      "ctaDescription": "Discutons de vos besoins techniques et concevons ensemble la solution adaptée à vos ambitions.",
-      "ctaButton1": "Planifier une consultation technique",
+      "ctaTitle": "Un projet à développer ?",
+      "ctaDescription": "Discutons de votre idée et construisons ensemble la solution adaptée.",
+      "ctaButton1": "Parler à un développeur",
       "ctaButton2": "Voir nos réalisations"
     }
   }

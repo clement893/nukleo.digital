@@ -174,6 +174,29 @@ export default function About() {
           </div>
         </section>
 
+        {/* Values Section */}
+        <section className="container mx-auto px-4 py-20">
+          <p className="text-violet-300 uppercase tracking-widest text-sm mb-4 text-center">{t('about.valuesTitle')}</p>
+          <p className="text-gray-300 text-center mb-12 max-w-2xl mx-auto">{t('about.valuesSubtitle')}</p>
+          
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold text-fuchsia-400 mb-4">{t('about.values.authenticity.title')}</h3>
+              <p className="text-gray-300 leading-relaxed">{t('about.values.authenticity.description')}</p>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold text-fuchsia-400 mb-4">{t('about.values.excellence.title')}</h3>
+              <p className="text-gray-300 leading-relaxed">{t('about.values.excellence.description')}</p>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold text-fuchsia-400 mb-4">{t('about.values.ownership.title')}</h3>
+              <p className="text-gray-300 leading-relaxed">{t('about.values.ownership.description')}</p>
+            </div>
+          </div>
+        </section>
+
         {/* Team Section */}
         <section className="container mx-auto px-4 py-20">
           <p className="text-violet-300 uppercase tracking-widest text-sm mb-12 text-center">{t('about.ourTeam')}</p>

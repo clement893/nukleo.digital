@@ -402,23 +402,20 @@
     "storyTitle": "Notre Histoire",
     "storyDescription1": "Nukleo Digital est né de la fusion de deux expertises : la stratégie numérique et l'ingénierie IA. Frustrés par l'approche en silo qui domine l'industrie, nous avons décidé de créer une agence qui pense en termes d'écosystèmes, pas de projets isolés.",
     "storyDescription2": "Depuis notre création, nous avons aidé des dizaines d'entreprises à naviguer dans la complexité de la transformation numérique, en livrant des solutions qui ne sont pas seulement technologiquement avancées, mais aussi profondément alignées avec leurs objectifs commerciaux.",
-    "valuesTitle": "Nos Valeurs",
+    "valuesTitle": "Nos valeurs",
+    "valuesSubtitle": "Les valeurs que nous défendons pour un travail accompli",
     "values": {
-      "innovation": {
-        "title": "Innovation pragmatique",
-        "description": "Nous explorons constamment les frontières de l'IA, mais nous ne perdons jamais de vue la valeur commerciale réelle. Chaque solution que nous proposons est à la fois innovante et pratique."
-      },
-      "partnership": {
-        "title": "Partenariat profond",
-        "description": "Nous nous intégrons à votre équipe, nous nous approprions vos défis et nous célébrons vos succès comme les nôtres. Votre réussite est notre seule mesure de succès."
-      },
-      "integrity": {
-        "title": "Intégrité radicale",
-        "description": "Nous sommes transparents dans notre approche, honnêtes dans nos recommandations et responsables de nos résultats. La confiance est le fondement de toute transformation réussie."
+      "authenticity": {
+        "title": "Authenticité",
+        "description": "Être authentique, c'est dire les choses comme elles sont — mais aussi être soi-même. Une équipe fonctionne mieux quand chacun peut exprimer qui il est, avec transparence, confiance et bienveillance. Cette honnêteté, envers soi et envers les autres, est essentielle pour bâtir des relations solides et générer un momentum durable."
       },
       "excellence": {
-        "title": "Excellence sans compromis",
-        "description": "De la première ligne de code à la dernière interaction client, nous visons l'excellence dans tout ce que nous faisons. Nous ne livrons pas de projets ; nous livrons des résultats."
+        "title": "Excellence",
+        "description": "Nous visons plus que la satisfaction : nous recherchons la performance, la rigueur et la cohérence à chaque étape. Pour créer des écosystèmes numériques qui accélèrent la croissance, nous devons viser haut — ensemble, et toujours avec exigence."
+      },
+      "ownership": {
+        "title": "Ownership",
+        "description": "Nous agissons comme si chaque projet nous appartenait. Responsabilité, autonomie et engagement sont au cœur de notre culture. Créer et garder le momentum, c'est s'impliquer pleinement, avec intention et conviction."
       }
     },
     "team": {

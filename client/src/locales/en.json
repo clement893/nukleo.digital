@@ -386,6 +386,22 @@
     "ourApproachText": "We're a passionate, curious team that loves solving problems creatively. From strategy to design, from development to launch, we bring together all the right skills to move your project forward and make it shine.",
     "whatSetsUsApart": "What Sets Us Apart",
     "whatSetsUsApartText": "No jargon. No chaos. Just true partners who listen, guide, and deliver. We don't just take on a project, we build lasting collaborations that make a real impact.",
+    "valuesTitle": "Our Values",
+    "valuesSubtitle": "The values we stand for to deliver quality work",
+    "values": {
+      "authenticity": {
+        "title": "Authenticity",
+        "description": "Being authentic means saying things as they are—but also being yourself. A team works better when everyone can express who they are, with transparency, trust, and kindness. This honesty, towards oneself and others, is essential for building strong relationships and generating lasting momentum."
+      },
+      "excellence": {
+        "title": "Excellence",
+        "description": "We aim for more than satisfaction: we seek performance, rigor, and consistency at every step. To create digital ecosystems that accelerate growth, we must aim high—together, and always with high standards."
+      },
+      "ownership": {
+        "title": "Ownership",
+        "description": "We act as if every project belongs to us. Responsibility, autonomy, and commitment are at the heart of our culture. Creating and maintaining momentum means fully engaging, with intention and conviction."
+      }
+    },
     "ourTeam": "OUR TEAM",
     "ourOffices": "OUR OFFICES",
     "montreal": "MONTRÉAL",

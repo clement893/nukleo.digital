@@ -1,4 +1,4 @@
-import { ArrowRight, Sparkles, Palette, Video, MessageSquare, Image, Mic, Zap, Globe } from "lucide-react";
+import { ArrowRight, Sparkles, Palette, PenTool, Camera, Film, Image, CheckCircle2 } from "lucide-react";
 import { Link } from "wouter";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -11,26 +11,21 @@ export default function CreativeStudioService() {
   const { t } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
   
-  // Helper to get array translations
-  const getArrayTranslation = (key: string): string[] => {
-    const value = t(key, { returnObjects: true });
-    return Array.isArray(value) ? value : [];
-  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-[rgb(107,23,22)] via-[rgb(40,60,120)] to-[rgb(107,23,22)]">
       <Header />
       
       {/* Breadcrumb */}
-      <div className="container pt-24 pb-4">
+      <div className="container pt-24 pb-4 px-4">
         <Breadcrumb items={[
           { name: t('nav.services') || 'Services', url: '/services' },
-          { name: t('services.creativeStudio.badge') || 'Le studio créatif', url: '/services/creative-studio' }
+          { name: t('services.creativeStudio.badge') || 'STUDIO', url: '/services/creative-studio' }
         ]} />
       </div>
       
       {/* Hero Section */}
       <section className="relative pt-8 pb-20 px-4">
-        <div className="container max-w-6xl">
+        <div className="container max-w-6xl mx-auto">
           <div className="flex items-center gap-2 text-pink-400 mb-6">
             <Sparkles className="w-5 h-5" />
             <span className="text-sm font-medium tracking-wider uppercase">{t('services.creativeStudio.badge')}</span>
@@ -44,182 +39,175 @@ export default function CreativeStudioService() {
             </span>
           </h1>
           
+          <p className="text-xl text-pink-400/90 mb-4 font-medium">
+            {t('services.creativeStudio.heroSubtitle')}
+          </p>
+          
           <p className="text-xl text-white/80 max-w-3xl mb-8">
             {t('services.creativeStudio.heroDescription')}
           </p>
           
-          <div className="flex flex-wrap gap-4">
-            <Link href={getLocalizedPath('/contact')}>
-              <Button size="lg" className="bg-pink-500 hover:bg-pink-600 text-white">
-                {t('services.creativeStudio.ctaLaunch')}
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
-            </Link>
-            <Link href={getLocalizedPath('/services/creative-studio')}>
-              <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
-                {t('services.creativeStudio.ctaLearnMore')}
-              </Button>
-            </Link>
+          {/* Client Needs */}
+          <div className="mt-8">
+            <ul className="space-y-3 text-white/70">
+              {(t('services.creativeStudio.clientNeeds.items', { returnObjects: true }) as string[] || []).map((need: string, idx: number) => (
+                <li key={idx} className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-pink-400 mt-0.5 flex-shrink-0" />
+                  <span>{need}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
 
-      {/* Core Services */}
+      {/* Our Approach Section */}
       <section className="py-20 px-4 bg-black/20">
-        <div className="container max-w-6xl">
-          <h2 className="text-4xl font-bold text-white mb-12">{t('services.creativeStudio.coreServicesTitle')}</h2>
+        <div className="container max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-white mb-6">{t('services.creativeStudio.approachTitle')}</h2>
+          <p className="text-lg text-white/70 mb-12 max-w-3xl leading-relaxed">
+            {t('services.creativeStudio.approachDescription')}
+          </p>
+          
+          {/* 4 Pillars */}
+          <div className="grid md:grid-cols-2 gap-8">
+            {[
+              {
+                number: t('services.creativeStudio.pillars.vision.number'),
+                title: t('services.creativeStudio.pillars.vision.title'),
+                description: t('services.creativeStudio.pillars.vision.description'),
+              },
+              {
+                number: t('services.creativeStudio.pillars.craft.number'),
+                title: t('services.creativeStudio.pillars.craft.title'),
+                description: t('services.creativeStudio.pillars.craft.description'),
+              },
+              {
+                number: t('services.creativeStudio.pillars.coherence.number'),
+                title: t('services.creativeStudio.pillars.coherence.title'),
+                description: t('services.creativeStudio.pillars.coherence.description'),
+              },
+              {
+                number: t('services.creativeStudio.pillars.impact.number'),
+                title: t('services.creativeStudio.pillars.impact.title'),
+                description: t('services.creativeStudio.pillars.impact.description'),
+              },
+            ].map((pillar, idx) => (
+              <div key={idx} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6">
+                <div className="text-4xl font-bold text-pink-400/30 mb-4">{pillar.number}</div>
+                <h3 className="text-xl font-semibold text-white mb-2">{pillar.title}</h3>
+                <p className="text-white/60">{pillar.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Expertise Section */}
+      <section className="py-20 px-4">
+        <div className="container max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-white mb-12">{t('services.creativeStudio.expertiseTitle')}</h2>
           
           <div className="grid md:grid-cols-2 gap-8">
             {[
               {
-                icon: Zap,
-                title: t('services.creativeStudio.services.agenticMarketing.title'),
-                description: t('services.creativeStudio.services.agenticMarketing.description')
+                icon: Sparkles,
+                title: t('services.creativeStudio.expertise.branding.title'),
+                description: t('services.creativeStudio.expertise.branding.description'),
+                deliverables: t('services.creativeStudio.expertise.branding.deliverables'),
               },
               {
-                icon: MessageSquare,
-                title: t('services.creativeStudio.services.contentGeneration.title'),
-                description: t('services.creativeStudio.services.contentGeneration.description')
+                icon: PenTool,
+                title: t('services.creativeStudio.expertise.uiux.title'),
+                description: t('services.creativeStudio.expertise.uiux.description'),
+                deliverables: t('services.creativeStudio.expertise.uiux.deliverables'),
+              },
+              {
+                icon: Camera,
+                title: t('services.creativeStudio.expertise.artDirection.title'),
+                description: t('services.creativeStudio.expertise.artDirection.description'),
+                deliverables: t('services.creativeStudio.expertise.artDirection.deliverables'),
+              },
+              {
+                icon: Film,
+                title: t('services.creativeStudio.expertise.campaigns.title'),
+                description: t('services.creativeStudio.expertise.campaigns.description'),
+                deliverables: t('services.creativeStudio.expertise.campaigns.deliverables'),
               },
               {
                 icon: Image,
-                title: t('services.creativeStudio.services.visualCreation.title'),
-                description: t('services.creativeStudio.services.visualCreation.description')
+                title: t('services.creativeStudio.expertise.motion.title'),
+                description: t('services.creativeStudio.expertise.motion.description'),
+                deliverables: t('services.creativeStudio.expertise.motion.deliverables'),
               },
               {
-                icon: Video,
-                title: t('services.creativeStudio.services.videoAnimation.title'),
-                description: t('services.creativeStudio.services.videoAnimation.description')
+                icon: Palette,
+                title: t('services.creativeStudio.expertise.production.title'),
+                description: t('services.creativeStudio.expertise.production.description'),
+                deliverables: t('services.creativeStudio.expertise.production.deliverables'),
               },
-              {
-                icon: Mic,
-                title: t('services.creativeStudio.services.audioVoice.title'),
-                description: t('services.creativeStudio.services.audioVoice.description')
-              },
-              {
-                icon: Globe,
-                title: t('services.creativeStudio.services.omnichannelCampaigns.title'),
-                description: t('services.creativeStudio.services.omnichannelCampaigns.description')
-              }
-            ].map((service, index) => (
-              <div key={index} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6 hover:bg-white/10 transition-colors">
-                <service.icon className="w-12 h-12 text-pink-400 mb-4" />
-                <h3 className="text-xl font-semibold text-white mb-3">{service.title}</h3>
-                <p className="text-white/70">{service.description}</p>
-              </div>
-            ))}
+            ].map((service, idx) => {
+              const ServiceIcon = service.icon;
+              return (
+                <div key={idx} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6 hover:bg-white/10 transition-colors">
+                  <ServiceIcon className="w-12 h-12 text-pink-400 mb-4" />
+                  <h3 className="text-xl font-semibold text-white mb-3">{service.title}</h3>
+                  <p className="text-white/70 mb-4">{service.description}</p>
+                  <div className="pt-4 border-t border-white/10">
+                    <p className="text-sm text-white/50">
+                      <span className="font-semibold text-white/70">Livrables :</span> {service.deliverables}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* Creative Process */}
-      <section className="py-20 px-4">
-        <div className="container max-w-6xl">
-          <h2 className="text-4xl font-bold text-white mb-6">{t('services.creativeStudio.processTitle')}</h2>
-          <p className="text-white/70 mb-12 max-w-3xl">
-            {t('services.creativeStudio.processDescription')}
-          </p>
-          
-          <div className="grid md:grid-cols-4 gap-6">
-            {[
-              {
-                phase: t('services.creativeStudio.phases.ideate.title'),
-                description: t('services.creativeStudio.phases.ideate.description')
-              },
-              {
-                phase: t('services.creativeStudio.phases.create.title'),
-                description: t('services.creativeStudio.phases.create.description')
-              },
-              {
-                phase: t('services.creativeStudio.phases.optimize.title'),
-                description: t('services.creativeStudio.phases.optimize.description')
-              },
-              {
-                phase: t('services.creativeStudio.phases.scale.title'),
-                description: t('services.creativeStudio.phases.scale.description')
-              }
-            ].map((phase, index) => (
-              <div key={index} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6">
-                <div className="text-3xl font-bold text-pink-400 mb-3">{phase.phase}</div>
-                <p className="text-white/70 text-sm">{phase.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Tools & Platforms */}
+      {/* Team Section */}
       <section className="py-20 px-4 bg-black/20">
-        <div className="container max-w-6xl">
-          <h2 className="text-4xl font-bold text-white mb-12">{t('services.creativeStudio.toolsTitle')}</h2>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="space-y-4">
-              <Palette className="w-12 h-12 text-pink-400" />
-              <h3 className="text-xl font-semibold text-white">{t('services.creativeStudio.tools.contentGeneration.title')}</h3>
-              <ul className="space-y-2 text-white/70">
-                {getArrayTranslation('services.creativeStudio.tools.contentGeneration.items').map((item: string, idx: number) => (
-                  <li key={idx}>• {item}</li>
-                ))}
-              </ul>
-            </div>
-            
-            <div className="space-y-4">
-              <Zap className="w-12 h-12 text-pink-400" />
-              <h3 className="text-xl font-semibold text-white">{t('services.creativeStudio.tools.marketingAutomation.title')}</h3>
-              <ul className="space-y-2 text-white/70">
-                {getArrayTranslation('services.creativeStudio.tools.marketingAutomation.items').map((item: string, idx: number) => (
-                  <li key={idx}>• {item}</li>
-                ))}
-              </ul>
-            </div>
-            
-            <div className="space-y-4">
-              <Globe className="w-12 h-12 text-pink-400" />
-              <h3 className="text-xl font-semibold text-white">{t('services.creativeStudio.tools.distribution.title')}</h3>
-              <ul className="space-y-2 text-white/70">
-                {getArrayTranslation('services.creativeStudio.tools.distribution.items').map((item: string, idx: number) => (
-                  <li key={idx}>• {item}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
+        <div className="container max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-white mb-6">{t('services.creativeStudio.teamTitle')}</h2>
+          <p className="text-lg text-white/70 max-w-3xl leading-relaxed">
+            {t('services.creativeStudio.teamDescription')}
+          </p>
         </div>
       </section>
 
-      {/* Use Cases */}
+      {/* Process Section */}
       <section className="py-20 px-4">
-        <div className="container max-w-6xl">
-          <h2 className="text-4xl font-bold text-white mb-12">{t('services.creativeStudio.useCasesTitle')}</h2>
+        <div className="container max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-white mb-12">{t('services.creativeStudio.processTitle')}</h2>
           
-          <div className="space-y-6">
+          <div className="space-y-8">
             {[
               {
-                title: t('services.creativeStudio.useCases.contentMarketing.title'),
-                description: t('services.creativeStudio.useCases.contentMarketing.description'),
-                impact: t('services.creativeStudio.useCases.contentMarketing.impact')
+                step: t('services.creativeStudio.process.discovery.step'),
+                title: t('services.creativeStudio.process.discovery.title'),
+                description: t('services.creativeStudio.process.discovery.description'),
               },
               {
-                title: t('services.creativeStudio.useCases.personalizedEmail.title'),
-                description: t('services.creativeStudio.useCases.personalizedEmail.description'),
-                impact: t('services.creativeStudio.useCases.personalizedEmail.impact')
+                step: t('services.creativeStudio.process.concept.step'),
+                title: t('services.creativeStudio.process.concept.title'),
+                description: t('services.creativeStudio.process.concept.description'),
               },
               {
-                title: t('services.creativeStudio.useCases.socialMediaAutomation.title'),
-                description: t('services.creativeStudio.useCases.socialMediaAutomation.description'),
-                impact: t('services.creativeStudio.useCases.socialMediaAutomation.impact')
+                step: t('services.creativeStudio.process.design.step'),
+                title: t('services.creativeStudio.process.design.title'),
+                description: t('services.creativeStudio.process.design.description'),
               },
               {
-                title: t('services.creativeStudio.useCases.dynamicAdCreative.title'),
-                description: t('services.creativeStudio.useCases.dynamicAdCreative.description'),
-                impact: t('services.creativeStudio.useCases.dynamicAdCreative.impact')
-              }
-            ].map((useCase, index) => (
-              <div key={index} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6">
-                <h3 className="text-2xl font-semibold text-white mb-3">{useCase.title}</h3>
-                <p className="text-white/70 mb-4">{useCase.description}</p>
-                <div className="inline-block bg-pink-500/20 text-pink-300 px-4 py-2 rounded-full text-sm font-medium">
-                  {useCase.impact}
+                step: t('services.creativeStudio.process.delivery.step'),
+                title: t('services.creativeStudio.process.delivery.title'),
+                description: t('services.creativeStudio.process.delivery.description'),
+              },
+            ].map((phase, idx) => (
+              <div key={idx} className="flex gap-6 items-start">
+                <div className="text-5xl font-bold text-pink-400/30">{phase.step}</div>
+                <div className="flex-1">
+                  <h3 className="text-2xl font-semibold text-white mb-2">{phase.title}</h3>
+                  <p className="text-white/70">{phase.description}</p>
                 </div>
               </div>
             ))}
@@ -228,8 +216,8 @@ export default function CreativeStudioService() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 bg-black/20">
-        <div className="container max-w-4xl text-center">
+      <section className="py-20 px-4">
+        <div className="container max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             {t('services.creativeStudio.ctaTitle')}
           </h2>

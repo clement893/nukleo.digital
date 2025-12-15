@@ -99,7 +99,13 @@
   },
   "home": {
     "beyondAI": "Au-delà de l'IA",
-    "beyondAIDescription": "Nous créons des écosystèmes numériques complets. De la stratégie aux plateformes, du contenu créatif à l'automatisation intelligente."
+    "beyondAIDescription": "Nous créons des écosystèmes numériques complets. De la stratégie aux plateformes, du contenu créatif à l'automatisation intelligente.",
+    "team": {
+      "sectionLabel": "NOTRE ÉQUIPE",
+      "title": "Rencontrez Notre Équipe",
+      "description": "Des experts passionnés qui transforment votre vision en réalité.",
+      "cta": "Voir Toute l'Équipe"
+    }
   },
   "capabilities": {
     "sectionLabel": "Capacités",

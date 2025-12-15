@@ -13,6 +13,7 @@ const CapabilitiesSection = lazy(() => import('@/components/CapabilitiesSection'
 const TrinitySection = lazy(() => import('@/components/TrinitySection'));
 const CTASection = lazy(() => import('@/components/CTASection'));
 const TestimonialsCarousel = lazy(() => import('@/components/TestimonialsCarousel'));
+const TeamCarousel = lazy(() => import('@/components/TeamCarousel'));
 const ClientLogos = lazy(() => import('@/components/ClientLogos'));
 
 export default function Home() {
@@ -70,6 +71,11 @@ export default function Home() {
           <CTASection />
           {/* ClientLogos temporarily hidden */}
           {/* <ClientLogos /> */}
+        </Suspense>
+        
+        {/* Team Carousel - Before Footer */}
+        <Suspense fallback={<div style={{ minHeight: '600px', contentVisibility: 'auto', containIntrinsicSize: '0 600px' }} />}>
+          <TeamCarousel />
         </Suspense>
       </main>
       <Footer />

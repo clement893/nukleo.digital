@@ -1387,39 +1387,90 @@
       "ctaButton2": "Voir nos réalisations"
     },
     "strategicBureau": {
-      "badge": "Le bureau stratégique",
-      "heroTitle": "Orchestration",
-      "heroTitleHighlight": "de transformation",
-      "heroDescription": "Nous orchestrons votre transformation IA de bout en bout. De la vision stratégique à l'exécution opérationnelle, nous alignons technologie, processus et équipes pour créer un impact mesurable et durable.",
-      "ctaStart": "Démarrer votre transformation",
-      "ctaLearnMore": "En savoir plus sur le bureau",
-      "coreServicesTitle": "Services stratégiques",
-      "services": {
-        "aiStrategy": {
-          "title": "Stratégie IA & feuille de route",
-          "description": "Définition de votre vision IA, identification des opportunités à fort impact et construction d'une feuille de route de transformation pragmatique et mesurable."
+      "badge": "BUREAU",
+      "heroTitle": "Stratégie claire,",
+      "heroTitleHighlight": "exécution concrète.",
+      "heroSubtitle": "Strategy, Transformation & Marketing",
+      "heroDescription": "Nous pilotons votre transformation digitale et orchestrons votre communication. De la stratégie à l'exécution, un accompagnement complet pour des résultats mesurables.",
+      "clientNeeds": {
+        "title": "Besoins clients",
+        "items": [
+          "Vous avez besoin d'une stratégie digitale claire et actionnable",
+          "Vous voulez structurer et professionnaliser votre communication",
+          "Vous cherchez à générer plus de leads et de visibilité",
+          "Vous avez besoin d'un partenaire qui pilote, pas juste qui conseille"
+        ]
+      },
+      "approachTitle": "Conseil + Exécution",
+      "approachDescription": "Nous ne sommes pas des consultants qui livrent des PowerPoints et disparaissent. On reste à vos côtés de la stratégie à l'exécution, avec un engagement sur les résultats. Notre équipe combine vision stratégique et expertise opérationnelle.",
+      "expertiseTitle": "Comment nous vous accompagnons",
+      "expertise": {
+        "digitalStrategy": {
+          "title": "Stratégie Digitale",
+          "description": "Nous définissons votre vision digitale et construisons la feuille de route pour y arriver.",
+          "deliverables": "Audit, vision, roadmap 12-36 mois"
         },
-        "businessCase": {
-          "title": "Business case & ROI",
-          "description": "Analyse approfondie du ROI, modélisation financière et construction de business cases solides pour sécuriser l'investissement."
+        "transformation": {
+          "title": "Transformation & Change",
+          "description": "Nous accompagnons vos équipes dans l'adoption des nouveaux outils et processus.",
+          "deliverables": "Plan de transformation, formation, conduite du changement"
         },
-        "changeManagement": {
-          "title": "Gestion du changement",
-          "description": "Accompagnement de vos équipes dans l'adoption de l'IA, formation, gestion du changement et création d'une culture axée sur les données."
+        "marketingStrategy": {
+          "title": "Stratégie Marketing",
+          "description": "Nous construisons votre stratégie d'acquisition et de fidélisation clients.",
+          "deliverables": "Personas, parcours client, plan marketing"
         },
-        "governance": {
-          "title": "Gouvernance & conformité",
-          "description": "Implémentation de cadres de gouvernance IA, politiques d'utilisation éthique et conformité réglementaire (RGPD, AI Act)."
+        "communication": {
+          "title": "Communication",
+          "description": "Nous structurons votre communication et créons les contenus qui portent votre message.",
+          "deliverables": "Stratégie éditoriale, contenus, relations presse"
         },
-        "performanceTracking": {
-          "title": "Suivi de performance",
-          "description": "Définition de KPI pertinents, implémentation de tableaux de bord de suivi et optimisation continue basée sur les données."
+        "digitalMarketing": {
+          "title": "Marketing Digital",
+          "description": "Nous déployons et optimisons vos campagnes sur tous les canaux digitaux.",
+          "deliverables": "SEO, SEA, Social Ads, Email, Analytics"
         },
-        "riskManagement": {
-          "title": "Gestion des risques",
-          "description": "Identification et mitigation des risques liés à l'IA (biais, sécurité, dépendance) avec stratégies de contingence robustes."
+        "communityManagement": {
+          "title": "Community Management",
+          "description": "Nous animons vos communautés et gérons votre présence sur les réseaux sociaux.",
+          "deliverables": "Calendrier éditorial, contenus, modération, reporting"
         }
       },
+      "teamTitle": "Des praticiens, pas des théoriciens",
+      "teamDescription": "Consultants seniors, chefs de projet, experts marketing et communication — une équipe qui a vécu les transformations de l'intérieur. On a accompagné des PME et des grands groupes dans leurs projets stratégiques.",
+      "processTitle": "Processus",
+      "process": {
+        "listen": {
+          "step": "01",
+          "title": "Écouter",
+          "description": "Comprendre votre contexte, vos enjeux, vos ambitions"
+        },
+        "diagnose": {
+          "step": "02",
+          "title": "Diagnostiquer",
+          "description": "Analyser votre situation et identifier les opportunités"
+        },
+        "plan": {
+          "step": "03",
+          "title": "Planifier",
+          "description": "Construire la stratégie et prioriser les actions"
+        },
+        "execute": {
+          "step": "04",
+          "title": "Exécuter",
+          "description": "Déployer les actions et piloter les projets"
+        },
+        "measure": {
+          "step": "05",
+          "title": "Mesurer",
+          "description": "Suivre les résultats et optimiser en continu"
+        }
+      },
+      "ctaTitle": "Prêt à passer à l'action ?",
+      "ctaDescription": "Discutons de vos enjeux et construisons ensemble la stratégie qui fera la différence.",
+      "ctaButton1": "Réserver un appel stratégique",
+      "ctaButton2": "Voir nos études de cas"
+    },
       "frameworkTitle": "Cadre de transformation",
       "frameworkDescription": "Notre méthodologie éprouvée pour orchestrer des transformations IA réussies, de la vision à l'impact.",
       "phases": {

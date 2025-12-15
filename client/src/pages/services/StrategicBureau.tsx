@@ -1,4 +1,4 @@
-import { ArrowRight, Compass, Target, Users, TrendingUp, Shield, Lightbulb, BarChart3, FileCheck } from "lucide-react";
+import { ArrowRight, Target, Compass, Users, TrendingUp, MessageSquare, Globe, CheckCircle2 } from "lucide-react";
 import { Link } from "wouter";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -11,26 +11,21 @@ export default function StrategicBureauService() {
   const { t } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
   
-  // Helper to get array translations
-  const getArrayTranslation = (key: string): string[] => {
-    const value = t(key, { returnObjects: true });
-    return Array.isArray(value) ? value : [];
-  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-[rgb(107,23,22)] via-[rgb(40,60,120)] to-[rgb(107,23,22)]">
       <Header />
       
       {/* Breadcrumb */}
-      <div className="container pt-24 pb-4">
+      <div className="container pt-24 pb-4 px-4">
         <Breadcrumb items={[
           { name: t('nav.services') || 'Services', url: '/services' },
-          { name: t('services.strategicBureau.badge') || 'Le bureau stratégique', url: '/services/strategic-bureau' }
+          { name: t('services.strategicBureau.badge') || 'BUREAU', url: '/services/strategic-bureau' }
         ]} />
       </div>
       
       {/* Hero Section */}
       <section className="relative pt-8 pb-20 px-4">
-        <div className="container max-w-6xl">
+        <div className="container max-w-6xl mx-auto">
           <div className="flex items-center gap-2 text-purple-400 mb-6">
             <Compass className="w-5 h-5" />
             <span className="text-sm font-medium tracking-wider uppercase">{t('services.strategicBureau.badge')}</span>
@@ -44,184 +39,145 @@ export default function StrategicBureauService() {
             </span>
           </h1>
           
+          <p className="text-xl text-purple-400/90 mb-4 font-medium">
+            {t('services.strategicBureau.heroSubtitle')}
+          </p>
+          
           <p className="text-xl text-white/80 max-w-3xl mb-8">
             {t('services.strategicBureau.heroDescription')}
           </p>
           
-          <div className="flex flex-wrap gap-4">
-            <Link href={getLocalizedPath('/contact')}>
-              <Button size="lg" className="bg-purple-500 hover:bg-purple-600 text-white">
-                {t('services.strategicBureau.ctaStart')}
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
-            </Link>
-            <Link href={getLocalizedPath('/services/strategic-bureau')}>
-              <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
-                {t('services.strategicBureau.ctaLearnMore')}
-              </Button>
-            </Link>
+          {/* Client Needs */}
+          <div className="mt-8">
+            <ul className="space-y-3 text-white/70">
+              {(t('services.strategicBureau.clientNeeds.items', { returnObjects: true }) as string[] || []).map((need: string, idx: number) => (
+                <li key={idx} className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-purple-400 mt-0.5 flex-shrink-0" />
+                  <span>{need}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
 
-      {/* Core Services */}
+      {/* Our Approach Section */}
       <section className="py-20 px-4 bg-black/20">
-        <div className="container max-w-6xl">
-          <h2 className="text-4xl font-bold text-white mb-12">{t('services.strategicBureau.coreServicesTitle')}</h2>
+        <div className="container max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-white mb-6">{t('services.strategicBureau.approachTitle')}</h2>
+          <p className="text-lg text-white/70 mb-12 max-w-3xl leading-relaxed">
+            {t('services.strategicBureau.approachDescription')}
+          </p>
+        </div>
+      </section>
+
+      {/* Expertise Section */}
+      <section className="py-20 px-4">
+        <div className="container max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-white mb-12">{t('services.strategicBureau.expertiseTitle')}</h2>
           
           <div className="grid md:grid-cols-2 gap-8">
             {[
               {
                 icon: Target,
-                title: t('services.strategicBureau.services.aiStrategy.title'),
-                description: t('services.strategicBureau.services.aiStrategy.description')
-              },
-              {
-                icon: BarChart3,
-                title: t('services.strategicBureau.services.businessCase.title'),
-                description: t('services.strategicBureau.services.businessCase.description')
+                title: t('services.strategicBureau.expertise.digitalStrategy.title'),
+                description: t('services.strategicBureau.expertise.digitalStrategy.description'),
+                deliverables: t('services.strategicBureau.expertise.digitalStrategy.deliverables'),
               },
               {
                 icon: Users,
-                title: t('services.strategicBureau.services.changeManagement.title'),
-                description: t('services.strategicBureau.services.changeManagement.description')
-              },
-              {
-                icon: FileCheck,
-                title: t('services.strategicBureau.services.governance.title'),
-                description: t('services.strategicBureau.services.governance.description')
+                title: t('services.strategicBureau.expertise.transformation.title'),
+                description: t('services.strategicBureau.expertise.transformation.description'),
+                deliverables: t('services.strategicBureau.expertise.transformation.deliverables'),
               },
               {
                 icon: TrendingUp,
-                title: t('services.strategicBureau.services.performanceTracking.title'),
-                description: t('services.strategicBureau.services.performanceTracking.description')
+                title: t('services.strategicBureau.expertise.marketingStrategy.title'),
+                description: t('services.strategicBureau.expertise.marketingStrategy.description'),
+                deliverables: t('services.strategicBureau.expertise.marketingStrategy.deliverables'),
               },
               {
-                icon: Shield,
-                title: t('services.strategicBureau.services.riskManagement.title'),
-                description: t('services.strategicBureau.services.riskManagement.description')
-              }
-            ].map((service, index) => (
-              <div key={index} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6 hover:bg-white/10 transition-colors">
-                <service.icon className="w-12 h-12 text-purple-400 mb-4" />
-                <h3 className="text-xl font-semibold text-white mb-3">{service.title}</h3>
-                <p className="text-white/70">{service.description}</p>
-              </div>
-            ))}
+                icon: MessageSquare,
+                title: t('services.strategicBureau.expertise.communication.title'),
+                description: t('services.strategicBureau.expertise.communication.description'),
+                deliverables: t('services.strategicBureau.expertise.communication.deliverables'),
+              },
+              {
+                icon: Globe,
+                title: t('services.strategicBureau.expertise.digitalMarketing.title'),
+                description: t('services.strategicBureau.expertise.digitalMarketing.description'),
+                deliverables: t('services.strategicBureau.expertise.digitalMarketing.deliverables'),
+              },
+              {
+                icon: MessageSquare,
+                title: t('services.strategicBureau.expertise.communityManagement.title'),
+                description: t('services.strategicBureau.expertise.communityManagement.description'),
+                deliverables: t('services.strategicBureau.expertise.communityManagement.deliverables'),
+              },
+            ].map((service, idx) => {
+              const ServiceIcon = service.icon;
+              return (
+                <div key={idx} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6 hover:bg-white/10 transition-colors">
+                  <ServiceIcon className="w-12 h-12 text-purple-400 mb-4" />
+                  <h3 className="text-xl font-semibold text-white mb-3">{service.title}</h3>
+                  <p className="text-white/70 mb-4">{service.description}</p>
+                  <div className="pt-4 border-t border-white/10">
+                    <p className="text-sm text-white/50">
+                      <span className="font-semibold text-white/70">Livrables :</span> {service.deliverables}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* Transformation Framework */}
-      <section className="py-20 px-4">
-        <div className="container max-w-6xl">
-          <h2 className="text-4xl font-bold text-white mb-6">{t('services.strategicBureau.frameworkTitle')}</h2>
-          <p className="text-white/70 mb-12 max-w-3xl">
-            {t('services.strategicBureau.frameworkDescription')}
-          </p>
-          
-          <div className="grid md:grid-cols-4 gap-6">
-            {[
-              {
-                phase: t('services.strategicBureau.phases.discover.title'),
-                description: t('services.strategicBureau.phases.discover.description')
-              },
-              {
-                phase: t('services.strategicBureau.phases.define.title'),
-                description: t('services.strategicBureau.phases.define.description')
-              },
-              {
-                phase: t('services.strategicBureau.phases.deploy.title'),
-                description: t('services.strategicBureau.phases.deploy.description')
-              },
-              {
-                phase: t('services.strategicBureau.phases.drive.title'),
-                description: t('services.strategicBureau.phases.drive.description')
-              }
-            ].map((phase, index) => (
-              <div key={index} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6">
-                <div className="text-3xl font-bold text-purple-400 mb-3">{phase.phase}</div>
-                <p className="text-white/70 text-sm">{phase.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Deliverables */}
+      {/* Team Section */}
       <section className="py-20 px-4 bg-black/20">
-        <div className="container max-w-6xl">
-          <h2 className="text-4xl font-bold text-white mb-12">{t('services.strategicBureau.deliverablesTitle')}</h2>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="space-y-4">
-              <Lightbulb className="w-12 h-12 text-purple-400" />
-              <h3 className="text-xl font-semibold text-white">{t('services.strategicBureau.deliverables.strategic.title')}</h3>
-              <ul className="space-y-2 text-white/70">
-                {getArrayTranslation('services.strategicBureau.deliverables.strategic.items').map((item: string, idx: number) => (
-                  <li key={idx}>• {item}</li>
-                ))}
-              </ul>
-            </div>
-            
-            <div className="space-y-4">
-              <BarChart3 className="w-12 h-12 text-purple-400" />
-              <h3 className="text-xl font-semibold text-white">{t('services.strategicBureau.deliverables.operational.title')}</h3>
-              <ul className="space-y-2 text-white/70">
-                {getArrayTranslation('services.strategicBureau.deliverables.operational.items').map((item: string, idx: number) => (
-                  <li key={idx}>• {item}</li>
-                ))}
-              </ul>
-            </div>
-            
-            <div className="space-y-4">
-              <Users className="w-12 h-12 text-purple-400" />
-              <h3 className="text-xl font-semibold text-white">{t('services.strategicBureau.deliverables.organizational.title')}</h3>
-              <ul className="space-y-2 text-white/70">
-                {getArrayTranslation('services.strategicBureau.deliverables.organizational.items').map((item: string, idx: number) => (
-                  <li key={idx}>• {item}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
+        <div className="container max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-white mb-6">{t('services.strategicBureau.teamTitle')}</h2>
+          <p className="text-lg text-white/70 max-w-3xl leading-relaxed">
+            {t('services.strategicBureau.teamDescription')}
+          </p>
         </div>
       </section>
 
-      {/* Approach */}
+      {/* Process Section */}
       <section className="py-20 px-4">
-        <div className="container max-w-6xl">
-          <h2 className="text-4xl font-bold text-white mb-12">{t('services.strategicBureau.approachTitle')}</h2>
+        <div className="container max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-white mb-12">{t('services.strategicBureau.processTitle')}</h2>
           
           <div className="space-y-8">
             {[
               {
-                step: t('services.strategicBureau.steps.assessment.step'),
-                title: t('services.strategicBureau.steps.assessment.title'),
-                description: t('services.strategicBureau.steps.assessment.description')
+                step: t('services.strategicBureau.process.listen.step'),
+                title: t('services.strategicBureau.process.listen.title'),
+                description: t('services.strategicBureau.process.listen.description'),
               },
               {
-                step: t('services.strategicBureau.steps.strategy.step'),
-                title: t('services.strategicBureau.steps.strategy.title'),
-                description: t('services.strategicBureau.steps.strategy.description')
+                step: t('services.strategicBureau.process.diagnose.step'),
+                title: t('services.strategicBureau.process.diagnose.title'),
+                description: t('services.strategicBureau.process.diagnose.description'),
               },
               {
-                step: t('services.strategicBureau.steps.pilot.step'),
-                title: t('services.strategicBureau.steps.pilot.title'),
-                description: t('services.strategicBureau.steps.pilot.description')
+                step: t('services.strategicBureau.process.plan.step'),
+                title: t('services.strategicBureau.process.plan.title'),
+                description: t('services.strategicBureau.process.plan.description'),
               },
               {
-                step: t('services.strategicBureau.steps.scale.step'),
-                title: t('services.strategicBureau.steps.scale.title'),
-                description: t('services.strategicBureau.steps.scale.description')
+                step: t('services.strategicBureau.process.execute.step'),
+                title: t('services.strategicBureau.process.execute.title'),
+                description: t('services.strategicBureau.process.execute.description'),
               },
               {
-                step: t('services.strategicBureau.steps.optimize.step'),
-                title: t('services.strategicBureau.steps.optimize.title'),
-                description: t('services.strategicBureau.steps.optimize.description')
-              }
-            ].map((phase, index) => (
-              <div key={index} className="flex gap-6 items-start">
-                <div className="text-5xl font-bold text-purple-400/20">{phase.step}</div>
+                step: t('services.strategicBureau.process.measure.step'),
+                title: t('services.strategicBureau.process.measure.title'),
+                description: t('services.strategicBureau.process.measure.description'),
+              },
+            ].map((phase, idx) => (
+              <div key={idx} className="flex gap-6 items-start">
+                <div className="text-5xl font-bold text-purple-400/30">{phase.step}</div>
                 <div className="flex-1">
                   <h3 className="text-2xl font-semibold text-white mb-2">{phase.title}</h3>
                   <p className="text-white/70">{phase.description}</p>
@@ -233,8 +189,8 @@ export default function StrategicBureauService() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 bg-black/20">
-        <div className="container max-w-4xl text-center">
+      <section className="py-20 px-4">
+        <div className="container max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             {t('services.strategicBureau.ctaTitle')}
           </h2>
@@ -248,7 +204,7 @@ export default function StrategicBureauService() {
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
-            <Link href={getLocalizedPath('/ai-readiness')}>
+            <Link href={getLocalizedPath('/projects')}>
               <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10">
                 {t('services.strategicBureau.ctaButton2')}
               </Button>

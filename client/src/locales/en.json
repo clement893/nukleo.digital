@@ -1064,5 +1064,289 @@
       "title": "Contact | Nukleo Digital",
       "description": "Contact Nukleo Digital to discuss your AI transformation project."
     }
+  },
+  "services": {
+    "creativeStudio": {
+      "badge": "The Creative Studio",
+      "heroTitle": "Augmented Content",
+      "heroTitleHighlight": "& Experiences",
+      "heroDescription": "We create AI-augmented content and experiences. From agentic marketing to intelligent multichannel campaigns, we amplify your creative impact with the power of artificial intelligence.",
+      "ctaLaunch": "Launch a Campaign",
+      "ctaLearnMore": "Learn More About the Studio",
+      "coreServicesTitle": "Creative Services",
+      "services": {
+        "agenticMarketing": {
+          "title": "Agentic Marketing",
+          "description": "Deployment of autonomous AI agents to automate and optimize your marketing campaigns: content generation, A/B testing, real-time personalization."
+        },
+        "contentGeneration": {
+          "title": "Content Generation",
+          "description": "Large-scale content production: blog articles, social posts, newsletters, video scripts, all adapted to your tone and audience."
+        },
+        "visualCreation": {
+          "title": "Visual Creation",
+          "description": "AI-powered image, illustration, and design generation: social media visuals, marketing assets, product mockups, and brand assets."
+        },
+        "videoAnimation": {
+          "title": "Video & Animation",
+          "description": "AI-augmented video creation: automatic editing, voiceover generation, intelligent subtitles, and personalized animations."
+        },
+        "audioVoice": {
+          "title": "Audio & Voice",
+          "description": "AI audio production: natural synthetic voiceovers, automated podcasts, voice translation, and voice cloning for branding."
+        },
+        "omnichannelCampaigns": {
+          "title": "Omnichannel Campaigns",
+          "description": "Orchestration of cohesive omnichannel campaigns with AI personalization across web, social, email, SMS, and programmatic advertising."
+        }
+      },
+      "processTitle": "Augmented Creative Process",
+      "processDescription": "Our hybrid approach combines human creativity and AI power to create content that resonates and performs.",
+      "phases": {
+        "ideate": {
+          "title": "Ideate",
+          "description": "AI-augmented brainstorming, trend analysis, and large-scale creative idea generation"
+        },
+        "create": {
+          "title": "Create",
+          "description": "Multi-format content production with AI tools, rapid iteration, and personalized variations"
+        },
+        "optimize": {
+          "title": "Optimize",
+          "description": "Automated A/B testing, real-time performance analysis, and continuous optimization"
+        },
+        "scale": {
+          "title": "Scale",
+          "description": "Omnichannel deployment, local adaptation, and intelligent amplification of high-performing content"
+        }
+      },
+      "toolsTitle": "Tools & Platforms",
+      "tools": {
+        "contentGeneration": {
+          "title": "Content Generation",
+          "items": ["GPT-4, Claude, Gemini", "Midjourney, DALL-E, Stable Diffusion", "Runway, Pika, Sora", "ElevenLabs, Descript", "Copy.ai, Jasper"]
+        },
+        "marketingAutomation": {
+          "title": "Marketing Automation",
+          "items": ["HubSpot, Marketo, Salesforce", "Zapier, Make, n8n", "Google Analytics, Mixpanel", "Segment, Amplitude", "Optimizely, VWO"]
+        },
+        "distribution": {
+          "title": "Distribution",
+          "items": ["Meta Business Suite", "LinkedIn Campaign Manager", "Google Ads, DV360", "Mailchimp, SendGrid", "Buffer, Hootsuite"]
+        }
+      },
+      "useCasesTitle": "Use Cases",
+      "useCases": {
+        "contentMarketing": {
+          "title": "Content Marketing at Scale",
+          "description": "Automated generation of hundreds of SEO-optimized blog articles per month, adapted to different audiences and personas.",
+          "impact": "10x content volume, -70% production costs"
+        },
+        "personalizedEmail": {
+          "title": "Personalized Email Campaigns",
+          "description": "Creation of hyper-personalized email campaigns with AI-generated dynamic content based on each lead's profile and behavior.",
+          "impact": "+250% open rate, +180% conversion rate"
+        },
+        "socialMediaAutomation": {
+          "title": "Social Media Automation",
+          "description": "AI agents that automatically create, schedule, and optimize your posts across all social networks with continuous A/B testing.",
+          "impact": "100% daily coverage, +320% engagement"
+        },
+        "dynamicAdCreative": {
+          "title": "Dynamic Ad Creative",
+          "description": "Automatic generation of thousands of ad creative variations tested and optimized in real-time based on performance.",
+          "impact": "-45% CPA, +190% ROAS"
+        }
+      },
+      "ctaTitle": "Ready to amplify your creative impact?",
+      "ctaDescription": "Let's discuss your marketing goals and create campaigns that perform at scale together.",
+      "ctaButton1": "Launch Your First AI Campaign",
+      "ctaButton2": "View Our Work"
+    },
+    "strategicBureau": {
+      "badge": "The Strategic Bureau",
+      "heroTitle": "Transformation",
+      "heroTitleHighlight": "Orchestration",
+      "heroDescription": "We orchestrate your AI transformation end-to-end. From strategic vision to operational execution, we align technology, processes, and teams to create measurable and lasting impact.",
+      "ctaStart": "Start Your Transformation",
+      "ctaLearnMore": "Learn More About the Bureau",
+      "coreServicesTitle": "Strategic Services",
+      "services": {
+        "aiStrategy": {
+          "title": "AI Strategy & Roadmap",
+          "description": "Definition of your AI vision, identification of high-impact opportunities, and construction of a pragmatic and measurable transformation roadmap."
+        },
+        "businessCase": {
+          "title": "Business Case & ROI",
+          "description": "In-depth ROI analysis, financial modeling, and construction of solid business cases to secure investment."
+        },
+        "changeManagement": {
+          "title": "Change Management",
+          "description": "Support for your teams in AI adoption, training, change management, and creation of a data-driven culture."
+        },
+        "governance": {
+          "title": "Governance & Compliance",
+          "description": "Implementation of AI governance frameworks, ethical use policies, and regulatory compliance (GDPR, AI Act)."
+        },
+        "performanceTracking": {
+          "title": "Performance Tracking",
+          "description": "Definition of relevant KPIs, implementation of tracking dashboards, and continuous data-driven optimization."
+        },
+        "riskManagement": {
+          "title": "Risk Management",
+          "description": "Identification and mitigation of AI-related risks (bias, security, dependency) with robust contingency strategies."
+        }
+      },
+      "frameworkTitle": "Transformation Framework",
+      "frameworkDescription": "Our proven methodology for orchestrating successful AI transformations, from vision to impact.",
+      "phases": {
+        "discover": {
+          "title": "Discover",
+          "description": "AI maturity audit, opportunity identification, and alignment with business strategy"
+        },
+        "define": {
+          "title": "Define",
+          "description": "Construction of the AI vision, prioritization of use cases and definition of the roadmap"
+        },
+        "deploy": {
+          "title": "Deploy",
+          "description": "Execution of pilot projects, scaling of solutions and integration into processes"
+        },
+        "drive": {
+          "title": "Drive",
+          "description": "Continuous optimization, impact measurement and strategy evolution"
+        }
+      },
+      "deliverablesTitle": "Key Deliverables",
+      "deliverables": {
+        "strategic": {
+          "title": "Strategic",
+          "items": ["AI Vision & Roadmap", "Detailed Business Cases", "Governance Framework", "Ethical Use Policy", "Change Management Strategy"]
+        },
+        "operational": {
+          "title": "Operational",
+          "items": ["Detailed Execution Plans", "KPI Tracking Dashboards", "Optimized Processes", "User Guides", "Training Plans"]
+        },
+        "organizational": {
+          "title": "Organizational",
+          "items": ["Target Organizational Charts", "AI Job Descriptions", "Training Paths", "Communities of Practice", "Communication Plans"]
+        }
+      },
+      "approachTitle": "Our Approach",
+      "steps": {
+        "assessment": {
+          "step": "01",
+          "title": "Assessment & Vision",
+          "description": "Evaluation of your AI maturity, identification of quick wins and construction of an ambitious but realistic vision."
+        },
+        "strategy": {
+          "step": "02",
+          "title": "Strategy & Roadmap",
+          "description": "Definition of the AI strategy aligned with your business objectives and construction of a phased transformation roadmap."
+        },
+        "pilot": {
+          "step": "03",
+          "title": "Pilot & Validate",
+          "description": "Launch of pilot projects to validate the approach, measure impact and adjust strategy before scaling."
+        },
+        "scale": {
+          "step": "04",
+          "title": "Scale & Integrate",
+          "description": "Large-scale deployment, integration into existing processes and team training for autonomy."
+        },
+        "optimize": {
+          "step": "05",
+          "title": "Optimize & Evolve",
+          "description": "Continuous performance measurement, solution optimization and strategy evolution based on results."
+        }
+      },
+      "ctaTitle": "Ready to orchestrate your AI transformation?",
+      "ctaDescription": "Let's discuss your vision and build together the strategy that will transform your organization.",
+      "ctaButton1": "Schedule a Strategic Diagnostic",
+      "ctaButton2": "Assess Your AI Maturity"
+    },
+    "aiLab": {
+      "badge": "The AI Lab",
+      "heroTitle": "Technology",
+      "heroTitleHighlight": "Foundation",
+      "heroDescription": "We build the technological infrastructure that powers your AI transformation. From intelligent agent development to data architecture, we create the technical foundations of your augmented future.",
+      "ctaStart": "Start a Project",
+      "ctaLearnMore": "Learn More About the Lab",
+      "capabilitiesTitle": "Technical Capabilities",
+      "capabilities": {
+        "aiAgents": {
+          "title": "AI Agents & Automation",
+          "description": "Development of autonomous intelligent agents capable of executing complex tasks, learning, and adapting to your business environment."
+        },
+        "dataPlatforms": {
+          "title": "Data Platforms & Pipelines",
+          "description": "Architecture and implementation of modern data platforms with ETL/ELT pipelines, data lakes, and optimized data warehouses."
+        },
+        "apiIntegration": {
+          "title": "API & Integration",
+          "description": "Design and development of robust APIs and system integrations to seamlessly connect your tools and data."
+        },
+        "customModels": {
+          "title": "Custom AI Models",
+          "description": "Fine-tuning and deployment of custom AI models tailored to your specific use cases and proprietary data."
+        },
+        "performance": {
+          "title": "Performance Optimization",
+          "description": "Performance optimization, scalability, and infrastructure cost reduction for your AI and data systems."
+        },
+        "security": {
+          "title": "Security & Compliance",
+          "description": "Implementation of robust security measures and regulatory compliance (GDPR, SOC2, ISO) for your AI systems."
+        }
+      },
+      "techStackTitle": "Technology Stack",
+      "techStackDescription": "We use the most advanced and proven technologies to build robust and scalable solutions.",
+      "techStack": {
+        "aiMl": {
+          "title": "AI & ML",
+          "items": ["OpenAI GPT-4, Claude, Gemini", "LangChain, LlamaIndex", "TensorFlow, PyTorch", "Hugging Face Transformers", "Vector Databases (Pinecone, Weaviate)"]
+        },
+        "dataInfrastructure": {
+          "title": "Data & Infrastructure",
+          "items": ["AWS, Google Cloud, Azure", "Snowflake, BigQuery, Databricks", "Apache Airflow, dbt", "PostgreSQL, MongoDB, Redis", "Docker, Kubernetes"]
+        },
+        "development": {
+          "title": "Development",
+          "items": ["Python, TypeScript, Go", "FastAPI, Node.js, React", "GraphQL, REST APIs", "CI/CD (GitHub Actions, GitLab)", "Monitoring (Datadog, Grafana)"]
+        }
+      },
+      "approachTitle": "Our Approach",
+      "steps": {
+        "discovery": {
+          "step": "01",
+          "title": "Discovery & Architecture",
+          "description": "Technical audit of your existing infrastructure, needs identification and target architecture design."
+        },
+        "poc": {
+          "step": "02",
+          "title": "Proof of Concept",
+          "description": "Rapid POC development to validate technical feasibility and demonstrate value before full investment."
+        },
+        "development": {
+          "step": "03",
+          "title": "Development & Integration",
+          "description": "Iterative development with continuous integration into your existing systems, rigorous testing, and complete documentation."
+        },
+        "deployment": {
+          "step": "04",
+          "title": "Deployment & Optimization",
+          "description": "Production deployment with monitoring, performance optimization, and training for your technical teams."
+        },
+        "support": {
+          "step": "05",
+          "title": "Support & Evolution",
+          "description": "Continuous technical support, proactive maintenance, and solution evolution according to your changing needs."
+        }
+      },
+      "ctaTitle": "Ready to build your AI infrastructure?",
+      "ctaDescription": "Let's discuss your technical needs and design the solution tailored to your ambitions together.",
+      "ctaButton1": "Schedule a Technical Consultation",
+      "ctaButton2": "View Our Work"
+    }
   }
 }

@@ -102,9 +102,9 @@
     "beyondAIDescription": "Nous créons des écosystèmes numériques complets. De la stratégie aux plateformes, du contenu créatif à l'automatisation intelligente.",
     "team": {
       "sectionLabel": "NOTRE ÉQUIPE",
-      "title": "Rencontrez Notre Équipe",
+      "title": "Rencontrez notre équipe",
       "description": "Des experts passionnés qui transforment votre vision en réalité.",
-      "cta": "Voir Toute l'Équipe"
+      "cta": "Voir toute l'équipe"
     }
   },
   "capabilities": {
@@ -205,21 +205,21 @@
   },
   "trinity": {
     "sectionLabel": "Nos départements",
-    "title": "Nos<br />Départements",
+    "title": "Nos<br />départements",
     "description": "Trois divisions spécialisées agissant comme les piliers de votre transformation.",
     "lab": {
-      "title": "Le Laboratoire IA",
-      "subtitle": "Fondation Technologique",
+      "title": "Le laboratoire IA",
+      "subtitle": "Fondation technologique",
       "description": "Nous construisons la fondation technologique robuste et flexible pour l'intégration IA. Des plateformes de données intelligentes aux agents IA sur mesure et à l'automatisation intelligente des processus."
     },
     "bureau": {
-      "title": "Le Bureau Stratégique",
+      "title": "Le bureau stratégique",
       "subtitle": "Pilotage de votre transformation",
       "description": "Nous définissons la stratégie, pilotons la transformation et mesurons l'impact de l'IA. Des audits de maturité à la stratégie basée sur des agents intelligents et à la gouvernance IA."
     },
     "studio": {
-      "title": "Le Studio Créatif",
-      "subtitle": "Contenu et Expériences Augmentées",
+      "title": "Le studio créatif",
+      "subtitle": "Contenu et expériences augmentées",
       "description": "Nous utilisons l'IA pour créer des expériences de marque et du contenu à une échelle et une pertinence sans précédent. De la création de contenu augmenté aux campagnes marketing automatisées avec IA."
     },
     "explore": "Explorer"
@@ -268,7 +268,7 @@
     "seoDescription": "Découvrez les entreprises visionnaires qui nous font confiance pour leur transformation IA. Des startups aux grandes entreprises, nous sommes fiers de nos partenariats.",
     "seoKeywords": "clients Nukleo Digital, partenaires IA, études de cas clients, portfolio IA",
     "trustedBy": "Approuvé par les leaders de l'industrie",
-    "title": "Nos<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">Clients</span>",
+    "title": "Nos<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">clients</span>",
     "description": "Des musées aux startups technologiques, nous avons aidé des organisations de divers secteurs à transformer leurs opérations avec des solutions alimentées par l'IA. Voici quelques-unes des entreprises incroyables avec lesquelles nous avons eu le privilège de travailler.",
     "trustedClients": "Clients de confiance",
     "industriesServed": "Secteurs desservis",
@@ -465,57 +465,57 @@
     "heroDescription": "Trois studios spécialisés travaillant en harmonie pour transformer votre vision en réalité. De la stratégie à la créativité, de l'innovation à l'exécution.",
     "bureau": {
       "category": "Le Bureau",
-      "subtitle": "Quartier Général Stratégique",
+      "subtitle": "Quartier général stratégique",
       "description": "Votre quartier général stratégique. Ici, nous transformons les données en décisions, les insights en actions, et les opportunités en résultats mesurables.",
       "services": {
         "aiStrategy": {
-          "title": "Consultation en Stratégie IA",
+          "title": "Consultation en stratégie IA",
           "description": "Définissez votre feuille de route IA avec des conseils d'experts sur la sélection de technologies, la planification de l'implémentation et l'optimisation du ROI."
         },
         "conversationalAI": {
-          "title": "IA Conversationnelle",
+          "title": "IA conversationnelle",
           "description": "Déployez des chatbots intelligents et des assistants virtuels qui comprennent le contexte, apprennent des interactions et offrent des expériences personnalisées."
         },
         "marketingAutomation": {
-          "title": "Automatisation Marketing",
+          "title": "Automatisation marketing",
           "description": "Automatisez vos flux de travail marketing avec des campagnes alimentées par l'IA, le scoring de leads et la livraison de contenu personnalisé."
         },
         "predictiveAnalytics": {
-          "title": "Analytique Prédictive",
+          "title": "Analytique prédictive",
           "description": "Tirez parti de l'IA pour prévoir les tendances, prédire le comportement des clients et prendre des décisions basées sur les données en toute confiance."
         }
       }
     },
     "lab": {
       "category": "Le Lab",
-      "subtitle": "Laboratoire d'Innovation",
+      "subtitle": "Laboratoire d'innovation",
       "description": "Bienvenue dans notre laboratoire d'innovation. Ici, nous transformons les technologies de pointe en avantages concurrentiels tangibles.",
       "services": {
         "customWebApps": {
-          "title": "Applications Web Sur Mesure",
+          "title": "Applications web sur mesure",
           "description": "Développez des plateformes web sur mesure avec des fonctionnalités alimentées par l'IA, la collaboration en temps réel et des intégrations transparentes."
         },
         "apiDevelopment": {
-          "title": "Développement & Intégration d'API",
+          "title": "Développement & intégration d'API",
           "description": "Créez des API robustes et intégrez des services tiers pour construire des écosystèmes connectés et intelligents."
         },
         "uxDesign": {
-          "title": "Design d'Expérience Utilisateur",
+          "title": "Design d'expérience utilisateur",
           "description": "Concevez des interfaces intuitives qui combinent le design centré sur l'humain avec la personnalisation alimentée par l'IA."
         },
         "security": {
-          "title": "Sécurité & Conformité",
+          "title": "Sécurité & conformité",
           "description": "Implémentez une sécurité de niveau entreprise, des contrôles de confidentialité des données et des cadres de conformité pour vos plateformes numériques."
         }
       }
     },
     "studio": {
       "category": "Le Studio",
-      "subtitle": "Atelier Créatif",
+      "subtitle": "Atelier créatif",
       "description": "Bienvenue dans l'atelier où les idées deviennent réalité. Notre Studio Créatif fusionne stratégie et créativité pour créer des expériences de marque captivantes.",
       "services": {
         "brandIdentity": {
-          "title": "Identité de Marque & Stratégie",
+          "title": "Identité de marque & stratégie",
           "description": "Créez des identités de marque convaincantes qui résonnent avec votre audience et vous différencient sur le marché."
         },
         "uiuxDesign": {
@@ -523,11 +523,11 @@
           "description": "Concevez des interfaces époustouflantes qui allient esthétique et fonctionnalité, créant des expériences que les utilisateurs adorent."
         },
         "contentCreation": {
-          "title": "Création de Contenu",
+          "title": "Création de contenu",
           "description": "Produisez du contenu visuel et écrit à fort impact qui raconte votre histoire et stimule l'engagement."
         },
         "campaignDesign": {
-          "title": "Design de Campagne",
+          "title": "Design de campagne",
           "description": "Concevez des campagnes marketing intégrées qui captent l'attention et livrent des résultats mesurables."
         }
       }
@@ -542,7 +542,7 @@
   "projects": {
     "title": "Projets",
     "heroTitle": "Transformations",
-    "heroSubtitle": "qui Résonnent",
+    "heroSubtitle": "qui résonnent",
     "description": "Résultats réels d'organisations qui ont choisi de mener plutôt que de suivre. Chaque projet représente une réinvention complète des opérations grâce à l'IA agentique.",
     "filterAll": "Tout",
     "noProjects": "Aucun projet trouvé",
@@ -555,7 +555,7 @@
     },
     "items": {
       "autonomousMarketing": {
-        "title": "Plateforme Marketing Autonome",
+        "title": "Plateforme marketing autonome",
         "category": "Plateformes IA",
         "description": "Gestion de campagnes de bout en bout alimentée par des agents IA, de la génération de contenu à l'optimisation des performances."
       },
@@ -565,12 +565,12 @@
         "description": "Expérience d'achat auto-optimisante avec personnalisation alimentée par l'IA et gestion prédictive des stocks."
       },
       "enterpriseTransformation": {
-        "title": "Transformation IA d'Entreprise",
+        "title": "Transformation IA d'entreprise",
         "category": "Stratégie",
         "description": "Refonte opérationnelle complète intégrant l'IA agentique dans tous les départements et flux de travail."
       },
       "contentGeneration": {
-        "title": "Moteur de Génération de Contenu",
+        "title": "Moteur de génération de contenu",
         "category": "Marketing",
         "description": "Système de création de contenu automatisé produisant des campagnes personnalisées multi-canaux à grande échelle."
       }
@@ -709,7 +709,7 @@
     "guides": "Guides",
     "tools": {
       "sectionLabel": "Outils Interactifs",
-      "title": "Explorez Nos Outils IA",
+      "title": "Explorez nos outils IA",
       "description": "Outils de diagnostic et de recherche gratuits pour accélérer votre parcours de transformation IA",
       "aiReadiness": {
         "badge": "Outil de Diagnostic",
@@ -720,7 +720,7 @@
       },
       "radar": {
         "badge": "Outil de Recherche",
-        "title": "Radar des Tendances IA",
+        "title": "Radar des tendances IA",
         "description": "Explorez notre radar interactif des technologies IA émergentes et établies. Mises à jour mensuelles pour guider vos décisions d'investissement.",
         "tags": ["10+ Technologies", "Mises à Jour Mensuelles", "Carte Interactive"],
         "buttonText": "Explorer le Radar"
@@ -745,7 +745,7 @@
     "articles": {
       "agenticPlaybook": {
         "category": "Guide technique",
-        "title": "Le Guide de l'IA Agentic",
+        "title": "Le guide de l'IA agentic",
         "description": "Un guide complet pour implémenter des agents IA autonomes dans votre organisation. De l'architecture au déploiement.",
         "readTime": "15 min",
         "content": "<p>L'IA agentic représente la prochaine évolution de l'intelligence artificielle—des systèmes qui peuvent planifier, exécuter et s'adapter de manière autonome pour atteindre des objectifs complexes. Ce guide fournit un cadre pratique pour les organisations qui cherchent à implémenter des solutions d'IA agentic.</p><h2>Comprendre l'IA Agentic</h2><p>Contrairement aux systèmes IA traditionnels qui répondent à des invites spécifiques, les systèmes d'IA agentic peuvent décomposer des tâches complexes en sous-tâches, prendre des décisions et itérer jusqu'à ce que les objectifs soient atteints. Ils combinent de grands modèles de langage avec des capacités de raisonnement, l'utilisation d'outils et des systèmes de mémoire.</p><h2>Cadre d'implémentation</h2><p>Notre approche en quatre phases assure un déploiement réussi : Découverte (évaluation de la préparation), Conception (architecture du système), Développement (construction et test), et Déploiement (mise à l'échelle et optimisation).</p><h2>Considérations clés</h2><p>Le succès avec l'IA agentic nécessite une attention particulière à la qualité des données, aux cadres de gouvernance et à la gestion du changement. Les organisations doivent également établir des métriques de succès claires et des systèmes de surveillance.</p>"
@@ -898,137 +898,137 @@
     "mediaContactEmail": "presse@nukleo.digital"
   },
   "lab": {
-    "title": "Le Laboratoire IA",
-    "subtitle": "Fondation Technologique",
+    "title": "Le laboratoire IA",
+    "subtitle": "Fondation technologique",
     "heroDescription": "Nous construisons la fondation technologique robuste et flexible qui alimente votre transformation IA. Des plateformes de données intelligentes aux agents IA sur mesure, nous créons l'infrastructure qui rend les opérations natives IA possibles.",
     "mission": "Notre Mission",
     "missionText": "Construire la colonne vertébrale technologique qui permet à votre organisation d'opérer comme une <strong>entreprise native IA</strong>. Nous n'implémentons pas simplement des outils, nous architecturons des systèmes qui apprennent, s'adaptent et évoluent avec vos ambitions.",
     "capabilities": {
-      "title": "Capacités Principales",
+      "title": "Capacités principales",
       "dataPlatforms": {
-        "title": "Plateformes de Données Intelligentes",
+        "title": "Plateformes de données intelligentes",
         "description": "Unifier et préparer votre écosystème de données pour l'IA. Nous construisons des architectures de données robustes qui servent de fondation pour les systèmes intelligents, garantissant la qualité, l'accessibilité et la gouvernance des données."
       },
       "customAgents": {
-        "title": "Développement d'Agents IA Sur Mesure",
+        "title": "Développement d'agents IA sur mesure",
         "description": "Créer des agents autonomes adaptés à vos besoins commerciaux spécifiques. Des bots de service client aux assistants de processus intelligents, nous développons des agents IA qui apprennent, s'adaptent et livrent de la valeur en continu."
       },
       "integration": {
-        "title": "Intégration IA Tiers",
+        "title": "Intégration IA tiers",
         "description": "Orchestrer les meilleurs modèles et services IA du marché. Nous intégrons les solutions leaders d'OpenAI, Anthropic, Mistral et d'autres pour créer une stack IA puissante personnalisée pour vos opérations."
       },
       "automation": {
-        "title": "Automatisation Intelligente des Processus (IPA)",
+        "title": "Automatisation intelligente des processus (IPA)",
         "description": "Aller au-delà de la RPA simple avec des flux de travail adaptatifs. Nous implémentons une automatisation intelligente qui comprend le contexte, prend des décisions et s'optimise continuellement en fonction des résultats."
       }
     },
     "approach": {
-      "title": "Notre Approche",
+      "title": "Notre approche",
       "assess": {
-        "title": "Évaluer & Concevoir",
+        "title": "Évaluer & concevoir",
         "description": "Nous commençons par comprendre votre infrastructure actuelle, votre paysage de données et vos objectifs commerciaux. Ensuite, nous concevons une architecture IA qui s'aligne avec vos objectifs stratégiques."
       },
       "build": {
-        "title": "Construire & Intégrer",
+        "title": "Construire & intégrer",
         "description": "Nous développons des solutions IA sur mesure et intégrons les meilleurs services tiers, créant un écosystème cohérent qui fonctionne parfaitement avec vos systèmes existants."
       },
       "optimize": {
-        "title": "Optimiser & Évoluer",
+        "title": "Optimiser & évoluer",
         "description": "Nous surveillons, affinons et améliorons continuellement votre infrastructure IA, garantissant qu'elle évolue avec vos besoins et livre un ROI mesurable à chaque étape."
       }
     },
     "cta": {
-      "title": "Prêt à Construire Votre Fondation IA ?",
+      "title": "Prêt à construire votre fondation IA ?",
       "description": "Discutons de la manière dont Le Laboratoire IA peut architecturer l'infrastructure technologique qui alimente votre transformation.",
       "button": "Démarrer la Conversation"
     }
   },
   "bureau": {
-    "title": "Le Bureau Stratégique",
-    "subtitle": "Pilotage de la Transformation",
+    "title": "Le bureau stratégique",
+    "subtitle": "Pilotage de la transformation",
     "heroDescription": "Nous définissons la stratégie, pilotons la transformation et mesurons l'impact de l'IA dans votre organisation. De la vision à l'exécution, nous orchestrons votre parcours de l'IA-curieux à l'IA-natif.",
     "mission": "Notre Mission",
     "missionText": "Guider votre organisation à travers le parcours complexe de la <strong>transformation IA</strong>. Nous ne créons pas simplement des stratégies, nous orchestrons le changement, alignons les parties prenantes et assurons que vos initiatives IA livrent une valeur commerciale mesurable à chaque étape.",
     "services": {
-      "title": "Services Stratégiques",
+      "title": "Services stratégiques",
       "aiMaturity": {
-        "title": "Audit de Maturité IA & Feuille de Route",
+        "title": "Audit de maturité IA & feuille de route",
         "description": "Évaluer votre position actuelle dans le paysage IA et tracer un chemin clair vers le leadership IA. Nous évaluons vos capacités, identifions les écarts et créons une feuille de route de transformation de 9 à 12 mois."
       },
       "transformationStrategy": {
-        "title": "Stratégie de Transformation Agentique",
+        "title": "Stratégie de transformation agentique",
         "description": "Redéfinir votre modèle opérationnel avec l'IA au centre. Nous vous aidons à passer de l'expérimentation à la transformation à l'échelle de l'entreprise, en intégrant l'IA agentique comme fondation de la croissance."
       },
       "governance": {
-        "title": "Gouvernance & Éthique IA",
+        "title": "Gouvernance & éthique IA",
         "description": "Implémenter les garde-fous pour une IA responsable et performante. Nous établissons des cadres pour l'utilisation éthique de l'IA, la conformité, la gestion des risques et la prise de décision transparente."
       },
       "performanceAnalysis": {
-        "title": "Analyse de Performance & ROI",
+        "title": "Analyse de performance & ROI",
         "description": "Mesurer l'impact tangible de l'IA sur vos objectifs commerciaux. Nous suivons les KPI, analysons les résultats et optimisons continuellement vos investissements IA pour maximiser le retour et la valeur stratégique."
       }
     },
     "journey": {
-      "title": "Le Parcours de Transformation",
+      "title": "Le parcours de transformation",
       "discovery": {
-        "title": "Découverte & Évaluation",
+        "title": "Découverte & évaluation",
         "description": "Nous menons un audit complet de maturité IA, évaluant vos capacités actuelles, la préparation des données, la culture organisationnelle et le positionnement concurrentiel. Cette évaluation de base identifie les opportunités et les contraintes."
       },
       "strategy": {
-        "title": "Stratégie & Feuille de Route",
+        "title": "Stratégie & feuille de route",
         "description": "Nous concevons votre stratégie de transformation agentique, définissant des objectifs clairs, priorisant les cas d'usage et créant une feuille de route par phases. Cela inclut les cadres de gouvernance, la planification des ressources et les stratégies de gestion du changement."
       },
       "execution": {
-        "title": "Exécution & Optimisation",
+        "title": "Exécution & optimisation",
         "description": "Nous orchestrons l'implémentation dans votre organisation, coordonnant avec Le Lab et Le Studio. Nous mesurons continuellement la performance, suivons le ROI et ajustons la stratégie pour maximiser l'impact commercial."
       },
       "scale": {
-        "title": "Évolution & Leadership",
+        "title": "Évolution & leadership",
         "description": "Nous vous aidons à faire évoluer les pilotes réussis à l'échelle de l'entreprise et à positionner votre organisation comme un leader IA dans votre industrie. Cela inclut le leadership d'opinion, les programmes d'innovation et le développement continu des capacités."
       }
     },
     "impact": {
-      "title": "Impact Attendu",
+      "title": "Impact attendu",
       "roi": "ROI sur les investissements IA dans les 12 mois",
       "timeToMarket": "Réduction du temps de mise sur le marché pour les nouvelles initiatives",
       "efficiency": "Augmentation de l'efficacité opérationnelle"
     },
     "cta": {
-      "title": "Prêt à Piloter Votre Transformation ?",
+      "title": "Prêt à piloter votre transformation ?",
       "description": "Discutons de la manière dont Le Bureau Stratégique peut orchestrer votre parcours de l'expérimentation IA à la transformation à l'échelle de l'entreprise.",
-      "button": "Commencer Votre Parcours"
+      "button": "Commencer votre parcours"
     }
   },
   "studio": {
-    "title": "Le Studio Créatif",
-    "subtitle": "Contenu & Expériences Augmentés",
+    "title": "Le studio créatif",
+    "subtitle": "Contenu & expériences augmentés",
     "heroDescription": "Nous utilisons l'IA pour créer des expériences de marque et du contenu à une échelle et une pertinence sans précédent. Du contenu génératif aux campagnes marketing autonomes, nous vous aidons à vous connecter avec les audiences de manières auparavant impossibles.",
     "mission": "Notre Mission",
     "missionText": "Exploiter le pouvoir créatif de l'IA pour livrer des <strong>expériences hyper-personnalisées à grande échelle</strong>. Nous ne remplaçons pas la créativité humaine, nous l'amplifions, permettant à votre marque de créer des connexions significatives avec chaque client, à chaque instant.",
     "capabilities": {
-      "title": "Capacités Créatives",
+      "title": "Capacités créatives",
       "contentCreation": {
-        "title": "Création de Contenu Augmenté",
+        "title": "Création de contenu augmenté",
         "description": "Produire du contenu (texte, image, vidéo) à une échelle sans précédent, personnalisé en temps réel. Nous tirons parti de l'IA générative pour créer du contenu aligné avec la marque qui résonne avec chaque segment d'audience."
       },
       "personalizedExperiences": {
-        "title": "Expériences Client Personnalisées par IA",
+        "title": "Expériences client personnalisées par IA",
         "description": "Créer des parcours clients uniques et dynamiques alimentés par l'IA. Des recommandations personnalisées aux interfaces adaptatives, nous concevons des expériences qui évoluent avec chaque interaction."
       },
       "agenticMarketing": {
-        "title": "Campagnes Marketing Agentiques",
+        "title": "Campagnes marketing agentiques",
         "description": "Déployer des campagnes autonomes qui s'optimisent continuellement. Nos agents IA testent, apprennent et s'adaptent en temps réel, maximisant l'engagement et la conversion sur tous les canaux."
       },
       "brandIdentity": {
-        "title": "Identité de Marque à l'Ère de l'IA",
+        "title": "Identité de marque à l'ère de l'IA",
         "description": "Définir comment votre marque interagit et est perçue dans un monde d'assistants et d'agents IA. Nous vous aidons à établir une voix et une présence distinctives dans les expériences médiées par l'IA."
       }
     },
     "revolution": {
-      "title": "La Révolution du Marketing Agentique",
+      "title": "La révolution du marketing agentique",
       "description": "Nous entrons dans l'ère du <strong>Marketing Agentique</strong> où les systèmes IA autonomes n'exécutent pas simplement des campagnes, ils apprennent, décident et agissent indépendamment pour atteindre vos objectifs commerciaux.",
       "traditional": {
-        "title": "Marketing Traditionnel",
+        "title": "Marketing traditionnel",
         "items": [
           "Configuration manuelle des campagnes",
           "Optimisation périodique",
@@ -1038,7 +1038,7 @@
         ]
       },
       "agentic": {
-        "title": "Marketing Agentique",
+        "title": "Marketing agentique",
         "items": [
           "Orchestration autonome des campagnes",
           "Optimisation continue en temps réel",
@@ -1049,22 +1049,22 @@
       }
     },
     "useCases": {
-      "title": "Cas d'Usage",
+      "title": "Cas d'usage",
       "dynamicContent": {
-        "title": "Génération de Contenu Dynamique",
+        "title": "Génération de contenu dynamique",
         "description": "Générer des milliers de descriptions de produits uniques, d'articles de blog et de contenu pour les réseaux sociaux adaptés à différents segments d'audience tout en maintenant la voix de marque et les standards de qualité."
       },
       "personalizedJourneys": {
-        "title": "Parcours Client Personnalisés",
+        "title": "Parcours client personnalisés",
         "description": "Créer des expériences uniques pour chaque visiteur basées sur leur comportement, leurs préférences et leur contexte. Les agents IA adaptent le contenu, les recommandations et les interfaces en temps réel pour maximiser l'engagement et la conversion."
       },
       "autonomousOptimization": {
-        "title": "Optimisation Autonome des Campagnes",
+        "title": "Optimisation autonome des campagnes",
         "description": "Déployer des campagnes marketing qui testent, apprennent et s'optimisent continuellement sur tous les canaux. Les agents IA ajustent le message, le timing, le ciblage et l'allocation budgétaire pour maximiser le ROI sans intervention manuelle."
       }
     },
     "cta": {
-      "title": "Prêt à Amplifier Votre Créativité ?",
+      "title": "Prêt à amplifier votre créativité ?",
       "description": "Explorons comment Le Studio Créatif peut vous aider à créer des expériences et du contenu qui captivent les audiences à une échelle sans précédent.",
       "button": "Créons Ensemble"
     }
@@ -1178,12 +1178,12 @@
       "titleHighlight": "Défi",
       "subtitle": "La culture fait face à des défis sans précédent",
       "budgetCuts": {
-        "title": "Coupes Budgétaires",
+        "title": "Coupes budgétaires",
         "description": "Les réductions drastiques de financement forcent les artistes et les institutions culturelles à faire des <span class=\"text-white/90 font-medium\">choix impossibles</span> entre la survie et la création.",
         "hover": "→ Il faut que ça change"
       },
       "precariousConditions": {
-        "title": "Conditions Précaires",
+        "title": "Conditions précaires",
         "description": "Les artistes font face à des revenus instables, un manque d'avantages sociaux et des avenirs incertains, ce qui rend plus difficile de se concentrer sur ce qu'ils font de mieux : <span class=\"text-white/90 font-medium\">créer</span>.",
         "hover": "→ Les artistes méritent mieux"
       },
@@ -1214,17 +1214,17 @@
       "titleHighlight": "Action",
       "subtitle": "Nous ne faisons pas que <span class=\"line-through text-white/40\">parler</span> de soutenir la culture, nous <span class=\"text-white/80 font-semibold\">agissons</span> chaque jour.",
       "affordablePricing": {
-        "title": "Tarifs Abordables",
+        "title": "Tarifs abordables",
         "description": "Nous offrons une <span class=\"inline-flex items-baseline gap-1\"><strong class=\"text-3xl font-bold text-green-300\">réduction de 40%</strong><span class=\"text-white/90\">sur nos services</span></span> pour les organisations culturelles, rendant la transformation numérique accessible à ceux qui en ont le plus besoin.",
         "hover": "→ Parce que l'accès ne devrait pas être une barrière"
       },
       "financialSupport": {
-        "title": "Soutien Financier",
+        "title": "Soutien financier",
         "description": "Nous consacrons <span class=\"inline-flex items-baseline gap-1\"><strong class=\"text-3xl font-bold text-red-300\">1%</strong><span class=\"text-white/90\">de nos revenus annuels</span></span> en dons directs aux organisations culturelles, et mobilisons d'autres entrepreneurs à nous rejoindre.",
         "hover": "→ Petit pourcentage, grand impact"
       },
       "liveCulture": {
-        "title": "Vivre la Culture",
+        "title": "Vivre la culture",
         "description": "Chaque membre de l'équipe reçoit <span class=\"inline-flex items-baseline gap-1\"><strong class=\"text-3xl font-bold text-blue-300\">350$</strong><span class=\"text-white/90\">par année</span></span> pour des sorties culturelles canadiennes. Parce que soutenir la culture commence par la <span class=\"text-white/90 font-medium\">vivre</span>.",
         "hover": "→ Pratiquer ce que nous prêchons"
       },

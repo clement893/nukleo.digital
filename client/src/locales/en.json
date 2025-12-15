@@ -253,9 +253,37 @@
     "seoDescription": "Access Nukleo Digital's latest press releases, media kit, and company news. Download logos, brand guidelines, and connect with our press team.",
     "seoKeywords": "Nukleo press, media kit, press releases, company news, brand assets",
     "badge": "Press & Media",
-    "title": "Media",
-    "titleHighlight": "Center",
-    "description": "Latest news, press releases, and media resources from Nukleo Digital. For press inquiries, contact us at",
+    "heroTitle": "Media",
+    "heroTitleHighlight": "Center",
+    "heroDescription": "Latest news, press releases, and media resources from Nukleo Digital. For press inquiries, contact us at",
+    "contactForm": {
+      "title": "Media Contact Form",
+      "description": "Fill out this form for any interview requests, information, or collaboration inquiries.",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "mediaOutlet": "Media Outlet",
+      "subject": "Subject",
+      "message": "Message",
+      "submit": "Send",
+      "success": "Thank you! Your message has been sent. We will respond within 24 hours.",
+      "error": "An error occurred. Please try again."
+    },
+    "mediaContact": {
+      "title": "Media Contact",
+      "description": "For any interview requests, information, or collaboration inquiries, contact our media relations team.",
+      "email": "press@nukleo.digital",
+      "responseTime": "We typically respond within 24 hours"
+    },
+    "pressArticles": {
+      "title": "Press Articles",
+      "description": "Discover articles and media coverage about Nukleo Digital"
+    },
+    "linkedinFeed": {
+      "title": "LinkedIn News",
+      "description": "Follow our latest news and publications on LinkedIn",
+      "followUs": "Follow us on LinkedIn"
+    },
     "pressReleases": {
       "title": "Latest Press Releases",
       "categories": {
@@ -418,7 +446,7 @@
     "subtitle": "We are by your side to help you grow.",
     "description": "Comprehensive AI services: Strategy & Marketing, Digital Platforms, Intelligent Operations.",
     "ourServices": "Our Services",
-    "heroTitle": "Three expertise,",
+    "heroTitle": "Three expertises,",
     "heroSubtitle": "one vision.",
     "heroSubtitleGradient": "Lab · Studio · Bureau",
     "heroDescription": "Development, creation, strategy — three complementary teams to support your digital transformation from A to Z. Choose the expertise you need, or combine them for a complete project.",
@@ -426,11 +454,11 @@
       "category": "The Lab",
       "number": "01",
       "tagline": "Development & Technology",
-      "description": "Our team of developers builds the digital solutions that power your business. Mobile apps, web platforms, integrations, automation.",
+      "description": "Our team of developers builds the digital solutions that power your business. Mobile applications, web platforms, integrations, automation.",
       "services": {
         "mobileApps": {
           "title": "Mobile Applications",
-          "description": "iOS, Android and cross-platform apps with exceptional UX"
+          "description": "iOS, Android, and cross-platform apps with exceptional UX"
         },
         "webApps": {
           "title": "Web Applications",
@@ -445,17 +473,17 @@
           "description": "Automate repetitive tasks to save time"
         }
       },
-      "cta": "Explore the Lab"
+      "cta": "Explore the Lab →"
     },
     "studio": {
       "category": "The Studio",
       "number": "02",
       "tagline": "Design & Creation",
-      "description": "Our creatives bring your ideas to life. Branding, UX/UI, art direction, visual campaigns — brand experiences that make an impact.",
+      "description": "Our creatives bring your ideas to life. Branding, UX/UI, art direction, visual campaigns — brand experiences that leave a lasting impression.",
       "services": {
         "branding": {
           "title": "Branding & Identity",
-          "description": "Memorable logos, brand guidelines and brand universes"
+          "description": "Memorable logos, brand guidelines, and brand universes"
         },
         "uiuxDesign": {
           "title": "UX/UI Design",
@@ -470,7 +498,7 @@
           "description": "Campaign visuals and animations that capture attention"
         }
       },
-      "cta": "Explore the Studio"
+      "cta": "Explore the Studio →"
     },
     "bureau": {
       "category": "The Bureau",
@@ -484,40 +512,40 @@
         },
         "transformation": {
           "title": "Transformation",
-          "description": "Change management and tool adoption support"
+          "description": "Change support and tool adoption"
         },
         "digitalMarketing": {
           "title": "Digital Marketing",
-          "description": "Acquisition, SEO, SEA, Social Ads and analytics"
+          "description": "Acquisition, SEO, SEA, Social Ads, and analytics"
         },
         "communication": {
           "title": "Communication",
-          "description": "Editorial strategy, content and community management"
+          "description": "Editorial strategy, content, and community management"
         }
       },
-      "cta": "Explore the Bureau"
+      "cta": "Explore the Bureau →"
     },
     "howItWorks": {
       "title": "An integrated approach",
       "description": "Our three teams work hand in hand. Depending on your project, you can call on a single entity or combine them for a complete solution.",
       "combinations": {
         "brandLaunch": {
-          "project": "Brand launch",
+          "project": "Brand Launch",
           "teams": "Studio + Bureau",
           "deliverables": "Visual identity + launch strategy + campaign"
         },
         "mobileApp": {
-          "project": "Mobile application",
+          "project": "Mobile Application",
           "teams": "Lab + Studio",
           "deliverables": "Development + UX/UI design"
         },
         "digitalOverhaul": {
-          "project": "Complete digital overhaul",
+          "project": "Complete Digital Overhaul",
           "teams": "Lab + Studio + Bureau",
           "deliverables": "New platform + new branding + marketing strategy"
         },
         "marketingCampaign": {
-          "project": "Marketing campaign",
+          "project": "Marketing Campaign",
           "teams": "Studio + Bureau",
           "deliverables": "Visuals + strategy + deployment"
         }
@@ -525,7 +553,7 @@
     },
     "cta": {
       "title": "Not sure what you need?",
-      "description": "Let's discuss your project. We'll guide you to the right team — or the right combination.",
+      "description": "Let's discuss your project. We'll point you to the right team — or the right combination.",
       "buttonPrimary": "Talk to an expert",
       "buttonSecondary": "See our work"
     }
@@ -1116,286 +1144,273 @@
   },
   "services": {
     "creativeStudio": {
-      "badge": "The Creative Studio",
-      "heroTitle": "Augmented Content",
-      "heroTitleHighlight": "& Experiences",
-      "heroDescription": "We create AI-augmented content and experiences. From agentic marketing to intelligent multichannel campaigns, we amplify your creative impact with the power of artificial intelligence.",
-      "ctaLaunch": "Launch a Campaign",
-      "ctaLearnMore": "Learn More About the Studio",
-      "coreServicesTitle": "Creative Services",
-      "services": {
-        "agenticMarketing": {
-          "title": "Agentic Marketing",
-          "description": "Deployment of autonomous AI agents to automate and optimize your marketing campaigns: content generation, A/B testing, real-time personalization."
+      "badge": "STUDIO",
+      "heroTitle": "Creativity,",
+      "heroTitleHighlight": "amplified.",
+      "heroSubtitle": "Design & Brand Experiences",
+      "heroDescription": "Passionate creatives who bring your ideas to life. We craft memorable brand identities and digital experiences that leave a lasting impression — with the best tools to go faster and further.",
+      "clientNeeds": {
+        "items": [
+          "You need a strong and distinctive brand identity",
+          "You want a smooth and engaging user experience",
+          "You're looking for creative campaigns that stand out",
+          "You need high-quality visual content at scale"
+        ]
+      },
+      "approachTitle": "Human creativity, modern tools",
+      "approachDescription": "Every project starts with a human idea. Our art directors, designers, and creatives imagine, design, and refine every detail. We use the best tools — including AI — to explore more directions, iterate faster, and deliver impeccable quality. But the vision remains human.",
+      "pillars": {
+        "vision": {
+          "number": "01",
+          "title": "Strategic Vision",
+          "description": "Every creation serves a clear business objective"
         },
-        "contentGeneration": {
-          "title": "Content Generation",
-          "description": "Large-scale content production: blog articles, social posts, newsletters, video scripts, all adapted to your tone and audience."
+        "craft": {
+          "number": "02",
+          "title": "Craft & Detail",
+          "description": "Meticulous execution down to the last pixel"
         },
-        "visualCreation": {
-          "title": "Visual Creation",
-          "description": "AI-powered image, illustration, and design generation: social media visuals, marketing assets, product mockups, and brand assets."
+        "coherence": {
+          "number": "03",
+          "title": "Consistency",
+          "description": "A strong identity across all touchpoints"
         },
-        "videoAnimation": {
-          "title": "Video & Animation",
-          "description": "AI-augmented video creation: automatic editing, voiceover generation, intelligent subtitles, and personalized animations."
-        },
-        "audioVoice": {
-          "title": "Audio & Voice",
-          "description": "AI audio production: natural synthetic voiceovers, automated podcasts, voice translation, and voice cloning for branding."
-        },
-        "omnichannelCampaigns": {
-          "title": "Omnichannel Campaigns",
-          "description": "Orchestration of cohesive omnichannel campaigns with AI personalization across web, social, email, SMS, and programmatic advertising."
+        "impact": {
+          "number": "04",
+          "title": "Impact",
+          "description": "Creations that generate results"
         }
       },
-      "processTitle": "Augmented Creative Process",
-      "processDescription": "Our hybrid approach combines human creativity and AI power to create content that resonates and performs.",
-      "phases": {
-        "ideate": {
-          "title": "Ideate",
-          "description": "AI-augmented brainstorming, trend analysis, and large-scale creative idea generation"
+      "expertiseTitle": "What we create",
+      "expertise": {
+        "branding": {
+          "title": "Branding & Identity",
+          "description": "We create memorable brands that tell your story and connect with your audience.",
+          "deliverables": "Logo, brand guidelines, naming, storytelling"
         },
-        "create": {
-          "title": "Create",
-          "description": "Multi-format content production with AI tools, rapid iteration, and personalized variations"
+        "uiux": {
+          "title": "UX/UI Design",
+          "description": "We design intuitive and aesthetic interfaces that turn users into loyal customers.",
+          "deliverables": "Wireframes, prototypes, design systems, web & mobile interfaces"
         },
-        "optimize": {
-          "title": "Optimize",
-          "description": "Automated A/B testing, real-time performance analysis, and continuous optimization"
+        "artDirection": {
+          "title": "Art Direction",
+          "description": "We define the visual universe of your projects and campaigns for impactful consistency.",
+          "deliverables": "Creative concepts, moodboards, visual guidelines"
         },
-        "scale": {
-          "title": "Scale",
-          "description": "Omnichannel deployment, local adaptation, and intelligent amplification of high-performing content"
+        "campaigns": {
+          "title": "Campaign Design",
+          "description": "We create the visuals and assets for your advertising campaigns across all channels.",
+          "deliverables": "Banners, social visuals, print, billboards, video"
+        },
+        "motion": {
+          "title": "Motion Design",
+          "description": "We bring your messages to life with animations and videos that capture attention.",
+          "deliverables": "Animations, explainer videos, intros, social content"
+        },
+        "production": {
+          "title": "Visual Production",
+          "description": "We produce the visual content you need: photos, illustrations, assets.",
+          "deliverables": "Photo shoots, illustrations, retouching, digital assets"
         }
       },
-      "toolsTitle": "Tools & Platforms",
-      "tools": {
-        "contentGeneration": {
-          "title": "Content Generation",
-          "items": ["GPT-4, Claude, Gemini", "Midjourney, DALL-E, Stable Diffusion", "Runway, Pika, Sora", "ElevenLabs, Descript", "Copy.ai, Jasper"]
-        },
-        "marketingAutomation": {
-          "title": "Marketing Automation",
-          "items": ["HubSpot, Marketo, Salesforce", "Zapier, Make, n8n", "Google Analytics, Mixpanel", "Segment, Amplitude", "Optimizely, VWO"]
-        },
-        "distribution": {
-          "title": "Distribution",
-          "items": ["Meta Business Suite", "LinkedIn Campaign Manager", "Google Ads, DV360", "Mailchimp, SendGrid", "Buffer, Hootsuite"]
-        }
-      },
-      "useCasesTitle": "Use Cases",
-      "useCases": {
-        "contentMarketing": {
-          "title": "Content Marketing at Scale",
-          "description": "Automated generation of hundreds of SEO-optimized blog articles per month, adapted to different audiences and personas.",
-          "impact": "10x content volume, -70% production costs"
-        },
-        "personalizedEmail": {
-          "title": "Personalized Email Campaigns",
-          "description": "Creation of hyper-personalized email campaigns with AI-generated dynamic content based on each lead's profile and behavior.",
-          "impact": "+250% open rate, +180% conversion rate"
-        },
-        "socialMediaAutomation": {
-          "title": "Social Media Automation",
-          "description": "AI agents that automatically create, schedule, and optimize your posts across all social networks with continuous A/B testing.",
-          "impact": "100% daily coverage, +320% engagement"
-        },
-        "dynamicAdCreative": {
-          "title": "Dynamic Ad Creative",
-          "description": "Automatic generation of thousands of ad creative variations tested and optimized in real-time based on performance.",
-          "impact": "-45% CPA, +190% ROAS"
-        }
-      },
-      "ctaTitle": "Ready to amplify your creative impact?",
-      "ctaDescription": "Let's discuss your marketing goals and create campaigns that perform at scale together.",
-      "ctaButton1": "Launch Your First AI Campaign",
-      "ctaButton2": "View Our Work"
-    },
-    "strategicBureau": {
-      "badge": "The Strategic Bureau",
-      "heroTitle": "Transformation",
-      "heroTitleHighlight": "Orchestration",
-      "heroDescription": "We orchestrate your AI transformation end-to-end. From strategic vision to operational execution, we align technology, processes, and teams to create measurable and lasting impact.",
-      "ctaStart": "Start Your Transformation",
-      "ctaLearnMore": "Learn More About the Bureau",
-      "coreServicesTitle": "Strategic Services",
-      "services": {
-        "aiStrategy": {
-          "title": "AI Strategy & Roadmap",
-          "description": "Definition of your AI vision, identification of high-impact opportunities, and construction of a pragmatic and measurable transformation roadmap."
-        },
-        "businessCase": {
-          "title": "Business Case & ROI",
-          "description": "In-depth ROI analysis, financial modeling, and construction of solid business cases to secure investment."
-        },
-        "changeManagement": {
-          "title": "Change Management",
-          "description": "Support for your teams in AI adoption, training, change management, and creation of a data-driven culture."
-        },
-        "governance": {
-          "title": "Governance & Compliance",
-          "description": "Implementation of AI governance frameworks, ethical use policies, and regulatory compliance (GDPR, AI Act)."
-        },
-        "performanceTracking": {
-          "title": "Performance Tracking",
-          "description": "Definition of relevant KPIs, implementation of tracking dashboards, and continuous data-driven optimization."
-        },
-        "riskManagement": {
-          "title": "Risk Management",
-          "description": "Identification and mitigation of AI-related risks (bias, security, dependency) with robust contingency strategies."
-        }
-      },
-      "frameworkTitle": "Transformation Framework",
-      "frameworkDescription": "Our proven methodology for orchestrating successful AI transformations, from vision to impact.",
-      "phases": {
-        "discover": {
-          "title": "Discover",
-          "description": "AI maturity audit, opportunity identification, and alignment with business strategy"
-        },
-        "define": {
-          "title": "Define",
-          "description": "Construction of the AI vision, prioritization of use cases and definition of the roadmap"
-        },
-        "deploy": {
-          "title": "Deploy",
-          "description": "Execution of pilot projects, scaling of solutions and integration into processes"
-        },
-        "drive": {
-          "title": "Drive",
-          "description": "Continuous optimization, impact measurement and strategy evolution"
-        }
-      },
-      "deliverablesTitle": "Key Deliverables",
-      "deliverables": {
-        "strategic": {
-          "title": "Strategic",
-          "items": ["AI Vision & Roadmap", "Detailed Business Cases", "Governance Framework", "Ethical Use Policy", "Change Management Strategy"]
-        },
-        "operational": {
-          "title": "Operational",
-          "items": ["Detailed Execution Plans", "KPI Tracking Dashboards", "Optimized Processes", "User Guides", "Training Plans"]
-        },
-        "organizational": {
-          "title": "Organizational",
-          "items": ["Target Organizational Charts", "AI Job Descriptions", "Training Paths", "Communities of Practice", "Communication Plans"]
-        }
-      },
-      "approachTitle": "Our Approach",
-      "steps": {
-        "assessment": {
-          "step": "01",
-          "title": "Assessment & Vision",
-          "description": "Evaluation of your AI maturity, identification of quick wins and construction of an ambitious but realistic vision."
-        },
-        "strategy": {
-          "step": "02",
-          "title": "Strategy & Roadmap",
-          "description": "Definition of the AI strategy aligned with your business objectives and construction of a phased transformation roadmap."
-        },
-        "pilot": {
-          "step": "03",
-          "title": "Pilot & Validate",
-          "description": "Launch of pilot projects to validate the approach, measure impact and adjust strategy before scaling."
-        },
-        "scale": {
-          "step": "04",
-          "title": "Scale & Integrate",
-          "description": "Large-scale deployment, integration into existing processes and team training for autonomy."
-        },
-        "optimize": {
-          "step": "05",
-          "title": "Optimize & Evolve",
-          "description": "Continuous performance measurement, solution optimization and strategy evolution based on results."
-        }
-      },
-      "ctaTitle": "Ready to orchestrate your AI transformation?",
-      "ctaDescription": "Let's discuss your vision and build together the strategy that will transform your organization.",
-      "ctaButton1": "Schedule a Strategic Diagnostic",
-      "ctaButton2": "Assess Your AI Maturity"
-    },
-    "aiLab": {
-      "badge": "The AI Lab",
-      "heroTitle": "Technology",
-      "heroTitleHighlight": "Foundation",
-      "heroDescription": "We build the technological infrastructure that powers your AI transformation. From intelligent agent development to data architecture, we create the technical foundations of your augmented future.",
-      "ctaStart": "Start a Project",
-      "ctaLearnMore": "Learn More About the Lab",
-      "capabilitiesTitle": "Technical Capabilities",
-      "capabilities": {
-        "aiAgents": {
-          "title": "AI Agents & Automation",
-          "description": "Development of autonomous intelligent agents capable of executing complex tasks, learning, and adapting to your business environment."
-        },
-        "dataPlatforms": {
-          "title": "Data Platforms & Pipelines",
-          "description": "Architecture and implementation of modern data platforms with ETL/ELT pipelines, data lakes, and optimized data warehouses."
-        },
-        "apiIntegration": {
-          "title": "API & Integration",
-          "description": "Design and development of robust APIs and system integrations to seamlessly connect your tools and data."
-        },
-        "customModels": {
-          "title": "Custom AI Models",
-          "description": "Fine-tuning and deployment of custom AI models tailored to your specific use cases and proprietary data."
-        },
-        "performance": {
-          "title": "Performance Optimization",
-          "description": "Performance optimization, scalability, and infrastructure cost reduction for your AI and data systems."
-        },
-        "security": {
-          "title": "Security & Compliance",
-          "description": "Implementation of robust security measures and regulatory compliance (GDPR, SOC2, ISO) for your AI systems."
-        }
-      },
-      "techStackTitle": "Technology Stack",
-      "techStackDescription": "We use the most advanced and proven technologies to build robust and scalable solutions.",
-      "techStack": {
-        "aiMl": {
-          "title": "AI & ML",
-          "items": ["OpenAI GPT-4, Claude, Gemini", "LangChain, LlamaIndex", "TensorFlow, PyTorch", "Hugging Face Transformers", "Vector Databases (Pinecone, Weaviate)"]
-        },
-        "dataInfrastructure": {
-          "title": "Data & Infrastructure",
-          "items": ["AWS, Google Cloud, Azure", "Snowflake, BigQuery, Databricks", "Apache Airflow, dbt", "PostgreSQL, MongoDB, Redis", "Docker, Kubernetes"]
-        },
-        "development": {
-          "title": "Development",
-          "items": ["Python, TypeScript, Go", "FastAPI, Node.js, React", "GraphQL, REST APIs", "CI/CD (GitHub Actions, GitLab)", "Monitoring (Datadog, Grafana)"]
-        }
-      },
-      "approachTitle": "Our Approach",
-      "steps": {
+      "teamTitle": "The creatives behind your projects",
+      "teamDescription": "Art directors, UI/UX designers, graphic designers, motion designers — a passionate creative team that turns your ideas into reality. Based in Montreal and Halifax, we work hand in hand with our clients.",
+      "processTitle": "Process",
+      "process": {
         "discovery": {
           "step": "01",
-          "title": "Discovery & Architecture",
-          "description": "Technical audit of your existing infrastructure, needs identification and target architecture design."
+          "title": "Discovery",
+          "description": "Understand your brand, objectives, and audience"
         },
-        "poc": {
+        "concept": {
           "step": "02",
-          "title": "Proof of Concept",
-          "description": "Rapid POC development to validate technical feasibility and demonstrate value before full investment."
+          "title": "Concept",
+          "description": "Explore creative directions and define the vision"
+        },
+        "design": {
+          "step": "03",
+          "title": "Design",
+          "description": "Create, iterate, and refine to perfection"
+        },
+        "delivery": {
+          "step": "04",
+          "title": "Delivery",
+          "description": "Adapt to all necessary formats and platforms"
+        }
+      },
+      "ctaTitle": "Ready to bring your vision to life?",
+      "ctaDescription": "Let's discuss your project and create something memorable together.",
+      "ctaButton1": "Start a project",
+      "ctaButton2": "See our work"
+    },
+    "strategicBureau": {
+      "badge": "BUREAU",
+      "heroTitle": "Clear strategy,",
+      "heroTitleHighlight": "concrete execution.",
+      "heroSubtitle": "Strategy, Transformation & Marketing",
+      "heroDescription": "We drive your digital transformation and orchestrate your communication. From strategy to execution, complete support for measurable results.",
+      "clientNeeds": {
+        "items": [
+          "You need a clear and actionable digital strategy",
+          "You want to structure and professionalize your communication",
+          "You're looking to generate more leads and visibility",
+          "You need a partner who executes, not just advises"
+        ]
+      },
+      "approachTitle": "Consulting + Execution",
+      "approachDescription": "We're not consultants who deliver PowerPoints and disappear. We stay by your side from strategy to execution, with a commitment to results. Our team combines strategic vision with operational expertise.",
+      "expertiseTitle": "How we support you",
+      "expertise": {
+        "digitalStrategy": {
+          "title": "Digital Strategy",
+          "description": "We define your digital vision and build the roadmap to get there.",
+          "deliverables": "Audit, vision, 12-36 month roadmap"
+        },
+        "transformation": {
+          "title": "Transformation & Change",
+          "description": "We support your teams in adopting new tools and processes.",
+          "deliverables": "Transformation plan, training, change management"
+        },
+        "marketingStrategy": {
+          "title": "Marketing Strategy",
+          "description": "We build your customer acquisition and retention strategy.",
+          "deliverables": "Personas, customer journey, marketing plan"
+        },
+        "communication": {
+          "title": "Communication",
+          "description": "We structure your communication and create content that carries your message.",
+          "deliverables": "Editorial strategy, content, press relations"
+        },
+        "digitalMarketing": {
+          "title": "Digital Marketing",
+          "description": "We deploy and optimize your campaigns across all digital channels.",
+          "deliverables": "SEO, SEA, Social Ads, Email, Analytics"
+        },
+        "communityManagement": {
+          "title": "Community Management",
+          "description": "We animate your communities and manage your social media presence.",
+          "deliverables": "Editorial calendar, content, moderation, reporting"
+        }
+      },
+      "teamTitle": "Practitioners, not theorists",
+      "teamDescription": "Senior consultants, project managers, marketing and communication experts — a team that has lived transformations from the inside. We've supported SMBs and large corporations in their strategic projects.",
+      "processTitle": "Process",
+      "process": {
+        "listen": {
+          "step": "01",
+          "title": "Listen",
+          "description": "Understand your context, challenges, and ambitions"
+        },
+        "diagnose": {
+          "step": "02",
+          "title": "Diagnose",
+          "description": "Analyze your situation and identify opportunities"
+        },
+        "plan": {
+          "step": "03",
+          "title": "Plan",
+          "description": "Build the strategy and prioritize actions"
+        },
+        "execute": {
+          "step": "04",
+          "title": "Execute",
+          "description": "Deploy actions and manage projects"
+        },
+        "measure": {
+          "step": "05",
+          "title": "Measure",
+          "description": "Track results and continuously optimize"
+        }
+      },
+      "ctaTitle": "Ready to take action?",
+      "ctaDescription": "Let's discuss your challenges and build the strategy that will make the difference.",
+      "ctaButton1": "Book a strategy call",
+      "ctaButton2": "See our case studies"
+    },
+    "aiLab": {
+      "badge": "LAB",
+      "heroTitle": "Code that",
+      "heroTitleHighlight": "delivers.",
+      "heroSubtitle": "Development & Technology",
+      "heroDescription": "We build the digital solutions that power your business. Mobile applications, web platforms, integrations, automation — a team of senior developers who deliver clean code and products that work.",
+      "clientNeeds": {
+        "items": [
+          "You need a mobile application for iOS and/or Android",
+          "You want a custom web platform for your business",
+          "You're looking to automate repetitive processes",
+          "You need to integrate your tools together"
+        ]
+      },
+      "approachTitle": "Pragmatic engineering",
+      "approachDescription": "We don't build technology for technology's sake. Every line of code is designed to solve a real problem and create value. Our team combines sharp technical expertise with business understanding. We speak your language, not just the machines'.",
+      "expertiseTitle": "What we build",
+      "expertise": {
+        "mobileApps": {
+          "title": "Mobile Applications",
+          "description": "We develop native and cross-platform apps with exceptional UX.",
+          "technologies": "iOS, Android, React Native, Flutter"
+        },
+        "webApps": {
+          "title": "Web Applications",
+          "description": "We build robust and scalable web platforms tailored to your needs.",
+          "technologies": "React, Node.js, Python, PostgreSQL"
+        },
+        "ecommerce": {
+          "title": "E-commerce",
+          "description": "We create high-performing online stores that convert.",
+          "technologies": "Shopify, WooCommerce, custom solutions"
+        },
+        "integrations": {
+          "title": "Integrations & APIs",
+          "description": "We connect your tools — CRM, ERP, business tools — for a seamless ecosystem.",
+          "technologies": "REST, GraphQL, webhooks, middleware"
+        },
+        "automation": {
+          "title": "Automation",
+          "description": "We automate your repetitive tasks to free up your team's time.",
+          "technologies": "Zapier, Make, n8n, custom scripts"
+        },
+        "data": {
+          "title": "Data & Analytics",
+          "description": "We structure your data and create dashboards to drive your business.",
+          "technologies": "SQL, ETL, BI tools, data pipelines"
+        }
+      },
+      "teamTitle": "Developers, not salespeople",
+      "teamDescription": "Full-stack developers, mobile engineers, data engineers, DevOps — a senior technical team that codes, tests, and delivers. We've built products for startups and large enterprises alike.",
+      "processTitle": "Process",
+      "process": {
+        "scoping": {
+          "step": "01",
+          "title": "Scoping",
+          "description": "Understand the need, define scope and constraints"
+        },
+        "prototype": {
+          "step": "02",
+          "title": "Prototype",
+          "description": "Validate quickly with an MVP or POC"
         },
         "development": {
           "step": "03",
-          "title": "Development & Integration",
-          "description": "Iterative development with continuous integration into your existing systems, rigorous testing, and complete documentation."
+          "title": "Development",
+          "description": "Build in sprints with regular deliverables"
         },
         "deployment": {
           "step": "04",
-          "title": "Deployment & Optimization",
-          "description": "Production deployment with monitoring, performance optimization, and training for your technical teams."
+          "title": "Deployment",
+          "description": "Launch to production and train users"
         },
-        "support": {
+        "evolution": {
           "step": "05",
-          "title": "Support & Evolution",
-          "description": "Continuous technical support, proactive maintenance, and solution evolution according to your changing needs."
+          "title": "Evolution",
+          "description": "Maintain, optimize, and evolve"
         }
       },
-      "ctaTitle": "Ready to build your AI infrastructure?",
-      "ctaDescription": "Let's discuss your technical needs and design the solution tailored to your ambitions together.",
-      "ctaButton1": "Schedule a Technical Consultation",
-      "ctaButton2": "View Our Work"
+      "ctaTitle": "Got a project to build?",
+      "ctaDescription": "Let's discuss your idea and build the right solution together.",
+      "ctaButton1": "Talk to a developer",
+      "ctaButton2": "See our work"
     }
   }
 }

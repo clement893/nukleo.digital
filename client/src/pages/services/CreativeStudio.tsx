@@ -8,26 +8,13 @@ import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export default function CreativeStudioService() {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
   
   // Helper to get array translations
   const getArrayTranslation = (key: string): string[] => {
-    try {
-      const translations = require(`../../locales/${language}.json`);
-      const keys = key.split('.');
-      let value: any = translations.default || translations;
-      for (const k of keys) {
-        if (value && typeof value === 'object' && k in value) {
-          value = value[k];
-        } else {
-          return [];
-        }
-      }
-      return Array.isArray(value) ? value : [];
-    } catch {
-      return [];
-    }
+    const value = t(key, { returnObjects: true });
+    return Array.isArray(value) ? value : [];
   };
   return (
     <div className="min-h-screen bg-gradient-to-br from-[rgb(107,23,22)] via-[rgb(40,60,120)] to-[rgb(107,23,22)]">

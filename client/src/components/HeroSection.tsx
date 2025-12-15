@@ -101,7 +101,7 @@ function HeroSection() {
       <div className="container relative z-10 px-4 sm:px-6">
         <div className="flex items-center justify-center">
           {/* Main Title */}
-          <div className="max-w-5xl w-full">
+          <div className="max-w-5xl w-full overflow-hidden">
             {/* Main Heading */}
             <h1 
               className={`
@@ -109,19 +109,26 @@ function HeroSection() {
                   ? 'text-[2rem] sm:text-[3.5rem] md:text-[5rem] lg:text-[7rem] xl:text-[8rem]' 
                   : 'text-[2.25rem] sm:text-[4rem] md:text-[6rem] lg:text-[9rem] xl:text-[10rem]'
                 }
-                font-bold leading-[1.05] sm:leading-[1.1] tracking-tighter text-white mb-4 sm:mb-6 md:mb-8 italic
+                font-bold leading-[1.05] sm:leading-[1.1] tracking-tighter text-white mb-4 sm:mb-6 md:mb-8 italic break-words overflow-wrap-anywhere
               `}
               style={useMemo(() => ({
                 // Prevent layout shift by reserving space - responsive
                 minHeight: isMobile 
                   ? (language === 'fr' ? '2.5rem' : '2.75rem')
                   : (language === 'fr' ? '3rem' : '3.5rem'),
+                wordBreak: 'break-word',
+                overflowWrap: 'break-word',
+                maxWidth: '100%',
               }), [isMobile, language]) as React.CSSProperties}
             >
               {t('hero.title')}
               <br />
               <span 
-                className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent"
+                className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent break-words overflow-wrap-anywhere"
+                style={{
+                  wordBreak: 'break-word',
+                  overflowWrap: 'break-word',
+                }}
               >
                 {t('hero.titleHighlight')}
               </span>

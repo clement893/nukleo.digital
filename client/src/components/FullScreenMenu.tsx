@@ -24,7 +24,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
   };
   
   const allNavItems = useMemo(() => [
-    { number: '01', label: t('nav.expertise'), path: '/expertise' },
+    { number: '01', label: t('nav.services'), path: '/services' },
     { number: '02', label: t('nav.projects'), path: '/projects' },
     { number: '03', label: t('nav.about'), path: '/about' },
     { number: '04', label: t('nav.resources'), path: '/resources' },

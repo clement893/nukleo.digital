@@ -700,7 +700,32 @@
     "all": "Tout",
     "articlesLabel": "Articles",
     "guides": "Guides",
-    "tools": "Outils",
+    "tools": {
+      "sectionLabel": "Outils Interactifs",
+      "title": "Explorez Nos Outils IA",
+      "description": "Outils de diagnostic et de recherche gratuits pour accélérer votre parcours de transformation IA",
+      "aiReadiness": {
+        "badge": "Outil de Diagnostic",
+        "title": "Évaluation de Préparation IA",
+        "description": "Découvrez où vous en êtes dans votre parcours de transformation IA. Obtenez des insights personnalisés sur 6 dimensions clés avec des résultats instantanés.",
+        "tags": ["20 Questions", "5 Niveaux de Maturité", "Résultats Instantanés"],
+        "buttonText": "Commencer l'Évaluation"
+      },
+      "radar": {
+        "badge": "Outil de Recherche",
+        "title": "Radar des Tendances IA",
+        "description": "Explorez notre radar interactif des technologies IA émergentes et établies. Mises à jour mensuelles pour guider vos décisions d'investissement.",
+        "tags": ["10+ Technologies", "Mises à Jour Mensuelles", "Carte Interactive"],
+        "buttonText": "Explorer le Radar"
+      },
+      "aiGlossary": {
+        "badge": "Base de Connaissances",
+        "title": "Glossaire IA",
+        "description": "Guide complet de la terminologie IA avec définitions essentielles, catégories et niveaux d'importance. Parfait pour comprendre les concepts clés de l'IA.",
+        "tags": ["Termes essentiels", "Par catégorie", "Recherchable"],
+        "buttonText": "Parcourir le Glossaire"
+      }
+    },
     "readMore": "Lire la suite",
     "filter": {
       "label": "Filtrer par :",

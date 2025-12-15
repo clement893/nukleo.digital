@@ -98,7 +98,13 @@
   },
   "home": {
     "beyondAI": "Beyond AI",
-    "beyondAIDescription": "We craft complete digital ecosystems from strategy and platforms to creative content and intelligent automation."
+    "beyondAIDescription": "We craft complete digital ecosystems from strategy and platforms to creative content and intelligent automation.",
+    "team": {
+      "sectionLabel": "OUR TEAM",
+      "title": "Meet Our Team",
+      "description": "Passionate experts who transform your vision into reality.",
+      "cta": "See Full Team"
+    }
   },
   "capabilities": {
     "sectionLabel": "Capabilities",

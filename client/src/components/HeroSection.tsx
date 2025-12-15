@@ -96,12 +96,12 @@ function HeroSection() {
   }, [isMobile]);
   
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20" style={{ paddingLeft: 'clamp(1rem, 4vw, 4rem)', paddingRight: 'clamp(1rem, 8vw, 12rem)', overflowX: 'visible' }}>
+    <section className="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 px-4 sm:px-6 lg:px-8">
 
-      <div className="relative z-10 w-full" style={{ maxWidth: '100%', overflow: 'visible' }}>
-        <div className="flex items-center justify-start w-full">
+      <div className="container relative z-10 px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-center">
           {/* Main Title */}
-          <div className="w-full" style={{ overflow: 'visible', maxWidth: '100%', paddingRight: '0' }}>
+          <div className="max-w-6xl lg:max-w-7xl xl:max-w-[90%] w-full">
             {/* Main Heading */}
             <h1 
               className={`
@@ -109,35 +109,19 @@ function HeroSection() {
                   ? 'text-[2rem] sm:text-[3.5rem] md:text-[5rem] lg:text-[7rem] xl:text-[8rem]' 
                   : 'text-[2.25rem] sm:text-[4rem] md:text-[6rem] lg:text-[9rem] xl:text-[10rem]'
                 }
-                font-bold leading-[1.05] sm:leading-[1.1] tracking-tighter text-white mb-4 sm:mb-6 md:mb-8 italic
+                font-bold leading-[1.05] sm:leading-[1.1] tracking-tighter text-white mb-4 sm:mb-6 md:mb-8 italic pr-4 sm:pr-8 md:pr-12 lg:pr-16 xl:pr-20
               `}
               style={useMemo(() => ({
                 // Prevent layout shift by reserving space - responsive
                 minHeight: isMobile 
                   ? (language === 'fr' ? '2.5rem' : '2.75rem')
                   : (language === 'fr' ? '3rem' : '3.5rem'),
-                overflowWrap: 'normal',
-                wordBreak: 'normal',
-                paddingRight: isMobile 
-                  ? '3rem' 
-                  : language === 'fr' 
-                    ? 'clamp(6rem, 15vw, 12rem)' 
-                    : 'clamp(8rem, 18vw, 15rem)',
-                width: '100%',
-                maxWidth: '100%',
-                boxSizing: 'border-box',
-                display: 'block',
               }), [isMobile, language]) as React.CSSProperties}
             >
               {t('hero.title')}
               <br />
               <span 
-                className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent inline-block"
-                style={{
-                  overflowWrap: 'normal',
-                  wordBreak: 'normal',
-                  maxWidth: '100%',
-                }}
+                className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent"
               >
                 {t('hero.titleHighlight')}
               </span>

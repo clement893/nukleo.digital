@@ -64,7 +64,7 @@ export function FloatingLanguageToggle() {
           backdrop-blur-md
           ${
             isOnWhiteBackground
-              ? 'bg-gray-900/10 border-gray-900/20 text-gray-900 hover:bg-gray-900/20 hover:border-gray-900/30'
+              ? 'bg-white/10 border-gray-900/20 text-gray-900 hover:bg-gray-900/20 hover:border-gray-900/30'
               : 'bg-white/10 border-white/20 text-white hover:bg-white/20 hover:border-white/30'
           }
         `}

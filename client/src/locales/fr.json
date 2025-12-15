@@ -457,83 +457,116 @@
     "subtitle": "Nous sommes à vos côtés pour vous aider à grandir.",
     "description": "Services IA complets : Stratégie & Marketing, Plateformes Numériques, Opérations Intelligentes.",
     "ourServices": "Nos Services",
-    "heroTitle": "Nous sommes à vos côtés",
-    "heroSubtitle": "pour vous aider à grandir.",
-    "heroDescription": "Trois studios spécialisés travaillant en harmonie pour transformer votre vision en réalité. De la stratégie à la créativité, de l'innovation à l'exécution.",
-    "bureau": {
-      "category": "Le Bureau",
-      "subtitle": "Quartier général stratégique",
-      "description": "Votre quartier général stratégique. Ici, nous transformons les données en décisions, les insights en actions, et les opportunités en résultats mesurables.",
-      "services": {
-        "aiStrategy": {
-          "title": "Consultation en stratégie IA",
-          "description": "Définissez votre feuille de route IA avec des conseils d'experts sur la sélection de technologies, la planification de l'implémentation et l'optimisation du ROI."
-        },
-        "conversationalAI": {
-          "title": "IA conversationnelle",
-          "description": "Déployez des chatbots intelligents et des assistants virtuels qui comprennent le contexte, apprennent des interactions et offrent des expériences personnalisées."
-        },
-        "marketingAutomation": {
-          "title": "Automatisation marketing",
-          "description": "Automatisez vos flux de travail marketing avec des campagnes alimentées par l'IA, le scoring de leads et la livraison de contenu personnalisé."
-        },
-        "predictiveAnalytics": {
-          "title": "Analytique prédictive",
-          "description": "Tirez parti de l'IA pour prévoir les tendances, prédire le comportement des clients et prendre des décisions basées sur les données en toute confiance."
-        }
-      }
-    },
+    "heroTitle": "Trois expertises,",
+    "heroSubtitle": "une vision.",
+    "heroSubtitleGradient": "Lab · Studio · Bureau",
+    "heroDescription": "Développement, création, stratégie — trois équipes complémentaires pour accompagner votre transformation digitale de A à Z. Choisissez l'expertise dont vous avez besoin, ou combinez-les pour un projet complet.",
     "lab": {
-      "category": "Le Lab",
-      "subtitle": "Laboratoire d'innovation",
-      "description": "Bienvenue dans notre laboratoire d'innovation. Ici, nous transformons les technologies de pointe en avantages concurrentiels tangibles.",
+      "category": "The Lab",
+      "number": "01",
+      "tagline": "Développement & Technologie",
+      "description": "Notre équipe de développeurs construit les solutions digitales qui font tourner votre business. Applications mobiles, plateformes web, intégrations, automatisation.",
       "services": {
-        "customWebApps": {
-          "title": "Applications web sur mesure",
-          "description": "Développez des plateformes web sur mesure avec des fonctionnalités alimentées par l'IA, la collaboration en temps réel et des intégrations transparentes."
+        "mobileApps": {
+          "title": "Applications Mobiles",
+          "description": "Apps iOS, Android et cross-platform avec une UX exceptionnelle"
         },
-        "apiDevelopment": {
-          "title": "Développement & intégration d'API",
-          "description": "Créez des API robustes et intégrez des services tiers pour construire des écosystèmes connectés et intelligents."
+        "webApps": {
+          "title": "Applications Web",
+          "description": "Plateformes web robustes et scalables sur mesure"
         },
-        "uxDesign": {
-          "title": "Design d'expérience utilisateur",
-          "description": "Concevez des interfaces intuitives qui combinent le design centré sur l'humain avec la personnalisation alimentée par l'IA."
+        "integrations": {
+          "title": "Intégrations & APIs",
+          "description": "Connexion de vos outils pour un écosystème fluide"
         },
-        "security": {
-          "title": "Sécurité & conformité",
-          "description": "Implémentez une sécurité de niveau entreprise, des contrôles de confidentialité des données et des cadres de conformité pour vos plateformes numériques."
+        "automation": {
+          "title": "Automatisation",
+          "description": "Automatisation des tâches répétitives pour gagner du temps"
         }
-      }
+      },
+      "cta": "Explorer le Lab"
     },
     "studio": {
-      "category": "Le Studio",
-      "subtitle": "Atelier créatif",
-      "description": "Bienvenue dans l'atelier où les idées deviennent réalité. Notre Studio Créatif fusionne stratégie et créativité pour créer des expériences de marque captivantes.",
+      "category": "The Studio",
+      "number": "02",
+      "tagline": "Design & Création",
+      "description": "Nos créatifs donnent vie à vos idées. Branding, UX/UI, direction artistique, campagnes visuelles — des expériences de marque qui marquent les esprits.",
       "services": {
-        "brandIdentity": {
-          "title": "Identité de marque & stratégie",
-          "description": "Créez des identités de marque convaincantes qui résonnent avec votre audience et vous différencient sur le marché."
+        "branding": {
+          "title": "Branding & Identité",
+          "description": "Logos, chartes graphiques et univers de marque mémorables"
         },
         "uiuxDesign": {
-          "title": "Design UI/UX",
-          "description": "Concevez des interfaces époustouflantes qui allient esthétique et fonctionnalité, créant des expériences que les utilisateurs adorent."
+          "title": "UX/UI Design",
+          "description": "Interfaces intuitives qui transforment les visiteurs en clients"
         },
-        "contentCreation": {
-          "title": "Création de contenu",
-          "description": "Produisez du contenu visuel et écrit à fort impact qui raconte votre histoire et stimule l'engagement."
+        "artDirection": {
+          "title": "Direction Artistique",
+          "description": "Concepts créatifs et cohérence visuelle sur tous vos supports"
         },
-        "campaignDesign": {
-          "title": "Design de campagne",
-          "description": "Concevez des campagnes marketing intégrées qui captent l'attention et livrent des résultats mesurables."
+        "campaigns": {
+          "title": "Campagnes & Motion",
+          "description": "Visuels de campagne et animations qui captent l'attention"
+        }
+      },
+      "cta": "Explorer le Studio"
+    },
+    "bureau": {
+      "category": "The Bureau",
+      "number": "03",
+      "tagline": "Stratégie & Marketing",
+      "description": "Nos stratèges pilotent votre transformation et orchestrent votre communication. Stratégie digitale, marketing, communication — de la vision à l'exécution.",
+      "services": {
+        "digitalStrategy": {
+          "title": "Stratégie Digitale",
+          "description": "Vision claire et feuille de route actionnable"
+        },
+        "transformation": {
+          "title": "Transformation",
+          "description": "Accompagnement au changement et adoption des outils"
+        },
+        "digitalMarketing": {
+          "title": "Marketing Digital",
+          "description": "Acquisition, SEO, SEA, Social Ads et analytics"
+        },
+        "communication": {
+          "title": "Communication",
+          "description": "Stratégie éditoriale, contenus et community management"
+        }
+      },
+      "cta": "Explorer le Bureau"
+    },
+    "howItWorks": {
+      "title": "Une approche intégrée",
+      "description": "Nos trois équipes travaillent main dans la main. Selon votre projet, vous pouvez faire appel à une seule entité ou les combiner pour une solution complète.",
+      "combinations": {
+        "brandLaunch": {
+          "project": "Lancement de marque",
+          "teams": "Studio + Bureau",
+          "deliverables": "Identité visuelle + stratégie de lancement + campagne"
+        },
+        "mobileApp": {
+          "project": "Application mobile",
+          "teams": "Lab + Studio",
+          "deliverables": "Développement + UX/UI design"
+        },
+        "digitalOverhaul": {
+          "project": "Refonte digitale complète",
+          "teams": "Lab + Studio + Bureau",
+          "deliverables": "Nouvelle plateforme + nouveau branding + stratégie marketing"
+        },
+        "marketingCampaign": {
+          "project": "Campagne marketing",
+          "teams": "Studio + Bureau",
+          "deliverables": "Visuels + stratégie + déploiement"
         }
       }
     },
-    "explore": "Explorer",
     "cta": {
-      "title": "Prêt à commencer ?",
-      "description": "Discutons de la manière dont nos services IA peuvent transformer votre entreprise et accélérer votre croissance.",
-      "button": "Démarrer votre transformation"
+      "title": "Pas sûr de ce dont vous avez besoin ?",
+      "description": "Discutons de votre projet. Nous vous orienterons vers la bonne équipe — ou la bonne combinaison.",
+      "buttonPrimary": "Parler à un expert",
+      "buttonSecondary": "Voir nos réalisations"
     }
   },
   "projects": {

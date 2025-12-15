@@ -418,83 +418,116 @@
     "subtitle": "We are by your side to help you grow.",
     "description": "Comprehensive AI services: Strategy & Marketing, Digital Platforms, Intelligent Operations.",
     "ourServices": "Our Services",
-    "heroTitle": "We are by your side",
-    "heroSubtitle": "to help you grow.",
-    "heroDescription": "Three specialized studios working in harmony to transform your vision into reality. From strategy to creativity, from innovation to execution.",
-    "bureau": {
-      "category": "The Bureau",
-      "subtitle": "Strategic Headquarters",
-      "description": "Your strategic headquarters. Here, we transform data into decisions, insights into actions, and opportunities into measurable results.",
-      "services": {
-        "aiStrategy": {
-          "title": "AI Strategy Consulting",
-          "description": "Define your AI roadmap with expert guidance on technology selection, implementation planning, and ROI optimization."
-        },
-        "conversationalAI": {
-          "title": "Conversational AI",
-          "description": "Deploy intelligent chatbots and virtual assistants that understand context, learn from interactions, and deliver personalized experiences."
-        },
-        "marketingAutomation": {
-          "title": "Marketing Automation",
-          "description": "Automatize your marketing workflows with AI-powered campaigns, lead scoring, and personalized content delivery."
-        },
-        "predictiveAnalytics": {
-          "title": "Predictive Analytics",
-          "description": "Leverage AI to forecast trends, predict customer behavior, and make data-driven decisions with confidence."
-        }
-      }
-    },
+    "heroTitle": "Three expertise,",
+    "heroSubtitle": "one vision.",
+    "heroSubtitleGradient": "Lab · Studio · Bureau",
+    "heroDescription": "Development, creation, strategy — three complementary teams to support your digital transformation from A to Z. Choose the expertise you need, or combine them for a complete project.",
     "lab": {
       "category": "The Lab",
-      "subtitle": "Innovation Laboratory",
-      "description": "Welcome to our innovation laboratory. Here, we transform cutting-edge technologies into tangible competitive advantages.",
+      "number": "01",
+      "tagline": "Development & Technology",
+      "description": "Our team of developers builds the digital solutions that power your business. Mobile apps, web platforms, integrations, automation.",
       "services": {
-        "customWebApps": {
-          "title": "Custom Web Applications",
-          "description": "Develop bespoke web platforms with AI-powered features, real-time collaboration, and seamless integrations."
+        "mobileApps": {
+          "title": "Mobile Applications",
+          "description": "iOS, Android and cross-platform apps with exceptional UX"
         },
-        "apiDevelopment": {
-          "title": "API Development & Integration",
-          "description": "Create robust APIs and integrate third-party services to build connected, intelligent ecosystems."
+        "webApps": {
+          "title": "Web Applications",
+          "description": "Robust and scalable custom web platforms"
         },
-        "uxDesign": {
-          "title": "User Experience Design",
-          "description": "Design intuitive interfaces that combine human-centered design with AI-driven personalization."
+        "integrations": {
+          "title": "Integrations & APIs",
+          "description": "Connect your tools for a seamless ecosystem"
         },
-        "security": {
-          "title": "Security & Compliance",
-          "description": "Implement enterprise-grade security, data privacy controls, and compliance frameworks for your digital platforms."
+        "automation": {
+          "title": "Automation",
+          "description": "Automate repetitive tasks to save time"
         }
-      }
+      },
+      "cta": "Explore the Lab"
     },
     "studio": {
       "category": "The Studio",
-      "subtitle": "Creative Workshop",
-      "description": "Welcome to the workshop where ideas become reality. Our Creative Studio fuses strategy and creativity to create brand experiences that captivate.",
+      "number": "02",
+      "tagline": "Design & Creation",
+      "description": "Our creatives bring your ideas to life. Branding, UX/UI, art direction, visual campaigns — brand experiences that make an impact.",
       "services": {
-        "brandIdentity": {
-          "title": "Brand Identity & Strategy",
-          "description": "Craft compelling brand identities that resonate with your audience and differentiate you in the market."
+        "branding": {
+          "title": "Branding & Identity",
+          "description": "Memorable logos, brand guidelines and brand universes"
         },
         "uiuxDesign": {
-          "title": "UI/UX Design",
-          "description": "Design stunning interfaces that blend aesthetics with functionality, creating experiences users love."
+          "title": "UX/UI Design",
+          "description": "Intuitive interfaces that turn visitors into customers"
         },
-        "contentCreation": {
-          "title": "Content Creation",
-          "description": "Produce high-impact visual and written content that tells your story and drives engagement."
+        "artDirection": {
+          "title": "Art Direction",
+          "description": "Creative concepts and visual consistency across all your media"
         },
-        "campaignDesign": {
-          "title": "Campaign Design",
-          "description": "Design integrated marketing campaigns that capture attention and deliver measurable results."
+        "campaigns": {
+          "title": "Campaigns & Motion",
+          "description": "Campaign visuals and animations that capture attention"
+        }
+      },
+      "cta": "Explore the Studio"
+    },
+    "bureau": {
+      "category": "The Bureau",
+      "number": "03",
+      "tagline": "Strategy & Marketing",
+      "description": "Our strategists drive your transformation and orchestrate your communication. Digital strategy, marketing, communication — from vision to execution.",
+      "services": {
+        "digitalStrategy": {
+          "title": "Digital Strategy",
+          "description": "Clear vision and actionable roadmap"
+        },
+        "transformation": {
+          "title": "Transformation",
+          "description": "Change management and tool adoption support"
+        },
+        "digitalMarketing": {
+          "title": "Digital Marketing",
+          "description": "Acquisition, SEO, SEA, Social Ads and analytics"
+        },
+        "communication": {
+          "title": "Communication",
+          "description": "Editorial strategy, content and community management"
+        }
+      },
+      "cta": "Explore the Bureau"
+    },
+    "howItWorks": {
+      "title": "An integrated approach",
+      "description": "Our three teams work hand in hand. Depending on your project, you can call on a single entity or combine them for a complete solution.",
+      "combinations": {
+        "brandLaunch": {
+          "project": "Brand launch",
+          "teams": "Studio + Bureau",
+          "deliverables": "Visual identity + launch strategy + campaign"
+        },
+        "mobileApp": {
+          "project": "Mobile application",
+          "teams": "Lab + Studio",
+          "deliverables": "Development + UX/UI design"
+        },
+        "digitalOverhaul": {
+          "project": "Complete digital overhaul",
+          "teams": "Lab + Studio + Bureau",
+          "deliverables": "New platform + new branding + marketing strategy"
+        },
+        "marketingCampaign": {
+          "project": "Marketing campaign",
+          "teams": "Studio + Bureau",
+          "deliverables": "Visuals + strategy + deployment"
         }
       }
     },
-    "explore": "Explore",
     "cta": {
-      "title": "Ready to Get Started?",
-      "description": "Let's discuss how our AI services can transform your business and accelerate your growth.",
-      "button": "Start Your Transformation"
+      "title": "Not sure what you need?",
+      "description": "Let's discuss your project. We'll guide you to the right team — or the right combination.",
+      "buttonPrimary": "Talk to an expert",
+      "buttonSecondary": "See our work"
     }
   },
   "startProject": {

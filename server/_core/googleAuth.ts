@@ -3,10 +3,11 @@ import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { ENV } from "./env";
 
 // Configure Google OAuth Strategy
-export function configureGoogleAuth() {
+// Returns true if Google Auth was successfully configured, false otherwise
+export function configureGoogleAuth(): boolean {
   if (!ENV.googleClientId || !ENV.googleClientSecret) {
     console.warn("[Google Auth] Missing credentials, Google OAuth disabled");
-    return;
+    return false;
   }
 
   const allowedEmails = ENV.adminAllowedEmails?.split(",").map((e) => e.trim().toLowerCase()) || [];
@@ -61,6 +62,7 @@ export function configureGoogleAuth() {
   });
 
   console.log("[Google Auth] Configured successfully");
+  return true;
 }
 
 // Middleware to check if user is authenticated admin

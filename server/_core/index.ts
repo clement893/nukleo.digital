@@ -169,20 +169,37 @@ async function startServer() {
   // Initialize Passport
   app.use(passport.initialize());
   app.use(passport.session());
-  configureGoogleAuth();
+  const googleAuthConfigured = configureGoogleAuth();
   
-  // Google OAuth routes
-  app.get('/api/auth/google', authLimiter, passport.authenticate('google', {
-    scope: ['profile', 'email'],
-  }));
-  
-  app.get('/api/auth/google/callback',
-    passport.authenticate('google', { failureRedirect: '/admin/login?error=unauthorized' }),
-    (req, res) => {
-      // Successful authentication, redirect to admin
-      res.redirect('/admin');
-    }
-  );
+  // Google OAuth routes - only register if Google Auth is configured
+  if (googleAuthConfigured) {
+    app.get('/api/auth/google', authLimiter, passport.authenticate('google', {
+      scope: ['profile', 'email'],
+    }));
+    
+    app.get('/api/auth/google/callback',
+      passport.authenticate('google', { failureRedirect: '/admin/login?error=unauthorized' }),
+      (req, res) => {
+        // Successful authentication, redirect to admin
+        res.redirect('/admin');
+      }
+    );
+  } else {
+    // Return helpful error if Google Auth is not configured
+    app.get('/api/auth/google', (req, res) => {
+      res.status(503).json({ 
+        error: 'Google OAuth is not configured',
+        message: 'Please set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables'
+      });
+    });
+    
+    app.get('/api/auth/google/callback', (req, res) => {
+      res.status(503).json({ 
+        error: 'Google OAuth is not configured',
+        message: 'Please set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables'
+      });
+    });
+  }
   
   // Logout route
   app.post('/api/auth/logout', (req, res) => {

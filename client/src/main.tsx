@@ -78,6 +78,11 @@ const root = createRoot(rootElement, {
   unstable_transitionCallbacks: undefined,
 });
 
+// Show body immediately when React starts rendering to prevent black screen
+if (!document.body.classList.contains('loaded')) {
+  document.body.classList.add('loaded');
+}
+
 // Render with automatic yielding - React 18+ handles this automatically
 // The concurrent root allows React to yield to browser during rendering
 root.render(

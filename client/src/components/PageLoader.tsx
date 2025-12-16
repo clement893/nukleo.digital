@@ -57,6 +57,14 @@ export default function PageLoader() {
     return isAdminArea || isContactPage || isManifestoPage;
   }, [location]);
 
+  // Show body immediately when component mounts to prevent black screen
+  useEffect(() => {
+    // Always show body when component mounts - don't wait for loaders
+    if (!document.body.classList.contains('loaded')) {
+      document.body.classList.add('loaded');
+    }
+  }, []);
+
   // If in admin area, contact page, or manifesto page, show body immediately and don't fetch loaders
   useEffect(() => {
     if (shouldSkipLoader) {
@@ -132,13 +140,13 @@ export default function PageLoader() {
     }
     
     if (isLoadingLoaders && !isMobile) {
-      // Add timeout - don't wait more than 3 seconds for loaders
+      // Add timeout - don't wait more than 1 second for loaders (reduced from 3s)
       // Use a separate effect to handle timeout cleanup
       const timeoutId = setTimeout(() => {
         setIsLoading(false);
         setIsFirstLoad(false);
         document.body.classList.add('loaded');
-      }, 3000);
+      }, 1000);
       
       // Return cleanup function
       return () => {
@@ -222,7 +230,8 @@ export default function PageLoader() {
 
       // Preload content while loader is showing
       // Use the loader time to prepare the page content
-      const minDisplayTime = 2000;
+      // Reduced minimum display time for faster loading
+      const minDisplayTime = 1000;
       const startTime = Date.now();
 
       // Preload critical resources during loader display
@@ -249,7 +258,7 @@ export default function PageLoader() {
         // Wait for minimum time AND page to be ready
         // Hero will be visible immediately when loader disappears
         // Also add maximum timeout to prevent infinite loading
-        const maxDisplayTime = 5000; // Maximum 5 seconds
+        const maxDisplayTime = 2000; // Maximum 2 seconds (reduced from 5s)
         const isReady = document.readyState === "complete" && elapsed >= minDisplayTime;
         const maxTimeReached = elapsed >= maxDisplayTime;
         

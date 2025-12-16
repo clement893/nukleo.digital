@@ -48,15 +48,16 @@ export async function setupVite(app: Express, server: Server) {
 }
 
 export function serveStatic(app: Express) {
-  const distPath =
-    process.env.NODE_ENV === "development"
-      ? path.resolve(import.meta.dirname, "../..", "dist", "public")
-      : path.resolve(import.meta.dirname, "public");
+  // Always use dist/public for production builds
+  const distPath = path.resolve(import.meta.dirname, "../..", "dist", "public");
   if (!fs.existsSync(distPath)) {
     console.error(
       `Could not find the build directory: ${distPath}, make sure to build the client first`
     );
+    return;
   }
+  
+  console.log(`[Static] Serving static files from: ${distPath}`);
 
   // Configure cache headers for different resource types
   // JavaScript and CSS files (with hash in filename) - cache forever
@@ -68,6 +69,10 @@ export function serveStatic(app: Express) {
     setHeaders: (res, filePath) => {
       res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
       res.setHeader('Vary', 'Accept-Encoding');
+      // Ensure proper Content-Type for JavaScript modules
+      if (filePath.endsWith('.js')) {
+        res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+      }
     }
   }));
 
@@ -114,6 +119,8 @@ export function serveStatic(app: Express) {
   }));
 
   // Static assets in root (images, favicons, etc.)
+  // This must come AFTER the specific /assets/js and /assets/css routes
+  // to avoid conflicts, but BEFORE the catch-all route
   app.use(express.static(distPath, {
     maxAge: '1y',
     immutable: false,
@@ -126,6 +133,10 @@ export function serveStatic(app: Express) {
       if (filePath.includes('/assets/') && (ext === '.js' || ext === '.css')) {
         res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
         res.setHeader('Vary', 'Accept-Encoding');
+        // Ensure proper Content-Type for JavaScript modules
+        if (ext === '.js') {
+          res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+        }
       }
       // Fonts - cache forever
       else if (ext === '.woff2' || ext === '.woff' || ext === '.ttf' || ext === '.otf' || ext === '.eot') {

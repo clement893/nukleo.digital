@@ -1,9 +1,10 @@
 import SEO from '@/components/SEO';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Shuffle, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import PageLayout from '@/components/PageLayout';
 import Breadcrumb from '@/components/Breadcrumb';
+import OptimizedImage from '@/components/OptimizedImage';
 
 // Liste des 51 images de la sélection Décembre 2025
 const projectImages = [
@@ -74,9 +75,50 @@ export default function Projects() {
   const [images, setImages] = useState(projectImages);
   const [isShuffling, setIsShuffling] = useState(false);
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+  const [visibleImages, setVisibleImages] = useState<Set<number>>(new Set());
+  const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  // Intersection Observer pour charger les images seulement quand elles sont visibles
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+    
+    imageRefs.current.forEach((ref, index) => {
+      if (!ref) return;
+      
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setVisibleImages((prev) => new Set(prev).add(index));
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          rootMargin: '50px', // Commence à charger 50px avant que l'image soit visible
+          threshold: 0.01,
+        }
+      );
+      
+      observer.observe(ref);
+      observers.push(observer);
+    });
+
+    return () => {
+      observers.forEach((observer) => observer.disconnect());
+    };
+  }, [images]);
+
+  // Précharger les premières images visibles immédiatement
+  useEffect(() => {
+    const initialCount = Math.min(6, images.length); // Précharger les 6 premières images
+    const initialSet = new Set(Array.from({ length: initialCount }, (_, i) => i));
+    setVisibleImages(initialSet);
+  }, [images.length]);
 
   const handleShuffle = () => {
     setIsShuffling(true);
+    setVisibleImages(new Set()); // Réinitialiser les images visibles
     setTimeout(() => {
       setImages(shuffleArray(projectImages));
       setIsShuffling(false);
@@ -126,30 +168,60 @@ export default function Projects() {
             <div 
               className={`columns-1 sm:columns-2 lg:columns-3 gap-6 transition-opacity duration-300 ${isShuffling ? 'opacity-0' : 'opacity-100'}`}
             >
-              {images.map((image, index) => (
-                <div
-                  key={`${image}-${index}`}
-                  className="break-inside-avoid mb-6 group cursor-pointer"
-                  onClick={() => setLightboxImage(image)}
-                >
-                  <div className="relative overflow-hidden rounded-xl bg-white/5">
-                    <img
-                      src={`/projects/${image}`}
-                      alt={image.replace(/[-_]/g, ' ').replace(/\.(jpg|png|jpeg)$/i, '')}
-                      className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    {/* Hover Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute bottom-4 left-4 right-4">
-                        <p className="text-white text-sm font-medium truncate">
-                          {image.replace(/[-_]/g, ' ').replace(/\.(jpg|png|jpeg)$/i, '').replace(/\d+$/, '').trim()}
-                        </p>
-                      </div>
+              {images.map((image, index) => {
+                const isVisible = visibleImages.has(index);
+                const imageName = image.replace(/[-_]/g, ' ').replace(/\.(jpg|png|jpeg)$/i, '');
+                const imageAlt = imageName.replace(/\d+$/, '').trim();
+                
+                return (
+                  <div
+                    key={`${image}-${index}`}
+                    ref={(el) => {
+                      imageRefs.current[index] = el;
+                    }}
+                    className="break-inside-avoid mb-6 group cursor-pointer"
+                    onClick={() => setLightboxImage(image)}
+                    style={{ contentVisibility: 'auto' }}
+                  >
+                    <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-white/5 to-white/10">
+                      {/* Placeholder avec blur pendant le chargement */}
+                      {!isVisible && (
+                        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 to-blue-900/20 animate-pulse" />
+                      )}
+                      
+                      {/* Image optimisée */}
+                      {isVisible ? (
+                        <OptimizedImage
+                          src={`/projects/${image}`}
+                          alt={imageAlt}
+                          className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+                          loading={index < 6 ? 'eager' : 'lazy'}
+                          fetchPriority={index < 3 ? 'high' : 'low'}
+                          decoding="async"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        />
+                      ) : (
+                        // Placeholder avec dimensions pour éviter le CLS
+                        <div 
+                          className="w-full aspect-[4/3] bg-gradient-to-br from-purple-900/20 to-blue-900/20"
+                          aria-hidden="true"
+                        />
+                      )}
+                      
+                      {/* Hover Overlay */}
+                      {isVisible && (
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                          <div className="absolute bottom-4 left-4 right-4">
+                            <p className="text-white text-sm font-medium truncate">
+                              {imageAlt}
+                            </p>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
@@ -192,10 +264,12 @@ export default function Projects() {
           >
             <X className="w-8 h-8" />
           </button>
-          <img
+          <OptimizedImage
             src={`/projects/${lightboxImage}`}
-            alt={lightboxImage}
+            alt={lightboxImage.replace(/[-_]/g, ' ').replace(/\.(jpg|png|jpeg)$/i, '')}
             className="max-w-full max-h-[90vh] object-contain rounded-lg"
+            loading="eager"
+            fetchPriority="high"
             onClick={(e) => e.stopPropagation()}
           />
         </div>

@@ -30,16 +30,20 @@ async function listImages() {
     if (existsSync(PROJECTS_IMAGES_DIR)) {
       try {
         const files = await fs.readdir(PROJECTS_IMAGES_DIR);
+        console.log(`[ProjectsImages] Found ${files.length} files in upload directory: ${PROJECTS_IMAGES_DIR}`);
         files.forEach(file => filesSet.add(file));
       } catch (error) {
         console.error("[ProjectsImages] Error reading upload directory:", error);
       }
+    } else {
+      console.log(`[ProjectsImages] Upload directory does not exist: ${PROJECTS_IMAGES_DIR}`);
     }
     
     // In production, also read from dist directory
     if (process.env.NODE_ENV === "production" && existsSync(DIST_PROJECTS_IMAGES_DIR)) {
       try {
         const distFiles = await fs.readdir(DIST_PROJECTS_IMAGES_DIR);
+        console.log(`[ProjectsImages] Found ${distFiles.length} files in dist directory: ${DIST_PROJECTS_IMAGES_DIR}`);
         distFiles.forEach(file => filesSet.add(file));
       } catch (error) {
         console.error("[ProjectsImages] Error reading dist directory:", error);
@@ -49,6 +53,8 @@ async function listImages() {
     const imageFiles = Array.from(filesSet).filter(
       (file) => /\.(jpg|jpeg|png|gif|webp)$/i.test(file)
     );
+    
+    console.log(`[ProjectsImages] Total image files found: ${imageFiles.length}`);
     
     const imagesWithStats = await Promise.all(
       imageFiles.map(async (file) => {
@@ -87,9 +93,14 @@ async function listImages() {
     // Filter out null values (files that don't exist)
     const validImages = imagesWithStats.filter((img): img is NonNullable<typeof img> => img !== null);
     
-    return validImages.sort((a, b) => 
+    console.log(`[ProjectsImages] Valid images after filtering: ${validImages.length}`);
+    
+    const sorted = validImages.sort((a, b) => 
       b.modified.getTime() - a.modified.getTime()
     );
+    
+    console.log(`[ProjectsImages] Returning ${sorted.length} images`);
+    return sorted;
   } catch (error) {
     console.error("[ProjectsImages] Error listing images:", error);
     return [];

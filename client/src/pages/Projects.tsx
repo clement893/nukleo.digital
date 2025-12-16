@@ -87,17 +87,32 @@ export default function Projects() {
   
   // Update images when API data loads
   useEffect(() => {
+    console.log('[Projects] API state:', { 
+      uploadedImages, 
+      isLoadingImages, 
+      imagesError,
+      count: uploadedImages?.length 
+    });
+    
     if (uploadedImages) {
       if (uploadedImages.length > 0) {
         // Use images from API
-        setImages(uploadedImages.map(img => img.name));
+        const imageNames = uploadedImages.map(img => img.name);
+        console.log('[Projects] Setting images:', imageNames);
+        setImages(imageNames);
       } else {
         // API returned empty array - no images available
+        console.log('[Projects] API returned empty array');
         setImages([]);
       }
     } else if (!isLoadingImages && !imagesError) {
       // API hasn't loaded yet, keep empty
+      console.log('[Projects] API not loaded yet');
       setImages([]);
+    }
+    
+    if (imagesError) {
+      console.error('[Projects] API error:', imagesError);
     }
   }, [uploadedImages, isLoadingImages, imagesError]);
 

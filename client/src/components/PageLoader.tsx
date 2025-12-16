@@ -71,14 +71,17 @@ export default function PageLoader() {
   // Use lower priority on mobile to improve initial load
   const isMobile = useIsMobile(768);
   
-  const { data: activeLoaders, isLoading: isLoadingLoaders } = trpc.loaders.getActive.useQuery(undefined, {
+  const { data: activeLoaders, isLoading: isLoadingLoaders, error: loadersError } = trpc.loaders.getActive.useQuery(undefined, {
     staleTime: 5 * 60 * 1000, // Cache for 5 minutes
     refetchOnWindowFocus: false,
     enabled: !shouldSkipLoader && !isMobile, // Skip loader fetch on mobile for better performance
     // Reduce timeout on mobile for faster fallback
-    retry: isMobile ? 0 : 3,
-    // Reduce timeout on mobile
+    retry: isMobile ? 0 : 1, // Reduce retries to fail faster
+    // Reduce timeout - fail fast if API is slow
     gcTime: isMobile ? 0 : 5 * 60 * 1000,
+    // Add timeout to fail fast if API doesn't respond
+    refetchOnMount: false,
+    refetchOnReconnect: false,
   });
 
   // Preload resources as soon as component mounts
@@ -119,7 +122,30 @@ export default function PageLoader() {
 
     // Wait for loaders to be fetched (only on first load)
     // On mobile, skip loader wait for faster initial render
-    if (isLoadingLoaders && !isMobile) return;
+    // Also skip if there's an error loading loaders
+    if (loadersError) {
+      // If error loading loaders, show content immediately
+      setIsLoading(false);
+      setIsFirstLoad(false);
+      document.body.classList.add('loaded');
+      return;
+    }
+    
+    if (isLoadingLoaders && !isMobile) {
+      // Add timeout - don't wait more than 3 seconds for loaders
+      // Use a separate effect to handle timeout cleanup
+      const timeoutId = setTimeout(() => {
+        setIsLoading(false);
+        setIsFirstLoad(false);
+        document.body.classList.add('loaded');
+      }, 3000);
+      
+      // Return cleanup function
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }
+    
     if (isLoadingLoaders && isMobile) {
       // On mobile, show content immediately without waiting for loader
       setIsLoading(false);
@@ -222,9 +248,12 @@ export default function PageLoader() {
         const elapsed = Date.now() - startTime;
         // Wait for minimum time AND page to be ready
         // Hero will be visible immediately when loader disappears
+        // Also add maximum timeout to prevent infinite loading
+        const maxDisplayTime = 5000; // Maximum 5 seconds
         const isReady = document.readyState === "complete" && elapsed >= minDisplayTime;
+        const maxTimeReached = elapsed >= maxDisplayTime;
         
-        if (isReady) {
+        if (isReady || maxTimeReached) {
           setIsLoading(false);
           setIsFirstLoad(false);
           // Show body content immediately - hero should be visible without animations
@@ -265,7 +294,7 @@ export default function PageLoader() {
       setIsLoading(false);
       setLoaderHtml(null);
     };
-  }, [activeLoaders, isLoadingLoaders, shouldSkipLoader, location, isFirstLoad]);
+  }, [activeLoaders, isLoadingLoaders, loadersError, shouldSkipLoader, location, isFirstLoad]);
 
   // Don't show loader in admin area, contact page, or manifesto page
   if (shouldSkipLoader) {
@@ -274,22 +303,32 @@ export default function PageLoader() {
 
   // Don't show loader if not loading (e.g., during page transitions)
   if (!isLoading) {
+    // Ensure body is visible when loader is not showing
+    if (!document.body.classList.contains('loaded')) {
+      document.body.classList.add('loaded');
+    }
     return null;
   }
 
   // Don't show anything if no loaders are active
   if (!isLoadingLoaders && (!activeLoaders || activeLoaders.length === 0)) {
+    // Ensure body is visible when no loaders
+    if (!document.body.classList.contains('loaded')) {
+      document.body.classList.add('loaded');
+    }
     return null;
   }
 
   // Show loader container
   if (!loaderHtml) {
-    // Still loading loaders, show black background matching pages
+    // Still loading loaders, show gradient background matching pages
+    // Don't use pure black to match site theme
     return (
       <div
         className="fixed inset-0 z-[9999]"
         style={{
-          backgroundColor: '#0a0a0a',
+          background: 'linear-gradient(135deg, #1e3a8a 0%, #3730a3 20%, #5b21b6 35%, #7c3aed 50%, #6d28d9 65%, #7f1d1d 85%, #991b1b 100%)',
+          backgroundAttachment: 'fixed',
           opacity: 1,
           pointerEvents: "all",
         }}

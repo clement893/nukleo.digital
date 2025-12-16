@@ -86,7 +86,6 @@
         margin: 0; 
         padding: 0; 
         height: 100%;
-        visibility: visible; 
         /* Fond gradient par défaut - optimized */
         background: linear-gradient(
           135deg,
@@ -102,7 +101,25 @@
         /* Prevent layout shift */
         overflow-x: hidden;
       }
-      body.loaded { visibility: visible; }
+      /* Hide body initially to prevent FOUC, but show after short delay */
+      /* This ensures content appears even if JavaScript fails */
+      body {
+        visibility: hidden;
+      }
+      /* Show body content after a short delay to prevent black screen */
+      /* Fallback: show content after 3 seconds even if loader doesn't finish */
+      @keyframes showContent {
+        from { visibility: hidden; }
+        to { visibility: visible; }
+      }
+      body {
+        animation: showContent 0s 3s forwards;
+      }
+      /* When loaded class is added, show immediately */
+      body.loaded {
+        animation: none;
+        visibility: visible !important;
+      }
       #nukleo-arrow-inline { display: none !important; }
       /* Show loader immediately if present - override body visibility */
       #root > div > div[style*="z-[9999]"],

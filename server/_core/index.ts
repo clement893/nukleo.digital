@@ -449,37 +449,48 @@ async function startServer() {
   // Serve uploaded project images from client/public/projects (works in both dev and prod)
   // This must be BEFORE serveStatic to ensure uploaded images are accessible
   const projectsImagesPath = path.resolve(process.cwd(), "client", "public", "projects");
-  if (existsSync(projectsImagesPath)) {
-    app.use('/projects', express.static(projectsImagesPath, {
-      maxAge: '1y',
-      immutable: false, // Images might be updated
-      etag: true,
-      lastModified: true,
-      setHeaders: (res, filePath) => {
-        res.setHeader('Cache-Control', 'public, max-age=31536000, stale-while-revalidate=86400');
-        res.setHeader('Vary', 'Accept');
-      }
-    }));
-    console.log(`[Static] Serving project images from: ${projectsImagesPath}`);
-  } else {
-    // Ensure directory exists
+  
+  // Ensure directory exists
+  if (!existsSync(projectsImagesPath)) {
     try {
       mkdirSync(projectsImagesPath, { recursive: true });
-      app.use('/projects', express.static(projectsImagesPath, {
-        maxAge: '1y',
-        immutable: false,
-        etag: true,
-        lastModified: true,
-        setHeaders: (res, filePath) => {
-          res.setHeader('Cache-Control', 'public, max-age=31536000, stale-while-revalidate=86400');
-          res.setHeader('Vary', 'Accept');
-        }
-      }));
-      console.log(`[Static] Created and serving project images from: ${projectsImagesPath}`);
+      console.log(`[Static] Created projects directory: ${projectsImagesPath}`);
     } catch (error) {
       console.error(`[Static] Failed to create projects directory: ${projectsImagesPath}`, error);
     }
   }
+  
+  // Always set up the static middleware, even if directory doesn't exist yet
+  app.use('/projects', express.static(projectsImagesPath, {
+    maxAge: '1y',
+    immutable: false, // Images might be updated
+    etag: true,
+    lastModified: true,
+    setHeaders: (res, filePath) => {
+      res.setHeader('Cache-Control', 'public, max-age=31536000, stale-while-revalidate=86400');
+      res.setHeader('Vary', 'Accept');
+    },
+    fallthrough: false, // Don't fall through to next middleware if file not found
+  }));
+  console.log(`[Static] Serving project images from: ${projectsImagesPath}`);
+  
+  // Debug endpoint to list files in projects directory
+  app.get('/api/debug/projects-images', requireAdminAuth, async (req, res) => {
+    try {
+      const files = await fs.readdir(projectsImagesPath);
+      const imageFiles = files.filter(
+        (file) => /\.(jpg|jpeg|png|gif|webp)$/i.test(file)
+      );
+      res.json({
+        path: projectsImagesPath,
+        exists: existsSync(projectsImagesPath),
+        files: imageFiles,
+        total: imageFiles.length,
+      });
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  });
   
   // development mode uses Vite, production mode uses static files
   // IMPORTANT: serveStatic must be AFTER API routes to ensure API endpoints work
@@ -504,9 +515,11 @@ async function startServer() {
     const distPath = path.resolve(process.cwd(), "dist", "public");
     app.get('*', (req, res) => {
       // Skip asset requests that weren't found
+      // IMPORTANT: Also skip /projects/ to allow uploaded images to be served
       if (req.path.startsWith('/assets/') || 
           req.path.startsWith('/fonts/') || 
           req.path.startsWith('/images/') ||
+          req.path.startsWith('/projects/') ||
           req.path.match(/\.(js|css|woff2?|eot|ttf|otf|png|jpg|jpeg|gif|svg|ico|webp)$/i)) {
         return res.status(404).send('File not found');
       }

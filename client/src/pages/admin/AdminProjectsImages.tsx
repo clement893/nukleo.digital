@@ -43,8 +43,15 @@ export default function AdminProjectsImages() {
         });
 
         if (!response.ok) {
-          const error = await response.json().catch(() => ({ error: 'Upload failed' }));
-          throw new Error(error.error || 'Upload failed');
+          const errorText = await response.text();
+          let error;
+          try {
+            error = JSON.parse(errorText);
+          } catch {
+            error = { error: errorText || 'Upload failed' };
+          }
+          console.error('[Upload] Error response:', response.status, error);
+          throw new Error(error.error || `Upload failed (${response.status})`);
         }
 
         const result = await response.json();

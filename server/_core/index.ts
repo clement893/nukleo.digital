@@ -489,12 +489,22 @@ async function startServer() {
   }
   
   // Serve uploaded project images AFTER serveStatic to ensure it takes precedence
-  // This is important because serveStatic might have its own /projects route
+  // Handle /projects/ route - serve images if file exists, otherwise let SPA handle it
   app.use('/projects', (req, res, next) => {
+    // If it's exactly /projects or /projects/, let SPA handle it
+    if (req.path === '/' || req.path === '') {
+      return next();
+    }
+    
     const requestedFile = req.path.replace(/^\//, '');
     
-    // Skip if no file requested or if it's a directory request
-    if (!requestedFile || requestedFile === '' || requestedFile.endsWith('/')) {
+    // Skip if it's a directory request (ends with /)
+    if (requestedFile.endsWith('/')) {
+      return next();
+    }
+    
+    // Only handle image files
+    if (!/\.(png|jpg|jpeg|gif|webp)$/i.test(requestedFile)) {
       return next();
     }
     
@@ -540,20 +550,10 @@ async function startServer() {
     }
     
     console.log(`[Projects] ✗ File not found: ${filePath}`);
-    next();
+    // Don't call next() here - return 404 for missing image files
+    return res.status(404).send('Image not found');
   });
   
-  // Also set up express.static as fallback
-  app.use('/projects', express.static(projectsImagesPath, {
-    maxAge: '1y',
-    immutable: false,
-    etag: true,
-    lastModified: true,
-    setHeaders: (res, filePath) => {
-      res.setHeader('Cache-Control', 'public, max-age=31536000, stale-while-revalidate=86400');
-      res.setHeader('Vary', 'Accept');
-    },
-  }));
   console.log(`[Static] Serving project images from: ${projectsImagesPath}`);
   
   // Redirect /en to home page

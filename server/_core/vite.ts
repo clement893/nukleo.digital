@@ -185,27 +185,5 @@ export function serveStatic(app: Express) {
     }
   }));
 
-  // fall through to index.html if the file doesn't exist
-  // IMPORTANT: This catch-all must be LAST and must NOT match asset requests or API routes
-  app.use("*", (req, res, next) => {
-    // Skip if this is an API route (should be handled by API routes before serveStatic)
-    if (req.path.startsWith('/api/')) {
-      return next(); // Let API routes handle it
-    }
-    
-    // Skip if this is an asset request (should have been handled above)
-    if (req.path.startsWith('/assets/') || 
-        req.path.startsWith('/fonts/') || 
-        req.path.startsWith('/images/') ||
-        req.path.match(/\.(js|css|woff2?|eot|ttf|otf|png|jpg|jpeg|gif|svg|ico|webp)$/i)) {
-      // Asset request that wasn't found - return 404 instead of serving index.html
-      return res.status(404).send('File not found');
-    }
-    
-    // Don't cache HTML files - always fetch fresh
-    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-    res.setHeader('Pragma', 'no-cache');
-    res.setHeader('Expires', '0');
-    res.sendFile(path.resolve(distPath, "index.html"));
-  });
+  // Note: catch-all route for index.html is handled in index.ts after all API routes
 }

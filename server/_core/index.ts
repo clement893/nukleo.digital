@@ -190,6 +190,15 @@ async function startServer() {
       createContext,
     })
   );
+  
+  // Redirect /en to home page
+  app.get("/en", (req, res) => {
+    res.redirect(301, "/");
+  });
+  app.get("/en/", (req, res) => {
+    res.redirect(301, "/");
+  });
+  
   // development mode uses Vite, production mode uses static files
   if (process.env.NODE_ENV === "development") {
     await setupVite(app, server);

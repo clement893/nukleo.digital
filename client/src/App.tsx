@@ -1,4 +1,4 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import CustomCursor from "./components/CustomCursor";
@@ -120,6 +120,15 @@ function LanguageRoute({ component: Component, ...props }: { component: any; pat
   return <Component {...props} />;
 }
 
+// Redirect component for /en to home page
+function RedirectToHome() {
+  const [, setLocation] = useLocation();
+  useEffect(() => {
+    setLocation("/");
+  }, [setLocation]);
+  return null;
+}
+
 function App() {
   // Trigger animations on route change
   usePageTransition();
@@ -140,6 +149,10 @@ function App() {
           {typeof window !== 'undefined' && window.innerWidth >= 768 && <GlobalLEO />}
           <Suspense fallback={null}>
             <Switch>
+              {/* Redirect /en to home page */}
+              <Route path="/en">
+                <RedirectToHome />
+              </Route>
               {/* Language routes - French */}
               <Route path="/fr" component={Home} />
               <Route path="/fr/projects" component={withPageVisibility(Projects, "/fr/projects")} />

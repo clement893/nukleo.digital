@@ -1,196 +1,214 @@
 import SEO from '@/components/SEO';
-import UniversalLEO from '@/components/UniversalLEO';
-import { useState } from 'react';
-import { Filter } from 'lucide-react';
+import { useState, useMemo } from 'react';
+import { Shuffle, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import PageLayout from '@/components/PageLayout';
 import Breadcrumb from '@/components/Breadcrumb';
-import { useLanguage } from '@/contexts/LanguageContext';
+
+// Liste des 51 images de la sélection Décembre 2025
+const projectImages = [
+  'AMQ_1.png',
+  'AdeleBlais_2.jpg',
+  'Affilia_3.jpg',
+  'Affilia_4.jpg',
+  'Affilia_7.png',
+  'Arsenal_1.jpg',
+  'Arsenal_2.jpg',
+  'CECS_2.jpg',
+  'CQDE_2.jpg',
+  'CQDE_4.jpg',
+  'D28_24_14.jpg',
+  'D28_24_17.jpg',
+  'D28_24_19.jpg',
+  'D28_24_5.jpg',
+  'D28_25_4.jpg',
+  'D28_25_5.jpg',
+  'D28_25_6.jpg',
+  'D28_25_9.jpg',
+  'DocTocToc_1.jpg',
+  'DocTocToc_2.jpg',
+  'FJL_2.jpg',
+  'FJL_3.jpg',
+  'Humankind_1.jpg',
+  'Humankind_2.jpg',
+  'MBAM_1.jpg',
+  'MBAM_2.jpg',
+  'MBAM_9.jpg',
+  'MJL_2025_1.jpg',
+  'MJL_2025_4.jpg',
+  'Matchstick_1.jpg',
+  'Matchstick_2.jpg',
+  'NouvelleIle_1.png',
+  'O-Salon_1.jpg',
+  'Psy-etc_1.jpg',
+  'Psy-etc_2.jpg',
+  'Queertech_1.jpg',
+  'Queertech_2.jpg',
+  'Reseau-Sante_1.jpg',
+  'Reseau-Sante_2.jpg',
+  'Rideau_4.jpg',
+  'SSCO_1.jpg',
+  'SSCO_2.jpg',
+  'SSCO_3.jpg',
+  'SummitLaw_1.jpg',
+  'SummitLaw_13.jpg',
+  'SummitLaw_2.jpg',
+  'SummitLaw_3.jpg',
+  'TAM_1.jpg',
+  'TAM_3.jpg',
+  'TAM_4.jpg',
+  'Zu_2.jpg',
+];
+
+// Fisher-Yates shuffle algorithm
+function shuffleArray<T>(array: T[]): T[] {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
 
 export default function Projects() {
-  const { t } = useLanguage();
-  const [activeFilter, setActiveFilter] = useState('all');
+  const [images, setImages] = useState(projectImages);
+  const [isShuffling, setIsShuffling] = useState(false);
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
 
-  const filters = [
-    { key: 'all', label: t('projects.filters.all') },
-    { key: 'AI Platforms', label: t('projects.filters.aiPlatforms') },
-    { key: 'Marketing', label: t('projects.filters.marketing') },
-    { key: 'Web Apps', label: t('projects.filters.webApps') },
-    { key: 'Strategy', label: t('projects.filters.strategy') },
-  ];
+  const handleShuffle = () => {
+    setIsShuffling(true);
+    setTimeout(() => {
+      setImages(shuffleArray(projectImages));
+      setIsShuffling(false);
+    }, 300);
+  };
 
-  const projects = [
-    {
-      id: 1,
-      title: t('projects.items.autonomousMarketing.title'),
-      category: 'AI Platforms',
-      description: t('projects.items.autonomousMarketing.description'),
-      metrics: { roi: '+340%', time: '-75%', output: '10x' },
-      image: '/projects/project1.jpg',
-    },
-    {
-      id: 2,
-      title: t('projects.items.intelligentEcommerce.title'),
-      category: 'Web Apps',
-      description: t('projects.items.intelligentEcommerce.description'),
-      metrics: { roi: '+220%', time: '-60%', output: '8x' },
-      image: '/projects/project2.jpg',
-    },
-    {
-      id: 3,
-      title: t('projects.items.enterpriseTransformation.title'),
-      category: 'Strategy',
-      description: t('projects.items.enterpriseTransformation.description'),
-      metrics: { roi: '+450%', time: '-80%', output: '12x' },
-      image: '/projects/project3.jpg',
-    },
-    {
-      id: 4,
-      title: t('projects.items.contentGeneration.title'),
-      category: 'Marketing',
-      description: t('projects.items.contentGeneration.description'),
-      metrics: { roi: '+280%', time: '-70%', output: '15x' },
-      image: '/projects/project4.jpg',
-    },
-  ];
-
-  const filteredProjects = activeFilter === 'all' 
-    ? projects 
-    : projects.filter(p => p.category === activeFilter);
+  // Assign sizes for masonry effect
+  const imageSizes = useMemo(() => {
+    return images.map((_, index) => {
+      // Create varied sizes for visual interest
+      const patterns = ['small', 'medium', 'large', 'small', 'medium'];
+      return patterns[index % patterns.length];
+    });
+  }, [images]);
 
   return (
     <PageLayout>
       <SEO 
-        title="AI Transformation Projects | Success Stories & Case Studies"
-        description="Explore our AI transformation projects: real results across healthcare, finance, retail & government. See how we deliver measurable ROI. View case studies now."
-        keywords="AI transformation projects, AI case studies, AI success stories, AI implementation examples, AI project portfolio"
+        title="Projects | Nukleo Digital Portfolio"
+        description="Explore our portfolio of creative and digital projects. Branding, web design, mobile apps, marketing campaigns and more."
+        keywords="portfolio, projects, branding, web design, digital agency, creative work"
       />
-    <div className="min-h-screen bg-gradient-nukleo">
-      {/* Hero Section */}
-      <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">
-        <div className="container">
-          <Breadcrumb items={[{ name: t('nav.projects'), url: '/projects' }]} />
+      
+      <div className="min-h-screen bg-gradient-nukleo">
+        {/* Hero Section */}
+        <section className="pt-32 pb-12 lg:pt-40 lg:pb-16">
+          <div className="container">
+            <Breadcrumb items={[{ name: 'Projects', url: '/projects' }]} />
 
-          <h1 className="text-white mb-8">
-            {t('projects.heroTitle')}<br />
-            {t('projects.heroSubtitle')}
-          </h1>
-
-          <p className="text-white/75 text-lg lg:text-xl leading-relaxed max-w-3xl">
-            {t('projects.description')}
-          </p>
-        </div>
-      </section>
-
-      {/* Filters */}
-      <section className="pb-12">
-        <div className="container">
-          <div className="flex flex-wrap gap-3">
-            {filters.map((filter) => (
-              <button
-                key={filter.key}
-                onClick={() => setActiveFilter(filter.key)}
-                className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
-                  activeFilter === filter.key
-                    ? 'bg-accent text-white'
-                    : 'glass text-white/75 hover:text-white hover:bg-white/10'
-                }`}
-              >
-                {filter.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Grid */}
-      <section className="pb-24 lg:pb-32">
-        <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {filteredProjects.map((project) => (
-              <div
-                key={project.id}
-                className="group glass rounded-3xl overflow-hidden transition-all duration-500 hover:bg-white/10"
-              >
-                {/* Project Image Placeholder */}
-                <div className="aspect-video bg-gradient-to-br from-purple-900/50 to-purple-800/50 relative overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-white/30 text-6xl font-bold">{project.id}</span>
-                  </div>
-                </div>
-
-                {/* Project Content */}
-                <div className="p-8">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-accent text-sm font-mono tracking-wider">
-                      {project.category}
-                    </span>
-                  </div>
-
-                  <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4 group-hover:text-accent transition-colors">
-                    {project.title}
-                  </h3>
-
-                  <p className="text-white/75 text-base leading-relaxed mb-6">
-                    {project.description}
-                  </p>
-
-                  {/* Metrics */}
-                  <div className="grid grid-cols-3 gap-4 mb-6 pb-6 border-b border-white/10">
-                    <div>
-                      <div className="text-accent text-2xl font-bold mb-1">{project.metrics.roi}</div>
-                      <div className="text-white/50 text-xs tracking-wider">ROI Increase</div>
-                    </div>
-                    <div>
-                      <div className="text-accent text-2xl font-bold mb-1">{project.metrics.time}</div>
-                      <div className="text-white/50 text-xs tracking-wider">Time Saved</div>
-                    </div>
-                    <div>
-                      <div className="text-accent text-2xl font-bold mb-1">{project.metrics.output}</div>
-                      <div className="text-white/50 text-xs tracking-wider">Output Boost</div>
-                    </div>
-                  </div>
-
-                  <a href="/contact">
-                    <Button
-                      variant="ghost"
-                      className="text-accent hover:text-accent/80 p-0 h-auto font-medium group/btn"
-                    >
-                      View Case Study
-                    </Button>
-                  </a>
-                </div>
+            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-8">
+              <div>
+                <h1 className="text-5xl lg:text-7xl font-bold text-white mb-4 font-heading italic">
+                  Our Work
+                </h1>
+                <p className="text-white/70 text-lg lg:text-xl max-w-2xl">
+                  A selection of our recent projects across branding, web, digital, and creative campaigns.
+                </p>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* CTA Section */}
-      <section className="py-24 lg:py-32">
-        <div className="container">
-          <div className="glass rounded-3xl p-12 lg:p-16 text-center">
-            <h2 className="text-white mb-6">
-              Ready to<br />
-              Transform?
-            </h2>
-
-            <p className="text-white/75 text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto mb-8">
-              Let's discuss how we can architect your AI-powered future.
-            </p>
-
-            <a href="/start-project">
+              {/* Try Me Button */}
               <Button
-                size="lg"
-                className="rounded-full text-lg px-10 py-8 bg-white text-purple-900 hover:bg-white/90 transition-all duration-500 font-bold tracking-wider shimmer"
+                onClick={handleShuffle}
+                disabled={isShuffling}
+                className="group flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white rounded-full font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
               >
-                Start Your Transformation
+                <Shuffle className={`w-5 h-5 transition-transform duration-300 ${isShuffling ? 'animate-spin' : 'group-hover:rotate-180'}`} />
+                Try Me
               </Button>
-            </a>
+            </div>
           </div>
+        </section>
+
+        {/* Masonry Grid */}
+        <section className="pb-24 lg:pb-32">
+          <div className="container">
+            <div 
+              className={`columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 transition-opacity duration-300 ${isShuffling ? 'opacity-0' : 'opacity-100'}`}
+            >
+              {images.map((image, index) => (
+                <div
+                  key={`${image}-${index}`}
+                  className="break-inside-avoid mb-4 group cursor-pointer"
+                  onClick={() => setLightboxImage(image)}
+                >
+                  <div className="relative overflow-hidden rounded-xl bg-white/5">
+                    <img
+                      src={`/projects/${image}`}
+                      alt={image.replace(/[-_]/g, ' ').replace(/\.(jpg|png|jpeg)$/i, '')}
+                      className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <p className="text-white text-sm font-medium truncate">
+                          {image.replace(/[-_]/g, ' ').replace(/\.(jpg|png|jpeg)$/i, '').replace(/\d+$/, '').trim()}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-24 lg:py-32">
+          <div className="container">
+            <div className="glass rounded-3xl p-12 lg:p-16 text-center">
+              <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6 font-heading">
+                Ready to Start<br />
+                Your Project?
+              </h2>
+
+              <p className="text-white/75 text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto mb-8">
+                Let's discuss how we can bring your vision to life.
+              </p>
+
+              <a href="/start-project">
+                <Button
+                  size="lg"
+                  className="rounded-full text-lg px-10 py-8 bg-white text-purple-900 hover:bg-white/90 transition-all duration-500 font-bold tracking-wider"
+                >
+                  Start Your Project
+                </Button>
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      {/* Lightbox */}
+      {lightboxImage && (
+        <div 
+          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
+          onClick={() => setLightboxImage(null)}
+        >
+          <button
+            onClick={() => setLightboxImage(null)}
+            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors"
+          >
+            <X className="w-8 h-8" />
+          </button>
+          <img
+            src={`/projects/${lightboxImage}`}
+            alt={lightboxImage}
+            className="max-w-full max-h-[90vh] object-contain rounded-lg"
+            onClick={(e) => e.stopPropagation()}
+          />
         </div>
-      </section>
-    </div>
+      )}
     </PageLayout>
   );
 }

@@ -23,6 +23,12 @@ import { configureGoogleAuth, requireAdminAuth } from "./googleAuth";
 import { getDb } from "../db";
 import postgres from "postgres";
 
+/**
+ * Vérifie si un port est disponible pour l'écoute.
+ * 
+ * @param port - Le numéro de port à vérifier
+ * @returns Promise qui se résout à true si le port est disponible, false sinon
+ */
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
     const server = net.createServer();
@@ -33,6 +39,16 @@ function isPortAvailable(port: number): Promise<boolean> {
   });
 }
 
+/**
+ * Trouve un port disponible en commençant par le port de départ.
+ * 
+ * @param startPort - Le port de départ (défaut: 3000)
+ * @returns Promise qui se résout au numéro de port disponible
+ * @throws Error si aucun port disponible n'est trouvé dans la plage (20 ports)
+ * 
+ * @example
+ * const port = await findAvailablePort(3000); // Cherche un port disponible à partir de 3000
+ */
 async function findAvailablePort(startPort: number = 3000): Promise<number> {
   for (let port = startPort; port < startPort + 20; port++) {
     if (await isPortAvailable(port)) {
@@ -55,10 +71,22 @@ async function startServer() {
   }
   
   // Sentry request handler (must be first)
-  // Note: Sentry.Handlers is deprecated in newer versions, skip for now
-  // if (process.env.SENTRY_DSN) {
-  //   app.use(Sentry.Handlers.requestHandler());
-  // }
+  // Track requests and user context
+  if (process.env.SENTRY_DSN) {
+    app.use((req, res, next) => {
+      Sentry.setUser({
+        ip_address: req.ip,
+      });
+      Sentry.setContext('request', {
+        method: req.method,
+        url: req.url,
+        headers: {
+          'user-agent': req.get('user-agent'),
+        },
+      });
+      next();
+    });
+  }
   
   // Compression (gzip/brotli)
   app.use(compression({ level: 9 }));
@@ -208,10 +236,13 @@ async function startServer() {
   }
   
   // Sentry error handler (must be after all routes)
-  // Note: Sentry.Handlers is deprecated in newer versions, skip for now
-  // if (process.env.SENTRY_DSN) {
-  //   app.use(Sentry.Handlers.errorHandler());
-  // }
+  // Capture unhandled errors and send to Sentry
+  if (process.env.SENTRY_DSN) {
+    app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
+      Sentry.captureException(err);
+      next(err);
+    });
+  }
 
   const preferredPort = parseInt(process.env.PORT || "3000");
   const port = await findAvailablePort(preferredPort);

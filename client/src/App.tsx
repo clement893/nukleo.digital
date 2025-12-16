@@ -13,10 +13,17 @@ import { FloatingLanguageToggle } from "./components/FloatingLanguageToggle";
 import { usePageTransition } from "./hooks/usePageTransition";
 import { usePageBackground } from "./hooks/usePageBackground";
 
-// Lazy load UniversalLEO
-const UniversalLEO = lazy(() => import("./components/UniversalLEO"));
-
-// Helper function to determine page context from URL
+/**
+ * Détermine le contexte de la page à partir de l'URL pour le composant LEO.
+ * 
+ * @param pathname - Le chemin de l'URL (ex: '/fr/services', '/about')
+ * @returns Le contexte de la page : 'home' | 'agencies' | 'services' | 'contact' | 'about' | 'default'
+ * 
+ * @example
+ * getPageContext('/fr/services') // returns 'services'
+ * getPageContext('/about') // returns 'about'
+ * getPageContext('/admin/dashboard') // returns 'default'
+ */
 function getPageContext(pathname: string): 'home' | 'agencies' | 'services' | 'contact' | 'about' | 'default' {
   // Remove language prefix if present
   const path = pathname.replace(/^\/(fr|en)/, '') || '/';
@@ -36,17 +43,33 @@ function getPageContext(pathname: string): 'home' | 'agencies' | 'services' | 'c
 // Global LEO component that detects page context - disabled on mobile for performance
 import { useIsMobile } from './hooks/useIsMobile';
 
+/**
+ * Lazy load UniversalLEO only when needed (desktop, non-admin pages).
+ * This prevents loading the component on mobile devices where it's disabled.
+ */
+const UniversalLEOLazy = lazy(() => import('./components/UniversalLEO'));
+
+/**
+ * Global LEO component that detects page context.
+ * Automatically disabled on mobile devices for better performance.
+ * 
+ * @returns UniversalLEO component or null if on mobile/admin
+ */
 function GlobalLEO() {
   const [location] = useLocation();
   const isMobile = useIsMobile(768);
   
-  if (isMobile) return null;
+  // Don't even load the component on mobile or server-side
+  if (isMobile || typeof window === 'undefined') return null;
+  
+  // Skip admin pages
+  if (location.startsWith('/admin')) return null;
   
   const pageContext = getPageContext(location);
   
   return (
     <Suspense fallback={null}>
-      <UniversalLEO pageContext={pageContext} />
+      <UniversalLEOLazy pageContext={pageContext} />
     </Suspense>
   );
 }
@@ -118,7 +141,12 @@ function LanguageRoute({ component: Component, ...props }: { component: any; pat
   return <Component {...props} />;
 }
 
-// Redirect component for /en to home page
+/**
+ * Composant de redirection qui redirige automatiquement vers la page d'accueil.
+ * Utilisé pour rediriger /en vers / (page d'accueil).
+ * 
+ * @returns null - Le composant ne rend rien, il effectue juste la redirection
+ */
 function RedirectToHome() {
   const [, setLocation] = useLocation();
   useEffect(() => {

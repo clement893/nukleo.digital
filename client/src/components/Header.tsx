@@ -7,6 +7,14 @@ import { useSound } from '@/hooks/useSound';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
+/**
+ * Composant Header principal de l'application.
+ * 
+ * Affiche le logo, le tagline, le bouton CTA et le menu burger.
+ * S'adapte au scroll avec un effet glass et cache le tagline quand on scroll.
+ * 
+ * @returns Le composant Header avec logo, navigation et menu
+ */
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -15,11 +23,17 @@ function Header() {
   const getLocalizedPath = useLocalizedPath();
   
   // Memoize handlers to prevent re-renders
+  /**
+   * Ouvre le menu plein écran et joue le son de clic.
+   */
   const handleMenuOpen = useCallback(() => {
     playClick();
     setIsMenuOpen(true);
   }, [playClick]);
   
+  /**
+   * Ferme le menu plein écran.
+   */
   const handleMenuClose = useCallback(() => {
     setIsMenuOpen(false);
   }, []);

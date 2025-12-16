@@ -36,6 +36,11 @@
     <!-- Preload critical LCP image - arrow SVG is the LCP element -->
     <link rel="preload" href="/nukleo-arrow.svg" as="image" type="image/svg+xml" fetchpriority="high" />
     
+    <!-- Preload critical routes for faster navigation -->
+    <link rel="prefetch" href="/about" />
+    <link rel="prefetch" href="/services" />
+    <link rel="prefetch" href="/contact" />
+    
     <!-- Inline critical font-face for instant rendering -->
     <style>
       /* Aktiv Grotesk Light 300 - Primary body text (critical) */
@@ -165,5 +170,19 @@
     <div id="root"></div>
     <!-- Load script immediately - Vite handles optimization -->
     <script type="module" src="/src/main.tsx"></script>
+    <!-- Register Service Worker -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('SW registered:', registration);
+            })
+            .catch((error) => {
+              console.log('SW registration failed:', error);
+            });
+        });
+      }
+    </script>
   </body>
 </html>

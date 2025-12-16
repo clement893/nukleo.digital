@@ -6,9 +6,12 @@ import { createRoot } from "react-dom/client";
 import superjson from "superjson";
 import App from "./App";
 
-
 import { getLoginUrl } from "./const";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { initSentry } from "./lib/sentry";
+
+// Initialize Sentry for client-side error monitoring
+initSentry();
 // CSS is loaded normally - Vite handles optimization and code splitting
 // Critical CSS is inlined in index.html to prevent render blocking
 // Non-critical CSS (admin) is split into separate chunks

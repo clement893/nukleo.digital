@@ -1,13 +1,14 @@
 import SEO from '@/components/SEO';
 import { useState, useRef, useEffect } from 'react';
-import { Shuffle, X } from 'lucide-react';
+import { Shuffle, X, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import PageLayout from '@/components/PageLayout';
 import Breadcrumb from '@/components/Breadcrumb';
 import OptimizedImage from '@/components/OptimizedImage';
+import { trpc } from '@/lib/trpc';
 
-// Liste des 51 images de la sélection Décembre 2025
-const projectImages = [
+// Liste de fallback des images (si l'API ne retourne rien)
+const fallbackImages = [
   'AMQ_1.png',
   'AdeleBlais_2.jpg',
   'Affilia_3.jpg',
@@ -72,11 +73,29 @@ function shuffleArray<T>(array: T[]): T[] {
 }
 
 export default function Projects() {
-  const [images, setImages] = useState(projectImages);
+  // Load images from API (public endpoint - we'll make it public)
+  const { data: uploadedImages, isLoading: isLoadingImages } = trpc.projectsImages.list.useQuery(undefined, {
+    retry: false,
+    refetchOnWindowFocus: false,
+  });
+  
+  // Use uploaded images if available, otherwise fallback to static list
+  const availableImages = uploadedImages && uploadedImages.length > 0 
+    ? uploadedImages.map(img => img.name)
+    : fallbackImages;
+  
+  const [images, setImages] = useState(availableImages);
   const [isShuffling, setIsShuffling] = useState(false);
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
   const [visibleImages, setVisibleImages] = useState<Set<number>>(new Set());
   const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
+  
+  // Update images when API data loads
+  useEffect(() => {
+    if (uploadedImages && uploadedImages.length > 0) {
+      setImages(uploadedImages.map(img => img.name));
+    }
+  }, [uploadedImages]);
 
   // Intersection Observer pour charger les images seulement quand elles sont visibles
   useEffect(() => {
@@ -120,7 +139,7 @@ export default function Projects() {
     setIsShuffling(true);
     setVisibleImages(new Set()); // Réinitialiser les images visibles
     setTimeout(() => {
-      setImages(shuffleArray(projectImages));
+      setImages(shuffleArray([...images]));
       setIsShuffling(false);
     }, 300);
   };
@@ -165,10 +184,16 @@ export default function Projects() {
         {/* Masonry Grid - 3 colonnes max */}
         <section className="pb-24 lg:pb-32">
           <div className="container">
-            <div 
-              className={`columns-1 sm:columns-2 lg:columns-3 gap-6 transition-opacity duration-300 ${isShuffling ? 'opacity-0' : 'opacity-100'}`}
-            >
-              {images.map((image, index) => {
+            {isLoadingImages && images.length === 0 ? (
+              <div className="flex items-center justify-center py-24">
+                <Loader2 className="w-8 h-8 animate-spin text-purple-400" />
+                <span className="ml-3 text-white/70">Loading images...</span>
+              </div>
+            ) : (
+              <div 
+                className={`columns-1 sm:columns-2 lg:columns-3 gap-6 transition-opacity duration-300 ${isShuffling ? 'opacity-0' : 'opacity-100'}`}
+              >
+                {images.map((image, index) => {
                 const isVisible = visibleImages.has(index);
                 const imageName = image.replace(/[-_]/g, ' ').replace(/\.(jpg|png|jpeg)$/i, '');
                 const imageAlt = imageName.replace(/\d+$/, '').trim();
@@ -222,7 +247,8 @@ export default function Projects() {
                   </div>
                 );
               })}
-            </div>
+              </div>
+            )}
           </div>
         </section>
 

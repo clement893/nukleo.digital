@@ -1,4 +1,4 @@
-import { router, adminProcedure } from "../_core/trpc";
+import { router, adminProcedure, publicProcedure } from "../_core/trpc";
 import { z } from "zod";
 import fs from "fs/promises";
 import path from "path";
@@ -13,37 +13,47 @@ async function ensureProjectsDir() {
   }
 }
 
-export const projectsImagesRouter = router({
-  // List all project images
-  list: adminProcedure.query(async () => {
-    await ensureProjectsDir();
+// Helper function to list images (shared between public and admin)
+async function listImages() {
+  await ensureProjectsDir();
+  
+  try {
+    const files = await fs.readdir(PROJECTS_IMAGES_DIR);
+    const imageFiles = files.filter(
+      (file) => /\.(jpg|jpeg|png|gif|webp)$/i.test(file)
+    );
     
-    try {
-      const files = await fs.readdir(PROJECTS_IMAGES_DIR);
-      const imageFiles = files.filter(
-        (file) => /\.(jpg|jpeg|png|gif|webp)$/i.test(file)
-      );
-      
-      const imagesWithStats = await Promise.all(
-        imageFiles.map(async (file) => {
-          const filePath = path.join(PROJECTS_IMAGES_DIR, file);
-          const stats = await fs.stat(filePath);
-          return {
-            name: file,
-            size: stats.size,
-            modified: stats.mtime,
-            url: `/projects/${file}`,
-          };
-        })
-      );
-      
-      return imagesWithStats.sort((a, b) => 
-        b.modified.getTime() - a.modified.getTime()
-      );
-    } catch (error) {
-      console.error("[ProjectsImages] Error listing images:", error);
-      return [];
-    }
+    const imagesWithStats = await Promise.all(
+      imageFiles.map(async (file) => {
+        const filePath = path.join(PROJECTS_IMAGES_DIR, file);
+        const stats = await fs.stat(filePath);
+        return {
+          name: file,
+          size: stats.size,
+          modified: stats.mtime,
+          url: `/projects/${file}`,
+        };
+      })
+    );
+    
+    return imagesWithStats.sort((a, b) => 
+      b.modified.getTime() - a.modified.getTime()
+    );
+  } catch (error) {
+    console.error("[ProjectsImages] Error listing images:", error);
+    return [];
+  }
+}
+
+export const projectsImagesRouter = router({
+  // List all project images (public - for the projects page)
+  list: publicProcedure.query(async () => {
+    return await listImages();
+  }),
+  
+  // List all project images (admin - same as public but requires auth)
+  listAdmin: adminProcedure.query(async () => {
+    return await listImages();
   }),
 
   // Delete an image

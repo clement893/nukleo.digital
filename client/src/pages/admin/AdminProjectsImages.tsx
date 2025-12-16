@@ -8,7 +8,7 @@ import { toast } from 'sonner';
 import { formatDistanceToNow } from 'date-fns';
 
 export default function AdminProjectsImages() {
-  const { data: images, isLoading, refetch } = trpc.projectsImages.list.useQuery();
+  const { data: images, isLoading, refetch } = trpc.projectsImages.listAdmin.useQuery();
   const deleteMutation = trpc.projectsImages.delete.useMutation();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);

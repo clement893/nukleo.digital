@@ -81,12 +81,8 @@ import About from "./pages/About";
 import Media from "./pages/Media";
 import NotFound404 from "@/pages/NotFound404";
 
-<<<<<<< HEAD
 // Lazy load all other pages with retry logic for chunk loading errors
 const Projects = lazyWithRetry(() => import("./pages/Projects"));
-=======
-// Lazy load all other pages
->>>>>>> 95094235bcd655a7c9b0acedf5a712c36c178d91
 const Expertise = lazy(() => import("./pages/Expertise"));
 const Resources = lazy(() => import("./pages/Resources"));
 const ResourceArticle = lazy(() => import("./pages/resources/ResourceArticle"));

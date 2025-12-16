@@ -268,26 +268,27 @@ async function startServer() {
 
   // Projects images upload endpoint (admin only)
   const PROJECTS_IMAGES_DIR = path.resolve(process.cwd(), "client", "public", "projects");
+  const USE_BUCKET = !!(process.env.BUILT_IN_FORGE_API_URL && process.env.BUILT_IN_FORGE_API_KEY);
   
-  // Ensure directory exists
-  if (!existsSync(PROJECTS_IMAGES_DIR)) {
-    mkdirSync(PROJECTS_IMAGES_DIR, { recursive: true });
-  }
-  
-  // Configure multer for file uploads
-  const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, PROJECTS_IMAGES_DIR);
-    },
-    filename: (req, file, cb) => {
-      // Keep original filename, sanitize it
-      const sanitized = file.originalname.replace(/[^a-zA-Z0-9._-]/g, '_');
-      cb(null, sanitized);
-    },
-  });
+  // Configure multer - use memory storage for bucket uploads, disk storage for local
+  const multerStorage = USE_BUCKET 
+    ? multer.memoryStorage()
+    : multer.diskStorage({
+        destination: (req, file, cb) => {
+          if (!existsSync(PROJECTS_IMAGES_DIR)) {
+            mkdirSync(PROJECTS_IMAGES_DIR, { recursive: true });
+          }
+          cb(null, PROJECTS_IMAGES_DIR);
+        },
+        filename: (req, file, cb) => {
+          // Keep original filename, sanitize it
+          const sanitized = file.originalname.replace(/[^a-zA-Z0-9._-]/g, '_');
+          cb(null, sanitized);
+        },
+      });
   
   const upload = multer({
-    storage,
+    storage: multerStorage,
     limits: {
       fileSize: 10 * 1024 * 1024, // 10MB max
     },
@@ -307,12 +308,80 @@ async function startServer() {
         return res.status(400).json({ error: 'No file uploaded' });
       }
       
+      const sanitized = req.file.originalname.replace(/[^a-zA-Z0-9._-]/g, '_');
+      const filename = USE_BUCKET ? sanitized : req.file.filename;
+      
+      // Get file buffer for bucket upload (if needed)
+      let fileBuffer: Buffer | undefined;
+      if (USE_BUCKET) {
+        fileBuffer = req.file.buffer;
+      } else {
+        // Read file from disk if using local storage
+        try {
+          fileBuffer = await fs.readFile(req.file.path);
+        } catch (readError) {
+          console.error("[ProjectsImages] Failed to read uploaded file:", readError);
+        }
+      }
+      
+      // Always save to local public folder for immediate access
+      try {
+        if (!existsSync(PROJECTS_IMAGES_DIR)) {
+          mkdirSync(PROJECTS_IMAGES_DIR, { recursive: true });
+        }
+        
+        if (USE_BUCKET && fileBuffer) {
+          // Write buffer to local folder
+          await fs.writeFile(
+            path.join(PROJECTS_IMAGES_DIR, sanitized),
+            fileBuffer
+          );
+        } else if (!USE_BUCKET) {
+          // Move file from temp location to public folder
+          const destPath = path.join(PROJECTS_IMAGES_DIR, filename);
+          await fs.rename(req.file.path, destPath);
+        }
+      } catch (localError) {
+        console.error("[ProjectsImages] Failed to save locally:", localError);
+        // Clean up temp file if using local storage
+        if (!USE_BUCKET && req.file.path) {
+          try {
+            await fs.unlink(req.file.path);
+          } catch (cleanupError) {
+            // Ignore cleanup errors
+          }
+        }
+        return res.status(500).json({ error: 'Failed to save image locally' });
+      }
+      
+      // Also upload to bucket as backup if available
+      if (USE_BUCKET && fileBuffer) {
+        try {
+          const { storagePut } = await import("../storage");
+          const storageKey = `projects/${sanitized}`;
+          const contentType = req.file.mimetype || 'image/jpeg';
+          
+          await storagePut(
+            storageKey,
+            fileBuffer,
+            contentType
+          );
+          console.log(`[ProjectsImages] Image also saved to bucket: ${storageKey}`);
+        } catch (bucketError) {
+          console.warn("[ProjectsImages] Failed to save to bucket (non-critical):", bucketError);
+          // Non-critical error, continue
+        }
+      }
+      
       res.json({ 
         success: true, 
-        filename: req.file.filename,
+        filename: filename,
         originalName: req.file.originalname,
         size: req.file.size,
-        message: 'Image uploaded successfully' 
+        url: `/projects/${filename}`,
+        message: USE_BUCKET 
+          ? 'Image uploaded successfully (local + bucket backup)' 
+          : 'Image uploaded successfully' 
       });
     } catch (error: any) {
       console.error("[ProjectsImages] Upload error:", error);

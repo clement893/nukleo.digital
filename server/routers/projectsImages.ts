@@ -32,6 +32,7 @@ export const projectsImagesRouter = router({
             name: file,
             size: stats.size,
             modified: stats.mtime,
+            url: `/projects/${file}`,
           };
         })
       );

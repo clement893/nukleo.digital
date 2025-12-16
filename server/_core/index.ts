@@ -285,10 +285,10 @@ async function startServer() {
   // This must be AFTER all API routes and serveStatic
   if (process.env.NODE_ENV === "production") {
     const distPath = path.resolve(process.cwd(), "dist", "public");
-    app.use("*", (req, res) => {
-      // Skip API routes
+    app.use("*", (req, res, next) => {
+      // Skip API routes - let them be handled by API routes above
       if (req.path.startsWith('/api/')) {
-        return res.status(404).json({ error: 'API endpoint not found' });
+        return next(); // Pass to next middleware (should be 404 handler)
       }
       
       // Skip asset requests that weren't found

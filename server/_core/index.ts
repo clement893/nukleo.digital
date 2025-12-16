@@ -302,10 +302,25 @@ async function startServer() {
     },
   });
   
-  app.post("/api/admin/projects-images/upload", requireAdminAuth, upload.single('image'), async (req, res) => {
-    try {
+  app.post("/api/admin/projects-images/upload", 
+    requireAdminAuth, 
+    (req, res, next) => {
+      console.log("[ProjectsImages] Auth check passed, processing upload...");
+      next();
+    },
+    upload.single('image'), 
+    async (req, res, next) => {
+      try {
+        console.log("[ProjectsImages] Upload request received", {
+          hasFile: !!req.file,
+          fileField: req.file?.fieldname,
+          fileName: req.file?.originalname,
+          fileSize: req.file?.size,
+        });
+
       if (!req.file) {
-        return res.status(400).json({ error: 'No file uploaded' });
+        console.error("[ProjectsImages] No file in request");
+        return res.status(400).json({ error: 'No file uploaded. Please select an image file.' });
       }
       
       const sanitized = req.file.originalname.replace(/[^a-zA-Z0-9._-]/g, '_');
@@ -373,6 +388,12 @@ async function startServer() {
         }
       }
       
+      console.log("[ProjectsImages] Upload successful", {
+        filename,
+        url: `/projects/${filename}`,
+        size: req.file.size,
+      });
+
       res.json({ 
         success: true, 
         filename: filename,
@@ -385,8 +406,34 @@ async function startServer() {
       });
     } catch (error: any) {
       console.error("[ProjectsImages] Upload error:", error);
+      console.error("[ProjectsImages] Error stack:", error.stack);
+      
+      // Handle multer errors specifically
+      if (error instanceof multer.MulterError) {
+        if (error.code === 'LIMIT_FILE_SIZE') {
+          return res.status(400).json({ error: 'File too large. Maximum size is 10MB' });
+        }
+        return res.status(400).json({ error: `Upload error: ${error.message}` });
+      }
+      
       res.status(500).json({ error: error.message || 'Failed to upload image' });
     }
+  });
+  
+  // Error handler for multer (catches errors from upload middleware)
+  app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    if (err instanceof multer.MulterError) {
+      console.error("[ProjectsImages] Multer error:", err);
+      if (err.code === 'LIMIT_FILE_SIZE') {
+        return res.status(400).json({ error: 'File too large. Maximum size is 10MB' });
+      }
+      return res.status(400).json({ error: `Upload error: ${err.message}` });
+    }
+    if (err && req.path === '/api/admin/projects-images/upload') {
+      console.error("[ProjectsImages] Upload middleware error:", err);
+      return res.status(400).json({ error: err.message || 'Upload failed' });
+    }
+    next(err);
   });
   
   // tRPC API with rate limiting - MUST be before serveStatic
@@ -398,6 +445,41 @@ async function startServer() {
       createContext,
     })
   );
+  
+  // Serve uploaded project images from client/public/projects (works in both dev and prod)
+  // This must be BEFORE serveStatic to ensure uploaded images are accessible
+  const projectsImagesPath = path.resolve(process.cwd(), "client", "public", "projects");
+  if (existsSync(projectsImagesPath)) {
+    app.use('/projects', express.static(projectsImagesPath, {
+      maxAge: '1y',
+      immutable: false, // Images might be updated
+      etag: true,
+      lastModified: true,
+      setHeaders: (res, filePath) => {
+        res.setHeader('Cache-Control', 'public, max-age=31536000, stale-while-revalidate=86400');
+        res.setHeader('Vary', 'Accept');
+      }
+    }));
+    console.log(`[Static] Serving project images from: ${projectsImagesPath}`);
+  } else {
+    // Ensure directory exists
+    try {
+      mkdirSync(projectsImagesPath, { recursive: true });
+      app.use('/projects', express.static(projectsImagesPath, {
+        maxAge: '1y',
+        immutable: false,
+        etag: true,
+        lastModified: true,
+        setHeaders: (res, filePath) => {
+          res.setHeader('Cache-Control', 'public, max-age=31536000, stale-while-revalidate=86400');
+          res.setHeader('Vary', 'Accept');
+        }
+      }));
+      console.log(`[Static] Created and serving project images from: ${projectsImagesPath}`);
+    } catch (error) {
+      console.error(`[Static] Failed to create projects directory: ${projectsImagesPath}`, error);
+    }
+  }
   
   // development mode uses Vite, production mode uses static files
   // IMPORTANT: serveStatic must be AFTER API routes to ensure API endpoints work

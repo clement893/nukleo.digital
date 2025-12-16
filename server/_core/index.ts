@@ -272,12 +272,40 @@ async function startServer() {
     // serveStatic now handles all cache headers internally
     serveStatic(app);
   }
+  
+  // Redirect /en to home page
   app.get("/en", (req, res) => {
     res.redirect(301, "/");
   });
   app.get("/en/", (req, res) => {
     res.redirect(301, "/");
   });
+  
+  // Catch-all route for SPA - serve index.html for all non-API routes
+  // This must be AFTER all API routes and serveStatic
+  if (process.env.NODE_ENV === "production") {
+    const distPath = path.resolve(process.cwd(), "dist", "public");
+    app.use("*", (req, res) => {
+      // Skip API routes
+      if (req.path.startsWith('/api/')) {
+        return res.status(404).json({ error: 'API endpoint not found' });
+      }
+      
+      // Skip asset requests that weren't found
+      if (req.path.startsWith('/assets/') || 
+          req.path.startsWith('/fonts/') || 
+          req.path.startsWith('/images/') ||
+          req.path.match(/\.(js|css|woff2?|eot|ttf|otf|png|jpg|jpeg|gif|svg|ico|webp)$/i)) {
+        return res.status(404).send('File not found');
+      }
+      
+      // Serve index.html for SPA routing
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+      res.setHeader('Pragma', 'no-cache');
+      res.setHeader('Expires', '0');
+      res.sendFile(path.resolve(distPath, "index.html"));
+    });
+  }
   
   // Sentry error handler (must be after all routes)
   // Capture unhandled errors and send to Sentry

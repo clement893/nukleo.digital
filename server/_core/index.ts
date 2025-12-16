@@ -569,17 +569,22 @@ async function startServer() {
   if (process.env.NODE_ENV === "production") {
     const distPath = path.resolve(process.cwd(), "dist", "public");
     app.get('*', (req, res) => {
-      // Skip asset requests that weren't found
-      // IMPORTANT: Also skip /projects/ to allow uploaded images to be served
-      if (req.path.startsWith('/assets/') || 
+      // Skip asset requests that weren't found (but NOT /projects/ route for SPA)
+      // Only return 404 for actual asset files, not routes
+      const isAssetFile = req.path.startsWith('/assets/') || 
           req.path.startsWith('/fonts/') || 
           req.path.startsWith('/images/') ||
-          req.path.startsWith('/projects/') ||
-          req.path.match(/\.(js|css|woff2?|eot|ttf|otf|png|jpg|jpeg|gif|svg|ico|webp)$/i)) {
+          req.path.match(/\.(js|css|woff2?|eot|ttf|otf|png|jpg|jpeg|gif|svg|ico|webp)$/i);
+      
+      // Check if it's a /projects/ image file (has extension)
+      const isProjectsImage = req.path.startsWith('/projects/') && 
+          req.path.match(/\.(png|jpg|jpeg|gif|webp)$/i);
+      
+      if (isAssetFile || isProjectsImage) {
         return res.status(404).send('File not found');
       }
       
-      // Serve index.html for SPA routing
+      // Serve index.html for SPA routing (including /projects/ page route)
       res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
       res.setHeader('Pragma', 'no-cache');
       res.setHeader('Expires', '0');

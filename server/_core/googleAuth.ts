@@ -86,8 +86,29 @@ export function configureGoogleAuth(): boolean {
 
 // Middleware to check if user is authenticated admin
 export function requireAdminAuth(req: any, res: any, next: any) {
+  // Check Passport session (Google OAuth)
   if (req.isAuthenticated && req.isAuthenticated()) {
     return next();
   }
+  
+  // Check admin JWT cookie (admin login form)
+  const ADMIN_COOKIE_NAME = "admin_session";
+  const ADMIN_JWT_SECRET = process.env.JWT_SECRET + "-admin";
+  const adminToken = req.cookies?.[ADMIN_COOKIE_NAME];
+  
+  if (adminToken && ADMIN_JWT_SECRET && ADMIN_JWT_SECRET !== "-admin") {
+    try {
+      const jwt = require("jsonwebtoken");
+      const decoded = jwt.verify(adminToken, ADMIN_JWT_SECRET);
+      if (decoded && decoded.id) {
+        // Admin authenticated via JWT cookie
+        return next();
+      }
+    } catch (error) {
+      // Invalid token, continue to check other methods
+    }
+  }
+  
+  console.log(`[AdminAuth] Unauthorized access attempt to ${req.path}`);
   res.status(401).json({ error: "Unauthorized - Admin login required" });
 }

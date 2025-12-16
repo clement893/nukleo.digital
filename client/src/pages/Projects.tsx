@@ -133,12 +133,12 @@ export default function Projects() {
         <section className="pb-24 lg:pb-32">
           <div className="container">
             <div 
-              className={`columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 transition-opacity duration-300 ${isShuffling ? 'opacity-0' : 'opacity-100'}`}
+              className={`columns-1 sm:columns-2 lg:columns-3 gap-6 transition-opacity duration-300 ${isShuffling ? 'opacity-0' : 'opacity-100'}`}
             >
               {images.map((image, index) => (
                 <div
                   key={`${image}-${index}`}
-                  className="break-inside-avoid mb-4 group cursor-pointer"
+                  className="break-inside-avoid mb-6 group cursor-pointer"
                   onClick={() => setLightboxImage(image)}
                 >
                   <div className="relative overflow-hidden rounded-xl bg-white/5">

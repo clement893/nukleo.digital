@@ -52,10 +52,16 @@ export async function createContext(
           updatedAt: now,
           lastSignedIn: now,
         } as User;
+        console.log(`[Context] Admin authenticated: ${decoded.email} (role: ${user.role})`);
       } catch (error) {
-        // Invalid admin token, continue with user = null
-        // Silently fail - don't log to avoid noise
+        // Invalid admin token
+        console.log(`[Context] Invalid admin token: ${error instanceof Error ? error.message : 'unknown error'}`);
         user = null;
+      }
+    } else {
+      // Log if no admin token found (only for admin routes to avoid noise)
+      if (opts.req.path?.includes('/admin') || opts.req.path?.includes('projectsImages')) {
+        console.log(`[Context] No admin token found. Cookie present: ${!!adminToken}, Secret configured: ${!!(ADMIN_JWT_SECRET && ADMIN_JWT_SECRET !== "-admin")}`);
       }
     }
   }

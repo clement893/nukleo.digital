@@ -491,22 +491,56 @@ async function startServer() {
   // Serve uploaded project images AFTER serveStatic to ensure it takes precedence
   // This is important because serveStatic might have its own /projects route
   app.use('/projects', (req, res, next) => {
-    console.log(`[Projects] Request for: ${req.path}`);
-    const filePath = path.join(projectsImagesPath, req.path.replace(/^\//, ''));
-    console.log(`[Projects] Looking for file at: ${filePath}`);
+    const requestedFile = req.path.replace(/^\//, '');
     
-    if (existsSync(filePath)) {
-      console.log(`[Projects] File found, serving: ${filePath}`);
-      res.sendFile(filePath, (err) => {
-        if (err) {
-          console.error(`[Projects] Error serving file: ${err.message}`);
-          next(err);
-        }
-      });
-    } else {
-      console.log(`[Projects] File not found: ${filePath}`);
-      next();
+    // Skip if no file requested or if it's a directory request
+    if (!requestedFile || requestedFile === '' || requestedFile.endsWith('/')) {
+      return next();
     }
+    
+    const filePath = path.join(projectsImagesPath, requestedFile);
+    
+    console.log(`[Projects] Request: ${req.method} ${req.path} -> ${filePath}`);
+    
+    // Check if file exists and is actually a file (not a directory)
+    if (existsSync(filePath)) {
+      try {
+        const stats = require('fs').statSync(filePath);
+        if (stats.isFile()) {
+          console.log(`[Projects] ✓ Serving: ${filePath} (${stats.size} bytes)`);
+          
+          // Set proper headers
+          res.setHeader('Cache-Control', 'public, max-age=31536000, stale-while-revalidate=86400');
+          res.setHeader('Vary', 'Accept');
+          
+          // Set content type based on extension
+          const ext = path.extname(filePath).toLowerCase();
+          if (ext === '.jpg' || ext === '.jpeg') {
+            res.setHeader('Content-Type', 'image/jpeg');
+          } else if (ext === '.png') {
+            res.setHeader('Content-Type', 'image/png');
+          } else if (ext === '.gif') {
+            res.setHeader('Content-Type', 'image/gif');
+          } else if (ext === '.webp') {
+            res.setHeader('Content-Type', 'image/webp');
+          }
+          
+          return res.sendFile(filePath, (err) => {
+            if (err) {
+              console.error(`[Projects] ✗ Error serving file: ${err.message}`);
+              if (!res.headersSent) {
+                next(err);
+              }
+            }
+          });
+        }
+      } catch (statError) {
+        console.error(`[Projects] ✗ Error checking file stats: ${statError}`);
+      }
+    }
+    
+    console.log(`[Projects] ✗ File not found: ${filePath}`);
+    next();
   });
   
   // Also set up express.static as fallback

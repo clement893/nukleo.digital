@@ -17,7 +17,7 @@ import { usePageBackground } from "./hooks/usePageBackground";
 const UniversalLEO = lazy(() => import("./components/UniversalLEO"));
 
 // Helper function to determine page context from URL
-function getPageContext(pathname: string): 'home' | 'agencies' | 'services' | 'contact' | 'projects' | 'about' | 'default' {
+function getPageContext(pathname: string): 'home' | 'agencies' | 'services' | 'contact' | 'about' | 'default' {
   // Remove language prefix if present
   const path = pathname.replace(/^\/(fr|en)/, '') || '/';
   
@@ -28,7 +28,6 @@ function getPageContext(pathname: string): 'home' | 'agencies' | 'services' | 'c
   if (path.includes('/agencies')) return 'agencies';
   if (path.includes('/services')) return 'services';
   if (path.includes('/contact')) return 'contact';
-  if (path.includes('/projects')) return 'projects';
   if (path.includes('/about')) return 'about';
   
   return 'default';
@@ -59,7 +58,6 @@ import Media from "./pages/Media";
 import NotFound404 from "@/pages/NotFound404";
 
 // Lazy load all other pages
-const Projects = lazy(() => import("./pages/Projects"));
 const Expertise = lazy(() => import("./pages/Expertise"));
 const Resources = lazy(() => import("./pages/Resources"));
 const ResourceArticle = lazy(() => import("./pages/resources/ResourceArticle"));
@@ -155,7 +153,6 @@ function App() {
               </Route>
               {/* Language routes - French */}
               <Route path="/fr" component={Home} />
-              <Route path="/fr/projects" component={withPageVisibility(Projects, "/fr/projects")} />
               <Route path="/fr/about" component={withPageVisibility(About, "/fr/about")} />
               <Route path="/fr/expertise" component={withPageVisibility(Expertise, "/fr/expertise")} />
               <Route path="/fr/resources" component={withPageVisibility(Resources, "/fr/resources")} />
@@ -195,7 +192,6 @@ function App() {
               
               {/* Default routes (English) */}
               <Route path="/" component={Home} />
-              <Route path="/projects" component={withPageVisibility(Projects, "/projects")} />
             <Route path="/about" component={withPageVisibility(About, "/about")} />
             <Route path="/expertise" component={withPageVisibility(Expertise, "/expertise")} />
             <Route path="/resources" component={withPageVisibility(Resources, "/resources")} />

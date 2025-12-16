@@ -243,15 +243,6 @@ async function startServer() {
     }
   });
   
-  // development mode uses Vite, production mode uses static files
-  // IMPORTANT: serveStatic must be BEFORE API routes to ensure assets are served correctly
-  if (process.env.NODE_ENV === "development") {
-    await setupVite(app, server);
-  } else {
-    // serveStatic now handles all cache headers internally
-    serveStatic(app);
-  }
-  
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
   // Sitemap and robots.txt
@@ -270,7 +261,16 @@ async function startServer() {
       res.status(500).json({ error: error.message || "Failed to enable projects pages" });
     }
   });
-  // Redirect /en to home page
+  
+  
+  // development mode uses Vite, production mode uses static files
+  // IMPORTANT: serveStatic must be AFTER API routes to ensure API endpoints work
+  if (process.env.NODE_ENV === "development") {
+    await setupVite(app, server);
+  } else {
+    // serveStatic now handles all cache headers internally
+    serveStatic(app);
+  }
   app.get("/en", (req, res) => {
     res.redirect(301, "/");
   });

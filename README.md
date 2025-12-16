@@ -7,46 +7,102 @@
 
 - **Frontend**: React 19 + TypeScript + Tailwind CSS 4
 - **Backend**: Express + tRPC 11
-- **Base de données**: MySQL/TiDB (Drizzle ORM)
-- **Authentification**: Manus OAuth
-- **Déploiement**: Vercel
+- **Base de données**: PostgreSQL (Drizzle ORM)
+- **Authentification**: Manus OAuth + Google OAuth (admin)
+- **Déploiement**: Railway (production) / Vercel (config disponible)
 
-## Déploiement sur Vercel
+## 🚀 Déploiement sur Railway
 
 ### Prérequis
 
-- Compte Vercel connecté à GitHub
+- Compte [Railway](https://railway.app) connecté à GitHub
+- Base de données PostgreSQL (Railway propose une option intégrée)
 - Variables d'environnement configurées
-
-### Variables d'environnement requises
-
-Les variables suivantes doivent être configurées dans Vercel :
-
-```
-DATABASE_URL=<votre_url_mysql>
-JWT_SECRET=<votre_secret_jwt>
-VITE_APP_ID=<manus_app_id>
-OAUTH_SERVER_URL=<manus_oauth_url>
-VITE_OAUTH_PORTAL_URL=<manus_portal_url>
-OWNER_OPEN_ID=<owner_id>
-OWNER_NAME=<owner_name>
-BUILT_IN_FORGE_API_URL=<forge_api_url>
-BUILT_IN_FORGE_API_KEY=<forge_api_key>
-VITE_FRONTEND_FORGE_API_KEY=<frontend_forge_key>
-VITE_FRONTEND_FORGE_API_URL=<frontend_forge_url>
-VITE_ANALYTICS_ENDPOINT=<analytics_endpoint>
-VITE_ANALYTICS_WEBSITE_ID=<analytics_id>
-VITE_APP_LOGO=<app_logo_url>
-VITE_APP_TITLE=Nukleo Digital
-```
 
 ### Étapes de déploiement
 
-1. Connectez-vous à [Vercel](https://vercel.com)
-2. Cliquez sur "Add New Project"
+1. Connectez-vous à [Railway](https://railway.app)
+2. Créez un nouveau projet depuis GitHub
 3. Importez le dépôt `clement893/nukleo.digital`
-4. Configurez les variables d'environnement
-5. Déployez !
+4. Ajoutez un service PostgreSQL (Railway le fait automatiquement)
+5. Configurez les variables d'environnement (voir `.env.example`)
+6. Railway détecte automatiquement le build et déploie !
+
+### Variables d'environnement requises
+
+Consultez le fichier `.env.example` pour la liste complète des variables d'environnement.
+
+**Variables essentielles** :
+- `DATABASE_URL` : URL de connexion PostgreSQL (générée automatiquement par Railway)
+- `JWT_SECRET` : Secret JWT pour les sessions (générez une chaîne aléatoire sécurisée)
+- `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` : Pour l'authentification admin
+- Variables Manus OAuth pour l'espace client
+- Variables Forge API si utilisées
+
+## 📝 Développement local
+
+### Prérequis
+
+- Node.js 18+ et pnpm installés
+- PostgreSQL en cours d'exécution
+- Variables d'environnement configurées (copiez `.env.example` vers `.env`)
+
+### Installation
+
+```bash
+# Installation des dépendances
+pnpm install
+
+# Copiez le fichier d'exemple des variables d'environnement
+cp .env.example .env
+
+# Éditez .env et remplissez les valeurs nécessaires
+```
+
+### Commandes disponibles
+
+```bash
+# Lancer le serveur de développement
+pnpm dev
+
+# Build de production
+pnpm build
+
+# Démarrer le serveur de production
+pnpm start
+
+# Vérifier les types TypeScript
+pnpm check
+
+# Formater le code
+pnpm format
+
+# Migrations de base de données
+pnpm db:push
+
+# Tests (à venir)
+pnpm test
+```
+
+### Structure du projet
+
+```
+nukleo.digital/
+├── client/          # Frontend React
+│   └── src/
+│       ├── components/  # Composants réutilisables
+│       ├── pages/      # Pages de l'application
+│       ├── hooks/      # Hooks personnalisés
+│       ├── contexts/   # Contextes React
+│       └── locales/   # Traductions (FR/EN)
+├── server/          # Backend Express + tRPC
+│   ├── _core/       # Code core du serveur
+│   ├── routers/     # Routes tRPC
+│   └── db/          # Configuration base de données
+├── shared/          # Code partagé entre client et server
+├── drizzle/         # Schémas et migrations de base de données
+└── dist/            # Build de production
+```
 
 ## Développement local
 
@@ -64,11 +120,48 @@ pnpm build
 pnpm db:push
 ```
 
-## Fonctionnalités
+## ✨ Fonctionnalités
 
 - ✅ Site d'agence avec présentation complète
-- ✅ Espace client avec authentification
-- ✅ Dashboard personnalisé
-- ✅ Gestion de projets
+- ✅ Espace client avec authentification Manus OAuth
+- ✅ Dashboard admin avec authentification Google OAuth
+- ✅ Gestion de visibilité des pages (admin)
 - ✅ Communication client-agence
-- ✅ Upload de fichiers
+- ✅ Upload de fichiers (S3)
+- ✅ Internationalisation (FR/EN)
+- ✅ SEO optimisé avec structured data
+- ✅ Analytics intégrés
+
+## 🔧 Configuration
+
+### Variables d'environnement
+
+Toutes les variables d'environnement sont documentées dans `.env.example`. Copiez ce fichier vers `.env` et remplissez les valeurs nécessaires.
+
+### Base de données
+
+Le projet utilise Drizzle ORM avec PostgreSQL. Les migrations sont gérées via :
+
+```bash
+pnpm db:push
+```
+
+## 📚 Documentation
+
+- [Analyse du code](./CODE_ANALYSIS.md) - Analyse détaillée de l'architecture et du code
+- [Guide de contribution](./CONTRIBUTING.md) - Comment contribuer au projet (à venir)
+
+## 🛠️ Technologies principales
+
+- **React 19** - Framework UI
+- **TypeScript** - Typage statique
+- **Tailwind CSS 4** - Framework CSS
+- **tRPC 11** - API type-safe
+- **Drizzle ORM** - ORM moderne
+- **Wouter** - Router léger
+- **Vite** - Build tool
+- **Express** - Serveur Node.js
+
+## 📄 Licence
+
+MIT

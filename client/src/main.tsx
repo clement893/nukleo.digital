@@ -6,9 +6,12 @@ import { createRoot } from "react-dom/client";
 import superjson from "superjson";
 import App from "./App";
 
-
 import { getLoginUrl } from "./const";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { initSentry } from "./lib/sentry";
+
+// Initialize Sentry for client-side error monitoring
+initSentry();
 // CSS is loaded normally - Vite handles optimization and code splitting
 // Critical CSS is inlined in index.html to prevent render blocking
 // Non-critical CSS (admin) is split into separate chunks
@@ -74,6 +77,12 @@ const root = createRoot(rootElement, {
   // This helps fragment long tasks into smaller chunks
   unstable_transitionCallbacks: undefined,
 });
+
+// Body is now visible by default in index.html, so we don't need to show it here
+// But we keep this for compatibility with any code that checks for 'loaded' class
+if (!document.body.classList.contains('loaded')) {
+  document.body.classList.add('loaded');
+}
 
 // Render with automatic yielding - React 18+ handles this automatically
 // The concurrent root allows React to yield to browser during rendering

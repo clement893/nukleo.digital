@@ -2,6 +2,7 @@ import "dotenv/config";
 import express from "express";
 import { createServer } from "http";
 import net from "net";
+import path from "path";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "./oauth";
 import { appRouter } from "../routers";
@@ -23,6 +24,12 @@ import { configureGoogleAuth, requireAdminAuth } from "./googleAuth";
 import { getDb } from "../db";
 import postgres from "postgres";
 
+/**
+ * Vérifie si un port est disponible pour l'écoute.
+ * 
+ * @param port - Le numéro de port à vérifier
+ * @returns Promise qui se résout à true si le port est disponible, false sinon
+ */
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
     const server = net.createServer();
@@ -33,6 +40,16 @@ function isPortAvailable(port: number): Promise<boolean> {
   });
 }
 
+/**
+ * Trouve un port disponible en commençant par le port de départ.
+ * 
+ * @param startPort - Le port de départ (défaut: 3000)
+ * @returns Promise qui se résout au numéro de port disponible
+ * @throws Error si aucun port disponible n'est trouvé dans la plage (20 ports)
+ * 
+ * @example
+ * const port = await findAvailablePort(3000); // Cherche un port disponible à partir de 3000
+ */
 async function findAvailablePort(startPort: number = 3000): Promise<number> {
   for (let port = startPort; port < startPort + 20; port++) {
     if (await isPortAvailable(port)) {
@@ -55,10 +72,22 @@ async function startServer() {
   }
   
   // Sentry request handler (must be first)
-  // Note: Sentry.Handlers is deprecated in newer versions, skip for now
-  // if (process.env.SENTRY_DSN) {
-  //   app.use(Sentry.Handlers.requestHandler());
-  // }
+  // Track requests and user context
+  if (process.env.SENTRY_DSN) {
+    app.use((req, res, next) => {
+      Sentry.setUser({
+        ip_address: req.ip,
+      });
+      Sentry.setContext('request', {
+        method: req.method,
+        url: req.url,
+        headers: {
+          'user-agent': req.get('user-agent'),
+        },
+      });
+      next();
+    });
+  }
   
   // Compression (gzip/brotli)
   app.use(compression({ level: 9 }));
@@ -141,20 +170,60 @@ async function startServer() {
   // Initialize Passport
   app.use(passport.initialize());
   app.use(passport.session());
-  configureGoogleAuth();
+  const googleAuthConfigured = configureGoogleAuth();
   
-  // Google OAuth routes
-  app.get('/api/auth/google', authLimiter, passport.authenticate('google', {
-    scope: ['profile', 'email'],
-  }));
-  
-  app.get('/api/auth/google/callback',
-    passport.authenticate('google', { failureRedirect: '/admin/login?error=unauthorized' }),
-    (req, res) => {
-      // Successful authentication, redirect to admin
-      res.redirect('/admin');
-    }
-  );
+  // Google OAuth routes - only register if Google Auth is configured
+  if (googleAuthConfigured) {
+    app.get('/api/auth/google', authLimiter, (req, res, next) => {
+      console.log(`[Google Auth] OAuth request initiated from: ${req.get('referer') || 'unknown'}`);
+      passport.authenticate('google', {
+        scope: ['profile', 'email'],
+      })(req, res, next);
+    });
+    
+    app.get('/api/auth/google/callback',
+      (req, res, next) => {
+        console.log(`[Google Auth] Callback received with code: ${req.query.code ? 'present' : 'missing'}`);
+        console.log(`[Google Auth] Callback error: ${req.query.error || 'none'}`);
+        passport.authenticate('google', { 
+          failureRedirect: '/admin/login?error=unauthorized',
+          failureFlash: false,
+        }, (err, user, info) => {
+          if (err) {
+            console.error('[Google Auth] Authentication error:', err);
+            return res.redirect(`/admin/login?error=${encodeURIComponent(err.message || 'authentication_failed')}`);
+          }
+          if (!user) {
+            console.error('[Google Auth] Authentication failed:', info);
+            return res.redirect(`/admin/login?error=${encodeURIComponent(info?.message || 'unauthorized')}`);
+          }
+          req.logIn(user, (loginErr) => {
+            if (loginErr) {
+              console.error('[Google Auth] Login error:', loginErr);
+              return res.redirect(`/admin/login?error=${encodeURIComponent(loginErr.message || 'login_failed')}`);
+            }
+            console.log(`[Google Auth] User logged in successfully: ${user.email}`);
+            return res.redirect('/admin');
+          });
+        })(req, res, next);
+      }
+    );
+  } else {
+    // Return helpful error if Google Auth is not configured
+    app.get('/api/auth/google', (req, res) => {
+      res.status(503).json({ 
+        error: 'Google OAuth is not configured',
+        message: 'Please set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables'
+      });
+    });
+    
+    app.get('/api/auth/google/callback', (req, res) => {
+      res.status(503).json({ 
+        error: 'Google OAuth is not configured',
+        message: 'Please set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables'
+      });
+    });
+  }
   
   // Logout route
   app.post('/api/auth/logout', (req, res) => {
@@ -181,7 +250,20 @@ async function startServer() {
   app.use(sitemapRouter);
   // Database initialization endpoint
   app.post("/api/init-db", initDatabase);
-  // tRPC API with rate limiting
+  
+  // Temporary endpoint to enable projects page (can be removed after use)
+  app.post("/api/enable-projects", async (req, res) => {
+    try {
+      const { enableProjectsPage } = await import("../enable-projects-page");
+      await enableProjectsPage();
+      res.json({ success: true, message: "Projects pages enabled successfully" });
+    } catch (error: any) {
+      console.error("[API] Error enabling projects pages:", error);
+      res.status(500).json({ error: error.message || "Failed to enable projects pages" });
+    }
+  });
+  
+  // tRPC API with rate limiting - MUST be before serveStatic
   app.use("/api/trpc", generalLimiter);
   app.use(
     "/api/trpc",
@@ -190,7 +272,9 @@ async function startServer() {
       createContext,
     })
   );
+  
   // development mode uses Vite, production mode uses static files
+  // IMPORTANT: serveStatic must be AFTER API routes to ensure API endpoints work
   if (process.env.NODE_ENV === "development") {
     await setupVite(app, server);
   } else {
@@ -198,11 +282,43 @@ async function startServer() {
     serveStatic(app);
   }
   
+  // Redirect /en to home page
+  app.get("/en", (req, res) => {
+    res.redirect(301, "/");
+  });
+  app.get("/en/", (req, res) => {
+    res.redirect(301, "/");
+  });
+  
+  // Catch-all route for SPA - serve index.html for all non-API routes
+  // This must be AFTER all API routes and serveStatic
+  if (process.env.NODE_ENV === "production") {
+    const distPath = path.resolve(process.cwd(), "dist", "public");
+    app.get('*', (req, res) => {
+      // Skip asset requests that weren't found
+      if (req.path.startsWith('/assets/') || 
+          req.path.startsWith('/fonts/') || 
+          req.path.startsWith('/images/') ||
+          req.path.match(/\.(js|css|woff2?|eot|ttf|otf|png|jpg|jpeg|gif|svg|ico|webp)$/i)) {
+        return res.status(404).send('File not found');
+      }
+      
+      // Serve index.html for SPA routing
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+      res.setHeader('Pragma', 'no-cache');
+      res.setHeader('Expires', '0');
+      res.sendFile(path.resolve(distPath, "index.html"));
+    });
+  }
+  
   // Sentry error handler (must be after all routes)
-  // Note: Sentry.Handlers is deprecated in newer versions, skip for now
-  // if (process.env.SENTRY_DSN) {
-  //   app.use(Sentry.Handlers.errorHandler());
-  // }
+  // Capture unhandled errors and send to Sentry
+  if (process.env.SENTRY_DSN) {
+    app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
+      Sentry.captureException(err);
+      next(err);
+    });
+  }
 
   const preferredPort = parseInt(process.env.PORT || "3000");
   const port = await findAvailablePort(preferredPort);

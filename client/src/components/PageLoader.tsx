@@ -57,6 +57,15 @@ export default function PageLoader() {
     return isAdminArea || isContactPage || isManifestoPage;
   }, [location]);
 
+  // Body is now visible by default in index.html, so we don't need to show it here
+  // But we keep this for compatibility with any code that checks for 'loaded' class
+  useEffect(() => {
+    // Ensure body has loaded class for compatibility
+    if (!document.body.classList.contains('loaded')) {
+      document.body.classList.add('loaded');
+    }
+  }, []);
+
   // If in admin area, contact page, or manifesto page, show body immediately and don't fetch loaders
   useEffect(() => {
     if (shouldSkipLoader) {
@@ -71,14 +80,17 @@ export default function PageLoader() {
   // Use lower priority on mobile to improve initial load
   const isMobile = useIsMobile(768);
   
-  const { data: activeLoaders, isLoading: isLoadingLoaders } = trpc.loaders.getActive.useQuery(undefined, {
+  const { data: activeLoaders, isLoading: isLoadingLoaders, error: loadersError } = trpc.loaders.getActive.useQuery(undefined, {
     staleTime: 5 * 60 * 1000, // Cache for 5 minutes
     refetchOnWindowFocus: false,
     enabled: !shouldSkipLoader && !isMobile, // Skip loader fetch on mobile for better performance
     // Reduce timeout on mobile for faster fallback
-    retry: isMobile ? 0 : 3,
-    // Reduce timeout on mobile
+    retry: isMobile ? 0 : 1, // Reduce retries to fail faster
+    // Reduce timeout - fail fast if API is slow
     gcTime: isMobile ? 0 : 5 * 60 * 1000,
+    // Add timeout to fail fast if API doesn't respond
+    refetchOnMount: false,
+    refetchOnReconnect: false,
   });
 
   // Preload resources as soon as component mounts
@@ -119,7 +131,30 @@ export default function PageLoader() {
 
     // Wait for loaders to be fetched (only on first load)
     // On mobile, skip loader wait for faster initial render
-    if (isLoadingLoaders && !isMobile) return;
+    // Also skip if there's an error loading loaders
+    if (loadersError) {
+      // If error loading loaders, show content immediately
+      setIsLoading(false);
+      setIsFirstLoad(false);
+      document.body.classList.add('loaded');
+      return;
+    }
+    
+    if (isLoadingLoaders && !isMobile) {
+      // Add timeout - don't wait more than 500ms for loaders (reduced from 1s)
+      // Use a separate effect to handle timeout cleanup
+      const timeoutId = setTimeout(() => {
+        setIsLoading(false);
+        setIsFirstLoad(false);
+        document.body.classList.add('loaded');
+      }, 500);
+      
+      // Return cleanup function
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }
+    
     if (isLoadingLoaders && isMobile) {
       // On mobile, show content immediately without waiting for loader
       setIsLoading(false);
@@ -196,13 +231,17 @@ export default function PageLoader() {
 
       // Preload content while loader is showing
       // Use the loader time to prepare the page content
-      const minDisplayTime = 2000;
+      // Very short minimum display time for fast loading
+      const minDisplayTime = 300; // Reduced to 300ms for faster loading
+      const maxDisplayTime = 800; // Maximum 800ms (reduced from 2s)
       const startTime = Date.now();
 
-      // Preload critical resources during loader display
-      const preloadPageContent = async () => {
-        // Ensure fonts are loaded
-        await document.fonts.ready;
+      // Preload critical resources during loader display (non-blocking)
+      const preloadPageContent = () => {
+        // Don't wait for fonts - load them in background
+        document.fonts.ready.catch(() => {
+          // Silently fail - fonts will load normally
+        });
         
         // Preload critical components for home page (non-blocking)
         // Normalize path to handle language prefixes
@@ -215,16 +254,18 @@ export default function PageLoader() {
         }
       };
 
-      // Start preloading immediately (non-blocking)
+      // Start preloading immediately (non-blocking, don't await)
       preloadPageContent();
 
       const checkReady = () => {
         const elapsed = Date.now() - startTime;
-        // Wait for minimum time AND page to be ready
-        // Hero will be visible immediately when loader disappears
-        const isReady = document.readyState === "complete" && elapsed >= minDisplayTime;
+        // Don't wait for document.readyState - just check elapsed time
+        // This makes loading much faster
+        const minTimeReached = elapsed >= minDisplayTime;
+        const maxTimeReached = elapsed >= maxDisplayTime;
         
-        if (isReady) {
+        // Show content as soon as minimum time is reached OR max time is reached
+        if (minTimeReached || maxTimeReached) {
           setIsLoading(false);
           setIsFirstLoad(false);
           // Show body content immediately - hero should be visible without animations
@@ -237,11 +278,13 @@ export default function PageLoader() {
             styleElement.remove();
           }
         } else {
+          // Check again in 50ms
           setTimeout(checkReady, 50);
         }
       };
 
-      // Start checking after minimum display time
+      // Start checking immediately, not after minDisplayTime
+      // This ensures we show content as soon as possible
       setTimeout(checkReady, minDisplayTime);
     } else {
       setIsLoading(false);
@@ -265,7 +308,7 @@ export default function PageLoader() {
       setIsLoading(false);
       setLoaderHtml(null);
     };
-  }, [activeLoaders, isLoadingLoaders, shouldSkipLoader, location, isFirstLoad]);
+  }, [activeLoaders, isLoadingLoaders, loadersError, shouldSkipLoader, location, isFirstLoad]);
 
   // Don't show loader in admin area, contact page, or manifesto page
   if (shouldSkipLoader) {
@@ -274,22 +317,32 @@ export default function PageLoader() {
 
   // Don't show loader if not loading (e.g., during page transitions)
   if (!isLoading) {
+    // Ensure body is visible when loader is not showing
+    if (!document.body.classList.contains('loaded')) {
+      document.body.classList.add('loaded');
+    }
     return null;
   }
 
   // Don't show anything if no loaders are active
   if (!isLoadingLoaders && (!activeLoaders || activeLoaders.length === 0)) {
+    // Ensure body is visible when no loaders
+    if (!document.body.classList.contains('loaded')) {
+      document.body.classList.add('loaded');
+    }
     return null;
   }
 
   // Show loader container
   if (!loaderHtml) {
-    // Still loading loaders, show black background matching pages
+    // Still loading loaders, show gradient background matching pages
+    // Don't use pure black to match site theme
     return (
       <div
         className="fixed inset-0 z-[9999]"
         style={{
-          backgroundColor: '#0a0a0a',
+          background: 'linear-gradient(135deg, #1e3a8a 0%, #3730a3 20%, #5b21b6 35%, #7c3aed 50%, #6d28d9 65%, #7f1d1d 85%, #991b1b 100%)',
+          backgroundAttachment: 'fixed',
           opacity: 1,
           pointerEvents: "all",
         }}

@@ -7,7 +7,7 @@ export default function NotFound404() {
   const quickLinks = [
     { icon: Home, label: 'Home', path: '/', description: 'Back to homepage' },
     { icon: Compass, label: 'Expertise', path: '/expertise', description: 'Explore our services' },
-    { icon: Briefcase, label: 'Projects', path: '/projects', description: 'View our work' },
+    { icon: Briefcase, label: 'Services', path: '/services', description: 'View our services' },
     { icon: Mail, label: 'Contact', path: '/contact', description: 'Get in touch' },
   ];
 

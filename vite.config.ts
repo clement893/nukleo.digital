@@ -10,6 +10,7 @@ const plugins = [react(), tailwindcss(), jsxLocPlugin()];
 
 export default defineConfig({
   plugins,
+  base: '/', // Explicit base path for proper asset resolution
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),

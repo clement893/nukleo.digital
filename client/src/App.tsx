@@ -1,4 +1,4 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import CustomCursor from "./components/CustomCursor";
@@ -14,11 +14,18 @@ import { usePageTransition } from "./hooks/usePageTransition";
 import { usePageBackground } from "./hooks/usePageBackground";
 import { lazyWithRetry } from "./lib/lazyWithRetry";
 
-// Lazy load UniversalLEO
-const UniversalLEO = lazy(() => import("./components/UniversalLEO"));
-
-// Helper function to determine page context from URL
-function getPageContext(pathname: string): 'home' | 'agencies' | 'services' | 'contact' | 'projects' | 'about' | 'default' {
+/**
+ * Détermine le contexte de la page à partir de l'URL pour le composant LEO.
+ * 
+ * @param pathname - Le chemin de l'URL (ex: '/fr/services', '/about')
+ * @returns Le contexte de la page : 'home' | 'agencies' | 'services' | 'contact' | 'about' | 'default'
+ * 
+ * @example
+ * getPageContext('/fr/services') // returns 'services'
+ * getPageContext('/about') // returns 'about'
+ * getPageContext('/admin/dashboard') // returns 'default'
+ */
+function getPageContext(pathname: string): 'home' | 'agencies' | 'services' | 'contact' | 'about' | 'default' {
   // Remove language prefix if present
   const path = pathname.replace(/^\/(fr|en)/, '') || '/';
   
@@ -29,7 +36,6 @@ function getPageContext(pathname: string): 'home' | 'agencies' | 'services' | 'c
   if (path.includes('/agencies')) return 'agencies';
   if (path.includes('/services')) return 'services';
   if (path.includes('/contact')) return 'contact';
-  if (path.includes('/projects')) return 'projects';
   if (path.includes('/about')) return 'about';
   
   return 'default';
@@ -38,17 +44,33 @@ function getPageContext(pathname: string): 'home' | 'agencies' | 'services' | 'c
 // Global LEO component that detects page context - disabled on mobile for performance
 import { useIsMobile } from './hooks/useIsMobile';
 
+/**
+ * Lazy load UniversalLEO only when needed (desktop, non-admin pages).
+ * This prevents loading the component on mobile devices where it's disabled.
+ */
+const UniversalLEOLazy = lazy(() => import('./components/UniversalLEO'));
+
+/**
+ * Global LEO component that detects page context.
+ * Automatically disabled on mobile devices for better performance.
+ * 
+ * @returns UniversalLEO component or null if on mobile/admin
+ */
 function GlobalLEO() {
   const [location] = useLocation();
   const isMobile = useIsMobile(768);
   
-  if (isMobile) return null;
+  // Don't even load the component on mobile or server-side
+  if (isMobile || typeof window === 'undefined') return null;
+  
+  // Skip admin pages
+  if (location.startsWith('/admin')) return null;
   
   const pageContext = getPageContext(location);
   
   return (
     <Suspense fallback={null}>
-      <UniversalLEO pageContext={pageContext} />
+      <UniversalLEOLazy pageContext={pageContext} />
     </Suspense>
   );
 }
@@ -59,8 +81,12 @@ import About from "./pages/About";
 import Media from "./pages/Media";
 import NotFound404 from "@/pages/NotFound404";
 
+<<<<<<< HEAD
 // Lazy load all other pages with retry logic for chunk loading errors
 const Projects = lazyWithRetry(() => import("./pages/Projects"));
+=======
+// Lazy load all other pages
+>>>>>>> 95094235bcd655a7c9b0acedf5a712c36c178d91
 const Expertise = lazy(() => import("./pages/Expertise"));
 const Resources = lazy(() => import("./pages/Resources"));
 const ResourceArticle = lazy(() => import("./pages/resources/ResourceArticle"));
@@ -82,6 +108,7 @@ const Cookies = lazy(() => import("./pages/Cookies"));
 const Testimonials = lazy(() => import("./pages/Testimonials"));
 const Services = lazy(() => import("./pages/Services"));
 const Clients = lazy(() => import("./pages/Clients"));
+const Projects = lazy(() => import("./pages/Projects"));
 const StartProject = lazy(() => import("./pages/StartProject"));
 const MediaCenter = lazy(() => import("./pages/MediaCenter"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
@@ -121,6 +148,20 @@ function LanguageRoute({ component: Component, ...props }: { component: any; pat
   return <Component {...props} />;
 }
 
+/**
+ * Composant de redirection qui redirige automatiquement vers la page d'accueil.
+ * Utilisé pour rediriger /en vers / (page d'accueil).
+ * 
+ * @returns null - Le composant ne rend rien, il effectue juste la redirection
+ */
+function RedirectToHome() {
+  const [, setLocation] = useLocation();
+  useEffect(() => {
+    setLocation("/");
+  }, [setLocation]);
+  return null;
+}
+
 function App() {
   // Trigger animations on route change
   usePageTransition();
@@ -141,9 +182,12 @@ function App() {
           {typeof window !== 'undefined' && window.innerWidth >= 768 && <GlobalLEO />}
           <Suspense fallback={null}>
             <Switch>
+              {/* Redirect /en to home page */}
+              <Route path="/en">
+                <RedirectToHome />
+              </Route>
               {/* Language routes - French */}
               <Route path="/fr" component={Home} />
-              <Route path="/fr/projects" component={withPageVisibility(Projects, "/fr/projects")} />
               <Route path="/fr/about" component={withPageVisibility(About, "/fr/about")} />
               <Route path="/fr/expertise" component={withPageVisibility(Expertise, "/fr/expertise")} />
               <Route path="/fr/resources" component={withPageVisibility(Resources, "/fr/resources")} />
@@ -168,6 +212,7 @@ function App() {
               <Route path="/fr/testimonials" component={withPageVisibility(Testimonials, "/fr/testimonials")} />
               <Route path="/fr/services" component={withPageVisibility(Services, "/fr/services")} />
               <Route path="/fr/clients" component={withPageVisibility(Clients, "/fr/clients")} />
+              <Route path="/fr/projects" component={withPageVisibility(Projects, "/fr/projects")} />
               <Route path="/fr/start-project" component={withPageVisibility(StartProject, "/fr/start-project")} />
               <Route path="/fr/media-center" component={withPageVisibility(MediaCenter, "/fr/media-center")} />
               <Route path="/fr/media" component={withPageVisibility(Media, "/fr/media")} />
@@ -183,7 +228,6 @@ function App() {
               
               {/* Default routes (English) */}
               <Route path="/" component={Home} />
-              <Route path="/projects" component={withPageVisibility(Projects, "/projects")} />
             <Route path="/about" component={withPageVisibility(About, "/about")} />
             <Route path="/expertise" component={withPageVisibility(Expertise, "/expertise")} />
             <Route path="/resources" component={withPageVisibility(Resources, "/resources")} />
@@ -208,6 +252,7 @@ function App() {
             <Route path="/testimonials" component={withPageVisibility(Testimonials, "/testimonials")} />
             <Route path="/services" component={withPageVisibility(Services, "/services")} />
             <Route path="/clients" component={withPageVisibility(Clients, "/clients")} />
+            <Route path="/projects" component={withPageVisibility(Projects, "/projects")} />
             <Route path="/start-project" component={withPageVisibility(StartProject, "/start-project")} />
             <Route path="/media-center" component={withPageVisibility(MediaCenter, "/media-center")} />
             <Route path="/media" component={withPageVisibility(Media, "/media")} />

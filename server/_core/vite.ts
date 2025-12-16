@@ -48,18 +48,41 @@ export async function setupVite(app: Express, server: Server) {
 }
 
 export function serveStatic(app: Express) {
-  const distPath =
-    process.env.NODE_ENV === "development"
-      ? path.resolve(import.meta.dirname, "../..", "dist", "public")
-      : path.resolve(import.meta.dirname, "public");
+  // Always use dist/public for production builds
+  // In Railway, the working directory is /app, so we need to resolve from process.cwd()
+  // The compiled code is in dist/, so we resolve from the working directory
+  let distPath = path.resolve(process.cwd(), "dist", "public");
+  
   if (!fs.existsSync(distPath)) {
-    console.error(
-      `Could not find the build directory: ${distPath}, make sure to build the client first`
-    );
+    // Try alternative path - in case we're running from a different location
+    const altPath = path.resolve(import.meta.dirname, "..", "..", "dist", "public");
+    if (fs.existsSync(altPath)) {
+      console.log(`[Static] Found build directory at alternative path: ${altPath}`);
+      distPath = altPath;
+    } else {
+      console.error(
+        `Could not find the build directory at: ${distPath} or ${altPath}`
+      );
+      console.error(`Current working directory: ${process.cwd()}`);
+      console.error(`__dirname equivalent: ${import.meta.dirname}`);
+      return;
+    }
+  }
+  
+  console.log(`[Static] Serving static files from: ${distPath}`);
+  
+  // Check if assets/js directory exists
+  const assetsJsPath = path.join(distPath, 'assets', 'js');
+  if (fs.existsSync(assetsJsPath)) {
+    const files = fs.readdirSync(assetsJsPath);
+    console.log(`[Static] Found ${files.length} JS files in assets/js:`, files.slice(0, 5));
+  } else {
+    console.error(`[Static] ⚠️ assets/js directory not found at: ${assetsJsPath}`);
   }
 
   // Configure cache headers for different resource types
   // JavaScript and CSS files (with hash in filename) - cache forever
+  // IMPORTANT: This must be BEFORE the catch-all route
   app.use('/assets/js', express.static(path.join(distPath, 'assets', 'js'), {
     maxAge: '1y',
     immutable: true,
@@ -68,6 +91,10 @@ export function serveStatic(app: Express) {
     setHeaders: (res, filePath) => {
       res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
       res.setHeader('Vary', 'Accept-Encoding');
+      // Ensure proper Content-Type for JavaScript modules
+      if (filePath.endsWith('.js')) {
+        res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+      }
     }
   }));
 
@@ -114,6 +141,8 @@ export function serveStatic(app: Express) {
   }));
 
   // Static assets in root (images, favicons, etc.)
+  // This must come AFTER the specific /assets/js and /assets/css routes
+  // to avoid conflicts, but BEFORE the catch-all route
   app.use(express.static(distPath, {
     maxAge: '1y',
     immutable: false,
@@ -126,6 +155,10 @@ export function serveStatic(app: Express) {
       if (filePath.includes('/assets/') && (ext === '.js' || ext === '.css')) {
         res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
         res.setHeader('Vary', 'Accept-Encoding');
+        // Ensure proper Content-Type for JavaScript modules
+        if (ext === '.js') {
+          res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+        }
       }
       // Fonts - cache forever
       else if (ext === '.woff2' || ext === '.woff' || ext === '.ttf' || ext === '.otf' || ext === '.eot') {
@@ -152,12 +185,5 @@ export function serveStatic(app: Express) {
     }
   }));
 
-  // fall through to index.html if the file doesn't exist
-  app.use("*", (_req, res) => {
-    // Don't cache HTML files - always fetch fresh
-    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-    res.setHeader('Pragma', 'no-cache');
-    res.setHeader('Expires', '0');
-    res.sendFile(path.resolve(distPath, "index.html"));
-  });
+  // Note: catch-all route for index.html is handled in index.ts after all API routes
 }

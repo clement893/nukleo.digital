@@ -77,6 +77,13 @@ export default function Projects() {
   const { data: uploadedImages, isLoading: isLoadingImages, error: imagesError } = trpc.projectsImages.list.useQuery(undefined, {
     retry: 2,
     refetchOnWindowFocus: false,
+    // Add error handling
+    onError: (error) => {
+      console.error('[Projects] tRPC error:', error);
+    },
+    onSuccess: (data) => {
+      console.log('[Projects] tRPC success:', data?.length, 'images');
+    },
   });
   
   const [images, setImages] = useState<string[]>([]); // Start empty, will be populated from API

@@ -519,6 +519,26 @@ async function startServer() {
     }
   });
   
+  // Test endpoint to directly call the listImages function
+  app.get('/api/debug/projects-images-trpc', async (req, res) => {
+    try {
+      // Import and call the listImages function directly
+      const { listImages } = await import("../routers/projectsImages");
+      const result = await listImages();
+      res.json({
+        success: true,
+        count: result.length,
+        images: result,
+      });
+    } catch (error: any) {
+      console.error("[Debug] Error calling listImages:", error);
+      res.status(500).json({ 
+        error: error.message,
+        stack: error.stack 
+      });
+    }
+  });
+  
   // development mode uses Vite, production mode uses static files
   // IMPORTANT: serveStatic must be AFTER API routes to ensure API endpoints work
   if (process.env.NODE_ENV === "development") {

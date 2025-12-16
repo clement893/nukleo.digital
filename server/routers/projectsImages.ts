@@ -19,7 +19,7 @@ async function ensureProjectsDir() {
 }
 
 // Helper function to list images (shared between public and admin)
-async function listImages() {
+export async function listImages() {
   await ensureProjectsDir();
   
   try {

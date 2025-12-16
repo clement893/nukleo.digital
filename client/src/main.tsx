@@ -78,7 +78,8 @@ const root = createRoot(rootElement, {
   unstable_transitionCallbacks: undefined,
 });
 
-// Show body immediately when React starts rendering to prevent black screen
+// Body is now visible by default in index.html, so we don't need to show it here
+// But we keep this for compatibility with any code that checks for 'loaded' class
 if (!document.body.classList.contains('loaded')) {
   document.body.classList.add('loaded');
 }

@@ -57,9 +57,10 @@ export default function PageLoader() {
     return isAdminArea || isContactPage || isManifestoPage;
   }, [location]);
 
-  // Show body immediately when component mounts to prevent black screen
+  // Body is now visible by default in index.html, so we don't need to show it here
+  // But we keep this for compatibility with any code that checks for 'loaded' class
   useEffect(() => {
-    // Always show body when component mounts - don't wait for loaders
+    // Ensure body has loaded class for compatibility
     if (!document.body.classList.contains('loaded')) {
       document.body.classList.add('loaded');
     }

@@ -74,8 +74,8 @@ function shuffleArray<T>(array: T[]): T[] {
 
 export default function Projects() {
   // Load images from API (public endpoint - we'll make it public)
-  const { data: uploadedImages, isLoading: isLoadingImages } = trpc.projectsImages.list.useQuery(undefined, {
-    retry: false,
+  const { data: uploadedImages, isLoading: isLoadingImages, error: imagesError } = trpc.projectsImages.list.useQuery(undefined, {
+    retry: 2,
     refetchOnWindowFocus: false,
   });
   
@@ -84,7 +84,7 @@ export default function Projects() {
     ? uploadedImages.map(img => img.name)
     : fallbackImages;
   
-  const [images, setImages] = useState(availableImages);
+  const [images, setImages] = useState(fallbackImages); // Start with fallback
   const [isShuffling, setIsShuffling] = useState(false);
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
   const [visibleImages, setVisibleImages] = useState<Set<number>>(new Set());
@@ -92,8 +92,13 @@ export default function Projects() {
   
   // Update images when API data loads
   useEffect(() => {
-    if (uploadedImages && uploadedImages.length > 0) {
-      setImages(uploadedImages.map(img => img.name));
+    if (uploadedImages) {
+      if (uploadedImages.length > 0) {
+        setImages(uploadedImages.map(img => img.name));
+      } else {
+        // API returned empty array, use fallback
+        setImages(fallbackImages);
+      }
     }
   }, [uploadedImages]);
 
@@ -184,10 +189,21 @@ export default function Projects() {
         {/* Masonry Grid - 3 colonnes max */}
         <section className="pb-24 lg:pb-32">
           <div className="container">
-            {isLoadingImages && images.length === 0 ? (
+            {isLoadingImages ? (
               <div className="flex items-center justify-center py-24">
                 <Loader2 className="w-8 h-8 animate-spin text-purple-400" />
                 <span className="ml-3 text-white/70">Loading images...</span>
+              </div>
+            ) : imagesError ? (
+              <div className="flex flex-col items-center justify-center py-24">
+                <p className="text-white/70 mb-4">Error loading images from server. Using fallback images.</p>
+                {images.length > 0 && (
+                  <p className="text-white/50 text-sm">Showing {images.length} images</p>
+                )}
+              </div>
+            ) : images.length === 0 ? (
+              <div className="flex items-center justify-center py-24">
+                <p className="text-white/70">No images found.</p>
               </div>
             ) : (
               <div 

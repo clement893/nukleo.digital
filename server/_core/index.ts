@@ -448,7 +448,9 @@ async function startServer() {
   
   // Serve uploaded project images from client/public/projects (works in both dev and prod)
   // This must be BEFORE serveStatic to ensure uploaded images are accessible
+  // In production, also check dist/public/projects (for images copied during build)
   const projectsImagesPath = path.resolve(process.cwd(), "client", "public", "projects");
+  const distProjectsImagesPath = path.resolve(process.cwd(), "dist", "public", "projects");
   
   // Ensure directory exists
   if (!existsSync(projectsImagesPath)) {
@@ -457,6 +459,16 @@ async function startServer() {
       console.log(`[Static] Created projects directory: ${projectsImagesPath}`);
     } catch (error) {
       console.error(`[Static] Failed to create projects directory: ${projectsImagesPath}`, error);
+    }
+  }
+  
+  // Also ensure dist directory exists in production
+  if (process.env.NODE_ENV === "production" && !existsSync(distProjectsImagesPath)) {
+    try {
+      mkdirSync(distProjectsImagesPath, { recursive: true });
+      console.log(`[Static] Created dist projects directory: ${distProjectsImagesPath}`);
+    } catch (error) {
+      console.error(`[Static] Failed to create dist projects directory: ${distProjectsImagesPath}`, error);
     }
   }
   
@@ -487,8 +499,8 @@ async function startServer() {
     });
   });
   
-  // Debug endpoint to list files in projects directory
-  app.get('/api/debug/projects-images', requireAdminAuth, async (req, res) => {
+  // Debug endpoint to list files in projects directory (public for debugging)
+  app.get('/api/debug/projects-images', async (req, res) => {
     try {
       const files = existsSync(projectsImagesPath) ? await fs.readdir(projectsImagesPath) : [];
       const imageFiles = files.filter(
@@ -500,6 +512,7 @@ async function startServer() {
         files: imageFiles,
         total: imageFiles.length,
         cwd: process.cwd(),
+        nodeEnv: process.env.NODE_ENV,
       });
     } catch (error: any) {
       res.status(500).json({ error: error.message });
@@ -535,12 +548,25 @@ async function startServer() {
       return next();
     }
     
-    const filePath = path.join(projectsImagesPath, requestedFile);
+    // Try both paths: first the upload directory, then dist (for build-time images)
+    let filePath = path.join(projectsImagesPath, requestedFile);
+    let foundPath = null;
     
-    console.log(`[Projects] Request: ${req.method} ${req.path} -> ${filePath}`);
+    if (existsSync(filePath)) {
+      foundPath = filePath;
+    } else if (process.env.NODE_ENV === "production") {
+      // In production, also check dist/public/projects
+      const distFilePath = path.join(distProjectsImagesPath, requestedFile);
+      if (existsSync(distFilePath)) {
+        foundPath = distFilePath;
+      }
+    }
+    
+    console.log(`[Projects] Request: ${req.method} ${req.path} -> ${filePath}${foundPath ? ` (found: ${foundPath})` : ' (not found)'}`);
     
     // Check if file exists and is actually a file (not a directory)
-    if (existsSync(filePath)) {
+    if (foundPath) {
+      filePath = foundPath;
       try {
         const stats = require('fs').statSync(filePath);
         if (stats.isFile()) {
@@ -581,7 +607,7 @@ async function startServer() {
     return res.status(404).send('Image not found');
   });
   
-  console.log(`[Static] Serving project images from: ${projectsImagesPath}`);
+  console.log(`[Static] Serving project images from: ${projectsImagesPath}${process.env.NODE_ENV === "production" ? ` and ${distProjectsImagesPath}` : ''}`);
   
   // Redirect /en to home page
   app.get("/en", (req, res) => {

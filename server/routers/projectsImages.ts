@@ -5,11 +5,16 @@ import path from "path";
 import { existsSync } from "fs";
 
 const PROJECTS_IMAGES_DIR = path.resolve(process.cwd(), "client", "public", "projects");
+const DIST_PROJECTS_IMAGES_DIR = path.resolve(process.cwd(), "dist", "public", "projects");
 
 // Ensure directory exists
 async function ensureProjectsDir() {
   if (!existsSync(PROJECTS_IMAGES_DIR)) {
     await fs.mkdir(PROJECTS_IMAGES_DIR, { recursive: true });
+  }
+  // Also ensure dist directory in production
+  if (process.env.NODE_ENV === "production" && !existsSync(DIST_PROJECTS_IMAGES_DIR)) {
+    await fs.mkdir(DIST_PROJECTS_IMAGES_DIR, { recursive: true });
   }
 }
 
@@ -18,14 +23,41 @@ async function listImages() {
   await ensureProjectsDir();
   
   try {
-    const files = await fs.readdir(PROJECTS_IMAGES_DIR);
-    const imageFiles = files.filter(
+    // Get files from both directories and merge them
+    const filesSet = new Set<string>();
+    
+    // Read from upload directory
+    if (existsSync(PROJECTS_IMAGES_DIR)) {
+      try {
+        const files = await fs.readdir(PROJECTS_IMAGES_DIR);
+        files.forEach(file => filesSet.add(file));
+      } catch (error) {
+        console.error("[ProjectsImages] Error reading upload directory:", error);
+      }
+    }
+    
+    // In production, also read from dist directory
+    if (process.env.NODE_ENV === "production" && existsSync(DIST_PROJECTS_IMAGES_DIR)) {
+      try {
+        const distFiles = await fs.readdir(DIST_PROJECTS_IMAGES_DIR);
+        distFiles.forEach(file => filesSet.add(file));
+      } catch (error) {
+        console.error("[ProjectsImages] Error reading dist directory:", error);
+      }
+    }
+    
+    const imageFiles = Array.from(filesSet).filter(
       (file) => /\.(jpg|jpeg|png|gif|webp)$/i.test(file)
     );
     
     const imagesWithStats = await Promise.all(
       imageFiles.map(async (file) => {
-        const filePath = path.join(PROJECTS_IMAGES_DIR, file);
+        // Try upload directory first, then dist
+        let filePath = path.join(PROJECTS_IMAGES_DIR, file);
+        if (!existsSync(filePath) && process.env.NODE_ENV === "production") {
+          filePath = path.join(DIST_PROJECTS_IMAGES_DIR, file);
+        }
+        
         const stats = await fs.stat(filePath);
         return {
           name: file,

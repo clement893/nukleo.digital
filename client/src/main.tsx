@@ -87,6 +87,32 @@ root.render(
   </trpc.Provider>
 );
 
+// Global error handler for chunk loading failures
+// This catches any chunk loading errors that might not be handled by lazyWithRetry
+if (typeof window !== 'undefined') {
+  window.addEventListener('error', (event) => {
+    const error = event.error || event.message;
+    const isChunkError = 
+      error instanceof TypeError &&
+      (error.message?.includes('Failed to fetch dynamically imported module') ||
+       error.message?.includes('Loading chunk') ||
+       error.message?.includes('Loading CSS chunk') ||
+       event.message?.includes('Failed to fetch dynamically imported module') ||
+       event.message?.includes('Loading chunk') ||
+       event.message?.includes('Loading CSS chunk'));
+    
+    if (isChunkError) {
+      console.warn('[Global Error Handler] Chunk loading failed, reloading page...', error || event.message);
+      event.preventDefault(); // Prevent default error handling
+      
+      // Reload the page to get the latest HTML/chunks
+      setTimeout(() => {
+        window.location.reload();
+      }, 100);
+    }
+  }, true); // Use capture phase to catch errors early
+}
+
 // Optimize LCP - show inline SVG immediately if present
 // Use requestIdleCallback to avoid blocking initial render
 if (typeof window !== 'undefined') {

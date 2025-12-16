@@ -12,6 +12,7 @@ import AnalyticsLoader from "./components/AnalyticsLoader";
 import { FloatingLanguageToggle } from "./components/FloatingLanguageToggle";
 import { usePageTransition } from "./hooks/usePageTransition";
 import { usePageBackground } from "./hooks/usePageBackground";
+import { lazyWithRetry } from "./lib/lazyWithRetry";
 
 // Lazy load UniversalLEO
 const UniversalLEO = lazy(() => import("./components/UniversalLEO"));
@@ -58,8 +59,8 @@ import About from "./pages/About";
 import Media from "./pages/Media";
 import NotFound404 from "@/pages/NotFound404";
 
-// Lazy load all other pages
-const Projects = lazy(() => import("./pages/Projects"));
+// Lazy load all other pages with retry logic for chunk loading errors
+const Projects = lazyWithRetry(() => import("./pages/Projects"));
 const Expertise = lazy(() => import("./pages/Expertise"));
 const Resources = lazy(() => import("./pages/Resources"));
 const ResourceArticle = lazy(() => import("./pages/resources/ResourceArticle"));

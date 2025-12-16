@@ -283,15 +283,9 @@ async function startServer() {
   
   // Catch-all route for SPA - serve index.html for all non-API routes
   // This must be AFTER all API routes and serveStatic
-  // Only match routes that don't start with /api/ to avoid intercepting API calls
   if (process.env.NODE_ENV === "production") {
     const distPath = path.resolve(process.cwd(), "dist", "public");
     app.get('*', (req, res) => {
-      // Skip API routes - they should be handled by API routes above
-      if (req.path.startsWith('/api/')) {
-        return res.status(404).json({ error: 'API endpoint not found' });
-      }
-      
       // Skip asset requests that weren't found
       if (req.path.startsWith('/assets/') || 
           req.path.startsWith('/fonts/') || 

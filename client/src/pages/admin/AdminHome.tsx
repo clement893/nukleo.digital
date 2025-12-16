@@ -14,7 +14,8 @@ import {
   Globe,
   Database,
   TrendingUp,
-  FileText
+  FileText,
+  Image as ImageIcon
 } from "lucide-react";
 
 interface AdminCardProps {
@@ -145,6 +146,12 @@ export default function AdminHome() {
           description: "Personnaliser les sons interactifs de l'interface",
           icon: <Volume2 className="w-6 h-6 text-primary" />,
           href: "/admin/sounds",
+        },
+        {
+          title: "Images de Projets",
+          description: "Uploader et gérer les images de la page projets",
+          icon: <ImageIcon className="w-6 h-6 text-primary" />,
+          href: "/admin/projects-images",
         },
       ],
     },

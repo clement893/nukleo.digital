@@ -141,13 +141,13 @@ export default function PageLoader() {
     }
     
     if (isLoadingLoaders && !isMobile) {
-      // Add timeout - don't wait more than 1 second for loaders (reduced from 3s)
+      // Add timeout - don't wait more than 500ms for loaders (reduced from 1s)
       // Use a separate effect to handle timeout cleanup
       const timeoutId = setTimeout(() => {
         setIsLoading(false);
         setIsFirstLoad(false);
         document.body.classList.add('loaded');
-      }, 1000);
+      }, 500);
       
       // Return cleanup function
       return () => {
@@ -231,14 +231,17 @@ export default function PageLoader() {
 
       // Preload content while loader is showing
       // Use the loader time to prepare the page content
-      // Reduced minimum display time for faster loading
-      const minDisplayTime = 1000;
+      // Very short minimum display time for fast loading
+      const minDisplayTime = 300; // Reduced to 300ms for faster loading
+      const maxDisplayTime = 800; // Maximum 800ms (reduced from 2s)
       const startTime = Date.now();
 
-      // Preload critical resources during loader display
-      const preloadPageContent = async () => {
-        // Ensure fonts are loaded
-        await document.fonts.ready;
+      // Preload critical resources during loader display (non-blocking)
+      const preloadPageContent = () => {
+        // Don't wait for fonts - load them in background
+        document.fonts.ready.catch(() => {
+          // Silently fail - fonts will load normally
+        });
         
         // Preload critical components for home page (non-blocking)
         // Normalize path to handle language prefixes
@@ -251,19 +254,18 @@ export default function PageLoader() {
         }
       };
 
-      // Start preloading immediately (non-blocking)
+      // Start preloading immediately (non-blocking, don't await)
       preloadPageContent();
 
       const checkReady = () => {
         const elapsed = Date.now() - startTime;
-        // Wait for minimum time AND page to be ready
-        // Hero will be visible immediately when loader disappears
-        // Also add maximum timeout to prevent infinite loading
-        const maxDisplayTime = 2000; // Maximum 2 seconds (reduced from 5s)
-        const isReady = document.readyState === "complete" && elapsed >= minDisplayTime;
+        // Don't wait for document.readyState - just check elapsed time
+        // This makes loading much faster
+        const minTimeReached = elapsed >= minDisplayTime;
         const maxTimeReached = elapsed >= maxDisplayTime;
         
-        if (isReady || maxTimeReached) {
+        // Show content as soon as minimum time is reached OR max time is reached
+        if (minTimeReached || maxTimeReached) {
           setIsLoading(false);
           setIsFirstLoad(false);
           // Show body content immediately - hero should be visible without animations
@@ -276,11 +278,13 @@ export default function PageLoader() {
             styleElement.remove();
           }
         } else {
+          // Check again in 50ms
           setTimeout(checkReady, 50);
         }
       };
 
-      // Start checking after minimum display time
+      // Start checking immediately, not after minDisplayTime
+      // This ensures we show content as soon as possible
       setTimeout(checkReady, minDisplayTime);
     } else {
       setIsLoading(false);

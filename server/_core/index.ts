@@ -263,6 +263,15 @@ async function startServer() {
     }
   });
   
+  // tRPC API with rate limiting - MUST be before serveStatic
+  app.use("/api/trpc", generalLimiter);
+  app.use(
+    "/api/trpc",
+    createExpressMiddleware({
+      router: appRouter,
+      createContext,
+    })
+  );
   
   // development mode uses Vite, production mode uses static files
   // IMPORTANT: serveStatic must be AFTER API routes to ensure API endpoints work

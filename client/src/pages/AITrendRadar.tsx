@@ -6,9 +6,11 @@ import Breadcrumb from '@/components/Breadcrumb';
 import { trpc } from '@/lib/trpc';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Loader2, Mail } from 'lucide-react';
+import { useLocation } from 'wouter';
 
 export default function AITrendRadar() {
   const { t } = useLanguage();
+  const [, setLocation] = useLocation();
   const { data: latestNews, isLoading: isLoadingNews } = trpc.radar.getLatestNews.useQuery({ limit: 10 });
   const [email, setEmail] = useState('');
   const [isSubscribed, setIsSubscribed] = useState(false);
@@ -91,6 +93,11 @@ export default function AITrendRadar() {
               {latestNews.map((news) => (
                 <div
                   key={news.id}
+                  onClick={() => {
+                    // Navigate to radar page - could be enhanced to scroll to specific technology
+                    const currentLang = window.location.pathname.startsWith('/fr') ? '/fr' : '';
+                    setLocation(`${currentLang}/radar`);
+                  }}
                   className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-purple-500/30 transition-all duration-300 group cursor-pointer h-full flex flex-col"
                 >
                   <div className="flex items-start justify-between mb-4">

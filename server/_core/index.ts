@@ -460,24 +460,10 @@ async function startServer() {
     }
   }
   
-  // Always set up the static middleware, even if directory doesn't exist yet
-  app.use('/projects', express.static(projectsImagesPath, {
-    maxAge: '1y',
-    immutable: false, // Images might be updated
-    etag: true,
-    lastModified: true,
-    setHeaders: (res, filePath) => {
-      res.setHeader('Cache-Control', 'public, max-age=31536000, stale-while-revalidate=86400');
-      res.setHeader('Vary', 'Accept');
-    },
-    fallthrough: false, // Don't fall through to next middleware if file not found
-  }));
-  console.log(`[Static] Serving project images from: ${projectsImagesPath}`);
-  
   // Debug endpoint to list files in projects directory
   app.get('/api/debug/projects-images', requireAdminAuth, async (req, res) => {
     try {
-      const files = await fs.readdir(projectsImagesPath);
+      const files = existsSync(projectsImagesPath) ? await fs.readdir(projectsImagesPath) : [];
       const imageFiles = files.filter(
         (file) => /\.(jpg|jpeg|png|gif|webp)$/i.test(file)
       );
@@ -486,6 +472,7 @@ async function startServer() {
         exists: existsSync(projectsImagesPath),
         files: imageFiles,
         total: imageFiles.length,
+        cwd: process.cwd(),
       });
     } catch (error: any) {
       res.status(500).json({ error: error.message });
@@ -500,6 +487,40 @@ async function startServer() {
     // serveStatic now handles all cache headers internally
     serveStatic(app);
   }
+  
+  // Serve uploaded project images AFTER serveStatic to ensure it takes precedence
+  // This is important because serveStatic might have its own /projects route
+  app.use('/projects', (req, res, next) => {
+    console.log(`[Projects] Request for: ${req.path}`);
+    const filePath = path.join(projectsImagesPath, req.path.replace(/^\//, ''));
+    console.log(`[Projects] Looking for file at: ${filePath}`);
+    
+    if (existsSync(filePath)) {
+      console.log(`[Projects] File found, serving: ${filePath}`);
+      res.sendFile(filePath, (err) => {
+        if (err) {
+          console.error(`[Projects] Error serving file: ${err.message}`);
+          next(err);
+        }
+      });
+    } else {
+      console.log(`[Projects] File not found: ${filePath}`);
+      next();
+    }
+  });
+  
+  // Also set up express.static as fallback
+  app.use('/projects', express.static(projectsImagesPath, {
+    maxAge: '1y',
+    immutable: false,
+    etag: true,
+    lastModified: true,
+    setHeaders: (res, filePath) => {
+      res.setHeader('Cache-Control', 'public, max-age=31536000, stale-while-revalidate=86400');
+      res.setHeader('Vary', 'Accept');
+    },
+  }));
+  console.log(`[Static] Serving project images from: ${projectsImagesPath}`);
   
   // Redirect /en to home page
   app.get("/en", (req, res) => {

@@ -258,6 +258,18 @@ async function startServer() {
   app.use(sitemapRouter);
   // Database initialization endpoint
   app.post("/api/init-db", initDatabase);
+  
+  // Temporary endpoint to enable projects page (can be removed after use)
+  app.post("/api/enable-projects", async (req, res) => {
+    try {
+      const { enableProjectsPage } = await import("../enable-projects-page");
+      await enableProjectsPage();
+      res.json({ success: true, message: "Projects pages enabled successfully" });
+    } catch (error: any) {
+      console.error("[API] Error enabling projects pages:", error);
+      res.status(500).json({ error: error.message || "Failed to enable projects pages" });
+    }
+  });
   // tRPC API with rate limiting
   app.use("/api/trpc", generalLimiter);
   app.use(

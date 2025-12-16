@@ -49,18 +49,40 @@ export async function setupVite(app: Express, server: Server) {
 
 export function serveStatic(app: Express) {
   // Always use dist/public for production builds
-  const distPath = path.resolve(import.meta.dirname, "../..", "dist", "public");
+  // In Railway, the working directory is /app, so we need to resolve from process.cwd()
+  // The compiled code is in dist/, so we resolve from the working directory
+  let distPath = path.resolve(process.cwd(), "dist", "public");
+  
   if (!fs.existsSync(distPath)) {
-    console.error(
-      `Could not find the build directory: ${distPath}, make sure to build the client first`
-    );
-    return;
+    // Try alternative path - in case we're running from a different location
+    const altPath = path.resolve(import.meta.dirname, "..", "..", "dist", "public");
+    if (fs.existsSync(altPath)) {
+      console.log(`[Static] Found build directory at alternative path: ${altPath}`);
+      distPath = altPath;
+    } else {
+      console.error(
+        `Could not find the build directory at: ${distPath} or ${altPath}`
+      );
+      console.error(`Current working directory: ${process.cwd()}`);
+      console.error(`__dirname equivalent: ${import.meta.dirname}`);
+      return;
+    }
   }
   
   console.log(`[Static] Serving static files from: ${distPath}`);
+  
+  // Check if assets/js directory exists
+  const assetsJsPath = path.join(distPath, 'assets', 'js');
+  if (fs.existsSync(assetsJsPath)) {
+    const files = fs.readdirSync(assetsJsPath);
+    console.log(`[Static] Found ${files.length} JS files in assets/js:`, files.slice(0, 5));
+  } else {
+    console.error(`[Static] ⚠️ assets/js directory not found at: ${assetsJsPath}`);
+  }
 
   // Configure cache headers for different resource types
   // JavaScript and CSS files (with hash in filename) - cache forever
+  // IMPORTANT: This must be BEFORE the catch-all route
   app.use('/assets/js', express.static(path.join(distPath, 'assets', 'js'), {
     maxAge: '1y',
     immutable: true,
@@ -164,7 +186,17 @@ export function serveStatic(app: Express) {
   }));
 
   // fall through to index.html if the file doesn't exist
-  app.use("*", (_req, res) => {
+  // IMPORTANT: This catch-all must be LAST and must NOT match asset requests
+  app.use("*", (req, res, next) => {
+    // Skip if this is an asset request (should have been handled above)
+    if (req.path.startsWith('/assets/') || 
+        req.path.startsWith('/fonts/') || 
+        req.path.startsWith('/images/') ||
+        req.path.match(/\.(js|css|woff2?|eot|ttf|otf|png|jpg|jpeg|gif|svg|ico|webp)$/i)) {
+      // Asset request that wasn't found - return 404 instead of serving index.html
+      return res.status(404).send('File not found');
+    }
+    
     // Don't cache HTML files - always fetch fresh
     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
     res.setHeader('Pragma', 'no-cache');

@@ -203,6 +203,15 @@ async function startServer() {
     }
   });
   
+  // development mode uses Vite, production mode uses static files
+  // IMPORTANT: serveStatic must be BEFORE API routes to ensure assets are served correctly
+  if (process.env.NODE_ENV === "development") {
+    await setupVite(app, server);
+  } else {
+    // serveStatic now handles all cache headers internally
+    serveStatic(app);
+  }
+  
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
   // Sitemap and robots.txt
@@ -226,14 +235,6 @@ async function startServer() {
   app.get("/en/", (req, res) => {
     res.redirect(301, "/");
   });
-  
-  // development mode uses Vite, production mode uses static files
-  if (process.env.NODE_ENV === "development") {
-    await setupVite(app, server);
-  } else {
-    // serveStatic now handles all cache headers internally
-    serveStatic(app);
-  }
   
   // Sentry error handler (must be after all routes)
   // Capture unhandled errors and send to Sentry

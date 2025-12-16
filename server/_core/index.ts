@@ -173,15 +173,38 @@ async function startServer() {
   
   // Google OAuth routes - only register if Google Auth is configured
   if (googleAuthConfigured) {
-    app.get('/api/auth/google', authLimiter, passport.authenticate('google', {
-      scope: ['profile', 'email'],
-    }));
+    app.get('/api/auth/google', authLimiter, (req, res, next) => {
+      console.log(`[Google Auth] OAuth request initiated from: ${req.get('referer') || 'unknown'}`);
+      passport.authenticate('google', {
+        scope: ['profile', 'email'],
+      })(req, res, next);
+    });
     
     app.get('/api/auth/google/callback',
-      passport.authenticate('google', { failureRedirect: '/admin/login?error=unauthorized' }),
-      (req, res) => {
-        // Successful authentication, redirect to admin
-        res.redirect('/admin');
+      (req, res, next) => {
+        console.log(`[Google Auth] Callback received with code: ${req.query.code ? 'present' : 'missing'}`);
+        console.log(`[Google Auth] Callback error: ${req.query.error || 'none'}`);
+        passport.authenticate('google', { 
+          failureRedirect: '/admin/login?error=unauthorized',
+          failureFlash: false,
+        }, (err, user, info) => {
+          if (err) {
+            console.error('[Google Auth] Authentication error:', err);
+            return res.redirect(`/admin/login?error=${encodeURIComponent(err.message || 'authentication_failed')}`);
+          }
+          if (!user) {
+            console.error('[Google Auth] Authentication failed:', info);
+            return res.redirect(`/admin/login?error=${encodeURIComponent(info?.message || 'unauthorized')}`);
+          }
+          req.logIn(user, (loginErr) => {
+            if (loginErr) {
+              console.error('[Google Auth] Login error:', loginErr);
+              return res.redirect(`/admin/login?error=${encodeURIComponent(loginErr.message || 'login_failed')}`);
+            }
+            console.log(`[Google Auth] User logged in successfully: ${user.email}`);
+            return res.redirect('/admin');
+          });
+        })(req, res, next);
       }
     );
   } else {

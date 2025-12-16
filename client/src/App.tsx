@@ -102,6 +102,7 @@ const Cookies = lazy(() => import("./pages/Cookies"));
 const Testimonials = lazy(() => import("./pages/Testimonials"));
 const Services = lazy(() => import("./pages/Services"));
 const Clients = lazy(() => import("./pages/Clients"));
+const Projects = lazy(() => import("./pages/Projects"));
 const StartProject = lazy(() => import("./pages/StartProject"));
 const MediaCenter = lazy(() => import("./pages/MediaCenter"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
@@ -205,6 +206,7 @@ function App() {
               <Route path="/fr/testimonials" component={withPageVisibility(Testimonials, "/fr/testimonials")} />
               <Route path="/fr/services" component={withPageVisibility(Services, "/fr/services")} />
               <Route path="/fr/clients" component={withPageVisibility(Clients, "/fr/clients")} />
+              <Route path="/fr/projects" component={withPageVisibility(Projects, "/fr/projects")} />
               <Route path="/fr/start-project" component={withPageVisibility(StartProject, "/fr/start-project")} />
               <Route path="/fr/media-center" component={withPageVisibility(MediaCenter, "/fr/media-center")} />
               <Route path="/fr/media" component={withPageVisibility(Media, "/fr/media")} />
@@ -244,6 +246,7 @@ function App() {
             <Route path="/testimonials" component={withPageVisibility(Testimonials, "/testimonials")} />
             <Route path="/services" component={withPageVisibility(Services, "/services")} />
             <Route path="/clients" component={withPageVisibility(Clients, "/clients")} />
+            <Route path="/projects" component={withPageVisibility(Projects, "/projects")} />
             <Route path="/start-project" component={withPageVisibility(StartProject, "/start-project")} />
             <Route path="/media-center" component={withPageVisibility(MediaCenter, "/media-center")} />
             <Route path="/media" component={withPageVisibility(Media, "/media")} />

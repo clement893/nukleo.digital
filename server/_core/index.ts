@@ -270,16 +270,6 @@ async function startServer() {
       res.status(500).json({ error: error.message || "Failed to enable projects pages" });
     }
   });
-  // tRPC API with rate limiting
-  app.use("/api/trpc", generalLimiter);
-  app.use(
-    "/api/trpc",
-    createExpressMiddleware({
-      router: appRouter,
-      createContext,
-    })
-  );
-  
   // Redirect /en to home page
   app.get("/en", (req, res) => {
     res.redirect(301, "/");

@@ -186,8 +186,13 @@ export function serveStatic(app: Express) {
   }));
 
   // fall through to index.html if the file doesn't exist
-  // IMPORTANT: This catch-all must be LAST and must NOT match asset requests
+  // IMPORTANT: This catch-all must be LAST and must NOT match asset requests or API routes
   app.use("*", (req, res, next) => {
+    // Skip if this is an API route (should be handled by API routes before serveStatic)
+    if (req.path.startsWith('/api/')) {
+      return next(); // Let API routes handle it
+    }
+    
     // Skip if this is an asset request (should have been handled above)
     if (req.path.startsWith('/assets/') || 
         req.path.startsWith('/fonts/') || 

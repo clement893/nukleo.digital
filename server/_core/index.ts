@@ -460,6 +460,33 @@ async function startServer() {
     }
   }
   
+  // Debug endpoint to check auth status
+  app.get('/api/debug/auth-check', (req, res) => {
+    const isPassportAuth = req.isAuthenticated && req.isAuthenticated();
+    const ADMIN_COOKIE_NAME = "admin_session";
+    const ADMIN_JWT_SECRET = process.env.JWT_SECRET + "-admin";
+    const adminToken = req.cookies?.[ADMIN_COOKIE_NAME];
+    let isJwtAuth = false;
+    
+    if (adminToken && ADMIN_JWT_SECRET && ADMIN_JWT_SECRET !== "-admin") {
+      try {
+        const jwt = require("jsonwebtoken");
+        const decoded = jwt.verify(adminToken, ADMIN_JWT_SECRET);
+        isJwtAuth = !!(decoded && decoded.id);
+      } catch (error) {
+        // Invalid token
+      }
+    }
+    
+    res.json({
+      authenticated: isPassportAuth || isJwtAuth,
+      passportAuth: isPassportAuth,
+      jwtAuth: isJwtAuth,
+      hasCookie: !!adminToken,
+      cookieName: ADMIN_COOKIE_NAME,
+    });
+  });
+  
   // Debug endpoint to list files in projects directory
   app.get('/api/debug/projects-images', requireAdminAuth, async (req, res) => {
     try {

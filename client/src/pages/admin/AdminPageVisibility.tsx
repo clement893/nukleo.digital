@@ -1,5 +1,4 @@
 import { trpc } from '@/lib/trpc';
-import AdminRoute from '@/components/AdminRoute';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2, Eye, EyeOff, Globe, Save } from 'lucide-react';
 import { AdminHeader } from "@/components/AdminHeader";
@@ -59,7 +58,15 @@ const ALL_PAGES = [
 ];
 
 export default function AdminPageVisibility() {
-  const { data: pagesVisibility, isLoading, refetch } = trpc.pageVisibility.getAll.useQuery();
+  const { data: pagesVisibility, isLoading, error, refetch } = trpc.pageVisibility.getAll.useQuery(
+    undefined,
+    {
+      retry: 2,
+      retryDelay: 1000,
+      refetchOnWindowFocus: false,
+      staleTime: 30000, // Cache for 30 seconds
+    }
+  );
   const updateMutation = trpc.pageVisibility.updateVisibility.useMutation({
     onSuccess: () => {
       toast.success('Visibilité mise à jour avec succès');
@@ -87,8 +94,15 @@ export default function AdminPageVisibility() {
         }
       });
       setLocalVisibility(visibilityMap);
+    } else if (!isLoading && !error) {
+      // If no data but not loading and no error, initialize with defaults
+      const visibilityMap: Record<string, boolean> = {};
+      ALL_PAGES.forEach((page) => {
+        visibilityMap[page.path] = true;
+      });
+      setLocalVisibility(visibilityMap);
     }
-  }, [pagesVisibility]);
+  }, [pagesVisibility, isLoading, error]);
 
   const toggleVisibility = (path: string) => {
     setLocalVisibility((prev) => {
@@ -138,14 +152,46 @@ export default function AdminPageVisibility() {
     }
   };
 
+  // Show error state if query failed
+  if (error) {
+    return (
+      <>
+        <AdminHeader />
+        <div className="min-h-screen bg-gradient-to-br from-[oklch(0.25_0.05_300)] to-[oklch(0.15_0.05_340)] flex items-center justify-center p-8">
+          <Card className="bg-white/5 backdrop-blur-md border-white/10 max-w-md">
+            <CardHeader>
+              <CardTitle className="text-red-400">Erreur de chargement</CardTitle>
+              <CardDescription className="text-white/60">
+                Impossible de charger les données de visibilité des pages
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-white/80 mb-4">{error.message || 'Une erreur est survenue'}</p>
+              <Button
+                onClick={() => refetch()}
+                className="bg-cyan-500 hover:bg-cyan-600 text-white"
+              >
+                Réessayer
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </>
+    );
+  }
+
+  // Show loading state
   if (isLoading) {
     return (
-      <AdminRoute>
+      <>
         <AdminHeader />
         <div className="min-h-screen bg-gradient-to-br from-[oklch(0.25_0.05_300)] to-[oklch(0.15_0.05_340)] flex items-center justify-center">
-          <Loader2 className="w-8 h-8 text-cyan-400 animate-spin" />
+          <div className="text-center">
+            <Loader2 className="w-8 h-8 text-cyan-400 animate-spin mx-auto mb-4" />
+            <p className="text-white/60">Chargement des pages...</p>
+          </div>
         </div>
-      </AdminRoute>
+      </>
     );
   }
 
@@ -153,7 +199,7 @@ export default function AdminPageVisibility() {
   const hiddenCount = Object.values(localVisibility).filter((v) => !v).length;
 
   return (
-    <AdminRoute>
+    <>
       <AdminHeader />
       <div className="min-h-screen bg-gradient-to-br from-[oklch(0.25_0.05_300)] to-[oklch(0.15_0.05_340)] p-8">
         <div className="max-w-7xl mx-auto">
@@ -279,6 +325,6 @@ export default function AdminPageVisibility() {
           </div>
         </div>
       </div>
-    </AdminRoute>
+    </>
   );
 }

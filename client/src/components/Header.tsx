@@ -62,7 +62,7 @@ function Header() {
         >
           <div className="flex items-center justify-between gap-2 sm:gap-4">
             {/* Logo */}
-            <Link href={getLocalizedPath('/')} className="flex flex-col group cursor-pointer touch-manipulation">
+            <Link href={getLocalizedPath('/')} className="flex flex-col items-center group cursor-pointer touch-manipulation">
               <img 
                 src="/Nukleo_blanc_RVB.svg" 
                 alt={t('alt.logo') || 'Logo Nukleo Digital - Agence de transformation IA'} 
@@ -74,7 +74,7 @@ function Header() {
                 className="h-7 sm:h-8 w-auto object-contain mb-0.5 sm:mb-1"
                 style={{ aspectRatio: '120 / 32' }}
               />
-              <span className={`text-[9px] sm:text-[10px] text-white/60 font-medium tracking-wider transition-all duration-300 sm:duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              <span className={`text-[9px] sm:text-[10px] text-white/60 font-medium tracking-wider text-center transition-all duration-300 sm:duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                 isScrolled ? 'opacity-0 h-0 mb-0 overflow-hidden' : 'opacity-100 h-auto mb-0'
               }`}>
                 {t('header.tagline')}

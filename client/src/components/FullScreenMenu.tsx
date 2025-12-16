@@ -25,13 +25,12 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
   
   const allNavItems = useMemo(() => [
     { number: '01', label: t('nav.services'), path: '/services' },
-    { number: '02', label: t('nav.projects'), path: '/projects' },
-    { number: '03', label: t('nav.about'), path: '/about' },
-    { number: '04', label: t('nav.resources'), path: '/resources' },
-    { number: '05', label: t('nav.faq'), path: '/faq' },
-    { number: '06', label: t('nav.contact'), path: '/contact' },
-    { number: '07', label: t('nav.talkToLeo'), path: '/leo' },
-    { number: '08', label: t('nav.artsCulture'), path: '/arts-culture' },
+    { number: '02', label: t('nav.about'), path: '/about' },
+    { number: '03', label: t('nav.resources'), path: '/resources' },
+    { number: '04', label: t('nav.faq'), path: '/faq' },
+    { number: '05', label: t('nav.contact'), path: '/contact' },
+    { number: '06', label: t('nav.talkToLeo'), path: '/leo' },
+    { number: '07', label: t('nav.artsCulture'), path: '/arts-culture' },
   ], [t]);
 
   // Fetch all page visibilities at once

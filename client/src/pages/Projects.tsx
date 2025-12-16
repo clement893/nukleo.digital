@@ -79,12 +79,7 @@ export default function Projects() {
     refetchOnWindowFocus: false,
   });
   
-  // Use uploaded images if available, otherwise fallback to static list
-  const availableImages = uploadedImages && uploadedImages.length > 0 
-    ? uploadedImages.map(img => img.name)
-    : fallbackImages;
-  
-  const [images, setImages] = useState(fallbackImages); // Start with fallback
+  const [images, setImages] = useState<string[]>([]); // Start empty, will be populated from API
   const [isShuffling, setIsShuffling] = useState(false);
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
   const [visibleImages, setVisibleImages] = useState<Set<number>>(new Set());
@@ -94,13 +89,17 @@ export default function Projects() {
   useEffect(() => {
     if (uploadedImages) {
       if (uploadedImages.length > 0) {
+        // Use images from API
         setImages(uploadedImages.map(img => img.name));
       } else {
-        // API returned empty array, use fallback
-        setImages(fallbackImages);
+        // API returned empty array - no images available
+        setImages([]);
       }
+    } else if (!isLoadingImages && !imagesError) {
+      // API hasn't loaded yet, keep empty
+      setImages([]);
     }
-  }, [uploadedImages]);
+  }, [uploadedImages, isLoadingImages, imagesError]);
 
   // Intersection Observer pour charger les images seulement quand elles sont visibles
   useEffect(() => {
@@ -196,14 +195,13 @@ export default function Projects() {
               </div>
             ) : imagesError ? (
               <div className="flex flex-col items-center justify-center py-24">
-                <p className="text-white/70 mb-4">Error loading images from server. Using fallback images.</p>
-                {images.length > 0 && (
-                  <p className="text-white/50 text-sm">Showing {images.length} images</p>
-                )}
+                <p className="text-white/70 mb-4">Error loading images from server.</p>
+                <p className="text-white/50 text-sm">Please try refreshing the page.</p>
               </div>
             ) : images.length === 0 ? (
-              <div className="flex items-center justify-center py-24">
-                <p className="text-white/70">No images found.</p>
+              <div className="flex flex-col items-center justify-center py-24">
+                <p className="text-white/70 mb-2">No images found.</p>
+                <p className="text-white/50 text-sm">Upload images via the admin panel to see them here.</p>
               </div>
             ) : (
               <div 

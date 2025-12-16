@@ -54,21 +54,40 @@ async function listImages() {
       imageFiles.map(async (file) => {
         // Try upload directory first, then dist
         let filePath = path.join(PROJECTS_IMAGES_DIR, file);
-        if (!existsSync(filePath) && process.env.NODE_ENV === "production") {
-          filePath = path.join(DIST_PROJECTS_IMAGES_DIR, file);
+        let found = existsSync(filePath);
+        
+        if (!found && process.env.NODE_ENV === "production") {
+          const distFilePath = path.join(DIST_PROJECTS_IMAGES_DIR, file);
+          if (existsSync(distFilePath)) {
+            filePath = distFilePath;
+            found = true;
+          }
         }
         
-        const stats = await fs.stat(filePath);
-        return {
-          name: file,
-          size: stats.size,
-          modified: stats.mtime,
-          url: `/projects/${file}`,
-        };
+        // Only return if file actually exists
+        if (!found) {
+          return null;
+        }
+        
+        try {
+          const stats = await fs.stat(filePath);
+          return {
+            name: file,
+            size: stats.size,
+            modified: stats.mtime,
+            url: `/projects/${file}`,
+          };
+        } catch (error) {
+          console.error(`[ProjectsImages] Error getting stats for ${file}:`, error);
+          return null;
+        }
       })
     );
     
-    return imagesWithStats.sort((a, b) => 
+    // Filter out null values (files that don't exist)
+    const validImages = imagesWithStats.filter((img): img is NonNullable<typeof img> => img !== null);
+    
+    return validImages.sort((a, b) => 
       b.modified.getTime() - a.modified.getTime()
     );
   } catch (error) {

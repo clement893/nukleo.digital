@@ -325,6 +325,9 @@ async function fetchTestimonialsFromExternalPlatform(language: 'fr' | 'en'): Pro
       throw new Error('INTERNAL_PLATFORM_API_KEY est requise pour accéder à l\'API');
     }
 
+    console.log(`[Admin] Making request to: ${url}`);
+    console.log(`[Admin] Headers:`, JSON.stringify(headers, null, 2));
+    
     const response = await fetch(url, {
       method: 'GET',
       headers,
@@ -335,15 +338,27 @@ async function fetchTestimonialsFromExternalPlatform(language: 'fr' | 'en'): Pro
     const contentType = response.headers.get('content-type') || '';
     const responseText = await response.text();
     
+    console.log(`[Admin] Response status: ${response.status}`);
+    console.log(`[Admin] Response Content-Type: ${contentType}`);
+    console.log(`[Admin] Response preview: ${responseText.substring(0, 300)}`);
+    
     if (!response.ok) {
-      console.error(`[Admin] API error ${response.status}: ${responseText.substring(0, 500)}`);
-      throw new Error(`API returned ${response.status}: ${response.statusText}. Response: ${responseText.substring(0, 200)}`);
+      console.error(`[Admin] API error ${response.status}: ${responseText.substring(0, 1000)}`);
+      // Si c'est une erreur 500, c'est probablement une erreur serveur côté HUB
+      if (response.status === 500) {
+        throw new Error(`Erreur serveur (500) sur le HUB. Vérifiez les logs du HUB pour plus de détails. Réponse: ${responseText.substring(0, 300)}`);
+      }
+      throw new Error(`API returned ${response.status}: ${response.statusText}. Response: ${responseText.substring(0, 300)}`);
     }
 
     // Vérifier que la réponse est bien du JSON
     if (!contentType.includes('application/json')) {
-      console.error(`[Admin] Expected JSON but got ${contentType}. Response: ${responseText.substring(0, 500)}`);
-      throw new Error(`L'API a retourné du HTML au lieu de JSON. Vérifiez que l'URL ${url} est correcte et que l'endpoint existe. Réponse: ${responseText.substring(0, 200)}`);
+      console.error(`[Admin] Expected JSON but got ${contentType}. Response: ${responseText.substring(0, 1000)}`);
+      // Si c'est du HTML même avec un status 200, c'est probablement une redirection ou une erreur
+      if (responseText.trim().startsWith('<!DOCTYPE') || responseText.trim().startsWith('<html')) {
+        throw new Error(`L'API a retourné du HTML au lieu de JSON (status: ${response.status}). Cela peut indiquer une erreur d'authentification ou une erreur serveur. Vérifiez que la clé API est correcte et que l'endpoint existe. Réponse: ${responseText.substring(0, 300)}`);
+      }
+      throw new Error(`L'API a retourné ${contentType} au lieu de JSON. Réponse: ${responseText.substring(0, 300)}`);
     }
 
     let data;

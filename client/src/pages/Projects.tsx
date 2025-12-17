@@ -140,7 +140,7 @@ export default function Projects() {
           });
         },
         {
-          rootMargin: '50px', // Commence à charger 50px avant que l'image soit visible
+          rootMargin: '200px', // Commence à charger 200px avant que l'image soit visible (augmenté pour précharger plus tôt)
           threshold: 0.01,
         }
       );
@@ -156,10 +156,37 @@ export default function Projects() {
 
   // Précharger les premières images visibles immédiatement
   useEffect(() => {
-    const initialCount = Math.min(6, images.length); // Précharger les 6 premières images
+    // Précharger les 12 premières images (augmenté de 6 à 12 pour un chargement plus rapide)
+    const initialCount = Math.min(12, images.length);
     const initialSet = new Set(Array.from({ length: initialCount }, (_, i) => i));
     setVisibleImages(initialSet);
-  }, [images.length]);
+    
+    // Précharger les images critiques avec link rel="preload"
+    if (typeof window !== 'undefined' && images.length > 0) {
+      const preloadCount = Math.min(6, images.length);
+      const preloadLinks: HTMLLinkElement[] = [];
+      const currentImages = images; // Capture current images array
+      
+      for (let i = 0; i < preloadCount; i++) {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = `/projects/${currentImages[i]}`;
+        link.setAttribute('fetchpriority', i < 3 ? 'high' : 'low');
+        document.head.appendChild(link);
+        preloadLinks.push(link);
+      }
+      
+      // Cleanup: remove preload links when component unmounts or images change
+      return () => {
+        preloadLinks.forEach(link => {
+          if (link.parentNode) {
+            link.parentNode.removeChild(link);
+          }
+        });
+      };
+    }
+  }, [images.length, images]);
 
   const handleShuffle = () => {
     setIsShuffling(true);
@@ -256,8 +283,8 @@ export default function Projects() {
                           src={`/projects/${image}`}
                           alt={imageAlt}
                           className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
-                          loading={index < 6 ? 'eager' : 'lazy'}
-                          fetchPriority={index < 3 ? 'high' : 'low'}
+                          loading={index < 12 ? 'eager' : 'lazy'}
+                          fetchPriority={index < 3 ? 'high' : index < 9 ? 'auto' : 'low'}
                           decoding="async"
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         />

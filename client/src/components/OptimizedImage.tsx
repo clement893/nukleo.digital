@@ -144,7 +144,7 @@ export default function OptimizedImage({
           alt={alt}
           width={width}
           height={height}
-          className={`${className} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}
+          className={`${className} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-200`}
           loading={loading}
           fetchPriority={fetchPriority}
           decoding="async"
@@ -153,6 +153,7 @@ export default function OptimizedImage({
           style={{
             ...style,
             aspectRatio: width && height ? `${width} / ${height}` : undefined,
+            willChange: !isLoaded ? 'opacity' : undefined, // Optimize for opacity transitions
           }}
           aria-label={alt}
         />
@@ -167,7 +168,7 @@ export default function OptimizedImage({
       alt={alt}
       width={width}
       height={height}
-      className={`${className} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}
+      className={`${className} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-200`}
       loading={loading}
       fetchPriority={fetchPriority}
       decoding="async"
@@ -178,6 +179,7 @@ export default function OptimizedImage({
       style={{
         ...style,
         aspectRatio: width && height ? `${width} / ${height}` : undefined,
+        willChange: !isLoaded ? 'opacity' : undefined, // Optimize for opacity transitions
       }}
       aria-label={alt}
     />

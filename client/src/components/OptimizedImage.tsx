@@ -51,11 +51,19 @@ export default function OptimizedImage({
 
   // Generate WebP and fallback sources if not provided
   const sources = useMemo(() => {
-    // If webpSrc is provided, use it; otherwise try to generate from src
-    const webp = webpSrc || (src.endsWith('.webp') ? src : src.replace(/\.(jpg|jpeg|png)$/i, '.webp'));
+    // Only use WebP if explicitly provided via webpSrc prop
+    // Never auto-generate WebP paths as the files may not exist
+    // Only use WebP if src already ends with .webp (file is already WebP)
     const fallback = fallbackSrc || src;
     
-    return { webp, fallback };
+    // Only use WebP if explicitly provided via prop OR if src is already .webp
+    // Never auto-generate .webp from .jpg/.png
+    const webp = webpSrc ? webpSrc : (src.endsWith('.webp') ? src : null);
+    
+    // Only use webp if it's different from fallback (to avoid duplicate sources)
+    const finalWebp = (webp && webp !== fallback) ? webp : null;
+    
+    return { webp: finalWebp, fallback };
   }, [src, webpSrc, fallbackSrc]);
 
   // Generate responsive srcset if not provided
@@ -69,8 +77,8 @@ export default function OptimizedImage({
     // In production, you'd want actual different-sized images or an image CDN
     if (width && !src.includes('.svg')) {
       // Simple density-based srcset (works with same image, browser picks based on DPR)
-      const webpSrcset = `${sources.webp} 1x, ${sources.webp} 2x`;
       const fallbackSrcset = `${sources.fallback} 1x, ${sources.fallback} 2x`;
+      const webpSrcset = sources.webp ? `${sources.webp} 1x, ${sources.webp} 2x` : null;
       
       return { webpSrcset, fallbackSrcset };
     }
@@ -92,7 +100,7 @@ export default function OptimizedImage({
   const defaultSizes = sizes || (width ? `(max-width: 768px) 100vw, ${width}px` : '100vw');
 
   // If error loading WebP, fall back to original
-  const currentSrc = imageError ? sources.fallback : (webpSrc || src);
+  const currentSrc = imageError ? sources.fallback : (webpSrc || sources.fallback || src);
 
   // For SVG files, use simple img tag (no WebP conversion needed)
   if (src.endsWith('.svg')) {
@@ -114,8 +122,8 @@ export default function OptimizedImage({
     );
   }
 
-  // For images with WebP support
-  if (webpSrc || (!src.endsWith('.webp') && sources.webp !== src)) {
+  // For images with WebP support (only if WebP source is explicitly provided)
+  if (sources.webp && sources.webp !== sources.fallback) {
     return (
       <picture>
         {/* WebP source */}

@@ -317,8 +317,8 @@ async function fetchTestimonialsFromExternalPlatform(language: 'fr' | 'en'): Pro
     if (ENV.internalPlatformApiKey) {
       // L'API du HUB accepte Bearer token dans Authorization header
       headers['Authorization'] = `Bearer ${ENV.internalPlatformApiKey}`;
-      // Certaines APIs utilisent aussi X-API-Key comme alternative
-      headers['X-API-Key'] = ENV.internalPlatformApiKey;
+      // Certaines APIs utilisent aussi X-API-Key comme alternative (note: case-sensitive, utiliser x-api-key)
+      headers['x-api-key'] = ENV.internalPlatformApiKey;
       console.log(`[Admin] Fetching testimonials from ${url} with API key authentication`);
     } else {
       console.warn('[Admin] INTERNAL_PLATFORM_API_KEY not configured, making unauthenticated request');

@@ -6,17 +6,27 @@ import { sanitizeLoaderHTML } from "./html-sanitizer";
 export async function getAllLoaders(): Promise<Loader[]> {
   const database = await getDb();
   if (!database) return [];
-  return await database.select().from(loaders).orderBy(desc(loaders.createdAt));
+  try {
+    return await database.select().from(loaders).orderBy(desc(loaders.createdAt));
+  } catch (error) {
+    console.warn('[Loaders] Table may not exist yet:', error);
+    return [];
+  }
 }
 
 export async function getActiveLoaders(): Promise<Loader[]> {
   const database = await getDb();
   if (!database) return [];
-  return await database
-    .select()
-    .from(loaders)
-    .where(eq(loaders.isActive, true))
-    .orderBy(loaders.displayOrder);
+  try {
+    return await database
+      .select()
+      .from(loaders)
+      .where(eq(loaders.isActive, true))
+      .orderBy(loaders.displayOrder);
+  } catch (error) {
+    console.warn('[Loaders] Table may not exist yet:', error);
+    return [];
+  }
 }
 
 export async function getLoaderById(id: number): Promise<Loader | null> {

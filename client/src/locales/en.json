@@ -1412,5 +1412,95 @@
       "ctaButton1": "Talk to a developer",
       "ctaButton2": "See our work"
     }
+  },
+  "artsCultureCommitment": {
+    "seoTitle": "Arts & Culture | Nukleo Digital",
+    "seoDescription": "Our commitment to supporting arts and culture. Discover how Nukleo invests in cultural innovation and supports artists and institutions.",
+    "seoKeywords": "arts and culture, cultural support, artist support, cultural innovation, Nukleo commitment",
+    "hero": {
+      "badge": "NUKLEO.ART",
+      "title": "Culture is our",
+      "titleHighlight": "heartbeat",
+      "subtitle": "A story of <span class=\"italic text-white/80\">commitment</span>, <span class=\"italic text-white/80\">action</span> and <span class=\"italic text-white/80\">impact</span>"
+    },
+    "act1": {
+      "label": "ACT I",
+      "title": "The",
+      "titleHighlight": "Challenge",
+      "subtitle": "Culture faces unprecedented challenges",
+      "budgetCuts": {
+        "title": "Budget cuts",
+        "description": "Drastic funding reductions force artists and cultural institutions to make <span class=\"text-white/90 font-medium\">impossible choices</span> between survival and creation.",
+        "hover": "→ This needs to change"
+      },
+      "precariousConditions": {
+        "title": "Precarious conditions",
+        "description": "Artists face unstable incomes, lack of benefits, and uncertain futures, making it harder to focus on what they do best: <span class=\"text-white/90 font-medium\">creating</span>.",
+        "hover": "→ Artists deserve better"
+      },
+      "quote": "\"The fragility of Quebec's cultural sector requires <span class=\"font-semibold not-italic text-white\">concrete efforts</span> to ensure its accessibility and encourage its innovation.\""
+    },
+    "act2": {
+      "label": "ACT II",
+      "title": "Our",
+      "titleHighlight": "Belief",
+      "subtitle": "At Nukleo, we believe culture is the <span class=\"text-white/80 font-medium\">beating heart</span> of society",
+      "heritage": {
+        "title": "Heritage",
+        "description": "Culture preserves our <span class=\"text-white/90\">history</span> and <span class=\"text-white/90\">identity</span> for future generations."
+      },
+      "creativity": {
+        "title": "Creativity",
+        "description": "Culture inspires <span class=\"text-white/90\">education</span> and drives <span class=\"text-white/90\">innovation</span>."
+      },
+      "community": {
+        "title": "Community",
+        "description": "Culture creates <span class=\"text-white/90\">connections</span> and fosters <span class=\"text-white/90\">belonging</span>."
+      },
+      "quote": "\"We believe it is imperative to direct our investments with <span class=\"font-semibold not-italic text-white\">discernment</span> to strengthen our cultural growth, as the cultural sector is an <span class=\"font-semibold not-italic text-white\">economic driver</span> and a pillar of our collective identity.\""
+    },
+    "act3": {
+      "label": "ACT III",
+      "title": "Our",
+      "titleHighlight": "Action",
+      "subtitle": "We don't just <span class=\"line-through text-white/40\">talk</span> about supporting culture, we <span class=\"text-white/80 font-semibold\">act</span> every day.",
+      "affordablePricing": {
+        "title": "Affordable pricing",
+        "description": "We offer a <span class=\"inline-flex items-baseline gap-1\"><strong class=\"text-3xl font-bold text-green-300\">40% reduction</strong><span class=\"text-white/90\">on our services</span></span> for cultural organizations, making digital transformation accessible to those who need it most.",
+        "hover": "→ Because access shouldn't be a barrier"
+      },
+      "financialSupport": {
+        "title": "Financial support",
+        "description": "We dedicate <span class=\"inline-flex items-baseline gap-1\"><strong class=\"text-3xl font-bold text-red-300\">1%</strong><span class=\"text-white/90\">of our annual revenue</span></span> in direct donations to cultural organizations, and mobilize other entrepreneurs to join us.",
+        "hover": "→ Small percentage, big impact"
+      },
+      "liveCulture": {
+        "title": "Live culture",
+        "description": "Each team member receives <span class=\"inline-flex items-baseline gap-1\"><strong class=\"text-3xl font-bold text-blue-300\">$350</strong><span class=\"text-white/90\">per year</span></span> for Canadian cultural outings. Because supporting culture starts by <span class=\"text-white/90 font-medium\">living</span> it.",
+        "hover": "→ Practicing what we preach"
+      },
+      "raiseAwareness": {
+        "title": "Raise awareness",
+        "description": "We actively promote arts and culture within our company, among our partners, and in our community, staying <span class=\"text-white/90 font-medium\">informed</span> and <span class=\"text-white/90 font-medium\">engaged</span> with contemporary cultural issues.",
+        "hover": "→ Amplifying voices that matter"
+      }
+    },
+    "act4": {
+      "label": "ACT IV",
+      "title": "The",
+      "titleHighlight": "Impact",
+      "subtitle": "Join us to make a <span class=\"text-white/80 font-semibold\">real</span> difference",
+      "stats": {
+        "discount": "Discount for cultural projects",
+        "donations": "Of annual revenue in donations",
+        "perEmployee": "Per employee for culture"
+      },
+      "cta": {
+        "title": "Let's grow culture",
+        "titleHighlight": "together",
+        "description": "Whether you're an artist, cultural organization, or entrepreneur, join us to make a real difference.",
+        "button": "Start the Conversation"
+      }
+    }
   }
 }

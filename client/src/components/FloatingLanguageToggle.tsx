@@ -15,8 +15,6 @@ export function FloatingLanguageToggle() {
     '/fr/resources',
     '/about',
     '/fr/about',
-    '/contact',
-    '/fr/contact',
     '/glossary',
     '/fr/glossary',
     '/ai-glossary',

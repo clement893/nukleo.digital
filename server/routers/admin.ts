@@ -304,13 +304,20 @@ async function fetchTestimonialsFromExternalPlatform(language: 'fr' | 'en'): Pro
   }
 
   try {
-    const url = `${ENV.internalPlatformUrl}/api/testimonials?language=${language}`;
+    // Construire l'URL de l'API
+    const baseUrl = ENV.internalPlatformUrl.replace(/\/$/, ''); // Enlever le slash final s'il existe
+    const url = `${baseUrl}/api/testimonials?language=${language}`;
+    
     const headers: HeadersInit = {
       'Content-Type': 'application/json',
+      'Accept': 'application/json',
     };
 
     if (ENV.internalPlatformApiKey) {
+      // Essayer plusieurs formats d'authentification possibles
       headers['Authorization'] = `Bearer ${ENV.internalPlatformApiKey}`;
+      // Certaines APIs utilisent aussi X-API-Key
+      headers['X-API-Key'] = ENV.internalPlatformApiKey;
       console.log(`[Admin] Fetching testimonials from ${url} with API key authentication`);
     } else {
       console.warn('[Admin] INTERNAL_PLATFORM_API_KEY not configured, making unauthenticated request');
@@ -322,13 +329,29 @@ async function fetchTestimonialsFromExternalPlatform(language: 'fr' | 'en'): Pro
       signal: AbortSignal.timeout(10000), // Timeout de 10 secondes pour la synchronisation
     });
 
+    // Vérifier le Content-Type avant de parser le JSON
+    const contentType = response.headers.get('content-type') || '';
+    const responseText = await response.text();
+    
     if (!response.ok) {
-      const errorText = await response.text().catch(() => 'No error details');
-      console.error(`[Admin] API error ${response.status}: ${errorText}`);
-      throw new Error(`API returned ${response.status}: ${response.statusText}. ${errorText}`);
+      console.error(`[Admin] API error ${response.status}: ${responseText.substring(0, 500)}`);
+      throw new Error(`API returned ${response.status}: ${response.statusText}. Response: ${responseText.substring(0, 200)}`);
     }
 
-    const data = await response.json();
+    // Vérifier que la réponse est bien du JSON
+    if (!contentType.includes('application/json')) {
+      console.error(`[Admin] Expected JSON but got ${contentType}. Response: ${responseText.substring(0, 500)}`);
+      throw new Error(`L'API a retourné du HTML au lieu de JSON. Vérifiez que l'URL ${url} est correcte et que l'endpoint existe. Réponse: ${responseText.substring(0, 200)}`);
+    }
+
+    let data;
+    try {
+      data = JSON.parse(responseText);
+    } catch (parseError) {
+      console.error(`[Admin] Failed to parse JSON response: ${responseText.substring(0, 500)}`);
+      throw new Error(`Impossible de parser la réponse JSON. Réponse reçue: ${responseText.substring(0, 200)}`);
+    }
+    
     console.log(`[Admin] Successfully fetched ${Array.isArray(data) ? data.length : data.testimonials?.length || 0} testimonials (${language})`);
     
     if (Array.isArray(data)) {

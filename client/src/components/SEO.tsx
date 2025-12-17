@@ -23,11 +23,11 @@ interface SEOProps {
 }
 
 const DEFAULT_SEO = {
-  title: 'AI Transformation Agency | Nukleo Digital',
-  description: 'Transformez votre entreprise avec des solutions IA agentic. Stratégie, plateforme, et automatisation intelligente.',
-  keywords: 'AI transformation, artificial intelligence consulting, agentic AI, AI strategy, machine learning, AI automation, digital transformation, AI agency, enterprise AI, AI solutions',
-  ogImage: 'https://nukleodigital-production.up.railway.app/og-image.jpg',
-  siteUrl: 'https://nukleodigital-production.up.railway.app',
+  title: 'Transformation IA & Écosystèmes Numériques | Nukleo Digital',
+  description: 'Nukleo construit des écosystèmes numériques et IA complets. Transformation IA, agents autonomes, plateformes intelligentes. Montréal & Halifax.',
+  keywords: 'transformation IA, agence IA, écosystèmes numériques, agents IA autonomes, agence transformation IA Montréal, services transformation digitale',
+  ogImage: 'https://nukleo.digital/og-image.jpg',
+  siteUrl: 'https://nukleo.digital',
   siteName: 'Nukleo Digital',
   twitterHandle: '@nukleodigital',
 };

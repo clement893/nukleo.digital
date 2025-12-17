@@ -126,6 +126,7 @@ export default function Projects() {
   // Intersection Observer pour charger les images seulement quand elles sont visibles
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
     
     imageRefs.current.forEach((ref, index) => {
       if (!ref) return;
@@ -140,7 +141,8 @@ export default function Projects() {
           });
         },
         {
-          rootMargin: '200px', // Commence à charger 200px avant que l'image soit visible (augmenté pour précharger plus tôt)
+          // Réduire rootMargin sur mobile pour améliorer les performances
+          rootMargin: isMobile ? '100px' : '200px',
           threshold: 0.01,
         }
       );
@@ -156,25 +158,39 @@ export default function Projects() {
 
   // Précharger les premières images visibles immédiatement
   useEffect(() => {
-    // Précharger les 12 premières images (augmenté de 6 à 12 pour un chargement plus rapide)
-    const initialCount = Math.min(12, images.length);
+    // Detect mobile to reduce preload on mobile devices
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    
+    // Précharger moins d'images sur mobile pour améliorer les performances
+    const initialCount = isMobile ? Math.min(6, images.length) : Math.min(12, images.length);
     const initialSet = new Set(Array.from({ length: initialCount }, (_, i) => i));
     setVisibleImages(initialSet);
     
-    // Précharger les images critiques avec link rel="preload"
-    if (typeof window !== 'undefined' && images.length > 0) {
-      const preloadCount = Math.min(6, images.length);
+    // Précharger les images critiques avec link rel="preload" (seulement sur desktop)
+    // Sur mobile, on évite le preload pour réduire les ressources bloquantes
+    if (typeof window !== 'undefined' && images.length > 0 && !isMobile) {
+      const preloadCount = Math.min(3, images.length); // Réduit à 3 pour éviter le blocage
       const preloadLinks: HTMLLinkElement[] = [];
       const currentImages = images; // Capture current images array
       
-      for (let i = 0; i < preloadCount; i++) {
-        const link = document.createElement('link');
-        link.rel = 'preload';
-        link.as = 'image';
-        link.href = `/projects/${currentImages[i]}`;
-        link.setAttribute('fetchpriority', i < 3 ? 'high' : 'low');
-        document.head.appendChild(link);
-        preloadLinks.push(link);
+      // Utiliser requestIdleCallback pour ne pas bloquer le rendu initial
+      const preloadImages = () => {
+        for (let i = 0; i < preloadCount; i++) {
+          const link = document.createElement('link');
+          link.rel = 'preload';
+          link.as = 'image';
+          link.href = `/projects/${currentImages[i]}`;
+          link.setAttribute('fetchpriority', i < 2 ? 'high' : 'low');
+          document.head.appendChild(link);
+          preloadLinks.push(link);
+        }
+      };
+      
+      // Utiliser requestIdleCallback si disponible, sinon setTimeout
+      if ('requestIdleCallback' in window) {
+        (window as any).requestIdleCallback(preloadImages, { timeout: 2000 });
+      } else {
+        setTimeout(preloadImages, 100);
       }
       
       // Cleanup: remove preload links when component unmounts or images change
@@ -282,9 +298,11 @@ export default function Projects() {
                         <OptimizedImage
                           src={`/projects/${image}`}
                           alt={imageAlt}
+                          width={400}
+                          height={300}
                           className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
-                          loading={index < 12 ? 'eager' : 'lazy'}
-                          fetchPriority={index < 3 ? 'high' : index < 9 ? 'auto' : 'low'}
+                          loading={index < 6 ? 'eager' : 'lazy'}
+                          fetchPriority={index < 2 ? 'high' : index < 6 ? 'auto' : 'low'}
                           decoding="async"
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         />
@@ -293,6 +311,7 @@ export default function Projects() {
                         <div 
                           className="w-full aspect-[4/3] bg-gradient-to-br from-purple-900/20 to-blue-900/20"
                           aria-hidden="true"
+                          style={{ width: '100%', aspectRatio: '4/3' }}
                         />
                       )}
                       
@@ -356,6 +375,8 @@ export default function Projects() {
           <OptimizedImage
             src={`/projects/${lightboxImage}`}
             alt={lightboxImage.replace(/[-_]/g, ' ').replace(/\.(jpg|png|jpeg)$/i, '')}
+            width={1200}
+            height={900}
             className="max-w-full max-h-[90vh] object-contain rounded-lg"
             loading="eager"
             fetchPriority="high"

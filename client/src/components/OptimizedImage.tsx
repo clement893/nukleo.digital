@@ -154,6 +154,8 @@ export default function OptimizedImage({
             ...style,
             aspectRatio: width && height ? `${width} / ${height}` : undefined,
             willChange: !isLoaded ? 'opacity' : undefined, // Optimize for opacity transitions
+            maxWidth: '100%',
+            height: 'auto',
           }}
           aria-label={alt}
         />
@@ -180,6 +182,8 @@ export default function OptimizedImage({
         ...style,
         aspectRatio: width && height ? `${width} / ${height}` : undefined,
         willChange: !isLoaded ? 'opacity' : undefined, // Optimize for opacity transitions
+        maxWidth: '100%',
+        height: 'auto',
       }}
       aria-label={alt}
     />

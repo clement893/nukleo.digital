@@ -91,7 +91,8 @@
     "services": {
       "agenticAI": "Agentic AI Systems",
       "aiNative": "AI-Native Platforms",
-      "transformation": "Transformation Strategy",
+      "aiStrategyMarketing": "AI Strategy & Marketing",
+      "digitalTransformation": "Digital Transformation",
       "creativeStudio": "Creative Studio",
       "aiConsulting": "AI Consulting"
     }
@@ -1455,6 +1456,99 @@
         "button": "Get Started",
         "explore": "Explore All Services"
       }
+    },
+    "digitalTransformation": {
+      "title": "Digital Transformation",
+      "description": "Consulting and support for digital transformation in the AI age. We guide organizations through their digital transformation journey, integrating AI technologies to modernize processes, improve efficiency, and drive innovation.",
+      "capabilities": [
+        "Digital Strategy & Roadmap",
+        "AI Integration & Adoption",
+        "Process Modernization",
+        "Change Management & Training"
+      ],
+      "heroTitle": "Digital",
+      "heroTitleHighlight": "Transformation",
+      "heroSubtitle": "Consulting & Support in the AI Age",
+      "heroDescription": "Navigate your digital transformation journey with expert guidance. We help organizations modernize their operations, integrate AI technologies, and build sustainable competitive advantages in the digital era.",
+      "clientNeeds": {
+        "title": "You might need Digital Transformation if...",
+        "items": [
+          "You're looking to modernize your business processes and operations.",
+          "You need guidance on integrating AI and digital technologies into your organization.",
+          "You want to improve efficiency and reduce operational costs through digitalization.",
+          "You're facing challenges adapting to new market demands and customer expectations.",
+          "You need a strategic partner to guide your transformation journey."
+        ]
+      },
+      "approachTitle": "Our Digital Transformation Approach",
+      "approachDescription": "We take a holistic approach to digital transformation, combining strategic consulting with hands-on implementation support. Our methodology focuses on understanding your unique context, defining clear objectives, and executing transformation initiatives that deliver measurable results while ensuring your team is equipped to sustain change.",
+      "expertiseTitle": "What We Offer",
+      "expertise": {
+        "strategy": {
+          "title": "Digital Strategy & Roadmap",
+          "description": "Define your digital vision and create a comprehensive roadmap aligned with your business objectives and market opportunities.",
+          "technologies": "Strategic Planning, Market Analysis, Technology Assessment, Roadmap Development"
+        },
+        "aiIntegration": {
+          "title": "AI Integration & Adoption",
+          "description": "Seamlessly integrate AI technologies into your existing systems and workflows, ensuring smooth adoption and maximum value extraction.",
+          "technologies": "AI Assessment, Integration Planning, Technology Selection, Implementation Support"
+        },
+        "processModernization": {
+          "title": "Process Modernization",
+          "description": "Redesign and optimize your business processes using digital tools and automation to improve efficiency and reduce manual work.",
+          "technologies": "Process Mapping, Automation, Workflow Optimization, Digital Tools"
+        },
+        "changeManagement": {
+          "title": "Change Management & Training",
+          "description": "Support your teams through transformation with comprehensive training, change management strategies, and ongoing support to ensure successful adoption.",
+          "technologies": "Training Programs, Change Management, User Adoption, Support & Maintenance"
+        },
+        "digitalCulture": {
+          "title": "Digital Culture Development",
+          "description": "Foster a digital-first mindset within your organization, building capabilities and cultural shifts necessary for sustained digital success.",
+          "technologies": "Workshops, Capability Building, Cultural Transformation, Knowledge Transfer"
+        },
+        "transformationGovernance": {
+          "title": "Transformation Governance",
+          "description": "Establish governance frameworks and metrics to track transformation progress, manage risks, and ensure alignment with strategic objectives.",
+          "technologies": "Governance Frameworks, KPIs, Risk Management, Performance Monitoring"
+        }
+      },
+      "teamTitle": "Our Digital Transformation Team",
+      "teamDescription": "Our team of transformation consultants, digital strategists, and change management experts brings deep experience in guiding organizations through complex digital transformations. We combine strategic thinking with practical execution to deliver transformations that stick.",
+      "processTitle": "Our Process",
+      "process": {
+        "assessment": {
+          "step": "01",
+          "title": "Assessment & Vision",
+          "description": "Understand your current state, identify opportunities, and define your digital transformation vision."
+        },
+        "strategy": {
+          "step": "02",
+          "title": "Strategy & Planning",
+          "description": "Develop a comprehensive transformation strategy and detailed implementation plan."
+        },
+        "execution": {
+          "step": "03",
+          "title": "Execution & Implementation",
+          "description": "Execute transformation initiatives with hands-on support and agile methodologies."
+        },
+        "adoption": {
+          "step": "04",
+          "title": "Adoption & Change Management",
+          "description": "Support your teams through change with training, communication, and ongoing support."
+        },
+        "optimization": {
+          "step": "05",
+          "title": "Optimization & Scaling",
+          "description": "Monitor results, optimize processes, and scale successful initiatives across the organization."
+        }
+      },
+      "ctaTitle": "Ready to Transform Your Organization?",
+      "ctaDescription": "Let's discuss how we can guide your digital transformation journey and help you build a competitive advantage in the AI age.",
+      "ctaButton1": "Schedule a Consultation",
+      "ctaButton2": "Explore Our Services"
     }
   },
   "artsCultureCommitment": {

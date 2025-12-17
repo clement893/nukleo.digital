@@ -92,7 +92,8 @@
     "services": {
       "agenticAI": "Systèmes d'agents IA autonomes",
       "aiNative": "Plateformes construites avec l'IA",
-      "transformation": "Stratégie de transformation",
+      "aiStrategyMarketing": "Stratégie & Marketing IA",
+      "digitalTransformation": "Transformation Numérique",
       "creativeStudio": "Studio créatif",
       "aiConsulting": "Consultation IA"
     }
@@ -1621,6 +1622,99 @@
         "button": "Commencer",
         "explore": "Explorer tous les services"
       }
+    },
+    "digitalTransformation": {
+      "title": "Transformation Numérique",
+      "description": "Conseil et accompagnement en transformation numérique à l'ère de l'IA. Nous guidons les organisations dans leur parcours de transformation numérique, en intégrant les technologies IA pour moderniser les processus, améliorer l'efficacité et stimuler l'innovation.",
+      "capabilities": [
+        "Stratégie & Feuille de route digitale",
+        "Intégration & Adoption de l'IA",
+        "Modernisation des processus",
+        "Gestion du changement & Formation"
+      ],
+      "heroTitle": "Transformation",
+      "heroTitleHighlight": "Numérique",
+      "heroSubtitle": "Conseil & Accompagnement à l'ère de l'IA",
+      "heroDescription": "Naviguez dans votre parcours de transformation numérique avec l'accompagnement d'experts. Nous aidons les organisations à moderniser leurs opérations, intégrer les technologies IA et construire des avantages concurrentiels durables à l'ère numérique.",
+      "clientNeeds": {
+        "title": "Vous pourriez avoir besoin de Transformation Numérique si...",
+        "items": [
+          "Vous cherchez à moderniser vos processus métier et opérations.",
+          "Vous avez besoin de conseils pour intégrer l'IA et les technologies numériques dans votre organisation.",
+          "Vous souhaitez améliorer l'efficacité et réduire les coûts opérationnels grâce à la digitalisation.",
+          "Vous faites face à des défis d'adaptation aux nouvelles exigences du marché et aux attentes des clients.",
+          "Vous avez besoin d'un partenaire stratégique pour guider votre parcours de transformation."
+        ]
+      },
+      "approachTitle": "Notre approche de Transformation Numérique",
+      "approachDescription": "Nous adoptons une approche holistique de la transformation numérique, combinant conseil stratégique et soutien à la mise en œuvre pratique. Notre méthodologie se concentre sur la compréhension de votre contexte unique, la définition d'objectifs clairs et l'exécution d'initiatives de transformation qui produisent des résultats mesurables tout en veillant à ce que votre équipe soit équipée pour maintenir le changement.",
+      "expertiseTitle": "Ce que nous offrons",
+      "expertise": {
+        "strategy": {
+          "title": "Stratégie & Feuille de route digitale",
+          "description": "Définissez votre vision digitale et créez une feuille de route complète alignée sur vos objectifs commerciaux et les opportunités du marché.",
+          "technologies": "Planification stratégique, Analyse de marché, Évaluation technologique, Développement de feuille de route"
+        },
+        "aiIntegration": {
+          "title": "Intégration & Adoption de l'IA",
+          "description": "Intégrez de manière transparente les technologies IA dans vos systèmes et flux de travail existants, en assurant une adoption fluide et une extraction maximale de valeur.",
+          "technologies": "Évaluation IA, Planification d'intégration, Sélection technologique, Soutien à la mise en œuvre"
+        },
+        "processModernization": {
+          "title": "Modernisation des processus",
+          "description": "Reconcevez et optimisez vos processus métier en utilisant des outils numériques et l'automatisation pour améliorer l'efficacité et réduire le travail manuel.",
+          "technologies": "Cartographie des processus, Automatisation, Optimisation des flux de travail, Outils numériques"
+        },
+        "changeManagement": {
+          "title": "Gestion du changement & Formation",
+          "description": "Soutenez vos équipes dans la transformation avec des formations complètes, des stratégies de gestion du changement et un soutien continu pour assurer une adoption réussie.",
+          "technologies": "Programmes de formation, Gestion du changement, Adoption utilisateur, Support & Maintenance"
+        },
+        "digitalCulture": {
+          "title": "Développement de la culture digitale",
+          "description": "Favorisez un état d'esprit axé sur le numérique au sein de votre organisation, en développant les capacités et les changements culturels nécessaires pour un succès numérique durable.",
+          "technologies": "Ateliers, Développement des capacités, Transformation culturelle, Transfert de connaissances"
+        },
+        "transformationGovernance": {
+          "title": "Gouvernance de la transformation",
+          "description": "Établissez des cadres de gouvernance et des métriques pour suivre les progrès de la transformation, gérer les risques et assurer l'alignement avec les objectifs stratégiques.",
+          "technologies": "Cadres de gouvernance, KPIs, Gestion des risques, Suivi des performances"
+        }
+      },
+      "teamTitle": "Notre équipe de Transformation Numérique",
+      "teamDescription": "Notre équipe de consultants en transformation, de stratèges digitaux et d'experts en gestion du changement apporte une expérience approfondie dans l'accompagnement des organisations à travers des transformations numériques complexes. Nous combinons la réflexion stratégique avec l'exécution pratique pour offrir des transformations qui perdurent.",
+      "processTitle": "Notre processus",
+      "process": {
+        "assessment": {
+          "step": "01",
+          "title": "Évaluation & Vision",
+          "description": "Comprendre votre état actuel, identifier les opportunités et définir votre vision de transformation numérique."
+        },
+        "strategy": {
+          "step": "02",
+          "title": "Stratégie & Planification",
+          "description": "Développer une stratégie de transformation complète et un plan de mise en œuvre détaillé."
+        },
+        "execution": {
+          "step": "03",
+          "title": "Exécution & Mise en œuvre",
+          "description": "Exécuter les initiatives de transformation avec un soutien pratique et des méthodologies agiles."
+        },
+        "adoption": {
+          "step": "04",
+          "title": "Adoption & Gestion du changement",
+          "description": "Soutenir vos équipes dans le changement avec formation, communication et soutien continu."
+        },
+        "optimization": {
+          "step": "05",
+          "title": "Optimisation & Mise à l'échelle",
+          "description": "Surveiller les résultats, optimiser les processus et mettre à l'échelle les initiatives réussies dans toute l'organisation."
+        }
+      },
+      "ctaTitle": "Prêt à transformer votre organisation ?",
+      "ctaDescription": "Discutons de la façon dont nous pouvons guider votre parcours de transformation numérique et vous aider à construire un avantage concurrentiel à l'ère de l'IA.",
+      "ctaButton1": "Planifier une consultation",
+      "ctaButton2": "Explorer nos services"
     }
   }
 }

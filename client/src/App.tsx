@@ -93,6 +93,7 @@ const AILabService = lazy(() => import("./pages/services/AILab"));
 const StrategicBureauService = lazy(() => import("./pages/services/StrategicBureau"));
 const CreativeStudioService = lazy(() => import("./pages/services/CreativeStudio"));
 const AgenticAIService = lazy(() => import("./pages/services/AgenticAI"));
+const DigitalTransformationService = lazy(() => import("./pages/services/DigitalTransformation"));
 const Agencies = lazy(() => import("./pages/Agencies"));
 const ArrowDemo = lazy(() => import("./pages/ArrowDemo"));
 const ArrowDemoV2 = lazy(() => import("./pages/ArrowDemoV2"));
@@ -182,6 +183,7 @@ function App() {
               <Route path="/fr/services/strategic-bureau" component={withPageVisibility(StrategicBureauService, "/fr/services/strategic-bureau")} />
               <Route path="/fr/services/creative-studio" component={withPageVisibility(CreativeStudioService, "/fr/services/creative-studio")} />
               <Route path="/fr/services/agentic-ai" component={withPageVisibility(AgenticAIService, "/fr/services/agentic-ai")} />
+              <Route path="/fr/services/digital-transformation" component={withPageVisibility(DigitalTransformationService, "/fr/services/digital-transformation")} />
               <Route path="/fr/agencies" component={withPageVisibility(Agencies, "/fr/agencies")} />
               
               {/* Default routes (English) */}
@@ -223,6 +225,7 @@ function App() {
             <Route path="/services/strategic-bureau" component={withPageVisibility(StrategicBureauService, "/services/strategic-bureau")} />
             <Route path="/services/creative-studio" component={withPageVisibility(CreativeStudioService, "/services/creative-studio")} />
             <Route path="/services/agentic-ai" component={withPageVisibility(AgenticAIService, "/services/agentic-ai")} />
+            <Route path="/services/digital-transformation" component={withPageVisibility(DigitalTransformationService, "/services/digital-transformation")} />
             <Route path="/agencies" component={withPageVisibility(Agencies, "/agencies")} />
           <Route path="/arrow-demo" component={ArrowDemo} />
           <Route path="/arrow-demo-v2" component={ArrowDemoV2} />

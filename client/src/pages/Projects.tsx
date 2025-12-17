@@ -125,38 +125,50 @@ export default function Projects() {
 
   // Intersection Observer pour charger les images seulement quand elles sont visibles
   useEffect(() => {
+    if (images.length === 0) return;
+    
     const observers: IntersectionObserver[] = [];
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
     
     // Utiliser requestIdleCallback pour différer l'initialisation de l'observer sur mobile
     const initObserver = () => {
-      imageRefs.current.forEach((ref, index) => {
-        if (!ref) return;
-        
-        const observer = new IntersectionObserver(
-          (entries) => {
+      // Créer un seul observer pour toutes les images pour réduire la charge
+      const observer = new IntersectionObserver(
+        (entries) => {
+          // Utiliser requestAnimationFrame pour différer les mises à jour d'état
+          requestAnimationFrame(() => {
             entries.forEach((entry) => {
               if (entry.isIntersecting) {
-                setVisibleImages((prev) => new Set(prev).add(index));
-                observer.unobserve(entry.target);
+                const index = imageRefs.current.indexOf(entry.target as HTMLDivElement);
+                if (index !== -1) {
+                  setVisibleImages((prev) => new Set(prev).add(index));
+                  observer.unobserve(entry.target);
+                }
               }
             });
-          },
-          {
-            // Réduire rootMargin sur mobile pour améliorer les performances
-            rootMargin: isMobile ? '50px' : '150px',
-            threshold: 0.01,
-          }
-        );
-        
-        observer.observe(ref);
-        observers.push(observer);
+          });
+        },
+        {
+          // Réduire rootMargin sur mobile pour améliorer les performances
+          rootMargin: isMobile ? '30px' : '150px',
+          threshold: 0.01,
+        }
+      );
+      
+      // Observer toutes les images en une seule passe
+      imageRefs.current.forEach((ref) => {
+        if (ref) {
+          observer.observe(ref);
+        }
       });
+      
+      observers.push(observer);
     };
     
-    // Sur mobile, différer l'initialisation pour ne pas bloquer le rendu initial
-    if (isMobile && 'requestIdleCallback' in window) {
-      (window as any).requestIdleCallback(initObserver, { timeout: 1000 });
+    // Sur mobile, différer l'initialisation avec un délai plus long
+    if (isMobile) {
+      // Utiliser setTimeout au lieu de requestIdleCallback pour un meilleur contrôle
+      setTimeout(initObserver, 200);
     } else {
       initObserver();
     }
@@ -174,17 +186,17 @@ export default function Projects() {
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
     
     // Réduire drastiquement le préchargement sur mobile pour améliorer les performances
-    // Sur mobile, on charge seulement les 2 premières images immédiatement
-    // Utiliser requestIdleCallback pour différer sur mobile
+    // Sur mobile, on charge seulement la première image immédiatement
     const setInitialImages = () => {
-      const initialCount = isMobile ? Math.min(2, images.length) : Math.min(6, images.length);
+      const initialCount = isMobile ? Math.min(1, images.length) : Math.min(4, images.length);
       const initialSet = new Set(Array.from({ length: initialCount }, (_, i) => i));
       setVisibleImages(initialSet);
     };
     
-    // Sur mobile, différer pour ne pas bloquer le rendu initial
-    if (isMobile && 'requestIdleCallback' in window) {
-      (window as any).requestIdleCallback(setInitialImages, { timeout: 500 });
+    // Sur mobile, différer avec un délai plus long pour ne pas bloquer le rendu initial
+    if (isMobile) {
+      // Utiliser setTimeout avec un délai pour laisser le navigateur terminer le rendu initial
+      setTimeout(setInitialImages, 100);
     } else {
       // Sur desktop, charger immédiatement mais avec moins d'images
       setInitialImages();
@@ -272,7 +284,10 @@ export default function Projects() {
                     }}
                     className="break-inside-avoid mb-6 group cursor-pointer"
                     onClick={() => setLightboxImage(image)}
-                    style={{ contentVisibility: 'auto' }}
+                    style={{ 
+                      contentVisibility: 'auto',
+                      containIntrinsicSize: '400px 300px' // Prévenir le CLS avec une taille intrinsèque
+                    }}
                   >
                     <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-white/5 to-white/10">
                       {/* Placeholder avec blur pendant le chargement */}
@@ -288,17 +303,22 @@ export default function Projects() {
                           width={400}
                           height={300}
                           className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
-                          loading={index < 3 ? 'eager' : 'lazy'}
-                          fetchPriority={index < 2 ? 'high' : 'low'}
+                          loading={index < 1 ? 'eager' : 'lazy'}
+                          fetchPriority={index < 1 ? 'high' : 'low'}
                           decoding="async"
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         />
                       ) : (
                         // Placeholder avec dimensions pour éviter le CLS
                         <div 
-                          className="w-full aspect-[4/3] bg-gradient-to-br from-purple-900/20 to-blue-900/20"
+                          className="w-full bg-gradient-to-br from-purple-900/20 to-blue-900/20"
                           aria-hidden="true"
-                          style={{ width: '100%', aspectRatio: '4/3' }}
+                          style={{ 
+                            width: '100%',
+                            aspectRatio: '4/3',
+                            minHeight: '300px',
+                            maxHeight: '400px'
+                          }}
                         />
                       )}
                       

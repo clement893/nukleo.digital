@@ -41,10 +41,16 @@ function Header() {
   useEffect(() => {
     // Optimize scroll handler for mobile - use passive listener and throttle
     let ticking = false;
+    let lastScrollY = 0;
     const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      // Skip if scroll change is minimal to reduce updates
+      if (Math.abs(currentScrollY - lastScrollY) < 10 && ticking) return;
+      
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          setIsScrolled(window.scrollY > 50);
+          setIsScrolled(currentScrollY > 50);
+          lastScrollY = currentScrollY;
           ticking = false;
         });
         ticking = true;

@@ -29,7 +29,8 @@ function Footer() {
   const allServices = useMemo(() => [
     { label: t('footer.services.agenticAI'), href: '/services/agentic-ai' },
     { label: t('footer.services.aiNative'), href: '/services/digital-platforms' },
-    { label: t('footer.services.transformation'), href: '/services/ai-strategy-marketing' },
+    { label: t('footer.services.aiStrategyMarketing'), href: '/services/ai-strategy-marketing' },
+    { label: t('footer.services.digitalTransformation'), href: '/services/digital-transformation' },
     { label: t('footer.services.creativeStudio'), href: '/services/creative-studio' },
     { label: t('footer.services.aiConsulting'), href: '/services/intelligent-operations' },
   ], [t]);

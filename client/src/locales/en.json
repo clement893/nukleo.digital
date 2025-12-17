@@ -1411,6 +1411,50 @@
       "ctaDescription": "Let's discuss your idea and build the right solution together.",
       "ctaButton1": "Talk to a developer",
       "ctaButton2": "See our work"
+    },
+    "agenticAI": {
+      "title": "Agentic AI Systems",
+      "subtitle": "Autonomous Intelligence",
+      "tagline": "Autonomous AI Agents",
+      "description": "We develop autonomous AI agents that automate your processes, from customer relationship management to internal operations optimization, creating an intelligent backbone for your organization.",
+      "capabilities": [
+        "Business Process Automation (BPA)",
+        "CRM and ERP Integration",
+        "Supply Chain Optimization",
+        "Autonomous Customer Support"
+      ],
+      "whatIs": {
+        "title": "What is Agentic AI?",
+        "description": "Agentic AI represents a fundamental shift in how we conceive work. It's no longer about tools we use, but autonomous agents that collaborate with us, learn from us, and execute complex tasks independently. These systems can break down complex tasks into subtasks, make decisions, and iterate until objectives are met."
+      },
+      "useCases": {
+        "title": "Use Cases",
+        "customerSupport": {
+          "title": "Autonomous Customer Support",
+          "description": "AI agents that handle customer inquiries, resolve issues, and escalate when needed, providing 24/7 support."
+        },
+        "processAutomation": {
+          "title": "Business Process Automation",
+          "description": "Automate complex workflows from data entry to decision-making, reducing manual work and errors."
+        },
+        "intelligentAnalytics": {
+          "title": "Intelligent Analytics",
+          "description": "AI agents that analyze data, generate insights, and make recommendations autonomously."
+        },
+        "supplyChain": {
+          "title": "Supply Chain Optimization",
+          "description": "Optimize inventory, logistics, and procurement with autonomous decision-making agents."
+        }
+      },
+      "benefits": {
+        "title": "Why Choose Agentic AI?"
+      },
+      "cta": {
+        "title": "Ready to Transform with Agentic AI?",
+        "description": "Let's discuss how autonomous AI agents can revolutionize your operations.",
+        "button": "Get Started",
+        "explore": "Explore All Services"
+      }
     }
   },
   "artsCultureCommitment": {

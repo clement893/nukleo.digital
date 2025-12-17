@@ -1577,6 +1577,50 @@
       "ctaDescription": "Discutons de votre idée et construisons ensemble la solution adaptée.",
       "ctaButton1": "Parler à un développeur",
       "ctaButton2": "Voir nos réalisations"
+    },
+    "agenticAI": {
+      "title": "Systèmes d'agents IA autonomes",
+      "subtitle": "Intelligence Autonome",
+      "tagline": "Agents IA Autonomes",
+      "description": "Nous développons des agents IA autonomes qui automatisent vos processus, de la gestion de la relation client à l'optimisation de vos opérations internes, créant une colonne vertébrale intelligente pour votre organisation.",
+      "capabilities": [
+        "Automatisation des processus métier (BPA)",
+        "Intégration CRM et ERP",
+        "Optimisation de la chaîne d'approvisionnement",
+        "Support client autonome"
+      ],
+      "whatIs": {
+        "title": "Qu'est-ce que l'IA Agentic ?",
+        "description": "L'IA agentic représente un changement fondamental dans la façon dont nous concevons le travail. Il ne s'agit plus d'outils que nous utilisons, mais d'agents autonomes qui collaborent avec nous, apprennent de nous et exécutent des tâches complexes de manière indépendante. Ces systèmes peuvent décomposer des tâches complexes en sous-tâches, prendre des décisions et itérer jusqu'à ce que les objectifs soient atteints."
+      },
+      "useCases": {
+        "title": "Cas d'usage",
+        "customerSupport": {
+          "title": "Support Client Autonome",
+          "description": "Des agents IA qui gèrent les demandes clients, résolvent les problèmes et escaladent si nécessaire, offrant un support 24/7."
+        },
+        "processAutomation": {
+          "title": "Automatisation des Processus Métier",
+          "description": "Automatisez des flux de travail complexes, de la saisie de données à la prise de décision, réduisant le travail manuel et les erreurs."
+        },
+        "intelligentAnalytics": {
+          "title": "Analytique Intelligente",
+          "description": "Des agents IA qui analysent les données, génèrent des insights et font des recommandations de manière autonome."
+        },
+        "supplyChain": {
+          "title": "Optimisation de la Chaîne d'Approvisionnement",
+          "description": "Optimisez l'inventaire, la logistique et les approvisionnements avec des agents de prise de décision autonomes."
+        }
+      },
+      "benefits": {
+        "title": "Pourquoi choisir l'IA Agentic ?"
+      },
+      "cta": {
+        "title": "Prêt à transformer avec l'IA Agentic ?",
+        "description": "Discutons de la façon dont les agents IA autonomes peuvent révolutionner vos opérations.",
+        "button": "Commencer",
+        "explore": "Explorer tous les services"
+      }
     }
   }
 }

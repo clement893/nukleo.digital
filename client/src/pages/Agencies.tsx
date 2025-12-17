@@ -1,10 +1,10 @@
-import { useState } from 'react';
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 import UniversalLEO from '@/components/UniversalLEO';
 import Header from '@/components/Header';
 import SEO from '@/components/SEO';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { 
   ArrowRight, 
   CheckCircle2, 
@@ -18,68 +18,65 @@ import {
   Sparkles,
   Target,
   Rocket,
-  Award,
   BarChart3
 } from 'lucide-react';
 
 export default function Agencies() {
+  const { t, language } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
+  
   return (
     <>
       <SEO 
-        title="Partner with Nukleo | Your AI & Digital Team on Demand"
-        description="Scale your agency with Nukleo's expert AI & digital team. 40% cost savings, zero hiring hassle, premium quality guaranteed."
+        title={t('agencies.seoTitle') || 'Partner with Nukleo | Your AI & Digital Team on Demand'}
+        description={t('agencies.seoDescription') || 'Scale your agency with Nukleo\'s expert AI & digital team. 40% cost savings, zero hiring hassle, premium quality guaranteed.'}
       />
       <Header />
       <div className="min-h-screen bg-gradient-to-br from-[oklch(0.20_0.05_300)] via-[oklch(0.15_0.05_320)] to-[oklch(0.10_0.05_340)]">
-      {/* Hero Section - Ultra impactant */}
+      {/* Hero Section */}
       <section className="relative overflow-hidden pt-32 pb-20">
-        {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[oklch(0.15_0.05_320)]/50 to-[oklch(0.15_0.05_320)]" />
         
         <div className="container relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-cyan-500/20 to-purple-600/20 border border-cyan-500/30 mb-8">
               <Sparkles className="w-4 h-4 text-cyan-400" />
-              <span className="text-sm font-medium text-white">Trusted by 32+ European Agencies</span>
+              <span className="text-sm font-medium text-white">{t('agencies.heroBadge')}</span>
             </div>
 
-            {/* Main headline */}
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-              Your{' '}
+              {t('agencies.heroTitle')}{' '}
               <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
-                AI & Digital Team
+                {t('agencies.heroTitleHighlight')}
               </span>
               <br />
-              Without the Overhead
+              {t('agencies.heroSubtitle')}
             </h1>
 
             <p className="text-xl md:text-2xl text-white/70 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Scale your agency instantly with our expert team. Deliver more projects, increase margins, keep clients happy all without hiring headaches.
+              {t('agencies.heroDescription')}
             </p>
 
-            {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-              <Link href="/start-project">
+              <Link href={getLocalizedPath('/start-project')}>
                 <Button size="lg" className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white px-8 py-6 text-lg group">
-                  Start Your First Project
+                  {t('agencies.ctaButton1')}
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
-              <Link href="/contact">
+              <Link href={getLocalizedPath('/contact')}>
                 <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 px-8 py-6 text-lg">
-                  Book a Strategy Call
+                  {t('agencies.ctaButton2')}
                 </Button>
               </Link>
             </div>
 
-            {/* Social proof numbers */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
               {[
-                { value: '40%', label: 'Cost Savings' },
-                { value: '< 48h', label: 'Team Ready' },
-                { value: '98%', label: 'On-Time Delivery' },
-                { value: '€1M', label: 'Insured Projects' },
+                { value: '40%', label: t('agencies.stats.costSavings') },
+                { value: '< 48h', label: t('agencies.stats.teamReady') },
+                { value: '98%', label: t('agencies.stats.onTimeDelivery') },
+                { value: '€1M', label: t('agencies.stats.insuredProjects') },
               ].map((stat, index) => (
                 <div key={index} className="text-center">
                   <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent mb-1">
@@ -93,16 +90,16 @@ export default function Agencies() {
         </div>
       </section>
 
-      {/* Problem/Agitation Section */}
+      {/* Problem Section */}
       <section className="py-20 bg-gradient-to-b from-[oklch(0.15_0.05_320)] to-[oklch(0.12_0.05_330)]">
         <div className="container">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-                Agencies Are Stuck Between <span className="text-red-400">Growth & Capacity</span>
+                {t('agencies.problemTitle')} <span className="text-red-400">{t('agencies.problemTitleHighlight')}</span>
               </h2>
               <p className="text-xl text-white/70">
-                Sound familiar? You're not alone.
+                {t('agencies.problemSubtitle')}
               </p>
             </div>
 
@@ -110,18 +107,18 @@ export default function Agencies() {
               {[
                 {
                   icon: Users,
-                  title: 'Hiring is Slow & Expensive',
-                  description: '3-6 months to hire, €60K+ salaries, high turnover risk. You lose projects while recruiting.',
+                  title: t('agencies.problems.hiring.title'),
+                  description: t('agencies.problems.hiring.description'),
                 },
                 {
                   icon: TrendingUp,
-                  title: 'Clients Want More, Faster',
-                  description: 'AI, automation, custom platforms demands are exploding but your team is maxed out.',
+                  title: t('agencies.problems.demand.title'),
+                  description: t('agencies.problems.demand.description'),
                 },
                 {
                   icon: DollarSign,
-                  title: 'Margins Are Shrinking',
-                  description: 'Local dev costs eat profits. You need premium quality at nearshore prices.',
+                  title: t('agencies.problems.margins.title'),
+                  description: t('agencies.problems.margins.description'),
                 },
               ].map((problem, index) => (
                 <div key={index} className="p-6 border-l-4 border-red-500 bg-red-500/5">
@@ -144,54 +141,53 @@ export default function Agencies() {
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-500/20 to-emerald-600/20 border border-green-500/30 mb-6">
                 <CheckCircle2 className="w-4 h-4 text-green-400" />
-                <span className="text-sm font-medium text-white">The Nukleo Solution</span>
+                <span className="text-sm font-medium text-white">{t('agencies.solutionBadge')}</span>
               </div>
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Your Instant <span className="bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">AI & Digital Powerhouse</span>
+                {t('agencies.solutionTitle')} <span className="bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">{t('agencies.solutionTitleHighlight')}</span>
               </h2>
               <p className="text-xl text-white/70 max-w-3xl mx-auto">
-                We become your technical backbone seamlessly integrated, instantly scalable, transparently priced.
+                {t('agencies.solutionDescription')}
               </p>
             </div>
 
-            {/* Benefits Grid */}
             <div className="grid md:grid-cols-2 gap-8 mb-16">
               {[
                 {
                   icon: Zap,
-                  title: 'Deploy in 48 Hours',
-                  description: 'No recruitment, no onboarding delays. Senior team ready to start Monday.',
-                  highlight: 'vs. 3-6 months hiring',
+                  title: t('agencies.benefits.deploy.title'),
+                  description: t('agencies.benefits.deploy.description'),
+                  highlight: t('agencies.benefits.deploy.highlight'),
                 },
                 {
                   icon: DollarSign,
-                  title: 'Save 40% on Dev Costs',
-                  description: 'Premium Canadian talent at nearshore prices. Better margins, same quality.',
-                  highlight: '€60K → €36K per dev/year',
+                  title: t('agencies.benefits.save.title'),
+                  description: t('agencies.benefits.save.description'),
+                  highlight: t('agencies.benefits.save.highlight'),
                 },
                 {
                   icon: Users,
-                  title: 'Scale Up or Down Instantly',
-                  description: 'Need 3 devs this month, 8 next month? No problem. Zero HR overhead.',
-                  highlight: 'Total flexibility',
+                  title: t('agencies.benefits.scale.title'),
+                  description: t('agencies.benefits.scale.description'),
+                  highlight: t('agencies.benefits.scale.highlight'),
                 },
                 {
                   icon: Shield,
-                  title: '€1M Project Insurance',
-                  description: 'Every project covered. 98% on-time delivery. 95% client satisfaction guaranteed.',
-                  highlight: 'Risk-free partnership',
+                  title: t('agencies.benefits.insurance.title'),
+                  description: t('agencies.benefits.insurance.description'),
+                  highlight: t('agencies.benefits.insurance.highlight'),
                 },
                 {
                   icon: Target,
-                  title: 'AI & Automation Experts',
-                  description: 'Not just coders strategic AI partners who understand business transformation.',
-                  highlight: '5+ years avg. experience',
+                  title: t('agencies.benefits.experts.title'),
+                  description: t('agencies.benefits.experts.description'),
+                  highlight: t('agencies.benefits.experts.highlight'),
                 },
                 {
                   icon: Clock,
-                  title: 'European Hours, Canadian Base',
-                  description: 'Bilingual team (French/English) aligned with your timezone and culture.',
-                  highlight: 'Real-time collaboration',
+                  title: t('agencies.benefits.hours.title'),
+                  description: t('agencies.benefits.hours.description'),
+                  highlight: t('agencies.benefits.hours.highlight'),
                 },
               ].map((benefit, index) => (
                 <div key={index} className="p-6 border-l-4 border-cyan-500 hover:border-purple-600 transition-all group">
@@ -212,11 +208,10 @@ export default function Agencies() {
               ))}
             </div>
 
-            {/* CTA */}
             <div className="text-center">
-              <Link href="/contact">
+              <Link href={getLocalizedPath('/contact')}>
                 <Button size="lg" className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white px-8 py-6 text-lg group">
-                  See How We Can Help Your Agency
+                  {t('agencies.ctaHelp')}
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
@@ -231,36 +226,35 @@ export default function Agencies() {
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                From Handshake to <span className="bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">Delivery in 3 Steps</span>
+                {t('agencies.howItWorksTitle')} <span className="bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">{t('agencies.howItWorksTitleHighlight')}</span>
               </h2>
               <p className="text-xl text-white/70">
-                No complexity. No bureaucracy. Just results.
+                {t('agencies.howItWorksSubtitle')}
               </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
               {[
                 {
-                  step: '01',
-                  title: 'Discovery Call',
-                  description: '30-min strategy session. We understand your needs, tech stack, and project pipeline.',
-                  timeline: 'Day 1',
+                  step: t('agencies.steps.discovery.step'),
+                  title: t('agencies.steps.discovery.title'),
+                  description: t('agencies.steps.discovery.description'),
+                  timeline: t('agencies.steps.discovery.timeline'),
                 },
                 {
-                  step: '02',
-                  title: 'Team Assembly',
-                  description: 'We match senior devs to your project. Meet your team, review profiles, approve lineup.',
-                  timeline: 'Day 2-3',
+                  step: t('agencies.steps.assembly.step'),
+                  title: t('agencies.steps.assembly.title'),
+                  description: t('agencies.steps.assembly.description'),
+                  timeline: t('agencies.steps.assembly.timeline'),
                 },
                 {
-                  step: '03',
-                  title: 'Project Kickoff',
-                  description: 'Team integrated into your workflow. Slack, GitHub, daily standups seamless collaboration.',
-                  timeline: 'Day 4+',
+                  step: t('agencies.steps.kickoff.step'),
+                  title: t('agencies.steps.kickoff.title'),
+                  description: t('agencies.steps.kickoff.description'),
+                  timeline: t('agencies.steps.kickoff.timeline'),
                 },
               ].map((step, index) => (
                 <div key={index} className="relative">
-                  {/* Connector line */}
                   {index < 2 && (
                     <div className="hidden md:block absolute top-12 left-full w-full h-0.5 bg-gradient-to-r from-cyan-500/50 to-purple-600/50 -translate-x-1/2" />
                   )}
@@ -283,36 +277,36 @@ export default function Agencies() {
         </div>
       </section>
 
-      {/* Services We Deliver */}
+      {/* Services Section */}
       <section className="py-20">
         <div className="container">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Full-Stack <span className="bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">AI & Digital Services</span>
+                {t('agencies.servicesTitle')} <span className="bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">{t('agencies.servicesTitleHighlight')}</span>
               </h2>
               <p className="text-xl text-white/70">
-                From strategy to deployment, we handle the entire technical journey.
+                {t('agencies.servicesSubtitle')}
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
               {[
                 {
-                  title: 'AI & Machine Learning',
-                  services: ['Custom AI models', 'NLP & chatbots', 'Predictive analytics', 'Computer vision', 'AI strategy consulting'],
+                  title: t('agencies.serviceCategories.ai.title'),
+                  services: (t('agencies.serviceCategories.ai.services', { returnObjects: true }) as string[] || []),
                 },
                 {
-                  title: 'Web & Mobile Apps',
-                  services: ['React, Vue, Next.js', 'iOS & Android native', 'Progressive Web Apps', 'E-commerce platforms', 'SaaS products'],
+                  title: t('agencies.serviceCategories.web.title'),
+                  services: (t('agencies.serviceCategories.web.services', { returnObjects: true }) as string[] || []),
                 },
                 {
-                  title: 'Cloud & DevOps',
-                  services: ['AWS, Azure, GCP', 'CI/CD pipelines', 'Kubernetes & Docker', 'Infrastructure as Code', 'Security & compliance'],
+                  title: t('agencies.serviceCategories.cloud.title'),
+                  services: (t('agencies.serviceCategories.cloud.services', { returnObjects: true }) as string[] || []),
                 },
                 {
-                  title: 'Data & Automation',
-                  services: ['Data pipelines', 'Business intelligence', 'Process automation', 'API integrations', 'ETL workflows'],
+                  title: t('agencies.serviceCategories.data.title'),
+                  services: (t('agencies.serviceCategories.data.services', { returnObjects: true }) as string[] || []),
                 },
               ].map((category, index) => (
                 <div key={index} className="p-6 border-l-4 border-cyan-500">
@@ -338,51 +332,36 @@ export default function Agencies() {
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Transparent <span className="bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">Pricing</span>
+                {t('agencies.pricingTitle')} <span className="bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">{t('agencies.pricingTitleHighlight')}</span>
               </h2>
               <p className="text-xl text-white/70">
-                No hidden fees. No surprises. Just honest, competitive rates.
+                {t('agencies.pricingSubtitle')}
               </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
               {[
                 {
-                  name: 'Project-Based',
-                  price: 'Fixed Quote',
-                  description: 'Perfect for defined scope projects',
-                  features: [
-                    'Clear deliverables',
-                    'Fixed timeline',
-                    'Milestone payments',
-                    'Full project management',
-                  ],
-                  cta: 'Get a Quote',
+                  name: t('agencies.pricingPlans.project.name'),
+                  price: t('agencies.pricingPlans.project.price'),
+                  description: t('agencies.pricingPlans.project.description'),
+                  features: (t('agencies.pricingPlans.project.features', { returnObjects: true }) as string[] || []),
+                  cta: t('agencies.pricingPlans.project.cta'),
                 },
                 {
-                  name: 'Team Extension',
-                  price: '€3,500/mo',
-                  description: 'Per senior developer',
-                  features: [
-                    'Dedicated team members',
-                    'Flexible scaling',
-                    'Your project management',
-                    'Monthly billing',
-                  ],
-                  cta: 'Build Your Team',
+                  name: t('agencies.pricingPlans.extension.name'),
+                  price: t('agencies.pricingPlans.extension.price'),
+                  description: t('agencies.pricingPlans.extension.description'),
+                  features: (t('agencies.pricingPlans.extension.features', { returnObjects: true }) as string[] || []),
+                  cta: t('agencies.pricingPlans.extension.cta'),
                   popular: true,
                 },
                 {
-                  name: 'Retainer',
-                  price: 'Custom',
-                  description: 'Ongoing partnership',
-                  features: [
-                    'Priority support',
-                    'Reserved capacity',
-                    'Strategic consulting',
-                    'Volume discounts',
-                  ],
-                  cta: 'Discuss Retainer',
+                  name: t('agencies.pricingPlans.retainer.name'),
+                  price: t('agencies.pricingPlans.retainer.price'),
+                  description: t('agencies.pricingPlans.retainer.description'),
+                  features: (t('agencies.pricingPlans.retainer.features', { returnObjects: true }) as string[] || []),
+                  cta: t('agencies.pricingPlans.retainer.cta'),
                 },
               ].map((plan, index) => (
                 <div 
@@ -395,7 +374,7 @@ export default function Agencies() {
                 >
                   {plan.popular && (
                     <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 text-white text-sm font-bold">
-                      Most Popular
+                      {language === 'fr' ? 'Le Plus Populaire' : 'Most Popular'}
                     </div>
                   )}
                   
@@ -416,7 +395,7 @@ export default function Agencies() {
                     ))}
                   </ul>
 
-                  <Link href="/contact">
+                  <Link href={getLocalizedPath('/contact')}>
                     <Button 
                       className={`w-full ${
                         plan.popular
@@ -433,7 +412,7 @@ export default function Agencies() {
 
             <div className="text-center mt-12">
               <p className="text-white/60 mb-4">
-                💰 <strong className="text-white">Export Canada Financing:</strong> CAD $75,000 available to support your growth
+                {t('agencies.pricingNote')}
               </p>
             </div>
           </div>
@@ -446,29 +425,29 @@ export default function Agencies() {
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Agencies <span className="bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">Love Working With Us</span>
+                {t('agencies.testimonialsTitle')} <span className="bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">{t('agencies.testimonialsTitleHighlight')}</span>
               </h2>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
               {[
                 {
-                  quote: "Nukleo became our AI team overnight. We went from turning down AI projects to leading with them.",
-                  author: "Sophie Laurent",
-                  role: "CEO, Digital Pulse Paris",
-                  metric: "3x project capacity",
+                  quote: t('agencies.testimonials.sophie.quote'),
+                  author: t('agencies.testimonials.sophie.author'),
+                  role: t('agencies.testimonials.sophie.role'),
+                  metric: t('agencies.testimonials.sophie.metric'),
                 },
                 {
-                  quote: "40% cost savings without compromising quality. Our margins improved while client satisfaction went up.",
-                  author: "Marc Dubois",
-                  role: "COO, TechFlow Brussels",
-                  metric: "40% margin increase",
+                  quote: t('agencies.testimonials.marc.quote'),
+                  author: t('agencies.testimonials.marc.author'),
+                  role: t('agencies.testimonials.marc.role'),
+                  metric: t('agencies.testimonials.marc.metric'),
                 },
                 {
-                  quote: "No more hiring stress. We scale up for big projects, scale down when quiet. Total flexibility.",
-                  author: "Elena Rodriguez",
-                  role: "Founder, Innovate Madrid",
-                  metric: "Zero turnover risk",
+                  quote: t('agencies.testimonials.elena.quote'),
+                  author: t('agencies.testimonials.elena.author'),
+                  role: t('agencies.testimonials.elena.role'),
+                  metric: t('agencies.testimonials.elena.metric'),
                 },
               ].map((testimonial, index) => (
                 <div key={index} className="p-6 border-l-4 border-yellow-400">
@@ -508,27 +487,27 @@ export default function Agencies() {
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-cyan-500/20 to-purple-600/20 border border-cyan-500/30 mb-8">
               <Rocket className="w-4 h-4 text-cyan-400" />
-              <span className="text-sm font-medium text-white">Ready to Scale?</span>
+              <span className="text-sm font-medium text-white">{t('agencies.finalCtaBadge')}</span>
             </div>
 
             <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Let's Build Something <span className="bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">Extraordinary</span>
+              {t('agencies.finalCtaTitle')} <span className="bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">{t('agencies.finalCtaTitleHighlight')}</span>
             </h2>
 
             <p className="text-xl text-white/70 mb-12 max-w-2xl mx-auto">
-              Join 32+ agencies who've transformed their business with Nukleo. Book a free strategy call today no commitment, just insights.
+              {t('agencies.finalCtaDescription')}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-              <Link href="/contact">
+              <Link href={getLocalizedPath('/contact')}>
                 <Button size="lg" className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white px-8 py-6 text-lg group">
-                  Book Your Strategy Call
+                  {t('agencies.finalCtaButton1')}
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
-              <Link href="/start-project">
+              <Link href={getLocalizedPath('/start-project')}>
                 <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 px-8 py-6 text-lg">
-                  Start a Project
+                  {t('agencies.finalCtaButton2')}
                 </Button>
               </Link>
             </div>
@@ -536,15 +515,15 @@ export default function Agencies() {
             <div className="flex flex-wrap justify-center gap-8 text-sm text-white/60">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-400" />
-                <span>Free consultation</span>
+                <span>{t('agencies.finalCtaFeatures.free')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-400" />
-                <span>No obligation</span>
+                <span>{t('agencies.finalCtaFeatures.noObligation')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-green-400" />
-                <span>Response in 24h</span>
+                <span>{t('agencies.finalCtaFeatures.response')}</span>
               </div>
             </div>
           </div>

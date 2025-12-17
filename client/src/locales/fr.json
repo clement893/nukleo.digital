@@ -866,52 +866,181 @@
     "ctaButton": "Parler à un expert"
   },
   "agencies": {
-    "seoTitle": "Partenariat en marque blanche pour agences | Nukleo Digital",
-    "seoDescription": "Étendez votre offre de services avec notre expertise en IA en marque blanche. Proposez des solutions IA de pointe à vos clients sans investir dans une équipe interne.",
-    "seoKeywords": "partenariat agence IA, marque blanche IA, services IA pour agences, externalisation IA",
-    "heroTitle": "Devenez une<br /><span class=\"text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500\">agence augmentée</span>",
-    "heroDescription": "Vous êtes une agence de marketing, de communication ou de développement ? Offrez des solutions d'intelligence artificielle de pointe à vos clients sans les coûts et la complexité de la construction d'une équipe interne. Nous devenons votre département IA en marque blanche.",
-    "whyPartnerTitle": "Pourquoi s'associer avec Nukleo ?",
-    "whyPartner": {
-      "expertise": {
-        "title": "Expertise instantanée",
-        "description": "Accédez à une équipe d'experts en IA de classe mondiale sans avoir à recruter, former et gérer une nouvelle division."
+    "seoTitle": "Votre équipe IA & Digitale à la demande | Nukleo Digital",
+    "seoDescription": "Étendez votre agence avec l'équipe experte en IA & digitale de Nukleo. 40% d'économies, zéro tracas de recrutement, qualité premium garantie.",
+    "seoKeywords": "partenariat agence IA, équipe digitale à la demande, externalisation développement, agence augmentée",
+    "heroBadge": "Approuvé par 32+ Agences Européennes",
+    "heroTitle": "Votre",
+    "heroTitleHighlight": "Équipe IA & Digitale",
+    "heroSubtitle": "Sans les frais généraux",
+    "heroDescription": "Étendez votre agence instantanément avec notre équipe experte. Livrez plus de projets, augmentez les marges, gardez les clients heureux, tout cela sans les tracas du recrutement.",
+    "ctaButton1": "Démarrer votre premier projet",
+    "ctaButton2": "Réserver un appel stratégie",
+    "stats": {
+      "costSavings": "Économies de coûts",
+      "teamReady": "Équipe prête",
+      "onTimeDelivery": "Livraison à temps",
+      "insuredProjects": "Projets assurés"
+    },
+    "problemTitle": "Les agences sont coincées entre",
+    "problemTitleHighlight": "Croissance & Capacité",
+    "problemSubtitle": "Ça vous dit quelque chose ? Vous n'êtes pas seul.",
+    "problems": {
+      "hiring": {
+        "title": "Le recrutement est lent et coûteux",
+        "description": "3-6 mois pour recruter, salaires de 60K€+, risque élevé de turnover. Vous perdez des projets pendant le recrutement."
       },
-      "expand": {
-        "title": "Élargissez votre offre",
-        "description": "Proposez des services à forte valeur ajoutée comme l'automatisation intelligente, l'analyse prédictive et les plateformes IA, et augmentez vos revenus par client."
+      "demand": {
+        "title": "Les clients veulent plus, plus vite",
+        "description": "Les demandes en IA, automatisation, plateformes sur mesure explosent mais votre équipe est à saturation."
       },
-      "focus": {
-        "title": "Concentrez-vous sur votre cœur de métier",
-        "description": "Laissez-nous gérer la complexité technique de l'IA pendant que vous vous concentrez sur ce que vous faites de mieux : la stratégie client et la créativité."
-      },
-      "whiteLabel": {
-        "title": "Intégration en marque blanche",
-        "description": "Nous travaillons en arrière-plan, sous votre marque. Vos clients voient une offre de services unifiée et transparente."
+      "margins": {
+        "title": "Les marges se rétrécissent",
+        "description": "Les coûts de développement locaux mangent les profits. Vous avez besoin d'une qualité premium à des prix nearshore."
       }
     },
-    "howItWorksTitle": "Comment ça marche ?",
-    "howItWorks": {
-      "contact": {
-        "title": "1. Prise de contact",
-        "description": "Vous nous présentez le besoin de votre client. Nous travaillons avec vous pour définir la portée du projet."
+    "solutionBadge": "La Solution Nukleo",
+    "solutionTitle": "Votre",
+    "solutionTitleHighlight": "Puissance IA & Digitale Instantanée",
+    "solutionDescription": "Nous devenons votre colonne vertébrale technique, intégrée de manière transparente, instantanément évolutive, tarifée de manière transparente.",
+    "benefits": {
+      "deploy": {
+        "title": "Déploiement en 48 heures",
+        "description": "Pas de recrutement, pas de délais d'intégration. Équipe senior prête à commencer lundi.",
+        "highlight": "vs. 3-6 mois de recrutement"
       },
-      "proposal": {
-        "title": "2. Proposition conjointe",
-        "description": "Nous préparons une proposition technique que vous pouvez intégrer dans votre offre commerciale globale."
+      "save": {
+        "title": "Économisez 40% sur les coûts de dev",
+        "description": "Talent canadien premium à prix nearshore. Meilleures marges, même qualité.",
+        "highlight": "60K€ → 36K€ par dev/an"
       },
-      "delivery": {
-        "title": "3. Livraison transparente",
-        "description": "Notre équipe développe et livre le projet, en vous tenant informé à chaque étape. Vous gérez la relation client."
+      "scale": {
+        "title": "Évoluez instantanément à la hausse ou à la baisse",
+        "description": "Besoin de 3 devs ce mois-ci, 8 le mois prochain ? Aucun problème. Zéro frais généraux RH.",
+        "highlight": "Flexibilité totale"
       },
-      "support": {
-        "title": "4. Support continu",
-        "description": "Nous assurons le support et la maintenance de la solution, vous permettant d'offrir un service à long terme."
+      "insurance": {
+        "title": "Assurance projet 1M€",
+        "description": "Chaque projet couvert. 98% de livraison à temps. 95% de satisfaction client garantie.",
+        "highlight": "Partenariat sans risque"
+      },
+      "experts": {
+        "title": "Experts IA & Automatisation",
+        "description": "Pas seulement des codeurs, des partenaires IA stratégiques qui comprennent la transformation métier.",
+        "highlight": "5+ ans d'expérience moyenne"
+      },
+      "hours": {
+        "title": "Heures européennes, base canadienne",
+        "description": "Équipe bilingue (français/anglais) alignée avec votre fuseau horaire et votre culture.",
+        "highlight": "Collaboration en temps réel"
       }
     },
-    "ctaTitle": "Prêt à augmenter votre agence ?",
-    "ctaDescription": "Contactez-nous pour discuter d'un partenariat et découvrir comment nous pouvons vous aider à gagner de plus gros mandats.",
-    "ctaButton": "Discuter d'un partenariat"
+    "ctaHelp": "Découvrez comment nous pouvons aider votre agence",
+    "howItWorksTitle": "De la poignée de main à la",
+    "howItWorksTitleHighlight": "livraison en 3 étapes",
+    "howItWorksSubtitle": "Pas de complexité. Pas de bureaucratie. Juste des résultats.",
+    "steps": {
+      "discovery": {
+        "step": "01",
+        "title": "Appel de découverte",
+        "description": "Session stratégie de 30 min. Nous comprenons vos besoins, votre stack technique et votre pipeline de projets.",
+        "timeline": "Jour 1"
+      },
+      "assembly": {
+        "step": "02",
+        "title": "Assemblage de l'équipe",
+        "description": "Nous faisons correspondre des devs seniors à votre projet. Rencontrez votre équipe, examinez les profils, approuvez la composition.",
+        "timeline": "Jour 2-3"
+      },
+      "kickoff": {
+        "step": "03",
+        "title": "Lancement du projet",
+        "description": "Équipe intégrée dans votre flux de travail. Slack, GitHub, standups quotidiens, collaboration transparente.",
+        "timeline": "Jour 4+"
+      }
+    },
+    "servicesTitle": "Services complets",
+    "servicesTitleHighlight": "IA & Digitaux",
+    "servicesSubtitle": "De la stratégie au déploiement, nous gérons tout le parcours technique.",
+    "serviceCategories": {
+      "ai": {
+        "title": "IA & Machine Learning",
+        "services": ["Modèles IA sur mesure", "NLP & chatbots", "Analyse prédictive", "Vision par ordinateur", "Conseil en stratégie IA"]
+      },
+      "web": {
+        "title": "Apps Web & Mobile",
+        "services": ["React, Vue, Next.js", "iOS & Android natif", "Progressive Web Apps", "Plateformes e-commerce", "Produits SaaS"]
+      },
+      "cloud": {
+        "title": "Cloud & DevOps",
+        "services": ["AWS, Azure, GCP", "Pipelines CI/CD", "Kubernetes & Docker", "Infrastructure as Code", "Sécurité & conformité"]
+      },
+      "data": {
+        "title": "Données & Automatisation",
+        "services": ["Pipelines de données", "Business intelligence", "Automatisation de processus", "Intégrations API", "Workflows ETL"]
+      }
+    },
+    "pricingTitle": "Tarification",
+    "pricingTitleHighlight": "Transparente",
+    "pricingSubtitle": "Pas de frais cachés. Pas de surprises. Juste des tarifs honnêtes et compétitifs.",
+    "pricingPlans": {
+      "project": {
+        "name": "Par projet",
+        "price": "Devis fixe",
+        "description": "Parfait pour les projets à périmètre défini",
+        "features": ["Livrables clairs", "Calendrier fixe", "Paiements par jalons", "Gestion de projet complète"],
+        "cta": "Obtenir un devis"
+      },
+      "extension": {
+        "name": "Extension d'équipe",
+        "price": "3 500€/mois",
+        "description": "Par développeur senior",
+        "features": ["Membres d'équipe dédiés", "Évolutivité flexible", "Votre gestion de projet", "Facturation mensuelle"],
+        "cta": "Construire votre équipe",
+        "popular": true
+      },
+      "retainer": {
+        "name": "Abonnement",
+        "price": "Sur mesure",
+        "description": "Partenariat continu",
+        "features": ["Support prioritaire", "Capacité réservée", "Conseil stratégique", "Remises volume"],
+        "cta": "Discuter abonnement"
+      }
+    },
+    "pricingNote": "💰 Financement Export Canada : 75 000 CAD disponibles pour soutenir votre croissance",
+    "testimonialsTitle": "Les agences",
+    "testimonialsTitleHighlight": "adorent travailler avec nous",
+    "testimonials": {
+      "sophie": {
+        "quote": "Nukleo est devenu notre équipe IA du jour au lendemain. Nous sommes passés de refuser des projets IA à les mener.",
+        "author": "Sophie Laurent",
+        "role": "CEO, Digital Pulse Paris",
+        "metric": "3x capacité projet"
+      },
+      "marc": {
+        "quote": "40% d'économies sans compromettre la qualité. Nos marges se sont améliorées tandis que la satisfaction client augmentait.",
+        "author": "Marc Dubois",
+        "role": "COO, TechFlow Brussels",
+        "metric": "40% d'augmentation de marge"
+      },
+      "elena": {
+        "quote": "Plus de stress de recrutement. Nous montons en puissance pour les gros projets, nous réduisons quand c'est calme. Flexibilité totale.",
+        "author": "Elena Rodriguez",
+        "role": "Fondatrice, Innovate Madrid",
+        "metric": "Zéro risque de turnover"
+      }
+    },
+    "finalCtaBadge": "Prêt à évoluer ?",
+    "finalCtaTitle": "Construisons quelque chose",
+    "finalCtaTitleHighlight": "d'extraordinaire",
+    "finalCtaDescription": "Rejoignez 32+ agences qui ont transformé leur entreprise avec Nukleo. Réservez un appel stratégie gratuit aujourd'hui, sans engagement, juste des insights.",
+    "finalCtaButton1": "Réserver votre appel stratégie",
+    "finalCtaButton2": "Démarrer un projet",
+    "finalCtaFeatures": {
+      "free": "Consultation gratuite",
+      "noObligation": "Sans obligation",
+      "response": "Réponse sous 24h"
+    }
   },
   "media": {
     "seoTitle": "Espace Média | Nukleo Digital",

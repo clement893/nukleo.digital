@@ -884,6 +884,183 @@
       "error": "✗ Failed to subscribe. Please try again."
     }
   },
+  "agencies": {
+    "seoTitle": "Your AI & Digital Team on Demand | Nukleo Digital",
+    "seoDescription": "Scale your agency with Nukleo's expert AI & digital team. 40% cost savings, zero hiring hassle, premium quality guaranteed.",
+    "seoKeywords": "agency partnership AI, digital team on demand, development outsourcing, augmented agency",
+    "heroBadge": "Trusted by 32+ European Agencies",
+    "heroTitle": "Your",
+    "heroTitleHighlight": "AI & Digital Team",
+    "heroSubtitle": "Without the Overhead",
+    "heroDescription": "Scale your agency instantly with our expert team. Deliver more projects, increase margins, keep clients happy all without hiring headaches.",
+    "ctaButton1": "Start Your First Project",
+    "ctaButton2": "Book a Strategy Call",
+    "stats": {
+      "costSavings": "Cost Savings",
+      "teamReady": "Team Ready",
+      "onTimeDelivery": "On-Time Delivery",
+      "insuredProjects": "Insured Projects"
+    },
+    "problemTitle": "Agencies Are Stuck Between",
+    "problemTitleHighlight": "Growth & Capacity",
+    "problemSubtitle": "Sound familiar? You're not alone.",
+    "problems": {
+      "hiring": {
+        "title": "Hiring is Slow & Expensive",
+        "description": "3-6 months to hire, €60K+ salaries, high turnover risk. You lose projects while recruiting."
+      },
+      "demand": {
+        "title": "Clients Want More, Faster",
+        "description": "AI, automation, custom platforms demands are exploding but your team is maxed out."
+      },
+      "margins": {
+        "title": "Margins Are Shrinking",
+        "description": "Local dev costs eat profits. You need premium quality at nearshore prices."
+      }
+    },
+    "solutionBadge": "The Nukleo Solution",
+    "solutionTitle": "Your Instant",
+    "solutionTitleHighlight": "AI & Digital Powerhouse",
+    "solutionDescription": "We become your technical backbone seamlessly integrated, instantly scalable, transparently priced.",
+    "benefits": {
+      "deploy": {
+        "title": "Deploy in 48 Hours",
+        "description": "No recruitment, no onboarding delays. Senior team ready to start Monday.",
+        "highlight": "vs. 3-6 months hiring"
+      },
+      "save": {
+        "title": "Save 40% on Dev Costs",
+        "description": "Premium Canadian talent at nearshore prices. Better margins, same quality.",
+        "highlight": "€60K → €36K per dev/year"
+      },
+      "scale": {
+        "title": "Scale Up or Down Instantly",
+        "description": "Need 3 devs this month, 8 next month? No problem. Zero HR overhead.",
+        "highlight": "Total flexibility"
+      },
+      "insurance": {
+        "title": "€1M Project Insurance",
+        "description": "Every project covered. 98% on-time delivery. 95% client satisfaction guaranteed.",
+        "highlight": "Risk-free partnership"
+      },
+      "experts": {
+        "title": "AI & Automation Experts",
+        "description": "Not just coders strategic AI partners who understand business transformation.",
+        "highlight": "5+ years avg. experience"
+      },
+      "hours": {
+        "title": "European Hours, Canadian Base",
+        "description": "Bilingual team (French/English) aligned with your timezone and culture.",
+        "highlight": "Real-time collaboration"
+      }
+    },
+    "ctaHelp": "See How We Can Help Your Agency",
+    "howItWorksTitle": "From Handshake to",
+    "howItWorksTitleHighlight": "Delivery in 3 Steps",
+    "howItWorksSubtitle": "No complexity. No bureaucracy. Just results.",
+    "steps": {
+      "discovery": {
+        "step": "01",
+        "title": "Discovery Call",
+        "description": "30-min strategy session. We understand your needs, tech stack, and project pipeline.",
+        "timeline": "Day 1"
+      },
+      "assembly": {
+        "step": "02",
+        "title": "Team Assembly",
+        "description": "We match senior devs to your project. Meet your team, review profiles, approve lineup.",
+        "timeline": "Day 2-3"
+      },
+      "kickoff": {
+        "step": "03",
+        "title": "Project Kickoff",
+        "description": "Team integrated into your workflow. Slack, GitHub, daily standups seamless collaboration.",
+        "timeline": "Day 4+"
+      }
+    },
+    "servicesTitle": "Full-Stack",
+    "servicesTitleHighlight": "AI & Digital Services",
+    "servicesSubtitle": "From strategy to deployment, we handle the entire technical journey.",
+    "serviceCategories": {
+      "ai": {
+        "title": "AI & Machine Learning",
+        "services": ["Custom AI models", "NLP & chatbots", "Predictive analytics", "Computer vision", "AI strategy consulting"]
+      },
+      "web": {
+        "title": "Web & Mobile Apps",
+        "services": ["React, Vue, Next.js", "iOS & Android native", "Progressive Web Apps", "E-commerce platforms", "SaaS products"]
+      },
+      "cloud": {
+        "title": "Cloud & DevOps",
+        "services": ["AWS, Azure, GCP", "CI/CD pipelines", "Kubernetes & Docker", "Infrastructure as Code", "Security & compliance"]
+      },
+      "data": {
+        "title": "Data & Automation",
+        "services": ["Data pipelines", "Business intelligence", "Process automation", "API integrations", "ETL workflows"]
+      }
+    },
+    "pricingTitle": "Transparent",
+    "pricingTitleHighlight": "Pricing",
+    "pricingSubtitle": "No hidden fees. No surprises. Just honest, competitive rates.",
+    "pricingPlans": {
+      "project": {
+        "name": "Project-Based",
+        "price": "Fixed Quote",
+        "description": "Perfect for defined scope projects",
+        "features": ["Clear deliverables", "Fixed timeline", "Milestone payments", "Full project management"],
+        "cta": "Get a Quote"
+      },
+      "extension": {
+        "name": "Team Extension",
+        "price": "€3,500/mo",
+        "description": "Per senior developer",
+        "features": ["Dedicated team members", "Flexible scaling", "Your project management", "Monthly billing"],
+        "cta": "Build Your Team",
+        "popular": true
+      },
+      "retainer": {
+        "name": "Retainer",
+        "price": "Custom",
+        "description": "Ongoing partnership",
+        "features": ["Priority support", "Reserved capacity", "Strategic consulting", "Volume discounts"],
+        "cta": "Discuss Retainer"
+      }
+    },
+    "pricingNote": "💰 Export Canada Financing: CAD $75,000 available to support your growth",
+    "testimonialsTitle": "Agencies",
+    "testimonialsTitleHighlight": "Love Working With Us",
+    "testimonials": {
+      "sophie": {
+        "quote": "Nukleo became our AI team overnight. We went from turning down AI projects to leading with them.",
+        "author": "Sophie Laurent",
+        "role": "CEO, Digital Pulse Paris",
+        "metric": "3x project capacity"
+      },
+      "marc": {
+        "quote": "40% cost savings without compromising quality. Our margins improved while client satisfaction went up.",
+        "author": "Marc Dubois",
+        "role": "COO, TechFlow Brussels",
+        "metric": "40% margin increase"
+      },
+      "elena": {
+        "quote": "No more hiring stress. We scale up for big projects, scale down when quiet. Total flexibility.",
+        "author": "Elena Rodriguez",
+        "role": "Founder, Innovate Madrid",
+        "metric": "Zero turnover risk"
+      }
+    },
+    "finalCtaBadge": "Ready to Scale?",
+    "finalCtaTitle": "Let's Build Something",
+    "finalCtaTitleHighlight": "Extraordinary",
+    "finalCtaDescription": "Join 32+ agencies who've transformed their business with Nukleo. Book a free strategy call today no commitment, just insights.",
+    "finalCtaButton1": "Book Your Strategy Call",
+    "finalCtaButton2": "Start a Project",
+    "finalCtaFeatures": {
+      "free": "Free consultation",
+      "noObligation": "No obligation",
+      "response": "Response in 24h"
+    }
+  },
   "bureau": {
     "title": "The Strategic Bureau",
     "subtitle": "Transformation Orchestration",

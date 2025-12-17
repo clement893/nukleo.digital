@@ -234,9 +234,6 @@ function App() {
             <Route path="/admin/leo-contacts">
               <ProtectedAdminRoute><AdminLEOContacts /></ProtectedAdminRoute>
             </Route>
-            <Route path="/admin" exact>
-              <ProtectedAdminRoute><AdminHome /></ProtectedAdminRoute>
-            </Route>
             <Route path="/admin/dashboard">
               <ProtectedAdminRoute><AdminDashboard /></ProtectedAdminRoute>
             </Route>
@@ -273,6 +270,9 @@ function App() {
                 <Route path="/admin/projects-images">
                   <ProtectedAdminRoute><AdminProjectsImages /></ProtectedAdminRoute>
                 </Route>
+            <Route path="/admin">
+              <ProtectedAdminRoute><AdminHome /></ProtectedAdminRoute>
+            </Route>
             <Route path="/create-first-admin" component={CreateFirstAdmin} />
             <Route component={NotFound404} />
           </Switch>

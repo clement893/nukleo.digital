@@ -128,28 +128,38 @@ export default function Projects() {
     const observers: IntersectionObserver[] = [];
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
     
-    imageRefs.current.forEach((ref, index) => {
-      if (!ref) return;
-      
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setVisibleImages((prev) => new Set(prev).add(index));
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        {
-          // Réduire rootMargin sur mobile pour améliorer les performances
-          rootMargin: isMobile ? '100px' : '200px',
-          threshold: 0.01,
-        }
-      );
-      
-      observer.observe(ref);
-      observers.push(observer);
-    });
+    // Utiliser requestIdleCallback pour différer l'initialisation de l'observer sur mobile
+    const initObserver = () => {
+      imageRefs.current.forEach((ref, index) => {
+        if (!ref) return;
+        
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                setVisibleImages((prev) => new Set(prev).add(index));
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            // Réduire rootMargin sur mobile pour améliorer les performances
+            rootMargin: isMobile ? '50px' : '150px',
+            threshold: 0.01,
+          }
+        );
+        
+        observer.observe(ref);
+        observers.push(observer);
+      });
+    };
+    
+    // Sur mobile, différer l'initialisation pour ne pas bloquer le rendu initial
+    if (isMobile && 'requestIdleCallback' in window) {
+      (window as any).requestIdleCallback(initObserver, { timeout: 1000 });
+    } else {
+      initObserver();
+    }
 
     return () => {
       observers.forEach((observer) => observer.disconnect());
@@ -158,51 +168,28 @@ export default function Projects() {
 
   // Précharger les premières images visibles immédiatement
   useEffect(() => {
+    if (images.length === 0) return;
+    
     // Detect mobile to reduce preload on mobile devices
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
     
-    // Précharger moins d'images sur mobile pour améliorer les performances
-    const initialCount = isMobile ? Math.min(6, images.length) : Math.min(12, images.length);
-    const initialSet = new Set(Array.from({ length: initialCount }, (_, i) => i));
-    setVisibleImages(initialSet);
+    // Réduire drastiquement le préchargement sur mobile pour améliorer les performances
+    // Sur mobile, on charge seulement les 2 premières images immédiatement
+    // Utiliser requestIdleCallback pour différer sur mobile
+    const setInitialImages = () => {
+      const initialCount = isMobile ? Math.min(2, images.length) : Math.min(6, images.length);
+      const initialSet = new Set(Array.from({ length: initialCount }, (_, i) => i));
+      setVisibleImages(initialSet);
+    };
     
-    // Précharger les images critiques avec link rel="preload" (seulement sur desktop)
-    // Sur mobile, on évite le preload pour réduire les ressources bloquantes
-    if (typeof window !== 'undefined' && images.length > 0 && !isMobile) {
-      const preloadCount = Math.min(3, images.length); // Réduit à 3 pour éviter le blocage
-      const preloadLinks: HTMLLinkElement[] = [];
-      const currentImages = images; // Capture current images array
-      
-      // Utiliser requestIdleCallback pour ne pas bloquer le rendu initial
-      const preloadImages = () => {
-        for (let i = 0; i < preloadCount; i++) {
-          const link = document.createElement('link');
-          link.rel = 'preload';
-          link.as = 'image';
-          link.href = `/projects/${currentImages[i]}`;
-          link.setAttribute('fetchpriority', i < 2 ? 'high' : 'low');
-          document.head.appendChild(link);
-          preloadLinks.push(link);
-        }
-      };
-      
-      // Utiliser requestIdleCallback si disponible, sinon setTimeout
-      if ('requestIdleCallback' in window) {
-        (window as any).requestIdleCallback(preloadImages, { timeout: 2000 });
-      } else {
-        setTimeout(preloadImages, 100);
-      }
-      
-      // Cleanup: remove preload links when component unmounts or images change
-      return () => {
-        preloadLinks.forEach(link => {
-          if (link.parentNode) {
-            link.parentNode.removeChild(link);
-          }
-        });
-      };
+    // Sur mobile, différer pour ne pas bloquer le rendu initial
+    if (isMobile && 'requestIdleCallback' in window) {
+      (window as any).requestIdleCallback(setInitialImages, { timeout: 500 });
+    } else {
+      // Sur desktop, charger immédiatement mais avec moins d'images
+      setInitialImages();
     }
-  }, [images.length, images]);
+  }, [images.length]);
 
   const handleShuffle = () => {
     setIsShuffling(true);
@@ -301,8 +288,8 @@ export default function Projects() {
                           width={400}
                           height={300}
                           className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
-                          loading={index < 6 ? 'eager' : 'lazy'}
-                          fetchPriority={index < 2 ? 'high' : index < 6 ? 'auto' : 'low'}
+                          loading={index < 3 ? 'eager' : 'lazy'}
+                          fetchPriority={index < 2 ? 'high' : 'low'}
                           decoding="async"
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         />

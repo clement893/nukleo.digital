@@ -304,9 +304,10 @@ async function fetchTestimonialsFromExternalPlatform(language: 'fr' | 'en'): Pro
   }
 
   try {
-    // Construire l'URL de l'API
+    // Construire l'URL de l'API - utiliser l'endpoint public qui est prévu pour l'accès externe
     const baseUrl = ENV.internalPlatformUrl.replace(/\/$/, ''); // Enlever le slash final s'il existe
-    const url = `${baseUrl}/api/testimonials?language=${language}`;
+    // Utiliser /api/public/testimonials qui est l'endpoint prévu pour l'accès externe avec clé API
+    const url = `${baseUrl}/api/public/testimonials?language=${language}`;
     
     const headers: HeadersInit = {
       'Content-Type': 'application/json',
@@ -314,13 +315,14 @@ async function fetchTestimonialsFromExternalPlatform(language: 'fr' | 'en'): Pro
     };
 
     if (ENV.internalPlatformApiKey) {
-      // Essayer plusieurs formats d'authentification possibles
+      // L'API du HUB accepte Bearer token dans Authorization header
       headers['Authorization'] = `Bearer ${ENV.internalPlatformApiKey}`;
-      // Certaines APIs utilisent aussi X-API-Key
+      // Certaines APIs utilisent aussi X-API-Key comme alternative
       headers['X-API-Key'] = ENV.internalPlatformApiKey;
       console.log(`[Admin] Fetching testimonials from ${url} with API key authentication`);
     } else {
       console.warn('[Admin] INTERNAL_PLATFORM_API_KEY not configured, making unauthenticated request');
+      throw new Error('INTERNAL_PLATFORM_API_KEY est requise pour accéder à l\'API');
     }
 
     const response = await fetch(url, {
@@ -352,37 +354,45 @@ async function fetchTestimonialsFromExternalPlatform(language: 'fr' | 'en'): Pro
       throw new Error(`Impossible de parser la réponse JSON. Réponse reçue: ${responseText.substring(0, 200)}`);
     }
     
-    console.log(`[Admin] Successfully fetched ${Array.isArray(data) ? data.length : data.testimonials?.length || 0} testimonials (${language})`);
+    // L'endpoint /api/public/testimonials retourne {success, language, count, testimonials: [...]}
+    let testimonialsArray: any[] = [];
     
     if (Array.isArray(data)) {
-      return data.map((item: any) => ({
-        id: item.id,
-        client: item.client || item.company || '',
-        contact: item.contact || item.name || '',
-        title: item.title || '',
-        company: item.company || item.client || '',
-        textEn: item.textEn || item.text || '',
-        textFr: item.textFr || item.text || '',
-        displayOrder: item.displayOrder || item.order || 0,
-        isActive: item.isActive !== false,
-      }));
+      // Format tableau direct
+      testimonialsArray = data;
+    } else if (data.testimonials && Array.isArray(data.testimonials)) {
+      // Format avec propriété testimonials
+      testimonialsArray = data.testimonials;
+    } else {
+      console.warn(`[Admin] Unexpected response format:`, JSON.stringify(data).substring(0, 200));
+      return [];
     }
-
-    if (data.testimonials && Array.isArray(data.testimonials)) {
-      return data.testimonials.map((item: any) => ({
+    
+    console.log(`[Admin] Successfully fetched ${testimonialsArray.length} testimonials (${language})`);
+    
+    // Mapper les données du format HUB vers le format local
+    // Format HUB: {id, clientName, companyName, text, title, rating, featured, createdAt}
+    // Format local: {id, client, contact, title, company, textFr, textEn, displayOrder, isActive}
+    return testimonialsArray.map((item: any) => {
+      // Le format de l'API publique retourne 'text' et 'title' selon la langue demandée
+      // On doit mapper cela vers textFr/textEn selon la langue
+      const textFr = language === 'fr' ? (item.text || item.textFr || '') : (item.textFr || '');
+      const textEn = language === 'en' ? (item.text || item.textEn || '') : (item.textEn || '');
+      const titleFr = language === 'fr' ? (item.title || item.titleFr || '') : (item.titleFr || '');
+      const titleEn = language === 'en' ? (item.title || item.titleEn || '') : (item.titleEn || '');
+      
+      return {
         id: item.id,
-        client: item.client || item.company || '',
-        contact: item.contact || item.name || '',
-        title: item.title || '',
-        company: item.company || item.client || '',
-        textEn: item.textEn || item.text || '',
-        textFr: item.textFr || item.text || '',
-        displayOrder: item.displayOrder || item.order || 0,
-        isActive: item.isActive !== false,
-      }));
-    }
-
-    return [];
+        client: item.clientName || item.client || '',
+        contact: item.clientName || item.contact || item.name || '', // clientName est utilisé comme contact
+        title: titleFr || titleEn || item.title || '',
+        company: item.companyName || item.company || '',
+        textFr: textFr,
+        textEn: textEn,
+        displayOrder: item.displayOrder || item.order || item.rating || 0, // Utiliser rating comme fallback pour l'ordre
+        isActive: item.isActive !== false && item.status !== 'offline', // Considérer comme actif si pas explicitement offline
+      };
+    });
   } catch (error: any) {
     console.error(`[Admin] Error fetching testimonials (${language}):`, error.message);
     throw error;

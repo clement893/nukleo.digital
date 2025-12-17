@@ -299,6 +299,7 @@ export const adminRouter = router({
 // Fonction helper pour récupérer les témoignages depuis la plateforme interne
 async function fetchTestimonialsFromExternalPlatform(language: 'fr' | 'en'): Promise<any[]> {
   if (!ENV.internalPlatformUrl) {
+    console.warn('[Admin] INTERNAL_PLATFORM_URL not configured');
     return [];
   }
 
@@ -310,6 +311,9 @@ async function fetchTestimonialsFromExternalPlatform(language: 'fr' | 'en'): Pro
 
     if (ENV.internalPlatformApiKey) {
       headers['Authorization'] = `Bearer ${ENV.internalPlatformApiKey}`;
+      console.log(`[Admin] Fetching testimonials from ${url} with API key authentication`);
+    } else {
+      console.warn('[Admin] INTERNAL_PLATFORM_API_KEY not configured, making unauthenticated request');
     }
 
     const response = await fetch(url, {
@@ -319,10 +323,13 @@ async function fetchTestimonialsFromExternalPlatform(language: 'fr' | 'en'): Pro
     });
 
     if (!response.ok) {
-      throw new Error(`API returned ${response.status}: ${response.statusText}`);
+      const errorText = await response.text().catch(() => 'No error details');
+      console.error(`[Admin] API error ${response.status}: ${errorText}`);
+      throw new Error(`API returned ${response.status}: ${response.statusText}. ${errorText}`);
     }
 
     const data = await response.json();
+    console.log(`[Admin] Successfully fetched ${Array.isArray(data) ? data.length : data.testimonials?.length || 0} testimonials (${language})`);
     
     if (Array.isArray(data)) {
       return data.map((item: any) => ({

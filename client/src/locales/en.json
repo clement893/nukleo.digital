@@ -91,8 +91,7 @@
     "services": {
       "agenticAI": "Agentic AI Systems",
       "aiNative": "AI-Native Platforms",
-      "aiStrategyMarketing": "AI Strategy & Marketing",
-      "digitalTransformation": "Digital Transformation",
+      "transformation": "Transformation Strategy",
       "creativeStudio": "Creative Studio",
       "aiConsulting": "AI Consulting"
     }
@@ -430,6 +429,23 @@
         "title": "Ownership",
         "description": "We act as if every project belongs to us. Responsibility, autonomy, and commitment are at the heart of our culture. Creating and maintaining momentum means fully engaging, with intention and conviction."
       }
+    },
+    "team": {
+      "clement": { "role": "Founder & CEO" },
+      "alexei": { "role": "Co-founder & CTO" },
+      "antoine": { "role": "Full-Stack Developer" },
+      "margaux": { "role": "UX/UI Designer" },
+      "camille": { "role": "Marketing Strategist" },
+      "timothe": { "role": "AI Developer" },
+      "sarah": { "role": "Project Manager" },
+      "severine": { "role": "Graphic Designer" },
+      "maxime": { "role": "Backend Developer" },
+      "meriem": { "role": "Data Analyst" },
+      "jeanFrancois": { "role": "Senior Developer" },
+      "hind": { "role": "Digital Strategist" },
+      "omar": { "role": "Solutions Architect" },
+      "ricardo": { "role": "AI Expert" },
+      "marieClaire": { "role": "Transformation Consultant" }
     },
     "ourTeam": "OUR TEAM",
     "ourOffices": "OUR OFFICES",
@@ -882,183 +898,6 @@
       "subscribing": "Subscribing...",
       "success": "✓ Successfully subscribed! Check your email for confirmation.",
       "error": "✗ Failed to subscribe. Please try again."
-    }
-  },
-  "agencies": {
-    "seoTitle": "Your AI & Digital Team on Demand | Nukleo Digital",
-    "seoDescription": "Scale your agency with Nukleo's expert AI & digital team. 40% cost savings, zero hiring hassle, premium quality guaranteed.",
-    "seoKeywords": "agency partnership AI, digital team on demand, development outsourcing, augmented agency",
-    "heroBadge": "Trusted by 32+ European Agencies",
-    "heroTitle": "Your",
-    "heroTitleHighlight": "AI & Digital Team",
-    "heroSubtitle": "Without the Overhead",
-    "heroDescription": "Scale your agency instantly with our expert team. Deliver more projects, increase margins, keep clients happy all without hiring headaches.",
-    "ctaButton1": "Start Your First Project",
-    "ctaButton2": "Book a Strategy Call",
-    "stats": {
-      "costSavings": "Cost Savings",
-      "teamReady": "Team Ready",
-      "onTimeDelivery": "On-Time Delivery",
-      "insuredProjects": "Insured Projects"
-    },
-    "problemTitle": "Agencies Are Stuck Between",
-    "problemTitleHighlight": "Growth & Capacity",
-    "problemSubtitle": "Sound familiar? You're not alone.",
-    "problems": {
-      "hiring": {
-        "title": "Hiring is Slow & Expensive",
-        "description": "3-6 months to hire, €60K+ salaries, high turnover risk. You lose projects while recruiting."
-      },
-      "demand": {
-        "title": "Clients Want More, Faster",
-        "description": "AI, automation, custom platforms demands are exploding but your team is maxed out."
-      },
-      "margins": {
-        "title": "Margins Are Shrinking",
-        "description": "Local dev costs eat profits. You need premium quality at nearshore prices."
-      }
-    },
-    "solutionBadge": "The Nukleo Solution",
-    "solutionTitle": "Your Instant",
-    "solutionTitleHighlight": "AI & Digital Powerhouse",
-    "solutionDescription": "We become your technical backbone seamlessly integrated, instantly scalable, transparently priced.",
-    "benefits": {
-      "deploy": {
-        "title": "Deploy in 48 Hours",
-        "description": "No recruitment, no onboarding delays. Senior team ready to start Monday.",
-        "highlight": "vs. 3-6 months hiring"
-      },
-      "save": {
-        "title": "Save 40% on Dev Costs",
-        "description": "Premium Canadian talent at nearshore prices. Better margins, same quality.",
-        "highlight": "€60K → €36K per dev/year"
-      },
-      "scale": {
-        "title": "Scale Up or Down Instantly",
-        "description": "Need 3 devs this month, 8 next month? No problem. Zero HR overhead.",
-        "highlight": "Total flexibility"
-      },
-      "insurance": {
-        "title": "€1M Project Insurance",
-        "description": "Every project covered. 98% on-time delivery. 95% client satisfaction guaranteed.",
-        "highlight": "Risk-free partnership"
-      },
-      "experts": {
-        "title": "AI & Automation Experts",
-        "description": "Not just coders strategic AI partners who understand business transformation.",
-        "highlight": "5+ years avg. experience"
-      },
-      "hours": {
-        "title": "European Hours, Canadian Base",
-        "description": "Bilingual team (French/English) aligned with your timezone and culture.",
-        "highlight": "Real-time collaboration"
-      }
-    },
-    "ctaHelp": "See How We Can Help Your Agency",
-    "howItWorksTitle": "From Handshake to",
-    "howItWorksTitleHighlight": "Delivery in 3 Steps",
-    "howItWorksSubtitle": "No complexity. No bureaucracy. Just results.",
-    "steps": {
-      "discovery": {
-        "step": "01",
-        "title": "Discovery Call",
-        "description": "30-min strategy session. We understand your needs, tech stack, and project pipeline.",
-        "timeline": "Day 1"
-      },
-      "assembly": {
-        "step": "02",
-        "title": "Team Assembly",
-        "description": "We match senior devs to your project. Meet your team, review profiles, approve lineup.",
-        "timeline": "Day 2-3"
-      },
-      "kickoff": {
-        "step": "03",
-        "title": "Project Kickoff",
-        "description": "Team integrated into your workflow. Slack, GitHub, daily standups seamless collaboration.",
-        "timeline": "Day 4+"
-      }
-    },
-    "servicesTitle": "Full-Stack",
-    "servicesTitleHighlight": "AI & Digital Services",
-    "servicesSubtitle": "From strategy to deployment, we handle the entire technical journey.",
-    "serviceCategories": {
-      "ai": {
-        "title": "AI & Machine Learning",
-        "services": ["Custom AI models", "NLP & chatbots", "Predictive analytics", "Computer vision", "AI strategy consulting"]
-      },
-      "web": {
-        "title": "Web & Mobile Apps",
-        "services": ["React, Vue, Next.js", "iOS & Android native", "Progressive Web Apps", "E-commerce platforms", "SaaS products"]
-      },
-      "cloud": {
-        "title": "Cloud & DevOps",
-        "services": ["AWS, Azure, GCP", "CI/CD pipelines", "Kubernetes & Docker", "Infrastructure as Code", "Security & compliance"]
-      },
-      "data": {
-        "title": "Data & Automation",
-        "services": ["Data pipelines", "Business intelligence", "Process automation", "API integrations", "ETL workflows"]
-      }
-    },
-    "pricingTitle": "Transparent",
-    "pricingTitleHighlight": "Pricing",
-    "pricingSubtitle": "No hidden fees. No surprises. Just honest, competitive rates.",
-    "pricingPlans": {
-      "project": {
-        "name": "Project-Based",
-        "price": "Fixed Quote",
-        "description": "Perfect for defined scope projects",
-        "features": ["Clear deliverables", "Fixed timeline", "Milestone payments", "Full project management"],
-        "cta": "Get a Quote"
-      },
-      "extension": {
-        "name": "Team Extension",
-        "price": "€3,500/mo",
-        "description": "Per senior developer",
-        "features": ["Dedicated team members", "Flexible scaling", "Your project management", "Monthly billing"],
-        "cta": "Build Your Team",
-        "popular": true
-      },
-      "retainer": {
-        "name": "Retainer",
-        "price": "Custom",
-        "description": "Ongoing partnership",
-        "features": ["Priority support", "Reserved capacity", "Strategic consulting", "Volume discounts"],
-        "cta": "Discuss Retainer"
-      }
-    },
-    "pricingNote": "💰 Export Canada Financing: CAD $75,000 available to support your growth",
-    "testimonialsTitle": "Agencies",
-    "testimonialsTitleHighlight": "Love Working With Us",
-    "testimonials": {
-      "sophie": {
-        "quote": "Nukleo became our AI team overnight. We went from turning down AI projects to leading with them.",
-        "author": "Sophie Laurent",
-        "role": "CEO, Digital Pulse Paris",
-        "metric": "3x project capacity"
-      },
-      "marc": {
-        "quote": "40% cost savings without compromising quality. Our margins improved while client satisfaction went up.",
-        "author": "Marc Dubois",
-        "role": "COO, TechFlow Brussels",
-        "metric": "40% margin increase"
-      },
-      "elena": {
-        "quote": "No more hiring stress. We scale up for big projects, scale down when quiet. Total flexibility.",
-        "author": "Elena Rodriguez",
-        "role": "Founder, Innovate Madrid",
-        "metric": "Zero turnover risk"
-      }
-    },
-    "finalCtaBadge": "Ready to Scale?",
-    "finalCtaTitle": "Let's Build Something",
-    "finalCtaTitleHighlight": "Extraordinary",
-    "finalCtaDescription": "Join 32+ agencies who've transformed their business with Nukleo. Book a free strategy call today no commitment, just insights.",
-    "finalCtaButton1": "Book Your Strategy Call",
-    "finalCtaButton2": "Start a Project",
-    "finalCtaFeatures": {
-      "free": "Free consultation",
-      "noObligation": "No obligation",
-      "response": "Response in 24h"
     }
   },
   "bureau": {
@@ -1589,233 +1428,6 @@
       "ctaDescription": "Let's discuss your idea and build the right solution together.",
       "ctaButton1": "Talk to a developer",
       "ctaButton2": "See our work"
-    },
-    "agenticAI": {
-      "title": "Agentic AI Systems",
-      "subtitle": "Autonomous Intelligence",
-      "tagline": "Autonomous AI Agents",
-      "description": "We develop autonomous AI agents that automate your processes, from customer relationship management to internal operations optimization, creating an intelligent backbone for your organization.",
-      "capabilities": [
-        "Business Process Automation (BPA)",
-        "CRM and ERP Integration",
-        "Supply Chain Optimization",
-        "Autonomous Customer Support"
-      ],
-      "whatIs": {
-        "title": "What is Agentic AI?",
-        "description": "Agentic AI represents a fundamental shift in how we conceive work. It's no longer about tools we use, but autonomous agents that collaborate with us, learn from us, and execute complex tasks independently. These systems can break down complex tasks into subtasks, make decisions, and iterate until objectives are met."
-      },
-      "useCases": {
-        "title": "Use Cases",
-        "customerSupport": {
-          "title": "Autonomous Customer Support",
-          "description": "AI agents that handle customer inquiries, resolve issues, and escalate when needed, providing 24/7 support."
-        },
-        "processAutomation": {
-          "title": "Business Process Automation",
-          "description": "Automate complex workflows from data entry to decision-making, reducing manual work and errors."
-        },
-        "intelligentAnalytics": {
-          "title": "Intelligent Analytics",
-          "description": "AI agents that analyze data, generate insights, and make recommendations autonomously."
-        },
-        "supplyChain": {
-          "title": "Supply Chain Optimization",
-          "description": "Optimize inventory, logistics, and procurement with autonomous decision-making agents."
-        }
-      },
-      "benefits": {
-        "title": "Why Choose Agentic AI?"
-      },
-      "cta": {
-        "title": "Ready to Transform with Agentic AI?",
-        "description": "Let's discuss how autonomous AI agents can revolutionize your operations.",
-        "button": "Get Started",
-        "explore": "Explore All Services"
-      }
-    },
-    "digitalTransformation": {
-      "title": "Digital Transformation",
-      "description": "Consulting and support for digital transformation in the AI age. We guide organizations through their digital transformation journey, integrating AI technologies to modernize processes, improve efficiency, and drive innovation.",
-      "capabilities": [
-        "Digital Strategy & Roadmap",
-        "AI Integration & Adoption",
-        "Process Modernization",
-        "Change Management & Training"
-      ],
-      "heroTitle": "Digital",
-      "heroTitleHighlight": "Transformation",
-      "heroSubtitle": "Consulting & Support in the AI Age",
-      "heroDescription": "Navigate your digital transformation journey with expert guidance. We help organizations modernize their operations, integrate AI technologies, and build sustainable competitive advantages in the digital era.",
-      "clientNeeds": {
-        "title": "You might need Digital Transformation if...",
-        "items": [
-          "You're looking to modernize your business processes and operations.",
-          "You need guidance on integrating AI and digital technologies into your organization.",
-          "You want to improve efficiency and reduce operational costs through digitalization.",
-          "You're facing challenges adapting to new market demands and customer expectations.",
-          "You need a strategic partner to guide your transformation journey."
-        ]
-      },
-      "approachTitle": "Our Digital Transformation Approach",
-      "approachDescription": "We take a holistic approach to digital transformation, combining strategic consulting with hands-on implementation support. Our methodology focuses on understanding your unique context, defining clear objectives, and executing transformation initiatives that deliver measurable results while ensuring your team is equipped to sustain change.",
-      "expertiseTitle": "What We Offer",
-      "expertise": {
-        "strategy": {
-          "title": "Digital Strategy & Roadmap",
-          "description": "Define your digital vision and create a comprehensive roadmap aligned with your business objectives and market opportunities.",
-          "technologies": "Strategic Planning, Market Analysis, Technology Assessment, Roadmap Development"
-        },
-        "aiIntegration": {
-          "title": "AI Integration & Adoption",
-          "description": "Seamlessly integrate AI technologies into your existing systems and workflows, ensuring smooth adoption and maximum value extraction.",
-          "technologies": "AI Assessment, Integration Planning, Technology Selection, Implementation Support"
-        },
-        "processModernization": {
-          "title": "Process Modernization",
-          "description": "Redesign and optimize your business processes using digital tools and automation to improve efficiency and reduce manual work.",
-          "technologies": "Process Mapping, Automation, Workflow Optimization, Digital Tools"
-        },
-        "changeManagement": {
-          "title": "Change Management & Training",
-          "description": "Support your teams through transformation with comprehensive training, change management strategies, and ongoing support to ensure successful adoption.",
-          "technologies": "Training Programs, Change Management, User Adoption, Support & Maintenance"
-        },
-        "digitalCulture": {
-          "title": "Digital Culture Development",
-          "description": "Foster a digital-first mindset within your organization, building capabilities and cultural shifts necessary for sustained digital success.",
-          "technologies": "Workshops, Capability Building, Cultural Transformation, Knowledge Transfer"
-        },
-        "transformationGovernance": {
-          "title": "Transformation Governance",
-          "description": "Establish governance frameworks and metrics to track transformation progress, manage risks, and ensure alignment with strategic objectives.",
-          "technologies": "Governance Frameworks, KPIs, Risk Management, Performance Monitoring"
-        }
-      },
-      "teamTitle": "Our Digital Transformation Team",
-      "teamDescription": "Our team of transformation consultants, digital strategists, and change management experts brings deep experience in guiding organizations through complex digital transformations. We combine strategic thinking with practical execution to deliver transformations that stick.",
-      "processTitle": "Our Process",
-      "process": {
-        "assessment": {
-          "step": "01",
-          "title": "Assessment & Vision",
-          "description": "Understand your current state, identify opportunities, and define your digital transformation vision."
-        },
-        "strategy": {
-          "step": "02",
-          "title": "Strategy & Planning",
-          "description": "Develop a comprehensive transformation strategy and detailed implementation plan."
-        },
-        "execution": {
-          "step": "03",
-          "title": "Execution & Implementation",
-          "description": "Execute transformation initiatives with hands-on support and agile methodologies."
-        },
-        "adoption": {
-          "step": "04",
-          "title": "Adoption & Change Management",
-          "description": "Support your teams through change with training, communication, and ongoing support."
-        },
-        "optimization": {
-          "step": "05",
-          "title": "Optimization & Scaling",
-          "description": "Monitor results, optimize processes, and scale successful initiatives across the organization."
-        }
-      },
-      "ctaTitle": "Ready to Transform Your Organization?",
-      "ctaDescription": "Let's discuss how we can guide your digital transformation journey and help you build a competitive advantage in the AI age.",
-      "ctaButton1": "Schedule a Consultation",
-      "ctaButton2": "Explore Our Services"
-    }
-  },
-  "artsCultureCommitment": {
-    "seoTitle": "Arts & Culture | Nukleo Digital",
-    "seoDescription": "Our commitment to supporting arts and culture. Discover how Nukleo invests in cultural innovation and supports artists and institutions.",
-    "seoKeywords": "arts and culture, cultural support, artist support, cultural innovation, Nukleo commitment",
-    "hero": {
-      "badge": "NUKLEO.ART",
-      "title": "Culture is our",
-      "titleHighlight": "heartbeat",
-      "subtitle": "A story of <span class=\"italic text-white/80\">commitment</span>, <span class=\"italic text-white/80\">action</span> and <span class=\"italic text-white/80\">impact</span>"
-    },
-    "act1": {
-      "label": "ACT I",
-      "title": "The",
-      "titleHighlight": "Challenge",
-      "subtitle": "Culture faces unprecedented challenges",
-      "budgetCuts": {
-        "title": "Budget cuts",
-        "description": "Drastic funding reductions force artists and cultural institutions to make <span class=\"text-white/90 font-medium\">impossible choices</span> between survival and creation.",
-        "hover": "→ This needs to change"
-      },
-      "precariousConditions": {
-        "title": "Precarious conditions",
-        "description": "Artists face unstable incomes, lack of benefits, and uncertain futures, making it harder to focus on what they do best: <span class=\"text-white/90 font-medium\">creating</span>.",
-        "hover": "→ Artists deserve better"
-      },
-      "quote": "\"The fragility of Quebec's cultural sector requires <span class=\"font-semibold not-italic text-white\">concrete efforts</span> to ensure its accessibility and encourage its innovation.\""
-    },
-    "act2": {
-      "label": "ACT II",
-      "title": "Our",
-      "titleHighlight": "Belief",
-      "subtitle": "At Nukleo, we believe culture is the <span class=\"text-white/80 font-medium\">beating heart</span> of society",
-      "heritage": {
-        "title": "Heritage",
-        "description": "Culture preserves our <span class=\"text-white/90\">history</span> and <span class=\"text-white/90\">identity</span> for future generations."
-      },
-      "creativity": {
-        "title": "Creativity",
-        "description": "Culture inspires <span class=\"text-white/90\">education</span> and drives <span class=\"text-white/90\">innovation</span>."
-      },
-      "community": {
-        "title": "Community",
-        "description": "Culture creates <span class=\"text-white/90\">connections</span> and fosters <span class=\"text-white/90\">belonging</span>."
-      },
-      "quote": "\"We believe it is imperative to direct our investments with <span class=\"font-semibold not-italic text-white\">discernment</span> to strengthen our cultural growth, as the cultural sector is an <span class=\"font-semibold not-italic text-white\">economic driver</span> and a pillar of our collective identity.\""
-    },
-    "act3": {
-      "label": "ACT III",
-      "title": "Our",
-      "titleHighlight": "Action",
-      "subtitle": "We don't just <span class=\"line-through text-white/40\">talk</span> about supporting culture, we <span class=\"text-white/80 font-semibold\">act</span> every day.",
-      "affordablePricing": {
-        "title": "Affordable pricing",
-        "description": "We offer a <span class=\"inline-flex items-baseline gap-1\"><strong class=\"text-3xl font-bold text-green-300\">40% reduction</strong><span class=\"text-white/90\">on our services</span></span> for cultural organizations, making digital transformation accessible to those who need it most.",
-        "hover": "→ Because access shouldn't be a barrier"
-      },
-      "financialSupport": {
-        "title": "Financial support",
-        "description": "We dedicate <span class=\"inline-flex items-baseline gap-1\"><strong class=\"text-3xl font-bold text-red-300\">1%</strong><span class=\"text-white/90\">of our annual revenue</span></span> in direct donations to cultural organizations, and mobilize other entrepreneurs to join us.",
-        "hover": "→ Small percentage, big impact"
-      },
-      "liveCulture": {
-        "title": "Live culture",
-        "description": "Each team member receives <span class=\"inline-flex items-baseline gap-1\"><strong class=\"text-3xl font-bold text-blue-300\">$350</strong><span class=\"text-white/90\">per year</span></span> for Canadian cultural outings. Because supporting culture starts by <span class=\"text-white/90 font-medium\">living</span> it.",
-        "hover": "→ Practicing what we preach"
-      },
-      "raiseAwareness": {
-        "title": "Raise awareness",
-        "description": "We actively promote arts and culture within our company, among our partners, and in our community, staying <span class=\"text-white/90 font-medium\">informed</span> and <span class=\"text-white/90 font-medium\">engaged</span> with contemporary cultural issues.",
-        "hover": "→ Amplifying voices that matter"
-      }
-    },
-    "act4": {
-      "label": "ACT IV",
-      "title": "The",
-      "titleHighlight": "Impact",
-      "subtitle": "Join us to make a <span class=\"text-white/80 font-semibold\">real</span> difference",
-      "stats": {
-        "discount": "Discount for cultural projects",
-        "donations": "Of annual revenue in donations",
-        "perEmployee": "Per employee for culture"
-      },
-      "cta": {
-        "title": "Let's grow culture",
-        "titleHighlight": "together",
-        "description": "Whether you're an artist, cultural organization, or entrepreneur, join us to make a real difference.",
-        "button": "Start the Conversation"
-      }
     }
   }
 }

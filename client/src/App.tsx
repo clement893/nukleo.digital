@@ -9,6 +9,7 @@ import { LanguageProvider } from "./contexts/LanguageContext";
 import ScrollToTop from "./components/ScrollToTop";
 import ArrowBackground from "./components/ArrowBackground";
 import AnalyticsLoader from "./components/AnalyticsLoader";
+import GoogleAnalytics from "./components/GoogleAnalytics";
 import { FloatingLanguageToggle } from "./components/FloatingLanguageToggle";
 import { usePageTransition } from "./hooks/usePageTransition";
 import { usePageBackground } from "./hooks/usePageBackground";
@@ -136,6 +137,7 @@ function App() {
           <ArrowBackground variant="default" />
           <CustomCursor />
           <ScrollToTop />
+          <GoogleAnalytics />
           <AnalyticsLoader />
           <FloatingLanguageToggle />
           {/* Lazy load LEO on mobile - only load on desktop for better mobile performance */}

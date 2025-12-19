@@ -1,17 +1,16 @@
 import { useEffect } from 'react';
 import { useLocation } from 'wouter';
 
-// Replace with your actual GA4 Measurement ID
-// Get it from https://analytics.google.com/
-const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX'; // TODO: Replace with real ID
+// Google Analytics 4 Measurement ID
+const GA_MEASUREMENT_ID = 'G-C2X5JWEL5S';
 
 export default function GoogleAnalytics() {
   const [location] = useLocation();
 
   useEffect(() => {
     // Only load in production
-    if (import.meta.env.DEV || GA_MEASUREMENT_ID === 'G-XXXXXXXXXX') {
-      console.log('[GA4] Skipped in development or ID not configured');
+    if (import.meta.env.DEV) {
+      console.log('[GA4] Skipped in development mode');
       return;
     }
 
@@ -46,7 +45,7 @@ export default function GoogleAnalytics() {
 
   // Track page views on route change
   useEffect(() => {
-    if (import.meta.env.DEV || GA_MEASUREMENT_ID === 'G-XXXXXXXXXX') return;
+    if (import.meta.env.DEV) return;
 
     const gtag = (window as any).gtag;
     if (gtag) {
@@ -63,7 +62,7 @@ export default function GoogleAnalytics() {
 
 // Helper function to track custom events
 export function trackEvent(eventName: string, eventParams?: Record<string, any>) {
-  if (import.meta.env.DEV || GA_MEASUREMENT_ID === 'G-XXXXXXXXXX') {
+  if (import.meta.env.DEV) {
     console.log('[GA4] Event (dev):', eventName, eventParams);
     return;
   }

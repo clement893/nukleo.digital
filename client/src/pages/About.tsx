@@ -208,7 +208,13 @@ export default function About() {
                 key={index}
                 className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 group"
               >
-                <div className="aspect-square rounded-xl overflow-hidden mb-4">
+                <a 
+                  href={member.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block aspect-square rounded-xl overflow-hidden mb-4 cursor-pointer hover:opacity-90 transition-opacity"
+                  aria-label={`${member.name}'s LinkedIn profile`}
+                >
                   {member.image === '/team/Ricardo.png' || member.image === '/team/Marie-Claire.png' ? (
                     <img 
                       src={member.image}
@@ -233,7 +239,7 @@ export default function About() {
                       className="w-full h-full object-cover"
                     />
                   )}
-                </div>
+                </a>
                 <div className="flex items-start justify-between">
                   <h3 className="text-xl font-bold text-white">{member.name}</h3>
                   <a 

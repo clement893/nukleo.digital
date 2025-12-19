@@ -707,14 +707,29 @@ async function startServer() {
     });
   }
   
-  // Sentry error handler (must be after all routes)
-  // Capture unhandled errors and send to Sentry
-  if (process.env.SENTRY_DSN) {
-    app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
-      Sentry.captureException(err);
-      next(err);
+  // Global error handler (must be after all routes)
+  app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    // Log error
+    logger.error("Unhandled error:", {
+      error: err.message,
+      stack: err.stack,
+      url: req.url,
+      method: req.method,
     });
-  }
+    
+    // Send to Sentry if configured
+    if (process.env.SENTRY_DSN) {
+      Sentry.captureException(err);
+    }
+    
+    // Send error response
+    res.status(500).json({
+      error: "Internal Server Error",
+      message: process.env.NODE_ENV === 'production' 
+        ? "An unexpected error occurred" 
+        : err.message,
+    });
+  });
 
   const preferredPort = parseInt(process.env.PORT || "3000");
   const port = await findAvailablePort(preferredPort);

@@ -255,7 +255,7 @@ export default function About() {
           <p className="text-violet-300 uppercase tracking-widest text-sm mb-12 text-center">{t('about.ourOffices')}</p>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
+            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8 flex flex-col">
               <h3 className="text-3xl font-bold text-white mb-4">{t('about.montreal')}</h3>
               <p className="text-gray-300 mb-6">
                 {t('about.montrealDescription')}
@@ -264,15 +264,17 @@ export default function About() {
                 7236 Rue Waverly Montréal<br />
                 QC H2R 0C2
               </p>
-              <a 
-                href={getLocalizedPath('/contact')} 
-                className="inline-block px-6 py-3 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-fuchsia-500/50 transition-all duration-300"
-              >
-                {t('about.letsTalk')}
-              </a>
+              <div className="mt-auto">
+                <a 
+                  href={getLocalizedPath('/contact')} 
+                  className="inline-block px-6 py-3 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-fuchsia-500/50 transition-all duration-300"
+                >
+                  {t('about.letsTalk')}
+                </a>
+              </div>
             </div>
 
-            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
+            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8 flex flex-col">
               <h3 className="text-3xl font-bold text-white mb-4">{t('about.halifax')}</h3>
               <p className="text-gray-300 mb-6">
                 {t('about.halifaxDescription')}
@@ -281,15 +283,17 @@ export default function About() {
                 1800 Argyle St Unit 801 Halifax<br />
                 NS B3J 3N8
               </p>
-              <a 
-                href={getLocalizedPath('/contact')} 
-                className="inline-block px-6 py-3 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-fuchsia-500/50 transition-all duration-300"
-              >
-                {t('about.letsTalk')}
-              </a>
+              <div className="mt-auto">
+                <a 
+                  href={getLocalizedPath('/contact')} 
+                  className="inline-block px-6 py-3 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-fuchsia-500/50 transition-all duration-300"
+                >
+                  {t('about.letsTalk')}
+                </a>
+              </div>
             </div>
 
-            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
+            <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8 flex flex-col">
               <h3 className="text-3xl font-bold text-white mb-4">{t('about.remote')}</h3>
               <p className="text-gray-300 mb-6">
                 {t('about.remoteDescription')}
@@ -297,12 +301,14 @@ export default function About() {
               <p className="text-gray-400 mb-6">
                 {t('about.remoteLocation')}
               </p>
-              <a 
-                href={getLocalizedPath('/contact')} 
-                className="inline-block px-6 py-3 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-fuchsia-500/50 transition-all duration-300"
-              >
-                {t('about.letsTalk')}
-              </a>
+              <div className="mt-auto">
+                <a 
+                  href={getLocalizedPath('/contact')} 
+                  className="inline-block px-6 py-3 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-fuchsia-500/50 transition-all duration-300"
+                >
+                  {t('about.letsTalk')}
+                </a>
+              </div>
             </div>
           </div>
         </section>

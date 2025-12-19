@@ -1,6 +1,6 @@
 import SEO from '@/components/SEO';
-import { useState } from 'react';
-import { QUESTIONS } from '@/lib/assessment/questions';
+import { useState, useMemo } from 'react';
+import { QUESTIONS, getTranslatedQuestions } from '@/lib/assessment/questions';
 import { calculateScores, AssessmentResults } from '@/lib/assessment/scoring';
 import AssessmentIntro from '@/components/assessment/AssessmentIntro';
 import QuestionCard from '@/components/assessment/QuestionCard';
@@ -33,6 +33,9 @@ export default function AIReadinessAssessment() {
   const { playClick } = useSound();
 
   const saveAssessment = trpc.assessment.save.useMutation();
+
+  // Get translated questions
+  const translatedQuestions = useMemo(() => getTranslatedQuestions(t), [t]);
 
   const handleEmailSubmit = async (data: EmailCaptureData) => {
     if (!results) return;
@@ -92,8 +95,8 @@ export default function AIReadinessAssessment() {
     playClick();
   };
 
-  const currentQuestion = QUESTIONS[currentQuestionIndex];
-  const totalQuestions = QUESTIONS.length;
+  const currentQuestion = translatedQuestions[currentQuestionIndex];
+  const totalQuestions = translatedQuestions.length;
   const isLastQuestion = currentQuestionIndex === totalQuestions - 1;
 
   const handleStart = () => {
@@ -111,7 +114,7 @@ export default function AIReadinessAssessment() {
     // Auto-advance to next question after 600ms with smooth animation
     setTimeout(() => {
       if (isLastQuestion) {
-        const assessmentResults = calculateScores({ ...answers, [currentQuestion.id]: points });
+        const assessmentResults = calculateScores({ ...answers, [currentQuestion.id]: points }, t);
         setResults(assessmentResults);
         // Show email capture before results
         setState('email-capture');

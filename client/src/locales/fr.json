@@ -1913,6 +1913,261 @@
     },
     "errors": {
       "saveFailed": "Échec de l'enregistrement de l'évaluation. Veuillez réessayer."
+    },
+    "questions": {
+      "1": {
+        "question": "Quelle est la vision de votre organisation concernant l'IA ?",
+        "options": {
+          "0": "Aucune vision formalisée",
+          "25": "Vision en cours de définition",
+          "50": "Vision documentée mais non communiquée",
+          "75": "Vision claire communiquée à l'équipe dirigeante",
+          "100": "Vision IA intégrée à la stratégie d'entreprise et communiquée à tous"
+        }
+      },
+      "2": {
+        "question": "Avez-vous identifié des cas d'usage prioritaires en IA ?",
+        "options": {
+          "0": "Non, aucune identification",
+          "25": "Quelques idées informelles",
+          "50": "Liste de cas d'usage potentiels",
+          "75": "Cas d'usage priorisés avec ROI estimé",
+          "100": "Feuille de route détaillée avec cas d'usage validés et budgétisés"
+        }
+      },
+      "3": {
+        "question": "Quel est le niveau d'engagement de la direction envers l'IA ?",
+        "options": {
+          "0": "Aucun intérêt ou scepticisme",
+          "25": "Curiosité passive",
+          "50": "Intérêt actif mais aucun budget alloué",
+          "75": "Sponsor exécutif identifié avec budget exploratoire",
+          "100": "Champion C-level avec budget stratégique et KPIs"
+        }
+      },
+      "4": {
+        "question": "Quelle est la qualité de vos données ?",
+        "options": {
+          "0": "Données fragmentées, non structurées, qualité inconnue",
+          "25": "Données partiellement structurées, qualité variable",
+          "50": "Données structurées mais silos départementaux",
+          "75": "Données centralisées avec gouvernance de base",
+          "100": "Data lake/warehouse unifié avec surveillance de la qualité des données"
+        }
+      },
+      "5": {
+        "question": "Avez-vous une infrastructure de données moderne ?",
+        "options": {
+          "0": "Systèmes legacy, pas de cloud",
+          "25": "Migration cloud en cours, infrastructure hybride",
+          "50": "Infrastructure cloud mais non optimisée pour l'IA",
+          "75": "Infrastructure cloud avec capacités ML",
+          "100": "Plateforme de données moderne (Snowflake, Databricks, etc.) + MLOps"
+        }
+      },
+      "6": {
+        "question": "Collectez-vous et stockez-vous des données en temps réel ?",
+        "options": {
+          "0": "Non, données par lots uniquement",
+          "25": "Quelques flux temps réel ad hoc",
+          "50": "Données en streaming pour certains cas d'usage",
+          "75": "Infrastructure de streaming robuste (Kafka, etc.)",
+          "100": "Plateforme de données temps réel avec architecture événementielle"
+        }
+      },
+      "7": {
+        "question": "Avez-vous déjà déployé des solutions IA/ML en production ?",
+        "options": {
+          "0": "Non, aucune expérience",
+          "25": "Projets pilotes ou POCs uniquement",
+          "50": "1-2 modèles en production",
+          "75": "3-5 modèles en production avec surveillance",
+          "100": "5+ modèles en production avec MLOps mature"
+        }
+      },
+      "8": {
+        "question": "Quelle est votre capacité d'intégration technologique ?",
+        "options": {
+          "0": "Systèmes monolithiques difficiles à intégrer",
+          "25": "APIs limitées, intégrations manuelles",
+          "50": "Architecture SOA avec APIs documentées",
+          "75": "Microservices avec gestion d'API",
+          "100": "Architecture cloud-native avec patterns événementiels"
+        }
+      },
+      "9": {
+        "question": "Utilisez-vous des outils d'IA générative (GPT, Claude, etc.) ?",
+        "options": {
+          "0": "Non, aucune utilisation",
+          "25": "Utilisation individuelle non structurée",
+          "50": "Pilotes départementaux avec lignes directrices",
+          "75": "Déploiement organisationnel avec gouvernance",
+          "100": "Plateforme GenAI d'entreprise avec fine-tuning et RAG"
+        }
+      },
+      "10": {
+        "question": "Quelle est la maturité de votre infrastructure cloud ?",
+        "options": {
+          "0": "On-premise uniquement, pas de stratégie cloud",
+          "25": "Adoption cloud de base (IaaS)",
+          "50": "Cloud-first avec services PaaS",
+          "75": "Multi-cloud avec orchestration",
+          "100": "Cloud-native avec serverless et conteneurs"
+        }
+      },
+      "11": {
+        "question": "Avez-vous des compétences IA/ML en interne ?",
+        "options": {
+          "0": "Aucune compétence IA",
+          "25": "1-2 personnes avec connaissances de base",
+          "50": "Petite équipe de science des données (3-5 personnes)",
+          "75": "Équipe IA structurée (data scientists, ingénieurs ML)",
+          "100": "Centre d'excellence IA avec spécialistes multidisciplinaires"
+        }
+      },
+      "12": {
+        "question": "Investissez-vous dans la formation IA ?",
+        "options": {
+          "0": "Aucune formation",
+          "25": "Formation ad hoc pour quelques personnes",
+          "50": "Programme de formation pour l'équipe technique",
+          "75": "Programme de formation étendu (business + tech)",
+          "100": "Académie IA interne avec certifications et développement continu"
+        }
+      },
+      "13": {
+        "question": "Collaborez-vous avec des partenaires IA externes ?",
+        "options": {
+          "0": "Non, aucun partenariat",
+          "25": "Consultations occasionnelles",
+          "50": "Partenariat avec 1 fournisseur",
+          "75": "Écosystème de partenaires (consultants, vendeurs, universités)",
+          "100": "Partenariats stratégiques avec co-innovation"
+        }
+      },
+      "14": {
+        "question": "Avez-vous des processus de gouvernance IA ?",
+        "options": {
+          "0": "Aucune gouvernance",
+          "25": "Lignes directrices informelles",
+          "50": "Politiques documentées mais non appliquées",
+          "75": "Cadre de gouvernance avec comité IA",
+          "100": "Gouvernance mature avec audits réguliers et conformité"
+        }
+      },
+      "15": {
+        "question": "Comment gérez-vous l'éthique et les biais de l'IA ?",
+        "options": {
+          "0": "Aucune considération éthique",
+          "25": "Conscience de base",
+          "50": "Principes éthiques documentés",
+          "75": "Processus d'examen éthique pour les projets IA",
+          "100": "Cadre éthique complet avec tests de biais et audits"
+        }
+      },
+      "16": {
+        "question": "Avez-vous des processus MLOps ?",
+        "options": {
+          "0": "Déploiements manuels ad hoc",
+          "25": "Scripts de déploiement de base",
+          "50": "CI/CD pour modèles ML",
+          "75": "MLOps avec surveillance et réentraînement",
+          "100": "Plateforme MLOps mature (Kubeflow, MLflow, etc.)"
+        }
+      },
+      "17": {
+        "question": "Quelle est l'attitude de vos employés envers l'IA ?",
+        "options": {
+          "0": "Résistance ou peur généralisée",
+          "25": "Scepticisme ou indifférence",
+          "50": "Curiosité mais attentisme",
+          "75": "Intérêt actif et volonté d'expérimenter",
+          "100": "Enthousiasme et culture d'innovation IA"
+        }
+      },
+      "18": {
+        "question": "Encouragez-vous l'expérimentation IA ?",
+        "options": {
+          "0": "Non, culture averse au risque",
+          "25": "Expérimentation tolérée mais non encouragée",
+          "50": "Budget d'innovation limité",
+          "75": "Programme d'innovation avec temps dédié",
+          "100": "Culture \"fail fast\" avec hackathons et sandbox IA"
+        }
+      },
+      "19": {
+        "question": "Communiquez-vous sur vos initiatives IA ?",
+        "options": {
+          "0": "Aucune communication",
+          "25": "Communication ad hoc",
+          "50": "Mises à jour régulières à l'équipe dirigeante",
+          "75": "Communication interne régulière (newsletters, townhalls)",
+          "100": "Communication interne + externe (blog, conférences, études de cas)"
+        }
+      },
+      "20": {
+        "question": "Avez-vous une stratégie de gestion du changement pour l'adoption IA ?",
+        "options": {
+          "0": "Aucune gestion du changement",
+          "25": "Plan de communication de base",
+          "50": "Gestion du changement structurée pour projets clés",
+          "75": "Gestion du changement complète avec formation et soutien",
+          "100": "Gestion du changement proactive avec réseau de champions et feedback continu"
+        }
+      }
+    },
+    "dimensions": {
+      "strategy": "Stratégie & Vision",
+      "data": "Infrastructure de Données",
+      "technology": "Capacités Technologiques",
+      "talent": "Talents & Compétences",
+      "governance": "Processus & Gouvernance",
+      "culture": "Culture & Changement"
+    },
+    "maturityLevels": {
+      "Explorer": {
+        "label": "Explorateur",
+        "description": "Aucune initiative IA formelle. Données fragmentées. Aucune compétence IA. Culture traditionnelle."
+      },
+      "Experimenter": {
+        "label": "Expérimentateur",
+        "description": "Projets pilotes en cours. Données partiellement structurées. 1-2 personnes avec compétences IA. Intérêt croissant."
+      },
+      "Adopter": {
+        "label": "Adopteur",
+        "description": "1-2 solutions IA en production. Infrastructure cloud établie. Équipe de science des données en place."
+      },
+      "Integrator": {
+        "label": "Intégrateur",
+        "description": "3-5 solutions IA en production. Plateforme de données mature. Équipe IA multidisciplinaire. Gouvernance établie."
+      },
+      "AI Leader": {
+        "label": "Leader IA",
+        "description": "5+ solutions IA en production. Architecture IA-native. Centre d'excellence mature. Culture d'innovation."
+      }
+    },
+    "resultsSummary": {
+      "yourScore": "Votre Score de Préparation IA",
+      "whatThisMeans": "Ce Que Cela Signifie",
+      "dimensionScores": "Scores par Dimension"
+    },
+    "recommendations": {
+      "characteristics": "Caractéristiques de votre niveau",
+      "topRecommendations": "Recommandations prioritaires",
+      "nextSteps": "Prochaines étapes",
+      "timeline": "Timeline",
+      "impact": {
+        "label": "Impact",
+        "high": "Élevé",
+        "medium": "Moyen",
+        "low": "Faible"
+      },
+      "effort": {
+        "label": "Effort",
+        "low": "Faible",
+        "medium": "Moyen",
+        "high": "Élevé"
+      }
     }
   },
   "seo": {

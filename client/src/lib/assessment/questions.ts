@@ -18,6 +18,33 @@ export interface Question {
   options: QuestionOption[];
 }
 
+// Type for translation function
+type TFunction = (key: string) => string;
+
+// Helper function to get translated questions
+export function getTranslatedQuestions(t: TFunction): Question[] {
+  return QUESTIONS.map(q => ({
+    ...q,
+    question: t(`assessment.questions.${q.id}.question`) || q.question,
+    options: q.options.map(opt => ({
+      ...opt,
+      label: t(`assessment.questions.${q.id}.options.${opt.points}`) || opt.label,
+    })),
+  }));
+}
+
+// Helper function to get translated dimension labels
+export function getTranslatedDimensionLabels(t: TFunction): Record<Dimension, string> {
+  return {
+    strategy: t('assessment.dimensions.strategy') || DIMENSION_LABELS.strategy,
+    data: t('assessment.dimensions.data') || DIMENSION_LABELS.data,
+    technology: t('assessment.dimensions.technology') || DIMENSION_LABELS.technology,
+    talent: t('assessment.dimensions.talent') || DIMENSION_LABELS.talent,
+    governance: t('assessment.dimensions.governance') || DIMENSION_LABELS.governance,
+    culture: t('assessment.dimensions.culture') || DIMENSION_LABELS.culture,
+  };
+}
+
 export const QUESTIONS: Question[] = [
   // DIMENSION 1: Strategy & Vision (3 questions)
   {

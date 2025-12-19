@@ -1,4 +1,7 @@
-import { QUESTIONS, Dimension, DIMENSION_LABELS } from './questions';
+import { QUESTIONS, Dimension, DIMENSION_LABELS, getTranslatedDimensionLabels } from './questions';
+
+// Type for translation function
+type TFunction = (key: string) => string;
 
 export interface DimensionScore {
   dimension: Dimension;
@@ -49,7 +52,21 @@ export const MATURITY_LEVELS: Record<MaturityLevel, { min: number; max: number; 
   },
 };
 
-export function calculateScores(answers: Record<number, number>): AssessmentResults {
+// Helper function to get translated maturity level
+export function getTranslatedMaturityLevel(level: MaturityLevel, t?: TFunction): { label: string; description: string } {
+  if (t) {
+    return {
+      label: t(`assessment.maturityLevels.${level}.label`) || level,
+      description: t(`assessment.maturityLevels.${level}.description`) || MATURITY_LEVELS[level].description,
+    };
+  }
+  return {
+    label: level,
+    description: MATURITY_LEVELS[level].description,
+  };
+}
+
+export function calculateScores(answers: Record<number, number>, t?: TFunction): AssessmentResults {
   // Group questions by dimension
   const dimensionQuestions = QUESTIONS.reduce((acc, question) => {
     if (!acc[question.dimension]) {
@@ -58,6 +75,9 @@ export function calculateScores(answers: Record<number, number>): AssessmentResu
     acc[question.dimension].push(question);
     return acc;
   }, {} as Record<Dimension, typeof QUESTIONS>);
+
+  // Get translated dimension labels if translation function provided
+  const dimensionLabels = t ? getTranslatedDimensionLabels(t) : DIMENSION_LABELS;
 
   // Calculate score for each dimension
   const dimensionScores: DimensionScore[] = Object.entries(dimensionQuestions).map(([dimension, questions]) => {
@@ -71,7 +91,7 @@ export function calculateScores(answers: Record<number, number>): AssessmentResu
 
     return {
       dimension: dimension as Dimension,
-      label: DIMENSION_LABELS[dimension as Dimension],
+      label: dimensionLabels[dimension as Dimension],
       score,
       fullMark: 100,
     };
@@ -84,7 +104,8 @@ export function calculateScores(answers: Record<number, number>): AssessmentResu
 
   // Determine maturity level
   const maturityLevel = getMaturityLevel(globalScore);
-  const maturityDescription = MATURITY_LEVELS[maturityLevel].description;
+  const translatedMaturity = t ? getTranslatedMaturityLevel(maturityLevel, t) : null;
+  const maturityDescription = translatedMaturity?.description || MATURITY_LEVELS[maturityLevel].description;
 
   return {
     dimensionScores,

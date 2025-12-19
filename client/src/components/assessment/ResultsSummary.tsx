@@ -1,12 +1,15 @@
-import { AssessmentResults, getMaturityColor, getScoreColor } from '@/lib/assessment/scoring';
+import { AssessmentResults, getMaturityColor, getScoreColor, getTranslatedMaturityLevel } from '@/lib/assessment/scoring';
 import { Trophy, TrendingUp, Target } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface ResultsSummaryProps {
   results: AssessmentResults;
 }
 
 export default function ResultsSummary({ results }: ResultsSummaryProps) {
+  const { t } = useLanguage();
   const maturityColor = getMaturityColor(results.maturityLevel);
+  const translatedMaturity = getTranslatedMaturityLevel(results.maturityLevel, t);
 
   return (
     <div className="space-y-6">
@@ -17,7 +20,7 @@ export default function ResultsSummary({ results }: ResultsSummaryProps) {
         </div>
         
         <h3 className="text-white/60 text-sm font-mono uppercase tracking-wider mb-2">
-          Your AI Readiness Score
+          {t('assessment.resultsSummary.yourScore') || 'Your AI Readiness Score'}
         </h3>
         
         <div className="text-7xl font-bold mb-4" style={{ color: getScoreColor(results.globalScore) }}>
@@ -33,7 +36,7 @@ export default function ResultsSummary({ results }: ResultsSummaryProps) {
             border: `2px solid ${maturityColor}40`
           }}
         >
-          {results.maturityLevel}
+          {translatedMaturity.label}
         </div>
       </div>
 
@@ -44,7 +47,7 @@ export default function ResultsSummary({ results }: ResultsSummaryProps) {
             <Target className="w-5 h-5 text-accent" />
           </div>
           <div>
-            <h4 className="text-white font-bold mb-2">What This Means</h4>
+            <h4 className="text-white font-bold mb-2">{t('assessment.resultsSummary.whatThisMeans') || 'What This Means'}</h4>
             <p className="text-white/70 leading-relaxed">
               {results.maturityDescription}
             </p>
@@ -58,7 +61,7 @@ export default function ResultsSummary({ results }: ResultsSummaryProps) {
           <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center">
             <TrendingUp className="w-5 h-5 text-accent" />
           </div>
-          <h4 className="text-white font-bold">Dimension Scores</h4>
+          <h4 className="text-white font-bold">{t('assessment.resultsSummary.dimensionScores') || 'Dimension Scores'}</h4>
         </div>
 
         <div className="space-y-4">

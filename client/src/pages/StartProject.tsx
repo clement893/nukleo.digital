@@ -5,7 +5,6 @@ import PageLayout from '@/components/PageLayout';
 import Breadcrumb from '@/components/Breadcrumb';
 import { Button } from '@/components/ui/button';
 import { trpc } from '@/lib/trpc';
-import { useLocation } from 'wouter';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
@@ -16,11 +15,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { ArrowRight, CheckCircle2, ArrowLeft } from 'lucide-react';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function StartProject() {
-  const [, navigate] = useLocation();
   const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
@@ -80,17 +78,6 @@ export default function StartProject() {
         {/* Breadcrumb */}
         <div className="max-w-3xl mx-auto mb-8">
           <Breadcrumb items={[{ name: t('nav.startProject') || 'Start Project', url: '/start-project' }]} />
-        </div>
-        {/* Back Button */}
-        <div className="max-w-3xl mx-auto mb-8">
-          <Button
-            variant="ghost"
-            onClick={() => navigate('/')}
-            className="text-white/70 hover:text-white hover:bg-white/10 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            {t('startProject.backToHome')}
-          </Button>
         </div>
 
         {/* Header */}
@@ -176,7 +163,11 @@ export default function StartProject() {
                     <SelectTrigger className="bg-white/10 border-white/20 text-white focus:border-accent focus:ring-accent">
                       <SelectValue placeholder={t('startProject.form.projectTypePlaceholder')} />
                     </SelectTrigger>
-                    <SelectContent className="bg-slate-900 border-white/20 backdrop-blur-xl">
+                    <SelectContent 
+                      className="bg-slate-900 border-white/20 backdrop-blur-xl"
+                      onOpenAutoFocus={(e) => e.preventDefault()}
+                      position="popper"
+                    >
                       <SelectItem value="ai-strategy" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">{t('startProject.form.projectTypes.aiStrategy')}</SelectItem>
                       <SelectItem value="agentic-ai" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">{t('startProject.form.projectTypes.agenticAI')}</SelectItem>
                       <SelectItem value="ai-integration" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">{t('startProject.form.projectTypes.aiIntegration')}</SelectItem>
@@ -199,7 +190,11 @@ export default function StartProject() {
                     <SelectTrigger className="bg-white/10 border-white/20 text-white focus:border-accent focus:ring-accent">
                       <SelectValue placeholder={t('startProject.form.budgetPlaceholder')} />
                     </SelectTrigger>
-                    <SelectContent className="bg-slate-900 border-white/20 backdrop-blur-xl">
+                    <SelectContent 
+                      className="bg-slate-900 border-white/20 backdrop-blur-xl"
+                      onOpenAutoFocus={(e) => e.preventDefault()}
+                      position="popper"
+                    >
                       <SelectItem value="10k-25k" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">{t('startProject.form.budgetRanges.10k25k')}</SelectItem>
                       <SelectItem value="25k-50k" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">{t('startProject.form.budgetRanges.25k50k')}</SelectItem>
                       <SelectItem value="50k-100k" className="text-white hover:bg-white/20 focus:bg-white/20 cursor-pointer">{t('startProject.form.budgetRanges.50k100k')}</SelectItem>

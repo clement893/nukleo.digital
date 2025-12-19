@@ -1885,6 +1885,261 @@
     },
     "errors": {
       "saveFailed": "Failed to save assessment. Please try again."
+    },
+    "questions": {
+      "1": {
+        "question": "What is your organization's vision regarding AI?",
+        "options": {
+          "0": "No formalized vision",
+          "25": "Vision being defined",
+          "50": "Documented vision but not communicated",
+          "75": "Clear vision communicated to leadership team",
+          "100": "AI vision integrated into enterprise strategy and communicated to all"
+        }
+      },
+      "2": {
+        "question": "Have you identified priority AI use cases?",
+        "options": {
+          "0": "No, no identification",
+          "25": "Some informal ideas",
+          "50": "List of potential use cases",
+          "75": "Prioritized use cases with estimated ROI",
+          "100": "Detailed roadmap with validated and budgeted use cases"
+        }
+      },
+      "3": {
+        "question": "What is the level of leadership engagement towards AI?",
+        "options": {
+          "0": "No interest or skepticism",
+          "25": "Passive curiosity",
+          "50": "Active interest but no allocated budget",
+          "75": "Executive sponsor identified with exploratory budget",
+          "100": "C-level champion with strategic budget and KPIs"
+        }
+      },
+      "4": {
+        "question": "What is the quality of your data?",
+        "options": {
+          "0": "Fragmented, unstructured data, unknown quality",
+          "25": "Partially structured data, variable quality",
+          "50": "Structured data but departmental silos",
+          "75": "Centralized data with basic governance",
+          "100": "Unified data lake/warehouse with data quality monitoring"
+        }
+      },
+      "5": {
+        "question": "Do you have a modern data infrastructure?",
+        "options": {
+          "0": "Legacy systems, no cloud",
+          "25": "Cloud migration in progress, hybrid infrastructure",
+          "50": "Cloud infrastructure but not optimized for AI",
+          "75": "Cloud infrastructure with ML capabilities",
+          "100": "Modern data platform (Snowflake, Databricks, etc.) + MLOps"
+        }
+      },
+      "6": {
+        "question": "Do you collect and store real-time data?",
+        "options": {
+          "0": "No, batch data only",
+          "25": "Some ad hoc real-time flows",
+          "50": "Streaming data for certain use cases",
+          "75": "Robust streaming infrastructure (Kafka, etc.)",
+          "100": "Real-time data platform with event-driven architecture"
+        }
+      },
+      "7": {
+        "question": "Have you already deployed AI/ML solutions in production?",
+        "options": {
+          "0": "No, no experience",
+          "25": "Pilot projects or POCs only",
+          "50": "1-2 models in production",
+          "75": "3-5 models in production with monitoring",
+          "100": "5+ models in production with mature MLOps"
+        }
+      },
+      "8": {
+        "question": "What is your technological integration capacity?",
+        "options": {
+          "0": "Monolithic systems difficult to integrate",
+          "25": "Limited APIs, manual integrations",
+          "50": "SOA architecture with documented APIs",
+          "75": "Microservices with API management",
+          "100": "Cloud-native architecture with event-driven patterns"
+        }
+      },
+      "9": {
+        "question": "Do you use generative AI tools (GPT, Claude, etc.)?",
+        "options": {
+          "0": "No, no usage",
+          "25": "Unstructured individual usage",
+          "50": "Departmental pilots with guidelines",
+          "75": "Organizational deployment with governance",
+          "100": "Enterprise GenAI platform with fine-tuning and RAG"
+        }
+      },
+      "10": {
+        "question": "What is your cloud infrastructure maturity?",
+        "options": {
+          "0": "On-premise only, no cloud strategy",
+          "25": "Basic cloud adoption (IaaS)",
+          "50": "Cloud-first with PaaS services",
+          "75": "Multi-cloud with orchestration",
+          "100": "Cloud-native with serverless and containers"
+        }
+      },
+      "11": {
+        "question": "Do you have AI/ML skills in-house?",
+        "options": {
+          "0": "No AI skills",
+          "25": "1-2 people with basic knowledge",
+          "50": "Small data science team (3-5 people)",
+          "75": "Structured AI team (data scientists, ML engineers)",
+          "100": "AI center of excellence with multidisciplinary specialists"
+        }
+      },
+      "12": {
+        "question": "Do you invest in AI training?",
+        "options": {
+          "0": "No training",
+          "25": "Ad hoc training for a few people",
+          "50": "Training program for technical team",
+          "75": "Extended training program (business + tech)",
+          "100": "Internal AI academy with certifications and continuous upskilling"
+        }
+      },
+      "13": {
+        "question": "Do you collaborate with external AI partners?",
+        "options": {
+          "0": "No, no partnership",
+          "25": "Occasional consultations",
+          "50": "Partnership with 1 provider",
+          "75": "Ecosystem of partners (consultants, vendors, universities)",
+          "100": "Strategic partnerships with co-innovation"
+        }
+      },
+      "14": {
+        "question": "Do you have AI governance processes?",
+        "options": {
+          "0": "No governance",
+          "25": "Informal guidelines",
+          "50": "Documented policies but not applied",
+          "75": "Governance framework with AI committee",
+          "100": "Mature governance with regular audits and compliance"
+        }
+      },
+      "15": {
+        "question": "How do you manage AI ethics and bias?",
+        "options": {
+          "0": "No ethical consideration",
+          "25": "Basic awareness",
+          "50": "Documented ethical principles",
+          "75": "Ethical review process for AI projects",
+          "100": "Complete ethical framework with bias testing and audits"
+        }
+      },
+      "16": {
+        "question": "Do you have MLOps processes?",
+        "options": {
+          "0": "Ad hoc manual deployments",
+          "25": "Basic deployment scripts",
+          "50": "CI/CD for ML models",
+          "75": "MLOps with monitoring and retraining",
+          "100": "Mature MLOps platform (Kubeflow, MLflow, etc.)"
+        }
+      },
+      "17": {
+        "question": "What is your employees' attitude towards AI?",
+        "options": {
+          "0": "Resistance or widespread fear",
+          "25": "Skepticism or indifference",
+          "50": "Curiosity but wait-and-see",
+          "75": "Active interest and willingness to experiment",
+          "100": "Enthusiasm and AI innovation culture"
+        }
+      },
+      "18": {
+        "question": "Do you encourage AI experimentation?",
+        "options": {
+          "0": "No, risk-averse culture",
+          "25": "Experimentation tolerated but not encouraged",
+          "50": "Limited innovation budget",
+          "75": "Innovation program with dedicated time",
+          "100": "\"Fail fast\" culture with hackathons and AI sandbox"
+        }
+      },
+      "19": {
+        "question": "Do you communicate about your AI initiatives?",
+        "options": {
+          "0": "No communication",
+          "25": "Ad hoc communication",
+          "50": "Regular updates to leadership team",
+          "75": "Regular internal communication (newsletters, townhalls)",
+          "100": "Internal + external communication (blog, conferences, case studies)"
+        }
+      },
+      "20": {
+        "question": "Do you have a change management strategy for AI adoption?",
+        "options": {
+          "0": "No change management",
+          "25": "Basic communication plan",
+          "50": "Structured change management for key projects",
+          "75": "Comprehensive change management with training and support",
+          "100": "Proactive change management with champions network and continuous feedback"
+        }
+      }
+    },
+    "dimensions": {
+      "strategy": "Strategy & Vision",
+      "data": "Data Infrastructure",
+      "technology": "Technology Capabilities",
+      "talent": "Talent & Skills",
+      "governance": "Processes & Governance",
+      "culture": "Culture & Change"
+    },
+    "maturityLevels": {
+      "Explorer": {
+        "label": "Explorer",
+        "description": "No formal AI initiative. Fragmented data. No AI skills. Traditional culture."
+      },
+      "Experimenter": {
+        "label": "Experimenter",
+        "description": "Pilot projects underway. Partially structured data. 1-2 people with AI skills. Growing interest."
+      },
+      "Adopter": {
+        "label": "Adopter",
+        "description": "1-2 AI solutions in production. Established cloud infrastructure. Data science team in place."
+      },
+      "Integrator": {
+        "label": "Integrator",
+        "description": "3-5 AI solutions in production. Mature data platform. Multidisciplinary AI team. Established governance."
+      },
+      "AI Leader": {
+        "label": "AI Leader",
+        "description": "5+ AI solutions in production. AI-native architecture. Mature center of excellence. Innovation culture."
+      }
+    },
+    "resultsSummary": {
+      "yourScore": "Your AI Readiness Score",
+      "whatThisMeans": "What This Means",
+      "dimensionScores": "Dimension Scores"
+    },
+    "recommendations": {
+      "characteristics": "Characteristics of Your Level",
+      "topRecommendations": "Top Recommendations",
+      "nextSteps": "Next Steps",
+      "timeline": "Timeline",
+      "impact": {
+        "label": "Impact",
+        "high": "High",
+        "medium": "Medium",
+        "low": "Low"
+      },
+      "effort": {
+        "label": "Effort",
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High"
+      }
     }
   }
 }

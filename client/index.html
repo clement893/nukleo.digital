@@ -7,17 +7,23 @@
     <link rel="preconnect" href="https://nukleodigital-production.up.railway.app" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Preconnect for Google Tag Manager for faster loading -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=5" />
     
-    <!-- Google tag (gtag.js) - Load synchronously for proper detection -->
+    <!-- Google tag (gtag.js) - Load synchronously for proper detection by Google Tag Assistant -->
+    <!-- This must be in the <head> section and loaded before page content -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-C2X5JWEL5S"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-C2X5JWEL5S');
+      gtag('config', 'G-C2X5JWEL5S', {
+        'send_page_view': true
+      });
     </script>
     
     <title>Transformation IA & Écosystèmes Numériques | Nukleo Digital</title>

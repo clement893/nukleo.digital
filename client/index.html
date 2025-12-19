@@ -11,39 +11,13 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=5" />
     
-    <!-- Google tag (gtag.js) - Deferred after LCP for better performance -->
+    <!-- Google tag (gtag.js) - Load synchronously for proper detection -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C2X5JWEL5S"></script>
     <script>
-      // Initialize dataLayer immediately but defer script loading
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      window.gtag = gtag;
       gtag('js', new Date());
-      
-      // Defer loading gtag.js until after LCP
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(() => {
-          const script = document.createElement('script');
-          script.async = true;
-          script.src = 'https://www.googletagmanager.com/gtag/js?id=G-C2X5JWEL5S';
-          script.onload = () => {
-            gtag('config', 'G-C2X5JWEL5S');
-          };
-          document.head.appendChild(script);
-        }, { timeout: 2000 });
-      } else {
-        // Fallback: load after page load
-        window.addEventListener('load', () => {
-          setTimeout(() => {
-            const script = document.createElement('script');
-            script.async = true;
-            script.src = 'https://www.googletagmanager.com/gtag/js?id=G-C2X5JWEL5S';
-            script.onload = () => {
-              gtag('config', 'G-C2X5JWEL5S');
-            };
-            document.head.appendChild(script);
-          }, 1000);
-        });
-      }
+      gtag('config', 'G-C2X5JWEL5S');
     </script>
     
     <title>Transformation IA & Écosystèmes Numériques | Nukleo Digital</title>

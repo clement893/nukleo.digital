@@ -64,6 +64,32 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
   throw new Error(`No available port found starting from ${startPort}`);
 }
 
+// Helper function to check database connection
+async function checkDatabaseConnection(): Promise<boolean> {
+  if (!process.env.DATABASE_URL) {
+    return false;
+  }
+  
+  try {
+    const { getDb } = await import("../db");
+    const db = await getDb();
+    if (!db) {
+      return false;
+    }
+    
+    // Try a simple query to verify connection
+    await db.execute(sql`SELECT 1`);
+    return true;
+  } catch (error) {
+    // Don't log full error details to avoid rate limiting
+    const errorCode = error instanceof Error && 'code' in error ? (error as any).code : 'UNKNOWN';
+    if (errorCode === 'ECONNREFUSED') {
+      logger.warn("Database connection refused. Check DATABASE_URL and ensure database is running.");
+    }
+    return false;
+  }
+}
+
 async function startServer() {
   // Initialize Sentry for error monitoring
   initSentry();

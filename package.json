@@ -11,6 +11,7 @@
     "check": "tsc --noEmit",
     "format": "prettier --write .",
     "test": "vitest run",
+    "verify:ga": "node scripts/verify-ga-tag.js",
     "db:push": "drizzle-kit generate && drizzle-kit migrate",
     "migrate:page-visibility": "node migrate-page-visibility.mjs",
     "migrate:loaders": "tsx server/migrate-loaders.ts",

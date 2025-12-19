@@ -135,7 +135,7 @@ async function startServer() {
         styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
         imgSrc: ["'self'", "data:", "https:", "blob:"],
         fontSrc: ["'self'", "https://fonts.gstatic.com", "data:"],
-        connectSrc: ["'self'", "https://api.manus.im", "https://*.railway.app", "https://*.manusvm.computer", "https://fonts.googleapis.com", "https://fonts.gstatic.com", "https://*.googleusercontent.com", "https://www.googletagmanager.com", "https://*.googletagmanager.com"],
+        connectSrc: ["'self'", "https://api.manus.im", "https://*.railway.app", "https://*.manusvm.computer", "https://fonts.googleapis.com", "https://fonts.gstatic.com", "https://*.googleusercontent.com", "https://www.googletagmanager.com", "https://*.googletagmanager.com", "https://www.google-analytics.com", "https://*.google-analytics.com"],
         frameSrc: ["'self'"],
         objectSrc: ["'none'"],
         upgradeInsecureRequests: process.env.NODE_ENV === 'production' ? [] : null,

@@ -734,18 +734,29 @@ async function startServer() {
   }
   
   // Global error handler (must be after all routes)
-  app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
-    // Log error
+  app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    // Log error with full details
+    const errorMessage = err?.message || String(err) || "Unknown error";
+    const errorStack = err?.stack || "No stack trace";
+    
     logger.error("Unhandled error:", {
-      error: err.message,
-      stack: err.stack,
+      error: errorMessage,
+      stack: errorStack,
       url: req.url,
       method: req.method,
+      body: req.body,
+      query: req.query,
+      params: req.params,
     });
     
     // Send to Sentry if configured
-    if (process.env.SENTRY_DSN) {
+    if (process.env.SENTRY_DSN && err instanceof Error) {
       Sentry.captureException(err);
+    }
+    
+    // Don't send response if headers already sent
+    if (res.headersSent) {
+      return next(err);
     }
     
     // Send error response
@@ -753,7 +764,7 @@ async function startServer() {
       error: "Internal Server Error",
       message: process.env.NODE_ENV === 'production' 
         ? "An unexpected error occurred" 
-        : err.message,
+        : errorMessage,
     });
   });
 

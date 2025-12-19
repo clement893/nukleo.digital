@@ -5,7 +5,7 @@ const router = Router();
 
 // Generate sitemap.xml
 router.get('/sitemap.xml', (req, res) => {
-  const baseUrl = 'https://nukleo.digital';
+  const baseUrl = 'https://nukleo.com';
   const currentDate = new Date().toISOString().split('T')[0];
 
   // Resource articles
@@ -127,7 +127,7 @@ ${allPages
 
 // Generate robots.txt
 router.get('/robots.txt', (req, res) => {
-  const baseUrl = 'https://nukleo.digital';
+  const baseUrl = 'https://nukleo.com';
   
   const robots = `# Nukleo Digital - Robots.txt
 User-agent: *

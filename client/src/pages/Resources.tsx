@@ -289,7 +289,7 @@ export default function Resources() {
                       <div className="relative z-10">
                         {/* Badge */}
                         <div className="mb-6">
-                          <span className="inline-block px-3 py-1 text-xs font-mono uppercase tracking-wider bg-purple-100 text-purple-900 group-hover:bg-accent group-hover:text-white transition-colors rounded-full font-semibold">
+                          <span className="inline-block px-3 py-1 text-xs font-mono uppercase tracking-wider bg-purple-100 text-purple-900 group-hover:bg-[#448DFF] group-hover:text-white transition-colors rounded-full font-semibold">
                             {categoryLabel}
                           </span>
                         </div>

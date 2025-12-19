@@ -9,6 +9,7 @@ import App from "./App";
 import { getLoginUrl } from "./const";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { initSentry } from "./lib/sentry";
+import { initWebVitals } from "./lib/webVitals";
 
 // Initialize Sentry for client-side error monitoring
 initSentry();
@@ -165,5 +166,16 @@ if (typeof window !== 'undefined') {
     requestIdleCallback(loadNonCriticalFonts, { timeout: 3000 });
   } else {
     setTimeout(loadNonCriticalFonts, 3000);
+  }
+
+  // Initialize Web Vitals monitoring after page load
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => {
+      initWebVitals();
+    }, { timeout: 2000 });
+  } else {
+    setTimeout(() => {
+      initWebVitals();
+    }, 2000);
   }
 }

@@ -1,0 +1,44 @@
+/**
+ * Web Vitals Monitoring
+ * Tracks Core Web Vitals metrics and sends them to Google Analytics
+ */
+
+import { onCLS, onFID, onFCP, onLCP, onTTFB, Metric } from 'web-vitals';
+
+// Send metrics to Google Analytics
+function sendToAnalytics(metric: Metric) {
+  const gtag = (window as any).gtag;
+  if (!gtag) return;
+
+  // Send to Google Analytics
+  gtag('event', metric.name, {
+    event_category: 'Web Vitals',
+    value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
+    event_label: metric.id,
+    non_interaction: true,
+  });
+
+  // Log in development
+  if (import.meta.env.DEV) {
+    console.log('[Web Vitals]', metric.name, metric.value, metric.id);
+  }
+}
+
+// Initialize Web Vitals tracking
+export function initWebVitals() {
+  if (typeof window === 'undefined') return;
+  if (import.meta.env.DEV) {
+    console.log('[Web Vitals] Initializing...');
+  }
+
+  // Track all Core Web Vitals
+  onCLS(sendToAnalytics);
+  onFID(sendToAnalytics);
+  onFCP(sendToAnalytics);
+  onLCP(sendToAnalytics);
+  onTTFB(sendToAnalytics);
+}
+
+// Export individual metric handlers for custom tracking
+export { onCLS, onFID, onFCP, onLCP, onTTFB };
+

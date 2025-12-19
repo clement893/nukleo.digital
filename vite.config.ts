@@ -4,9 +4,22 @@ import react from "@vitejs/plugin-react";
 import fs from "node:fs";
 import path from "path";
 import { defineConfig } from "vite";
+import { visualizer } from "rollup-plugin-visualizer";
 
 
-const plugins = [react(), tailwindcss(), jsxLocPlugin()];
+const plugins = [
+  react(), 
+  tailwindcss(), 
+  jsxLocPlugin(),
+  // Bundle analyzer - only in production builds
+  process.env.ANALYZE === 'true' && visualizer({
+    open: true,
+    filename: 'dist/stats.html',
+    gzipSize: true,
+    brotliSize: true,
+    template: 'treemap', // 'sunburst' | 'treemap' | 'network'
+  }),
+].filter(Boolean);
 
 export default defineConfig({
   plugins,

@@ -67,19 +67,31 @@ export default function OptimizedImage({
   }, [src, webpSrc, fallbackSrc]);
 
   // Generate responsive srcset if not provided
-  // Note: For proper srcset, you'd need an image CDN or multiple image files
-  // For now, we'll use the same image with density descriptors for retina displays
+  // Enhanced with width-based srcset for better performance
   const responsiveSrcset = useMemo(() => {
-    if (srcset) return srcset;
+    if (srcset) return { webpSrcset: srcset, fallbackSrcset: srcset };
     
-    // Only generate srcset if we have width and it's not an SVG
-    // For now, we'll use density descriptors (1x, 2x) which work with the same image
-    // In production, you'd want actual different-sized images or an image CDN
+    // Generate responsive srcset based on width
     if (width && !src.includes('.svg')) {
-      // Simple density-based srcset (works with same image, browser picks based on DPR)
+      // Generate multiple sizes for responsive images
+      // Mobile: 1x, Tablet: 1.5x, Desktop: 2x
+      const sizes = [
+        { width: width, density: '1x' },
+        { width: Math.ceil(width * 1.5), density: '1.5x' },
+        { width: width * 2, density: '2x' },
+      ];
+      
+      // Build srcset strings
+      const fallbackSrcset = sizes.map(s => `${sources.fallback} ${s.density}`).join(', ');
+      const webpSrcset = sources.webp ? sizes.map(s => `${sources.webp} ${s.density}`).join(', ') : null;
+      
+      return { webpSrcset, fallbackSrcset };
+    }
+    
+    // Fallback: density-based srcset if no width provided
+    if (!src.includes('.svg')) {
       const fallbackSrcset = `${sources.fallback} 1x, ${sources.fallback} 2x`;
       const webpSrcset = sources.webp ? `${sources.webp} 1x, ${sources.webp} 2x` : null;
-      
       return { webpSrcset, fallbackSrcset };
     }
     
@@ -96,8 +108,10 @@ export default function OptimizedImage({
     onError?.();
   };
 
-  // Default sizes if not provided
-  const defaultSizes = sizes || (width ? `(max-width: 768px) 100vw, ${width}px` : '100vw');
+  // Default sizes if not provided - responsive sizes for better performance
+  const defaultSizes = sizes || (width 
+    ? `(max-width: 640px) 100vw, (max-width: 1024px) 50vw, ${width}px`
+    : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 1200px');
 
   // If error loading WebP, fall back to original
   const currentSrc = imageError ? sources.fallback : (webpSrc || sources.fallback || src);

@@ -216,7 +216,7 @@ export default function About() {
                   aria-label={`${member.name}'s LinkedIn profile`}
                 >
                   {member.image === '/team/Ricardo.png' || member.image === '/team/Marie-Claire.png' ? (
-                    <img 
+                    <OptimizedImage 
                       src={member.image}
                       alt={(t('alt.teamMember') || '{{name}} - {{role}} chez Nukleo Digital')
                         .replace('{{name}}', member.name)

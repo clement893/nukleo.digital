@@ -1,14 +1,20 @@
 // Service Worker for Nukleo Digital
 // Provides offline caching and performance improvements
 
-const CACHE_NAME = 'nukleo-digital-v1';
+const CACHE_NAME = 'nukleo-digital-v2';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/Nukleo_blanc_RVB.svg',
+  '/nukleo-arrow.svg',
   '/fonts/AktivGrotesk-Light.woff2',
   '/fonts/AktivGrotesk-Regular.woff2',
   '/fonts/AktivGrotesk-Bold.woff2',
+  '/favicon.ico',
+  '/favicon-16x16.png',
+  '/favicon-32x32.png',
+  '/icon-192x192.png',
+  '/manifest.json',
 ];
 
 // Install event - cache static assets
@@ -57,51 +63,66 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Cache strategy: Cache First for static assets, Network First for pages
+  // Cache strategy: Stale-While-Revalidate for better performance
   if (
     url.pathname.match(/\.(js|css|woff2?|png|jpg|jpeg|svg|webp|ico)$/) ||
     url.pathname.startsWith('/assets/')
   ) {
-    // Static assets: Cache First
+    // Static assets: Stale-While-Revalidate (serve from cache immediately, update in background)
     event.respondWith(
-      caches.match(request).then((cachedResponse) => {
-        return cachedResponse || fetch(request).then((response) => {
-          // Don't cache non-successful responses
-          if (!response || response.status !== 200) {
-            return response;
-          }
-          const responseToCache = response.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(request, responseToCache);
+      caches.open(CACHE_NAME).then((cache) => {
+        return cache.match(request).then((cachedResponse) => {
+          // Start fetching fresh version in background
+          const fetchPromise = fetch(request).then((networkResponse) => {
+            // Don't cache non-successful responses
+            if (networkResponse && networkResponse.status === 200) {
+              cache.put(request, networkResponse.clone());
+            }
+            return networkResponse;
+          }).catch(() => {
+            // Ignore network errors, we'll use cached version
+            return null;
           });
-          return response;
+          
+          // Return cached version immediately if available, otherwise wait for network
+          return cachedResponse || fetchPromise;
         });
       })
     );
   } else {
-    // Pages: Network First, fallback to cache
+    // Pages: Stale-While-Revalidate (serve cached version immediately, update in background)
     event.respondWith(
-      fetch(request)
-        .then((response) => {
-          // Cache successful responses
-          if (response && response.status === 200) {
-            const responseToCache = response.clone();
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(request, responseToCache);
-            });
-          }
-          return response;
-        })
-        .catch(() => {
-          // Fallback to cache if network fails
-          return caches.match(request).then((cachedResponse) => {
-            // Fallback to index.html for SPA routing
-            if (!cachedResponse && request.mode === 'navigate') {
-              return caches.match('/index.html');
+      caches.open(CACHE_NAME).then((cache) => {
+        return cache.match(request).then((cachedResponse) => {
+          // Start fetching fresh version in background
+          const fetchPromise = fetch(request).then((networkResponse) => {
+            // Cache successful responses
+            if (networkResponse && networkResponse.status === 200) {
+              cache.put(request, networkResponse.clone());
             }
-            return cachedResponse;
+            return networkResponse;
+          }).catch(() => {
+            // If network fails and we have cached version, use it
+            return cachedResponse || null;
           });
-        })
+          
+          // Return cached version immediately if available, otherwise wait for network
+          if (cachedResponse) {
+            // Update cache in background without blocking
+            fetchPromise.catch(() => {});
+            return cachedResponse;
+          }
+          
+          // If no cache, wait for network
+          return fetchPromise.then((networkResponse) => {
+            // Fallback to index.html for SPA routing if network fails
+            if (!networkResponse && request.mode === 'navigate') {
+              return cache.match('/index.html');
+            }
+            return networkResponse;
+          });
+        });
+      })
     );
   }
 });

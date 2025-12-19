@@ -8,39 +8,24 @@ export default function GoogleAnalytics() {
   const [location] = useLocation();
 
   useEffect(() => {
-    // Only load in production
+    // gtag is already loaded in index.html, just ensure it's available
+    if (typeof window === 'undefined') return;
+    
+    // Ensure gtag function exists (it should be loaded from index.html)
+    if (!(window as any).gtag) {
+      window.dataLayer = window.dataLayer || [];
+      (window as any).gtag = function(...args: any[]) {
+        window.dataLayer.push(args);
+      };
+    }
+
+    // Only initialize in production
     if (import.meta.env.DEV) {
-      console.log('[GA4] Skipped in development mode');
+      console.log('[GA4] Development mode - tracking disabled');
       return;
     }
 
-    // Load gtag.js script
-    const script = document.createElement('script');
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-    script.async = true;
-    document.head.appendChild(script);
-
-    // Initialize gtag
-    window.dataLayer = window.dataLayer || [];
-    function gtag(...args: any[]) {
-      window.dataLayer.push(args);
-    }
-    (window as any).gtag = gtag;
-
-    gtag('js', new Date());
-    gtag('config', GA_MEASUREMENT_ID, {
-      send_page_view: false, // We'll send manually on route change
-    });
-
-    console.log('[GA4] Initialized');
-
-    return () => {
-      // Cleanup
-      const existingScript = document.querySelector(`script[src*="googletagmanager"]`);
-      if (existingScript) {
-        document.head.removeChild(existingScript);
-      }
-    };
+    console.log('[GA4] Ready (loaded from index.html)');
   }, []);
 
   // Track page views on route change

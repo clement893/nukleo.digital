@@ -2,9 +2,9 @@ import { useState } from "react";
 import { trpc } from "@/lib/trpc";
 
 export default function CreateFirstAdmin() {
-  const [username, setUsername] = useState("clement");
-  const [password, setPassword] = useState("Nukleo2025!");
-  const [email, setEmail] = useState("clement@nukleo.com");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
   const createAdmin = trpc.adminAuth.createFirstAdmin.useMutation({

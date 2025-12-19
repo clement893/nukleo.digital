@@ -149,9 +149,15 @@ export default function AIReadinessAssessment() {
       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b border-white/5">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
           <Link href="/">
-            <a className="text-2xl font-bold text-white hover:text-violet-400 transition-colors">
-              nukleo.
-            </a>
+            <img 
+              src="/Nukleo_blanc_RVB.svg" 
+              alt={t('alt.logo') || 'Logo Nukleo Digital - Agence de transformation IA'} 
+              width="120"
+              height="32"
+              fetchPriority="high"
+              loading="eager"
+              className="h-8 w-auto cursor-pointer"
+            />
           </Link>
           <button
             onClick={() => setMenuOpen(true)}

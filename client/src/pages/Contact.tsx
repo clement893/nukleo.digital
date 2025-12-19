@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Mail, MapPin, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import PageLayout from '@/components/PageLayout';
+import SafeHTML from '@/components/SafeHTML';
 import { trpc } from '@/lib/trpc';
 import SEO from '@/components/SEO';
 import UniversalLEO from '@/components/UniversalLEO';
@@ -185,9 +186,10 @@ export default function Contact() {
         <div className="container">
           <Breadcrumb items={[{ name: t('nav.contact'), url: '/contact' }]} />
 
-          <h1 
+          <SafeHTML 
+            html={t('contact.heroTitle')} 
+            tag="h1"
             className="text-white mb-8 text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
-            dangerouslySetInnerHTML={{ __html: t('contact.heroTitle') }}
             style={{ lineHeight: '1.2' }}
           />
 

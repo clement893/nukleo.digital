@@ -1,4 +1,5 @@
 import { Rocket, Building2, Heart } from 'lucide-react';
+import SafeHTML from '@/components/SafeHTML';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
@@ -53,8 +54,8 @@ export default function WhoWeServeSection() {
           <p className="text-sm font-mono tracking-widest text-accent mb-8 block">
             {t('whoWeServe.subtitle')}
           </p>
-          <h2 className="text-white mb-4 sm:mb-6 text-4xl sm:text-5xl lg:text-6xl font-heading" dangerouslySetInnerHTML={{ __html: t('whoWeServe.title') }} />
-          <p className="text-white/75 text-base sm:text-lg leading-relaxed max-w-3xl" dangerouslySetInnerHTML={{ __html: t('whoWeServe.description') }} />
+          <SafeHTML html={t('whoWeServe.title')} tag="h2" className="text-white mb-4 sm:mb-6 text-4xl sm:text-5xl lg:text-6xl font-heading" />
+          <SafeHTML html={t('whoWeServe.description')} tag="p" className="text-white/75 text-base sm:text-lg leading-relaxed max-w-3xl" />
         </div>
 
         {/* Segments Grid */}

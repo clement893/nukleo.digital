@@ -472,72 +472,76 @@ async function startServer() {
     }
   }
   
-  // Debug endpoint to check auth status
-  app.get('/api/debug/auth-check', (req, res) => {
-    const isPassportAuth = req.isAuthenticated && req.isAuthenticated();
-    const ADMIN_COOKIE_NAME = "admin_session";
-    const ADMIN_JWT_SECRET = process.env.JWT_SECRET + "-admin";
-    const adminToken = req.cookies?.[ADMIN_COOKIE_NAME];
-    let isJwtAuth = false;
-    
-    if (adminToken && ADMIN_JWT_SECRET && ADMIN_JWT_SECRET !== "-admin") {
-      try {
-        const jwt = require("jsonwebtoken");
-        const decoded = jwt.verify(adminToken, ADMIN_JWT_SECRET);
-        isJwtAuth = !!(decoded && decoded.id);
-      } catch (error) {
-        // Invalid token
+  // Debug endpoints - ONLY available in development mode
+  // SECURITY: These endpoints expose sensitive information and must never be accessible in production
+  if (process.env.NODE_ENV === "development") {
+    // Debug endpoint to check auth status
+    app.get('/api/debug/auth-check', (req, res) => {
+      const isPassportAuth = req.isAuthenticated && req.isAuthenticated();
+      const ADMIN_COOKIE_NAME = "admin_session";
+      const ADMIN_JWT_SECRET = process.env.JWT_SECRET + "-admin";
+      const adminToken = req.cookies?.[ADMIN_COOKIE_NAME];
+      let isJwtAuth = false;
+      
+      if (adminToken && ADMIN_JWT_SECRET && ADMIN_JWT_SECRET !== "-admin") {
+        try {
+          const jwt = require("jsonwebtoken");
+          const decoded = jwt.verify(adminToken, ADMIN_JWT_SECRET);
+          isJwtAuth = !!(decoded && decoded.id);
+        } catch (error) {
+          // Invalid token
+        }
       }
-    }
-    
-    res.json({
-      authenticated: isPassportAuth || isJwtAuth,
-      passportAuth: isPassportAuth,
-      jwtAuth: isJwtAuth,
-      hasCookie: !!adminToken,
-      cookieName: ADMIN_COOKIE_NAME,
+      
+      res.json({
+        authenticated: isPassportAuth || isJwtAuth,
+        passportAuth: isPassportAuth,
+        jwtAuth: isJwtAuth,
+        hasCookie: !!adminToken,
+        cookieName: ADMIN_COOKIE_NAME,
+      });
     });
-  });
-  
-  // Debug endpoint to list files in projects directory (public for debugging)
-  app.get('/api/debug/projects-images', async (req, res) => {
-    try {
-      const files = existsSync(projectsImagesPath) ? await fs.readdir(projectsImagesPath) : [];
-      const imageFiles = files.filter(
-        (file) => /\.(jpg|jpeg|png|gif|webp)$/i.test(file)
-      );
-      res.json({
-        path: projectsImagesPath,
-        exists: existsSync(projectsImagesPath),
-        files: imageFiles,
-        total: imageFiles.length,
-        cwd: process.cwd(),
-        nodeEnv: process.env.NODE_ENV,
-      });
-    } catch (error: any) {
-      res.status(500).json({ error: error.message });
-    }
-  });
-  
-  // Test endpoint to directly call the listImages function
-  app.get('/api/debug/projects-images-trpc', async (req, res) => {
-    try {
-      // Import and call the listImages function directly
-      const { listImages } = await import("../routers/projectsImages");
-      const result = await listImages();
-      res.json({
-        success: true,
-        count: result.length,
-        images: result,
-      });
-    } catch (error: any) {
-      console.error("[Debug] Error calling listImages:", error);
-      res.status(500).json({ 
-        error: error.message,
-        stack: error.stack 
-      });
-    }
-  });
+    
+    // Debug endpoint to list files in projects directory (development only)
+    app.get('/api/debug/projects-images', async (req, res) => {
+      try {
+        const files = existsSync(projectsImagesPath) ? await fs.readdir(projectsImagesPath) : [];
+        const imageFiles = files.filter(
+          (file) => /\.(jpg|jpeg|png|gif|webp)$/i.test(file)
+        );
+        res.json({
+          path: projectsImagesPath,
+          exists: existsSync(projectsImagesPath),
+          files: imageFiles,
+          total: imageFiles.length,
+          cwd: process.cwd(),
+          nodeEnv: process.env.NODE_ENV,
+        });
+      } catch (error: any) {
+        res.status(500).json({ error: error.message });
+      }
+    });
+    
+    // Test endpoint to directly call the listImages function (development only)
+    app.get('/api/debug/projects-images-trpc', async (req, res) => {
+      try {
+        // Import and call the listImages function directly
+        const { listImages } = await import("../routers/projectsImages");
+        const result = await listImages();
+        res.json({
+          success: true,
+          count: result.length,
+          images: result,
+        });
+      } catch (error: any) {
+        console.error("[Debug] Error calling listImages:", error);
+        res.status(500).json({ 
+          error: error.message,
+          stack: error.stack 
+        });
+      }
+    });
+  }
   
   // development mode uses Vite, production mode uses static files
   // IMPORTANT: serveStatic must be AFTER API routes to ensure API endpoints work

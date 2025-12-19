@@ -3,6 +3,7 @@ import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import StructuredData, { createArticleSchema } from '@/components/StructuredData';
 import Breadcrumb from '@/components/Breadcrumb';
+import SafeHTML from '@/components/SafeHTML';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { ArrowLeft } from 'lucide-react';
@@ -151,7 +152,8 @@ export default function ResourceArticle() {
                   
                   {/* Article content */}
                   {content && content !== description && (
-                    <div 
+                    <SafeHTML 
+                      html={content}
                       className="prose prose-invert prose-base max-w-none 
                         prose-headings:text-white prose-headings:font-bold
                         prose-h2:text-2xl prose-h2:font-bold prose-h2:mt-12 prose-h2:mb-6 prose-h2:leading-tight
@@ -165,7 +167,6 @@ export default function ResourceArticle() {
                         prose-li:text-white/80 prose-li:text-base prose-li:leading-relaxed prose-li:pl-2
                         prose-li:marker:text-accent prose-li:marker:font-bold
                         prose-blockquote:border-l-4 prose-blockquote:border-accent prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-white/70 prose-blockquote:my-8"
-                      dangerouslySetInnerHTML={{ __html: content }}
                     />
                   )}
                 </div>

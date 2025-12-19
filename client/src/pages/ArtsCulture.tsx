@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
+import SafeHTML from "@/components/SafeHTML";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function ArtsCulture() {
@@ -183,7 +184,7 @@ export default function ArtsCulture() {
                 </span>
               </h1>
               
-              <p className="text-xl text-white/60 max-w-2xl mx-auto leading-relaxed" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.hero.subtitle') }} />
+              <SafeHTML html={t('artsCultureCommitment.hero.subtitle')} tag="p" className="text-xl text-white/60 max-w-2xl mx-auto leading-relaxed" />
             </div>
           </div>
         </section>
@@ -219,7 +220,7 @@ export default function ArtsCulture() {
                 
                 <div className="text-4xl mb-4 inline-block group-hover:animate-bounce">📉</div>
                 <h3 className="text-xl font-semibold mb-3 group-hover:text-red-300 transition-colors">{t('artsCultureCommitment.act1.budgetCuts.title')}</h3>
-                <p className="text-white/70 leading-relaxed" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.act1.budgetCuts.description') }} />
+                <SafeHTML html={t('artsCultureCommitment.act1.budgetCuts.description')} tag="p" className="text-white/70 leading-relaxed" />
                 
                 {/* Reveal on hover */}
                 <div className={`mt-4 text-sm text-red-300/80 italic transition-opacity duration-300 ${hoveredCard === 1 ? 'opacity-100' : 'opacity-0'}`}>
@@ -239,7 +240,7 @@ export default function ArtsCulture() {
                 
                 <div className="text-4xl mb-4 inline-block group-hover:animate-bounce">⚠️</div>
                 <h3 className="text-xl font-semibold mb-3 group-hover:text-orange-300 transition-colors">{t('artsCultureCommitment.act1.precariousConditions.title')}</h3>
-                <p className="text-white/70 leading-relaxed" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.act1.precariousConditions.description') }} />
+                <SafeHTML html={t('artsCultureCommitment.act1.precariousConditions.description')} tag="p" className="text-white/70 leading-relaxed" />
                 
                 {/* Reveal on hover */}
                 <div className={`mt-4 text-sm text-orange-300/80 italic transition-opacity duration-300 ${hoveredCard === 2 ? 'opacity-100' : 'opacity-0'}`}>
@@ -254,7 +255,7 @@ export default function ArtsCulture() {
               <div className="absolute top-0 left-0 w-24 h-1 bg-gradient-to-r from-red-400/50 to-transparent" />
               
               <Quote className="w-8 h-8 text-white/30 mb-4 group-hover:text-white/40 transition-colors" />
-              <p className="text-xl text-white/90 leading-relaxed italic" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.act1.quote') }} />
+              <SafeHTML html={t('artsCultureCommitment.act1.quote')} tag="p" className="text-xl text-white/90 leading-relaxed italic" />
             </div>
           </div>
         </section>
@@ -272,7 +273,7 @@ export default function ArtsCulture() {
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
                 {t('artsCultureCommitment.act2.title')} <span className="font-light italic">{t('artsCultureCommitment.act2.titleHighlight')}</span>
               </h2>
-              <p className="text-lg text-white/60 max-w-2xl mx-auto" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.act2.subtitle') }} />
+              <SafeHTML html={t('artsCultureCommitment.act2.subtitle')} tag="p" className="text-lg text-white/60 max-w-2xl mx-auto" />
             </div>
 
             <div className="grid md:grid-cols-3 gap-6 mb-12">
@@ -281,7 +282,7 @@ export default function ArtsCulture() {
                 
                 <div className="text-4xl mb-4 inline-block group-hover:scale-[1.045] transition-transform">🏛️</div>
                 <h3 className="text-xl font-semibold mb-3 group-hover:text-purple-300 transition-colors">{t('artsCultureCommitment.act2.heritage.title')}</h3>
-                <p className="text-white/70 leading-relaxed" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.act2.heritage.description') }} />
+                <SafeHTML html={t('artsCultureCommitment.act2.heritage.description')} tag="p" className="text-white/70 leading-relaxed" />
               </div>
 
               <div className="group relative bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-pink-400/30 transition-all duration-300 cursor-default">
@@ -289,7 +290,7 @@ export default function ArtsCulture() {
                 
                 <div className="text-4xl mb-4 inline-block group-hover:scale-[1.045] transition-transform">💡</div>
                 <h3 className="text-xl font-semibold mb-3 group-hover:text-pink-300 transition-colors">{t('artsCultureCommitment.act2.creativity.title')}</h3>
-                <p className="text-white/70 leading-relaxed" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.act2.creativity.description') }} />
+                <SafeHTML html={t('artsCultureCommitment.act2.creativity.description')} tag="p" className="text-white/70 leading-relaxed" />
               </div>
 
               <div className="group relative bg-white/5 rounded-2xl p-8 border border-white/10 hover:border-blue-400/30 transition-all duration-300 cursor-default">
@@ -297,7 +298,7 @@ export default function ArtsCulture() {
                 
                 <div className="text-4xl mb-4 inline-block group-hover:scale-[1.045] transition-transform">🤝</div>
                 <h3 className="text-xl font-semibold mb-3 group-hover:text-blue-300 transition-colors">{t('artsCultureCommitment.act2.community.title')}</h3>
-                <p className="text-white/70 leading-relaxed" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.act2.community.description') }} />
+                <SafeHTML html={t('artsCultureCommitment.act2.community.description')} tag="p" className="text-white/70 leading-relaxed" />
               </div>
             </div>
 
@@ -306,7 +307,7 @@ export default function ArtsCulture() {
               <div className="absolute top-0 left-0 w-24 h-1 bg-gradient-to-r from-purple-400/50 to-transparent" />
               
               <Quote className="w-8 h-8 text-white/30 mb-4 group-hover:text-white/40 transition-colors" />
-              <p className="text-xl text-white/90 leading-relaxed italic" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.act2.quote') }} />
+              <SafeHTML html={t('artsCultureCommitment.act2.quote')} tag="p" className="text-xl text-white/90 leading-relaxed italic" />
             </div>
           </div>
         </section>
@@ -324,7 +325,7 @@ export default function ArtsCulture() {
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
                 {t('artsCultureCommitment.act3.title')} <span className="font-light italic">{t('artsCultureCommitment.act3.titleHighlight')}</span>
               </h2>
-              <p className="text-lg text-white/60 max-w-2xl mx-auto" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.act3.subtitle') }} />
+              <SafeHTML html={t('artsCultureCommitment.act3.subtitle')} tag="p" className="text-lg text-white/60 max-w-2xl mx-auto" />
             </div>
 
             {/* Timeline */}
@@ -349,7 +350,7 @@ export default function ArtsCulture() {
                         <span className="hidden md:inline text-sm font-mono text-white/40">01</span>
                         <h3 className="text-2xl font-semibold group-hover:text-green-300 transition-colors">{t('artsCultureCommitment.act3.affordablePricing.title')}</h3>
                       </div>
-                      <p className="text-white/70 leading-relaxed" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.act3.affordablePricing.description') }} />
+                      <SafeHTML html={t('artsCultureCommitment.act3.affordablePricing.description')} tag="p" className="text-white/70 leading-relaxed" />
                       <div className="mt-4 text-sm text-green-300/60 italic group-hover:text-green-300/80 transition-colors">
                         {t('artsCultureCommitment.act3.affordablePricing.hover')}
                       </div>
@@ -377,7 +378,7 @@ export default function ArtsCulture() {
                         <span className="hidden md:inline text-sm font-mono text-white/40">02</span>
                         <h3 className="text-2xl font-semibold group-hover:text-red-300 transition-colors">{t('artsCultureCommitment.act3.financialSupport.title')}</h3>
                       </div>
-                      <p className="text-white/70 leading-relaxed" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.act3.financialSupport.description') }} />
+                      <SafeHTML html={t('artsCultureCommitment.act3.financialSupport.description')} tag="p" className="text-white/70 leading-relaxed" />
                       <div className="mt-4 text-sm text-red-300/60 italic group-hover:text-red-300/80 transition-colors">
                         {t('artsCultureCommitment.act3.financialSupport.hover')}
                       </div>
@@ -405,7 +406,7 @@ export default function ArtsCulture() {
                         <span className="hidden md:inline text-sm font-mono text-white/40">03</span>
                         <h3 className="text-2xl font-semibold group-hover:text-blue-300 transition-colors">{t('artsCultureCommitment.act3.liveCulture.title')}</h3>
                       </div>
-                      <p className="text-white/70 leading-relaxed" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.act3.liveCulture.description') }} />
+                      <SafeHTML html={t('artsCultureCommitment.act3.liveCulture.description')} tag="p" className="text-white/70 leading-relaxed" />
                       <div className="mt-4 text-sm text-blue-300/60 italic group-hover:text-blue-300/80 transition-colors">
                         {t('artsCultureCommitment.act3.liveCulture.hover')}
                       </div>
@@ -433,7 +434,7 @@ export default function ArtsCulture() {
                         <span className="hidden md:inline text-sm font-mono text-white/40">04</span>
                         <h3 className="text-2xl font-semibold group-hover:text-purple-300 transition-colors">{t('artsCultureCommitment.act3.raiseAwareness.title')}</h3>
                       </div>
-                      <p className="text-white/70 leading-relaxed" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.act3.raiseAwareness.description') }} />
+                      <SafeHTML html={t('artsCultureCommitment.act3.raiseAwareness.description')} tag="p" className="text-white/70 leading-relaxed" />
                       <div className="mt-4 text-sm text-purple-300/60 italic group-hover:text-purple-300/80 transition-colors">
                         {t('artsCultureCommitment.act3.raiseAwareness.hover')}
                       </div>
@@ -458,7 +459,7 @@ export default function ArtsCulture() {
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
                 {t('artsCultureCommitment.act4.title')} <span className="font-light italic">{t('artsCultureCommitment.act4.titleHighlight')}</span>
               </h2>
-              <p className="text-lg text-white/60 max-w-2xl mx-auto" dangerouslySetInnerHTML={{ __html: t('artsCultureCommitment.act4.subtitle') }} />
+              <SafeHTML html={t('artsCultureCommitment.act4.subtitle')} tag="p" className="text-lg text-white/60 max-w-2xl mx-auto" />
             </div>
 
             {/* Stats Grid */}

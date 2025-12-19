@@ -4,6 +4,7 @@ import { useState } from 'react';
 import SEO from '@/components/SEO';
 import StructuredData from '@/components/StructuredData';
 import Breadcrumb from '@/components/Breadcrumb';
+import SafeHTML from '@/components/SafeHTML';
 import { trpc } from '@/lib/trpc';
 import { Button } from '@/components/ui/button';
 import { Link } from 'wouter';
@@ -327,7 +328,7 @@ export default function Resources() {
 
           <div className="container relative z-10">
             <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight" dangerouslySetInnerHTML={{ __html: t('resources.newsletter.title') }} />
+              <SafeHTML html={t('resources.newsletter.title')} tag="h2" className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight" />
 
               <p className="text-xl text-white/70 leading-relaxed mb-12">
                 {t('resources.newsletter.description')}

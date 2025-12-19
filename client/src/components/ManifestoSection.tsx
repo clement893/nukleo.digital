@@ -1,4 +1,5 @@
 import { Zap, Settings } from 'lucide-react';
+import SafeHTML from '@/components/SafeHTML';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
@@ -15,7 +16,7 @@ export default function ManifestoSection() {
               {t('manifesto.sectionLabel')}
             </span>
 
-            <h2 className="text-white mb-6 sm:mb-8 text-4xl sm:text-5xl lg:text-6xl font-heading" dangerouslySetInnerHTML={{ __html: t('manifesto.title') }} />
+            <SafeHTML html={t('manifesto.title')} tag="h2" className="text-white mb-6 sm:mb-8 text-4xl sm:text-5xl lg:text-6xl font-heading" />
 
             <p className="text-white/75 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8">
               {t('manifesto.description')}

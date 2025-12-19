@@ -2,6 +2,7 @@ import SEO from '@/components/SEO';
 import StructuredData, { createArticleSchema } from '@/components/StructuredData';
 import PageLayout from '@/components/PageLayout';
 import Breadcrumb from '@/components/Breadcrumb';
+import SafeHTML from '@/components/SafeHTML';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { Link } from 'wouter';
@@ -69,7 +70,7 @@ export default function Manifesto() {
             <span className="text-sm font-medium text-white/90">{t('manifesto.sectionLabel')}</span>
           </div>
           
-          <h1 className="text-6xl md:text-8xl font-bold text-white mb-8 leading-tight" dangerouslySetInnerHTML={{ __html: t('manifesto.title') }} />
+          <SafeHTML html={t('manifesto.title')} tag="h1" className="text-6xl md:text-8xl font-bold text-white mb-8 leading-tight" />
           
           <p className="text-2xl text-white/70 max-w-3xl leading-relaxed">
             {t('manifesto.description')}

@@ -1,4 +1,5 @@
 import { Globe, Layers, Zap, BarChart3 } from 'lucide-react';
+import SafeHTML from '@/components/SafeHTML';
 import { useSound } from '@/hooks/useSound';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -38,7 +39,7 @@ export default function CapabilitiesSection() {
             {t('capabilities.sectionLabel')}
           </span>
 
-          <h2 className="text-white mb-4 sm:mb-6 text-4xl sm:text-5xl lg:text-6xl font-heading" dangerouslySetInnerHTML={{ __html: t('capabilities.title') }} />
+          <SafeHTML html={t('capabilities.title')} tag="h2" className="text-white mb-4 sm:mb-6 text-4xl sm:text-5xl lg:text-6xl font-heading" />
 
           <p className="text-white/75 text-base sm:text-lg leading-relaxed max-w-3xl">
             {t('capabilities.description')}

@@ -2,6 +2,7 @@ import PageLayout from "@/components/PageLayout";
 import SEO from '@/components/SEO';
 import StructuredData, { createPersonSchema } from '@/components/StructuredData';
 import UniversalLEO from '@/components/UniversalLEO';
+import SafeHTML from '@/components/SafeHTML';
 import { Linkedin } from 'lucide-react';
 import Breadcrumb from '@/components/Breadcrumb';
 import OptimizedImage from '@/components/OptimizedImage';
@@ -159,7 +160,7 @@ export default function About() {
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
               <h3 className="text-2xl font-bold text-fuchsia-400 mb-4">{t('about.nukleoSpirit')}</h3>
-              <p className="text-gray-300 leading-relaxed" dangerouslySetInnerHTML={{ __html: t('about.nukleoSpiritText') }} />
+              <SafeHTML html={t('about.nukleoSpiritText')} tag="p" className="text-gray-300 leading-relaxed" />
             </div>
 
             <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">

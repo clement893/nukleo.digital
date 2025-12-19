@@ -1,5 +1,6 @@
 import { Cpu, Compass, Sparkles } from 'lucide-react';
 import { Link } from 'wouter';
+import SafeHTML from '@/components/SafeHTML';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
@@ -44,7 +45,7 @@ export default function TrinitySection() {
       <div className="container relative z-10">
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:justify-between lg:items-end mb-24 border-b border-black/10 pb-8 gap-6 lg:gap-0">
-          <h2 className="text-white mb-4 sm:mb-6 text-4xl sm:text-5xl lg:text-6xl font-heading" dangerouslySetInnerHTML={{ __html: t('trinity.title') }} />
+          <SafeHTML html={t('trinity.title')} tag="h2" className="text-white mb-4 sm:mb-6 text-4xl sm:text-5xl lg:text-6xl font-heading" />
 
           <p className="text-xl max-w-sm font-light text-white/80 pb-2">
             {t('trinity.description')}

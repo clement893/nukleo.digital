@@ -276,29 +276,34 @@ Contexte actuel:
 - Impact: ${latestPosition.impactScore}/100
 ` : ''}
 
-Génère une nouvelle RÉELLE et RÉCENTE (comme si c'était une actualité récente mondiale) avec:
-1. Un titre accrocheur basé sur un développement réel récent (max 80 caractères)
-2. Un résumé de 2-3 phrases décrivant l'actualité réelle (max 200 caractères)
+Génère une nouvelle basée sur des développements RÉCENTS MONDIAUX réels avec:
+1. Un titre accrocheur basé sur des tendances réelles (max 80 caractères)
+2. Un résumé de 2-3 phrases décrivant les développements récents (max 200 caractères)
 3. Un ton professionnel mais accessible
 4. Focus sur les développements RÉCENTS MONDIAUX, cas d'usage concrets, ou implications business
-5. Une URL vers un article réel ou une source crédible (TechCrunch, The Verge, MIT Technology Review, etc.)
+5. Le nom d'une source crédible (TechCrunch, The Verge, MIT Technology Review, etc.) - mais NE PAS inventer d'URL
 
-IMPORTANT: La nouvelle doit être basée sur des développements RÉELS et RÉCENTS dans le monde entier, pas seulement au Canada.
+CRITIQUE: 
+- NE JAMAIS inventer ou générer d'URLs fictives
+- Si tu ne connais pas une URL réelle et vérifiable, laisse le champ "url" vide ou null
+- Les nouvelles doivent être basées sur des tendances réelles, mais sans prétendre avoir une URL spécifique si tu n'en connais pas une
 
 Réponds en JSON avec cette structure exacte:
 {
-  "title": "titre accrocheur basé sur actualité réelle",
-  "summary": "résumé de 2-3 phrases décrivant l'actualité réelle mondiale",
-  "source": "nom de la source réelle (ex: TechCrunch, The Verge, MIT Technology Review)",
-  "url": "https://exemple.com/article-reel"
-}`;
+  "title": "titre accrocheur basé sur tendances réelles",
+  "summary": "résumé de 2-3 phrases décrivant les développements récents mondiaux",
+  "source": "nom de la source crédible (ex: TechCrunch, The Verge, MIT Technology Review)",
+  "url": null
+}
+
+Si tu connais une URL réelle et vérifiable, tu peux l'inclure. Sinon, utilise null pour le champ url.`;
 
   try {
     const response = await invokeLLM({
       messages: [
         {
           role: "system",
-          content: "Tu es un journaliste spécialisé en IA et tendances technologiques. Tu génères des nouvelles brèves et pertinentes en JSON.",
+          content: "Tu es un journaliste spécialisé en IA et tendances technologiques. Tu génères des nouvelles brèves et pertinentes en JSON. IMPORTANT: Ne JAMAIS inventer d'URLs. Si tu ne connais pas une URL réelle et vérifiable, utilise null pour le champ url.",
         },
         {
           role: "user",
@@ -319,19 +324,24 @@ Réponds en JSON avec cette structure exacte:
     const parsed = JSON.parse(content);
     
     // Validate and sanitize URL if provided
+    // Only keep URL if it's a valid string and not null/undefined
     let url = parsed.url;
-    if (url && typeof url === 'string') {
+    if (url && typeof url === 'string' && url.trim() !== '' && url !== 'null') {
       // Ensure URL is valid and starts with http/https
       try {
         const urlObj = new URL(url);
         if (!['http:', 'https:'].includes(urlObj.protocol)) {
           url = undefined; // Invalid protocol, remove URL
         }
+        // Additional validation: check if URL looks suspicious (contains placeholder text)
+        if (url.includes('exemple.com') || url.includes('example.com') || url.includes('placeholder')) {
+          url = undefined; // Remove placeholder URLs
+        }
       } catch {
         url = undefined; // Invalid URL format, remove URL
       }
     } else {
-      url = undefined;
+      url = undefined; // No URL or null/empty, remove it
     }
     
     return {

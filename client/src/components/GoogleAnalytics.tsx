@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'wouter';
 
 // Google Analytics 4 Measurement ID
-const GA_MEASUREMENT_ID = 'G-C2X5JWEL5S';
+const GA_MEASUREMENT_ID = 'G-PMCLW23ZCS';
 
 export default function GoogleAnalytics() {
   const [location] = useLocation();

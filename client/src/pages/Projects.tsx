@@ -6,6 +6,7 @@ import PageLayout from '@/components/PageLayout';
 import Breadcrumb from '@/components/Breadcrumb';
 import OptimizedImage from '@/components/OptimizedImage';
 import { trpc } from '@/lib/trpc';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 // Liste de fallback des images (si l'API ne retourne rien)
 const fallbackImages = [
@@ -73,6 +74,7 @@ function shuffleArray<T>(array: T[]): T[] {
 }
 
 export default function Projects() {
+  const { t } = useLanguage();
   // Load images from API (public endpoint - we'll make it public)
   const { data: uploadedImages, isLoading: isLoadingImages, error: imagesError } = trpc.projectsImages.list.useQuery(undefined, {
     retry: 2,
@@ -224,15 +226,15 @@ export default function Projects() {
         {/* Hero Section */}
         <section className="pt-32 pb-12 lg:pt-40 lg:pb-16">
           <div className="container">
-            <Breadcrumb items={[{ name: 'Projects', url: '/projects' }]} />
+            <Breadcrumb items={[{ name: t('projects.title'), url: '/projects' }]} />
 
             <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-8">
               <div>
                 <h1 className="text-5xl lg:text-7xl font-bold text-white mb-4 font-heading italic">
-                  Our Work
+                  {t('projects.heroTitle')}
                 </h1>
                 <p className="text-white/70 text-lg lg:text-xl max-w-2xl">
-                  A selection of our recent projects across branding, web, digital, and creative campaigns.
+                  {t('projects.description')}
                 </p>
               </div>
 
@@ -243,7 +245,7 @@ export default function Projects() {
                 className="group flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white rounded-full font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25"
               >
                 <Shuffle className={`w-5 h-5 transition-transform duration-300 ${isShuffling ? 'animate-spin' : 'group-hover:rotate-180'}`} />
-                Try Me
+                {t('projects.tryMe')}
               </Button>
             </div>
           </div>
@@ -255,17 +257,17 @@ export default function Projects() {
             {isLoadingImages ? (
               <div className="flex items-center justify-center py-24">
                 <Loader2 className="w-8 h-8 animate-spin text-purple-400" />
-                <span className="ml-3 text-white/70">Loading images...</span>
+                <span className="ml-3 text-white/70">{t('projects.loadingImages')}</span>
               </div>
             ) : imagesError ? (
               <div className="flex flex-col items-center justify-center py-24">
-                <p className="text-white/70 mb-4">Error loading images from server.</p>
-                <p className="text-white/50 text-sm">Please try refreshing the page.</p>
+                <p className="text-white/70 mb-4">{t('projects.errorLoading')}</p>
+                <p className="text-white/50 text-sm">{t('projects.errorRefresh')}</p>
               </div>
             ) : images.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-24">
-                <p className="text-white/70 mb-2">No images found.</p>
-                <p className="text-white/50 text-sm">Upload images via the admin panel to see them here.</p>
+                <p className="text-white/70 mb-2">{t('projects.noImages')}</p>
+                <p className="text-white/50 text-sm">{t('projects.noImagesAdmin')}</p>
               </div>
             ) : (
               <div 
@@ -346,12 +348,12 @@ export default function Projects() {
           <div className="container">
             <div className="glass rounded-3xl p-12 lg:p-16 text-center">
               <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6 font-heading">
-                Ready to Start<br />
-                Your Project?
+                {t('projects.ctaTitle')}<br />
+                {t('projects.ctaSubtitle')}
               </h2>
 
               <p className="text-white/75 text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto mb-8">
-                Let's discuss how we can bring your vision to life.
+                {t('projects.ctaDescription')}
               </p>
 
               <a href="/start-project">
@@ -359,7 +361,7 @@ export default function Projects() {
                   size="lg"
                   className="rounded-full text-lg px-10 py-8 bg-white text-purple-900 hover:bg-white/90 transition-all duration-500 font-bold tracking-wider"
                 >
-                  Start Your Project
+                  {t('projects.ctaButton')}
                 </Button>
               </a>
             </div>

@@ -727,12 +727,19 @@ async function startServer() {
     logger.info(`Server running on http://localhost:${port}/`);
     
     // Check database connection before attempting initialization
-    const dbAvailable = await checkDatabaseConnection();
-    
-    if (!dbAvailable) {
-      logger.warn("⚠️ Database not available. Server running in degraded mode (static files only).");
-      logger.warn("⚠️ Database features will be unavailable until connection is restored.");
-      return; // Exit early if DB is not available
+    try {
+      const dbAvailable = await checkDatabaseConnection();
+      
+      if (!dbAvailable) {
+        logger.warn("⚠️ Database not available. Server running in degraded mode (static files only).");
+        logger.warn("⚠️ Database features will be unavailable until connection is restored.");
+        return; // Exit early if DB is not available
+      }
+    } catch (error) {
+      const errorMsg = error instanceof Error ? error.message : "Unknown error";
+      logger.error(`Failed to check database connection: ${errorMsg}`);
+      logger.warn("⚠️ Server running in degraded mode (static files only).");
+      return; // Exit early if connection check fails
     }
     
     // Initialize database tables on startup
@@ -907,32 +914,6 @@ function setupRadarDailyRefresh() {
   }, msUntilRefresh);
   
   logger.info(`Radar daily refresh scheduled for ${nextRefresh.toISOString()}`);
-}
-
-// Helper function to check database connection
-async function checkDatabaseConnection(): Promise<boolean> {
-  if (!process.env.DATABASE_URL) {
-    return false;
-  }
-  
-  try {
-    const { getDb } = await import("../db");
-    const db = await getDb();
-    if (!db) {
-      return false;
-    }
-    
-    // Try a simple query to verify connection
-    await db.execute(sql`SELECT 1`);
-    return true;
-  } catch (error) {
-    // Don't log full error details to avoid rate limiting
-    const errorCode = error instanceof Error && 'code' in error ? (error as any).code : 'UNKNOWN';
-    if (errorCode === 'ECONNREFUSED') {
-      logger.warn("Database connection refused. Check DATABASE_URL and ensure database is running.");
-    }
-    return false;
-  }
 }
 
 startServer().catch((error) => {

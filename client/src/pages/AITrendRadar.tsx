@@ -106,23 +106,34 @@ export default function AITrendRadar() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {latestNews.map((news) => {
                 // Determine if news has a clickable URL or should navigate to radar
-                const hasUrl = news.url && news.url.startsWith('http');
-                const handleClick = () => {
-                  if (hasUrl) {
-                    // Open external URL in new tab
-                    window.open(news.url, '_blank', 'noopener,noreferrer');
-                  } else {
-                    // Navigate to radar page
-                    const currentLang = window.location.pathname.startsWith('/fr') ? '/fr' : '';
-                    setLocation(`${currentLang}/radar`);
-                  }
-                };
+                const hasUrl = news.url && typeof news.url === 'string' && news.url.startsWith('http');
+                const currentLang = window.location.pathname.startsWith('/fr') ? '/fr' : '';
+                const radarUrl = `${currentLang}/radar`;
+                
+                // Use proper link element for better accessibility and functionality
+                const LinkComponent = hasUrl ? 'a' : Link;
+                const linkProps = hasUrl 
+                  ? {
+                      href: news.url,
+                      target: '_blank',
+                      rel: 'noopener noreferrer',
+                      onClick: (e: React.MouseEvent) => {
+                        e.stopPropagation();
+                      }
+                    }
+                  : {
+                      href: radarUrl,
+                      onClick: (e: React.MouseEvent) => {
+                        e.preventDefault();
+                        setLocation(radarUrl);
+                      }
+                    };
 
                 return (
-                  <div
+                  <LinkComponent
                     key={news.id}
-                    onClick={handleClick}
-                    className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-purple-500/30 transition-all duration-300 group cursor-pointer h-full flex flex-col"
+                    {...linkProps}
+                    className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-purple-500/30 transition-all duration-300 group cursor-pointer h-full flex flex-col block"
                   >
                     <div className="flex items-start justify-between mb-4">
                       <span className="px-3 py-1 bg-purple-500/20 border border-purple-500/50 rounded-full text-purple-300 text-xs font-semibold">
@@ -161,7 +172,7 @@ export default function AITrendRadar() {
                         </svg>
                       )}
                     </div>
-                  </div>
+                  </LinkComponent>
                 );
               })}
             </div>

@@ -1,48 +1,7 @@
-# robots.txt for nukleo.digital
-# Optimized for SEO and crawler guidance
-
-# Allow all crawlers by default
 User-agent: *
 Allow: /
-
-# Block test and component pages
-Disallow: /component-showcase
-
-# Block admin pages
 Disallow: /admin/
-Disallow: /admin/*
-Disallow: /init-db
-
-# Block API endpoints
 Disallow: /api/
 
-# Block authentication pages (if any)
-Disallow: /auth/
-
-# Allow important resources for rendering
-Allow: /*.css$
-Allow: /*.js$
-Allow: /*.webp$
-Allow: /*.png$
-Allow: /*.jpg$
-Allow: /*.svg$
-
-# Sitemap location
-Sitemap: https://nukleodigital-production.up.railway.app/sitemap.xml
-
-# Crawl-delay to prevent server overload (optional, 1 second)
-Crawl-delay: 1
-
-# Specific rules for common crawlers
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-# Block bad bots (optional)
-User-agent: AhrefsBot
-Crawl-delay: 10
-
-User-agent: SemrushBot
-Crawl-delay: 10
+# Sitemap
+Sitemap: https://nukleo.digital/sitemap.xml

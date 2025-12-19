@@ -8,8 +8,17 @@ router.get('/sitemap.xml', (req, res) => {
   const baseUrl = 'https://nukleo.digital';
   const currentDate = new Date().toISOString().split('T')[0];
 
-  // Static pages
-  const staticPages = [
+  // Resource articles
+  const resourceArticles = [
+    'agentic-ai-playbook',
+    'pilot-to-scale',
+    'agentic-marketing',
+    'building-agentic-systems',
+    'roi-ai-investment',
+  ];
+
+  // Static pages (English)
+  const staticPagesEn = [
     { url: '', priority: '1.0', changefreq: 'weekly' },
     { url: '/about', priority: '0.8', changefreq: 'monthly' },
     { url: '/expertise', priority: '0.8', changefreq: 'monthly' },
@@ -20,34 +29,94 @@ router.get('/sitemap.xml', (req, res) => {
     { url: '/ai-readiness', priority: '0.7', changefreq: 'monthly' },
     { url: '/contact', priority: '0.6', changefreq: 'monthly' },
     { url: '/manifesto', priority: '0.7', changefreq: 'monthly' },
+    { url: '/start-project', priority: '0.8', changefreq: 'monthly' },
+    { url: '/services', priority: '0.9', changefreq: 'weekly' },
     { url: '/services/ai-strategy-marketing', priority: '0.8', changefreq: 'monthly' },
     { url: '/services/digital-platforms', priority: '0.8', changefreq: 'monthly' },
     { url: '/services/intelligent-operations', priority: '0.8', changefreq: 'monthly' },
+    { url: '/services/agentic-ai', priority: '0.8', changefreq: 'monthly' },
+    { url: '/services/digital-transformation', priority: '0.8', changefreq: 'monthly' },
   ];
 
-  // Glossary term pages
-  const glossaryPages = allTerms.map(term => ({
+  // Static pages (French)
+  const staticPagesFr = [
+    { url: '/fr', priority: '1.0', changefreq: 'weekly' },
+    { url: '/fr/about', priority: '0.8', changefreq: 'monthly' },
+    { url: '/fr/expertise', priority: '0.8', changefreq: 'monthly' },
+    { url: '/fr/projects', priority: '0.7', changefreq: 'weekly' },
+    { url: '/fr/resources', priority: '0.9', changefreq: 'weekly' },
+    { url: '/fr/glossary', priority: '0.9', changefreq: 'weekly' },
+    { url: '/fr/radar', priority: '0.8', changefreq: 'monthly' },
+    { url: '/fr/ai-readiness', priority: '0.7', changefreq: 'monthly' },
+    { url: '/fr/contact', priority: '0.6', changefreq: 'monthly' },
+    { url: '/fr/manifesto', priority: '0.7', changefreq: 'monthly' },
+    { url: '/fr/start-project', priority: '0.8', changefreq: 'monthly' },
+    { url: '/fr/services', priority: '0.9', changefreq: 'weekly' },
+    { url: '/fr/services/ai-strategy-marketing', priority: '0.8', changefreq: 'monthly' },
+    { url: '/fr/services/digital-platforms', priority: '0.8', changefreq: 'monthly' },
+    { url: '/fr/services/intelligent-operations', priority: '0.8', changefreq: 'monthly' },
+    { url: '/fr/services/agentic-ai', priority: '0.8', changefreq: 'monthly' },
+    { url: '/fr/services/digital-transformation', priority: '0.8', changefreq: 'monthly' },
+  ];
+
+  // Resource articles (English)
+  const resourcePagesEn = resourceArticles.map(id => ({
+    url: `/resources/${id}`,
+    priority: '0.8',
+    changefreq: 'monthly',
+  }));
+
+  // Resource articles (French)
+  const resourcePagesFr = resourceArticles.map(id => ({
+    url: `/fr/resources/${id}`,
+    priority: '0.8',
+    changefreq: 'monthly',
+  }));
+
+  // Glossary term pages (English)
+  const glossaryPagesEn = allTerms.map(term => ({
     url: `/glossary/${term.id}`,
     priority: '0.8',
     changefreq: 'monthly',
   }));
 
-  const allPages = [...staticPages, ...glossaryPages];
+  // Glossary term pages (French)
+  const glossaryPagesFr = allTerms.map(term => ({
+    url: `/fr/glossary/${term.id}`,
+    priority: '0.8',
+    changefreq: 'monthly',
+  }));
+
+  const allPages = [
+    ...staticPagesEn,
+    ...staticPagesFr,
+    ...resourcePagesEn,
+    ...resourcePagesFr,
+    ...glossaryPagesEn,
+    ...glossaryPagesFr,
+  ];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
-        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${allPages
   .map(
-    page => `  <url>
+    page => {
+      // Determine alternate language URL
+      const isFr = page.url.startsWith('/fr');
+      const alternateUrl = isFr 
+        ? page.url.replace('/fr', '') || '/'
+        : `/fr${page.url}`;
+      
+      return `  <url>
     <loc>${baseUrl}${page.url}</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>
-  </url>`
+    <xhtml:link rel="alternate" hreflang="${isFr ? 'fr' : 'en'}" href="${baseUrl}${page.url}" />
+    <xhtml:link rel="alternate" hreflang="${isFr ? 'en' : 'fr'}" href="${baseUrl}${alternateUrl}" />
+  </url>`;
+    }
   )
   .join('\n')}
 </urlset>`;
@@ -63,6 +132,8 @@ router.get('/robots.txt', (req, res) => {
   const robots = `# Nukleo Digital - Robots.txt
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /api/
 
 # Sitemaps
 Sitemap: ${baseUrl}/sitemap.xml

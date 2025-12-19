@@ -249,10 +249,10 @@ export default function Resources() {
         </section>
 
         {/* Filter Section (White Background) */}
-        <section className="py-12 bg-white border-b border-gray-200">
+        <section className="py-12 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
           <div className="container">
             <div className="flex items-center gap-4 flex-wrap">
-              <div className="flex items-center gap-2 text-gray-900">
+              <div className="flex items-center gap-2 text-gray-900 dark:text-white">
                 <Filter className="w-4 h-4" />
                 <span className="text-sm font-mono uppercase tracking-wider font-semibold">{t('resources.filter.label')}</span>
               </div>
@@ -263,8 +263,8 @@ export default function Resources() {
                   onClick={() => setSelectedCategory(category.key)}
                   className={`rounded-full text-sm font-mono uppercase tracking-wider transition-all duration-300 font-semibold ${
                     selectedCategory === category.key 
-                      ? "bg-purple-900 text-white hover:bg-purple-800 border-purple-900" 
-                      : "bg-white text-gray-900 border-gray-300 hover:bg-purple-50 hover:border-purple-500 hover:text-purple-900"
+                      ? "bg-purple-900 text-white hover:bg-purple-800 border-purple-900 dark:bg-purple-700 dark:hover:bg-purple-600" 
+                      : "bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-700 hover:bg-purple-50 dark:hover:bg-purple-900/30 hover:border-purple-500 dark:hover:border-purple-500 hover:text-purple-900 dark:hover:text-purple-300"
                   }`}
                 >
                   {category.label}
@@ -275,37 +275,37 @@ export default function Resources() {
         </section>
 
         {/* Resources Grid (White Background) */}
-        <section className="py-32 bg-white">
+        <section className="py-32 bg-white dark:bg-gray-900">
           <div className="container">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredResources.map((resource) => {
                 const categoryLabel = categories.find(c => c.key === resource.category)?.label || resource.category;
                 return (
                   <Link key={resource.id} href={getLocalizedPath(`/resources/${resource.id}`)}>
-                    <div className="bg-white p-12 hover:bg-white hover:shadow-2xl border-2 border-gray-200 hover:border-accent transition-all duration-300 group cursor-pointer h-full flex flex-col rounded-3xl relative overflow-hidden">
+                    <div className="bg-white dark:bg-gray-800 p-12 hover:bg-white dark:hover:bg-gray-700 hover:shadow-2xl border-2 border-gray-200 dark:border-gray-700 hover:border-accent dark:hover:border-[#448DFF] transition-all duration-300 group cursor-pointer h-full flex flex-col rounded-3xl relative overflow-hidden">
                       {/* Subtle overlay on hover - doesn't affect text readability */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-purple-50/0 to-cyan-50/0 group-hover:from-purple-50/30 group-hover:to-cyan-50/20 transition-all duration-300 pointer-events-none" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-purple-50/0 to-cyan-50/0 group-hover:from-purple-50/30 dark:group-hover:from-purple-900/20 group-hover:to-cyan-50/20 dark:group-hover:to-cyan-900/10 transition-all duration-300 pointer-events-none" />
                       
                       <div className="relative z-10">
                         {/* Badge */}
                         <div className="mb-6">
-                          <span className="inline-block px-3 py-1 text-xs font-mono uppercase tracking-wider bg-purple-100 text-purple-900 group-hover:bg-[#448DFF] group-hover:text-white transition-colors rounded-full font-semibold">
+                          <span className="inline-block px-3 py-1 text-xs font-mono uppercase tracking-wider bg-purple-100 dark:bg-purple-900/50 text-purple-900 dark:text-purple-200 group-hover:bg-[#448DFF] group-hover:text-white transition-colors rounded-full font-semibold">
                             {categoryLabel}
                           </span>
                         </div>
 
                         {/* Title */}
-                        <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 group-hover:text-purple-900 transition-colors leading-tight">
+                        <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-purple-900 dark:group-hover:text-purple-300 transition-colors leading-tight">
                           {resource.title}
                         </h3>
 
                         {/* Description */}
-                        <p className="text-base text-gray-700 leading-relaxed mb-8 flex-grow group-hover:text-gray-900 transition-colors">
+                        <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed mb-8 flex-grow group-hover:text-gray-900 dark:group-hover:text-gray-100 transition-colors">
                           {resource.description}
                         </p>
 
                         {/* Meta */}
-                        <div className="flex items-center justify-between text-sm text-gray-600 pt-6 border-t border-gray-200 group-hover:border-gray-300 transition-colors">
+                        <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400 pt-6 border-t border-gray-200 dark:border-gray-700 group-hover:border-gray-300 dark:group-hover:border-gray-600 transition-colors">
                           <span className="font-medium">{resource.readTime}</span>
                           <span>{new Date(resource.date).toLocaleDateString(language === 'fr' ? 'fr-FR' : 'en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
                         </div>

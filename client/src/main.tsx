@@ -89,7 +89,7 @@ if (!document.body.classList.contains('loaded')) {
 root.render(
   <trpc.Provider client={trpcClient} queryClient={queryClient}>
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="dark" switchable={false}>
+      <ThemeProvider defaultTheme="dark" switchable={true}>
         <App />
       </ThemeProvider>
     </QueryClientProvider>

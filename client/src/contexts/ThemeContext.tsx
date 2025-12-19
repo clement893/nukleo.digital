@@ -22,9 +22,24 @@ export function ThemeProvider({
   switchable = false,
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(() => {
-    if (switchable) {
-      const stored = localStorage.getItem("theme");
-      return (stored as Theme) || defaultTheme;
+    // Detect system preference
+    if (typeof window !== 'undefined') {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const systemTheme = prefersDark ? 'dark' : 'light';
+      
+      if (switchable) {
+        const stored = localStorage.getItem("theme");
+        return (stored as Theme) || systemTheme;
+      }
+      
+      // Always respect system preference for better UX
+      // But allow defaultTheme override if explicitly set
+      if (defaultTheme === 'dark') {
+        return 'dark';
+      }
+      
+      // Auto-detect from system preference
+      return systemTheme;
     }
     return defaultTheme;
   });
@@ -40,7 +55,28 @@ export function ThemeProvider({
     if (switchable) {
       localStorage.setItem("theme", theme);
     }
-  }, [theme, switchable]);
+    
+    // Listen for system theme changes
+    if (typeof window !== 'undefined' && !switchable) {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      const handleChange = (e: MediaQueryListEvent) => {
+        if (defaultTheme === 'light') {
+          setTheme(e.matches ? 'dark' : 'light');
+        }
+      };
+      
+      // Modern browsers
+      if (mediaQuery.addEventListener) {
+        mediaQuery.addEventListener('change', handleChange);
+        return () => mediaQuery.removeEventListener('change', handleChange);
+      }
+      // Fallback for older browsers
+      else if (mediaQuery.addListener) {
+        mediaQuery.addListener(handleChange);
+        return () => mediaQuery.removeListener(handleChange);
+      }
+    }
+  }, [theme, switchable, defaultTheme]);
 
   const toggleTheme = switchable
     ? () => {

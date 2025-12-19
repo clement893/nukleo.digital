@@ -121,6 +121,17 @@
     background-attachment: fixed;
   }
 
+  /* Dark mode optimizations */
+  @media (prefers-color-scheme: dark) {
+    body {
+      color-scheme: dark;
+    }
+  }
+
+  .dark body {
+    color-scheme: dark;
+  }
+
   /* Classe pour le fond gradient utilisé sur certaines pages */
   .bg-gradient-nukleo {
     background: linear-gradient(

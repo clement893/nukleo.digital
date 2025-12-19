@@ -6,7 +6,7 @@ import Breadcrumb from '@/components/Breadcrumb';
 import { trpc } from '@/lib/trpc';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Loader2, Mail } from 'lucide-react';
-import { useLocation } from 'wouter';
+import { useLocation, Link } from 'wouter';
 
 export default function AITrendRadar() {
   const { t } = useLanguage();
@@ -110,31 +110,8 @@ export default function AITrendRadar() {
                 const currentLang = window.location.pathname.startsWith('/fr') ? '/fr' : '';
                 const radarUrl = `${currentLang}/radar`;
                 
-                // Use proper link element for better accessibility and functionality
-                const LinkComponent = hasUrl ? 'a' : Link;
-                const linkProps = hasUrl 
-                  ? {
-                      href: news.url,
-                      target: '_blank',
-                      rel: 'noopener noreferrer',
-                      onClick: (e: React.MouseEvent) => {
-                        e.stopPropagation();
-                      }
-                    }
-                  : {
-                      href: radarUrl,
-                      onClick: (e: React.MouseEvent) => {
-                        e.preventDefault();
-                        setLocation(radarUrl);
-                      }
-                    };
-
-                return (
-                  <LinkComponent
-                    key={news.id}
-                    {...linkProps}
-                    className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-purple-500/30 transition-all duration-300 group cursor-pointer h-full flex flex-col block"
-                  >
+                const cardContent = (
+                  <>
                     <div className="flex items-start justify-between mb-4">
                       <span className="px-3 py-1 bg-purple-500/20 border border-purple-500/50 rounded-full text-purple-300 text-xs font-semibold">
                         {news.technology}
@@ -172,8 +149,33 @@ export default function AITrendRadar() {
                         </svg>
                       )}
                     </div>
-                  </LinkComponent>
+                  </>
                 );
+
+                // Render with proper link element
+                if (hasUrl) {
+                  return (
+                    <a
+                      key={news.id}
+                      href={news.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-purple-500/30 transition-all duration-300 group cursor-pointer h-full flex flex-col block"
+                    >
+                      {cardContent}
+                    </a>
+                  );
+                } else {
+                  return (
+                    <Link
+                      key={news.id}
+                      href={radarUrl}
+                      className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-purple-500/30 transition-all duration-300 group cursor-pointer h-full flex flex-col block"
+                    >
+                      {cardContent}
+                    </Link>
+                  );
+                }
               })}
             </div>
           </div>

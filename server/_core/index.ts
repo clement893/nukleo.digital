@@ -109,6 +109,8 @@ async function startServer() {
         frameSrc: ["'self'"],
         objectSrc: ["'none'"],
         upgradeInsecureRequests: process.env.NODE_ENV === 'production' ? [] : null,
+        // CSP Reporting - log violations for monitoring (optional endpoint)
+        reportUri: process.env.CSP_REPORT_URI || '/api/csp-report',
       },
     },
     hsts: {

@@ -384,3 +384,42 @@ export const halifaxOfficeSchema = createLocalBusinessSchema({
   email: 'hello@nukleo.digital',
   url: 'https://nukleo.digital',
 });
+
+// VideoObject schema for video content
+export function createVideoObjectSchema(video: {
+  name: string;
+  description: string;
+  thumbnailUrl: string;
+  uploadDate: string;
+  contentUrl?: string;
+  embedUrl?: string;
+  duration?: string; // ISO 8601 duration (e.g., "PT1H30M")
+  publisher?: {
+    name: string;
+    logo?: string;
+  };
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    name: video.name,
+    description: video.description,
+    thumbnailUrl: video.thumbnailUrl,
+    uploadDate: video.uploadDate,
+    contentUrl: video.contentUrl,
+    embedUrl: video.embedUrl,
+    duration: video.duration,
+    publisher: video.publisher ? {
+      '@type': 'Organization',
+      name: video.publisher.name,
+      logo: video.publisher.logo ? {
+        '@type': 'ImageObject',
+        url: video.publisher.logo,
+      } : undefined,
+    } : {
+      '@type': 'Organization',
+      name: 'Nukleo Digital',
+      logo: 'https://nukleo.digital/Nukleo_blanc_RVB.svg',
+    },
+  };
+}

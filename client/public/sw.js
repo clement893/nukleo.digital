@@ -22,16 +22,10 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(STATIC_ASSETS).catch((err) => {
-        // Silently fail in production, log only in development
-        if (typeof self !== 'undefined' && self.registration && self.registration.scope) {
-          // Only log if we're in a development-like environment
-          try {
-            if (self.location && self.location.hostname === 'localhost') {
-              console.warn('Failed to cache some assets:', err);
-            }
-          } catch {
-            // Ignore errors accessing location
-          }
+        // Silently fail in production - no logging
+        // Only log in development (localhost)
+        if (typeof self !== 'undefined' && self.location?.hostname === 'localhost') {
+          console.warn('[SW] Failed to cache some assets:', err);
         }
       });
     })

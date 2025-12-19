@@ -1,8 +1,6 @@
-import { expect, afterEach, vi } from 'vitest';
+import { expect, afterEach } from 'vitest';
 import { cleanup } from '@testing-library/react';
-
-// Note: @testing-library/jest-dom matchers need to be installed separately
-// For now, using basic vitest matchers
+import '@testing-library/jest-dom/vitest';
 
 // Cleanup after each test
 afterEach(() => {
@@ -34,12 +32,3 @@ global.IntersectionObserver = class IntersectionObserver {
   }
   unobserve() {}
 } as any;
-
-// Mock ResizeObserver
-global.ResizeObserver = class ResizeObserver {
-  constructor() {}
-  disconnect() {}
-  observe() {}
-  unobserve() {}
-} as any;
-

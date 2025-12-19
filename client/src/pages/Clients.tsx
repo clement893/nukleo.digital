@@ -128,10 +128,10 @@ export default function Clients() {
             </div>
             
             <h1 className="text-5xl md:text-7xl font-bold mb-8">
-              <span className="text-white">{t('clients.title')}</span>
+              <span className="text-white">Nos</span>
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">
-                {t('clients.titleHighlight')}
+                clients
               </span>
             </h1>
             
@@ -246,11 +246,18 @@ export default function Clients() {
             <p className="text-xl text-white/70 mb-8 max-w-2xl mx-auto">
               {t('clients.cta.description')}
             </p>
-            <Link href={getLocalizedPath('/contact')}>
-              <a className="inline-block bg-white text-purple-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/90 transition-all hover:scale-[1.022]">
-                {t('clients.cta.button')}
-              </a>
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link href={getLocalizedPath('/contact')}>
+                <a className="inline-block bg-white text-purple-900 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/90 transition-all hover:scale-[1.022] shadow-lg">
+                  {t('clients.cta.button')}
+                </a>
+              </Link>
+              <Link href={getLocalizedPath('/start-project')}>
+                <a className="inline-block bg-transparent border-2 border-white/30 text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 hover:border-white/50 transition-all hover:scale-[1.022]">
+                  {t('clients.cta.buttonSecondary')}
+                </a>
+              </Link>
+            </div>
           </div>
         </section>
       </div>

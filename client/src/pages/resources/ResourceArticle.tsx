@@ -150,31 +150,6 @@ export default function ResourceArticle() {
                     </p>
                   </div>
                   
-                  {/* Related Articles Section */}
-                  <div className="mt-16 pt-12 border-t border-white/10">
-                    <h2 className="text-2xl font-bold text-white mb-6">{t('resources.relatedArticles') || 'Articles similaires'}</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {Object.entries(articleMap)
-                        .filter(([id]) => id !== articleId)
-                        .slice(0, 2)
-                        .map(([id, key]) => {
-                          const relatedTitle = t(`resources.articles.${key}.title`);
-                          return relatedTitle ? (
-                            <Link key={id} href={getLocalizedPath(`/resources/${id}`)}>
-                              <a className="block p-4 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-accent/50 rounded-xl transition-all group">
-                                <h3 className="text-lg font-semibold text-white group-hover:text-accent transition-colors mb-2">
-                                  {relatedTitle}
-                                </h3>
-                                <p className="text-white/60 text-sm line-clamp-2">
-                                  {t(`resources.articles.${key}.description`)}
-                                </p>
-                              </a>
-                            </Link>
-                          ) : null;
-                        })}
-                    </div>
-                  </div>
-                  
                   {/* Article content */}
                   {content && content !== description && (
                     <>
@@ -271,6 +246,31 @@ export default function ResourceArticle() {
                       />
                     </>
                   )}
+                  
+                  {/* Related Articles Section - After content */}
+                  <div className="mt-16 pt-12 border-t border-white/10">
+                    <h2 className="text-2xl font-bold text-white mb-6">{t('resources.relatedArticles') || 'Articles similaires'}</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {Object.entries(articleMap)
+                        .filter(([id]) => id !== articleId)
+                        .slice(0, 2)
+                        .map(([id, key]) => {
+                          const relatedTitle = t(`resources.articles.${key}.title`);
+                          return relatedTitle ? (
+                            <Link key={id} href={getLocalizedPath(`/resources/${id}`)}>
+                              <a className="block p-4 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-accent/50 rounded-xl transition-all group">
+                                <h3 className="text-lg font-semibold text-white group-hover:text-accent transition-colors mb-2">
+                                  {relatedTitle}
+                                </h3>
+                                <p className="text-white/60 text-sm line-clamp-2">
+                                  {t(`resources.articles.${key}.description`)}
+                                </p>
+                              </a>
+                            </Link>
+                          ) : null;
+                        })}
+                    </div>
+                  </div>
                 </div>
               </article>
             </div>

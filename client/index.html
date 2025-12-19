@@ -14,16 +14,15 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=5" />
     
-    <!-- Google tag (gtag.js) - Load synchronously for proper detection by Google Tag Assistant -->
-    <!-- This must be in the <head> section and loaded before page content -->
+    <!-- Google tag (gtag.js) - Standard implementation for proper detection by Google Tag Assistant -->
+    <!-- IMPORTANT: This must be in <head> and loaded synchronously for Tag Assistant to detect it -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-C2X5JWEL5S"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
       gtag('js', new Date());
-      gtag('config', 'G-C2X5JWEL5S', {
-        'send_page_view': true
-      });
+      gtag('config', 'G-C2X5JWEL5S');
     </script>
     
     <title>Transformation IA & Écosystèmes Numériques | Nukleo Digital</title>

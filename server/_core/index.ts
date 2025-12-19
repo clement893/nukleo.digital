@@ -735,18 +735,37 @@ async function startServer() {
   
   // Global error handler (must be after all routes)
   app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-    // Log error with full details
+    // Log error with full details - always log full error in production for debugging
     const errorMessage = err?.message || String(err) || "Unknown error";
     const errorStack = err?.stack || "No stack trace";
+    const errorName = err?.name || "Error";
+    const errorCode = err?.code || null;
     
-    logger.error("Unhandled error:", {
+    // Always log full error details for debugging
+    logger.error(`[ERROR HANDLER] ${errorName}: ${errorMessage}`, {
       error: errorMessage,
+      name: errorName,
+      code: errorCode,
       stack: errorStack,
       url: req.url,
       method: req.method,
-      body: req.body,
-      query: req.query,
-      params: req.params,
+      path: req.path,
+      body: req.body ? JSON.stringify(req.body).substring(0, 500) : undefined,
+      query: Object.keys(req.query).length > 0 ? req.query : undefined,
+      params: Object.keys(req.params).length > 0 ? req.params : undefined,
+      headers: {
+        'user-agent': req.get('user-agent'),
+        'content-type': req.get('content-type'),
+      },
+    });
+    
+    // Also log to console for Railway logs
+    console.error("[ERROR HANDLER] Full error details:", {
+      message: errorMessage,
+      name: errorName,
+      code: errorCode,
+      stack: errorStack,
+      url: req.url,
     });
     
     // Send to Sentry if configured
@@ -759,12 +778,13 @@ async function startServer() {
       return next(err);
     }
     
-    // Send error response
+    // Send error response - include error code if available for better debugging
     res.status(500).json({
       error: "Internal Server Error",
       message: process.env.NODE_ENV === 'production' 
         ? "An unexpected error occurred" 
         : errorMessage,
+      ...(errorCode && { code: errorCode }),
     });
   });
 

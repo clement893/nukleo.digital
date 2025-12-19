@@ -173,7 +173,7 @@ export default function ResourceArticle() {
                           transform: translateY(-50%);
                           width: 4px;
                           height: 1.2em;
-                          background: linear-gradient(135deg, #00d4ff, #0099ff);
+                          background: linear-gradient(135deg, #448DFF, #0099ff);
                           border-radius: 2px;
                         }
                         .article-content h3 {
@@ -209,22 +209,22 @@ export default function ResourceArticle() {
                           color: rgba(255, 255, 255, 0.85);
                         }
                         .article-content li::marker {
-                          color: #00d4ff;
+                          color: #448DFF;
                           font-weight: 700;
                         }
                         .article-content strong {
-                          color: #00d4ff;
+                          color: #448DFF;
                           font-weight: 600;
                         }
                         .article-content a {
-                          color: #00d4ff;
+                          color: #448DFF;
                           text-decoration: none;
                           font-weight: 500;
                           transition: all 0.2s ease;
                         }
                         .article-content a:hover {
           text-decoration: underline;
-          color: #00b8e6;
+          color: #5a9fff;
         }
                       `}</style>
                       <SafeHTML 

@@ -828,7 +828,9 @@
       "subscribing": "Abonnement...",
       "success": "✓ Abonnement réussi ! Vérifiez votre email pour confirmation.",
       "error": "✗ Échec de l'abonnement. Veuillez réessayer."
-    }
+    },
+    "articleNotFound": "Article introuvable",
+    "backToResources": "Retour aux Ressources"
   },
   "faq": {
     "seoTitle": "FAQ | Questions fréquentes sur la transformation IA",

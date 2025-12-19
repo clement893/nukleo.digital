@@ -9,10 +9,14 @@ import { ArrowLeft } from 'lucide-react';
 import { Link } from 'wouter';
 
 export default function ResourceArticle() {
-  const [, params] = useRoute('/resources/:id');
+  // Try both routes: /resources/:id and /fr/resources/:id
+  const [matchEn, paramsEn] = useRoute('/resources/:id');
+  const [matchFr, paramsFr] = useRoute('/fr/resources/:id');
   const { t, language } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
   
+  // Get params from whichever route matched
+  const params = matchEn ? paramsEn : (matchFr ? paramsFr : null);
   const articleId = params?.id || '';
   
   // Map article IDs to translation keys
@@ -26,14 +30,14 @@ export default function ResourceArticle() {
   
   const translationKey = articleMap[articleId];
   
-  if (!translationKey) {
+  if (!translationKey || !articleId) {
     return (
       <PageLayout>
         <div className="min-h-screen bg-gradient-nukleo flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-white mb-4">Article Not Found</h1>
+            <h1 className="text-4xl font-bold text-white mb-4">{t('resources.articleNotFound') || 'Article Not Found'}</h1>
             <Link href={getLocalizedPath('/resources')}>
-              <a className="text-accent hover:text-white">Back to Resources</a>
+              <a className="text-accent hover:text-white">{t('resources.backToResources') || 'Back to Resources'}</a>
             </Link>
           </div>
         </div>
@@ -45,6 +49,22 @@ export default function ResourceArticle() {
   const description = t(`resources.articles.${translationKey}.description`);
   const readTime = t(`resources.articles.${translationKey}.readTime`);
   const content = t(`resources.articles.${translationKey}.content`, { returnObjects: false }) || description;
+  
+  // Check if title exists (if empty, article not found)
+  if (!title || title.trim() === '') {
+    return (
+      <PageLayout>
+        <div className="min-h-screen bg-gradient-nukleo flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-4xl font-bold text-white mb-4">{t('resources.articleNotFound') || 'Article Not Found'}</h1>
+            <Link href={getLocalizedPath('/resources')}>
+              <a className="text-accent hover:text-white">{t('resources.backToResources') || 'Back to Resources'}</a>
+            </Link>
+          </div>
+        </div>
+      </PageLayout>
+    );
+  }
   
   // Get article date from resources list
   const articleDates: Record<string, string> = {
@@ -85,8 +105,8 @@ export default function ResourceArticle() {
         <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">
           <div className="container">
             <Breadcrumb items={[
-              { name: t('nav.resources') || 'Resources', url: '/resources' },
-              { name: title, url: `/resources/${articleId}` }
+              { name: t('nav.resources') || 'Resources', url: getLocalizedPath('/resources') },
+              { name: title, url: getLocalizedPath(`/resources/${articleId}`) }
             ]} />
             
             <div className="max-w-4xl mx-auto">

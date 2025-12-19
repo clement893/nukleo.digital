@@ -892,7 +892,9 @@
       "subscribing": "Subscribing...",
       "success": "✓ Successfully subscribed! Check your email for confirmation.",
       "error": "✗ Failed to subscribe. Please try again."
-    }
+    },
+    "articleNotFound": "Article Not Found",
+    "backToResources": "Back to Resources"
   },
   "agencies": {
     "seoTitle": "Your AI & Digital Team on Demand | Nukleo Digital",

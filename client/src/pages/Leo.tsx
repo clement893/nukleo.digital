@@ -358,22 +358,30 @@ export default function Leo() {
             content: fullText,
             timestamp: new Date(),
           };
-          setMessages((prev) => [...prev, assistantMessage]);
+          
+          // Check if we should show email form - only after first complete exchange
+          // Welcome message (1) + user message (2) = 2 messages before adding assistant
+          const emailAlreadySaved = localStorage.getItem('leo-email-saved');
+          
+          setMessages((prev) => {
+            const updated = [...prev, assistantMessage];
+            // Show email form after first complete exchange (welcome + user + assistant = 3 messages)
+            // Check if we have exactly 2 messages before adding assistant (welcome + user)
+            if (!emailAlreadySaved && !emailSaved && prev.length === 2 && !showEmailForm) {
+              updated.push({
+                role: 'system',
+                content: t('leo.emailPrompt') || "Before we continue, I'd love to send you personalized insights! Could you share your email?",
+                timestamp: new Date(),
+                isEmailForm: true,
+              });
+              setShowEmailForm(true);
+            }
+            return updated;
+          });
+          
           setTypingText('');
           // Show suggestions again after response is complete
           setShowSuggestions(true);
-
-          // Show email form inline after first exchange (2 messages: user + assistant)
-          const emailAlreadySaved = localStorage.getItem('leo-email-saved');
-          if (!emailAlreadySaved && !emailSaved && messages.length >= 1 && !showEmailForm) {
-            setShowEmailForm(true);
-            setMessages((prev) => [...prev, {
-              role: 'system',
-              content: t('leo.emailPrompt') || "Before we continue, I'd love to send you personalized insights! Could you share your email?",
-              timestamp: new Date(),
-              isEmailForm: true,
-            }]);
-          }
         }
       }, 5); // 5ms per character for fast typing speed
     } catch (error) {
@@ -454,7 +462,7 @@ export default function Leo() {
         keywords={t('leo.seoKeywords') || "AI chatbot, AI assistant, AI consultation, AI strategy, AI transformation help, AI implementation guide, free AI consultation, AI advisor"}
         ogImage="https://nukleodigital-production.up.railway.app/og-image.jpg"
       />
-      <div className="min-h-screen bg-gradient-to-br from-[oklch(0.35_0.15_300)] via-[oklch(0.40_0.15_320)] to-[oklch(0.35_0.15_340)] flex flex-col">
+      <div className="min-h-screen bg-gradient-to-br from-[oklch(0.35_0.15_300)] via-[oklch(0.40_0.15_320)] to-[oklch(0.35_0.15_340)] flex flex-col overflow-hidden">
       {/* Breadcrumb */}
       <div className="container pt-24 pb-4">
         <Breadcrumb items={[{ name: t('nav.leo') || 'LEO AI Assistant', url: '/leo' }]} />
@@ -532,23 +540,23 @@ export default function Leo() {
       </div>
 
       {/* Chat container */}
-      <div className="flex-1 container pb-32 overflow-y-auto">
-        <div className="max-w-3xl mx-auto space-y-8">
+      <div className="flex-1 container pb-32 overflow-y-auto overflow-x-hidden" style={{ maxHeight: 'calc(100vh - 200px)', WebkitOverflowScrolling: 'touch' }}>
+        <div className="max-w-3xl mx-auto space-y-8 py-4">
           {messages.map((message, index) => (
             <div key={index}>
               {message.isEmailForm ? (
                 // Inline Email Form
                 <div className="flex gap-4 justify-start">
                   <div className="flex-shrink-0">
-                    <OptimizedImage 
-                      src={getAvatarSrc('happy').fallback}
-                      webpSrc={getAvatarSrc('happy').webp}
-                      alt="Leo" 
-                      width={48}
-                      height={48}
-                      loading="lazy"
-                      className="w-12 h-12 object-contain avatar-happy"
-                    />
+                      <OptimizedImage 
+                        src={getAvatarSrc('happy').fallback}
+                        webpSrc={getAvatarSrc('happy').webp}
+                        alt="Leo" 
+                        width={48}
+                        height={48}
+                        loading="lazy"
+                        className="w-12 h-12 object-contain bg-transparent avatar-happy"
+                      />
                   </div>
                   <div className="flex flex-col items-start max-w-[70%]">
                     <span className="text-xs text-white/40 uppercase tracking-wider mb-2">{t('leo.leoLabel')}</span>
@@ -609,7 +617,7 @@ export default function Leo() {
                         width={48}
                         height={48}
                         loading="lazy"
-                        className={`w-12 h-12 object-contain transition-all duration-300 ${
+                        className={`w-12 h-12 object-contain bg-transparent transition-all duration-300 ${
                           index === messages.length - 1 ? `avatar-${currentEmotion}` : 'avatar-default'
                         }`}
                       />
@@ -660,7 +668,7 @@ export default function Leo() {
                   width={48}
                   height={48}
                   loading="lazy"
-                  className="w-12 h-12 object-contain avatar-thinking transition-all duration-300"
+                  className="w-12 h-12 object-contain bg-transparent avatar-thinking transition-all duration-300"
                 />
               </div>
               <div className="flex flex-col items-start">
@@ -687,7 +695,7 @@ export default function Leo() {
                   width={48}
                   height={48}
                   loading="lazy"
-                  className={`w-12 h-12 object-contain transition-all duration-300 avatar-${currentEmotion}`}
+                  className={`w-12 h-12 object-contain bg-transparent transition-all duration-300 avatar-${currentEmotion}`}
                 />
               </div>
               <div className="flex flex-col items-start max-w-[70%]">

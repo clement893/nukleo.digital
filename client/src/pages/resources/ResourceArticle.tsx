@@ -102,7 +102,7 @@ export default function ResourceArticle() {
       <StructuredData data={articleSchema} />
       <div className="min-h-screen bg-gradient-nukleo">
         {/* Hero Section */}
-        <section className="pt-32 pb-16 lg:pt-40 lg:pb-24">
+        <section className="pt-32 pb-20 lg:pt-40 lg:pb-28">
           <div className="container">
             <Breadcrumb items={[
               { name: t('nav.resources') || 'Resources', url: getLocalizedPath('/resources') },
@@ -111,24 +111,24 @@ export default function ResourceArticle() {
             
             <div className="max-w-4xl mx-auto">
               <Link href={getLocalizedPath('/resources')}>
-                <a className="inline-flex items-center gap-2 text-white/60 hover:text-white mb-8 transition-colors">
-                  <ArrowLeft className="w-4 h-4" />
+                <a className="inline-flex items-center gap-2 text-white/60 hover:text-white mb-10 transition-colors group">
+                  <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                   {t('common.back') || 'Back to Resources'}
                 </a>
               </Link>
               
-              <div className="mb-6">
-                <span className="inline-block px-3 py-1 text-xs font-mono uppercase tracking-wider bg-accent/20 text-accent rounded-full">
+              <div className="mb-8">
+                <span className="inline-block px-4 py-2 text-xs font-mono uppercase tracking-wider bg-accent/20 border border-accent/30 text-accent rounded-full">
                   {t(`resources.articles.${translationKey}.category`) || 'Article'}
                 </span>
               </div>
               
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight">
                 {title}
               </h1>
               
-              <div className="flex items-center gap-4 text-white/60 text-sm mb-8">
-                <span>{readTime}</span>
+              <div className="flex items-center gap-4 text-white/60 text-sm mb-12">
+                <span className="font-medium">{readTime}</span>
                 <span>•</span>
                 <span>{new Date(date).toLocaleDateString(language === 'fr' ? 'fr-FR' : 'en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
               </div>
@@ -140,17 +140,31 @@ export default function ResourceArticle() {
         <section className="pb-24 lg:pb-32">
           <div className="container">
             <div className="max-w-4xl mx-auto">
-              <article className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 md:p-12 lg:p-16">
+              <article className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12 lg:p-16 shadow-2xl">
                 <div className="prose prose-invert prose-lg max-w-none">
                   {/* Description */}
-                  <p className="text-white/80 text-lg leading-relaxed mb-8">
-                    {description}
-                  </p>
+                  <div className="mb-12 pb-8 border-b border-white/10">
+                    <p className="text-white/90 text-xl leading-relaxed font-light">
+                      {description}
+                    </p>
+                  </div>
                   
                   {/* Article content */}
                   {content && content !== description && (
                     <div 
-                      className="prose prose-invert prose-base max-w-none prose-headings:text-white prose-p:text-white/70 prose-p:leading-relaxed prose-p:text-base prose-h2:text-xl prose-h2:font-bold prose-h2:mt-8 prose-h2:mb-4 prose-h3:text-lg prose-h3:font-semibold prose-h3:mt-6 prose-h3:mb-3 prose-h4:text-base prose-h4:font-semibold prose-h4:mt-4 prose-h4:mb-2 prose-strong:text-white prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-ul:text-white/70 prose-ol:text-white/70 prose-li:text-white/70 prose-li:text-base"
+                      className="prose prose-invert prose-base max-w-none 
+                        prose-headings:text-white prose-headings:font-bold
+                        prose-h2:text-2xl prose-h2:font-bold prose-h2:mt-12 prose-h2:mb-6 prose-h2:leading-tight
+                        prose-h3:text-xl prose-h3:font-semibold prose-h3:mt-10 prose-h3:mb-4 prose-h3:leading-tight
+                        prose-h4:text-lg prose-h4:font-semibold prose-h4:mt-8 prose-h4:mb-3
+                        prose-p:text-white/80 prose-p:leading-relaxed prose-p:text-base prose-p:mb-6
+                        prose-strong:text-white prose-strong:font-semibold
+                        prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-a:font-medium
+                        prose-ul:text-white/80 prose-ul:my-6 prose-ul:space-y-3
+                        prose-ol:text-white/80 prose-ol:my-6 prose-ol:space-y-3
+                        prose-li:text-white/80 prose-li:text-base prose-li:leading-relaxed prose-li:pl-2
+                        prose-li:marker:text-accent prose-li:marker:font-bold
+                        prose-blockquote:border-l-4 prose-blockquote:border-accent prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-white/70 prose-blockquote:my-8"
                       dangerouslySetInnerHTML={{ __html: content }}
                     />
                   )}

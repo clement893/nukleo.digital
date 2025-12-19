@@ -263,7 +263,7 @@ export default function Resources() {
                   className={`rounded-full text-sm font-mono uppercase tracking-wider transition-all duration-300 font-semibold ${
                     selectedCategory === category.key 
                       ? "bg-purple-900 text-white hover:bg-purple-800 border-purple-900" 
-                      : "bg-white text-gray-900 border-gray-300 hover:bg-gray-50 hover:border-purple-500 hover:text-purple-900"
+                      : "bg-white text-gray-900 border-gray-300 hover:bg-purple-50 hover:border-purple-500 hover:text-purple-900"
                   }`}
                 >
                   {category.label}

@@ -103,6 +103,8 @@ export async function listImages() {
     return sorted;
   } catch (error) {
     console.error("[ProjectsImages] Error listing images:", error);
+    // Return empty array instead of throwing to prevent ERR_FAILED
+    // The frontend will use fallback images
     return [];
   }
 }
@@ -110,7 +112,13 @@ export async function listImages() {
 export const projectsImagesRouter = router({
   // List all project images (public - for the projects page)
   list: publicProcedure.query(async () => {
-    return await listImages();
+    try {
+      return await listImages();
+    } catch (error) {
+      console.error("[ProjectsImages] Error in list procedure:", error);
+      // Return empty array instead of throwing to prevent ERR_FAILED
+      return [];
+    }
   }),
   
   // List all project images (admin - same as public but requires auth)

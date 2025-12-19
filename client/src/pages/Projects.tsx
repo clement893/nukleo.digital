@@ -77,11 +77,15 @@ export default function Projects() {
   const { t } = useLanguage();
   // Load images from API (public endpoint - we'll make it public)
   const { data: uploadedImages, isLoading: isLoadingImages, error: imagesError } = trpc.projectsImages.list.useQuery(undefined, {
-    retry: 2,
+    retry: 1,
+    retryDelay: 1000,
     refetchOnWindowFocus: false,
+    staleTime: 5 * 60 * 1000, // Cache for 5 minutes
     // Add error handling
     onError: (error) => {
       console.error('[Projects] tRPC error:', error);
+      // Fallback to fallback images on error
+      setImages(fallbackImages);
     },
     onSuccess: (data) => {
       console.log('[Projects] tRPC success:', data?.length, 'images');
@@ -103,25 +107,28 @@ export default function Projects() {
       count: uploadedImages?.length 
     });
     
+    if (imagesError) {
+      console.error('[Projects] API error, using fallback images:', imagesError);
+      // Use fallback images on error
+      setImages(fallbackImages);
+      return;
+    }
+    
     if (uploadedImages) {
       if (uploadedImages.length > 0) {
         // Use images from API
         const imageNames = uploadedImages.map(img => img.name);
-        console.log('[Projects] Setting images:', imageNames);
+        console.log('[Projects] Setting images from API:', imageNames.length);
         setImages(imageNames);
       } else {
-        // API returned empty array - no images available
-        console.log('[Projects] API returned empty array');
-        setImages([]);
+        // API returned empty array - use fallback images
+        console.log('[Projects] API returned empty array, using fallback images');
+        setImages(fallbackImages);
       }
-    } else if (!isLoadingImages && !imagesError) {
-      // API hasn't loaded yet, keep empty
-      console.log('[Projects] API not loaded yet');
-      setImages([]);
-    }
-    
-    if (imagesError) {
-      console.error('[Projects] API error:', imagesError);
+    } else if (!isLoadingImages) {
+      // API finished loading but no data - use fallback images
+      console.log('[Projects] No API data after loading, using fallback images');
+      setImages(fallbackImages);
     }
   }, [uploadedImages, isLoadingImages, imagesError]);
 

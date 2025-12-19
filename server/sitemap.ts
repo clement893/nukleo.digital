@@ -104,9 +104,12 @@ ${allPages
     page => {
       // Determine alternate language URL
       const isFr = page.url.startsWith('/fr');
-      const alternateUrl = isFr 
-        ? page.url.replace('/fr', '') || '/'
-        : `/fr${page.url}`;
+      const enUrl = isFr ? (page.url.replace('/fr', '') || '/') : page.url;
+      const frUrl = isFr ? page.url : `/fr${page.url}`;
+      
+      // Ensure URLs are properly formatted (no double slashes)
+      const cleanEnUrl = enUrl === '/' ? '' : enUrl;
+      const cleanFrUrl = frUrl === '/fr' ? '/fr' : frUrl;
       
       return `  <url>
     <loc>${baseUrl}${page.url}</loc>
@@ -114,14 +117,16 @@ ${allPages
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>
     <xhtml:link rel="alternate" hreflang="${isFr ? 'fr' : 'en'}" href="${baseUrl}${page.url}" />
-    <xhtml:link rel="alternate" hreflang="${isFr ? 'en' : 'fr'}" href="${baseUrl}${alternateUrl}" />
+    <xhtml:link rel="alternate" hreflang="${isFr ? 'en' : 'fr'}" href="${baseUrl}${isFr ? cleanEnUrl : cleanFrUrl}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${baseUrl}${cleanEnUrl || '/'}" />
   </url>`;
     }
   )
   .join('\n')}
 </urlset>`;
 
-  res.header('Content-Type', 'application/xml');
+  res.header('Content-Type', 'application/xml; charset=utf-8');
+  res.header('Cache-Control', 'public, max-age=3600'); // Cache for 1 hour
   res.send(sitemap);
 });
 

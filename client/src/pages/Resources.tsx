@@ -171,12 +171,6 @@ export default function Resources() {
           
           <div className="container relative z-10">
             <Breadcrumb items={[{ name: t('nav.resources') || 'Resources', url: '/resources' }]} />
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 border border-accent/50 rounded-full text-accent text-xs font-mono uppercase tracking-widest mb-8">
-              <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-              {t('resources.badge')}
-            </div>
-
             {/* Title */}
             <h1 className="text-[5rem] md:text-[6.5rem] lg:text-[8rem] text-white mb-8 leading-[0.85] font-heading font-bold uppercase">
               {t('resources.title')}

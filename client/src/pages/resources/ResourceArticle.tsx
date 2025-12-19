@@ -150,7 +150,7 @@ export default function ResourceArticle() {
                   {/* Article content */}
                   {content && content !== description && (
                     <div 
-                      className="prose prose-invert prose-lg max-w-none prose-headings:text-white prose-p:text-white/70 prose-p:leading-relaxed prose-h2:text-2xl prose-h2:font-bold prose-h2:mt-8 prose-h2:mb-4 prose-h3:text-xl prose-h3:font-semibold prose-h3:mt-6 prose-h3:mb-3 prose-strong:text-white prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-ul:text-white/70 prose-ol:text-white/70 prose-li:text-white/70"
+                      className="prose prose-invert prose-base max-w-none prose-headings:text-white prose-p:text-white/70 prose-p:leading-relaxed prose-p:text-base prose-h2:text-xl prose-h2:font-bold prose-h2:mt-8 prose-h2:mb-4 prose-h3:text-lg prose-h3:font-semibold prose-h3:mt-6 prose-h3:mb-3 prose-h4:text-base prose-h4:font-semibold prose-h4:mt-4 prose-h4:mb-2 prose-strong:text-white prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-ul:text-white/70 prose-ol:text-white/70 prose-li:text-white/70 prose-li:text-base"
                       dangerouslySetInnerHTML={{ __html: content }}
                     />
                   )}

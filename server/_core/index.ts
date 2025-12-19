@@ -26,6 +26,7 @@ import postgres from "postgres";
 import multer from "multer";
 import fs from "fs/promises";
 import { existsSync, mkdirSync } from "fs";
+import { csrfTokenMiddleware, validateCSRF } from "./csrf";
 
 /**
  * Vérifie si un port est disponible pour l'écoute.
@@ -170,6 +171,9 @@ async function startServer() {
     },
   }));
   
+  // CSRF protection - add token to session (must be after session middleware)
+  app.use(csrfTokenMiddleware);
+  
   // Initialize Passport
   app.use(passport.initialize());
   app.use(passport.session());
@@ -287,19 +291,37 @@ async function startServer() {
         },
       });
   
+  // File filter for image validation - checks both extension and MIME type
+  const imageFileFilter = (req: any, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
+    // Allowed MIME types
+    const allowedMimes = [
+      'image/jpeg',
+      'image/jpg',
+      'image/png',
+      'image/gif',
+      'image/webp',
+    ];
+    
+    // Allowed file extensions
+    const allowedExtensions = /\.(jpg|jpeg|png|gif|webp)$/i;
+    
+    // Check both MIME type and extension for security
+    const isValidMime = allowedMimes.includes(file.mimetype);
+    const isValidExtension = allowedExtensions.test(file.originalname);
+    
+    if (isValidMime && isValidExtension) {
+      cb(null, true);
+    } else {
+      cb(new Error('Invalid file type. Only JPEG, PNG, GIF, and WebP images are allowed.'));
+    }
+  };
+  
   const upload = multer({
     storage: multerStorage,
     limits: {
-      fileSize: 10 * 1024 * 1024, // 10MB max
+      fileSize: 10 * 1024 * 1024, // 10MB max file size
     },
-    fileFilter: (req, file, cb) => {
-      // Only allow image files
-      if (/\.(jpg|jpeg|png|gif|webp)$/i.test(file.originalname)) {
-        cb(null, true);
-      } else {
-        cb(new Error('Only image files (jpg, jpeg, png, gif, webp) are allowed'));
-      }
-    },
+    fileFilter: imageFileFilter,
   });
   
   app.post("/api/admin/projects-images/upload", 

@@ -1,7 +1,14 @@
 import { useEffect } from 'react';
 
+// Type definitions for Schema.org structured data
+export interface SchemaOrgData {
+  '@context': string;
+  '@type': string;
+  [key: string]: any;
+}
+
 interface StructuredDataProps {
-  data: Record<string, any>;
+  data: SchemaOrgData | Record<string, any>;
 }
 
 export default function StructuredData({ data }: StructuredDataProps) {

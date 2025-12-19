@@ -1,5 +1,6 @@
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
+import StructuredData, { createFAQSchema } from '@/components/StructuredData';
 import {
   Accordion,
   AccordionContent,
@@ -216,6 +217,12 @@ export default function FAQ() {
 
   const currentContent = content[language];
 
+  // Flatten all FAQs for schema
+  const allFaqs = faqs.flatMap(category => 
+    category.questions.map(q => ({ question: q.question, answer: q.answer }))
+  );
+  const faqSchema = createFAQSchema(allFaqs);
+
   return (
     <PageLayout>
       <SEO 
@@ -223,6 +230,7 @@ export default function FAQ() {
         description={currentContent.seoDescription}
         keywords={currentContent.seoKeywords}
       />
+      <StructuredData data={faqSchema} />
       
       <div className="min-h-screen bg-[#0a0a0a]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 max-w-5xl">

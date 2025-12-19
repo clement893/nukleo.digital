@@ -1904,5 +1904,75 @@
     "errors": {
       "saveFailed": "Échec de l'enregistrement de l'évaluation. Veuillez réessayer."
     }
+  },
+  "seo": {
+    "home": {
+      "title": "Transformation IA & Écosystèmes Numériques Complets - Nukleo",
+      "description": "Nukleo construit des écosystèmes numériques et IA complets. Transformation IA, agents autonomes, plateformes intelligentes. Montréal & Halifax."
+    },
+    "manifesto": {
+      "title": "Passer du Pilote à l'Échelle - Manifeste Transformation IA - Nukleo",
+      "description": "Le manifeste de Nukleo : passez du pilote à l'échelle avec une transformation IA complète. Réarchitecturez vos opérations autour d'agents IA autonomes."
+    },
+    "about": {
+      "title": "Stratégie. Créativité. Technologie. - Notre Équipe - Nukleo",
+      "description": "Découvrez l'équipe de Nukleo : experts en transformation IA et digitale basés à Montréal et Halifax. Nous construisons des écosystèmes numériques complets."
+    },
+    "expertise": {
+      "title": "Notre Expertise en Transformation IA & Digitale - Nukleo",
+      "description": "Explorez notre expertise en transformation IA, stratégie digitale, développement d'agents autonomes et implémentation de solutions IA d'entreprise."
+    },
+    "clients": {
+      "title": "Nos Clients | Leaders de l'Industrie - Nukleo",
+      "description": "Clients de confiance : MBAM, Summit Law, Affilia, GoCoupons & plus. Découvrez comment nous avons transformé les opérations dans 8+ industries avec l'IA."
+    },
+    "resources": {
+      "title": "Ressources & Guides - Transformation IA & Digitale - Nukleo",
+      "description": "Accédez à nos ressources gratuites : guides, articles et documentation sur la transformation IA, les agents autonomes et les stratégies digitales."
+    },
+    "services": {
+      "title": "Services IA | Stratégie, Plateformes & Opérations Intelligentes - Nukleo",
+      "description": "Services IA complets : Stratégie & Marketing, Plateformes Digitales, Opérations Intelligentes. 12 solutions spécialisées pour accélérer votre transformation IA."
+    },
+    "contact": {
+      "title": "Nous Contacter - Devis Gratuit & Consultation - Nukleo",
+      "description": "Contactez Nukleo pour une consultation gratuite sur votre transformation IA. Bureaux à Montréal et Halifax. Réponse rapide garantie."
+    },
+    "faq": {
+      "title": "FAQ - Questions Fréquentes sur la Transformation IA - Nukleo",
+      "description": "Trouvez les réponses à vos questions sur la transformation IA, les agents autonomes, les coûts et la mise en œuvre. FAQ complète de Nukleo."
+    },
+    "projects": {
+      "title": "Nos Projets de Transformation IA - Cas d'Usage & Solutions - Nukleo",
+      "description": "Découvrez nos projets de transformation IA réussis. Agents autonomes, plateformes intelligentes, marketing automation et solutions IA intégrées."
+    },
+    "assessment": {
+      "title": "Audit de Maturité IA Gratuit - Assessment - Nukleo",
+      "description": "Évaluez votre maturité IA avec notre audit gratuit. Diagnostic complet de votre transformation digitale et recommandations personnalisées."
+    },
+    "radar": {
+      "title": "Radar IA - Tendances & Innovations - Nukleo",
+      "description": "Radar IA : suivez les dernières tendances, innovations et technologies émergentes en intelligence artificielle et transformation digitale."
+    },
+    "glossary": {
+      "title": "Glossaire IA - Définitions & Terminologie - Nukleo",
+      "description": "Glossaire complet des termes IA et transformation digitale. Définitions claires et explications pour comprendre l'IA et ses applications."
+    },
+    "artsCulture": {
+      "title": "Arts & Culture - Créativité IA - Nukleo",
+      "description": "Explorez l'intersection entre l'art, la culture et l'IA. Découvrez comment l'IA transforme la créativité et l'expression artistique."
+    },
+    "privacy": {
+      "title": "Politique de Confidentialité - Nukleo",
+      "description": "Politique de confidentialité de Nukleo Digital. Apprenez comment nous protégeons et utilisons vos données personnelles."
+    },
+    "terms": {
+      "title": "Conditions d'Utilisation - Nukleo",
+      "description": "Conditions d'utilisation de Nukleo Digital. Conditions régissant l'utilisation de nos services et site web."
+    },
+    "cookies": {
+      "title": "Politique de Cookies - Nukleo",
+      "description": "Politique de cookies de Nukleo Digital. Apprenez quels cookies nous utilisons et comment les gérer."
+    }
   }
 }

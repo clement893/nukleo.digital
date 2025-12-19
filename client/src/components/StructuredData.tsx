@@ -29,14 +29,14 @@ export const organizationSchema = {
   '@type': 'Organization',
   name: 'Nukleo Digital',
   alternateName: 'Nukleo',
-  url: 'https://nukleodigital-production.up.railway.app',
+  url: 'https://nukleo.digital',
   logo: {
     '@type': 'ImageObject',
-    url: 'https://nukleodigital-production.up.railway.app/Nukleo_blanc_RVB.svg',
+    url: 'https://nukleo.digital/Nukleo_blanc_RVB.svg',
     width: 120,
     height: 32,
   },
-  image: 'https://nukleodigital-production.up.railway.app/Nukleo_blanc_RVB.svg',
+  image: 'https://nukleo.digital/Nukleo_blanc_RVB.svg',
   description: 'AI Transformation Agency helping organizations unlock the power of artificial intelligence through agentic AI systems, AI-native platforms, and intelligent operations.',
   foundingDate: '2020',
   foundingLocation: {
@@ -103,19 +103,19 @@ export const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: 'Nukleo Digital',
-  url: 'https://nukleodigital-production.up.railway.app',
+  url: 'https://nukleo.digital',
   description: 'AI transformation agency helping organizations unlock the power of artificial intelligence',
   publisher: {
     '@type': 'Organization',
     name: 'Nukleo Digital',
     logo: {
       '@type': 'ImageObject',
-      url: 'https://nukleodigital-production.up.railway.app/Nukleo_blanc_RVB.svg',
+      url: 'https://nukleo.digital/Nukleo_blanc_RVB.svg',
     },
   },
   potentialAction: {
     '@type': 'SearchAction',
-    target: 'https://nukleodigital-production.up.railway.app/glossary?q={search_term_string}',
+    target: 'https://nukleo.digital/glossary?q={search_term_string}',
     'query-input': 'required name=search_term_string',
   },
 };
@@ -147,10 +147,10 @@ export function createArticleSchema(article: {
       name: 'Nukleo Digital',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://nukleodigital-production.up.railway.app/Nukleo_blanc_RVB.svg',
+        url: 'https://nukleo.digital/Nukleo_blanc_RVB.svg',
       },
     },
-    image: article.image || 'https://nukleodigital-production.up.railway.app/og-image.jpg',
+    image: article.image || 'https://nukleo.digital/og-image.jpg',
     keywords: article.keywords?.join(', '),
   };
 }
@@ -238,7 +238,7 @@ export function createServiceSchema(service: {
       '@type': 'Organization',
       name: 'Nukleo Digital',
     },
-    url: service.url || 'https://nukleodigital-production.up.railway.app',
+    url: service.url || 'https://nukleo.digital',
   };
 }
 
@@ -287,9 +287,9 @@ export function createLocalBusinessSchema(location: {
   return {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    '@id': `https://nukleodigital-production.up.railway.app#${location.addressLocality.toLowerCase()}`,
+    '@id': `https://nukleo.digital#${location.addressLocality.toLowerCase()}`,
     name: location.name,
-    image: 'https://nukleodigital-production.up.railway.app/Nukleo_blanc_RVB.svg',
+    image: 'https://nukleo.digital/Nukleo_blanc_RVB.svg',
     address: {
       '@type': 'PostalAddress',
       streetAddress: location.streetAddress,
@@ -300,7 +300,7 @@ export function createLocalBusinessSchema(location: {
     },
     telephone: location.telephone,
     email: location.email || 'hello@nukleo.digital',
-    url: location.url || 'https://nukleodigital-production.up.railway.app',
+    url: location.url || 'https://nukleo.digital',
     priceRange: '$$',
     openingHoursSpecification: {
       '@type': 'OpeningHoursSpecification',
@@ -340,7 +340,7 @@ export function createPersonSchema(person: {
     worksFor: person.worksFor || {
       '@type': 'Organization',
       name: 'Nukleo Digital',
-      url: 'https://nukleodigital-production.up.railway.app',
+      url: 'https://nukleo.digital',
     },
   };
 }
@@ -354,7 +354,7 @@ export const montrealOfficeSchema = createLocalBusinessSchema({
   postalCode: 'H2R 0C2',
   addressCountry: 'CA',
   email: 'hello@nukleo.digital',
-  url: 'https://nukleodigital-production.up.railway.app',
+  url: 'https://nukleo.digital',
 });
 
 export const halifaxOfficeSchema = createLocalBusinessSchema({
@@ -365,5 +365,5 @@ export const halifaxOfficeSchema = createLocalBusinessSchema({
   postalCode: 'B3J 3N8',
   addressCountry: 'CA',
   email: 'hello@nukleo.digital',
-  url: 'https://nukleodigital-production.up.railway.app',
+  url: 'https://nukleo.digital',
 });

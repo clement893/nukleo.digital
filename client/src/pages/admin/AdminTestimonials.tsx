@@ -3,7 +3,6 @@ import { trpc } from "@/lib/trpc";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { RefreshCw, CheckCircle2, XCircle, Loader2, MessageSquare } from "lucide-react";
-import AdminRoute from "@/components/AdminRoute";
 import { AdminHeader } from "@/components/AdminHeader";
 
 export default function AdminTestimonials() {
@@ -46,7 +45,7 @@ export default function AdminTestimonials() {
   };
 
   return (
-    <AdminRoute>
+    <>
       <AdminHeader />
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-8">
         <div className="max-w-7xl mx-auto space-y-8">
@@ -187,6 +186,6 @@ export default function AdminTestimonials() {
           </Card>
         </div>
       </div>
-    </AdminRoute>
+    </>
   );
 }

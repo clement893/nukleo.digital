@@ -431,6 +431,23 @@
         "description": "We act as if every project belongs to us. Responsibility, autonomy, and commitment are at the heart of our culture. Creating and maintaining momentum means fully engaging, with intention and conviction."
       }
     },
+    "team": {
+      "clement": { "role": "Founder & CEO" },
+      "alexei": { "role": "Co-founder & CTO" },
+      "antoine": { "role": "Full-Stack Developer" },
+      "margaux": { "role": "UX/UI Designer" },
+      "camille": { "role": "Marketing Strategist" },
+      "timothe": { "role": "AI Developer" },
+      "sarah": { "role": "Project Manager" },
+      "severine": { "role": "Graphic Designer" },
+      "maxime": { "role": "Backend Developer" },
+      "meriem": { "role": "Data Analyst" },
+      "jeanFrancois": { "role": "Senior Developer" },
+      "hind": { "role": "Digital Strategist" },
+      "omar": { "role": "Solutions Architect" },
+      "ricardo": { "role": "AI Expert" },
+      "marieClaire": { "role": "Transformation Consultant" }
+    },
     "ourTeam": "OUR TEAM",
     "ourOffices": "OUR OFFICES",
     "montreal": "MONTRÉAL",
@@ -1119,36 +1136,72 @@
   },
   "seo": {
     "home": {
-      "title": "AI Transformation Agency | Agentic AI Solutions",
-      "description": "Transform your business with AI-powered solutions. We help startups, SMBs, enterprises, and governments unlock the power of artificial intelligence."
+      "title": "AI Transformation & Complete Digital Ecosystems - Nukleo",
+      "description": "Nukleo builds complete digital and AI ecosystems. AI transformation, autonomous agents, intelligent platforms. Montréal & Halifax."
     },
     "manifesto": {
-      "title": "Our Manifesto | Move From Pilot to Scale",
-      "description": "Discover the Nukleo manifesto: our vision for AI transformation that moves beyond pilots to production-ready, scalable solutions. Read our approach to AI success."
+      "title": "From Pilot to Scale - AI Transformation Manifesto - Nukleo",
+      "description": "The Nukleo manifesto: move from pilot to scale with complete AI transformation. Rearchitect your operations around autonomous AI agents."
     },
     "about": {
-      "title": "About Nukleo Digital | AI Transformation Experts",
-      "description": "Meet the Nukleo Digital team: 15+ AI experts transforming businesses across Canada. Based in Montréal & Halifax. Expertise in strategy, platforms, and intelligent operations."
+      "title": "Strategy. Creativity. Technology. - Our Team - Nukleo",
+      "description": "Discover the Nukleo team: AI transformation and digital experts based in Montréal and Halifax. We build complete digital ecosystems."
     },
     "expertise": {
-      "title": "Our AI Expertise | Agentic AI Systems, Platforms & Strategy",
-      "description": "Discover our AI expertise: Agentic AI systems, AI-native platforms, transformation strategy, creative studio & intelligent data. Proven 4-phase methodology for success."
+      "title": "Our AI Transformation & Digital Expertise - Nukleo",
+      "description": "Explore our expertise in AI transformation, digital strategy, autonomous agent development and enterprise AI solution implementation."
     },
     "clients": {
-      "title": "Our Clients | Trusted by Industry Leaders",
+      "title": "Our Clients | Trusted by Industry Leaders - Nukleo",
       "description": "Trusted by 12+ industry leaders: MBAM, Summit Law, Affilia, GoCoupons & more. See how we transformed operations across 8+ industries with AI."
     },
     "resources": {
-      "title": "Resources | AI Insights, Guides & Research",
-      "description": "Insights, guides, and research from the frontlines of AI transformation. Stay ahead with expert analysis, practical frameworks, and interactive tools."
+      "title": "Resources & Guides - AI & Digital Transformation - Nukleo",
+      "description": "Access our free resources: guides, articles and documentation on AI transformation, autonomous agents and digital strategies."
     },
     "services": {
-      "title": "AI Services | Strategy, Platforms & Intelligent Operations",
+      "title": "AI Services | Strategy, Platforms & Intelligent Operations - Nukleo",
       "description": "Comprehensive AI services: Strategy & Marketing, Digital Platforms, Intelligent Operations. 12 specialized solutions to accelerate your AI transformation."
     },
     "contact": {
-      "title": "Contact Nukleo Digital | Start Your AI Transformation",
-      "description": "Ready to transform with AI? Contact Nukleo Digital for expert consultation. Offices in Montréal & Halifax. Let's discuss your AI transformation project."
+      "title": "Contact Us - Free Quote & Consultation - Nukleo",
+      "description": "Contact Nukleo for a free consultation on your AI transformation. Offices in Montréal and Halifax. Fast response guaranteed."
+    },
+    "faq": {
+      "title": "FAQ - Frequently Asked Questions about AI Transformation - Nukleo",
+      "description": "Find answers to your questions about AI transformation, autonomous agents, costs and implementation. Complete Nukleo FAQ."
+    },
+    "projects": {
+      "title": "Our AI Transformation Projects - Use Cases & Solutions - Nukleo",
+      "description": "Discover our successful AI transformation projects. Autonomous agents, intelligent platforms, marketing automation and integrated AI solutions."
+    },
+    "assessment": {
+      "title": "Free AI Maturity Audit - Assessment - Nukleo",
+      "description": "Evaluate your AI maturity with our free audit. Complete diagnosis of your digital transformation and personalized recommendations."
+    },
+    "radar": {
+      "title": "AI Radar - Trends & Innovations - Nukleo",
+      "description": "AI Radar: follow the latest trends, innovations and emerging technologies in artificial intelligence and digital transformation."
+    },
+    "glossary": {
+      "title": "AI Glossary - Definitions & Terminology - Nukleo",
+      "description": "Complete glossary of AI and digital transformation terms. Clear definitions and explanations to understand AI and its applications."
+    },
+    "artsCulture": {
+      "title": "Arts & Culture - AI Creativity - Nukleo",
+      "description": "Explore the intersection between art, culture and AI. Discover how AI transforms creativity and artistic expression."
+    },
+    "privacy": {
+      "title": "Privacy Policy - Nukleo",
+      "description": "Nukleo Digital privacy policy. Learn how we protect and use your personal data."
+    },
+    "terms": {
+      "title": "Terms of Use - Nukleo",
+      "description": "Nukleo Digital terms of use. Conditions governing the use of our services and website."
+    },
+    "cookies": {
+      "title": "Cookie Policy - Nukleo",
+      "description": "Nukleo Digital cookie policy. Learn about the cookies we use and how to manage them."
     }
   },
   "lab": {

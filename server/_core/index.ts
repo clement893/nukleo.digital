@@ -823,20 +823,13 @@ async function startServer() {
   server.listen(port, async () => {
     logger.info(`Server running on http://localhost:${port}/`);
     
-    // Check database connection before attempting initialization
-    try {
-      const dbAvailable = await checkDatabaseConnection();
-      
-      if (!dbAvailable) {
-        logger.warn("⚠️ Database not available. Server running in degraded mode (static files only).");
-        logger.warn("⚠️ Database features will be unavailable until connection is restored.");
-        return; // Exit early if DB is not available
-      }
-    } catch (error) {
-      const errorMsg = error instanceof Error ? error.message : "Unknown error";
-      logger.error(`Failed to check database connection: ${errorMsg}`);
-      logger.warn("⚠️ Server running in degraded mode (static files only).");
-      return; // Exit early if connection check fails
+    // Database connection was already checked at startup (dbAvailable variable)
+    // If DB is not available, server runs in degraded mode but still serves static files
+    if (!dbAvailable) {
+      logger.warn("⚠️ Database not available. Server running in degraded mode (static files only).");
+      logger.warn("⚠️ Database features will be unavailable until connection is restored.");
+      logger.warn("⚠️ Sessions are stored in memory (will be lost on restart).");
+      return; // Exit early if DB is not available - static files will still be served
     }
     
     // Initialize database tables on startup

@@ -63,7 +63,7 @@ import NotFound404 from "@/pages/NotFound404";
 // Lazy load all other pages with retry logic for chunk loading errors
 const Projects = lazyWithRetry(() => import("./pages/Projects"));
 const Expertise = lazy(() => import("./pages/Expertise"));
-const Resources = lazy(() => import("./pages/Resources"));
+const Resources = lazyWithRetry(() => import("./pages/Resources"));
 const ResourceArticle = lazy(() => import("./pages/resources/ResourceArticle"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Leo = lazy(() => import("./pages/Leo"));

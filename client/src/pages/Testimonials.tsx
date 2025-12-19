@@ -1,14 +1,37 @@
 import SEO from '@/components/SEO';
 import PageLayout from '@/components/PageLayout';
+import StructuredData, { createReviewSchema } from '@/components/StructuredData';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { Link } from 'wouter';
 import { trpc } from '@/lib/trpc';
+import { useMemo } from 'react';
 
 export default function Testimonials() {
   const { t, language } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
   const { data: testimonials = [], isLoading } = trpc.testimonials.getAll.useQuery({ language });
+
+  // Create Review schema for testimonials
+  const reviewSchema = useMemo(() => {
+    if (!testimonials || testimonials.length === 0) return null;
+    
+    const reviews = testimonials.map((testimonial, index) => ({
+      author: testimonial.contact,
+      rating: 5, // Default rating for testimonials
+      text: testimonial.text,
+      date: new Date().toISOString(), // Use current date if not available
+    }));
+
+    return createReviewSchema({
+      itemReviewed: {
+        name: 'Nukleo Digital',
+        type: 'Organization',
+        url: 'https://nukleo.digital',
+      },
+      reviews,
+    });
+  }, [testimonials]);
 
   return (
     <>
@@ -17,6 +40,7 @@ export default function Testimonials() {
         description={t('testimonials.seoDescription')}
         keywords={t('testimonials.seoKeywords')}
       />
+      {reviewSchema && <StructuredData data={reviewSchema} />}
       
       <PageLayout>
         <div className="min-h-screen py-20">

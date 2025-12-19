@@ -48,14 +48,14 @@ function ArrowBackground({ variant = 'default' }: ArrowBackgroundProps) {
           <img
             key={i}
             src="/nukleo-arrow.svg"
-            alt=""
-            alt=""
+            alt="Flèche décorative Nukleo Digital"
             width={arrow.size}
             height={arrow.size}
             className="absolute"
             loading={isLCP ? "eager" : "lazy"}
             fetchPriority={isLCP ? "high" : "low"}
             decoding="async"
+            aria-hidden="true"
             style={{
               ...arrow,
               width: `${arrow.size}px`,

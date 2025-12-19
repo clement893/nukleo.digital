@@ -132,6 +132,36 @@
     color-scheme: dark;
   }
 
+  /* Screen reader only - for accessibility */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /* Improved contrast for accessibility */
+  .text-white\/90 {
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  .text-white\/80 {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .text-white\/70 {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .text-white\/60 {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
   /* Classe pour le fond gradient utilisé sur certaines pages */
   .bg-gradient-nukleo {
     background: linear-gradient(

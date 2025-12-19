@@ -242,11 +242,21 @@ export function createServiceSchema(service: {
   };
 }
 
-export function createReviewSchema(reviews: Array<{ author: string; rating: number; text: string; date?: string }>) {
+export function createReviewSchema(params: {
+  itemReviewed: {
+    name: string;
+    type: string;
+    url?: string;
+  };
+  reviews: Array<{ author: string; rating: number; text: string; date?: string }>;
+}) {
+  const { itemReviewed, reviews } = params;
+  
   return {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'Nukleo Digital',
+    '@type': itemReviewed.type === 'Organization' ? 'Organization' : 'Product',
+    name: itemReviewed.name,
+    url: itemReviewed.url || 'https://nukleo.digital',
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue: (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1),

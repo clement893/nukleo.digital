@@ -350,18 +350,25 @@ export default function Resources() {
                 </div>
               )}
 
-              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
+              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto" aria-label={t('resources.newsletter.title') || 'Newsletter subscription'}>
+                <label htmlFor="newsletter-email" className="sr-only">
+                  {t('resources.newsletter.placeholder')}
+                </label>
                 <input
+                  id="newsletter-email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  aria-required="true"
+                  aria-label={t('resources.newsletter.placeholder')}
                   placeholder={t('resources.newsletter.placeholder')}
                   className="flex-1 px-8 py-5 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:border-white/40 transition-colors text-lg"
                 />
                 <button 
                   type="submit"
                   disabled={subscribe.isPending}
+                  aria-label={subscribe.isPending ? t('resources.newsletter.subscribing') : t('resources.newsletter.subscribe')}
                   className="px-10 py-5 rounded-full bg-white text-purple-900 font-bold hover:bg-white/90 transition-all duration-300 hover:scale-[1.022] shadow-2xl text-lg disabled:opacity-50"
                 >
                   {subscribe.isPending ? t('resources.newsletter.subscribing') : t('resources.newsletter.subscribe')}

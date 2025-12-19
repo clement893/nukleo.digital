@@ -247,61 +247,73 @@ export default function Contact() {
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-white/90 text-sm mb-2 font-medium">
-                      {t('contact.firstName')}
-                    </label>
-                    <input
-                      type="text"
-                      name="firstName"
-                      value={formData.firstName}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/50 focus:outline-none focus:border-accent transition-colors"
-                      placeholder={t('contact.firstNamePlaceholder')}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-white/90 text-sm mb-2 font-medium">
-                      {t('contact.lastName')}
-                    </label>
-                    <input
-                      type="text"
-                      name="lastName"
-                      value={formData.lastName}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/50 focus:outline-none focus:border-accent transition-colors"
-                      placeholder={t('contact.lastNamePlaceholder')}
-                    />
-                  </div>
+                <div>
+                  <label htmlFor="firstName" className="block text-white/90 text-sm mb-2 font-medium">
+                    {t('contact.firstName')}
+                  </label>
+                  <input
+                    id="firstName"
+                    type="text"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    required
+                    aria-required="true"
+                    aria-label={t('contact.firstName')}
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/50 focus:outline-none focus:border-accent transition-colors"
+                    placeholder={t('contact.firstNamePlaceholder')}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="lastName" className="block text-white/90 text-sm mb-2 font-medium">
+                    {t('contact.lastName')}
+                  </label>
+                  <input
+                    id="lastName"
+                    type="text"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    required
+                    aria-required="true"
+                    aria-label={t('contact.lastName')}
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/50 focus:outline-none focus:border-accent transition-colors"
+                    placeholder={t('contact.lastNamePlaceholder')}
+                  />
+                </div>
                 </div>
 
                 <div>
-                  <label className="block text-white/90 text-sm mb-2 font-medium">
+                  <label htmlFor="email" className="block text-white/90 text-sm mb-2 font-medium">
                     {t('contact.email')}
                   </label>
                   <input
+                    id="email"
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
                     required
+                    aria-required="true"
+                    aria-label={t('contact.email')}
                     className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/50 focus:outline-none focus:border-accent transition-colors"
                     placeholder={t('contact.emailPlaceholder')}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-white/90 text-sm mb-2 font-medium">
+                  <label htmlFor="company" className="block text-white/90 text-sm mb-2 font-medium">
                     {t('contact.company')}
                   </label>
                   <input
+                    id="company"
                     type="text"
                     name="company"
                     value={formData.company}
                     onChange={handleChange}
                     required
+                    aria-required="true"
+                    aria-label={t('contact.company')}
                     className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/50 focus:outline-none focus:border-accent transition-colors"
                     placeholder={t('contact.companyPlaceholder')}
                   />

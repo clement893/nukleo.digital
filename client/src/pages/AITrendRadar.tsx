@@ -11,7 +11,10 @@ import { useLocation } from 'wouter';
 export default function AITrendRadar() {
   const { t } = useLanguage();
   const [, setLocation] = useLocation();
-  const { data: latestNews, isLoading: isLoadingNews } = trpc.radar.getLatestNews.useQuery({ limit: 10 });
+  const { data: latestNews, isLoading: isLoadingNews, error: newsError } = trpc.radar.getLatestNews.useQuery({ limit: 10 }, {
+    retry: 2,
+    retryDelay: 1000,
+  });
   const [email, setEmail] = useState('');
   const [isSubscribed, setIsSubscribed] = useState(false);
   const subscribeNewsletter = trpc.contact.subscribe.useMutation();
@@ -72,6 +75,17 @@ export default function AITrendRadar() {
           </div>
         )}
 
+        {newsError && (
+          <div className="mb-16 bg-red-500/20 border border-red-500/50 rounded-2xl p-6 text-center">
+            <p className="text-red-300 mb-2">
+              Erreur lors du chargement des nouvelles
+            </p>
+            <p className="text-red-200/70 text-sm">
+              Les nouvelles seront disponibles prochainement. Veuillez réessayer plus tard.
+            </p>
+          </div>
+        )}
+
         {latestNews && latestNews.length > 0 && (
           <div className="mb-16">
             <div className="flex items-center justify-between mb-8">
@@ -105,10 +119,10 @@ export default function AITrendRadar() {
                       {news.technology}
                     </span>
                     <span className="text-white/40 text-xs">
-                      {new Date(news.date).toLocaleDateString('fr-FR', { 
+                      {news.date ? new Date(news.date).toLocaleDateString('fr-FR', { 
                         day: 'numeric', 
                         month: 'short' 
-                      })}
+                      }) : 'Aujourd\'hui'}
                     </span>
                   </div>
                   
@@ -132,10 +146,13 @@ export default function AITrendRadar() {
           </div>
         )}
 
-        {latestNews && latestNews.length === 0 && !isLoadingNews && (
-          <div className="bg-yellow-500/20 border border-yellow-500/50 rounded-2xl p-6 text-center">
-            <p className="text-yellow-300">
-              Aucune nouvelle disponible pour le moment. Les nouvelles seront mises à jour quotidiennement.
+        {!isLoadingNews && !newsError && (!latestNews || latestNews.length === 0) && (
+          <div className="mb-16 bg-yellow-500/20 border border-yellow-500/50 rounded-2xl p-6 text-center">
+            <p className="text-yellow-300 mb-2">
+              Aucune nouvelle disponible pour le moment
+            </p>
+            <p className="text-yellow-200/70 text-sm">
+              Les nouvelles seront mises à jour quotidiennement. Revenez bientôt pour découvrir les dernières tendances IA.
             </p>
           </div>
         )}

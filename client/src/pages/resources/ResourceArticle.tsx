@@ -142,26 +142,18 @@ export default function ResourceArticle() {
             <div className="max-w-4xl mx-auto">
               <article className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 md:p-12 lg:p-16">
                 <div className="prose prose-invert prose-lg max-w-none">
+                  {/* Description */}
                   <p className="text-white/80 text-lg leading-relaxed mb-8">
                     {description}
                   </p>
                   
-                  <div className="text-white/70 leading-relaxed space-y-6">
-                    <p>
-                      {content}
-                    </p>
-                    
-                    {/* Article content */}
-                    {content && content !== description && (
-                      <div className="prose prose-invert max-w-none">
-                        {typeof content === 'string' ? (
-                          <div dangerouslySetInnerHTML={{ __html: content }} />
-                        ) : (
-                          <p>{content}</p>
-                        )}
-                      </div>
-                    )}
-                  </div>
+                  {/* Article content */}
+                  {content && content !== description && (
+                    <div 
+                      className="prose prose-invert prose-lg max-w-none prose-headings:text-white prose-p:text-white/70 prose-p:leading-relaxed prose-h2:text-2xl prose-h2:font-bold prose-h2:mt-8 prose-h2:mb-4 prose-h3:text-xl prose-h3:font-semibold prose-h3:mt-6 prose-h3:mb-3 prose-strong:text-white prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-ul:text-white/70 prose-ol:text-white/70 prose-li:text-white/70"
+                      dangerouslySetInnerHTML={{ __html: content }}
+                    />
+                  )}
                 </div>
               </article>
             </div>

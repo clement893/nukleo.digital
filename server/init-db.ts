@@ -274,10 +274,20 @@ export async function initDatabase(req: Request, res: Response) {
       ]
     });
   } catch (error) {
-    console.error("[Init DB] Error:", error);
+    // Don't log full error details to avoid rate limiting
+    const errorMsg = error instanceof Error ? error.message : "Unknown error";
+    const errorCode = error instanceof Error && 'code' in error ? (error as any).code : null;
+    
+    // Log concise error message
+    if (errorCode === 'ECONNREFUSED') {
+      console.error("[Init DB] Error: Database connection refused");
+    } else {
+      console.error(`[Init DB] Error: ${errorMsg}`);
+    }
+    
     res.status(500).json({ 
       error: "Failed to initialize database",
-      details: error instanceof Error ? error.message : "Unknown error"
+      details: errorCode === 'ECONNREFUSED' ? "Database connection refused" : errorMsg
     });
   }
 }

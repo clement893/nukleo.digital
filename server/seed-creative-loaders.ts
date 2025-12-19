@@ -1136,7 +1136,18 @@ export async function seedCreativeLoaders() {
     console.log(`✅ ${created} nouveaux loaders créatifs créés`);
     return { success: true, created };
   } catch (error) {
-    console.error("❌ Erreur lors de la création des loaders créatifs:", error);
+    // Don't log full error details to avoid rate limiting and excessive logs
+    const errorMsg = error instanceof Error ? error.message : "Unknown error";
+    const errorCode = error instanceof Error && 'code' in error ? (error as any).code : null;
+    
+    // Check if it's a database connection error
+    if (errorCode === 'ECONNREFUSED') {
+      console.error("❌ Erreur lors de la création des loaders créatifs: Database connection refused");
+      throw new Error("Database connection refused");
+    }
+    
+    // For other errors, log a concise message
+    console.error(`❌ Erreur lors de la création des loaders créatifs: ${errorMsg}`);
     throw error;
   }
 }

@@ -42,22 +42,36 @@ export async function getLoaderById(id: number): Promise<Loader | null> {
 
 export async function createLoader(data: InsertLoader): Promise<Loader> {
   const database = await getDb();
-  if (!database) throw new Error("Database not available");
+  if (!database) {
+    throw new Error("Database not available");
+  }
   
-  // Sanitize HTML content before storing
-  const sanitizedData = {
-    ...data,
-    cssCode: data.cssCode ? sanitizeLoaderHTML(data.cssCode) : data.cssCode,
-  };
-  
-  const result = await database
-    .insert(loaders)
-    .values({
-      ...sanitizedData,
-      updatedAt: new Date(),
-    })
-    .returning();
-  return result[0];
+  try {
+    // Sanitize HTML content before storing
+    const sanitizedData = {
+      ...data,
+      cssCode: data.cssCode ? sanitizeLoaderHTML(data.cssCode) : data.cssCode,
+    };
+
+    const result = await database
+      .insert(loaders)
+      .values({
+        ...sanitizedData,
+        updatedAt: new Date(),
+      })
+      .returning();
+    return result[0];
+  } catch (error) {
+    // Don't log full error details to avoid rate limiting
+    const errorMsg = error instanceof Error ? error.message : "Unknown error";
+    const errorCode = error instanceof Error && 'code' in error ? (error as any).code : null;
+    
+    if (errorCode === 'ECONNREFUSED') {
+      throw new Error("Database connection refused");
+    }
+    
+    throw new Error(`Failed to create loader: ${errorMsg}`);
+  }
 }
 
 export async function updateLoader(

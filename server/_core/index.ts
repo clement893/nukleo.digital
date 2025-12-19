@@ -23,6 +23,7 @@ import passport from "passport";
 import { configureGoogleAuth, requireAdminAuth } from "./googleAuth";
 import { getDb } from "../db";
 import postgres from "postgres";
+import { sql } from "drizzle-orm";
 import multer from "multer";
 import fs from "fs/promises";
 import { existsSync, mkdirSync } from "fs";
@@ -725,10 +726,19 @@ async function startServer() {
   server.listen(port, async () => {
     logger.info(`Server running on http://localhost:${port}/`);
     
+    // Check database connection before attempting initialization
+    const dbAvailable = await checkDatabaseConnection();
+    
+    if (!dbAvailable) {
+      logger.warn("⚠️ Database not available. Server running in degraded mode (static files only).");
+      logger.warn("⚠️ Database features will be unavailable until connection is restored.");
+      return; // Exit early if DB is not available
+    }
+    
     // Initialize database tables on startup
     if (process.env.DATABASE_URL) {
       try {
-        console.log("[Server] Initializing database tables...");
+        logger.info("[Server] Initializing database tables...");
         const mockReq = {
           body: {},
         } as any;
@@ -736,19 +746,22 @@ async function startServer() {
           status: (code: number) => ({
             json: (data: any) => {
               if (code === 200) {
-                console.log("[Server] ✅ Database tables initialized successfully");
+                logger.info("[Server] ✅ Database tables initialized successfully");
               } else {
-                console.error("[Server] ⚠️ Database initialization failed:", data);
+                const errorMsg = data?.error || data?.details || "Unknown error";
+                logger.error(`[Server] ⚠️ Database initialization failed: ${errorMsg}`);
               }
             },
           }),
           json: (data: any) => {
-            console.log("[Server] ✅ Database tables initialized successfully");
+            logger.info("[Server] ✅ Database tables initialized successfully");
           },
         } as any;
         await initDatabase(mockReq, mockRes);
       } catch (error) {
-        console.error("[Server] ⚠️ Failed to initialize database:", error);
+        const errorMsg = error instanceof Error ? error.message : "Unknown error";
+        logger.error(`[Server] ⚠️ Failed to initialize database: ${errorMsg}`);
+        return; // Exit early if initialization fails
       }
     }
     
@@ -836,7 +849,8 @@ async function startServer() {
           }
         }
       } catch (error) {
-        logger.error("Failed to initialize radar tables:", error);
+        const errorMsg = error instanceof Error ? error.message : "Unknown error";
+        logger.error(`Failed to initialize radar tables: ${errorMsg}`);
       }
       
       // Seed radar technologies
@@ -844,10 +858,12 @@ async function startServer() {
         const { seedRadarTechnologies } = await import("../routers/radar");
         await seedRadarTechnologies();
       } catch (error) {
-        logger.error("Failed to seed radar technologies:", error);
+        const errorMsg = error instanceof Error ? error.message : "Unknown error";
+        logger.error(`Failed to seed radar technologies: ${errorMsg}`);
       }
     } catch (error) {
-      logger.error("Failed to seed loaders:", error);
+      const errorMsg = error instanceof Error ? error.message : "Unknown error";
+      logger.error(`Failed to seed loaders: ${errorMsg}`);
     }
     
     // Setup daily radar refresh cron job
@@ -893,4 +909,34 @@ function setupRadarDailyRefresh() {
   logger.info(`Radar daily refresh scheduled for ${nextRefresh.toISOString()}`);
 }
 
-startServer().catch(console.error);
+// Helper function to check database connection
+async function checkDatabaseConnection(): Promise<boolean> {
+  if (!process.env.DATABASE_URL) {
+    return false;
+  }
+  
+  try {
+    const { getDb } = await import("../db");
+    const db = await getDb();
+    if (!db) {
+      return false;
+    }
+    
+    // Try a simple query to verify connection
+    await db.execute(sql`SELECT 1`);
+    return true;
+  } catch (error) {
+    // Don't log full error details to avoid rate limiting
+    const errorCode = error instanceof Error && 'code' in error ? (error as any).code : 'UNKNOWN';
+    if (errorCode === 'ECONNREFUSED') {
+      logger.warn("Database connection refused. Check DATABASE_URL and ensure database is running.");
+    }
+    return false;
+  }
+}
+
+startServer().catch((error) => {
+  const errorMsg = error instanceof Error ? error.message : "Unknown error";
+  logger.error(`Failed to start server: ${errorMsg}`);
+  process.exit(1);
+});

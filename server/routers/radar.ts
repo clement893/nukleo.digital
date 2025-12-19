@@ -263,7 +263,7 @@ async function generateNewsForTechnology(
   source: string;
   url?: string;
 }> {
-  const prompt = `Tu es un expert en intelligence artificielle et tendances technologiques pour le marché canadien francophone.
+  const prompt = `Tu es un expert en intelligence artificielle et tendances technologiques mondiales.
 
 Génère une nouvelle brève et pertinente (style article de blog/news) sur la technologie suivante :
 
@@ -276,17 +276,21 @@ Contexte actuel:
 - Impact: ${latestPosition.impactScore}/100
 ` : ''}
 
-Génère une nouvelle récente et pertinente (comme si c'était une actualité récente) avec:
-1. Un titre accrocheur (max 80 caractères)
-2. Un résumé de 2-3 phrases (max 200 caractères)
+Génère une nouvelle RÉELLE et RÉCENTE (comme si c'était une actualité récente mondiale) avec:
+1. Un titre accrocheur basé sur un développement réel récent (max 80 caractères)
+2. Un résumé de 2-3 phrases décrivant l'actualité réelle (max 200 caractères)
 3. Un ton professionnel mais accessible
-4. Focus sur les développements récents, cas d'usage concrets, ou implications business
+4. Focus sur les développements RÉCENTS MONDIAUX, cas d'usage concrets, ou implications business
+5. Une URL vers un article réel ou une source crédible (TechCrunch, The Verge, MIT Technology Review, etc.)
+
+IMPORTANT: La nouvelle doit être basée sur des développements RÉELS et RÉCENTS dans le monde entier, pas seulement au Canada.
 
 Réponds en JSON avec cette structure exacte:
 {
-  "title": "titre accrocheur",
-  "summary": "résumé de 2-3 phrases",
-  "source": "Nukleo Digital AI Radar"
+  "title": "titre accrocheur basé sur actualité réelle",
+  "summary": "résumé de 2-3 phrases décrivant l'actualité réelle mondiale",
+  "source": "nom de la source réelle (ex: TechCrunch, The Verge, MIT Technology Review)",
+  "url": "https://exemple.com/article-reel"
 }`;
 
   try {
@@ -314,6 +318,22 @@ Réponds en JSON avec cette structure exacte:
 
     const parsed = JSON.parse(content);
     
+    // Validate and sanitize URL if provided
+    let url = parsed.url;
+    if (url && typeof url === 'string') {
+      // Ensure URL is valid and starts with http/https
+      try {
+        const urlObj = new URL(url);
+        if (!['http:', 'https:'].includes(urlObj.protocol)) {
+          url = undefined; // Invalid protocol, remove URL
+        }
+      } catch {
+        url = undefined; // Invalid URL format, remove URL
+      }
+    } else {
+      url = undefined;
+    }
+    
     return {
       id: `news-${technology.slug}-${Date.now()}`,
       title: parsed.title,
@@ -322,17 +342,19 @@ Réponds en JSON avec cette structure exacte:
       technologySlug: technology.slug,
       date: new Date(),
       source: parsed.source || "Nukleo Digital AI Radar",
+      url: url, // URL vers l'article réel si disponible
     };
   } catch (error) {
     // Fallback news if AI generation fails
     return {
       id: `news-${technology.slug}-${Date.now()}`,
-      title: `${technology.name}: Tendances et développements récents`,
-      summary: `Découvrez les dernières évolutions et cas d'usage de ${technology.name} dans le contexte canadien.`,
+      title: `${technology.name}: Tendances et développements récents mondiaux`,
+      summary: `Découvrez les dernières évolutions et cas d'usage de ${technology.name} à travers le monde.`,
       technology: technology.name,
       technologySlug: technology.slug,
       date: new Date(),
       source: "Nukleo Digital AI Radar",
+      url: undefined, // Pas d'URL pour les fallbacks
     };
   }
 }

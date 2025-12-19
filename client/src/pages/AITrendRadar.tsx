@@ -104,44 +104,66 @@ export default function AITrendRadar() {
             </div>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {latestNews.map((news) => (
-                <div
-                  key={news.id}
-                  onClick={() => {
-                    // Navigate to radar page - could be enhanced to scroll to specific technology
+              {latestNews.map((news) => {
+                // Determine if news has a clickable URL or should navigate to radar
+                const hasUrl = news.url && news.url.startsWith('http');
+                const handleClick = () => {
+                  if (hasUrl) {
+                    // Open external URL in new tab
+                    window.open(news.url, '_blank', 'noopener,noreferrer');
+                  } else {
+                    // Navigate to radar page
                     const currentLang = window.location.pathname.startsWith('/fr') ? '/fr' : '';
                     setLocation(`${currentLang}/radar`);
-                  }}
-                  className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-purple-500/30 transition-all duration-300 group cursor-pointer h-full flex flex-col"
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <span className="px-3 py-1 bg-purple-500/20 border border-purple-500/50 rounded-full text-purple-300 text-xs font-semibold">
-                      {news.technology}
-                    </span>
-                    <span className="text-white/40 text-xs">
-                      {news.date ? new Date(news.date).toLocaleDateString('fr-FR', { 
-                        day: 'numeric', 
-                        month: 'short' 
-                      }) : 'Aujourd\'hui'}
-                    </span>
+                  }
+                };
+
+                return (
+                  <div
+                    key={news.id}
+                    onClick={handleClick}
+                    className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-purple-500/30 transition-all duration-300 group cursor-pointer h-full flex flex-col"
+                  >
+                    <div className="flex items-start justify-between mb-4">
+                      <span className="px-3 py-1 bg-purple-500/20 border border-purple-500/50 rounded-full text-purple-300 text-xs font-semibold">
+                        {news.technology}
+                      </span>
+                      <span className="text-white/40 text-xs">
+                        {news.date ? new Date(news.date).toLocaleDateString('fr-FR', { 
+                          day: 'numeric', 
+                          month: 'short' 
+                        }) : 'Aujourd\'hui'}
+                      </span>
+                    </div>
+                    
+                    <h3 className="text-white font-bold text-lg mb-3 group-hover:text-purple-300 transition-colors line-clamp-2 flex-grow">
+                      {news.title}
+                    </h3>
+                    
+                    <p className="text-white/70 text-sm leading-relaxed line-clamp-3 mb-4">
+                      {news.summary}
+                    </p>
+                    
+                    {news.source && (
+                      <p className="text-white/50 text-xs mb-2">
+                        Source: {news.source}
+                      </p>
+                    )}
+                    
+                    <div className="mt-auto flex items-center gap-2 text-purple-300 text-xs font-semibold">
+                      <span>{hasUrl ? 'Lire l\'article' : 'Voir sur le radar'}</span>
+                      <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                      {hasUrl && (
+                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      )}
+                    </div>
                   </div>
-                  
-                  <h3 className="text-white font-bold text-lg mb-3 group-hover:text-purple-300 transition-colors line-clamp-2 flex-grow">
-                    {news.title}
-                  </h3>
-                  
-                  <p className="text-white/70 text-sm leading-relaxed line-clamp-3 mb-4">
-                    {news.summary}
-                  </p>
-                  
-                  <div className="mt-auto flex items-center gap-2 text-purple-300 text-xs font-semibold">
-                    <span>Lire la suite</span>
-                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         )}

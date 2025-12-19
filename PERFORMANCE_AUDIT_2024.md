@@ -417,7 +417,7 @@ export default {
     requestIdleCallback(() => {
       const script = document.createElement('script');
       script.async = true;
-      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-C2X5JWEL5S';
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-PMCLW23ZCS';
       document.head.appendChild(script);
     });
   });

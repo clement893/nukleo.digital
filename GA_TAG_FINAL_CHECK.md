@@ -7,12 +7,12 @@
 ### Tag dans `client/index.html` (lignes 17-26)
 ```html
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-C2X5JWEL5S"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PMCLW23ZCS"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-C2X5JWEL5S');
+  gtag('config', 'G-PMCLW23ZCS');
 </script>
 ```
 
@@ -42,7 +42,7 @@ connectSrc: [
 **Étapes:**
 1. Ouvrir https://nukleo.com dans le navigateur
 2. Clic droit > "Afficher le code source" (ou Ctrl+U)
-3. Rechercher `G-C2X5JWEL5S` (Ctrl+F)
+3. Rechercher `G-PMCLW23ZCS` (Ctrl+F)
 4. **Le tag DOIT être présent dans le `<head>`**
 
 **Si le tag n'est PAS présent:**
@@ -87,7 +87,7 @@ if (window.gtag) {
 2. Recharger la page (F5)
 3. Filtrer par "gtag" ou "googletagmanager"
 4. Vérifier que ces requêtes sont présentes :
-   - `gtag/js?id=G-C2X5JWEL5S` → Statut 200
+   - `gtag/js?id=G-PMCLW23ZCS` → Statut 200
    - `google-analytics.com/g/collect` → Statut 200 (peut prendre quelques secondes)
 
 **Si les requêtes ne sont pas présentes:**
@@ -159,11 +159,11 @@ if (window.gtag) {
 
 ## ✅ Checklist de Vérification
 
-- [ ] Tag présent dans le code source HTML (`G-C2X5JWEL5S`)
+- [ ] Tag présent dans le code source HTML (`G-PMCLW23ZCS`)
 - [ ] Tag dans la section `<head>`
 - [ ] `window.dataLayer` existe (console)
 - [ ] `window.gtag` existe et est une fonction (console)
-- [ ] Requête `gtag/js?id=G-C2X5JWEL5S` chargée (Network tab)
+- [ ] Requête `gtag/js?id=G-PMCLW23ZCS` chargée (Network tab)
 - [ ] Requête `google-analytics.com/g/collect` envoyée (Network tab)
 - [ ] Aucune erreur CSP dans la console
 - [ ] Google Tag Assistant détecte le tag (après 10-30 secondes)
@@ -190,7 +190,7 @@ if (window.gtag) {
 console.log('=== Test Google Analytics ===');
 console.log('1. dataLayer:', window.dataLayer ? '✅' : '❌');
 console.log('2. gtag:', typeof window.gtag === 'function' ? '✅' : '❌');
-console.log('3. GA ID présent:', document.documentElement.innerHTML.includes('G-C2X5JWEL5S') ? '✅' : '❌');
+console.log('3. GA ID présent:', document.documentElement.innerHTML.includes('G-PMCLW23ZCS') ? '✅' : '❌');
 
 // Test d'envoi d'événement
 if (window.gtag) {

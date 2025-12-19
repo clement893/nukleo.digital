@@ -91,7 +91,7 @@ Le site Nukleo Digital présente une excellente base SEO avec des optimisations 
 ### 10. **Google Analytics** (20/20)
 - ✅ Google Tag (gtag.js) intégré dans index.html
 - ✅ Tag placé en haut du head pour meilleure détection
-- ✅ ID correct: G-C2X5JWEL5S
+- ✅ ID correct: G-PMCLW23ZCS
 - ✅ Tracking des pages configuré
 - ✅ dataLayer initialisé correctement
 

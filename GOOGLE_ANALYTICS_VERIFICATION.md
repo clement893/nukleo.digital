@@ -18,12 +18,12 @@ Le tag est configuré dans `client/index.html` :
 <link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
 
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-C2X5JWEL5S"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PMCLW23ZCS"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-C2X5JWEL5S', {
+  gtag('config', 'G-PMCLW23ZCS', {
     'send_page_view': true
   });
 </script>
@@ -42,7 +42,7 @@ Le CSP permet bien le chargement :
 **Dans le navigateur :**
 1. Ouvrir le site en production
 2. Clic droit > "Afficher le code source"
-3. Rechercher `G-C2X5JWEL5S`
+3. Rechercher `G-PMCLW23ZCS`
 4. Vérifier que le tag est présent dans le `<head>`
 
 **Si le tag n'est pas présent :**
@@ -66,7 +66,7 @@ Le CSP permet bien le chargement :
 
 **Ouvrir DevTools > Network :**
 1. Filtrer par "gtag" ou "googletagmanager"
-2. Vérifier que la requête vers `gtag/js?id=G-C2X5JWEL5S` est présente
+2. Vérifier que la requête vers `gtag/js?id=G-PMCLW23ZCS` est présente
 3. Vérifier le statut (doit être 200)
 4. Vérifier le temps de chargement
 
@@ -104,7 +104,7 @@ Le CSP permet bien le chargement :
 ```bash
 pnpm run build
 # Vérifier que dist/index.html contient le tag
-cat dist/index.html | grep "G-C2X5JWEL5S"
+cat dist/index.html | grep "G-PMCLW23ZCS"
 ```
 
 **Si le tag n'est pas dans le build :**
@@ -137,7 +137,7 @@ cat dist/index.html | grep "G-C2X5JWEL5S"
 
 **Si nécessaire, essayer sans `async`:**
 ```html
-<script src="https://www.googletagmanager.com/gtag/js?id=G-C2X5JWEL5S"></script>
+<script src="https://www.googletagmanager.com/gtag/js?id=G-PMCLW23ZCS"></script>
 ```
 ⚠️ Cela peut bloquer le rendu de la page
 
@@ -156,25 +156,25 @@ cat dist/index.html | grep "G-C2X5JWEL5S"
 
 **Format actuel (correct):**
 ```html
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-C2X5JWEL5S"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PMCLW23ZCS"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-C2X5JWEL5S');
+  gtag('config', 'G-PMCLW23ZCS');
 </script>
 ```
 
 **Format alternatif (si nécessaire):**
 ```html
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-C2X5JWEL5S"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PMCLW23ZCS"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   window.gtag = gtag;
   gtag('js', new Date());
-  gtag('config', 'G-C2X5JWEL5S');
+  gtag('config', 'G-PMCLW23ZCS');
 </script>
 ```
 
@@ -203,7 +203,7 @@ if (window.gtag) {
 ## Checklist de Vérification
 
 - [ ] Le tag est présent dans le code source HTML
-- [ ] Le script `gtag/js?id=G-C2X5JWEL5S` est chargé (Network tab)
+- [ ] Le script `gtag/js?id=G-PMCLW23ZCS` est chargé (Network tab)
 - [ ] Aucune erreur CSP dans la console
 - [ ] `window.dataLayer` existe
 - [ ] `window.gtag` existe

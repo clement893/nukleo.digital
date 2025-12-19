@@ -8,7 +8,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const GA_MEASUREMENT_ID = 'G-C2X5JWEL5S';
+const GA_MEASUREMENT_ID = 'G-PMCLW23ZCS';
 const distIndexPath = path.join(__dirname, '../dist/index.html');
 
 console.log('🔍 Verifying Google Analytics tag in built HTML...\n');

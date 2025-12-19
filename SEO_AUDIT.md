@@ -333,7 +333,7 @@ Sitemap: https://nukleo.digital/sitemap.xml
 ### État Actuel: **CONFIGURÉ**
 
 **Points positifs:**
-- ✅ Google Analytics 4 configuré (ID: G-C2X5JWEL5S)
+- ✅ Google Analytics 4 configuré (ID: G-PMCLW23ZCS)
 - ✅ Composant dédié (`GoogleAnalytics.tsx`)
 - ✅ Tracking des pages activé
 - ✅ Fonction `trackEvent` disponible pour les événements personnalisés

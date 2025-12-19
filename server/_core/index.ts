@@ -94,6 +94,9 @@ async function startServer() {
   // Initialize Sentry for error monitoring
   initSentry();
   
+  // Check database connection early to determine session store
+  const dbAvailable = await checkDatabaseConnection();
+  
   const app = express();
   const server = createServer(app);
   
@@ -182,13 +185,35 @@ async function startServer() {
   // Configure cookie parser for admin authentication
   app.use(cookieParser());
   
-  // Configure session for Passport with PostgreSQL store
-  const PgSession = connectPgSimple(session);
+  // Configure session for Passport
+  // Use PostgreSQL store if DB is available, otherwise use MemoryStore
+  let sessionStore: session.Store;
+  
+  if (dbAvailable && process.env.DATABASE_URL) {
+    try {
+      // Use PostgreSQL store only if DB is available
+      const PgSession = connectPgSimple(session);
+      sessionStore = new PgSession({
+        conString: process.env.DATABASE_URL,
+        createTableIfMissing: true,
+        tableName: 'session',
+      });
+      logger.info("Using PostgreSQL session store");
+    } catch (error) {
+      // If PostgreSQL store fails, use MemoryStore
+      logger.warn("PostgreSQL session store unavailable, using MemoryStore");
+      const MemoryStore = session.MemoryStore;
+      sessionStore = new MemoryStore();
+    }
+  } else {
+    // DB not available, use MemoryStore
+    logger.warn("Database not available, using MemoryStore for sessions (sessions will be lost on restart)");
+    const MemoryStore = session.MemoryStore;
+    sessionStore = new MemoryStore();
+  }
+  
   app.use(session({
-    store: new PgSession({
-      conString: process.env.DATABASE_URL,
-      createTableIfMissing: true,
-    }),
+    store: sessionStore,
     secret: process.env.JWT_SECRET || 'nukleo-admin-secret',
     resave: false,
     saveUninitialized: false,

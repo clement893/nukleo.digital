@@ -58,8 +58,12 @@ function Header() {
     };
 
     // Use passive listener for better scroll performance
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    // Store handler reference for proper cleanup
+    const scrollOptions = { passive: true } as AddEventListenerOptions;
+    window.addEventListener('scroll', handleScroll, scrollOptions);
+    return () => {
+      window.removeEventListener('scroll', handleScroll, scrollOptions);
+    };
   }, []);
 
   return (

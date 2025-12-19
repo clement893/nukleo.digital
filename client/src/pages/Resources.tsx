@@ -1,6 +1,6 @@
-import { Filter } from 'lucide-react';
+import { Filter, AlertCircle } from 'lucide-react';
 import PageLayout from '@/components/PageLayout';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import SEO from '@/components/SEO';
 import StructuredData from '@/components/StructuredData';
 import Breadcrumb from '@/components/Breadcrumb';
@@ -10,6 +10,8 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'wouter';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import enTranslations from '../locales/en.json';
+import frTranslations from '../locales/fr.json';
 
 export default function Resources() {
   const { t, language } = useLanguage();
@@ -17,14 +19,22 @@ export default function Resources() {
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const subscribe = trpc.contact.subscribe.useMutation();
+  
+  // Get preloaded translations based on language
+  const translations = useMemo(() => {
+    return language === 'fr' ? frTranslations : enTranslations;
+  }, [language]);
 
-  // Helper to get array from translations
+  // Helper to get array from translations using preloaded translations
   const getArrayTranslation = (key: string): string[] => {
     try {
-      const translations = require(`../locales/${language || 'en'}.json`);
       const keys = key.split('.');
-      let value: any = translations.default || translations;
+      let value: any = translations;
+      
+      // Navigate through nested keys
       for (const k of keys) {
         if (value && typeof value === 'object' && k in value) {
           value = value[k];
@@ -32,6 +42,7 @@ export default function Resources() {
           return [];
         }
       }
+      
       return Array.isArray(value) ? value : [];
     } catch {
       return [];
@@ -40,6 +51,8 @@ export default function Resources() {
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage(null);
+    setIsSubmitting(true);
     
     try {
       await subscribe.mutateAsync({ email });
@@ -48,7 +61,13 @@ export default function Resources() {
       
       setTimeout(() => setIsSubmitted(false), 5000);
     } catch (error) {
-      console.error('Failed to subscribe:', error);
+      if (import.meta.env.DEV) {
+        console.error('Failed to subscribe:', error);
+      }
+      setErrorMessage(t('resources.newsletter.error') || 'Failed to subscribe. Please try again.');
+      setTimeout(() => setErrorMessage(null), 5000);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -342,10 +361,11 @@ export default function Resources() {
                 </div>
               )}
 
-              {subscribe.error && (
-                <div className="mb-8 p-4 bg-red-500/20 border border-red-500/50 rounded-2xl backdrop-blur-sm">
-                  <p className="text-red-300 font-medium text-center">
-                    {t('resources.newsletter.error')}
+              {errorMessage && (
+                <div className="mb-8 flex items-center gap-3 p-4 bg-red-500/10 border border-red-500/20 rounded-2xl backdrop-blur-sm">
+                  <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0" />
+                  <p className="text-red-300 font-medium text-center flex-1">
+                    {errorMessage}
                   </p>
                 </div>
               )}
@@ -367,11 +387,11 @@ export default function Resources() {
                 />
                 <button 
                   type="submit"
-                  disabled={subscribe.isPending}
-                  aria-label={subscribe.isPending ? t('resources.newsletter.subscribing') : t('resources.newsletter.subscribe')}
+                  disabled={isSubmitting || subscribe.isPending}
+                  aria-label={isSubmitting || subscribe.isPending ? t('resources.newsletter.subscribing') : t('resources.newsletter.subscribe')}
                   className="px-10 py-5 rounded-full bg-white text-purple-900 font-bold hover:bg-white/90 transition-all duration-300 hover:scale-[1.022] shadow-2xl text-lg disabled:opacity-50"
                 >
-                  {subscribe.isPending ? t('resources.newsletter.subscribing') : t('resources.newsletter.subscribe')}
+                  {isSubmitting || subscribe.isPending ? (t('resources.newsletter.subscribing') || 'Subscribing...') : t('resources.newsletter.subscribe')}
                 </button>
               </form>
             </div>

@@ -25,7 +25,9 @@ export default function GoogleAnalytics() {
       return;
     }
 
-    console.log('[GA4] Ready (loaded from index.html)');
+    if (import.meta.env.DEV) {
+      console.log('[GA4] Ready (loaded from index.html)');
+    }
   }, []);
 
   // Track page views on route change
@@ -38,7 +40,9 @@ export default function GoogleAnalytics() {
         page_path: location,
         page_title: document.title,
       });
-      console.log('[GA4] Page view:', location);
+      if (import.meta.env.DEV) {
+        console.log('[GA4] Page view:', location);
+      }
     }
   }, [location]);
 
@@ -55,7 +59,9 @@ export function trackEvent(eventName: string, eventParams?: Record<string, any>)
   const gtag = (window as any).gtag;
   if (gtag) {
     gtag('event', eventName, eventParams);
-    console.log('[GA4] Event:', eventName, eventParams);
+    if (import.meta.env.DEV) {
+      console.log('[GA4] Event:', eventName, eventParams);
+    }
   }
 }
 

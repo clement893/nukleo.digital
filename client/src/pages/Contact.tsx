@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, MapPin, Phone } from 'lucide-react';
+import { Mail, MapPin, Phone, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import PageLayout from '@/components/PageLayout';
 import SafeHTML from '@/components/SafeHTML';
@@ -10,6 +10,7 @@ import StructuredData, { montrealOfficeSchema, halifaxOfficeSchema } from '@/com
 import Breadcrumb from '@/components/Breadcrumb';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { extractValidationErrors, getErrorMessage } from '@/lib/trpcErrorHandler';
 
 export default function Contact() {
   const { t } = useLanguage();
@@ -24,12 +25,16 @@ export default function Contact() {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const sendMessage = trpc.contact.send.useMutation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setValidationErrors({});
+    setErrorMessage(null);
+    setIsSubmitting(true);
     
     try {
       await sendMessage.mutateAsync(formData);
@@ -44,70 +49,25 @@ export default function Contact() {
       
       // Reset success message after 5 seconds
       setTimeout(() => setIsSubmitted(false), 5000);
-    } catch (error: any) {
-      console.error('Failed to send message:', error);
-      
-      // Extract validation errors from tRPC error
-      // tRPC formats Zod errors differently - check multiple formats
-      const formattedErrors: Record<string, string> = {};
-      
-      // Format 1: error.data is directly an array of Zod errors (most common with tRPC)
-      if (Array.isArray(error?.data)) {
-        error.data.forEach((err: any) => {
-          if (err.path && Array.isArray(err.path) && err.path.length > 0) {
-            const field = err.path[err.path.length - 1];
-            formattedErrors[field] = err.message || 'Invalid value';
-          }
-        });
-      }
-      // Format 2: error.data.zodError.fieldErrors
-      else if (error?.data?.zodError?.fieldErrors) {
-        const fieldErrors = error.data.zodError.fieldErrors;
-        Object.keys(fieldErrors).forEach((key) => {
-          if (fieldErrors[key] && fieldErrors[key].length > 0) {
-            formattedErrors[key] = fieldErrors[key][0];
-          }
-        });
-      }
-      // Format 3: error.data.zodError.issues (array)
-      else if (error?.data?.zodError?.issues && Array.isArray(error.data.zodError.issues)) {
-        error.data.zodError.issues.forEach((err: any) => {
-          if (err.path && Array.isArray(err.path) && err.path.length > 0) {
-            const field = err.path[err.path.length - 1];
-            formattedErrors[field] = err.message || 'Invalid value';
-          }
-        });
-      }
-      // Format 4: error.data.zodError is directly an array
-      else if (Array.isArray(error?.data?.zodError)) {
-        error.data.zodError.forEach((err: any) => {
-          if (err.path && Array.isArray(err.path) && err.path.length > 0) {
-            const field = err.path[err.path.length - 1];
-            formattedErrors[field] = err.message || 'Invalid value';
-          }
-        });
+    } catch (error) {
+      if (import.meta.env.DEV) {
+        console.error('Failed to send message:', error);
       }
       
-      // Check error message format (tRPC sometimes puts errors in error.message)
-      if (error?.message && typeof error.message === 'string' && error.message.includes('zodError')) {
-        try {
-          const parsed = JSON.parse(error.message);
-          if (Array.isArray(parsed)) {
-            parsed.forEach((err: any) => {
-              if (err.path && Array.isArray(err.path) && err.path.length > 0) {
-                const field = err.path[err.path.length - 1];
-                formattedErrors[field] = err.message || 'Invalid value';
-              }
-            });
-          }
-        } catch (e) {
-          // Not JSON, ignore
-        }
-      }
+      // Extract validation errors using utility function
+      const formattedErrors = extractValidationErrors(error);
       
       if (Object.keys(formattedErrors).length > 0) {
         setValidationErrors(formattedErrors);
+      } else {
+        // If no validation errors, show a general error message
+        const message = getErrorMessage(error, t('contact.error.generic') || 'Failed to send message. Please try again.');
+        setErrorMessage(message);
+        // Clear error message after 5 seconds
+        setTimeout(() => setErrorMessage(null), 5000);
       }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -246,6 +206,14 @@ export default function Contact() {
               )}
 
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Error message display */}
+                {errorMessage && (
+                  <div className="flex items-center gap-3 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400">
+                    <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                    <p className="text-sm">{errorMessage}</p>
+                  </div>
+                )}
+                
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="firstName" className="block text-white/90 text-sm mb-2 font-medium">
@@ -347,10 +315,10 @@ export default function Contact() {
 
                 <Button
                   type="submit"
-                  disabled={sendMessage.isPending}
+                  disabled={isSubmitting || sendMessage.isPending}
                   className="w-full py-6 text-base"
                 >
-                  {sendMessage.isPending ? t('common.loading') : t('contact.send')}
+                  {isSubmitting || sendMessage.isPending ? (t('common.loading') || 'Sending...') : t('contact.send')}
                 </Button>
               </form>
             </div>

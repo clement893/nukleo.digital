@@ -112,7 +112,9 @@ if (typeof window !== 'undefined') {
        event.message?.includes('Loading CSS chunk'));
     
     if (isChunkError) {
-      console.warn('[Global Error Handler] Chunk loading failed, reloading page...', error || event.message);
+      if (import.meta.env.DEV) {
+        console.warn('[Global Error Handler] Chunk loading failed, reloading page...', error || event.message);
+      }
       event.preventDefault(); // Prevent default error handling
       
       // Reload the page to get the latest HTML/chunks
@@ -156,7 +158,9 @@ if (typeof window !== 'undefined') {
     };
     link.onerror = () => {
       // Silently fail if fonts-lazy.css doesn't exist
-      console.warn('fonts-lazy.css failed to load');
+      if (import.meta.env.DEV) {
+        console.warn('fonts-lazy.css failed to load');
+      }
     };
     document.head.appendChild(link);
   };

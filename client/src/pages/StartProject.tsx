@@ -15,8 +15,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2, AlertCircle } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { getErrorMessage } from '@/lib/trpcErrorHandler';
 
 export default function StartProject() {
   const { t } = useLanguage();
@@ -29,11 +30,15 @@ export default function StartProject() {
     description: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const submitProject = trpc.startProject.submit.useMutation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage(null);
+    setIsSubmitting(true);
     
     try {
       await submitProject.mutateAsync(formData);
@@ -52,7 +57,14 @@ export default function StartProject() {
         });
       }, 3000);
     } catch (error) {
-      console.error('Failed to submit project:', error);
+      if (import.meta.env.DEV) {
+        console.error('Failed to submit project:', error);
+      }
+      const message = getErrorMessage(error, t('startProject.form.error') || 'Failed to submit project. Please try again.');
+      setErrorMessage(message);
+      setTimeout(() => setErrorMessage(null), 5000);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -105,6 +117,14 @@ export default function StartProject() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Error message display */}
+                {errorMessage && (
+                  <div className="flex items-center gap-3 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400">
+                    <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                    <p className="text-sm">{errorMessage}</p>
+                  </div>
+                )}
+                
                 {/* Name */}
                 <div className="space-y-2">
                   <Label htmlFor="name" className="text-white text-sm font-medium">
@@ -222,11 +242,11 @@ export default function StartProject() {
                 {/* Submit Button */}
                 <Button
                   type="submit"
-                  disabled={submitProject.isPending}
+                  disabled={isSubmitting || submitProject.isPending}
                   className="w-full bg-gradient-to-r from-violet-600 to-rose-600 hover:from-violet-700 hover:to-rose-700 text-white font-bold py-4 text-base rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group disabled:opacity-50"
                 >
-                  {submitProject.isPending ? (
-                    t('startProject.form.sending')
+                  {isSubmitting || submitProject.isPending ? (
+                    t('startProject.form.sending') || 'Sending...'
                   ) : (
                     <>
                       {t('startProject.form.submit')}

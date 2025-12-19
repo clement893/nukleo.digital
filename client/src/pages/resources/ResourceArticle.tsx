@@ -152,22 +152,99 @@ export default function ResourceArticle() {
                   
                   {/* Article content */}
                   {content && content !== description && (
-                    <SafeHTML 
-                      html={content}
-                      className="prose prose-invert prose-base max-w-none 
-                        prose-headings:text-white prose-headings:font-bold
-                        prose-h2:text-2xl prose-h2:font-bold prose-h2:mt-12 prose-h2:mb-6 prose-h2:leading-tight
-                        prose-h3:text-xl prose-h3:font-semibold prose-h3:mt-10 prose-h3:mb-4 prose-h3:leading-tight
-                        prose-h4:text-lg prose-h4:font-semibold prose-h4:mt-8 prose-h4:mb-3
-                        prose-p:text-white/80 prose-p:leading-relaxed prose-p:text-base prose-p:mb-6
-                        prose-strong:text-white prose-strong:font-semibold
-                        prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-a:font-medium
-                        prose-ul:text-white/80 prose-ul:my-6 prose-ul:space-y-3
-                        prose-ol:text-white/80 prose-ol:my-6 prose-ol:space-y-3
-                        prose-li:text-white/80 prose-li:text-base prose-li:leading-relaxed prose-li:pl-2
-                        prose-li:marker:text-accent prose-li:marker:font-bold
-                        prose-blockquote:border-l-4 prose-blockquote:border-accent prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-white/70 prose-blockquote:my-8"
-                    />
+                    <>
+                      <style>{`
+                        .article-content h2 {
+                          font-size: 1.75rem;
+                          line-height: 1.3;
+                          margin-top: 3rem;
+                          margin-bottom: 1.5rem;
+                          color: #ffffff;
+                          font-weight: 700;
+                          position: relative;
+                          padding-left: 1.25rem;
+                          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+                        }
+                        .article-content h2::before {
+                          content: '';
+                          position: absolute;
+                          left: 0;
+                          top: 50%;
+                          transform: translateY(-50%);
+                          width: 4px;
+                          height: 1.2em;
+                          background: linear-gradient(135deg, #00d4ff, #0099ff);
+                          border-radius: 2px;
+                        }
+                        .article-content h3 {
+                          font-size: 1.375rem;
+                          line-height: 1.4;
+                          margin-top: 2rem;
+                          margin-bottom: 1rem;
+                          color: #ffffff;
+                          font-weight: 600;
+                        }
+                        .article-content h4 {
+                          font-size: 1.125rem;
+                          line-height: 1.4;
+                          margin-top: 1.5rem;
+                          margin-bottom: 0.75rem;
+                          color: #ffffff;
+                          font-weight: 600;
+                        }
+                        .article-content p {
+                          margin-bottom: 1.25rem;
+                          line-height: 1.7;
+                          color: rgba(255, 255, 255, 0.85);
+                        }
+                        .article-content ul,
+                        .article-content ol {
+                          margin-bottom: 1.75rem;
+                          margin-top: 0.5rem;
+                          padding-left: 1.5rem;
+                        }
+                        .article-content li {
+                          margin-bottom: 0.75rem;
+                          line-height: 1.7;
+                          color: rgba(255, 255, 255, 0.85);
+                        }
+                        .article-content li::marker {
+                          color: #00d4ff;
+                          font-weight: 700;
+                        }
+                        .article-content strong {
+                          color: #00d4ff;
+                          font-weight: 600;
+                        }
+                        .article-content a {
+                          color: #00d4ff;
+                          text-decoration: none;
+                          font-weight: 500;
+                          transition: all 0.2s ease;
+                        }
+                        .article-content a:hover {
+          text-decoration: underline;
+          color: #00b8e6;
+        }
+                      `}</style>
+                      <SafeHTML 
+                        html={content}
+                        className="article-content prose prose-invert prose-base max-w-none 
+                          prose-headings:text-white
+                          prose-h1:text-4xl prose-h1:font-bold prose-h1:mb-8 prose-h1:leading-tight
+                          prose-h2:!text-[1.75rem] prose-h2:!font-bold prose-h2:!mt-12 prose-h2:!mb-6 prose-h2:!leading-[1.3]
+                          prose-h3:!text-[1.375rem] prose-h3:!font-semibold prose-h3:!mt-8 prose-h3:!mb-4 prose-h3:!leading-[1.4]
+                          prose-h4:!text-[1.125rem] prose-h4:!font-semibold prose-h4:!mt-6 prose-h4:!mb-3 prose-h4:!leading-[1.4]
+                          prose-p:text-white/80 prose-p:leading-[1.7] prose-p:text-base prose-p:mb-5
+                          prose-strong:text-accent prose-strong:font-semibold
+                          prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-a:font-medium
+                          prose-ul:text-white/80 prose-ul:my-6 prose-ul:space-y-2
+                          prose-ol:text-white/80 prose-ol:my-6 prose-ol:space-y-2
+                          prose-li:text-white/80 prose-li:text-base prose-li:leading-relaxed prose-li:pl-2 prose-li:mb-2
+                          prose-li:marker:text-accent prose-li:marker:font-bold
+                          prose-blockquote:border-l-4 prose-blockquote:border-accent prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-white/70 prose-blockquote:my-8"
+                      />
+                    </>
                   )}
                 </div>
               </article>

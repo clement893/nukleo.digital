@@ -460,6 +460,19 @@ async function startServer() {
     next(err);
   });
   
+  // CSP Report endpoint (for monitoring CSP violations)
+  app.post('/api/csp-report', express.json({ limit: '1mb' }), (req, res) => {
+    // Log CSP violations for monitoring (only in development or if logging is enabled)
+    if (process.env.NODE_ENV === 'development' || process.env.LOG_CSP_VIOLATIONS === 'true') {
+      logger.warn('[CSP Violation]', {
+        'csp-report': req.body,
+        ip: req.ip,
+        userAgent: req.get('user-agent'),
+      });
+    }
+    res.status(204).send(); // No content response
+  });
+  
   // tRPC API with rate limiting - MUST be before serveStatic
   app.use("/api/trpc", generalLimiter);
   app.use(

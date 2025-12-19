@@ -57,6 +57,11 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // Skip non-HTTP(S) requests (chrome-extension, etc.)
+  if (!url.protocol.startsWith('http')) {
+    return;
+  }
+
   // Skip API requests
   if (url.pathname.startsWith('/api/')) {
     return;
@@ -64,6 +69,11 @@ self.addEventListener('fetch', (event) => {
 
   // Skip admin routes
   if (url.pathname.startsWith('/admin')) {
+    return;
+  }
+
+  // Skip external resources that shouldn't be cached (Google Fonts, etc.)
+  if (url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com') {
     return;
   }
 
@@ -78,9 +88,16 @@ self.addEventListener('fetch', (event) => {
         return cache.match(request).then((cachedResponse) => {
           // Start fetching fresh version in background
           const fetchPromise = fetch(request).then((networkResponse) => {
-            // Don't cache non-successful responses
-            if (networkResponse && networkResponse.status === 200) {
-              cache.put(request, networkResponse.clone());
+            // Don't cache non-successful responses or non-HTTP requests
+            if (networkResponse && networkResponse.status === 200 && request.url.startsWith('http')) {
+              try {
+                cache.put(request, networkResponse.clone());
+              } catch (err) {
+                // Ignore cache errors (e.g., chrome-extension://)
+                if (typeof self !== 'undefined' && self.location?.hostname === 'localhost') {
+                  console.warn('[SW] Failed to cache:', request.url, err);
+                }
+              }
             }
             return networkResponse;
           }).catch(() => {
@@ -100,9 +117,16 @@ self.addEventListener('fetch', (event) => {
         return cache.match(request).then((cachedResponse) => {
           // Start fetching fresh version in background
           const fetchPromise = fetch(request).then((networkResponse) => {
-            // Cache successful responses
-            if (networkResponse && networkResponse.status === 200) {
-              cache.put(request, networkResponse.clone());
+            // Cache successful responses (only HTTP requests)
+            if (networkResponse && networkResponse.status === 200 && request.url.startsWith('http')) {
+              try {
+                cache.put(request, networkResponse.clone());
+              } catch (err) {
+                // Ignore cache errors (e.g., chrome-extension://)
+                if (typeof self !== 'undefined' && self.location?.hostname === 'localhost') {
+                  console.warn('[SW] Failed to cache:', request.url, err);
+                }
+              }
             }
             return networkResponse;
           }).catch(() => {

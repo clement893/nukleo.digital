@@ -101,11 +101,11 @@ async function startServer() {
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
-        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://fonts.googleapis.com", "https://*.manusvm.computer"],
+        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://fonts.googleapis.com", "https://*.manusvm.computer", "https://www.googletagmanager.com", "https://*.googletagmanager.com"],
         styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
         imgSrc: ["'self'", "data:", "https:", "blob:"],
         fontSrc: ["'self'", "https://fonts.gstatic.com", "data:"],
-        connectSrc: ["'self'", "https://api.manus.im", "https://*.railway.app", "https://*.manusvm.computer", "https://fonts.googleapis.com", "https://fonts.gstatic.com", "https://*.googleusercontent.com"],
+        connectSrc: ["'self'", "https://api.manus.im", "https://*.railway.app", "https://*.manusvm.computer", "https://fonts.googleapis.com", "https://fonts.gstatic.com", "https://*.googleusercontent.com", "https://www.googletagmanager.com", "https://*.googletagmanager.com"],
         frameSrc: ["'self'"],
         objectSrc: ["'none'"],
         upgradeInsecureRequests: process.env.NODE_ENV === 'production' ? [] : null,

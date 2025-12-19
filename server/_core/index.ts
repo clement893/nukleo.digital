@@ -131,7 +131,16 @@ async function startServer() {
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
-        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://fonts.googleapis.com", "https://*.manusvm.computer", "https://www.googletagmanager.com", "https://*.googletagmanager.com"],
+        scriptSrc: [
+          "'self'", 
+          "'unsafe-inline'", 
+          "'unsafe-eval'", 
+          "https://fonts.googleapis.com", 
+          "https://*.manusvm.computer", 
+          "https://www.googletagmanager.com", 
+          "https://*.googletagmanager.com",
+          "https://www.google-analytics.com"
+        ],
         styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
         imgSrc: ["'self'", "data:", "https:", "blob:"],
         fontSrc: ["'self'", "https://fonts.gstatic.com", "data:"],

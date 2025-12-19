@@ -1313,7 +1313,8 @@
     "cta": {
       "title": "Ready to Join Them?",
       "description": "Let's discuss how our AI services can transform your business and accelerate your growth.",
-      "button": "Start Your Transformation"
+      "button": "Start Your Transformation",
+      "buttonSecondary": "Start a Project"
     }
   },
   "seo": {

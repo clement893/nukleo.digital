@@ -276,9 +276,12 @@
     "avgROI": "Augmentation moyenne du ROI",
     "servicesProvided": "Services fournis",
     "keyResults": "Résultats clés",
-    "ctaTitle": "Prêt à les rejoindre ?",
-    "ctaDescription": "Discutons de la manière dont nos services d'IA peuvent transformer votre entreprise et accélérer votre croissance.",
-    "ctaButton": "Démarrer votre transformation"
+    "cta": {
+      "title": "Prêt à les rejoindre ?",
+      "description": "Discutons de la manière dont nos services d'IA peuvent transformer votre entreprise et accélérer votre croissance.",
+      "button": "Démarrer votre transformation",
+      "buttonSecondary": "Démarrer un projet"
+    }
   },
   "expertise": {
     "seo": {

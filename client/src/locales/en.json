@@ -1817,5 +1817,64 @@
         "button": "Start the Conversation"
       }
     }
+  },
+  "assessment": {
+    "seo": {
+      "title": "Free AI Readiness Assessment | Evaluate Your AI Potential",
+      "description": "Take our free 5-minute AI readiness assessment. Get personalized insights on your organization's AI maturity, gaps & opportunities. Start your AI journey today.",
+      "keywords": "AI readiness assessment, AI maturity assessment, AI evaluation, AI readiness score, free AI assessment"
+    },
+    "intro": {
+      "badge": "FREE AI READINESS ASSESSMENT",
+      "title": "Discover Your",
+      "titleHighlight": "AI Transformation Readiness",
+      "subtitle": "Take our comprehensive 20-question assessment to understand where you stand on your AI journey and get a personalized roadmap to accelerate your transformation.",
+      "startButton": "Start Assessment",
+      "benefits": {
+        "identify": {
+          "title": "Identify Your AI Maturity",
+          "description": "Assess your organization across 6 key dimensions"
+        },
+        "benchmark": {
+          "title": "Benchmark Against Leaders",
+          "description": "See how you compare to AI-mature organizations"
+        },
+        "recommendations": {
+          "title": "Get Actionable Recommendations",
+          "description": "Receive a detailed roadmap tailored to your level"
+        },
+        "fast": {
+          "title": "Fast & Comprehensive",
+          "description": "Complete in 5-7 minutes, get instant results"
+        }
+      },
+      "whatYouGet": {
+        "title": "What You'll Receive",
+        "overallScore": "Overall Maturity Score",
+        "dimensionScores": "Dimension Scores",
+        "recommendations": "Custom Recommendations"
+      },
+      "trustIndicators": "✓ No credit card required  •  ✓ Takes 5-7 minutes  •  ✓ Instant results"
+    },
+    "quiz": {
+      "previous": "Previous"
+    },
+    "emailCapture": {
+      "title": "Almost There!",
+      "description": "Enter your details to receive your personalized AI Readiness Report"
+    },
+    "results": {
+      "title": "Your AI Readiness Report",
+      "subtitle": "Here's your comprehensive assessment across 6 key dimensions",
+      "cta": {
+        "title": "Ready for Your Detailed Roadmap?",
+        "description": "Get a comprehensive PDF report with personalized recommendations, implementation timeline, and next steps tailored to your maturity level.",
+        "button": "Get Your Full Report",
+        "saved": "Report Saved! Check your email."
+      }
+    },
+    "errors": {
+      "saveFailed": "Failed to save assessment. Please try again."
+    }
   }
 }

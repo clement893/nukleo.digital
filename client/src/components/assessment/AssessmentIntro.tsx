@@ -1,5 +1,6 @@
 import { Target, TrendingUp, FileCheck, Zap } from 'lucide-react';
 import { useSound } from '@/hooks/useSound';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface AssessmentIntroProps {
   onStart: () => void;
@@ -7,6 +8,7 @@ interface AssessmentIntroProps {
 
 export default function AssessmentIntro({ onStart }: AssessmentIntroProps) {
   const { playClick } = useSound();
+  const { t } = useLanguage();
 
   const handleStart = () => {
     playClick();
@@ -16,23 +18,23 @@ export default function AssessmentIntro({ onStart }: AssessmentIntroProps) {
   const benefits = [
     {
       icon: Target,
-      title: 'Identify Your AI Maturity',
-      description: 'Assess your organization across 6 key dimensions',
+      title: t('assessment.intro.benefits.identify.title'),
+      description: t('assessment.intro.benefits.identify.description'),
     },
     {
       icon: TrendingUp,
-      title: 'Benchmark Against Leaders',
-      description: 'See how you compare to AI-mature organizations',
+      title: t('assessment.intro.benefits.benchmark.title'),
+      description: t('assessment.intro.benefits.benchmark.description'),
     },
     {
       icon: FileCheck,
-      title: 'Get Actionable Recommendations',
-      description: 'Receive a detailed roadmap tailored to your level',
+      title: t('assessment.intro.benefits.recommendations.title'),
+      description: t('assessment.intro.benefits.recommendations.description'),
     },
     {
       icon: Zap,
-      title: 'Fast & Comprehensive',
-      description: 'Complete in 5-7 minutes, get instant results',
+      title: t('assessment.intro.benefits.fast.title'),
+      description: t('assessment.intro.benefits.fast.description'),
     },
   ];
 
@@ -41,29 +43,26 @@ export default function AssessmentIntro({ onStart }: AssessmentIntroProps) {
       {/* Hero Section */}
       <div className="text-center mb-16">
         <div className="inline-block px-4 py-2 bg-accent/10 border border-accent/30 rounded-full mb-6 backdrop-blur-sm">
-          <span className="text-accent font-mono text-sm font-bold">FREE AI READINESS ASSESSMENT</span>
+          <span className="text-accent font-mono text-sm font-bold">{t('assessment.intro.badge')}</span>
         </div>
         
         <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-          Discover Your
+          {t('assessment.intro.title')}
           <br />
           <span className="bg-gradient-to-r from-violet-400 to-rose-400 bg-clip-text text-transparent">
-            AI Transformation
+            {t('assessment.intro.titleHighlight')}
           </span>
-          <br />
-          Readiness
         </h1>
         
         <p className="text-xl text-white/70 max-w-2xl mx-auto mb-8 leading-relaxed">
-          Take our comprehensive 20-question assessment to understand where you stand 
-          on your AI journey and get a personalized roadmap to accelerate your transformation.
+          {t('assessment.intro.subtitle')}
         </p>
 
         <button
           onClick={handleStart}
           className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-violet-500 to-rose-500 text-white font-bold rounded-full hover:shadow-[0_0_40px_rgba(139,92,246,0.5)] transition-all duration-300"
         >
-          Start Assessment
+          {t('assessment.intro.startButton')}
         </button>
       </div>
 
@@ -88,22 +87,22 @@ export default function AssessmentIntro({ onStart }: AssessmentIntroProps) {
 
       {/* What You'll Get */}
       <div className="p-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl">
-        <h3 className="text-2xl font-bold text-white mb-6 text-center">What You'll Receive</h3>
+        <h3 className="text-2xl font-bold text-white mb-6 text-center">{t('assessment.intro.whatYouGet.title')}</h3>
         
         <div className="grid md:grid-cols-3 gap-6">
           <div className="text-center">
             <div className="text-4xl font-bold text-accent mb-2">0-100</div>
-            <div className="text-white/60">Overall Maturity Score</div>
+            <div className="text-white/60">{t('assessment.intro.whatYouGet.overallScore')}</div>
           </div>
           
           <div className="text-center">
             <div className="text-4xl font-bold text-accent mb-2">6</div>
-            <div className="text-white/60">Dimension Scores</div>
+            <div className="text-white/60">{t('assessment.intro.whatYouGet.dimensionScores')}</div>
           </div>
           
           <div className="text-center">
             <div className="text-4xl font-bold text-accent mb-2">5+</div>
-            <div className="text-white/60">Custom Recommendations</div>
+            <div className="text-white/60">{t('assessment.intro.whatYouGet.recommendations')}</div>
           </div>
         </div>
       </div>
@@ -111,7 +110,7 @@ export default function AssessmentIntro({ onStart }: AssessmentIntroProps) {
       {/* Trust Indicators */}
       <div className="mt-12 text-center">
         <p className="text-white/40 text-sm">
-          ✓ No credit card required  •  ✓ Takes 5-7 minutes  •  ✓ Instant results
+          {t('assessment.intro.trustIndicators')}
         </p>
       </div>
     </div>

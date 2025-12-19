@@ -1845,5 +1845,64 @@
       "ctaButton1": "Planifier une consultation",
       "ctaButton2": "Explorer nos services"
     }
+  },
+  "assessment": {
+    "seo": {
+      "title": "Évaluation Gratuite de Préparation IA | Évaluez Votre Potentiel IA",
+      "description": "Passez notre évaluation gratuite de 5 minutes sur la préparation IA. Obtenez des insights personnalisés sur la maturité IA de votre organisation, les écarts et les opportunités. Commencez votre parcours IA aujourd'hui.",
+      "keywords": "évaluation de préparation IA, évaluation de maturité IA, évaluation IA, score de préparation IA, évaluation IA gratuite"
+    },
+    "intro": {
+      "badge": "ÉVALUATION GRATUITE DE PRÉPARATION IA",
+      "title": "Découvrez Votre",
+      "titleHighlight": "Préparation à la Transformation IA",
+      "subtitle": "Passez notre évaluation complète de 20 questions pour comprendre où vous en êtes dans votre parcours IA et obtenez une feuille de route personnalisée pour accélérer votre transformation.",
+      "startButton": "Commencer l'Évaluation",
+      "benefits": {
+        "identify": {
+          "title": "Identifiez Votre Maturité IA",
+          "description": "Évaluez votre organisation sur 6 dimensions clés"
+        },
+        "benchmark": {
+          "title": "Comparez-vous aux Leaders",
+          "description": "Voyez comment vous vous comparez aux organisations matures en IA"
+        },
+        "recommendations": {
+          "title": "Obtenez des Recommandations Actionnables",
+          "description": "Recevez une feuille de route détaillée adaptée à votre niveau"
+        },
+        "fast": {
+          "title": "Rapide & Complet",
+          "description": "Complété en 5-7 minutes, obtenez des résultats instantanés"
+        }
+      },
+      "whatYouGet": {
+        "title": "Ce Que Vous Recevrez",
+        "overallScore": "Score de Maturité Global",
+        "dimensionScores": "Scores par Dimension",
+        "recommendations": "Recommandations Personnalisées"
+      },
+      "trustIndicators": "✓ Aucune carte de crédit requise  •  ✓ Prend 5-7 minutes  •  ✓ Résultats instantanés"
+    },
+    "quiz": {
+      "previous": "Précédent"
+    },
+    "emailCapture": {
+      "title": "Presque Terminé !",
+      "description": "Entrez vos coordonnées pour recevoir votre rapport personnalisé de Préparation IA"
+    },
+    "results": {
+      "title": "Votre Rapport de Préparation IA",
+      "subtitle": "Voici votre évaluation complète sur 6 dimensions clés",
+      "cta": {
+        "title": "Prêt pour Votre Feuille de Route Détaillée ?",
+        "description": "Obtenez un rapport PDF complet avec des recommandations personnalisées, un calendrier de mise en œuvre et les prochaines étapes adaptées à votre niveau de maturité.",
+        "button": "Obtenez Votre Rapport Complet",
+        "saved": "Rapport Enregistré ! Vérifiez votre email."
+      }
+    },
+    "errors": {
+      "saveFailed": "Échec de l'enregistrement de l'évaluation. Veuillez réessayer."
+    }
   }
 }

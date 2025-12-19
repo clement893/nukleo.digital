@@ -16,10 +16,12 @@ import { Link } from 'wouter';
 import { Menu } from 'lucide-react';
 import { useState as useMenuState } from 'react';
 import FullScreenMenu from '@/components/FullScreenMenu';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 type AssessmentState = 'intro' | 'quiz' | 'email-capture' | 'results';
 
 export default function AIReadinessAssessment() {
+  const { t } = useLanguage();
   const [menuOpen, setMenuOpen] = useMenuState(false);
   const [state, setState] = useState<AssessmentState>('intro');
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -79,7 +81,7 @@ export default function AIReadinessAssessment() {
       playClick();
     } catch (error) {
       console.error('Failed to save assessment:', error);
-      alert('Failed to save assessment. Please try again.');
+      alert(t('assessment.errors.saveFailed'));
     }
   };
 
@@ -135,9 +137,9 @@ export default function AIReadinessAssessment() {
   return (
     <>
       <SEO 
-        title="Free AI Readiness Assessment | Evaluate Your AI Potential"
-        description="Take our free 5-minute AI readiness assessment. Get personalized insights on your organization's AI maturity, gaps & opportunities. Start your AI journey today."
-        keywords="AI readiness assessment, AI maturity assessment, AI evaluation, AI readiness score, free AI assessment"
+        title={t('assessment.seo.title')}
+        description={t('assessment.seo.description')}
+        keywords={t('assessment.seo.keywords')}
       />
 
       {/* Header */}
@@ -210,7 +212,7 @@ export default function AIReadinessAssessment() {
                 className="group inline-flex items-center gap-2 px-6 py-3 bg-white/5 backdrop-blur-xl border border-white/10 text-white font-medium rounded-full hover:bg-white/10 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-300"
               >
                 <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-                Previous
+                {t('assessment.quiz.previous')}
               </button>
             </div>
           </div>
@@ -220,10 +222,10 @@ export default function AIReadinessAssessment() {
           <div className="w-full max-w-4xl mx-auto text-center">
             <div className="mb-8">
               <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
-                Almost There!
+                {t('assessment.emailCapture.title')}
               </h2>
               <p className="text-xl text-white/70">
-                Enter your details to receive your personalized AI Readiness Report
+                {t('assessment.emailCapture.description')}
               </p>
             </div>
           </div>
@@ -234,10 +236,10 @@ export default function AIReadinessAssessment() {
             {/* Header */}
             <div className="text-center mb-12">
               <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4">
-                Your AI Readiness Report
+                {t('assessment.results.title')}
               </h2>
               <p className="text-xl text-white/70">
-                Here's your comprehensive assessment across 6 key dimensions
+                {t('assessment.results.subtitle')}
               </p>
             </div>
 
@@ -262,11 +264,10 @@ export default function AIReadinessAssessment() {
             {/* CTA Section */}
             <div className="p-8 bg-gradient-to-r from-violet-500/10 to-rose-500/10 backdrop-blur-xl border border-white/10 rounded-2xl text-center">
               <h3 className="text-2xl font-bold text-white mb-4">
-                Ready for Your Detailed Roadmap?
+                {t('assessment.results.cta.title')}
               </h3>
               <p className="text-white/70 mb-6 max-w-2xl mx-auto">
-                Get a comprehensive PDF report with personalized recommendations, 
-                implementation timeline, and next steps tailored to your maturity level.
+                {t('assessment.results.cta.description')}
               </p>
               {!isSaved ? (
                 <button
@@ -277,12 +278,12 @@ export default function AIReadinessAssessment() {
                   className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-violet-500 to-rose-500 text-white font-bold rounded-full hover:shadow-[0_0_40px_rgba(139,92,246,0.5)] transition-all duration-300"
                 >
                   <Download className="w-5 h-5" />
-                  Get Your Full Report
+                  {t('assessment.results.cta.button')}
                 </button>
               ) : (
                 <div className="inline-flex items-center gap-3 px-8 py-4 bg-green-500/20 border border-green-500/30 text-green-400 font-bold rounded-full">
                   <CheckCircle className="w-5 h-5" />
-                  Report Saved! Check your email.
+                  {t('assessment.results.cta.saved')}
                 </div>
               )}
             </div>

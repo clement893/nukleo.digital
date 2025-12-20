@@ -236,7 +236,7 @@ export default function Glossary() {
                       />
                     </button>
 
-                    <Link href={`/glossary/${term.id}`} className="flex-1 flex flex-col">
+                    <Link href={getLocalizedPath(`/glossary/${term.id}`)} className="flex-1 flex flex-col">
                       {/* Category & Difficulty Badges */}
                       <div className="flex items-center gap-2 mb-4">
                         <span className="inline-block px-3 py-1 text-xs font-mono uppercase tracking-wider bg-purple-100 text-accent group-hover:bg-accent group-hover:text-white transition-colors rounded-full">

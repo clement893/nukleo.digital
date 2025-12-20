@@ -43,7 +43,7 @@ export default function Radar() {
                 for your organization and build your technology roadmap.
               </p>
               <a
-                href="/contact"
+                href={getLocalizedPath('/contact')}
                 className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-white rounded-full font-medium hover:bg-accent/90 transition-all duration-300"
               >
                 Talk to an Expert

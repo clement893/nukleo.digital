@@ -50,7 +50,7 @@ export default function NotFound404() {
 
           {/* Back Button */}
           <div className="mb-16">
-            <Link href="/">
+            <Link href={getLocalizedPath('/')}>
               <button className="inline-flex items-center gap-3 px-8 py-4 bg-white text-purple-900 rounded-full font-bold hover:bg-white/90 transition-all duration-300 hover:scale-[1.045]">
                 <ArrowLeft className="w-5 h-5" />
                 Back to Home

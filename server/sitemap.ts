@@ -5,7 +5,7 @@ const router = Router();
 
 // Generate sitemap.xml
 router.get('/sitemap.xml', (req, res) => {
-  const baseUrl = 'https://nukleo.com';
+  const baseUrl = process.env.SITE_URL || 'https://nukleo.digital';
   const currentDate = new Date().toISOString().split('T')[0];
 
   // Resource articles
@@ -57,6 +57,11 @@ router.get('/sitemap.xml', (req, res) => {
     { url: '/fr/services/intelligent-operations', priority: '0.8', changefreq: 'monthly' },
     { url: '/fr/services/agentic-ai', priority: '0.8', changefreq: 'monthly' },
     { url: '/fr/services/digital-transformation', priority: '0.8', changefreq: 'monthly' },
+    { url: '/fr/clients', priority: '0.7', changefreq: 'monthly' },
+    { url: '/fr/testimonials', priority: '0.7', changefreq: 'monthly' },
+    { url: '/fr/faq', priority: '0.6', changefreq: 'monthly' },
+    { url: '/fr/agencies', priority: '0.8', changefreq: 'monthly' },
+    { url: '/fr/leo', priority: '0.7', changefreq: 'monthly' },
   ];
 
   // Resource articles (English)
@@ -132,7 +137,7 @@ ${allPages
 
 // Generate robots.txt
 router.get('/robots.txt', (req, res) => {
-  const baseUrl = 'https://nukleo.com';
+  const baseUrl = process.env.SITE_URL || 'https://nukleo.digital';
   
   const robots = `# Nukleo Digital - Robots.txt
 User-agent: *

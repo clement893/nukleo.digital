@@ -830,12 +830,29 @@ async function startServer() {
             logger.error(`[Static] This will cause "Failed to fetch dynamically imported module" errors.`);
             logger.error(`[Static] The build is incomplete. Please rebuild the application.`);
             
-            // Still serve the HTML, but log the error
-            // The client-side error handler will attempt recovery
+            // CRITICAL FIX: Remove references to missing chunks from HTML before serving
+            // This prevents "Failed to fetch dynamically imported module" errors
+            let cleanedHtml = htmlContent;
+            
+            for (const missingChunk of missingChunks) {
+              // Remove script tags referencing missing chunks
+              const scriptRegex = new RegExp(`<script[^>]+src=["'][^"']*${missingChunk.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[^"']*["'][^>]*></script>`, 'gi');
+              cleanedHtml = cleanedHtml.replace(scriptRegex, '');
+              
+              // Remove link preload tags referencing missing chunks
+              const linkRegex = new RegExp(`<link[^>]+href=["'][^"']*${missingChunk.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[^"']*["'][^>]*>`, 'gi');
+              cleanedHtml = cleanedHtml.replace(linkRegex, '');
+              
+              logger.warn(`[Static] Removed reference to missing chunk: ${missingChunk}`);
+            }
+            
+            // Serve the cleaned HTML instead of the original
+            res.setHeader('Content-Type', 'text/html; charset=utf-8');
+            return res.send(cleanedHtml);
           }
         }
         
-        // Serve the HTML (even if chunks are missing - client will handle recovery)
+        // Serve the HTML (all chunks exist)
         res.sendFile(indexPath);
       } catch (error) {
         logger.error(`[Static] Error reading/verifying index.html:`, error);

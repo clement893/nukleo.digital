@@ -843,6 +843,11 @@ async function startServer() {
             }
           }
           
+          // Log verification result (even if no missing chunks)
+          if (chunkRefs.size > 0) {
+            logger.info(`[Static] Verified ${chunkRefs.size} chunk references in HTML, ${missingChunks.length} missing`);
+          }
+          
           if (missingChunks.length > 0) {
             logger.error(`[Static] ⚠️ CRITICAL: HTML references ${missingChunks.length} missing chunks:`, missingChunks);
             logger.error(`[Static] Available chunks: ${Array.from(availableChunks).slice(0, 10).join(', ')}...`);

@@ -65,7 +65,7 @@ const Projects = lazyWithRetry(() => import("./pages/Projects"));
 const Expertise = lazy(() => import("./pages/Expertise"));
 const Resources = lazyWithRetry(() => import("./pages/Resources"));
 const ResourceArticle = lazy(() => import("./pages/resources/ResourceArticle"));
-const Contact = lazy(() => import("./pages/Contact"));
+const Contact = lazyWithRetry(() => import("./pages/Contact"));
 const Leo = lazy(() => import("./pages/Leo"));
 const Manifesto = lazy(() => import("./pages/Manifesto"));
 const Radar = lazy(() => import("./pages/RadarNew").then(m => ({ default: m.RadarNew })));

@@ -44,24 +44,28 @@ export function lazyWithRetry<T extends ComponentType<any>>(
           // Store the current URL to reload to
           const currentUrl = window.location.href;
           
-          // Clear service worker cache if available
-          if ('serviceWorker' in navigator && navigator.serviceWorker.controller && 'caches' in window) {
-            window.caches.keys().then(cacheNames => {
-              cacheNames.forEach(cacheName => {
-                window.caches.delete(cacheName);
-              });
-            }).catch(() => {
-              // Ignore cache deletion errors
-            });
-          }
-          
-          // Use a small delay to ensure the error is logged
-          setTimeout(() => {
-            // Force a hard reload with cache bypass
-            // Add timestamp to force cache bypass
+          // CRITICAL: Clear ALL caches and unregister service worker for chunk errors
+          // This ensures we get fresh HTML that matches available chunks
+          Promise.all([
+            // Clear all caches
+            'caches' in window ? window.caches.keys().then(names => 
+              Promise.all(names.map(name => window.caches.delete(name)))
+            ) : Promise.resolve(),
+            // Unregister service worker
+            'serviceWorker' in navigator 
+              ? navigator.serviceWorker.getRegistrations().then(registrations =>
+                  Promise.all(registrations.map(reg => reg.unregister()))
+                )
+              : Promise.resolve(),
+          ]).then(() => {
+            // Force hard reload with cache bypass
             const separator = currentUrl.includes('?') ? '&' : '?';
-            window.location.href = `${currentUrl}${separator}_reload=${Date.now()}`;
-          }, 100);
+            window.location.replace(`${currentUrl.split('?')[0]}${separator}_reload=${Date.now()}&_nocache=1`);
+          }).catch(() => {
+            // If cache clearing fails, still reload
+            const separator = currentUrl.includes('?') ? '&' : '?';
+            window.location.replace(`${currentUrl.split('?')[0]}${separator}_reload=${Date.now()}&_nocache=1`);
+          });
           
           // Return a promise that never resolves (page will reload)
           return new Promise(() => {});

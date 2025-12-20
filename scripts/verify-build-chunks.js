@@ -21,33 +21,49 @@ const ASSETS_JS = path.join(DIST_PUBLIC, 'assets', 'js');
 function extractChunkReferences(htmlContent) {
   const chunks = new Set();
   
-  // Extract from script tags with src
+  // Extract from script tags with src (including type="module")
   const scriptSrcRegex = /<script[^>]+src=["']([^"']+\.js[^"']*)["']/gi;
   let match;
   while ((match = scriptSrcRegex.exec(htmlContent)) !== null) {
     const src = match[1];
     // Remove query parameters and hash
     const cleanSrc = src.split('?')[0].split('#')[0];
-    if (cleanSrc.startsWith('/')) {
-      chunks.add(cleanSrc);
-    } else if (cleanSrc.startsWith('./')) {
-      chunks.add(cleanSrc.substring(1));
-    } else {
-      chunks.add('/' + cleanSrc);
+    // Normalize path
+    let normalizedPath = cleanSrc;
+    if (!normalizedPath.startsWith('/')) {
+      normalizedPath = '/' + normalizedPath;
+    }
+    // Only add JS files from assets/js
+    if (normalizedPath.includes('/assets/js/')) {
+      chunks.add(normalizedPath);
     }
   }
   
-  // Extract from dynamic imports in inline scripts
-  const importRegex = /import\(["']([^"']+\.js[^"']*)["']\)/gi;
+  // Extract from dynamic imports in inline scripts (preload, etc.)
+  const importRegex = /(?:import|preload)\(["']([^"']+\.js[^"']*)["']\)/gi;
   while ((match = importRegex.exec(htmlContent)) !== null) {
     const src = match[1];
     const cleanSrc = src.split('?')[0].split('#')[0];
-    if (cleanSrc.startsWith('/')) {
-      chunks.add(cleanSrc);
-    } else if (cleanSrc.startsWith('./')) {
-      chunks.add(cleanSrc.substring(1));
-    } else {
-      chunks.add('/' + cleanSrc);
+    let normalizedPath = cleanSrc;
+    if (!normalizedPath.startsWith('/')) {
+      normalizedPath = '/' + normalizedPath;
+    }
+    if (normalizedPath.includes('/assets/js/')) {
+      chunks.add(normalizedPath);
+    }
+  }
+  
+  // Extract from link rel="modulepreload" or "preload"
+  const linkRegex = /<link[^>]+(?:href|as)=["']([^"']+\.js[^"']*)["']/gi;
+  while ((match = linkRegex.exec(htmlContent)) !== null) {
+    const src = match[1];
+    const cleanSrc = src.split('?')[0].split('#')[0];
+    let normalizedPath = cleanSrc;
+    if (!normalizedPath.startsWith('/')) {
+      normalizedPath = '/' + normalizedPath;
+    }
+    if (normalizedPath.includes('/assets/js/')) {
+      chunks.add(normalizedPath);
     }
   }
   
@@ -97,24 +113,47 @@ function main() {
   
   // Report results
   if (missingChunks.length > 0) {
-    console.error(`❌ ${missingChunks.length} chunks manquants:\n`);
+    console.error(`\n❌ ERREUR CRITIQUE: ${missingChunks.length} chunks manquants détectés!\n`);
     missingChunks.forEach(chunk => {
-      console.error(`   - ${chunk}`);
+      console.error(`   ❌ ${chunk}`);
     });
-    console.error('\n⚠️  Le build est incomplet. Certains chunks référencés n\'existent pas.');
-    console.error('   Cela peut causer des erreurs "Failed to fetch dynamically imported module".\n');
+    console.error('\n⚠️  Le build est INCOMPLET. Certains chunks référencés dans index.html n\'existent pas.');
+    console.error('   Cela causera des erreurs "Failed to fetch dynamically imported module" en production.\n');
     
-    // List available chunks
+    // List available chunks for debugging
     if (fs.existsSync(ASSETS_JS)) {
       const availableChunks = fs.readdirSync(ASSETS_JS).filter(f => f.endsWith('.js'));
       console.log(`📋 Chunks disponibles dans assets/js (${availableChunks.length}):`);
-      availableChunks.slice(0, 10).forEach(chunk => {
-        console.log(`   - ${chunk}`);
+      
+      // Try to find similar chunks (for debugging)
+      missingChunks.forEach(missing => {
+        const missingName = path.basename(missing);
+        const baseMatch = missingName.match(/^(.+?)-[^-]+\.js$/);
+        if (baseMatch) {
+          const baseName = baseMatch[1];
+          const similar = availableChunks.filter(chunk => chunk.startsWith(baseName + '-'));
+          if (similar.length > 0) {
+            console.log(`\n   💡 Chunks similaires trouvés pour "${missingName}":`);
+            similar.forEach(chunk => {
+              console.log(`      - ${chunk}`);
+            });
+          }
+        }
       });
-      if (availableChunks.length > 10) {
-        console.log(`   ... et ${availableChunks.length - 10} autres`);
+      
+      console.log(`\n   📦 Tous les chunks disponibles:`);
+      availableChunks.slice(0, 20).forEach(chunk => {
+        console.log(`      - ${chunk}`);
+      });
+      if (availableChunks.length > 20) {
+        console.log(`      ... et ${availableChunks.length - 20} autres`);
       }
     }
+    
+    console.error('\n🔧 SOLUTION:');
+    console.error('   1. Vérifiez que le build s\'est terminé correctement');
+    console.error('   2. Supprimez le dossier dist/ et reconstruisez: pnpm build');
+    console.error('   3. Vérifiez que tous les fichiers sont copiés correctement\n');
     
     process.exit(1);
   } else {

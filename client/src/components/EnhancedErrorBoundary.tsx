@@ -82,23 +82,29 @@ export class EnhancedErrorBoundary extends Component<Props, State> {
     if (isChunkError) {
       logger.tagged('ErrorBoundary').warn('Chunk loading error detected, reloading page...');
       
-      // Clear service worker cache if available
-      if ('serviceWorker' in navigator && navigator.serviceWorker.controller && 'caches' in window) {
-        window.caches.keys().then(cacheNames => {
-          cacheNames.forEach(cacheName => {
-            window.caches.delete(cacheName);
-          });
-        }).catch(() => {
-          // Ignore cache deletion errors
-        });
-      }
-      
-      // Reload with cache bypass
-      setTimeout(() => {
+      // CRITICAL: Clear ALL caches and unregister service worker for chunk errors
+      Promise.all([
+        // Clear all caches
+        'caches' in window ? window.caches.keys().then(names => 
+          Promise.all(names.map(name => window.caches.delete(name)))
+        ) : Promise.resolve(),
+        // Unregister service worker
+        'serviceWorker' in navigator 
+          ? navigator.serviceWorker.getRegistrations().then(registrations =>
+              Promise.all(registrations.map(reg => reg.unregister()))
+            )
+          : Promise.resolve(),
+      ]).then(() => {
+        // Force hard reload with cache bypass
         const currentUrl = window.location.href;
         const separator = currentUrl.includes('?') ? '&' : '?';
-        window.location.href = `${currentUrl.split('?')[0]}${separator}_reload=${Date.now()}`;
-      }, 500);
+        window.location.replace(`${currentUrl.split('?')[0]}${separator}_reload=${Date.now()}&_nocache=1`);
+      }).catch(() => {
+        // If cache clearing fails, still reload
+        const currentUrl = window.location.href;
+        const separator = currentUrl.includes('?') ? '&' : '?';
+        window.location.replace(`${currentUrl.split('?')[0]}${separator}_reload=${Date.now()}&_nocache=1`);
+      });
       return;
     }
 

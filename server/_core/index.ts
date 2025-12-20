@@ -773,10 +773,20 @@ async function startServer() {
       }
       
       // Serve index.html for SPA routing (including /projects/ page route)
-      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+      // CRITICAL: Never cache HTML to ensure it always matches available chunks
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate, max-age=0');
       res.setHeader('Pragma', 'no-cache');
       res.setHeader('Expires', '0');
-      res.sendFile(path.resolve(distPath, "index.html"));
+      res.setHeader('X-Content-Type-Options', 'nosniff');
+      
+      // Verify that index.html exists before serving
+      const indexPath = path.resolve(distPath, "index.html");
+      if (!existsSync(indexPath)) {
+        logger.error(`[Static] index.html not found at ${indexPath}`);
+        return res.status(500).send('Application not available. Please try again later.');
+      }
+      
+      res.sendFile(indexPath);
     });
   }
   

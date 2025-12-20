@@ -162,12 +162,31 @@ if (typeof window !== 'undefined') {
         });
       }
       
-      // Reload the page with cache bypass
-      setTimeout(() => {
+      // CRITICAL: For chunk loading errors, immediately clear ALL caches and reload
+      // This ensures we get the latest HTML that matches available chunks
+      Promise.all([
+        // Clear all caches
+        'caches' in window ? window.caches.keys().then(names => 
+          Promise.all(names.map(name => window.caches.delete(name)))
+        ) : Promise.resolve(),
+        // Unregister service worker if present
+        'serviceWorker' in navigator && navigator.serviceWorker.controller 
+          ? navigator.serviceWorker.getRegistrations().then(registrations =>
+              Promise.all(registrations.map(reg => reg.unregister()))
+            )
+          : Promise.resolve(),
+      ]).then(() => {
+        // Force hard reload with cache bypass
         const currentUrl = window.location.href;
         const separator = currentUrl.includes('?') ? '&' : '?';
-        window.location.href = `${currentUrl.split('?')[0]}${separator}_reload=${Date.now()}`;
-      }, 100);
+        // Use location.replace to avoid adding to history
+        window.location.replace(`${currentUrl.split('?')[0]}${separator}_reload=${Date.now()}&_nocache=1`);
+      }).catch(() => {
+        // If cache clearing fails, still reload
+        const currentUrl = window.location.href;
+        const separator = currentUrl.includes('?') ? '&' : '?';
+        window.location.replace(`${currentUrl.split('?')[0]}${separator}_reload=${Date.now()}&_nocache=1`);
+      });
     }
   }, true); // Use capture phase to catch errors early
   

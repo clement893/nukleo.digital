@@ -797,9 +797,9 @@ async function startServer() {
           
           // Extract chunk references from HTML
           const chunkRefs = new Set<string>();
-          const scriptSrcRegex = /<script[^>]+src=["']([^"']+\.js[^"']*)["']/gi;
-          const linkPreloadRegex = /<link[^>]+href=["']([^"']+\.js[^"']*)["']/gi;
           
+          // Extract from script tags with src attribute
+          const scriptSrcRegex = /<script[^>]+src=["']([^"']+\.js[^"']*)["']/gi;
           let match;
           while ((match = scriptSrcRegex.exec(htmlContent)) !== null) {
             const src = match[1].split('?')[0].split('#')[0];
@@ -808,11 +808,30 @@ async function startServer() {
               chunkRefs.add(chunkName);
             }
           }
+          
+          // Extract from link preload/modulepreload tags
+          const linkPreloadRegex = /<link[^>]+href=["']([^"']+\.js[^"']*)["']/gi;
           while ((match = linkPreloadRegex.exec(htmlContent)) !== null) {
             const src = match[1].split('?')[0].split('#')[0];
             if (src.includes('/assets/js/')) {
               const chunkName = path.basename(src);
               chunkRefs.add(chunkName);
+            }
+          }
+          
+          // Extract from inline script content (dynamic imports)
+          const inlineScriptRegex = /<script[^>]*>([\s\S]*?)<\/script>/gi;
+          while ((match = inlineScriptRegex.exec(htmlContent)) !== null) {
+            const scriptContent = match[1];
+            // Look for import() or import.meta.resolve() patterns
+            const importRegex = /(?:import\(|import\.meta\.resolve\(|["'])([^"']*\/assets\/js\/[^"']+\.js[^"']*)/gi;
+            let importMatch;
+            while ((importMatch = importRegex.exec(scriptContent)) !== null) {
+              const src = importMatch[1].split('?')[0].split('#')[0];
+              if (src.includes('/assets/js/')) {
+                const chunkName = path.basename(src);
+                chunkRefs.add(chunkName);
+              }
             }
           }
           

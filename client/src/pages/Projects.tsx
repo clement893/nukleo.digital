@@ -118,7 +118,7 @@ export default function Projects() {
       return;
     }
     
-    if (uploadedImages) {
+    if (uploadedImages && Array.isArray(uploadedImages)) {
       if (uploadedImages.length > 0) {
         // Use images from API
         const imageNames = uploadedImages.map(img => img.name);

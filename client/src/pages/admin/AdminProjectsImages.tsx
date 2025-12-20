@@ -172,7 +172,7 @@ export default function AdminProjectsImages() {
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                {images.map((image) => (
+                {images && Array.isArray(images) ? images.map((image) => (
                   <div
                     key={image.name}
                     className="group relative border rounded-lg overflow-hidden bg-muted/50 hover:bg-muted transition-colors"
@@ -215,7 +215,7 @@ export default function AdminProjectsImages() {
                       </div>
                     </div>
                   </div>
-                ))}
+                )) : null}
               </div>
             )}
           </CardContent>

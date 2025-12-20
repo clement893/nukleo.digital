@@ -105,7 +105,7 @@ export default function AITrendRadar() {
             </div>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {latestNews.map((news) => {
+              {latestNews && Array.isArray(latestNews) ? latestNews.map((news) => {
                 // Determine if news has a clickable URL or should navigate to radar
                 const hasUrl = news.url && typeof news.url === 'string' && news.url.startsWith('http');
                 const currentLang = window.location.pathname.startsWith('/fr') ? '/fr' : '';
@@ -177,7 +177,7 @@ export default function AITrendRadar() {
                     </Link>
                   );
                 }
-              })}
+              }) : null}
             </div>
           </div>
         )}

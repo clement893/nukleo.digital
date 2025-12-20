@@ -10,7 +10,7 @@ export default function AdminContactMessages() {
   const [selectedMessage, setSelectedMessage] = useState<number | null>(null);
 
   const exportToCSV = () => {
-    if (!messages || messages.length === 0) return;
+    if (!messages || !Array.isArray(messages) || messages.length === 0) return;
 
     const headers = ['ID', 'First Name', 'Last Name', 'Email', 'Company', 'Message', 'Created At'];
     const rows = messages.map(msg => [
@@ -134,7 +134,7 @@ export default function AdminContactMessages() {
           </Card>
         ) : (
           <div className="space-y-4">
-            {messages.map((message) => (
+            {messages && Array.isArray(messages) ? messages.map((message) => (
               <Card
                 key={message.id}
                 className={`cursor-pointer transition-all ${
@@ -193,7 +193,7 @@ export default function AdminContactMessages() {
                   </CardContent>
                 )}
               </Card>
-            ))}
+            )) : null}
           </div>
         )}
       </div>

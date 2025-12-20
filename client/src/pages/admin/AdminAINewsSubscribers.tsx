@@ -22,7 +22,7 @@ export default function AdminAINewsSubscribers() {
   }
 
   const exportToCSV = () => {
-    if (!subscribers || subscribers.length === 0) return;
+    if (!subscribers || !Array.isArray(subscribers) || subscribers.length === 0) return;
 
     const headers = ['ID', 'Email', 'Source', 'Created At'];
     const rows = subscribers.map((subscriber: any) => [
@@ -82,7 +82,7 @@ export default function AdminAINewsSubscribers() {
             </Card>
           ) : (
             <div className="space-y-4">
-              {subscribers.map((subscriber: any) => (
+              {subscribers && Array.isArray(subscribers) ? subscribers.map((subscriber: any) => (
                 <Card
                   key={subscriber.id}
                   className="bg-white/5 backdrop-blur-md border-white/10 hover:bg-white/10 transition-all cursor-pointer"
@@ -120,7 +120,7 @@ export default function AdminAINewsSubscribers() {
                     </div>
                   </div>
                 </Card>
-              ))}
+              )) : null}
             </div>
           )}
         </div>

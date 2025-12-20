@@ -50,13 +50,17 @@ export default function AdminLeoAnalytics() {
 
   const { overview, byPage, funnel, timeSeries, recentSessions } = analytics;
 
+  // Ensure arrays are safe
+  const safeTimeSeries = Array.isArray(timeSeries) ? timeSeries : [];
+  const safeRecentSessions = Array.isArray(recentSessions) ? recentSessions : [];
+
   // Chart data for time series
   const timeSeriesChartData = {
-    labels: timeSeries.map(d => new Date(d.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })),
+    labels: safeTimeSeries.map(d => new Date(d.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })),
     datasets: [
       {
         label: 'Sessions',
-        data: timeSeries.map(d => d.sessions),
+        data: safeTimeSeries.map(d => d.sessions),
         borderColor: 'rgb(34, 211, 238)',
         backgroundColor: 'rgba(34, 211, 238, 0.1)',
         fill: true,
@@ -64,7 +68,7 @@ export default function AdminLeoAnalytics() {
       },
       {
         label: 'Conversions',
-        data: timeSeries.map(d => d.conversions),
+        data: safeTimeSeries.map(d => d.conversions),
         borderColor: 'rgb(168, 85, 247)',
         backgroundColor: 'rgba(168, 85, 247, 0.1)',
         fill: true,
@@ -245,7 +249,7 @@ export default function AdminLeoAnalytics() {
                 </tr>
               </thead>
               <tbody>
-                {recentSessions.map((session: any) => (
+                {safeRecentSessions.map((session: any) => (
                   <tr key={session.sessionId} className="border-b border-white/10">
                     <td className="text-white/80 py-3 px-4 font-mono text-sm">{session.sessionId.slice(0, 8)}...</td>
                     <td className="text-white py-3 px-4 capitalize">{session.pageContext}</td>

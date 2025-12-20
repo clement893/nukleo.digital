@@ -22,7 +22,7 @@ export default function AdminLEOContacts() {
   }
 
   const exportToCSV = () => {
-    if (!contacts || contacts.length === 0) return;
+    if (!contacts || !Array.isArray(contacts) || contacts.length === 0) return;
 
     const headers = ['ID', 'Email', 'Name', 'Created At', 'Context'];
     const rows = contacts.map((contact: any) => [
@@ -147,7 +147,7 @@ export default function AdminLEOContacts() {
                     </tr>
                   </thead>
                   <tbody>
-                    {contacts.map((contact: any) => (
+                    {contacts && Array.isArray(contacts) ? contacts.map((contact: any) => (
                       <>
                         <tr 
                           key={contact.id} 
@@ -220,7 +220,7 @@ export default function AdminLEOContacts() {
                           </tr>
                         )}
                       </>
-                    ))}
+                    )) : null}
                   </tbody>
                 </table>
               </div>

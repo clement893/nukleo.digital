@@ -25,7 +25,7 @@ export default function AdminAgencyLeads() {
 
   // Filter leads
   const filteredLeads = useMemo(() => {
-    if (!leads) return [];
+    if (!leads || !Array.isArray(leads)) return [];
     
     return leads.filter(lead => {
       const matchesSearch = 

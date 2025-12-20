@@ -33,6 +33,16 @@ export default function Leo() {
       const saved = localStorage.getItem('leo-chat-history');
       if (saved) {
         const parsed = JSON.parse(saved);
+        // Ensure parsed is an array before mapping
+        if (!Array.isArray(parsed)) {
+          return [
+            {
+              role: 'assistant',
+              content: welcomeMessage,
+              timestamp: new Date(),
+            },
+          ];
+        }
         // Convert timestamp strings back to Date objects and update welcome message if it's the default English one
         return parsed.map((msg: any) => {
           const message = {

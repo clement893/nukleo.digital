@@ -64,6 +64,12 @@ export default defineConfig({
           return 'assets/[ext]/[name]-[hash][extname]';
         },
         manualChunks: (id) => {
+          // CRITICAL: Exclude wouter from splitting - it must stay in main chunk
+          // This ensures Link is always available for lazy-loaded components
+          if (id.includes('wouter')) {
+            return; // Return undefined to keep in main chunk
+          }
+          
           // Vendor chunks - ultra-granular splitting for better caching and smaller initial bundle
           if (id.includes('node_modules')) {
             // React core - split into smaller chunks (critical, load first)
@@ -102,11 +108,6 @@ export default defineConfig({
             if (id.includes('framer-motion')) {
               return 'animation-vendor';
             }
-            // Router - keep in initial bundle for faster navigation
-            // Don't split wouter - it's small and needed immediately
-            if (id.includes('wouter')) {
-              return 'vendor'; // Ensure wouter is in vendor chunk, not split
-            }
             // Hooks - ensure useLocalizedPath is available in vendor chunk
             if (id.includes('useLocalizedPath') || id.includes('hooks/useLocalizedPath')) {
               return 'vendor';
@@ -125,6 +126,11 @@ export default defineConfig({
             }
             // Other node_modules go to vendor chunk
             return 'vendor';
+          }
+          
+          // Exclude hooks from splitting if they're used by lazy-loaded components
+          if (id.includes('hooks/useLocalizedPath')) {
+            return; // Keep in main chunk
           }
           // Split by page for better lazy loading - admin should NEVER be in initial bundle
           // Use more efficient string matching - CRITICAL: admin must be completely separate

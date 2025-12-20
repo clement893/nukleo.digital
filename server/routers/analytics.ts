@@ -19,6 +19,10 @@ export const analyticsRouter = router({
 
       return Array.isArray(configs) ? configs : [];
     } catch (error) {
+      // Silently handle database connection errors - return empty array
+      if (error instanceof Error && 'code' in error && error.code === 'ECONNREFUSED') {
+        return [];
+      }
       console.error("[Analytics] Error fetching configurations:", error);
       return [];
     }
@@ -40,6 +44,10 @@ export const analyticsRouter = router({
 
       return Array.isArray(configs) ? configs : [];
     } catch (error) {
+      // Silently handle database connection errors - return empty array
+      if (error instanceof Error && 'code' in error && error.code === 'ECONNREFUSED') {
+        return [];
+      }
       console.error("[Analytics] Error fetching active configurations:", error);
       return [];
     }

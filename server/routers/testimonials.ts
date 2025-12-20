@@ -41,6 +41,10 @@ export const testimonialsRouter = router({
           displayOrder: testimonial.displayOrder,
         }));
       } catch (error) {
+        // Silently handle database connection errors - return empty array
+        if (error instanceof Error && 'code' in error && error.code === 'ECONNREFUSED') {
+          return [];
+        }
         console.error('Error fetching testimonials from database:', error);
         return [];
       }

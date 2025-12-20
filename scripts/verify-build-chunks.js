@@ -71,7 +71,9 @@ function extractChunkReferences(htmlContent) {
 }
 
 function checkChunkExists(chunkPath) {
-  const fullPath = path.join(DIST_PUBLIC, chunkPath);
+  // Normalize the path - remove leading slash if present for join
+  const normalizedPath = chunkPath.startsWith('/') ? chunkPath.substring(1) : chunkPath;
+  const fullPath = path.join(DIST_PUBLIC, normalizedPath);
   return fs.existsSync(fullPath);
 }
 

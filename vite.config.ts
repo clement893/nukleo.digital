@@ -69,8 +69,12 @@ export default defineConfig({
           if (id.includes('wouter')) {
             return; // Return undefined to keep in main chunk
           }
-          // Force useLocalizedPath hook to stay in main chunk
+          // Force useLocalizedPath hook and LanguageContext to stay in main chunk
           if (id.includes('hooks/useLocalizedPath') || id.includes('useLocalizedPath')) {
+            return; // Return undefined to keep in main chunk
+          }
+          // LanguageContext is needed by useLocalizedPath
+          if (id.includes('contexts/LanguageContext') || id.includes('LanguageContext')) {
             return; // Return undefined to keep in main chunk
           }
           

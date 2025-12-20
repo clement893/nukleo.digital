@@ -39,6 +39,9 @@ const welcomeMessages: Record<PageContext, string> = {
 export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
+  
+  // Ensure messages is always an array to prevent .map() errors
+  const safeMessages = Array.isArray(messages) ? messages : [];
   const [inputValue, setInputValue] = useState('');
   const [hasInteracted, setHasInteracted] = useState(false);
   const [emailCaptured, setEmailCaptured] = useState(false);
@@ -115,15 +118,15 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
   
   // Update session on message count change
   useEffect(() => {
-    if (messages.length > 0 && sessionId) {
+    if (safeMessages.length > 0 && sessionId) {
       const conversationDuration = Math.floor((Date.now() - sessionStartTime) / 1000);
       updateSessionMutation.mutate({
         sessionId,
-        messageCount: messages.length,
+        messageCount: safeMessages.length,
         conversationDuration,
       });
     }
-  }, [messages.length, sessionId, sessionStartTime]);
+  }, [safeMessages.length, sessionId, sessionStartTime]);
 
   const storageKey = `leo-${pageContext}-interacted`;
 
@@ -165,7 +168,8 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
   // Extract structured data from conversation
   const extractDataFromConversation = (messages: Message[]): Record<string, any> => {
     const data: Record<string, any> = {};
-    const fullConversation = messages.map(m => m.content).join(' ');
+    const safeMessagesArray = Array.isArray(messages) ? messages : [];
+    const fullConversation = safeMessagesArray.map(m => m.content).join(' ');
 
     // Extract email
     const email = extractEmail(fullConversation);
@@ -211,7 +215,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
       content: inputValue.trim(),
     };
 
-    const newMessages = [...messages, userMessage];
+    const newMessages = [...safeMessages, userMessage];
     setMessages(newMessages);
     setInputValue('');
 
@@ -322,7 +326,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
     setShowEmailForm(false);
     
     // Remove email form message and add confirmation
-    const messagesWithoutForm = messages.filter(m => !m.isEmailForm);
+    const messagesWithoutForm = safeMessages.filter(m => !m.isEmailForm);
     setMessages([...messagesWithoutForm, {
       role: 'assistant',
       content: `Perfect! Thanks ${nameInput || 'there'}! 🎉 I'll send personalized insights to ${emailInput}. Now, let's continue our conversation!`,
@@ -354,7 +358,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
         name: nameInput,
         conversationContext: JSON.stringify({
           pageContext,
-          messages: messages.slice(0, 10),
+          messages: safeMessages.slice(0, 10),
         }),
       }).catch(err => console.error('Failed to save contact:', err));
     }
@@ -367,7 +371,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
   const handleSkipEmail = () => {
     setShowEmailForm(false);
     // Remove email form message and add skip confirmation
-    const messagesWithoutForm = messages.filter(m => !m.isEmailForm);
+    const messagesWithoutForm = safeMessages.filter(m => !m.isEmailForm);
     setMessages([...messagesWithoutForm, {
       role: 'assistant',
       content: "No problem! Let's continue our conversation. 😊",
@@ -380,7 +384,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
     localStorage.setItem(storageKey, 'true');
     
     // Add welcome message if no messages yet
-    if (messages.length === 0) {
+    if (safeMessages.length === 0) {
       setMessages([{
         role: 'assistant',
         content: welcomeMessages[pageContext],
@@ -465,7 +469,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
 
           {/* Messages */}
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
-            {messages.map((message, index) => (
+            {safeMessages.map((message, index) => (
               <div key={index}>
                 {message.isEmailForm ? (
                   // Inline Email Form

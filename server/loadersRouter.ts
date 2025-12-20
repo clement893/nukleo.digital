@@ -107,6 +107,19 @@ export const loadersRouter = router({
         hasWarnings: results.filter(r => r.warnings.length > 0).length,
       },
     };
+    } catch (error) {
+      console.error('[Loaders Router] Error in checkAll:', error);
+      return {
+        total: 0,
+        needsMigration: 0,
+        results: [],
+        summary: {
+          valid: 0,
+          hasErrors: 0,
+          hasWarnings: 0,
+        },
+      };
+    }
   }),
 
   migrateAll: adminProcedure.mutation(async () => {

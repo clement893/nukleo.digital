@@ -54,6 +54,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
   const [emailInput, setEmailInput] = useState('');
   const [nameInput, setNameInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const typingIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const chatMutation = trpc.leo.chat.useMutation();
   const saveLeoContact = trpc.leo.saveContact.useMutation();
@@ -132,10 +133,15 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
 
   // Auto-open disabled - Leo will only open when user clicks the button
   useEffect(() => {
-    const hasSeenBefore = localStorage.getItem(storageKey);
-    if (hasSeenBefore) {
-      setHasInteracted(true);
-      return;
+    try {
+      const hasSeenBefore = typeof window !== 'undefined' ? localStorage.getItem(storageKey) : null;
+      if (hasSeenBefore) {
+        setHasInteracted(true);
+        return;
+      }
+    } catch (error) {
+      // localStorage may not be available (private mode, SSR)
+      logger.tagged('UniversalLEO').warn('localStorage not available:', error);
     }
 
     // Auto-open functionality disabled
@@ -235,13 +241,24 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
       setIsTyping(true);
       setTypingText('');
       
+      // Clear any existing interval
+      if (typingIntervalRef.current) {
+        clearInterval(typingIntervalRef.current);
+        typingIntervalRef.current = null;
+      }
+      
       let currentIndex = 0;
-      const typingInterval = setInterval(async () => {
+      
+      // Store interval in ref for cleanup
+      typingIntervalRef.current = setInterval(() => {
         if (currentIndex < fullText.length) {
           setTypingText(fullText.slice(0, currentIndex + 1));
           currentIndex++;
         } else {
-          clearInterval(typingInterval);
+          if (typingIntervalRef.current) {
+            clearInterval(typingIntervalRef.current);
+            typingIntervalRef.current = null;
+          }
           setIsTyping(false);
           
           const assistantMessage: Message = {
@@ -290,7 +307,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
                   budget: extractedData.budget,
                   urgency: extractedData.urgency,
                   techNeeds: undefined,
-                }).catch(err => console.error('Failed to save agency lead:', err));
+                }).catch(err => logger.tagged('UniversalLEO').error('Failed to save agency lead:', err));
               } else {
                 // Save as LEO contact
                 saveLeoContact.mutateAsync({
@@ -301,14 +318,20 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
                     messages: updatedMessages.slice(0, 10),
                     extractedData,
                   }),
-                }).catch(err => console.error('Failed to save contact:', err));
+                }).catch(err => logger.tagged('UniversalLEO').error('Failed to save contact:', err));
               }
             }
           }
         }
       }, 5);
     } catch (error) {
-      console.error('Chat error:', error);
+      logger.tagged('UniversalLEO').error('Chat error:', error);
+      // Clear typing interval on error
+      if (typingIntervalRef.current) {
+        clearInterval(typingIntervalRef.current);
+        typingIntervalRef.current = null;
+      }
+      setIsTyping(false);
       setMessages([
         ...newMessages,
         {
@@ -351,7 +374,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
         budget: undefined,
         urgency: undefined,
         techNeeds: undefined,
-      }).catch(err => console.error('Failed to save agency lead:', err));
+      }).catch(err => logger.tagged('UniversalLEO').error('Failed to save agency lead:', err));
     } else {
       await saveLeoContact.mutateAsync({
         email: emailInput,
@@ -360,7 +383,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
           pageContext,
           messages: safeMessages.slice(0, 10),
         }),
-      }).catch(err => console.error('Failed to save contact:', err));
+      }).catch(err => logger.tagged('UniversalLEO').error('Failed to save contact:', err));
     }
     
     // Clear inputs
@@ -381,7 +404,14 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
   const handleOpen = () => {
     setIsOpen(true);
     setHasInteracted(true);
-    localStorage.setItem(storageKey, 'true');
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(storageKey, 'true');
+      }
+    } catch (error) {
+      // localStorage may not be available (private mode)
+      logger.tagged('UniversalLEO').warn('Failed to save interaction state:', error);
+    }
     
     // Add welcome message if no messages yet
     if (safeMessages.length === 0) {

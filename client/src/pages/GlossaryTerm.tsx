@@ -15,8 +15,14 @@ export default function GlossaryTerm() {
   const getLocalizedPath = useLocalizedPath();
 
   const [bookmarkedTerms, setBookmarkedTerms] = useState<string[]>(() => {
-    const saved = localStorage.getItem('glossary-bookmarks');
-    return saved ? JSON.parse(saved) : [];
+    try {
+      if (typeof window === 'undefined') return [];
+      const saved = localStorage.getItem('glossary-bookmarks');
+      return saved ? JSON.parse(saved) : [];
+    } catch (error) {
+      // localStorage may not be available (private mode, SSR)
+      return [];
+    }
   });
 
   const toggleBookmark = (id: string) => {
@@ -24,7 +30,14 @@ export default function GlossaryTerm() {
       ? bookmarkedTerms.filter(bid => bid !== id)
       : [...bookmarkedTerms, id];
     setBookmarkedTerms(newBookmarks);
-    localStorage.setItem('glossary-bookmarks', JSON.stringify(newBookmarks));
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('glossary-bookmarks', JSON.stringify(newBookmarks));
+      }
+    } catch (error) {
+      // localStorage may not be available (private mode)
+      console.warn('Failed to save bookmarks:', error);
+    }
   };
 
   const handleShare = async () => {

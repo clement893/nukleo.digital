@@ -14,8 +14,14 @@ export default function Glossary() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedDifficulty, setSelectedDifficulty] = useState('All');
   const [bookmarkedTerms, setBookmarkedTerms] = useState<string[]>(() => {
-    const saved = localStorage.getItem('glossary-bookmarks');
-    return saved ? JSON.parse(saved) : [];
+    try {
+      if (typeof window === 'undefined') return [];
+      const saved = localStorage.getItem('glossary-bookmarks');
+      return saved ? JSON.parse(saved) : [];
+    } catch (error) {
+      // localStorage may not be available (private mode, SSR)
+      return [];
+    }
   });
 
   const toggleBookmark = (termId: string) => {
@@ -23,7 +29,14 @@ export default function Glossary() {
       ? bookmarkedTerms.filter(id => id !== termId)
       : [...bookmarkedTerms, termId];
     setBookmarkedTerms(newBookmarks);
-    localStorage.setItem('glossary-bookmarks', JSON.stringify(newBookmarks));
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('glossary-bookmarks', JSON.stringify(newBookmarks));
+      }
+    } catch (error) {
+      // localStorage may not be available (private mode)
+      console.warn('Failed to save bookmarks:', error);
+    }
   };
 
   const filteredTerms = useMemo(() => {

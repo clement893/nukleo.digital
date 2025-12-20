@@ -195,6 +195,7 @@ export default function Leo() {
   // Load expert mode preference from localStorage
   const [isExpertMode, setIsExpertMode] = useState<boolean>(() => {
     try {
+      if (typeof window === 'undefined') return false;
       const saved = localStorage.getItem('leo-expert-mode');
       return saved === 'true';
     } catch {
@@ -205,7 +206,9 @@ export default function Leo() {
   // Save expert mode preference
   useEffect(() => {
     try {
-      localStorage.setItem('leo-expert-mode', String(isExpertMode));
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('leo-expert-mode', String(isExpertMode));
+      }
     } catch (error) {
       logger.tagged('Leo').error('Error saving expert mode preference:', error);
     }
@@ -304,7 +307,9 @@ export default function Leo() {
   // Save messages to localStorage whenever they change
   useEffect(() => {
     try {
-      localStorage.setItem('leo-chat-history', JSON.stringify(messages));
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('leo-chat-history', JSON.stringify(messages));
+      }
     } catch (error) {
       logger.tagged('Leo').error('Error saving chat history:', error);
     }
@@ -370,13 +375,22 @@ export default function Leo() {
       setIsTyping(true);
       setTypingText('');
       
+      // Clear any existing interval
+      if (typingIntervalRef.current) {
+        clearInterval(typingIntervalRef.current);
+        typingIntervalRef.current = null;
+      }
+      
       let currentIndex = 0;
-      const typingInterval = setInterval(() => {
+      typingIntervalRef.current = setInterval(() => {
         if (currentIndex < fullText.length) {
           setTypingText(fullText.slice(0, currentIndex + 1));
           currentIndex++;
         } else {
-          clearInterval(typingInterval);
+          if (typingIntervalRef.current) {
+            clearInterval(typingIntervalRef.current);
+            typingIntervalRef.current = null;
+          }
           setIsTyping(false);
           
           const assistantMessage: Message = {
@@ -387,7 +401,7 @@ export default function Leo() {
           
           // Check if we should show email form - only after first complete exchange
           // Welcome message (1) + user message (2) = 2 messages before adding assistant
-          const emailAlreadySaved = localStorage.getItem('leo-email-saved');
+          const emailAlreadySaved = typeof window !== 'undefined' ? localStorage.getItem('leo-email-saved') : null;
           
           setMessages((prev) => {
             const updated = [...prev, assistantMessage];
@@ -437,7 +451,13 @@ export default function Leo() {
       
       setEmailSaved(true);
       setShowEmailForm(false);
-      localStorage.setItem('leo-email-saved', 'true');
+      try {
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('leo-email-saved', 'true');
+        }
+      } catch (error) {
+        logger.tagged('Leo').warn('Failed to save email state:', error);
+      }
       
       // Remove email form message and add confirmation
       const messagesWithoutForm = messages.filter(m => !m.isEmailForm);

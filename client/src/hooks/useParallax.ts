@@ -1,9 +1,28 @@
 import { useEffect, useState } from 'react';
 
 /**
- * Hook pour créer un effet parallax subtil au scroll
- * @param speed - Vitesse du parallax (0.3 = lent, 0.5 = moyen, 0.7 = rapide)
- * @returns offsetY - Décalage vertical en pixels
+ * Hook personnalisé pour créer un effet parallax subtil au scroll.
+ * 
+ * Calcule un décalage vertical basé sur la position de scroll et une vitesse
+ * configurable. Utilise `requestAnimationFrame` pour des performances optimales.
+ * 
+ * @param speed - Vitesse du parallax (défaut: 0.5)
+ *   - `0.3` = lent (effet subtil)
+ *   - `0.5` = moyen (effet équilibré)
+ *   - `0.7` = rapide (effet prononcé)
+ * 
+ * @returns `offsetY` - Décalage vertical en pixels à appliquer à l'élément
+ * 
+ * @example
+ * ```tsx
+ * const offsetY = useParallax(0.5);
+ * 
+ * return (
+ *   <div style={{ transform: `translateY(${offsetY}px)` }}>
+ *     Contenu avec effet parallax
+ *   </div>
+ * );
+ * ```
  */
 export function useParallax(speed: number = 0.5) {
   const [offsetY, setOffsetY] = useState(0);

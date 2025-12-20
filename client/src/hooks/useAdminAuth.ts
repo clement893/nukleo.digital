@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 
+/**
+ * Interface représentant un utilisateur administrateur authentifié.
+ */
 interface AdminUser {
   id: string;
   email: string;
@@ -8,6 +11,34 @@ interface AdminUser {
   picture?: string;
 }
 
+/**
+ * Hook personnalisé pour gérer l'authentification administrateur.
+ * 
+ * Vérifie automatiquement l'état d'authentification au montage du composant
+ * et fournit des méthodes pour se connecter et se déconnecter.
+ * 
+ * @returns Objet contenant :
+ * - `user`: L'utilisateur admin authentifié ou `null`
+ * - `loading`: État de chargement initial (`true` pendant la vérification)
+ * - `isAuthenticated`: Booléen indiquant si l'utilisateur est authentifié
+ * - `login`: Fonction pour rediriger vers la page de connexion Google OAuth
+ * - `logout`: Fonction pour déconnecter l'utilisateur et rediriger vers `/admin/login`
+ * 
+ * @example
+ * ```tsx
+ * const { user, loading, isAuthenticated, login, logout } = useAdminAuth();
+ * 
+ * if (loading) return <div>Loading...</div>;
+ * if (!isAuthenticated) return <button onClick={login}>Login</button>;
+ * 
+ * return (
+ *   <div>
+ *     <p>Welcome, {user.name}</p>
+ *     <button onClick={logout}>Logout</button>
+ *   </div>
+ * );
+ * ```
+ */
 export function useAdminAuth() {
   const [user, setUser] = useState<AdminUser | null>(null);
   const [loading, setLoading] = useState(true);

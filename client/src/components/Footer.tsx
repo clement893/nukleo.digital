@@ -8,11 +8,12 @@ import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import { useMemo, memo } from 'react';
 import { trpc } from '@/lib/trpc';
+import { MOBILE_BREAKPOINT } from '@/lib/constants';
 
 function Footer() {
   const { t, language } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
-  const isMobile = useIsMobile(768);
+  const isMobile = useIsMobile(MOBILE_BREAKPOINT);
   
   const allNavigation = useMemo(() => [
     { label: t('footer.nav.manifesto'), href: '/manifesto' },

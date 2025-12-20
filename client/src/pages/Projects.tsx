@@ -10,6 +10,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { logger } from '@/lib/logger';
 import { Link } from 'wouter';
+import { MOBILE_BREAKPOINT } from '@/lib/constants';
 
 // Liste de fallback des images (si l'API ne retourne rien)
 const fallbackImages = [
@@ -141,7 +142,7 @@ export default function Projects() {
     if (images.length === 0) return;
     
     const observers: IntersectionObserver[] = [];
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < MOBILE_BREAKPOINT;
     
     // Utiliser requestIdleCallback pour différer l'initialisation de l'observer sur mobile
     const initObserver = () => {
@@ -196,7 +197,7 @@ export default function Projects() {
     if (images.length === 0) return;
     
     // Detect mobile to reduce preload on mobile devices
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < MOBILE_BREAKPOINT;
     
     // Réduire drastiquement le préchargement sur mobile pour améliorer les performances
     // Sur mobile, on charge seulement la première image immédiatement

@@ -817,7 +817,18 @@ async function startServer() {
     
     // Send to Sentry if configured
     if (process.env.SENTRY_DSN && err instanceof Error) {
-      Sentry.captureException(err);
+      Sentry.captureException(err, {
+        tags: {
+          errorCode: errorCode || 'UNKNOWN',
+          errorName: errorName,
+        },
+        extra: {
+          url: req.url,
+          method: req.method,
+          statusCode: res.statusCode,
+        },
+        level: 'error',
+      });
     }
     
     // Don't send response if headers already sent

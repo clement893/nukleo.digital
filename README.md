@@ -3,13 +3,17 @@
 > Site d'agence professionnelle avec espace client connecté et application de gestion de projets.
 > Dernière mise à jour: Décembre 2024
 
+[![Railway](https://railway.app/button.svg)](https://railway.app)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ## Stack Technique
 
 - **Frontend**: React 19 + TypeScript + Tailwind CSS 4
 - **Backend**: Express + tRPC 11
 - **Base de données**: PostgreSQL (Drizzle ORM)
 - **Authentification**: Manus OAuth + Google OAuth (admin)
-- **Déploiement**: Railway (production) / Vercel (config disponible)
+- **Déploiement**: Railway (production)
+- **Monitoring**: Sentry (erreurs), Winston (logs)
 
 ## 🚀 Déploiement sur Railway
 
@@ -80,8 +84,11 @@ pnpm format
 # Migrations de base de données
 pnpm db:push
 
-# Tests (à venir)
+# Tests
 pnpm test
+
+# Tests en mode watch
+pnpm test --watch
 ```
 
 ### Structure du projet
@@ -104,21 +111,20 @@ nukleo.digital/
 └── dist/            # Build de production
 ```
 
-## Développement local
+## 🧪 Tests
 
 ```bash
-# Installation des dépendances
-pnpm install
+# Exécuter tous les tests
+pnpm test
 
-# Lancer le serveur de développement
-pnpm dev
+# Tests en mode watch
+pnpm test --watch
 
-# Build de production
-pnpm build
-
-# Migrations de base de données
-pnpm db:push
+# Couverture de code
+pnpm test --coverage
 ```
+
+> **Note**: Les tests sont en cours d'implémentation. Objectif: 70% de couverture pour le code critique.
 
 ## ✨ Fonctionnalités
 
@@ -148,8 +154,10 @@ pnpm db:push
 
 ## 📚 Documentation
 
+- [Guide de contribution](./CONTRIBUTING.md) - Comment contribuer au projet
 - [Analyse du code](./CODE_ANALYSIS.md) - Analyse détaillée de l'architecture et du code
-- [Guide de contribution](./CONTRIBUTING.md) - Comment contribuer au projet (à venir)
+- [Audit technique](./AUDIT_TECHNIQUE.md) - Audit complet du site et du code
+- [Variables d'environnement](./.env.example) - Documentation complète des variables d'environnement
 
 ## 🛠️ Technologies principales
 

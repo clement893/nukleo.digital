@@ -2,9 +2,26 @@ import { useEffect } from 'react';
 import { useLocation } from 'wouter';
 
 /**
- * Hook to trigger page animations on route change
- * Adds a class to body to restart CSS animations
- * Ensures body stays visible during transitions to prevent flash
+ * Hook personnalisé pour déclencher des animations de transition entre les pages.
+ * 
+ * Ajoute automatiquement des classes CSS au `body` lors des changements de route
+ * pour permettre le redémarrage des animations CSS et éviter les flashs visuels.
+ * 
+ * **Comportement** :
+ * - Ajoute la classe `loaded` au body pour s'assurer qu'il reste visible
+ * - Ajoute la classe `page-transitioning` lors du changement de route
+ * - Retire la classe après 300ms (durée des animations)
+ * 
+ * @example
+ * ```tsx
+ * // Dans votre composant App ou Layout
+ * usePageTransition();
+ * 
+ * // Dans votre CSS
+ * .page-transitioning {
+ *   animation: fadeIn 0.3s ease-in-out;
+ * }
+ * ```
  */
 export function usePageTransition() {
   const [location] = useLocation();

@@ -7,12 +7,48 @@ import { ENV } from "./env";
 const ADMIN_JWT_SECRET = ENV.cookieSecret + "-admin";
 const ADMIN_COOKIE_NAME = "admin_session";
 
+/**
+ * Contexte tRPC contenant les informations de requête et utilisateur.
+ * 
+ * Utilisé par toutes les procédures tRPC pour accéder aux informations
+ * de la requête HTTP et à l'utilisateur authentifié (si présent).
+ */
 export type TrpcContext = {
   req: CreateExpressContextOptions["req"];
   res: CreateExpressContextOptions["res"];
   user: User | null;
 };
 
+/**
+ * Crée le contexte tRPC pour une requête donnée.
+ * 
+ * Cette fonction gère l'authentification de plusieurs façons :
+ * 1. Authentification Google OAuth via Passport (pour les admins)
+ * 2. Authentification Manus OAuth standard (pour les clients)
+ * 3. Authentification JWT via cookie (pour les admins legacy)
+ * 
+ * **Ordre de vérification** :
+ * 1. Vérifie si l'utilisateur est authentifié via Passport (Google OAuth)
+ *    - Si oui et email dans la liste admin → utilisateur admin
+ *    - Sinon → essaie l'authentification Manus OAuth standard
+ * 2. Si pas d'authentification Passport → essaie Manus OAuth
+ * 3. Si toujours pas d'utilisateur → vérifie le cookie JWT admin
+ * 
+ * @param opts - Options de contexte Express fournies par tRPC
+ * @returns Contexte tRPC avec requête, réponse et utilisateur (ou null)
+ * 
+ * @example
+ * ```typescript
+ * // Dans une procédure tRPC
+ * export const myProcedure = publicProcedure
+ *   .use(async ({ ctx, next }) => {
+ *     if (!ctx.user) {
+ *       throw new TRPCError({ code: 'UNAUTHORIZED' });
+ *     }
+ *     return next({ ctx: { ...ctx, user: ctx.user } });
+ *   });
+ * ```
+ */
 export async function createContext(
   opts: CreateExpressContextOptions
 ): Promise<TrpcContext> {

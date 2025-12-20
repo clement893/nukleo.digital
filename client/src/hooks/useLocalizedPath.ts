@@ -1,9 +1,26 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 
 /**
- * Hook to generate localized paths
- * @param path - The path to localize (e.g., '/about' or '/')
- * @returns The localized path (e.g., '/fr/about' or '/about' for English)
+ * Hook personnalisé pour générer des chemins localisés selon la langue actuelle.
+ * 
+ * Ajoute automatiquement le préfixe `/fr` pour le français et conserve les chemins
+ * sans préfixe pour l'anglais. Les routes admin ne sont pas préfixées.
+ * 
+ * @returns Fonction qui prend un chemin et retourne le chemin localisé
+ * 
+ * @example
+ * ```tsx
+ * const getLocalizedPath = useLocalizedPath();
+ * 
+ * // En français
+ * getLocalizedPath('/about'); // '/fr/about'
+ * 
+ * // En anglais
+ * getLocalizedPath('/about'); // '/about'
+ * 
+ * // Routes admin (pas de préfixe)
+ * getLocalizedPath('/admin/dashboard'); // '/admin/dashboard'
+ * ```
  */
 export function useLocalizedPath() {
   const { language } = useLanguage();

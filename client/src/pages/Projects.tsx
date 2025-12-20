@@ -9,6 +9,7 @@ import { trpc } from '@/lib/trpc';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { logger } from '@/lib/logger';
+import { Link } from 'wouter';
 
 // Liste de fallback des images (si l'API ne retourne rien)
 const fallbackImages = [

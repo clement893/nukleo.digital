@@ -10,7 +10,12 @@ export const agenciesRouter = router({
       throw new TRPCError({ code: 'FORBIDDEN', message: 'Admin access required' });
     }
     
-    return await getAllAgencyLeads();
+    try {
+      return await getAllAgencyLeads();
+    } catch (error) {
+      console.error("[Agencies] Error fetching leads:", error);
+      return []; // Return empty array on error
+    }
   }),
 
   saveLead: publicProcedure

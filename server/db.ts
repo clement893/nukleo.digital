@@ -34,7 +34,7 @@ export async function getAllAgencyLeads() {
     return await db.select().from(agencyLeads).orderBy(desc(agencyLeads.createdAt));
   } catch (error) {
     console.error("[Database] Error getting agency leads:", error);
-    throw error;
+    return []; // Return empty array instead of throwing
   }
 }
 

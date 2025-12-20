@@ -129,6 +129,9 @@ export default function AdminLoaders() {
   // Fetch all loaders
   const { data: loaders, isLoading, error } = trpc.loaders.getAll.useQuery();
 
+  // Ensure loaders is always an array to prevent .map() errors
+  const safeLoaders = Array.isArray(loaders) ? loaders : [];
+
   // Mutations
   const toggleActiveMutation = trpc.loaders.toggleActive.useMutation({
     onSuccess: () => {
@@ -190,8 +193,8 @@ export default function AdminLoaders() {
     );
   }
 
-  const activeCount = loaders?.filter((l) => l.isActive).length || 0;
-  const inactiveCount = (loaders?.length || 0) - activeCount;
+  const activeCount = safeLoaders.filter((l) => l.isActive).length || 0;
+  const inactiveCount = safeLoaders.length - activeCount;
 
   return (
     <>
@@ -217,7 +220,7 @@ export default function AdminLoaders() {
           <Card>
             <CardHeader className="pb-3">
               <CardDescription>Total</CardDescription>
-              <CardTitle className="text-3xl">{loaders?.length || 0}</CardTitle>
+              <CardTitle className="text-3xl">{safeLoaders.length || 0}</CardTitle>
             </CardHeader>
           </Card>
           <Card>
@@ -239,7 +242,7 @@ export default function AdminLoaders() {
         </div>
 
         {/* Loaders List */}
-        {!loaders || loaders.length === 0 ? (
+        {safeLoaders.length === 0 ? (
           <Card>
             <CardContent className="py-12">
               <div className="text-center">
@@ -260,7 +263,7 @@ export default function AdminLoaders() {
           </Card>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {loaders.map((loader) => (
+            {safeLoaders.map((loader) => (
               <Card
                 key={loader.id}
                 className={loader.isActive ? "border-primary" : ""}

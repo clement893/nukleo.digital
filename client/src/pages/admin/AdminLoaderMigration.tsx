@@ -146,12 +146,14 @@ export default function AdminLoaderMigration() {
                   )}
 
                   {/* Détails des loaders avec problèmes */}
-                  {checkResult.results && checkResult.results.length > 0 && (
+                  {checkResult?.results && Array.isArray(checkResult.results) && checkResult.results.length > 0 && (
                     <div className="mt-4">
                       <h4 className="text-white font-semibold mb-2">Détails des loaders :</h4>
                       <div className="space-y-2 max-h-60 overflow-y-auto">
                         {checkResult.results.map((loader: any) => {
-                          const hasIssues = !loader.isValid || loader.errors.length > 0 || loader.warnings.length > 0;
+                          const errors = Array.isArray(loader.errors) ? loader.errors : [];
+                          const warnings = Array.isArray(loader.warnings) ? loader.warnings : [];
+                          const hasIssues = !loader.isValid || errors.length > 0 || warnings.length > 0;
                           if (!hasIssues) return null;
 
                           return (
@@ -159,16 +161,16 @@ export default function AdminLoaderMigration() {
                               <div className="flex items-start justify-between">
                                 <div className="flex-1">
                                   <div className="text-white font-medium">{loader.name}</div>
-                                  {loader.errors.length > 0 && (
+                                  {errors.length > 0 && (
                                     <div className="text-red-400 text-sm mt-1">
-                                      {loader.errors.map((error: string, idx: number) => (
+                                      {errors.map((error: string, idx: number) => (
                                         <div key={idx}>• {error}</div>
                                       ))}
                                     </div>
                                   )}
-                                  {loader.warnings.length > 0 && (
+                                  {warnings.length > 0 && (
                                     <div className="text-yellow-400 text-sm mt-1">
-                                      {loader.warnings.map((warning: string, idx: number) => (
+                                      {warnings.map((warning: string, idx: number) => (
                                         <div key={idx}>⚠ {warning}</div>
                                       ))}
                                     </div>

@@ -6,11 +6,23 @@ import { migrateLoaders } from "./migrate-loaders";
 
 export const loadersRouter = router({
   getAll: publicProcedure.query(async () => {
-    return await loadersDb.getAllLoaders();
+    try {
+      const result = await loadersDb.getAllLoaders();
+      return Array.isArray(result) ? result : [];
+    } catch (error) {
+      console.warn('[Loaders Router] Error in getAll:', error);
+      return [];
+    }
   }),
 
   getActive: publicProcedure.query(async () => {
-    return await loadersDb.getActiveLoaders();
+    try {
+      const result = await loadersDb.getActiveLoaders();
+      return Array.isArray(result) ? result : [];
+    } catch (error) {
+      console.warn('[Loaders Router] Error in getActive:', error);
+      return [];
+    }
   }),
 
   getById: publicProcedure
@@ -71,7 +83,8 @@ export const loadersRouter = router({
   // Admin routes
   checkAll: adminProcedure.query(async () => {
     const allLoaders = await loadersDb.getAllLoaders();
-    const results = allLoaders.map(loader => {
+    const safeLoaders = Array.isArray(allLoaders) ? allLoaders : [];
+    const results = safeLoaders.map(loader => {
       const validation = validateLoaderHTML(loader.cssCode);
       return {
         id: loader.id,

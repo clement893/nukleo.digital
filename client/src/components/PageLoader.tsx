@@ -94,6 +94,9 @@ export default function PageLoader() {
     refetchOnReconnect: false,
   });
 
+  // Ensure activeLoaders is always an array to prevent .map() errors
+  const safeActiveLoaders = Array.isArray(activeLoaders) ? activeLoaders : [];
+
   // Preload resources as soon as component mounts
   useEffect(() => {
     if (!shouldSkipLoader) {
@@ -164,7 +167,7 @@ export default function PageLoader() {
       return;
     }
 
-    if (!activeLoaders || activeLoaders.length === 0) {
+    if (!safeActiveLoaders || safeActiveLoaders.length === 0) {
       // No active loaders, show body content immediately
       setIsLoading(false);
       setIsFirstLoad(false);
@@ -173,7 +176,7 @@ export default function PageLoader() {
     }
 
     // Select a random loader from active loaders
-    const randomLoader = activeLoaders[Math.floor(Math.random() * activeLoaders.length)];
+    const randomLoader = safeActiveLoaders[Math.floor(Math.random() * safeActiveLoaders.length)];
     
     if (randomLoader && randomLoader.cssCode) {
       // Extract and inject CSS styles FIRST
@@ -309,7 +312,7 @@ export default function PageLoader() {
       setIsLoading(false);
       setLoaderHtml(null);
     };
-  }, [activeLoaders, isLoadingLoaders, loadersError, shouldSkipLoader, location, isFirstLoad]);
+  }, [safeActiveLoaders, isLoadingLoaders, loadersError, shouldSkipLoader, location, isFirstLoad]);
 
   // Don't show loader in admin area, contact page, or manifesto page
   if (shouldSkipLoader) {
@@ -326,7 +329,7 @@ export default function PageLoader() {
   }
 
   // Don't show anything if no loaders are active
-  if (!isLoadingLoaders && (!activeLoaders || activeLoaders.length === 0)) {
+  if (!isLoadingLoaders && (!safeActiveLoaders || safeActiveLoaders.length === 0)) {
     // Ensure body is visible when no loaders
     if (!document.body.classList.contains('loaded')) {
       document.body.classList.add('loaded');

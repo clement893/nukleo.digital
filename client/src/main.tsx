@@ -8,6 +8,10 @@ import App from "./App";
 
 import { getLoginUrl } from "./const";
 import { ThemeProvider } from "./contexts/ThemeContext";
+// CRITICAL: Pre-import LanguageContext and useLocalizedPath to ensure they're in main chunk
+// Import side-effect to ensure modules are bundled in main chunk
+import type {} from "./contexts/LanguageContext";
+import type {} from "./hooks/useLocalizedPath";
 import { initSentry } from "./lib/sentry";
 import { initWebVitals } from "./lib/webVitals";
 

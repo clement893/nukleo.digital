@@ -234,7 +234,7 @@ export default function Leo() {
   const getContextualSuggestionsForMode = (expertMode: boolean): string[] => {
     const categories = expertMode ? expertSuggestionCategories : suggestionCategories;
     
-    if (messages.length <= 1) return categories.initial;
+    if (safeMessages.length <= 1) return categories.initial;
 
     const lastMessages = safeMessages.slice(-3).map(m => m.content.toLowerCase()).join(' ');
 

@@ -7,6 +7,8 @@ import Breadcrumb from '@/components/Breadcrumb';
 import OptimizedImage from '@/components/OptimizedImage';
 import { trpc } from '@/lib/trpc';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { logger } from '@/lib/logger';
 
 // Liste de fallback des images (si l'API ne retourne rien)
 const fallbackImages = [
@@ -84,12 +86,12 @@ export default function Projects() {
     staleTime: 5 * 60 * 1000, // Cache for 5 minutes
     // Add error handling
     onError: (error) => {
-      console.error('[Projects] tRPC error:', error);
+      logger.tagged('Projects').error('tRPC error:', error);
       // Fallback to fallback images on error
       setImages(fallbackImages);
     },
     onSuccess: (data) => {
-      console.log('[Projects] tRPC success:', data?.length, 'images');
+      logger.tagged('Projects').log('tRPC success:', data?.length, 'images');
     },
   });
   
@@ -101,7 +103,7 @@ export default function Projects() {
   
   // Update images when API data loads
   useEffect(() => {
-    console.log('[Projects] API state:', { 
+    logger.tagged('Projects').debug('API state:', { 
       uploadedImages, 
       isLoadingImages, 
       imagesError,

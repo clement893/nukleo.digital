@@ -9,6 +9,7 @@ import Breadcrumb from '@/components/Breadcrumb';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { trpc } from '@/lib/trpc';
+import { logger } from '@/lib/logger';
 
 export default function Media() {
   const { t } = useLanguage();
@@ -48,7 +49,7 @@ export default function Media() {
       
       setTimeout(() => setIsSubmitted(false), 5000);
     } catch (error: any) {
-      console.error('Failed to send message:', error);
+      logger.tagged('Media').error('Failed to send message:', error);
       const formattedErrors: Record<string, string> = {};
       
       if (Array.isArray(error?.data)) {

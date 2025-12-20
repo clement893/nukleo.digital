@@ -45,7 +45,7 @@ export default function Leo() {
         });
       }
     } catch (error) {
-      console.error('Error loading chat history:', error);
+      logger.tagged('Leo').error('Error loading chat history:', error);
     }
     // Return default welcome message if no history
     return [

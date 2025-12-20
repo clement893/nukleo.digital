@@ -2162,5 +2162,14 @@
         "high": "High"
       }
     }
+  },
+  "pwa": {
+    "install": {
+      "title": "Install Nukleo Digital",
+      "description": "Install our app for a faster, more convenient experience.",
+      "button": "Install",
+      "dismiss": "Not now",
+      "close": "Close"
+    }
   }
 }

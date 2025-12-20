@@ -11,6 +11,7 @@ import ArrowBackground from "./components/ArrowBackground";
 import AnalyticsLoader from "./components/AnalyticsLoader";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import { FloatingLanguageToggle } from "./components/FloatingLanguageToggle";
+import PWAInstallPrompt from "./components/PWAInstallPrompt";
 import { usePageTransition } from "./hooks/usePageTransition";
 import { usePageBackground } from "./hooks/usePageBackground";
 import { lazyWithRetry } from "./lib/lazyWithRetry";
@@ -142,6 +143,7 @@ function App() {
           <GoogleAnalytics />
           <AnalyticsLoader />
           <FloatingLanguageToggle />
+          <PWAInstallPrompt />
           {/* Lazy load LEO on mobile - only load on desktop for better mobile performance */}
           <GlobalLEO />
           <Suspense fallback={null}>

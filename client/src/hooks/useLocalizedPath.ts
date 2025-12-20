@@ -8,6 +8,9 @@ import { useLanguage } from '@/contexts/LanguageContext';
 export function useLocalizedPath() {
   const { language } = useLanguage();
   
+  // Ensure language is always defined, default to 'en'
+  const safeLanguage = language || 'en';
+  
   return (path: string): string => {
     // Remove leading slash for processing
     const cleanPath = path.startsWith('/') ? path.slice(1) : path;
@@ -18,7 +21,7 @@ export function useLocalizedPath() {
     }
     
     // For French, add /fr prefix
-    if (language === 'fr') {
+    if (safeLanguage === 'fr') {
       return cleanPath ? `/fr/${cleanPath}` : '/fr';
     }
     

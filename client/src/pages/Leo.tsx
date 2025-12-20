@@ -24,6 +24,11 @@ interface Message {
 export default function Leo() {
   const { t } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
+  
+  // Ensure getLocalizedPath is always defined - provide fallback if hook fails
+  const safeGetLocalizedPath = (getLocalizedPath && typeof getLocalizedPath === 'function') 
+    ? getLocalizedPath 
+    : ((path: string) => path); // Fallback function
   const [menuOpen, setMenuOpen] = useState(false);
   const welcomeMessage = t('leo.welcomeMessage') || "I'm here to help architect your AI transformation. To begin, what should I call you?";
   
@@ -491,7 +496,7 @@ export default function Leo() {
         <div className="container">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <Link href={getLocalizedPath('/')}>
+            <Link href={safeGetLocalizedPath('/')}>
               <img 
                 src="/Nukleo_blanc_RVB.svg" 
                 alt={t('alt.logo') || 'Logo Nukleo Digital - Agence de transformation IA'} 
@@ -524,7 +529,7 @@ export default function Leo() {
                 {t('leo.newChat')}
               </Button>
               {/* Start Project - Text hidden on mobile, icon only */}
-              <Link href={getLocalizedPath('/start-project')}>
+              <Link href={safeGetLocalizedPath('/start-project')}>
                 <Button className="rounded-full bg-white text-purple-900 hover:bg-white/90 font-bold px-4 sm:px-6">
                   <span className="hidden sm:inline">{t('leo.startProject')}</span>
                   <span className="sm:hidden">+</span>
@@ -785,7 +790,7 @@ export default function Leo() {
 
             {/* Footer links */}
             <div className="flex items-center justify-between mt-4 text-xs text-white/40">
-              <Link href={getLocalizedPath('/privacy')} className="hover:text-white/60 transition-colors uppercase tracking-wider">
+              <Link href={safeGetLocalizedPath('/privacy')} className="hover:text-white/60 transition-colors uppercase tracking-wider">
                 {t('leo.privacyPolicy')}
               </Link>
               <a href="mailto:hello@nukleo.com" className="hover:text-white/60 transition-colors uppercase tracking-wider">

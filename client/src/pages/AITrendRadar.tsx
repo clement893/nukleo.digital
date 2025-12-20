@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import Breadcrumb from '@/components/Breadcrumb';
 import { trpc } from '@/lib/trpc';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { logger } from '@/lib/logger';
 import { Loader2, Mail } from 'lucide-react';
 import { useLocation, Link } from 'wouter';
 
@@ -28,7 +29,7 @@ export default function AITrendRadar() {
       setEmail('');
       setTimeout(() => setIsSubscribed(false), 5000);
     } catch (error) {
-      console.error('Failed to subscribe:', error);
+      logger.tagged('AITrendRadar').error('Failed to subscribe:', error);
     }
   };
 

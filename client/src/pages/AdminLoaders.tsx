@@ -12,6 +12,7 @@ import { Switch } from "@/components/ui/switch";
 import { Trash2, Eye, Plus, Loader2 } from "lucide-react";
 import { AdminHeader } from "@/components/AdminHeader";
 import LoaderPreview from "@/components/LoaderPreview";
+import SafeHTML from "@/components/SafeHTML";
 
 // Composant pour la prévisualisation miniature
 function LoaderMiniPreview({ cssCode, loaderId }: { cssCode: string; loaderId: number }) {
@@ -99,7 +100,9 @@ function LoaderMiniPreview({ cssCode, loaderId }: { cssCode: string; loaderId: n
           }}
         />
       </div>
-      <div
+      <SafeHTML
+        html={htmlContent}
+        tag="div"
         id={`loader-mini-container-${loaderId}`}
         className="absolute inset-0 flex items-center justify-center"
         style={{
@@ -109,7 +112,6 @@ function LoaderMiniPreview({ cssCode, loaderId }: { cssCode: string; loaderId: n
           left: "50%",
           transform: "translate(-50%, -50%) scale(0.3)",
         }}
-        dangerouslySetInnerHTML={{ __html: htmlContent }}
       />
       {!isReady && (
         <div className="absolute inset-0 flex items-center justify-center bg-black">

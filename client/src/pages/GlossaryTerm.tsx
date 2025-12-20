@@ -36,7 +36,7 @@ export default function GlossaryTerm() {
           url: window.location.href
         });
       } catch (err) {
-        console.log('Share failed:', err);
+        logger.tagged('GlossaryTerm').warn('Share failed:', err);
       }
     } else {
       // Fallback: copy to clipboard

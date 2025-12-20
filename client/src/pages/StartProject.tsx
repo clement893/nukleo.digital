@@ -57,9 +57,7 @@ export default function StartProject() {
         });
       }, 3000);
     } catch (error) {
-      if (import.meta.env.DEV) {
-        console.error('Failed to submit project:', error);
-      }
+      logger.tagged('StartProject').error('Failed to submit project:', error);
       const message = getErrorMessage(error, t('startProject.form.error') || 'Failed to submit project. Please try again.');
       setErrorMessage(message);
       setTimeout(() => setErrorMessage(null), 5000);

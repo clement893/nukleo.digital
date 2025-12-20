@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import SafeHTML from "@/components/SafeHTML";
 
 interface LoaderPreviewProps {
   cssCode: string;
@@ -139,10 +140,11 @@ export default function LoaderPreview({
               />
             </div>
             
-            <div
+            <SafeHTML
+              html={htmlContent}
+              tag="div"
               key={`preview-${isReady}`}
               className="absolute inset-0"
-              dangerouslySetInnerHTML={{ __html: htmlContent }}
             />
           </>
         )}

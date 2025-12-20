@@ -1,4 +1,5 @@
 import { lazy, ComponentType, LazyExoticComponent } from 'react';
+import { logger } from './logger';
 
 /**
  * Wraps React.lazy() with retry logic for failed chunk loads.
@@ -38,7 +39,7 @@ export function lazyWithRetry<T extends ComponentType<any>>(
         // If it's a chunk error and we've exhausted retries, reload the page
         // This ensures users get the latest HTML that matches the available chunks
         if (isChunkError) {
-          console.warn('[LazyLoad] Chunk loading failed, reloading page to get latest build...', error);
+          logger.tagged('LazyLoad').warn('Chunk loading failed, reloading page to get latest build...', error);
           
           // Store the current URL to reload to
           const currentUrl = window.location.href;

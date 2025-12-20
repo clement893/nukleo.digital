@@ -74,7 +74,7 @@ export default function AIReadinessAssessment() {
         const { generatePDFReport } = await import('@/lib/assessment/pdfGenerator');
         await generatePDFReport(results, data);
       } catch (pdfError) {
-        console.warn('PDF generation failed, report saved to database:', pdfError);
+        logger.tagged('AIReadinessAssessment').warn('PDF generation failed, report saved to database:', pdfError);
         // Continue - report is saved and email sent
       }
 
@@ -85,7 +85,7 @@ export default function AIReadinessAssessment() {
       setState('results');
       playClick();
     } catch (error) {
-      console.error('Failed to save assessment:', error);
+      logger.tagged('AIReadinessAssessment').error('Failed to save assessment:', error);
       alert(t('assessment.errors.saveFailed'));
     }
   };

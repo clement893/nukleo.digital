@@ -3,6 +3,7 @@ import { useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { sanitizeLoaderHTML, sanitizeLoaderDOM } from "@/utils/htmlSanitizer";
+import SafeHTML from "@/components/SafeHTML";
 
 // Preload critical resources during loader display
 function preloadResources() {
@@ -408,15 +409,16 @@ export default function PageLoader() {
       )}
       
       {sanitizedHtml && isLoading && (
-        <div
-          data-page-loader
+        <SafeHTML
+          html={sanitizedHtml}
+          tag="div"
+          data-page-loader="true"
           key={`page-loader-${loaderHtml.substring(0, 50)}`}
           className="fixed inset-0"
           style={{ 
             zIndex: 9999,
             visibility: "visible",
           }}
-          dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
         />
       )}
     </div>

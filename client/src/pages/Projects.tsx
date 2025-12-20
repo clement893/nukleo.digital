@@ -109,7 +109,7 @@ export default function Projects() {
     });
     
     if (imagesError) {
-      console.error('[Projects] API error, using fallback images:', imagesError);
+      logger.tagged('Projects').error('API error, using fallback images:', imagesError);
       // Use fallback images on error
       setImages(fallbackImages);
       return;
@@ -119,16 +119,16 @@ export default function Projects() {
       if (uploadedImages.length > 0) {
         // Use images from API
         const imageNames = uploadedImages.map(img => img.name);
-        console.log('[Projects] Setting images from API:', imageNames.length);
+        logger.tagged('Projects').log('Setting images from API:', imageNames.length);
         setImages(imageNames);
       } else {
         // API returned empty array - use fallback images
-        console.log('[Projects] API returned empty array, using fallback images');
+        logger.tagged('Projects').log('API returned empty array, using fallback images');
         setImages(fallbackImages);
       }
     } else if (!isLoadingImages) {
       // API finished loading but no data - use fallback images
-      console.log('[Projects] No API data after loading, using fallback images');
+      logger.tagged('Projects').log('No API data after loading, using fallback images');
       setImages(fallbackImages);
     }
   }, [uploadedImages, isLoadingImages, imagesError]);

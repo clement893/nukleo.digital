@@ -29,7 +29,9 @@ export default function SafeHTML({
   className,
   style,
   tag = 'div',
-  allowScripts = false 
+  allowScripts = false,
+  id,
+  ...restProps
 }: SafeHTMLProps) {
   const containerRef = useRef<HTMLElement>(null);
 
@@ -79,6 +81,15 @@ export default function SafeHTML({
   // Create the wrapper element dynamically
   const Tag = tag as keyof JSX.IntrinsicElements;
   
-  return <Tag ref={containerRef as any} className={className} style={style} />;
+  // Filter out non-HTML props and keep only valid HTML attributes
+  const htmlProps: Record<string, unknown> = {};
+  Object.keys(restProps).forEach(key => {
+    // Allow data-*, aria-*, and key attributes
+    if (key.startsWith('data-') || key.startsWith('aria-') || key === 'key') {
+      htmlProps[key] = restProps[key];
+    }
+  });
+  
+  return <Tag ref={containerRef as any} id={id} className={className} style={style} {...htmlProps} />;
 }
 

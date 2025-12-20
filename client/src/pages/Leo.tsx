@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { trpc } from '@/lib/trpc';
 import { Link } from 'wouter';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { logger } from '@/lib/logger';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 interface Message {
@@ -185,7 +186,7 @@ export default function Leo() {
     try {
       localStorage.setItem('leo-expert-mode', String(isExpertMode));
     } catch (error) {
-      console.error('Error saving expert mode preference:', error);
+      logger.tagged('Leo').error('Error saving expert mode preference:', error);
     }
   }, [isExpertMode]);
 
@@ -281,7 +282,7 @@ export default function Leo() {
     try {
       localStorage.setItem('leo-chat-history', JSON.stringify(messages));
     } catch (error) {
-      console.error('Error saving chat history:', error);
+      logger.tagged('Leo').error('Error saving chat history:', error);
     }
   }, [messages]);
 
@@ -386,7 +387,7 @@ export default function Leo() {
         }
       }, 5); // 5ms per character for fast typing speed
     } catch (error) {
-      console.error('Error sending message:', error);
+      logger.tagged('Leo').error('Error sending message:', error);
       const errorMessage: Message = {
         role: 'assistant',
         content: t('leo.errorMessage') || "Sorry, I'm having trouble connecting right now. Please try again! 🔄",
@@ -429,7 +430,7 @@ export default function Leo() {
       setEmailInput('');
       setNameInput('');
     } catch (error) {
-      console.error('Error saving email:', error);
+      logger.tagged('Leo').error('Error saving email:', error);
     }
   };
 

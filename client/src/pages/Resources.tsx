@@ -61,9 +61,7 @@ export default function Resources() {
       
       setTimeout(() => setIsSubmitted(false), 5000);
     } catch (error) {
-      if (import.meta.env.DEV) {
-        console.error('Failed to subscribe:', error);
-      }
+      logger.tagged('Resources').error('Failed to subscribe:', error);
       setErrorMessage(t('resources.newsletter.error') || 'Failed to subscribe. Please try again.');
       setTimeout(() => setErrorMessage(null), 5000);
     } finally {

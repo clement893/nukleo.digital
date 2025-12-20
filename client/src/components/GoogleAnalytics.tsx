@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'wouter';
+import { logger } from '@/lib/logger';
 
 // Google Analytics 4 Measurement ID
 const GA_MEASUREMENT_ID = 'G-PMCLW23ZCS';
@@ -26,7 +27,7 @@ export default function GoogleAnalytics() {
     }
 
     if (import.meta.env.DEV) {
-      console.log('[GA4] Ready (loaded from index.html)');
+      logger.tagged('GA4').log('Ready (loaded from index.html)');
     }
   }, []);
 
@@ -41,7 +42,7 @@ export default function GoogleAnalytics() {
         page_title: document.title,
       });
       if (import.meta.env.DEV) {
-        console.log('[GA4] Page view:', location);
+        logger.tagged('GA4').log('Page view:', location);
       }
     }
   }, [location]);
@@ -52,7 +53,7 @@ export default function GoogleAnalytics() {
 // Helper function to track custom events
 export function trackEvent(eventName: string, eventParams?: Record<string, any>) {
   if (import.meta.env.DEV) {
-    console.log('[GA4] Event (dev):', eventName, eventParams);
+    logger.tagged('GA4').log('Event (dev):', eventName, eventParams);
     return;
   }
 
@@ -60,7 +61,7 @@ export function trackEvent(eventName: string, eventParams?: Record<string, any>)
   if (gtag) {
     gtag('event', eventName, eventParams);
     if (import.meta.env.DEV) {
-      console.log('[GA4] Event:', eventName, eventParams);
+      logger.tagged('GA4').log('Event:', eventName, eventParams);
     }
   }
 }

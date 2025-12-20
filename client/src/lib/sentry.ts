@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/react';
+import { logger } from './logger';
 
 /**
  * Initialize Sentry for client-side error monitoring.
@@ -8,7 +9,7 @@ export function initSentry() {
   const dsn = import.meta.env.VITE_SENTRY_DSN;
   
   if (!dsn) {
-    console.log('⚠️  Sentry DSN not configured, error monitoring disabled');
+    logger.tagged('Sentry').warn('DSN not configured, error monitoring disabled');
     return false;
   }
 
@@ -34,7 +35,7 @@ export function initSentry() {
     },
   });
 
-  console.log('✅ Sentry initialized for client-side error monitoring');
+  logger.tagged('Sentry').log('Initialized for client-side error monitoring');
   return true;
 }
 

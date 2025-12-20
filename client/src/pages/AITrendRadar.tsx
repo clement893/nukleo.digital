@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import Breadcrumb from '@/components/Breadcrumb';
 import { trpc } from '@/lib/trpc';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { logger } from '@/lib/logger';
 import { Loader2, Mail } from 'lucide-react';
 import { useLocation, Link } from 'wouter';
 
@@ -28,7 +29,7 @@ export default function AITrendRadar() {
       setEmail('');
       setTimeout(() => setIsSubscribed(false), 5000);
     } catch (error) {
-      console.error('Failed to subscribe:', error);
+      logger.tagged('AITrendRadar').error('Failed to subscribe:', error);
     }
   };
 
@@ -104,7 +105,7 @@ export default function AITrendRadar() {
             </div>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {latestNews.map((news) => {
+              {latestNews && Array.isArray(latestNews) ? latestNews.map((news) => {
                 // Determine if news has a clickable URL or should navigate to radar
                 const hasUrl = news.url && typeof news.url === 'string' && news.url.startsWith('http');
                 const currentLang = window.location.pathname.startsWith('/fr') ? '/fr' : '';
@@ -176,7 +177,7 @@ export default function AITrendRadar() {
                     </Link>
                   );
                 }
-              })}
+              }) : null}
             </div>
           </div>
         )}

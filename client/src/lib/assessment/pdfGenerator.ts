@@ -1,12 +1,13 @@
 import { AssessmentResults } from './scoring';
 import { getRecommendationsForLevel } from './recommendations';
 import { EmailCaptureData } from '@/components/assessment/EmailCaptureModal';
+import { logger } from '@/lib/logger';
 
 // Lazy load jsPDF only when needed - use string-based dynamic import to avoid Vite resolution
 async function loadJsPDF() {
   // Check if already loaded globally (from CDN)
-  if (typeof window !== 'undefined' && (window as any).jspdf) {
-    return (window as any).jspdf.jsPDF;
+  if (typeof window !== 'undefined' && window.jspdf) {
+    return window.jspdf.jsPDF;
   }
   
   try {
@@ -17,7 +18,7 @@ async function loadJsPDF() {
   } catch (npmError) {
     try {
       // Fallback: load from CDN
-      console.log('Loading jsPDF from CDN...');
+      logger.tagged('PDFGenerator').log('Loading jsPDF from CDN...');
       await new Promise<void>((resolve, reject) => {
         if ((window as any).jspdf) {
           resolve();
@@ -29,10 +30,9 @@ async function loadJsPDF() {
         script.onerror = () => reject(new Error('Failed to load jsPDF from CDN'));
         document.head.appendChild(script);
       });
-      // @ts-ignore - jsPDF loaded from CDN
-      return (window as any).jspdf.jsPDF;
+      return window.jspdf?.jsPDF ?? null;
     } catch (cdnError) {
-      console.warn('Failed to load jsPDF:', { npmError, cdnError });
+      logger.tagged('PDFGenerator').warn('Failed to load jsPDF:', { npmError, cdnError });
       return null;
     }
   }
@@ -47,7 +47,7 @@ export async function generatePDFReport(
   
   if (!jsPDF) {
     // Fallback: download as text file if jsPDF not available
-    console.warn('jsPDF not available, falling back to text report');
+    logger.tagged('PDFGenerator').warn('jsPDF not available, falling back to text report');
     // Fallback: download as text file
     const recommendations = getRecommendationsForLevel(results.maturityLevel);
     const reportText = `

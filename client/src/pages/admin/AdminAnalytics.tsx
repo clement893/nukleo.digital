@@ -63,7 +63,7 @@ export default function AdminAnalytics() {
 
   // Initialize local state from server data
   useEffect(() => {
-    if (analyticsConfigs) {
+    if (analyticsConfigs && Array.isArray(analyticsConfigs)) {
       const configs: Record<string, { isEnabled: boolean; trackingId: string }> = {};
       ANALYTICS_PROVIDERS.forEach(provider => {
         const config = analyticsConfigs.find(c => c.provider === provider.id);

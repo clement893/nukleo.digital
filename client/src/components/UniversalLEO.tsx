@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { X, Send, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { trpc } from '@/lib/trpc';
+import { logger } from '@/lib/logger';
 
 // Generate a simple UUID v4
 function generateUUID() {
@@ -39,6 +40,9 @@ const welcomeMessages: Record<PageContext, string> = {
 export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
+  
+  // Ensure messages is always an array to prevent .map() errors
+  const safeMessages = Array.isArray(messages) ? messages : [];
   const [inputValue, setInputValue] = useState('');
   const [hasInteracted, setHasInteracted] = useState(false);
   const [emailCaptured, setEmailCaptured] = useState(false);
@@ -51,6 +55,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
   const [emailInput, setEmailInput] = useState('');
   const [nameInput, setNameInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const typingIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const chatMutation = trpc.leo.chat.useMutation();
   const saveLeoContact = trpc.leo.saveContact.useMutation();
@@ -115,24 +120,29 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
   
   // Update session on message count change
   useEffect(() => {
-    if (messages.length > 0 && sessionId) {
+    if (safeMessages.length > 0 && sessionId) {
       const conversationDuration = Math.floor((Date.now() - sessionStartTime) / 1000);
       updateSessionMutation.mutate({
         sessionId,
-        messageCount: messages.length,
+        messageCount: safeMessages.length,
         conversationDuration,
       });
     }
-  }, [messages.length, sessionId, sessionStartTime]);
+  }, [safeMessages.length, sessionId, sessionStartTime]);
 
   const storageKey = `leo-${pageContext}-interacted`;
 
   // Auto-open disabled - Leo will only open when user clicks the button
   useEffect(() => {
-    const hasSeenBefore = localStorage.getItem(storageKey);
-    if (hasSeenBefore) {
-      setHasInteracted(true);
-      return;
+    try {
+      const hasSeenBefore = typeof window !== 'undefined' ? localStorage.getItem(storageKey) : null;
+      if (hasSeenBefore) {
+        setHasInteracted(true);
+        return;
+      }
+    } catch (error) {
+      // localStorage may not be available (private mode, SSR)
+      logger.tagged('UniversalLEO').warn('localStorage not available:', error);
     }
 
     // Auto-open functionality disabled
@@ -165,7 +175,8 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
   // Extract structured data from conversation
   const extractDataFromConversation = (messages: Message[]): Record<string, any> => {
     const data: Record<string, any> = {};
-    const fullConversation = messages.map(m => m.content).join(' ');
+    const safeMessagesArray = Array.isArray(messages) ? messages : [];
+    const fullConversation = safeMessagesArray.map(m => m.content).join(' ');
 
     // Extract email
     const email = extractEmail(fullConversation);
@@ -211,7 +222,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
       content: inputValue.trim(),
     };
 
-    const newMessages = [...messages, userMessage];
+    const newMessages = [...safeMessages, userMessage];
     setMessages(newMessages);
     setInputValue('');
 
@@ -231,13 +242,24 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
       setIsTyping(true);
       setTypingText('');
       
+      // Clear any existing interval
+      if (typingIntervalRef.current) {
+        clearInterval(typingIntervalRef.current);
+        typingIntervalRef.current = null;
+      }
+      
       let currentIndex = 0;
-      const typingInterval = setInterval(async () => {
+      
+      // Store interval in ref for cleanup
+      typingIntervalRef.current = setInterval(() => {
         if (currentIndex < fullText.length) {
           setTypingText(fullText.slice(0, currentIndex + 1));
           currentIndex++;
         } else {
-          clearInterval(typingInterval);
+          if (typingIntervalRef.current) {
+            clearInterval(typingIntervalRef.current);
+            typingIntervalRef.current = null;
+          }
           setIsTyping(false);
           
           const assistantMessage: Message = {
@@ -286,7 +308,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
                   budget: extractedData.budget,
                   urgency: extractedData.urgency,
                   techNeeds: undefined,
-                }).catch(err => console.error('Failed to save agency lead:', err));
+                }).catch(err => logger.tagged('UniversalLEO').error('Failed to save agency lead:', err));
               } else {
                 // Save as LEO contact
                 saveLeoContact.mutateAsync({
@@ -297,14 +319,20 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
                     messages: updatedMessages.slice(0, 10),
                     extractedData,
                   }),
-                }).catch(err => console.error('Failed to save contact:', err));
+                }).catch(err => logger.tagged('UniversalLEO').error('Failed to save contact:', err));
               }
             }
           }
         }
       }, 5);
     } catch (error) {
-      console.error('Chat error:', error);
+      logger.tagged('UniversalLEO').error('Chat error:', error);
+      // Clear typing interval on error
+      if (typingIntervalRef.current) {
+        clearInterval(typingIntervalRef.current);
+        typingIntervalRef.current = null;
+      }
+      setIsTyping(false);
       setMessages([
         ...newMessages,
         {
@@ -322,7 +350,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
     setShowEmailForm(false);
     
     // Remove email form message and add confirmation
-    const messagesWithoutForm = messages.filter(m => !m.isEmailForm);
+    const messagesWithoutForm = safeMessages.filter(m => !m.isEmailForm);
     setMessages([...messagesWithoutForm, {
       role: 'assistant',
       content: `Perfect! Thanks ${nameInput || 'there'}! 🎉 I'll send personalized insights to ${emailInput}. Now, let's continue our conversation!`,
@@ -347,16 +375,16 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
         budget: undefined,
         urgency: undefined,
         techNeeds: undefined,
-      }).catch(err => console.error('Failed to save agency lead:', err));
+      }).catch(err => logger.tagged('UniversalLEO').error('Failed to save agency lead:', err));
     } else {
       await saveLeoContact.mutateAsync({
         email: emailInput,
         name: nameInput,
         conversationContext: JSON.stringify({
           pageContext,
-          messages: messages.slice(0, 10),
+          messages: safeMessages.slice(0, 10),
         }),
-      }).catch(err => console.error('Failed to save contact:', err));
+      }).catch(err => logger.tagged('UniversalLEO').error('Failed to save contact:', err));
     }
     
     // Clear inputs
@@ -367,7 +395,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
   const handleSkipEmail = () => {
     setShowEmailForm(false);
     // Remove email form message and add skip confirmation
-    const messagesWithoutForm = messages.filter(m => !m.isEmailForm);
+    const messagesWithoutForm = safeMessages.filter(m => !m.isEmailForm);
     setMessages([...messagesWithoutForm, {
       role: 'assistant',
       content: "No problem! Let's continue our conversation. 😊",
@@ -377,10 +405,17 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
   const handleOpen = () => {
     setIsOpen(true);
     setHasInteracted(true);
-    localStorage.setItem(storageKey, 'true');
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(storageKey, 'true');
+      }
+    } catch (error) {
+      // localStorage may not be available (private mode)
+      logger.tagged('UniversalLEO').warn('Failed to save interaction state:', error);
+    }
     
     // Add welcome message if no messages yet
-    if (messages.length === 0) {
+    if (safeMessages.length === 0) {
       setMessages([{
         role: 'assistant',
         content: welcomeMessages[pageContext],
@@ -465,7 +500,7 @@ export default function UniversalLEO({ pageContext = 'default' }: UniversalLEOPr
 
           {/* Messages */}
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
-            {messages.map((message, index) => (
+            {safeMessages.map((message, index) => (
               <div key={index}>
                 {message.isEmailForm ? (
                   // Inline Email Form

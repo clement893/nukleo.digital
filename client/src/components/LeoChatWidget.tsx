@@ -22,6 +22,7 @@ export default function LeoChatWidget() {
   // Charger l'historique depuis localStorage
   useEffect(() => {
     try {
+      if (typeof window === 'undefined') return;
       const saved = localStorage.getItem('leo_widget_messages');
       if (saved) {
         setMessages(JSON.parse(saved));
@@ -45,7 +46,9 @@ export default function LeoChatWidget() {
   useEffect(() => {
     if (messages.length > 0) {
       try {
-        localStorage.setItem('leo_widget_messages', JSON.stringify(messages));
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('leo_widget_messages', JSON.stringify(messages));
+        }
       } catch (e) {
         console.error('Failed to save messages:', e);
       }
@@ -146,7 +149,13 @@ export default function LeoChatWidget() {
             onClick={() => {
               setIsOpen(true);
               setShowBadge(false);
-              localStorage.setItem('leo_badge_shown', 'true');
+              try {
+                if (typeof window !== 'undefined') {
+                  localStorage.setItem('leo_badge_shown', 'true');
+                }
+              } catch (e) {
+                console.warn('Failed to save badge state:', e);
+              }
             }}
             className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 via-pink-500 to-cyan-400 shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center group"
             aria-label="Chat with LEO"
@@ -189,7 +198,13 @@ export default function LeoChatWidget() {
                 <button
                   onClick={() => {
                     setShowBadge(false);
-                    localStorage.setItem('leo_badge_shown', 'true');
+                    try {
+                if (typeof window !== 'undefined') {
+                  localStorage.setItem('leo_badge_shown', 'true');
+                }
+              } catch (e) {
+                console.warn('Failed to save badge state:', e);
+              }
                   }}
                   className="text-gray-400 hover:text-gray-600 transition-colors"
                   aria-label="Close notification"

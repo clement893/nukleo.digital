@@ -3,6 +3,7 @@ import { useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { sanitizeLoaderHTML, sanitizeLoaderDOM } from "@/utils/htmlSanitizer";
+import SafeHTML from "@/components/SafeHTML";
 
 // Preload critical resources during loader display
 function preloadResources() {
@@ -93,6 +94,10 @@ export default function PageLoader() {
     refetchOnReconnect: false,
   });
 
+  // Ensure activeLoaders is always an array to prevent .map() errors
+  // Also handle undefined/null cases explicitly
+  const safeActiveLoaders = (activeLoaders && Array.isArray(activeLoaders)) ? activeLoaders : [];
+
   // Preload resources as soon as component mounts
   useEffect(() => {
     if (!shouldSkipLoader) {
@@ -163,7 +168,7 @@ export default function PageLoader() {
       return;
     }
 
-    if (!activeLoaders || activeLoaders.length === 0) {
+    if (!safeActiveLoaders || safeActiveLoaders.length === 0) {
       // No active loaders, show body content immediately
       setIsLoading(false);
       setIsFirstLoad(false);
@@ -172,7 +177,10 @@ export default function PageLoader() {
     }
 
     // Select a random loader from active loaders
-    const randomLoader = activeLoaders[Math.floor(Math.random() * activeLoaders.length)];
+    // Ensure safeActiveLoaders is valid before accessing
+    const randomLoader = safeActiveLoaders && safeActiveLoaders.length > 0 
+      ? safeActiveLoaders[Math.floor(Math.random() * safeActiveLoaders.length)]
+      : null;
     
     if (randomLoader && randomLoader.cssCode) {
       // Extract and inject CSS styles FIRST
@@ -308,7 +316,7 @@ export default function PageLoader() {
       setIsLoading(false);
       setLoaderHtml(null);
     };
-  }, [activeLoaders, isLoadingLoaders, loadersError, shouldSkipLoader, location, isFirstLoad]);
+  }, [safeActiveLoaders, isLoadingLoaders, loadersError, shouldSkipLoader, location, isFirstLoad]);
 
   // Don't show loader in admin area, contact page, or manifesto page
   if (shouldSkipLoader) {
@@ -325,7 +333,7 @@ export default function PageLoader() {
   }
 
   // Don't show anything if no loaders are active
-  if (!isLoadingLoaders && (!activeLoaders || activeLoaders.length === 0)) {
+  if (!isLoadingLoaders && (!safeActiveLoaders || safeActiveLoaders.length === 0)) {
     // Ensure body is visible when no loaders
     if (!document.body.classList.contains('loaded')) {
       document.body.classList.add('loaded');
@@ -408,15 +416,16 @@ export default function PageLoader() {
       )}
       
       {sanitizedHtml && isLoading && (
-        <div
-          data-page-loader
+        <SafeHTML
+          html={sanitizedHtml}
+          tag="div"
+          data-page-loader="true"
           key={`page-loader-${loaderHtml.substring(0, 50)}`}
           className="fixed inset-0"
           style={{ 
             zIndex: 9999,
             visibility: "visible",
           }}
-          dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
         />
       )}
     </div>

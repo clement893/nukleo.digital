@@ -28,6 +28,8 @@ export default function ArrowDemoV3() {
                   key={i}
                   src="/nukleo-arrow.svg"
                   alt=""
+                  role="presentation"
+                  aria-hidden="true"
                   className="absolute pointer-events-none"
                   style={{
                     width: `${40 + Math.random() * 80}px`,
@@ -81,6 +83,8 @@ export default function ArrowDemoV3() {
                   key={i}
                   src="/nukleo-arrow.svg"
                   alt=""
+                  role="presentation"
+                  aria-hidden="true"
                   className="absolute pointer-events-none"
                   style={{
                     ...arrow,
@@ -128,18 +132,24 @@ export default function ArrowDemoV3() {
               <img
                 src="/nukleo-arrow.svg"
                 alt=""
+                role="presentation"
+                aria-hidden="true"
                 className="absolute top-[20%] left-[10%] w-[200px] opacity-[0.02] pointer-events-none"
                 style={{ filter: 'invert(1)' }}
               />
               <img
                 src="/nukleo-arrow.svg"
                 alt=""
+                role="presentation"
+                aria-hidden="true"
                 className="absolute bottom-[15%] right-[8%] w-[250px] opacity-[0.025] pointer-events-none"
                 style={{ filter: 'invert(1)' }}
               />
               <img
                 src="/nukleo-arrow.svg"
                 alt=""
+                role="presentation"
+                aria-hidden="true"
                 className="absolute top-[50%] left-[40%] w-[180px] opacity-[0.015] pointer-events-none"
                 style={{ filter: 'invert(1)' }}
               />
@@ -186,6 +196,8 @@ export default function ArrowDemoV3() {
                   key={i}
                   src="/nukleo-arrow.svg"
                   alt=""
+                  role="presentation"
+                  aria-hidden="true"
                   className="absolute pointer-events-none"
                   style={{
                     width: `${40 + Math.random() * 80}px`,
@@ -290,18 +302,24 @@ export default function ArrowDemoV3() {
               <img
                 src="/nukleo-arrow.svg"
                 alt=""
+                role="presentation"
+                aria-hidden="true"
                 className="absolute top-[15%] left-[5%] w-[250px] opacity-[0.02] pointer-events-none"
                 style={{ filter: 'invert(1)' }}
               />
               <img
                 src="/nukleo-arrow.svg"
                 alt=""
+                role="presentation"
+                aria-hidden="true"
                 className="absolute bottom-[10%] right-[3%] w-[300px] opacity-[0.025] pointer-events-none"
                 style={{ filter: 'invert(1)' }}
               />
               <img
                 src="/nukleo-arrow.svg"
                 alt=""
+                role="presentation"
+                aria-hidden="true"
                 className="absolute top-[50%] left-[35%] w-[200px] opacity-[0.015] pointer-events-none"
                 style={{ filter: 'invert(1)' }}
               />

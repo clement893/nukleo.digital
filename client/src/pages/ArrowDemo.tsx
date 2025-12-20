@@ -28,6 +28,8 @@ export default function ArrowDemo() {
                   key={i}
                   src="/nukleo-arrow.svg"
                   alt=""
+                  role="presentation"
+                  aria-hidden="true"
                   className="absolute pointer-events-none transition-transform duration-1000 group-hover:translate-y-4"
                   style={{
                     width: `${80 + Math.random() * 120}px`,
@@ -74,6 +76,8 @@ export default function ArrowDemo() {
                   key={i}
                   src="/nukleo-arrow.svg"
                   alt=""
+                  role="presentation"
+                  aria-hidden="true"
                   className="absolute pointer-events-none animate-float"
                   style={{
                     ...arrow,
@@ -116,6 +120,8 @@ export default function ArrowDemo() {
                     key={i}
                     src="/nukleo-arrow.svg"
                     alt=""
+                    role="presentation"
+                    aria-hidden="true"
                     className="w-full h-full object-contain pointer-events-none"
                     style={{
                       opacity: 0.05,
@@ -162,6 +168,8 @@ export default function ArrowDemo() {
                   key={i}
                   src="/nukleo-arrow.svg"
                   alt=""
+                  role="presentation"
+                  aria-hidden="true"
                   className="absolute pointer-events-none transition-transform duration-700"
                   style={{
                     width: `${60 + Math.random() * 180}px`,
@@ -209,6 +217,8 @@ export default function ArrowDemo() {
                   key={i}
                   src="/nukleo-arrow.svg"
                   alt=""
+                  role="presentation"
+                  aria-hidden="true"
                   className="absolute pointer-events-none animate-float"
                   style={{
                     ...arrow,
@@ -245,6 +255,8 @@ export default function ArrowDemo() {
                     key={i}
                     src="/nukleo-arrow.svg"
                     alt=""
+                    role="presentation"
+                    aria-hidden="true"
                     className="w-full h-full object-contain pointer-events-none"
                     style={{
                       opacity: 0.05,

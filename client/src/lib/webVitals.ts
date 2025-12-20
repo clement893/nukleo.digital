@@ -4,10 +4,11 @@
  */
 
 import { onCLS, onFID, onFCP, onLCP, onTTFB, Metric } from 'web-vitals';
+import { logger } from './logger';
 
 // Send metrics to Google Analytics
 function sendToAnalytics(metric: Metric) {
-  const gtag = (window as any).gtag;
+  const gtag = window.gtag;
   if (!gtag) return;
 
   // Send to Google Analytics
@@ -20,7 +21,7 @@ function sendToAnalytics(metric: Metric) {
 
   // Log in development
   if (import.meta.env.DEV) {
-    console.log('[Web Vitals]', metric.name, metric.value, metric.id);
+    logger.tagged('Web Vitals').log(metric.name, metric.value, metric.id);
   }
 }
 
@@ -28,7 +29,7 @@ function sendToAnalytics(metric: Metric) {
 export function initWebVitals() {
   if (typeof window === 'undefined') return;
   if (import.meta.env.DEV) {
-    console.log('[Web Vitals] Initializing...');
+    logger.tagged('Web Vitals').log('Initializing...');
   }
 
   // Track all Core Web Vitals

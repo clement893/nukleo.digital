@@ -149,7 +149,7 @@ export default function AdminTestimonials() {
                   <Loader2 className="w-8 h-8 animate-spin text-white mx-auto mb-2" />
                   <p className="text-gray-400">Chargement des témoignages...</p>
                 </div>
-              ) : testimonials && testimonials.length > 0 ? (
+              ) : testimonials && Array.isArray(testimonials) && testimonials.length > 0 ? (
                 <div className="space-y-4">
                   {testimonials.map((testimonial) => (
                     <div

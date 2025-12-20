@@ -18,6 +18,7 @@ import {
 import { ArrowRight, CheckCircle2, AlertCircle } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { getErrorMessage } from '@/lib/trpcErrorHandler';
+import { logger } from '@/lib/logger';
 
 export default function StartProject() {
   const { t } = useLanguage();
@@ -57,9 +58,7 @@ export default function StartProject() {
         });
       }, 3000);
     } catch (error) {
-      if (import.meta.env.DEV) {
-        console.error('Failed to submit project:', error);
-      }
+      logger.tagged('StartProject').error('Failed to submit project:', error);
       const message = getErrorMessage(error, t('startProject.form.error') || 'Failed to submit project. Please try again.');
       setErrorMessage(message);
       setTimeout(() => setErrorMessage(null), 5000);

@@ -27,8 +27,11 @@ export const testimonialsRouter = router({
           .where(eq(testimonials.isActive, true))
           .orderBy(desc(testimonials.displayOrder), desc(testimonials.createdAt));
 
+        // Ensure allTestimonials is always an array
+        const safeTestimonials = Array.isArray(allTestimonials) ? allTestimonials : [];
+
         // Map testimonials to include the correct language text
-        return allTestimonials.map((testimonial) => ({
+        return safeTestimonials.map((testimonial) => ({
           id: testimonial.id,
           client: testimonial.client,
           contact: testimonial.contact,
@@ -38,6 +41,10 @@ export const testimonialsRouter = router({
           displayOrder: testimonial.displayOrder,
         }));
       } catch (error) {
+        // Silently handle database connection errors - return empty array
+        if (error instanceof Error && 'code' in error && error.code === 'ECONNREFUSED') {
+          return [];
+        }
         console.error('Error fetching testimonials from database:', error);
         return [];
       }

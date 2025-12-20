@@ -10,7 +10,7 @@ export default function AdminStartProjectSubmissions() {
   const [selectedSubmission, setSelectedSubmission] = useState<number | null>(null);
 
   const exportToCSV = () => {
-    if (!submissions || submissions.length === 0) return;
+    if (!submissions || !Array.isArray(submissions) || submissions.length === 0) return;
 
     const headers = ['ID', 'Name', 'Email', 'Company', 'Project Type', 'Budget', 'Description', 'Created At'];
     const rows = submissions.map(sub => [
@@ -156,7 +156,7 @@ export default function AdminStartProjectSubmissions() {
           </Card>
         ) : (
           <div className="space-y-4">
-            {submissions.map((submission) => (
+            {submissions && Array.isArray(submissions) ? submissions.map((submission) => (
               <Card
                 key={submission.id}
                 className={`cursor-pointer transition-all ${
@@ -224,7 +224,7 @@ export default function AdminStartProjectSubmissions() {
                   </CardContent>
                 )}
               </Card>
-            ))}
+            )) : null}
           </div>
         )}
       </div>

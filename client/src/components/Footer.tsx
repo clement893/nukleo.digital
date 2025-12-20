@@ -45,7 +45,7 @@ function Footer() {
   // Create a map of path -> visibility for quick lookup
   const visibilityMap = useMemo(() => {
     const map = new Map<string, boolean>();
-    if (allVisibilities) {
+    if (allVisibilities && Array.isArray(allVisibilities)) {
       allVisibilities.forEach(page => {
         map.set(page.path, page.isVisible);
       });
@@ -204,9 +204,9 @@ function Footer() {
         <div className="border-t border-white/10 pt-4 sm:pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4 text-xs sm:text-sm text-white/60">
           <div className="text-center sm:text-left">{t('footer.copyright', { year: new Date().getFullYear() })}</div>
           <div className="flex flex-wrap justify-center sm:justify-end gap-4 sm:gap-6">
-            <Link href="/sitemap.xml" target="_blank" rel="noopener noreferrer" className="active:text-white sm:hover:text-white transition-colors touch-manipulation">
+            <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" className="active:text-white sm:hover:text-white transition-colors touch-manipulation">
               {t('footer.sitemap') || 'Sitemap'}
-            </Link>
+            </a>
             <Link href={getLocalizedPath('/privacy')} className="active:text-white sm:hover:text-white transition-colors touch-manipulation">{t('footer.links.privacy')}</Link>
             <Link href={getLocalizedPath('/terms')} className="active:text-white sm:hover:text-white transition-colors touch-manipulation">{t('footer.links.terms')}</Link>
             <Link href={getLocalizedPath('/cookies')} className="active:text-white sm:hover:text-white transition-colors touch-manipulation">{t('footer.links.cookies')}</Link>

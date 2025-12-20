@@ -9,6 +9,10 @@ import { Input } from '@/components/ui/input';
 import { trpc } from '@/lib/trpc';
 import { Link } from 'wouter';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { logger } from '@/lib/logger';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { ChatMessage, isValidChatMessage } from '@/types/localStorage';
+import Header from '@/components/Header';
 
 interface Message {
   role: 'user' | 'assistant' | 'system';
@@ -19,6 +23,12 @@ interface Message {
 
 export default function Leo() {
   const { t } = useLanguage();
+  
+  // Get localized path function with safe fallback
+  const getLocalizedPathHook = useLocalizedPath();
+  const safeGetLocalizedPath = typeof getLocalizedPathHook === 'function' 
+    ? getLocalizedPathHook 
+    : ((path: string) => path); // Fallback function that returns path as-is
   const welcomeMessage = t('leo.welcomeMessage') || "I'm here to help architect your AI transformation. To begin, what should I call you?";
   
   // Load messages from localStorage on mount
@@ -27,6 +37,16 @@ export default function Leo() {
       const saved = localStorage.getItem('leo-chat-history');
       if (saved) {
         const parsed = JSON.parse(saved);
+        // Ensure parsed is an array before mapping
+        if (!Array.isArray(parsed)) {
+          return [
+            {
+              role: 'assistant',
+              content: welcomeMessage,
+              timestamp: new Date(),
+            },
+          ];
+        }
         // Convert timestamp strings back to Date objects and update welcome message if it's the default English one
         return parsed.map((msg: any) => {
           const message = {
@@ -42,7 +62,7 @@ export default function Leo() {
         });
       }
     } catch (error) {
-      console.error('Error loading chat history:', error);
+      logger.tagged('Leo').error('Error loading chat history:', error);
     }
     // Return default welcome message if no history
     return [
@@ -55,6 +75,9 @@ export default function Leo() {
   };
 
   const [messages, setMessages] = useState<Message[]>(() => loadMessages());
+  
+  // Ensure messages is always an array to prevent .map() errors
+  const safeMessages = Array.isArray(messages) ? messages : [];
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
@@ -110,6 +133,7 @@ export default function Leo() {
     }
   };
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const typingIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const chatMutation = trpc.leo.chat.useMutation();
   const saveContactMutation = trpc.leo.saveContact.useMutation();
 
@@ -151,7 +175,7 @@ export default function Leo() {
   const getContextualSuggestions = (): string[] => {
     if (messages.length <= 1) return suggestionCategories.initial;
 
-    const lastMessages = messages.slice(-3).map(m => m.content.toLowerCase()).join(' ');
+    const lastMessages = safeMessages.slice(-3).map(m => m.content.toLowerCase()).join(' ');
 
     if (lastMessages.includes('roi') || lastMessages.includes('cost') || lastMessages.includes('budget') || lastMessages.includes('value')) {
       return suggestionCategories.roi;
@@ -172,6 +196,7 @@ export default function Leo() {
   // Load expert mode preference from localStorage
   const [isExpertMode, setIsExpertMode] = useState<boolean>(() => {
     try {
+      if (typeof window === 'undefined') return false;
       const saved = localStorage.getItem('leo-expert-mode');
       return saved === 'true';
     } catch {
@@ -182,9 +207,11 @@ export default function Leo() {
   // Save expert mode preference
   useEffect(() => {
     try {
-      localStorage.setItem('leo-expert-mode', String(isExpertMode));
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('leo-expert-mode', String(isExpertMode));
+      }
     } catch (error) {
-      console.error('Error saving expert mode preference:', error);
+      logger.tagged('Leo').error('Error saving expert mode preference:', error);
     }
   }, [isExpertMode]);
 
@@ -225,9 +252,9 @@ export default function Leo() {
   const getContextualSuggestionsForMode = (expertMode: boolean): string[] => {
     const categories = expertMode ? expertSuggestionCategories : suggestionCategories;
     
-    if (messages.length <= 1) return categories.initial;
+    if (safeMessages.length <= 1) return categories.initial;
 
-    const lastMessages = messages.slice(-3).map(m => m.content.toLowerCase()).join(' ');
+    const lastMessages = safeMessages.slice(-3).map(m => m.content.toLowerCase()).join(' ');
 
     if (lastMessages.includes('roi') || lastMessages.includes('cost') || lastMessages.includes('budget') || lastMessages.includes('value')) {
       return categories.roi;
@@ -246,6 +273,9 @@ export default function Leo() {
   };
 
   const [suggestions, setSuggestions] = useState<string[]>(getContextualSuggestionsForMode(isExpertMode));
+  
+  // Ensure suggestions is always an array to prevent .map() errors
+  const safeSuggestions = Array.isArray(suggestions) ? suggestions : [];
 
   // Update suggestions when messages or expert mode change
   useEffect(() => {
@@ -278,9 +308,11 @@ export default function Leo() {
   // Save messages to localStorage whenever they change
   useEffect(() => {
     try {
-      localStorage.setItem('leo-chat-history', JSON.stringify(messages));
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('leo-chat-history', JSON.stringify(messages));
+      }
     } catch (error) {
-      console.error('Error saving chat history:', error);
+      logger.tagged('Leo').error('Error saving chat history:', error);
     }
   }, [messages]);
 
@@ -328,7 +360,7 @@ export default function Leo() {
 
     try {
       const response = await chatMutation.mutateAsync({
-        messages: [...messages, userMessage].map((m) => ({
+        messages: [...safeMessages, userMessage].map((m) => ({
           role: m.role,
           content: m.content,
         })),
@@ -344,13 +376,22 @@ export default function Leo() {
       setIsTyping(true);
       setTypingText('');
       
+      // Clear any existing interval
+      if (typingIntervalRef.current) {
+        clearInterval(typingIntervalRef.current);
+        typingIntervalRef.current = null;
+      }
+      
       let currentIndex = 0;
-      const typingInterval = setInterval(() => {
+      typingIntervalRef.current = setInterval(() => {
         if (currentIndex < fullText.length) {
           setTypingText(fullText.slice(0, currentIndex + 1));
           currentIndex++;
         } else {
-          clearInterval(typingInterval);
+          if (typingIntervalRef.current) {
+            clearInterval(typingIntervalRef.current);
+            typingIntervalRef.current = null;
+          }
           setIsTyping(false);
           
           const assistantMessage: Message = {
@@ -361,7 +402,7 @@ export default function Leo() {
           
           // Check if we should show email form - only after first complete exchange
           // Welcome message (1) + user message (2) = 2 messages before adding assistant
-          const emailAlreadySaved = localStorage.getItem('leo-email-saved');
+          const emailAlreadySaved = typeof window !== 'undefined' ? localStorage.getItem('leo-email-saved') : null;
           
           setMessages((prev) => {
             const updated = [...prev, assistantMessage];
@@ -385,7 +426,7 @@ export default function Leo() {
         }
       }, 5); // 5ms per character for fast typing speed
     } catch (error) {
-      console.error('Error sending message:', error);
+      logger.tagged('Leo').error('Error sending message:', error);
       const errorMessage: Message = {
         role: 'assistant',
         content: t('leo.errorMessage') || "Sorry, I'm having trouble connecting right now. Please try again! 🔄",
@@ -411,7 +452,13 @@ export default function Leo() {
       
       setEmailSaved(true);
       setShowEmailForm(false);
-      localStorage.setItem('leo-email-saved', 'true');
+      try {
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('leo-email-saved', 'true');
+        }
+      } catch (error) {
+        logger.tagged('Leo').warn('Failed to save email state:', error);
+      }
       
       // Remove email form message and add confirmation
       const messagesWithoutForm = messages.filter(m => !m.isEmailForm);
@@ -428,7 +475,7 @@ export default function Leo() {
       setEmailInput('');
       setNameInput('');
     } catch (error) {
-      console.error('Error saving email:', error);
+      logger.tagged('Leo').error('Error saving email:', error);
     }
   };
 
@@ -462,73 +509,38 @@ export default function Leo() {
         keywords={t('leo.seoKeywords') || "AI chatbot, AI assistant, AI consultation, AI strategy, AI transformation help, AI implementation guide, free AI consultation, AI advisor"}
         ogImage="https://nukleodigital-production.up.railway.app/og-image.jpg"
       />
+      <Header />
       <div className="min-h-screen bg-gradient-to-br from-[oklch(0.35_0.15_300)] via-[oklch(0.40_0.15_320)] to-[oklch(0.35_0.15_340)] flex flex-col overflow-hidden">
-      {/* Breadcrumb */}
-      <div className="container pt-24 pb-4">
-        <Breadcrumb items={[{ name: t('nav.leo') || 'LEO AI Assistant', url: '/leo' }]} />
-      </div>
-      {/* Header minimal */}
-      <header className="fixed top-0 left-0 right-0 z-50">
+      {/* Toolbar with Leo-specific actions - positioned below header */}
+      <div className="fixed top-20 sm:top-24 left-0 right-0 z-40 bg-gradient-to-br from-[oklch(0.35_0.15_300)] via-[oklch(0.40_0.15_320)] to-[oklch(0.35_0.15_340)] backdrop-blur-md border-b border-white/10 px-4 py-2">
         <div className="container">
-          <div className="flex items-center justify-between h-20">
-            {/* Logo */}
-            <Link href="/">
-              <img 
-                src="/Nukleo_blanc_RVB.svg" 
-                alt={t('alt.logo') || 'Logo Nukleo Digital - Agence de transformation IA'} 
-                width="120"
-                height="32"
-                fetchPriority="high"
-                loading="eager"
-                className="h-8 w-auto cursor-pointer"
-              />
-            </Link>
-
-            {/* Right side */}
-            <div className="flex items-center gap-4">
-              {/* Expert Mode Toggle */}
-              <button
-                onClick={() => setIsExpertMode(!isExpertMode)}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all"
-                title={isExpertMode ? t('leo.switchToStandard') : t('leo.switchToExpert')}
-              >
-                <span className="text-xs font-medium">
-                  {isExpertMode ? `🔬 ${t('leo.expertMode')}` : `💡 ${t('leo.standardMode')}`}
-                </span>
-              </button>
-              <Button
-                onClick={handleNewChat}
-                variant="outline"
-                className="bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white"
-              >
-                {t('leo.newChat')}
-              </Button>
-              <Button
-                className="rounded-full bg-white text-purple-900 hover:bg-white/90 font-bold px-6"
-              >
-                {t('leo.startProject')}
-              </Button>
-              <Link href="/">
-                <button className="text-white hover:text-white/80 transition-colors p-2">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                  </svg>
-                </button>
-              </Link>
-            </div>
+          <div className="flex items-center justify-between gap-2 sm:gap-4">
+            {/* Left side - Expert Mode Toggle */}
+            <button
+              onClick={() => setIsExpertMode(!isExpertMode)}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all"
+              title={isExpertMode ? t('leo.switchToStandard') : t('leo.switchToExpert')}
+            >
+              <span className="text-xs font-medium">
+                {isExpertMode ? `🔬 ${t('leo.expertMode')}` : `💡 ${t('leo.standardMode')}`}
+              </span>
+            </button>
+            
+            {/* Right side - New Chat button */}
+            <Button
+              onClick={handleNewChat}
+              variant="outline"
+              className="bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white"
+            >
+              {t('leo.newChat')}
+            </Button>
           </div>
         </div>
-      </header>
+      </div>
 
       {/* Breadcrumb */}
-      <div className="container pt-24 pb-4">
-        <div className="flex items-center gap-2 text-sm text-white/60">
-          <Link href="/" className="hover:text-white/80 transition-colors">
-            {t('leo.home')}
-          </Link>
-          <span>/</span>
-          <span className="text-white/90">{t('leo.chatWithLeo')}</span>
-        </div>
+      <div className="container pt-32 sm:pt-36 pb-4">
+        <Breadcrumb items={[{ name: t('nav.leo') || 'LEO AI Assistant', url: '/leo' }]} />
       </div>
 
       {/* Status indicator */}
@@ -542,7 +554,7 @@ export default function Leo() {
       {/* Chat container */}
       <div className="flex-1 container pb-32 overflow-y-auto overflow-x-hidden" style={{ maxHeight: 'calc(100vh - 200px)', WebkitOverflowScrolling: 'touch' }}>
         <div className="max-w-3xl mx-auto space-y-8 py-4">
-          {messages.map((message, index) => (
+          {safeMessages.map((message, index) => (
             <div key={index}>
               {message.isEmailForm ? (
                 // Inline Email Form
@@ -710,12 +722,12 @@ export default function Leo() {
             </div>
           )}
 
-          {/* Suggestions */}
-          {showSuggestions && messages.length === 2 && (
+          {/* Suggestions - Show when there are 2 or fewer messages, or when user hasn't interacted much */}
+          {showSuggestions && messages.length <= 3 && (
             <div className="mt-8 space-y-4">
               <p className="text-sm text-white/60 text-center">{t('leo.suggestionsPrompt')}</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {suggestions.map((suggestion, index) => (
+                {safeSuggestions.map((suggestion, index) => (
                   <button
                     key={index}
                     onClick={() => handleSuggestionClick(suggestion)}
@@ -752,19 +764,26 @@ export default function Leo() {
                 onClick={handleSend}
                 disabled={isLoading || !input.trim() || showEmailForm}
                 className="text-white/60 hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                aria-label="Send message"
               >
                 <Send className="w-5 h-5" />
               </button>
-              <button className="text-white/60 hover:text-white transition-colors">
-                <Mic className="w-5 h-5" />
-              </button>
+              {/* Voice input - Coming soon */}
+              {/* <button 
+                className="text-white/60 hover:text-white transition-colors"
+                aria-label="Voice input (coming soon)"
+                disabled
+                title="Voice input coming soon"
+              >
+                <Mic className="w-5 h-5 opacity-50" />
+              </button> */}
             </div>
 
             {/* Footer links */}
             <div className="flex items-center justify-between mt-4 text-xs text-white/40">
-              <a href="#" className="hover:text-white/60 transition-colors uppercase tracking-wider">
+              <Link href={safeGetLocalizedPath('/privacy')} className="hover:text-white/60 transition-colors uppercase tracking-wider">
                 {t('leo.privacyPolicy')}
-              </a>
+              </Link>
               <a href="mailto:hello@nukleo.com" className="hover:text-white/60 transition-colors uppercase tracking-wider">
                 hello@nukleo.com
               </a>

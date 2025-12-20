@@ -17,11 +17,14 @@ import { Menu } from 'lucide-react';
 import { useState as useMenuState } from 'react';
 import FullScreenMenu from '@/components/FullScreenMenu';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { logger } from '@/lib/logger';
 
 type AssessmentState = 'intro' | 'quiz' | 'email-capture' | 'results';
 
 export default function AIReadinessAssessment() {
   const { t } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
   const [menuOpen, setMenuOpen] = useMenuState(false);
   const [state, setState] = useState<AssessmentState>('intro');
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -72,7 +75,7 @@ export default function AIReadinessAssessment() {
         const { generatePDFReport } = await import('@/lib/assessment/pdfGenerator');
         await generatePDFReport(results, data);
       } catch (pdfError) {
-        console.warn('PDF generation failed, report saved to database:', pdfError);
+        logger.tagged('AIReadinessAssessment').warn('PDF generation failed, report saved to database:', pdfError);
         // Continue - report is saved and email sent
       }
 
@@ -83,7 +86,7 @@ export default function AIReadinessAssessment() {
       setState('results');
       playClick();
     } catch (error) {
-      console.error('Failed to save assessment:', error);
+      logger.tagged('AIReadinessAssessment').error('Failed to save assessment:', error);
       alert(t('assessment.errors.saveFailed'));
     }
   };

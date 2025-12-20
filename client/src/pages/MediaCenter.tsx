@@ -161,7 +161,7 @@ export default function MediaCenter() {
                   </div>
                 ) : (
                   <div className="grid md:grid-cols-2 gap-4">
-                    {mediaAssets?.map((asset) => (
+                    {mediaAssets && Array.isArray(mediaAssets) ? mediaAssets.map((asset) => (
                       <a
                         key={asset.id}
                         href={asset.url}
@@ -181,7 +181,7 @@ export default function MediaCenter() {
                         </div>
                         <Download className="w-5 h-5 text-white/50 group-hover:text-accent transition-colors" />
                       </a>
-                    ))}
+                    )) : null}
                   </div>
                 )}
 

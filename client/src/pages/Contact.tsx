@@ -11,6 +11,7 @@ import Breadcrumb from '@/components/Breadcrumb';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { extractValidationErrors, getErrorMessage } from '@/lib/trpcErrorHandler';
+import { logger } from '@/lib/logger';
 
 export default function Contact() {
   const { t } = useLanguage();
@@ -50,9 +51,7 @@ export default function Contact() {
       // Reset success message after 5 seconds
       setTimeout(() => setIsSubmitted(false), 5000);
     } catch (error) {
-      if (import.meta.env.DEV) {
-        console.error('Failed to send message:', error);
-      }
+      logger.tagged('Contact').error('Failed to send message:', error);
       
       // Extract validation errors using utility function
       const formattedErrors = extractValidationErrors(error);

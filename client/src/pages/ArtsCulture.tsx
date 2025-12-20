@@ -6,9 +6,11 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import SafeHTML from "@/components/SafeHTML";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 
 export default function ArtsCulture() {
   const { t } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [scrollY, setScrollY] = useState(0);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
@@ -511,7 +513,7 @@ export default function ArtsCulture() {
               <p className="text-lg text-white/60 mb-8 max-w-2xl mx-auto leading-relaxed">
                 {t('artsCultureCommitment.act4.cta.description')}
               </p>
-              <Link href="/contact">
+              <Link href={getLocalizedPath('/contact')}>
                 <button className="group/btn bg-white text-[rgb(107,23,22)] px-8 py-4 rounded-full font-semibold hover:bg-white/90 transition-all inline-flex items-center gap-2 hover:gap-3">
                   <span>{t('artsCultureCommitment.act4.cta.button')}</span>
                   <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />

@@ -5,9 +5,11 @@ import { Link } from 'wouter';
 import { Menu, Code, Zap, Shield, Layers, CheckCircle, ArrowRight } from 'lucide-react';
 import FullScreenMenu from '@/components/FullScreenMenu';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 export default function DigitalPlatforms() {
   const { t } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const seoContent = (
@@ -66,7 +68,7 @@ export default function DigitalPlatforms() {
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b border-white/5">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/">
+          <Link href={getLocalizedPath('/')}>
             <a className="text-2xl font-bold text-white hover:text-violet-400 transition-colors">
               nukleo.
             </a>
@@ -99,7 +101,7 @@ export default function DigitalPlatforms() {
               Build intelligent, scalable platforms that transform how you operate, 
               engage customers, and deliver value in the AI era.
             </p>
-            <Link href="/contact">
+            <Link href={getLocalizedPath('/contact')}>
               <a className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-violet-500 to-rose-500 text-white font-bold rounded-full hover:shadow-[0_0_40px_rgba(139,92,246,0.5)] transition-all duration-300">
                 Build Your Platform
                 <ArrowRight className="w-5 h-5" />
@@ -157,7 +159,7 @@ export default function DigitalPlatforms() {
             <p className="text-white/70 mb-8 max-w-2xl mx-auto">
               Let's create intelligent platforms that power your business and delight your customers.
             </p>
-            <Link href="/contact">
+            <Link href={getLocalizedPath('/contact')}>
               <a className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-violet-500 to-rose-500 text-white font-bold rounded-full hover:shadow-[0_0_40px_rgba(139,92,246,0.5)] transition-all duration-300">
                 Schedule a Consultation
                 <ArrowRight className="w-5 h-5" />

@@ -40,6 +40,8 @@ export default function ArrowDemoV2() {
                 <img 
                   src="/nukleo-arrow.svg" 
                   alt=""
+                  role="presentation"
+                  aria-hidden="true"
                   className="absolute right-6 top-1/2 -translate-y-1/2 w-12 opacity-40 rotate-90 group-hover:translate-y-2 transition-transform duration-500"
                 />
               </div>
@@ -74,6 +76,8 @@ export default function ArrowDemoV2() {
                   <img 
                     src="/nukleo-arrow.svg" 
                     alt=""
+                    role="presentation"
+                    aria-hidden="true"
                     className="absolute right-4 top-1/2 -translate-y-1/2 w-6 opacity-0 group-hover/btn:opacity-100 group-hover/btn:translate-x-2 transition-all duration-300"
                   />
                 </button>
@@ -109,6 +113,8 @@ export default function ArrowDemoV2() {
                   <img 
                     src="/nukleo-arrow.svg" 
                     alt=""
+                    role="presentation"
+                    aria-hidden="true"
                     className="w-8 opacity-30 rotate-90 group-hover:scale-110 transition-transform duration-500"
                   />
                 </div>
@@ -150,6 +156,8 @@ export default function ArrowDemoV2() {
                 <img 
                   src="/nukleo-arrow.svg" 
                   alt=""
+                  role="presentation"
+                  aria-hidden="true"
                   className="absolute right-12 top-1/2 -translate-y-1/2 w-16 opacity-20 rotate-90 group-hover:translate-y-4 transition-all duration-700"
                   style={{ filter: 'drop-shadow(0 0 20px rgba(168, 85, 247, 0.5))' }}
                 />
@@ -165,6 +173,8 @@ export default function ArrowDemoV2() {
                 <img 
                   src="/nukleo-arrow.svg" 
                   alt=""
+                  role="presentation"
+                  aria-hidden="true"
                   className="absolute right-12 top-1/2 -translate-y-1/2 w-16 opacity-20 rotate-90 group-hover:translate-y-4 transition-all duration-700"
                   style={{ filter: 'drop-shadow(0 0 20px rgba(236, 72, 153, 0.5))' }}
                 />
@@ -180,6 +190,8 @@ export default function ArrowDemoV2() {
                 <img 
                   src="/nukleo-arrow.svg" 
                   alt=""
+                  role="presentation"
+                  aria-hidden="true"
                   className="absolute right-12 top-1/2 -translate-y-1/2 w-16 opacity-20 rotate-90 group-hover:translate-y-4 transition-all duration-700"
                   style={{ filter: 'drop-shadow(0 0 20px rgba(59, 130, 246, 0.5))' }}
                 />
@@ -206,6 +218,8 @@ export default function ArrowDemoV2() {
                     <img 
                       src="/nukleo-arrow.svg" 
                       alt=""
+                      role="presentation"
+                      aria-hidden="true"
                       className="absolute right-8 top-1/2 -translate-y-1/2 w-8 opacity-0 -translate-x-4 group-hover/btn:opacity-100 group-hover/btn:translate-x-0 transition-all duration-300"
                     />
                   </button>
@@ -221,6 +235,8 @@ export default function ArrowDemoV2() {
                     <img 
                       src="/nukleo-arrow.svg" 
                       alt=""
+                      role="presentation"
+                      aria-hidden="true"
                       className="absolute right-6 top-1/2 -translate-y-1/2 w-6 opacity-0 -translate-x-4 group-hover/btn:opacity-100 group-hover/btn:translate-x-0 transition-all duration-300"
                     />
                   </button>
@@ -234,6 +250,8 @@ export default function ArrowDemoV2() {
                     <img 
                       src="/nukleo-arrow.svg" 
                       alt=""
+                      role="presentation"
+                      aria-hidden="true"
                       className="w-5 opacity-60 group-hover/link:opacity-100 group-hover/link:translate-x-2 transition-all duration-300"
                     />
                   </a>
@@ -253,6 +271,8 @@ export default function ArrowDemoV2() {
                     <img 
                       src="/nukleo-arrow.svg" 
                       alt=""
+                      role="presentation"
+                      aria-hidden="true"
                       className="absolute right-4 top-1/2 -translate-y-1/2 w-5 opacity-0 -translate-x-4 group-hover/btn:opacity-100 group-hover/btn:translate-x-0 transition-all duration-300"
                     />
                   </button>
@@ -285,6 +305,8 @@ export default function ArrowDemoV2() {
                   <img 
                     src="/nukleo-arrow.svg" 
                     alt=""
+                    role="presentation"
+                    aria-hidden="true"
                     className="w-10 opacity-30 rotate-90 animate-pulse"
                     style={{ 
                       filter: 'drop-shadow(0 0 20px rgba(168, 85, 247, 0.6))',
@@ -311,6 +333,8 @@ export default function ArrowDemoV2() {
                   <img 
                     src="/nukleo-arrow.svg" 
                     alt=""
+                    role="presentation"
+                    aria-hidden="true"
                     className="w-10 opacity-30 rotate-90 animate-pulse"
                     style={{ 
                       filter: 'drop-shadow(0 0 20px rgba(236, 72, 153, 0.6))',

@@ -19,8 +19,12 @@ export const pageVisibilityRouter = router({
         .from(pageVisibility)
         .orderBy(desc(pageVisibility.updatedAt));
 
-      return pages;
+      return Array.isArray(pages) ? pages : [];
     } catch (error) {
+      // Silently handle database connection errors - return empty array
+      if (error instanceof Error && 'code' in error && error.code === 'ECONNREFUSED') {
+        return [];
+      }
       console.error("[PageVisibility] Error fetching pages:", error);
       return [];
     }

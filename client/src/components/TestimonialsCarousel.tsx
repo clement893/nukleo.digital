@@ -13,7 +13,8 @@ export default function TestimonialsCarousel() {
   const { data: testimonials = [], isLoading } = trpc.testimonials.getAll.useQuery({ language });
 
   // Sélectionner 6 témoignages pour le carrousel
-  const carouselTestimonials = testimonials.slice(0, 6);
+  const safeTestimonials = Array.isArray(testimonials) ? testimonials : [];
+  const carouselTestimonials = safeTestimonials.slice(0, 6);
 
   // Auto-play
   useEffect(() => {
@@ -104,7 +105,9 @@ export default function TestimonialsCarousel() {
               <div className="flex items-center gap-4">
                 <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold text-xl">
-                    {currentTestimonial.contact.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                    {currentTestimonial.contact 
+                      ? currentTestimonial.contact.split(' ').map(n => n[0]).join('').slice(0, 2)
+                      : '??'}
                   </span>
                 </div>
                 <div>

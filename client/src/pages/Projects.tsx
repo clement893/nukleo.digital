@@ -7,6 +7,9 @@ import Breadcrumb from '@/components/Breadcrumb';
 import OptimizedImage from '@/components/OptimizedImage';
 import { trpc } from '@/lib/trpc';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { logger } from '@/lib/logger';
+import { Link } from 'wouter';
 
 // Liste de fallback des images (si l'API ne retourne rien)
 const fallbackImages = [
@@ -75,6 +78,7 @@ function shuffleArray<T>(array: T[]): T[] {
 
 export default function Projects() {
   const { t } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
   // Load images from API (public endpoint - we'll make it public)
   const { data: uploadedImages, isLoading: isLoadingImages, error: imagesError } = trpc.projectsImages.list.useQuery(undefined, {
     retry: 1,
@@ -83,12 +87,12 @@ export default function Projects() {
     staleTime: 5 * 60 * 1000, // Cache for 5 minutes
     // Add error handling
     onError: (error) => {
-      console.error('[Projects] tRPC error:', error);
+      logger.tagged('Projects').error('tRPC error:', error);
       // Fallback to fallback images on error
       setImages(fallbackImages);
     },
     onSuccess: (data) => {
-      console.log('[Projects] tRPC success:', data?.length, 'images');
+      logger.tagged('Projects').log('tRPC success:', data?.length, 'images');
     },
   });
   
@@ -100,7 +104,7 @@ export default function Projects() {
   
   // Update images when API data loads
   useEffect(() => {
-    console.log('[Projects] API state:', { 
+    logger.tagged('Projects').debug('API state:', { 
       uploadedImages, 
       isLoadingImages, 
       imagesError,
@@ -108,26 +112,26 @@ export default function Projects() {
     });
     
     if (imagesError) {
-      console.error('[Projects] API error, using fallback images:', imagesError);
+      logger.tagged('Projects').error('API error, using fallback images:', imagesError);
       // Use fallback images on error
       setImages(fallbackImages);
       return;
     }
     
-    if (uploadedImages) {
+    if (uploadedImages && Array.isArray(uploadedImages)) {
       if (uploadedImages.length > 0) {
         // Use images from API
         const imageNames = uploadedImages.map(img => img.name);
-        console.log('[Projects] Setting images from API:', imageNames.length);
+        logger.tagged('Projects').log('Setting images from API:', imageNames.length);
         setImages(imageNames);
       } else {
         // API returned empty array - use fallback images
-        console.log('[Projects] API returned empty array, using fallback images');
+        logger.tagged('Projects').log('API returned empty array, using fallback images');
         setImages(fallbackImages);
       }
     } else if (!isLoadingImages) {
       // API finished loading but no data - use fallback images
-      console.log('[Projects] No API data after loading, using fallback images');
+      logger.tagged('Projects').log('No API data after loading, using fallback images');
       setImages(fallbackImages);
     }
   }, [uploadedImages, isLoadingImages, imagesError]);
@@ -363,14 +367,14 @@ export default function Projects() {
                 {t('projects.ctaDescription')}
               </p>
 
-              <a href="/start-project">
+              <Link href={getLocalizedPath('/start-project')}>
                 <Button
                   size="lg"
                   className="rounded-full text-lg px-10 py-8 bg-white text-purple-900 hover:bg-white/90 transition-all duration-500 font-bold tracking-wider"
                 >
                   {t('projects.ctaButton')}
                 </Button>
-              </a>
+              </Link>
             </div>
           </div>
         </section>

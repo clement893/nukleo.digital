@@ -1,11 +1,14 @@
 import { Suspense, lazy } from "react";
 import { Route, Switch, useLocation } from "wouter";
-import ErrorBoundary from "./components/ErrorBoundary";
+import EnhancedErrorBoundary from "./components/EnhancedErrorBoundary";
 import CustomCursor from "./components/CustomCursor";
 import PageLoader from "./components/PageLoader";
 
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
+// CRITICAL: Pre-import useLocalizedPath to ensure it's in the main chunk
+// This import forces the module to be included in the main bundle
+import "./hooks/useLocalizedPath";
 import ScrollToTop from "./components/ScrollToTop";
 import ArrowBackground from "./components/ArrowBackground";
 import AnalyticsLoader from "./components/AnalyticsLoader";
@@ -61,39 +64,42 @@ import Media from "./pages/Media";
 import NotFound404 from "@/pages/NotFound404";
 
 // Lazy load all other pages with retry logic for chunk loading errors
+// Using lazyWithRetry for all public-facing pages to handle chunk loading errors gracefully
 const Projects = lazyWithRetry(() => import("./pages/Projects"));
-const Expertise = lazy(() => import("./pages/Expertise"));
+const Expertise = lazyWithRetry(() => import("./pages/Expertise"));
 const Resources = lazyWithRetry(() => import("./pages/Resources"));
-const ResourceArticle = lazy(() => import("./pages/resources/ResourceArticle"));
-const Contact = lazy(() => import("./pages/Contact"));
-const Leo = lazy(() => import("./pages/Leo"));
-const Manifesto = lazy(() => import("./pages/Manifesto"));
-const Radar = lazy(() => import("./pages/RadarNew").then(m => ({ default: m.RadarNew })));
-const AITrendRadar = lazy(() => import("./pages/AITrendRadar"));
-const AIReadinessAssessment = lazy(() => import("./pages/AIReadinessAssessment"));
-const AIStrategyMarketing = lazy(() => import("./pages/services/AIStrategyMarketing"));
-const DigitalPlatforms = lazy(() => import("./pages/services/DigitalPlatforms"));
-const IntelligentOperations = lazy(() => import("./pages/services/IntelligentOperations"));
-const Glossary = lazy(() => import("./pages/Glossary"));
-const GlossaryTerm = lazy(() => import("./pages/GlossaryTerm"));
-const AIGlossary = lazy(() => import("./pages/AIGlossary"));
-const Privacy = lazy(() => import("./pages/Privacy"));
-const Terms = lazy(() => import("./pages/Terms"));
-const Cookies = lazy(() => import("./pages/Cookies"));
-const Testimonials = lazy(() => import("./pages/Testimonials"));
-const Services = lazy(() => import("./pages/Services"));
-const Clients = lazy(() => import("./pages/Clients"));
-const StartProject = lazy(() => import("./pages/StartProject"));
-const MediaCenter = lazy(() => import("./pages/MediaCenter"));
-const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
-const TermsOfService = lazy(() => import("./pages/TermsOfService"));
-const CookiePolicy = lazy(() => import("./pages/CookiePolicy"));
-const FAQ = lazy(() => import("./pages/FAQ"));
-const ArtsCulture = lazy(() => import("./pages/ArtsCulture"));
-const AILabService = lazy(() => import("./pages/services/AILab"));
-const StrategicBureauService = lazy(() => import("./pages/services/StrategicBureau"));
-const CreativeStudioService = lazy(() => import("./pages/services/CreativeStudio"));
-const Agencies = lazy(() => import("./pages/Agencies"));
+const ResourceArticle = lazyWithRetry(() => import("./pages/resources/ResourceArticle"));
+const Contact = lazyWithRetry(() => import("./pages/Contact"));
+const Leo = lazyWithRetry(() => import("./pages/Leo"));
+const Manifesto = lazyWithRetry(() => import("./pages/Manifesto"));
+const Radar = lazyWithRetry(() => import("./pages/RadarNew").then(m => ({ default: m.RadarNew })));
+const AITrendRadar = lazyWithRetry(() => import("./pages/AITrendRadar"));
+const AIReadinessAssessment = lazyWithRetry(() => import("./pages/AIReadinessAssessment"));
+const AIStrategyMarketing = lazyWithRetry(() => import("./pages/services/AIStrategyMarketing"));
+const DigitalPlatforms = lazyWithRetry(() => import("./pages/services/DigitalPlatforms"));
+const IntelligentOperations = lazyWithRetry(() => import("./pages/services/IntelligentOperations"));
+const Glossary = lazyWithRetry(() => import("./pages/Glossary"));
+const GlossaryTerm = lazyWithRetry(() => import("./pages/GlossaryTerm"));
+const AIGlossary = lazyWithRetry(() => import("./pages/AIGlossary"));
+const Privacy = lazyWithRetry(() => import("./pages/Privacy"));
+const Terms = lazyWithRetry(() => import("./pages/Terms"));
+const Cookies = lazyWithRetry(() => import("./pages/Cookies"));
+const Testimonials = lazyWithRetry(() => import("./pages/Testimonials"));
+const Services = lazyWithRetry(() => import("./pages/Services"));
+const Clients = lazyWithRetry(() => import("./pages/Clients"));
+const StartProject = lazyWithRetry(() => import("./pages/StartProject"));
+const MediaCenter = lazyWithRetry(() => import("./pages/MediaCenter"));
+const PrivacyPolicy = lazyWithRetry(() => import("./pages/PrivacyPolicy"));
+const TermsOfService = lazyWithRetry(() => import("./pages/TermsOfService"));
+const CookiePolicy = lazyWithRetry(() => import("./pages/CookiePolicy"));
+const FAQ = lazyWithRetry(() => import("./pages/FAQ"));
+const ArtsCulture = lazyWithRetry(() => import("./pages/ArtsCulture"));
+const AILabService = lazyWithRetry(() => import("./pages/services/AILab"));
+const StrategicBureauService = lazyWithRetry(() => import("./pages/services/StrategicBureau"));
+const CreativeStudioService = lazyWithRetry(() => import("./pages/services/CreativeStudio"));
+const AgenticAIService = lazyWithRetry(() => import("./pages/services/AgenticAI"));
+const DigitalTransformationService = lazyWithRetry(() => import("./pages/services/DigitalTransformation"));
+const Agencies = lazyWithRetry(() => import("./pages/Agencies"));
 const ArrowDemo = lazy(() => import("./pages/ArrowDemo"));
 const ArrowDemoV2 = lazy(() => import("./pages/ArrowDemoV2"));
 const ArrowDemoV3 = lazy(() => import("./pages/ArrowDemoV3"));
@@ -130,7 +136,7 @@ function App() {
   usePageBackground();
   
   return (
-    <ErrorBoundary>
+    <EnhancedErrorBoundary enableRecovery={true} maxRecoveryAttempts={3}>
       <ThemeProvider defaultTheme="dark">
         <LanguageProvider>
           <PageLoader />
@@ -182,6 +188,8 @@ function App() {
               <Route path="/fr/services/ai-lab" component={withPageVisibility(AILabService, "/fr/services/ai-lab")} />
               <Route path="/fr/services/strategic-bureau" component={withPageVisibility(StrategicBureauService, "/fr/services/strategic-bureau")} />
               <Route path="/fr/services/creative-studio" component={withPageVisibility(CreativeStudioService, "/fr/services/creative-studio")} />
+              <Route path="/fr/services/agentic-ai" component={withPageVisibility(AgenticAIService, "/fr/services/agentic-ai")} />
+              <Route path="/fr/services/digital-transformation" component={withPageVisibility(DigitalTransformationService, "/fr/services/digital-transformation")} />
               <Route path="/fr/agencies" component={withPageVisibility(Agencies, "/fr/agencies")} />
               
               {/* Default routes (English) */}
@@ -222,6 +230,8 @@ function App() {
             <Route path="/services/ai-lab" component={withPageVisibility(AILabService, "/services/ai-lab")} />
             <Route path="/services/strategic-bureau" component={withPageVisibility(StrategicBureauService, "/services/strategic-bureau")} />
             <Route path="/services/creative-studio" component={withPageVisibility(CreativeStudioService, "/services/creative-studio")} />
+            <Route path="/services/agentic-ai" component={withPageVisibility(AgenticAIService, "/services/agentic-ai")} />
+            <Route path="/services/digital-transformation" component={withPageVisibility(DigitalTransformationService, "/services/digital-transformation")} />
             <Route path="/agencies" component={withPageVisibility(Agencies, "/agencies")} />
           <Route path="/arrow-demo" component={ArrowDemo} />
           <Route path="/arrow-demo-v2" component={ArrowDemoV2} />
@@ -281,7 +291,7 @@ function App() {
         </Suspense>
         </LanguageProvider>
       </ThemeProvider>
-    </ErrorBoundary>
+    </EnhancedErrorBoundary>
   );
 }
 

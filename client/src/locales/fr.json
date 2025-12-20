@@ -2244,6 +2244,15 @@
       "title": "Politique de Cookies - Nukleo",
       "description": "Politique de cookies de Nukleo Digital. Apprenez quels cookies nous utilisons et comment les gérer."
     }
+  },
+  "pwa": {
+    "install": {
+      "title": "Installer Nukleo Digital",
+      "description": "Installez notre application pour une expérience plus rapide et plus pratique.",
+      "button": "Installer",
+      "dismiss": "Plus tard",
+      "close": "Fermer"
+    }
   }
 }
 

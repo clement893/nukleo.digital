@@ -44,7 +44,7 @@ export default function FullScreenMenu({ isOpen, onClose }: FullScreenMenuProps)
   // Create a map of path -> visibility for quick lookup
   const visibilityMap = useMemo(() => {
     const map = new Map<string, boolean>();
-    if (allVisibilities) {
+    if (allVisibilities && Array.isArray(allVisibilities)) {
       allVisibilities.forEach(page => {
         map.set(page.path, page.isVisible);
       });

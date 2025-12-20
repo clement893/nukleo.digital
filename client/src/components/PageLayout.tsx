@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import SkipToContent from './SkipToContent';
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -9,8 +10,11 @@ interface PageLayoutProps {
 export default function PageLayout({ children }: PageLayoutProps) {
   return (
     <>
+      <SkipToContent />
       <Header />
-      {children}
+      <main id="main-content" role="main">
+        {children}
+      </main>
       <Footer />
     </>
   );

@@ -8,8 +8,13 @@ import App from "./App";
 
 import { getLoginUrl } from "./const";
 import { ThemeProvider } from "./contexts/ThemeContext";
+// CRITICAL: Pre-import LanguageContext and useLocalizedPath to ensure they're in main chunk
+// These imports force the modules to be included in the main bundle
+import "./contexts/LanguageContext";
+import "./hooks/useLocalizedPath";
 import { initSentry } from "./lib/sentry";
 import { initWebVitals } from "./lib/webVitals";
+import { logger } from "./lib/logger";
 
 // Initialize Sentry for client-side error monitoring
 initSentry();
@@ -39,7 +44,7 @@ queryClient.getQueryCache().subscribe(event => {
   if (event.type === "updated" && event.action.type === "error") {
     const error = event.query.state.error;
     redirectToLoginIfUnauthorized(error);
-    if (isDev) console.error("[API Query Error]", error);
+    if (isDev) logger.tagged('API').error("Query Error", error);
   }
 });
 
@@ -47,7 +52,7 @@ queryClient.getMutationCache().subscribe(event => {
   if (event.type === "updated" && event.action.type === "error") {
     const error = event.mutation.state.error;
     redirectToLoginIfUnauthorized(error);
-    if (isDev) console.error("[API Mutation Error]", error);
+    if (isDev) logger.tagged('API').error("Mutation Error", error);
   }
 });
 

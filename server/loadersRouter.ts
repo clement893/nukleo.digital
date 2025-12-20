@@ -6,11 +6,23 @@ import { migrateLoaders } from "./migrate-loaders";
 
 export const loadersRouter = router({
   getAll: publicProcedure.query(async () => {
-    return await loadersDb.getAllLoaders();
+    try {
+      const result = await loadersDb.getAllLoaders();
+      return Array.isArray(result) ? result : [];
+    } catch (error) {
+      console.warn('[Loaders Router] Error in getAll:', error);
+      return [];
+    }
   }),
 
   getActive: publicProcedure.query(async () => {
-    return await loadersDb.getActiveLoaders();
+    try {
+      const result = await loadersDb.getActiveLoaders();
+      return Array.isArray(result) ? result : [];
+    } catch (error) {
+      console.warn('[Loaders Router] Error in getActive:', error);
+      return [];
+    }
   }),
 
   getById: publicProcedure
@@ -70,16 +82,18 @@ export const loadersRouter = router({
 
   // Admin routes
   checkAll: adminProcedure.query(async () => {
-    const allLoaders = await loadersDb.getAllLoaders();
-    const results = allLoaders.map(loader => {
-      const validation = validateLoaderHTML(loader.cssCode);
-      return {
-        id: loader.id,
-        name: loader.name,
-        isActive: loader.isActive,
-        ...validation,
-      };
-    });
+    try {
+      const allLoaders = await loadersDb.getAllLoaders();
+      const safeLoaders = Array.isArray(allLoaders) ? allLoaders : [];
+      const results = safeLoaders.map(loader => {
+        const validation = validateLoaderHTML(loader.cssCode);
+        return {
+          id: loader.id,
+          name: loader.name,
+          isActive: loader.isActive,
+          ...validation,
+        };
+      });
     
     const needsMigration = results.filter(r => !r.isValid || r.errors.length > 0 || r.warnings.length > 0);
     
@@ -93,6 +107,19 @@ export const loadersRouter = router({
         hasWarnings: results.filter(r => r.warnings.length > 0).length,
       },
     };
+    } catch (error) {
+      console.error('[Loaders Router] Error in checkAll:', error);
+      return {
+        total: 0,
+        needsMigration: 0,
+        results: [],
+        summary: {
+          valid: 0,
+          hasErrors: 0,
+          hasWarnings: 0,
+        },
+      };
+    }
   }),
 
   migrateAll: adminProcedure.mutation(async () => {

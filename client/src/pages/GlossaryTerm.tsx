@@ -6,15 +6,24 @@ import StructuredData, { createArticleSchema, createFAQSchema, createBreadcrumbS
 import { ArrowLeft, Bookmark, Share2, ExternalLink, Lightbulb, HelpCircle, BookOpen } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { logger } from '@/lib/logger';
 
 export default function GlossaryTerm() {
   const [, params] = useRoute('/glossary/:termId');
   const termId = params?.termId;
   const term = allTerms.find(t => t.id === termId);
+  const getLocalizedPath = useLocalizedPath();
 
   const [bookmarkedTerms, setBookmarkedTerms] = useState<string[]>(() => {
-    const saved = localStorage.getItem('glossary-bookmarks');
-    return saved ? JSON.parse(saved) : [];
+    try {
+      if (typeof window === 'undefined') return [];
+      const saved = localStorage.getItem('glossary-bookmarks');
+      return saved ? JSON.parse(saved) : [];
+    } catch (error) {
+      // localStorage may not be available (private mode, SSR)
+      return [];
+    }
   });
 
   const toggleBookmark = (id: string) => {
@@ -22,7 +31,14 @@ export default function GlossaryTerm() {
       ? bookmarkedTerms.filter(bid => bid !== id)
       : [...bookmarkedTerms, id];
     setBookmarkedTerms(newBookmarks);
-    localStorage.setItem('glossary-bookmarks', JSON.stringify(newBookmarks));
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('glossary-bookmarks', JSON.stringify(newBookmarks));
+      }
+    } catch (error) {
+      // localStorage may not be available (private mode)
+      console.warn('Failed to save bookmarks:', error);
+    }
   };
 
   const handleShare = async () => {
@@ -34,7 +50,7 @@ export default function GlossaryTerm() {
           url: window.location.href
         });
       } catch (err) {
-        console.log('Share failed:', err);
+        logger.tagged('GlossaryTerm').warn('Share failed:', err);
       }
     } else {
       // Fallback: copy to clipboard
@@ -49,7 +65,7 @@ export default function GlossaryTerm() {
         <div className="container py-32 text-center">
           <h1 className="text-4xl font-bold text-white mb-4">Term Not Found</h1>
           <p className="text-white/70 mb-8">The term you're looking for doesn't exist.</p>
-          <Link href="/glossary">
+          <Link href={getLocalizedPath('/glossary')}>
             <Button className="bg-accent text-white hover:bg-accent/90">
               Back to Glossary
             </Button>
@@ -129,7 +145,7 @@ export default function GlossaryTerm() {
           
           <div className="container relative z-10">
             {/* Back Button */}
-            <Link href="/glossary">
+            <Link href={getLocalizedPath('/glossary')}>
               <button className="flex items-center gap-2 text-white/70 hover:text-white transition-colors mb-8 group">
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                 <span className="font-mono text-sm uppercase tracking-wider">Back to Glossary</span>
@@ -248,7 +264,7 @@ export default function GlossaryTerm() {
                   <h2 className="text-3xl font-bold text-gray-900 mb-6">Related Terms</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {relatedTermsData.map((relatedTerm) => (
-                      <Link key={relatedTerm!.id} href={`/glossary/${relatedTerm!.id}`}>
+                      <Link key={relatedTerm!.id} href={getLocalizedPath(`/glossary/${relatedTerm!.id}`)}>
                         <div className="p-6 bg-gray-50 hover:bg-purple-50 border border-gray-200 hover:border-accent rounded-xl transition-all duration-300 group cursor-pointer">
                           <div className="flex items-center justify-between mb-2">
                             <h3 className="text-lg font-bold text-gray-900 group-hover:text-accent transition-colors">
@@ -324,7 +340,7 @@ export default function GlossaryTerm() {
               <p className="text-lg text-white/70 mb-8">
                 Let's discuss how this technology can drive growth for your organization.
               </p>
-              <Link href="/contact">
+              <Link href={getLocalizedPath('/contact')}>
                 <Button className="bg-white text-purple-900 hover:bg-white/90 text-lg px-10 py-6 rounded-full font-bold shadow-2xl hover:scale-[1.022] transition-all duration-300">
                   Discuss Your Project
                 </Button>

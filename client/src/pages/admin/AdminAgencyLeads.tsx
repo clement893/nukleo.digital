@@ -25,7 +25,7 @@ export default function AdminAgencyLeads() {
 
   // Filter leads
   const filteredLeads = useMemo(() => {
-    if (!leads) return [];
+    if (!leads || !Array.isArray(leads)) return [];
     
     return leads.filter(lead => {
       const matchesSearch = 
@@ -302,7 +302,15 @@ export default function AdminAgencyLeads() {
                       </td>
                       <td className="px-6 py-4">
                         <div className="text-xs text-white/60 max-w-xs truncate">
-                          {lead.techNeeds ? JSON.parse(lead.techNeeds).join(', ') : 'N/A'}
+                          {(() => {
+                            if (!lead.techNeeds) return 'N/A';
+                            try {
+                              const techNeeds = JSON.parse(lead.techNeeds);
+                              return Array.isArray(techNeeds) ? techNeeds.join(', ') : String(techNeeds);
+                            } catch (error) {
+                              return lead.techNeeds; // Return raw value if JSON parse fails
+                            }
+                          })()}
                         </div>
                       </td>
                       <td className="px-6 py-4">

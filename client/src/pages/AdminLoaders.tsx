@@ -12,6 +12,7 @@ import { Switch } from "@/components/ui/switch";
 import { Trash2, Eye, Plus, Loader2 } from "lucide-react";
 import { AdminHeader } from "@/components/AdminHeader";
 import LoaderPreview from "@/components/LoaderPreview";
+import SafeHTML from "@/components/SafeHTML";
 
 // Composant pour la prévisualisation miniature
 function LoaderMiniPreview({ cssCode, loaderId }: { cssCode: string; loaderId: number }) {
@@ -99,7 +100,9 @@ function LoaderMiniPreview({ cssCode, loaderId }: { cssCode: string; loaderId: n
           }}
         />
       </div>
-      <div
+      <SafeHTML
+        html={htmlContent}
+        tag="div"
         id={`loader-mini-container-${loaderId}`}
         className="absolute inset-0 flex items-center justify-center"
         style={{
@@ -109,7 +112,6 @@ function LoaderMiniPreview({ cssCode, loaderId }: { cssCode: string; loaderId: n
           left: "50%",
           transform: "translate(-50%, -50%) scale(0.3)",
         }}
-        dangerouslySetInnerHTML={{ __html: htmlContent }}
       />
       {!isReady && (
         <div className="absolute inset-0 flex items-center justify-center bg-black">
@@ -126,6 +128,9 @@ export default function AdminLoaders() {
 
   // Fetch all loaders
   const { data: loaders, isLoading, error } = trpc.loaders.getAll.useQuery();
+
+  // Ensure loaders is always an array to prevent .map() errors
+  const safeLoaders = Array.isArray(loaders) ? loaders : [];
 
   // Mutations
   const toggleActiveMutation = trpc.loaders.toggleActive.useMutation({
@@ -188,8 +193,8 @@ export default function AdminLoaders() {
     );
   }
 
-  const activeCount = loaders?.filter((l) => l.isActive).length || 0;
-  const inactiveCount = (loaders?.length || 0) - activeCount;
+  const activeCount = safeLoaders.filter((l) => l.isActive).length || 0;
+  const inactiveCount = safeLoaders.length - activeCount;
 
   return (
     <>
@@ -215,7 +220,7 @@ export default function AdminLoaders() {
           <Card>
             <CardHeader className="pb-3">
               <CardDescription>Total</CardDescription>
-              <CardTitle className="text-3xl">{loaders?.length || 0}</CardTitle>
+              <CardTitle className="text-3xl">{safeLoaders.length || 0}</CardTitle>
             </CardHeader>
           </Card>
           <Card>
@@ -237,7 +242,7 @@ export default function AdminLoaders() {
         </div>
 
         {/* Loaders List */}
-        {!loaders || loaders.length === 0 ? (
+        {safeLoaders.length === 0 ? (
           <Card>
             <CardContent className="py-12">
               <div className="text-center">
@@ -258,7 +263,7 @@ export default function AdminLoaders() {
           </Card>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {loaders.map((loader) => (
+            {safeLoaders.map((loader) => (
               <Card
                 key={loader.id}
                 className={loader.isActive ? "border-primary" : ""}

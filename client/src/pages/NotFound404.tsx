@@ -2,13 +2,15 @@ import { Link } from 'wouter';
 import { Home, Compass, Briefcase, Mail, ArrowLeft } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 export default function NotFound404() {
+  const getLocalizedPath = useLocalizedPath();
   const quickLinks = [
-    { icon: Home, label: 'Home', path: '/', description: 'Back to homepage' },
-    { icon: Compass, label: 'Expertise', path: '/expertise', description: 'Explore our services' },
-    { icon: Briefcase, label: 'Services', path: '/services', description: 'View our services' },
-    { icon: Mail, label: 'Contact', path: '/contact', description: 'Get in touch' },
+    { icon: Home, label: 'Home', path: getLocalizedPath('/'), description: 'Back to homepage' },
+    { icon: Compass, label: 'Expertise', path: getLocalizedPath('/expertise'), description: 'Explore our services' },
+    { icon: Briefcase, label: 'Services', path: getLocalizedPath('/services'), description: 'View our services' },
+    { icon: Mail, label: 'Contact', path: getLocalizedPath('/contact'), description: 'Get in touch' },
   ];
 
   return (
@@ -48,7 +50,7 @@ export default function NotFound404() {
 
           {/* Back Button */}
           <div className="mb-16">
-            <Link href="/">
+            <Link href={getLocalizedPath('/')}>
               <button className="inline-flex items-center gap-3 px-8 py-4 bg-white text-purple-900 rounded-full font-bold hover:bg-white/90 transition-all duration-300 hover:scale-[1.045]">
                 <ArrowLeft className="w-5 h-5" />
                 Back to Home

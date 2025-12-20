@@ -36,6 +36,9 @@ export function AITrendRadarVisualization({ data, onTechnologyClick }: AITrendRa
   const svgRef = useRef<SVGSVGElement>(null);
   const [selectedTech, setSelectedTech] = useState<RadarData | null>(null);
   const [hoveredTech, setHoveredTech] = useState<RadarData | null>(null);
+  
+  // Ensure data is always an array
+  const safeData = Array.isArray(data) ? data : [];
 
   // Radar dimensions
   const width = 900;
@@ -153,7 +156,7 @@ export function AITrendRadarVisualization({ data, onTechnologyClick }: AITrendRa
           <rect x={centerX} y={centerY} width={centerX} height={centerY} fill="rgba(34,197,94,0.05)" />
           
           {/* Technology bubbles - always visible with labels */}
-          {data.map((item) => {
+          {safeData.map((item) => {
             const { x, y } = scoreToCoords(item.position.maturityScore, item.position.impactScore);
             const quadrant = getQuadrant(item.position.maturityScore, item.position.impactScore);
             const isHovered = hoveredTech?.technology.id === item.technology.id;
@@ -306,48 +309,72 @@ export function AITrendRadarVisualization({ data, onTechnologyClick }: AITrendRa
           <div className="mb-6">
             <h4 className="text-white font-bold mb-3">Cas d'usage</h4>
             <div className="space-y-3">
-              {JSON.parse(selectedTech.position.useCases).map((useCase: any, idx: number) => (
-                <div key={idx} className="bg-white/5 p-4 rounded-lg">
-                  <h5 className="text-white font-semibold mb-1">{useCase.title}</h5>
-                  <p className="text-white/70 text-sm mb-2">{useCase.description}</p>
-                  {useCase.examples && (
-                    <div className="flex flex-wrap gap-2">
-                      {useCase.examples.map((ex: string, i: number) => (
-                        <span key={i} className="px-2 py-1 bg-white/10 rounded text-white/80 text-xs">
-                          {ex}
-                        </span>
-                      ))}
+              {(() => {
+                try {
+                  const useCases = JSON.parse(selectedTech.position.useCases || '[]');
+                  if (!Array.isArray(useCases)) return null;
+                  return useCases.map((useCase: any, idx: number) => (
+                    <div key={idx} className="bg-white/5 p-4 rounded-lg">
+                      <h5 className="text-white font-semibold mb-1">{useCase.title || 'Cas d\'usage'}</h5>
+                      <p className="text-white/70 text-sm mb-2">{useCase.description || ''}</p>
+                      {useCase.examples && Array.isArray(useCase.examples) && (
+                        <div className="flex flex-wrap gap-2">
+                          {useCase.examples.map((ex: string, i: number) => (
+                            <span key={i} className="px-2 py-1 bg-white/10 rounded text-white/80 text-xs">
+                              {ex}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
-              ))}
+                  ));
+                } catch (error) {
+                  return <p className="text-white/60 text-sm">Données de cas d'usage non disponibles</p>;
+                }
+              })()}
             </div>
           </div>
           
           <div className="mb-6">
             <h4 className="text-white font-bold mb-3">Barrières à l'adoption</h4>
             <div className="space-y-2">
-              {JSON.parse(selectedTech.position.adoptionBarriers).map((barrier: any, idx: number) => (
-                <div key={idx} className="flex items-start gap-2">
-                  <span className="text-white/60">•</span>
-                  <div>
-                    <span className="text-white/80 font-semibold">{barrier.type}: </span>
-                    <span className="text-white/70">{barrier.description}</span>
-                  </div>
-                </div>
-              ))}
+              {(() => {
+                try {
+                  const barriers = JSON.parse(selectedTech.position.adoptionBarriers || '[]');
+                  if (!Array.isArray(barriers)) return null;
+                  return barriers.map((barrier: any, idx: number) => (
+                    <div key={idx} className="flex items-start gap-2">
+                      <span className="text-white/60">•</span>
+                      <div>
+                        <span className="text-white/80 font-semibold">{barrier.type || 'Barrière'}: </span>
+                        <span className="text-white/70">{barrier.description || ''}</span>
+                      </div>
+                    </div>
+                  ));
+                } catch (error) {
+                  return <p className="text-white/60 text-sm">Données de barrières non disponibles</p>;
+                }
+              })()}
             </div>
           </div>
           
           <div>
             <h4 className="text-white font-bold mb-3">Recommandations par niveau</h4>
             <div className="space-y-3">
-              {Object.entries(JSON.parse(selectedTech.position.recommendations)).map(([level, rec]: [string, any]) => (
-                <div key={level} className="bg-white/5 p-4 rounded-lg">
-                  <h5 className="text-white font-semibold mb-1">{level}</h5>
-                  <p className="text-white/70 text-sm">{rec}</p>
-                </div>
-              ))}
+              {(() => {
+                try {
+                  const recommendations = JSON.parse(selectedTech.position.recommendations || '{}');
+                  if (typeof recommendations !== 'object' || recommendations === null) return null;
+                  return Object.entries(recommendations).map(([level, rec]: [string, any]) => (
+                    <div key={level} className="bg-white/5 p-4 rounded-lg">
+                      <h5 className="text-white font-semibold mb-1">{level}</h5>
+                      <p className="text-white/70 text-sm">{rec || ''}</p>
+                    </div>
+                  ));
+                } catch (error) {
+                  return <p className="text-white/60 text-sm">Données de recommandations non disponibles</p>;
+                }
+              })()}
             </div>
           </div>
         </div>

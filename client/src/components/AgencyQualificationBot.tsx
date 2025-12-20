@@ -68,8 +68,13 @@ export default function AgencyQualificationBot() {
   // Auto-open after 10 seconds if not interacted
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (!hasInteracted && !localStorage.getItem('agencyBotCompleted')) {
-        setIsOpen(true);
+      try {
+        if (typeof window !== 'undefined' && !hasInteracted && !localStorage.getItem('agencyBotCompleted')) {
+          setIsOpen(true);
+        }
+      } catch (error) {
+        // localStorage may not be available
+        console.warn('Failed to check agencyBotCompleted:', error);
       }
     }, 10000);
 
@@ -104,7 +109,13 @@ export default function AgencyQualificationBot() {
           urgency: newAnswers.urgency,
         });
         setIsCompleted(true);
-        localStorage.setItem('agencyBotCompleted', 'true');
+        try {
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('agencyBotCompleted', 'true');
+          }
+        } catch (error) {
+          console.warn('Failed to save agencyBotCompleted:', error);
+        }
       } catch (error) {
         console.error('Error saving lead:', error);
       }

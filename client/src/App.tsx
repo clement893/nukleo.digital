@@ -1,6 +1,6 @@
 import { Suspense, lazy } from "react";
 import { Route, Switch, useLocation } from "wouter";
-import ErrorBoundary from "./components/ErrorBoundary";
+import EnhancedErrorBoundary from "./components/EnhancedErrorBoundary";
 import CustomCursor from "./components/CustomCursor";
 import PageLoader from "./components/PageLoader";
 
@@ -133,7 +133,7 @@ function App() {
   usePageBackground();
   
   return (
-    <ErrorBoundary>
+    <EnhancedErrorBoundary enableRecovery={true} maxRecoveryAttempts={3}>
       <ThemeProvider defaultTheme="dark">
         <LanguageProvider>
           <PageLoader />
@@ -289,7 +289,7 @@ function App() {
         </Suspense>
         </LanguageProvider>
       </ThemeProvider>
-    </ErrorBoundary>
+    </EnhancedErrorBoundary>
   );
 }
 

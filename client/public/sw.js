@@ -1,7 +1,9 @@
 // Service Worker for Nukleo Digital
 // Provides offline caching and performance improvements
+// Enhanced with better error handling and stability
 
-const CACHE_NAME = 'nukleo-digital-v2';
+const CACHE_NAME = 'nukleo-digital-v3';
+const MAX_CACHE_AGE = 7 * 24 * 60 * 60 * 1000; // 7 days
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -17,34 +19,91 @@ const STATIC_ASSETS = [
   '/manifest.json',
 ];
 
-// Install event - cache static assets
+// Install event - cache static assets with improved error handling
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(STATIC_ASSETS).catch((err) => {
-        // Silently fail in production - no logging
-        // Only log in development (localhost)
-        if (typeof self !== 'undefined' && self.location?.hostname === 'localhost') {
-          console.warn('[SW] Failed to cache some assets:', err);
+    caches.open(CACHE_NAME)
+      .then((cache) => {
+        // Cache assets one by one to prevent single failure from blocking all
+        return Promise.allSettled(
+          STATIC_ASSETS.map((asset) =>
+            cache.add(asset).catch((err) => {
+              // Log but don't fail - individual asset failures shouldn't block SW install
+              if (typeof self !== 'undefined' && self.location?.hostname === 'localhost') {
+                console.warn(`[SW] Failed to cache asset: ${asset}`, err);
+              }
+              return null; // Return null instead of throwing
+            })
+          )
+        );
+      })
+      .then((results) => {
+        const failures = results.filter((r) => r.status === 'rejected').length;
+        if (failures > 0 && typeof self !== 'undefined' && self.location?.hostname === 'localhost') {
+          console.warn(`[SW] ${failures} assets failed to cache, but SW will still activate`);
         }
-      });
-    })
+      })
+      .catch((err) => {
+        // Even if caching fails completely, activate the SW
+        if (typeof self !== 'undefined' && self.location?.hostname === 'localhost') {
+          console.error('[SW] Install failed, but activating anyway:', err);
+        }
+      })
   );
-  self.skipWaiting();
+  self.skipWaiting(); // Activate immediately
 });
 
-// Activate event - clean up old caches
+// Activate event - clean up old caches with improved error handling
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames
-          .filter((name) => name !== CACHE_NAME)
-          .map((name) => caches.delete(name))
-      );
-    })
+    caches.keys()
+      .then((cacheNames) => {
+        // Delete old caches, but don't fail if deletion fails
+        return Promise.allSettled(
+          cacheNames
+            .filter((name) => name !== CACHE_NAME)
+            .map((name) =>
+              caches.delete(name).catch((err) => {
+                if (typeof self !== 'undefined' && self.location?.hostname === 'localhost') {
+                  console.warn(`[SW] Failed to delete old cache: ${name}`, err);
+                }
+                return false; // Continue even if deletion fails
+              })
+            )
+        );
+      })
+      .then(() => {
+        // Clean up expired cache entries
+        return caches.open(CACHE_NAME).then((cache) => {
+          return cache.keys().then((keys) => {
+            const now = Date.now();
+            return Promise.allSettled(
+              keys.map((request) => {
+                return cache.match(request).then((response) => {
+                  if (response) {
+                    const dateHeader = response.headers.get('date');
+                    if (dateHeader) {
+                      const cachedDate = new Date(dateHeader).getTime();
+                      if (now - cachedDate > MAX_CACHE_AGE) {
+                        return cache.delete(request);
+                      }
+                    }
+                  }
+                  return Promise.resolve();
+                });
+              })
+            );
+          });
+        });
+      })
+      .catch((err) => {
+        // Log but don't fail activation
+        if (typeof self !== 'undefined' && self.location?.hostname === 'localhost') {
+          console.error('[SW] Activate cleanup failed:', err);
+        }
+      })
   );
-  self.clients.claim();
+  self.clients.claim(); // Take control of all pages immediately
 });
 
 // Fetch event - serve from cache, fallback to network

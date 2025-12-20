@@ -88,7 +88,7 @@ const MediaCenter = lazy(() => import("./pages/MediaCenter"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));
 const CookiePolicy = lazy(() => import("./pages/CookiePolicy"));
-const FAQ = lazy(() => import("./pages/FAQ"));
+const FAQ = lazyWithRetry(() => import("./pages/FAQ"));
 const ArtsCulture = lazy(() => import("./pages/ArtsCulture"));
 const AILabService = lazy(() => import("./pages/services/AILab"));
 const StrategicBureauService = lazy(() => import("./pages/services/StrategicBureau"));

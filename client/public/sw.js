@@ -147,6 +147,18 @@ self.addEventListener('fetch', (event) => {
         return cache.match(request).then((cachedResponse) => {
           // Start fetching fresh version in background
           const fetchPromise = fetch(request).then((networkResponse) => {
+            // CRITICAL: Don't cache 404 responses (missing chunks)
+            // This prevents caching chunks that don't exist, which causes chunk loading errors
+            if (networkResponse && networkResponse.status === 404) {
+              // If we have a cached version, use it (might be from previous build)
+              // But don't cache the 404 response
+              if (cachedResponse) {
+                return cachedResponse;
+              }
+              // If no cached version and 404, return the 404 to trigger error handler
+              return networkResponse;
+            }
+            
             // Don't cache non-successful responses or non-HTTP requests
             if (networkResponse && networkResponse.status === 200 && request.url.startsWith('http')) {
               try {
@@ -159,9 +171,13 @@ self.addEventListener('fetch', (event) => {
               }
             }
             return networkResponse;
-          }).catch(() => {
-            // Ignore network errors, we'll use cached version
-            return null;
+          }).catch((error) => {
+            // Network error - use cached version if available
+            if (cachedResponse) {
+              return cachedResponse;
+            }
+            // If no cache and network fails, let the error propagate to trigger error handler
+            throw error;
           });
           
           // Return cached version immediately if available, otherwise wait for network
@@ -170,43 +186,31 @@ self.addEventListener('fetch', (event) => {
       })
     );
   } else {
-    // Pages: Stale-While-Revalidate (serve cached version immediately, update in background)
+    // Pages: Network-First with Cache Fallback
+    // For HTML pages, always try network first to get latest chunks references
     event.respondWith(
       caches.open(CACHE_NAME).then((cache) => {
-        return cache.match(request).then((cachedResponse) => {
-          // Start fetching fresh version in background
-          const fetchPromise = fetch(request).then((networkResponse) => {
-            // Cache successful responses (only HTTP requests)
-            if (networkResponse && networkResponse.status === 200 && request.url.startsWith('http')) {
-              try {
-                cache.put(request, networkResponse.clone());
-              } catch (err) {
-                // Ignore cache errors (e.g., chrome-extension://)
-                if (typeof self !== 'undefined' && self.location?.hostname === 'localhost') {
-                  console.warn('[SW] Failed to cache:', request.url, err);
-                }
+        return fetch(request).then((networkResponse) => {
+          // Cache successful responses (only HTTP requests)
+          if (networkResponse && networkResponse.status === 200 && request.url.startsWith('http')) {
+            try {
+              cache.put(request, networkResponse.clone());
+            } catch (err) {
+              // Ignore cache errors (e.g., chrome-extension://)
+              if (typeof self !== 'undefined' && self.location?.hostname === 'localhost') {
+                console.warn('[SW] Failed to cache:', request.url, err);
               }
             }
-            return networkResponse;
-          }).catch(() => {
-            // If network fails and we have cached version, use it
-            return cachedResponse || null;
-          });
-          
-          // Return cached version immediately if available, otherwise wait for network
-          if (cachedResponse) {
-            // Update cache in background without blocking
-            fetchPromise.catch(() => {});
-            return cachedResponse;
           }
-          
-          // If no cache, wait for network
-          return fetchPromise.then((networkResponse) => {
-            // Fallback to index.html for SPA routing if network fails
-            if (!networkResponse && request.mode === 'navigate') {
+          return networkResponse;
+        }).catch(() => {
+          // If network fails, try cache
+          return cache.match(request).then((cachedResponse) => {
+            // Fallback to index.html for SPA routing if no cache
+            if (!cachedResponse && request.mode === 'navigate') {
               return cache.match('/index.html');
             }
-            return networkResponse;
+            return cachedResponse || null;
           });
         });
       })

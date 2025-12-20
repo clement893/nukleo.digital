@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "NODE_ENV=development tsx watch server/_core/index.ts",
-    "build": "vite build && esbuild server/_core/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
+    "build": "vite build && esbuild server/_core/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist && pnpm verify:build",
     "build:analyze": "ANALYZE=true vite build && esbuild server/_core/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
     "start": "NODE_ENV=production node dist/index.js",
     "check": "tsc --noEmit",
@@ -13,6 +13,7 @@
     "test": "vitest run",
     "verify:ga": "node scripts/verify-ga-tag.js",
     "validate:translations": "node scripts/validate-translations.js",
+    "verify:build": "node scripts/verify-build-chunks.js",
     "db:push": "drizzle-kit generate && drizzle-kit migrate",
     "migrate:page-visibility": "node migrate-page-visibility.mjs",
     "migrate:loaders": "tsx server/migrate-loaders.ts",

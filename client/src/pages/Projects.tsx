@@ -75,6 +75,7 @@ function shuffleArray<T>(array: T[]): T[] {
 
 export default function Projects() {
   const { t } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
   // Load images from API (public endpoint - we'll make it public)
   const { data: uploadedImages, isLoading: isLoadingImages, error: imagesError } = trpc.projectsImages.list.useQuery(undefined, {
     retry: 1,
@@ -363,14 +364,14 @@ export default function Projects() {
                 {t('projects.ctaDescription')}
               </p>
 
-              <a href="/start-project">
+              <Link href={getLocalizedPath('/start-project')}>
                 <Button
                   size="lg"
                   className="rounded-full text-lg px-10 py-8 bg-white text-purple-900 hover:bg-white/90 transition-all duration-500 font-bold tracking-wider"
                 >
                   {t('projects.ctaButton')}
                 </Button>
-              </a>
+              </Link>
             </div>
           </div>
         </section>

@@ -2,13 +2,15 @@ import { Link } from 'wouter';
 import { Home, Compass, Briefcase, Mail, ArrowLeft } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 export default function NotFound404() {
+  const getLocalizedPath = useLocalizedPath();
   const quickLinks = [
-    { icon: Home, label: 'Home', path: '/', description: 'Back to homepage' },
-    { icon: Compass, label: 'Expertise', path: '/expertise', description: 'Explore our services' },
-    { icon: Briefcase, label: 'Services', path: '/services', description: 'View our services' },
-    { icon: Mail, label: 'Contact', path: '/contact', description: 'Get in touch' },
+    { icon: Home, label: 'Home', path: getLocalizedPath('/'), description: 'Back to homepage' },
+    { icon: Compass, label: 'Expertise', path: getLocalizedPath('/expertise'), description: 'Explore our services' },
+    { icon: Briefcase, label: 'Services', path: getLocalizedPath('/services'), description: 'View our services' },
+    { icon: Mail, label: 'Contact', path: getLocalizedPath('/contact'), description: 'Get in touch' },
   ];
 
   return (

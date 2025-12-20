@@ -3,8 +3,12 @@ import SEO from '@/components/SEO';
 import { Link } from 'wouter';
 import { Menu, Settings, BarChart3, Workflow, Bot, CheckCircle, ArrowRight } from 'lucide-react';
 import FullScreenMenu from '@/components/FullScreenMenu';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 export default function IntelligentOperations() {
+  const { t } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const seoContent = (
@@ -55,7 +59,7 @@ export default function IntelligentOperations() {
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b border-white/5">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/">
+          <Link href={getLocalizedPath('/')}>
             <a className="text-2xl font-bold text-white hover:text-violet-400 transition-colors">
               nukleo.
             </a>
@@ -88,7 +92,7 @@ export default function IntelligentOperations() {
               Optimize your operations with AI-powered automation and intelligence 
               that drives efficiency, reduces costs, and scales with your growth.
             </p>
-            <Link href="/contact">
+            <Link href={getLocalizedPath('/contact')}>
               <a className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-violet-500 to-rose-500 text-white font-bold rounded-full hover:shadow-[0_0_40px_rgba(139,92,246,0.5)] transition-all duration-300">
                 Optimize Your Operations
                 <ArrowRight className="w-5 h-5" />
@@ -146,7 +150,7 @@ export default function IntelligentOperations() {
             <p className="text-white/70 mb-8 max-w-2xl mx-auto">
               Let's automate and optimize your operations with AI that works smarter, not harder.
             </p>
-            <Link href="/contact">
+            <Link href={getLocalizedPath('/contact')}>
               <a className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-violet-500 to-rose-500 text-white font-bold rounded-full hover:shadow-[0_0_40px_rgba(139,92,246,0.5)] transition-all duration-300">
                 Schedule a Consultation
                 <ArrowRight className="w-5 h-5" />

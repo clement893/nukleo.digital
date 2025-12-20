@@ -17,11 +17,13 @@ import { Menu } from 'lucide-react';
 import { useState as useMenuState } from 'react';
 import FullScreenMenu from '@/components/FullScreenMenu';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 type AssessmentState = 'intro' | 'quiz' | 'email-capture' | 'results';
 
 export default function AIReadinessAssessment() {
   const { t } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
   const [menuOpen, setMenuOpen] = useMenuState(false);
   const [state, setState] = useState<AssessmentState>('intro');
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);

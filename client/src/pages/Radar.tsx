@@ -1,8 +1,10 @@
 import SEO from '@/components/SEO';
 import PageLayout from '@/components/PageLayout';
 import TrendRadar from '@/components/TrendRadar';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 export default function Radar() {
+  const getLocalizedPath = useLocalizedPath();
   return (
     <PageLayout>
       <div className="min-h-screen">

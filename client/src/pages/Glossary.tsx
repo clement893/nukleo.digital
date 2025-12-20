@@ -6,8 +6,10 @@ import StructuredData from '@/components/StructuredData';
 import { Link } from 'wouter';
 import { allTerms, categories, difficulties } from '@/data/glossary';
 import { Button } from '@/components/ui/button';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 export default function Glossary() {
+  const getLocalizedPath = useLocalizedPath();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedDifficulty, setSelectedDifficulty] = useState('All');
@@ -131,7 +133,7 @@ export default function Glossary() {
                 {trendingTerms.map(termId => {
                   const term = allTerms.find(t => t.id === termId);
                   return term ? (
-                    <Link key={termId} href={`/glossary/${termId}`}>
+                    <Link key={termId} href={getLocalizedPath(`/glossary/${termId}`)}>
                       <button className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 hover:border-accent text-white/80 hover:text-white text-sm transition-all duration-300">
                         {term.term}
                       </button>
@@ -299,12 +301,12 @@ export default function Glossary() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/ai-readiness">
+                <Link href={getLocalizedPath('/ai-readiness')}>
                   <Button className="bg-white text-purple-900 hover:bg-white/90 text-lg px-10 py-7 rounded-full font-bold shadow-2xl hover:scale-[1.022] transition-all duration-300">
                     Take AI Readiness Assessment
                   </Button>
                 </Link>
-                <Link href="/contact">
+                <Link href={getLocalizedPath('/contact')}>
                   <Button variant="outline" className="bg-transparent border-2 border-white text-white hover:bg-white/10 text-lg px-10 py-7 rounded-full font-bold transition-all duration-300">
                     Discuss Your Project
                   </Button>

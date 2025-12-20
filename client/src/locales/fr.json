@@ -654,7 +654,9 @@
     "addressHalifax": "1800 Argyle St Unit 801, Halifax, NS B3J 3N8",
     "email": "hello@nukleo.digital",
     "emailUs": "Envoyez-nous un email",
-    "phone": "Téléphone"
+    "phone": "Téléphone",
+    "send": "Envoyer",
+    "ourOffices": "Nos bureaux"
   },
   "startProject": {
     "seoTitle": "Démarrer un projet | Nukleo Digital",

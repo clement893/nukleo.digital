@@ -22,6 +22,7 @@ interface Message {
 
 export default function Leo() {
   const { t } = useLanguage();
+  const getLocalizedPath = useLocalizedPath();
   const welcomeMessage = t('leo.welcomeMessage') || "I'm here to help architect your AI transformation. To begin, what should I call you?";
   
   // Load messages from localStorage on mount

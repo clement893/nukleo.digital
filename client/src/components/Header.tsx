@@ -6,6 +6,8 @@ import FullScreenMenu from './FullScreenMenu';
 import { useSound } from '@/hooks/useSound';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { useIsMobile } from '@/hooks/useIsMobile';
+import { MOBILE_BREAKPOINT, ANIMATIONS } from '@/lib/constants';
 
 /**
  * Composant Header principal de l'application.
@@ -21,6 +23,12 @@ function Header() {
   const { playHover, playClick } = useSound();
   const { t } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
+  const isMobile = useIsMobile(MOBILE_BREAKPOINT);
+  
+  // Optimize animation duration for mobile
+  const animationDuration = isMobile 
+    ? ANIMATIONS.DEFAULT_DURATION - ANIMATIONS.MOBILE_DURATION_REDUCTION
+    : ANIMATIONS.DEFAULT_DURATION;
   
   // Memoize handlers to prevent re-renders
   /**
@@ -71,9 +79,10 @@ function Header() {
       <header 
         className={`
           fixed top-0 left-0 right-0 z-40
-          transition-all duration-300 sm:duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]
+          transition-all ${isMobile ? `duration-${animationDuration}` : 'duration-300 sm:duration-700'} ease-[cubic-bezier(0.16,1,0.3,1)]
           ${isScrolled ? 'px-4 sm:px-6 md:px-12 pt-3 sm:pt-4' : 'px-4 sm:px-6 md:px-12 pt-6 sm:pt-8'}
         `}
+        style={isMobile && ANIMATIONS.USE_WILL_CHANGE ? { willChange: 'transform, opacity' } : undefined}
       >
         <div 
           className={`

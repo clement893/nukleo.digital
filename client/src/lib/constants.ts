@@ -66,6 +66,12 @@ export const ANIMATIONS = {
   SLOW_DURATION: 500,
   /** Easing par défaut */
   DEFAULT_EASING: 'cubic-bezier(0.4, 0, 0.2, 1)',
+  /** Réduction de durée sur mobile pour meilleures performances (en ms) */
+  MOBILE_DURATION_REDUCTION: 100,
+  /** Désactiver les animations complexes sur mobile */
+  DISABLE_COMPLEX_ON_MOBILE: true,
+  /** Utiliser will-change pour optimiser les animations */
+  USE_WILL_CHANGE: true,
 } as const;
 
 /**

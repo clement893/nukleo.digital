@@ -16,6 +16,7 @@ import GoogleAnalytics from "./components/GoogleAnalytics";
 import { FloatingLanguageToggle } from "./components/FloatingLanguageToggle";
 import { usePageTransition } from "./hooks/usePageTransition";
 import { usePageBackground } from "./hooks/usePageBackground";
+import { usePrefetch } from "./hooks/usePrefetch";
 import { lazyWithRetry } from "./lib/lazyWithRetry";
 
 // Lazy load UniversalLEO
@@ -134,6 +135,8 @@ function App() {
   usePageTransition();
   // Preload background of destination page to prevent color flash
   usePageBackground();
+  // Prefetch frequently visited routes for better performance
+  usePrefetch(true);
   
   return (
     <EnhancedErrorBoundary enableRecovery={true} maxRecoveryAttempts={3}>

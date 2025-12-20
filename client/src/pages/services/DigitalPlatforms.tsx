@@ -5,6 +5,7 @@ import { Link } from 'wouter';
 import { Menu, Code, Zap, Shield, Layers, CheckCircle, ArrowRight } from 'lucide-react';
 import FullScreenMenu from '@/components/FullScreenMenu';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 export default function DigitalPlatforms() {
   const { t } = useLanguage();

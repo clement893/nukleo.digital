@@ -756,7 +756,7 @@ async function startServer() {
   // This must be AFTER all API routes and serveStatic
   if (process.env.NODE_ENV === "production") {
     const distPath = path.resolve(process.cwd(), "dist", "public");
-    app.get('*', (req, res) => {
+    app.get('*', async (req, res) => {
       // Skip asset requests that weren't found (but NOT /projects/ route for SPA)
       // Only return 404 for actual asset files, not routes
       const isAssetFile = req.path.startsWith('/assets/') || 

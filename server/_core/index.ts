@@ -26,7 +26,7 @@ import postgres from "postgres";
 import { sql } from "drizzle-orm";
 import multer from "multer";
 import fs from "fs/promises";
-import { existsSync, mkdirSync } from "fs";
+import { existsSync, mkdirSync, readdirSync } from "fs";
 import { csrfTokenMiddleware, validateCSRF } from "./csrf";
 
 /**
@@ -786,7 +786,62 @@ async function startServer() {
         return res.status(500).send('Application not available. Please try again later.');
       }
       
-      res.sendFile(indexPath);
+      // CRITICAL: Verify that all referenced chunks exist before serving HTML
+      // This prevents "Failed to fetch dynamically imported module" errors
+      try {
+        const htmlContent = await fs.promises.readFile(indexPath, 'utf-8');
+        const assetsJsPath = path.join(distPath, 'assets', 'js');
+        
+        if (existsSync(assetsJsPath)) {
+          const availableChunks = new Set(readdirSync(assetsJsPath).filter(f => f.endsWith('.js')));
+          
+          // Extract chunk references from HTML
+          const chunkRefs = new Set<string>();
+          const scriptSrcRegex = /<script[^>]+src=["']([^"']+\.js[^"']*)["']/gi;
+          const linkPreloadRegex = /<link[^>]+href=["']([^"']+\.js[^"']*)["']/gi;
+          
+          let match;
+          while ((match = scriptSrcRegex.exec(htmlContent)) !== null) {
+            const src = match[1].split('?')[0].split('#')[0];
+            if (src.includes('/assets/js/')) {
+              const chunkName = path.basename(src);
+              chunkRefs.add(chunkName);
+            }
+          }
+          while ((match = linkPreloadRegex.exec(htmlContent)) !== null) {
+            const src = match[1].split('?')[0].split('#')[0];
+            if (src.includes('/assets/js/')) {
+              const chunkName = path.basename(src);
+              chunkRefs.add(chunkName);
+            }
+          }
+          
+          // Check for missing chunks
+          const missingChunks: string[] = [];
+          for (const chunkRef of chunkRefs) {
+            if (!availableChunks.has(chunkRef)) {
+              missingChunks.push(chunkRef);
+            }
+          }
+          
+          if (missingChunks.length > 0) {
+            logger.error(`[Static] ⚠️ CRITICAL: HTML references ${missingChunks.length} missing chunks:`, missingChunks);
+            logger.error(`[Static] Available chunks: ${Array.from(availableChunks).slice(0, 10).join(', ')}...`);
+            logger.error(`[Static] This will cause "Failed to fetch dynamically imported module" errors.`);
+            logger.error(`[Static] The build is incomplete. Please rebuild the application.`);
+            
+            // Still serve the HTML, but log the error
+            // The client-side error handler will attempt recovery
+          }
+        }
+        
+        // Serve the HTML (even if chunks are missing - client will handle recovery)
+        res.sendFile(indexPath);
+      } catch (error) {
+        logger.error(`[Static] Error reading/verifying index.html:`, error);
+        // Fallback: serve the file anyway
+        res.sendFile(indexPath);
+      }
     });
   }
   

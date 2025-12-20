@@ -133,6 +133,7 @@ export default function Leo() {
     }
   };
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const typingIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const chatMutation = trpc.leo.chat.useMutation();
   const saveContactMutation = trpc.leo.saveContact.useMutation();
 

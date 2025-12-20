@@ -7,6 +7,7 @@ import { ArrowLeft, Bookmark, Share2, ExternalLink, Lightbulb, HelpCircle, BookO
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { logger } from '@/lib/logger';
 
 export default function GlossaryTerm() {
   const [, params] = useRoute('/glossary/:termId');

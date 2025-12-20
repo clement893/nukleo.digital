@@ -18,6 +18,7 @@ import { useState as useMenuState } from 'react';
 import FullScreenMenu from '@/components/FullScreenMenu';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { logger } from '@/lib/logger';
 
 type AssessmentState = 'intro' | 'quiz' | 'email-capture' | 'results';
 

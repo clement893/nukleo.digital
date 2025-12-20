@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { X, Send, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { trpc } from '@/lib/trpc';
+import { logger } from '@/lib/logger';
 
 // Generate a simple UUID v4
 function generateUUID() {

@@ -18,6 +18,7 @@ import {
 import { ArrowRight, CheckCircle2, AlertCircle } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { getErrorMessage } from '@/lib/trpcErrorHandler';
+import { logger } from '@/lib/logger';
 
 export default function StartProject() {
   const { t } = useLanguage();

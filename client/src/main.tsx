@@ -14,6 +14,7 @@ import "./contexts/LanguageContext";
 import "./hooks/useLocalizedPath";
 import { initSentry } from "./lib/sentry";
 import { initWebVitals } from "./lib/webVitals";
+import { logger } from "./lib/logger";
 
 // Initialize Sentry for client-side error monitoring
 initSentry();

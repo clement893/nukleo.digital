@@ -11,6 +11,7 @@ import Breadcrumb from '@/components/Breadcrumb';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { extractValidationErrors, getErrorMessage } from '@/lib/trpcErrorHandler';
+import { logger } from '@/lib/logger';
 
 export default function Contact() {
   const { t } = useLanguage();

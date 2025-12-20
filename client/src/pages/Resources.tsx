@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'wouter';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { logger } from '@/lib/logger';
 import enTranslations from '../locales/en.json';
 import frTranslations from '../locales/fr.json';
 

@@ -1,6 +1,7 @@
 import { AssessmentResults } from './scoring';
 import { getRecommendationsForLevel } from './recommendations';
 import { EmailCaptureData } from '@/components/assessment/EmailCaptureModal';
+import { logger } from '@/lib/logger';
 
 // Lazy load jsPDF only when needed - use string-based dynamic import to avoid Vite resolution
 async function loadJsPDF() {

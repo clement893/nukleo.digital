@@ -23,9 +23,15 @@ interface Message {
 
 export default function Leo() {
   const { t } = useLanguage();
-  const getLocalizedPath = useLocalizedPath();
   
   // Ensure getLocalizedPath is always defined - provide fallback if hook fails
+  let getLocalizedPath: ((path: string) => string) | undefined;
+  try {
+    getLocalizedPath = useLocalizedPath();
+  } catch (error) {
+    logger.tagged('Leo').warn('Failed to initialize useLocalizedPath hook:', error);
+  }
+  
   const safeGetLocalizedPath = (getLocalizedPath && typeof getLocalizedPath === 'function') 
     ? getLocalizedPath 
     : ((path: string) => path); // Fallback function

@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import SEO from '@/components/SEO';
 import Breadcrumb from '@/components/Breadcrumb';
 import OptimizedImage from '@/components/OptimizedImage';
-import { Send, Mic, Mail, X } from 'lucide-react';
+import { Send, Mic, Mail, X, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { trpc } from '@/lib/trpc';
@@ -12,6 +12,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { logger } from '@/lib/logger';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { ChatMessage, isValidChatMessage } from '@/types/localStorage';
+import FullScreenMenu from '@/components/FullScreenMenu';
 
 interface Message {
   role: 'user' | 'assistant' | 'system';
@@ -23,6 +24,7 @@ interface Message {
 export default function Leo() {
   const { t } = useLanguage();
   const getLocalizedPath = useLocalizedPath();
+  const [menuOpen, setMenuOpen] = useState(false);
   const welcomeMessage = t('leo.welcomeMessage') || "I'm here to help architect your AI transformation. To begin, what should I call you?";
   
   // Load messages from localStorage on mount
@@ -466,6 +468,7 @@ export default function Leo() {
         keywords={t('leo.seoKeywords') || "AI chatbot, AI assistant, AI consultation, AI strategy, AI transformation help, AI implementation guide, free AI consultation, AI advisor"}
         ogImage="https://nukleodigital-production.up.railway.app/og-image.jpg"
       />
+      <FullScreenMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
       <div className="min-h-screen bg-gradient-to-br from-[oklch(0.35_0.15_300)] via-[oklch(0.40_0.15_320)] to-[oklch(0.35_0.15_340)] flex flex-col overflow-hidden">
       {/* Breadcrumb */}
       <div className="container pt-24 pb-4">
@@ -507,18 +510,18 @@ export default function Leo() {
               >
                 {t('leo.newChat')}
               </Button>
-              <Button
-                className="rounded-full bg-white text-purple-900 hover:bg-white/90 font-bold px-6"
-              >
-                {t('leo.startProject')}
-              </Button>
-              <Link href={getLocalizedPath('/')}>
-                <button className="text-white hover:text-white/80 transition-colors p-2">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                  </svg>
-                </button>
+              <Link href={getLocalizedPath('/start-project')}>
+                <Button className="rounded-full bg-white text-purple-900 hover:bg-white/90 font-bold px-6">
+                  {t('leo.startProject')}
+                </Button>
               </Link>
+              <button
+                onClick={() => setMenuOpen(true)}
+                className="text-white hover:text-white/80 transition-colors p-2"
+                aria-label="Open menu"
+              >
+                <Menu className="w-6 h-6" />
+              </button>
             </div>
           </div>
         </div>

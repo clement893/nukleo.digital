@@ -23,6 +23,7 @@
     "contact": "Contact",
     "startProject": "Start Project",
     "talkToLeo": "Talk to Leo",
+    "leo": "Talk to Leo",
     "artsCulture": "Arts & Culture",
     "faq": "FAQ"
   },
@@ -2170,6 +2171,99 @@
       "button": "Install",
       "dismiss": "Not now",
       "close": "Close"
+    }
+  },
+  "leo": {
+    "seoTitle": "Chat with LEO - AI Assistant | Instant AI Consultation",
+    "seoDescription": "LEO AI assistant Nukleo Digital. Instant answers on AI transformation, strategy, implementation. Free AI consultation chatbot.",
+    "seoKeywords": "AI chatbot, AI assistant, AI consultation, AI strategy, AI transformation help, AI implementation guide, free AI consultation, AI advisor",
+    "welcomeMessage": "I'm here to help you architect your AI transformation. To get started, what should I call you?",
+    "newChat": "New Conversation",
+    "startProject": "START A PROJECT",
+    "home": "HOME",
+    "chatWithLeo": "TALK TO LEO",
+    "aiOnline": "AI Online",
+    "leoLabel": "LEO",
+    "youLabel": "YOU",
+    "skip": "Skip",
+    "saving": "Saving...",
+    "send": "Send",
+    "namePlaceholder": "Your name (optional)",
+    "emailPlaceholder": "your@email.com",
+    "emailPrompt": "Before we continue, I'd love to send you personalized insights! Could you share your email?",
+    "emailSuccess": "Perfect! Thank you {{name}}! 🎉 I'll send personalized insights to {{email}}. Now, let's continue our conversation!",
+    "emailSkip": "No problem! Let's continue our conversation. 😊",
+    "errorMessage": "Sorry, I'm having trouble connecting right now. Please try again! 🔄",
+    "suggestionsPrompt": "Or choose a topic to get started:",
+    "inputPlaceholder": "Type your response...",
+    "privacyPolicy": "Privacy Policy",
+    "expertMode": "Expert",
+    "standardMode": "Standard",
+    "switchToExpert": "Switch to Expert Mode",
+    "switchToStandard": "Switch to Standard Mode",
+    "suggestions": {
+      "initial": [
+        "How can AI transform my business operations?",
+        "What's the ROI timeline for AI implementation?",
+        "Help me build a strategic AI roadmap",
+        "What are the best AI use cases for my industry?"
+      ],
+      "strategy": [
+        "How do I create a phased AI implementation plan?",
+        "What are the key success factors for AI transformation?",
+        "How should I structure my AI team?",
+        "What's the typical timeline for AI adoption?"
+      ],
+      "implementation": [
+        "What tech stack should I choose for AI?",
+        "How do I ensure data quality for AI models?",
+        "What are common pitfalls in AI implementation?",
+        "How do I integrate AI with existing systems?"
+      ],
+      "roi": [
+        "How long before I see ROI from AI investments?",
+        "What metrics should I track for AI success?",
+        "How do I calculate the business value of AI?",
+        "What are realistic cost expectations for AI projects?"
+      ],
+      "team": [
+        "What skills should I recruit for AI projects?",
+        "How do I train my existing team on AI?",
+        "Should I build in-house or partner for AI?",
+        "How do I create an AI-focused culture?"
+      ]
+    },
+    "expertSuggestions": {
+      "initial": [
+        "What's your approach to MLOps and model governance?",
+        "How do you architect multi-agent AI agent systems?",
+        "What's your framework for AI risk assessment and mitigation?",
+        "How do you handle data drift and model retraining pipelines?"
+      ],
+      "strategy": [
+        "What's your methodology for AI maturity assessment?",
+        "How do you design federated learning architectures?",
+        "What's your approach to AI ethics frameworks and bias detection?",
+        "How do you structure an AI center of excellence?"
+      ],
+      "implementation": [
+        "What's your tech stack for large-scale real-time inference?",
+        "How do you implement model versioning and A/B testing?",
+        "What's your approach to feature engineering automation?",
+        "How do you handle model explainability and interpretability?"
+      ],
+      "roi": [
+        "How do you calculate TCO for AI infrastructure?",
+        "What metrics do you use for model performance vs business KPIs?",
+        "How do you quantify the value of data quality improvements?",
+        "What's your framework for optimizing AI investment portfolios?"
+      ],
+      "team": [
+        "What's your recruitment framework for ML engineers vs data scientists?",
+        "How do you structure AI teams (centralized vs integrated)?",
+        "What certifications and skills matter for AI practitioners?",
+        "How do you build internal AI communities of practice?"
+      ]
     }
   }
 }

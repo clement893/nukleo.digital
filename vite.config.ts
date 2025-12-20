@@ -107,6 +107,10 @@ export default defineConfig({
             if (id.includes('wouter')) {
               return 'vendor'; // Ensure wouter is in vendor chunk, not split
             }
+            // Hooks - ensure useLocalizedPath is available in vendor chunk
+            if (id.includes('useLocalizedPath') || id.includes('hooks/useLocalizedPath')) {
+              return 'vendor';
+            }
             // Markdown rendering (used in LEO) - lazy load
             if (id.includes('streamdown') || id.includes('react-markdown')) {
               return 'markdown-vendor';
@@ -158,7 +162,7 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: ['wouter'], // Ensure wouter is pre-bundled and available
+    include: ['wouter', '@/hooks/useLocalizedPath'], // Ensure wouter and useLocalizedPath are pre-bundled and available
   },
   // Optimize CSS loading - defer non-critical CSS
   css: {

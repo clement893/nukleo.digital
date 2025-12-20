@@ -17,7 +17,7 @@ export const analyticsRouter = router({
         .select()
         .from(analytics);
 
-      return configs;
+      return Array.isArray(configs) ? configs : [];
     } catch (error) {
       console.error("[Analytics] Error fetching configurations:", error);
       return [];
@@ -38,7 +38,7 @@ export const analyticsRouter = router({
         .from(analytics)
         .where(eq(analytics.isEnabled, true));
 
-      return configs;
+      return Array.isArray(configs) ? configs : [];
     } catch (error) {
       console.error("[Analytics] Error fetching active configurations:", error);
       return [];

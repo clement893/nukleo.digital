@@ -9,7 +9,7 @@ export default function AnalyticsLoader() {
   const { data: activeAnalytics } = trpc.analytics.getActive.useQuery();
 
   useEffect(() => {
-    if (!activeAnalytics || activeAnalytics.length === 0) {
+    if (!activeAnalytics || !Array.isArray(activeAnalytics) || activeAnalytics.length === 0) {
       return;
     }
 
@@ -121,7 +121,7 @@ export default function AnalyticsLoader() {
 
   // Track conversions for forms
   useEffect(() => {
-    if (!activeAnalytics || activeAnalytics.length === 0) {
+    if (!activeAnalytics || !Array.isArray(activeAnalytics) || activeAnalytics.length === 0) {
       return;
     }
 
@@ -167,7 +167,7 @@ export default function AnalyticsLoader() {
 
   // Track route changes (for SPA routing with wouter)
   useEffect(() => {
-    if (!activeAnalytics || activeAnalytics.length === 0) {
+    if (!activeAnalytics || !Array.isArray(activeAnalytics) || activeAnalytics.length === 0) {
       return;
     }
 

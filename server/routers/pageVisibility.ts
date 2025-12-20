@@ -19,7 +19,7 @@ export const pageVisibilityRouter = router({
         .from(pageVisibility)
         .orderBy(desc(pageVisibility.updatedAt));
 
-      return pages;
+      return Array.isArray(pages) ? pages : [];
     } catch (error) {
       console.error("[PageVisibility] Error fetching pages:", error);
       return [];

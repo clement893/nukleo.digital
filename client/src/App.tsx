@@ -83,7 +83,7 @@ const Cookies = lazy(() => import("./pages/Cookies"));
 const Testimonials = lazy(() => import("./pages/Testimonials"));
 const Services = lazy(() => import("./pages/Services"));
 const Clients = lazy(() => import("./pages/Clients"));
-const StartProject = lazy(() => import("./pages/StartProject"));
+const StartProject = lazyWithRetry(() => import("./pages/StartProject"));
 const MediaCenter = lazy(() => import("./pages/MediaCenter"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsOfService = lazy(() => import("./pages/TermsOfService"));

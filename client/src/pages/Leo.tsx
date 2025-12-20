@@ -24,17 +24,11 @@ interface Message {
 export default function Leo() {
   const { t } = useLanguage();
   
-  // Ensure getLocalizedPath is always defined - provide fallback if hook fails
-  let getLocalizedPath: ((path: string) => string) | undefined;
-  try {
-    getLocalizedPath = useLocalizedPath();
-  } catch (error) {
-    logger.tagged('Leo').warn('Failed to initialize useLocalizedPath hook:', error);
-  }
-  
-  const safeGetLocalizedPath = (getLocalizedPath && typeof getLocalizedPath === 'function') 
-    ? getLocalizedPath 
-    : ((path: string) => path); // Fallback function
+  // Get localized path function with safe fallback
+  const getLocalizedPathHook = useLocalizedPath();
+  const safeGetLocalizedPath = typeof getLocalizedPathHook === 'function' 
+    ? getLocalizedPathHook 
+    : ((path: string) => path); // Fallback function that returns path as-is
   const welcomeMessage = t('leo.welcomeMessage') || "I'm here to help architect your AI transformation. To begin, what should I call you?";
   
   // Load messages from localStorage on mount

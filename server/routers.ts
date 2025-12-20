@@ -122,7 +122,22 @@ Limitations:
             message: error instanceof Error ? error.message : 'Unknown error',
             hasApiKey: !!process.env.BUILT_IN_FORGE_API_KEY,
           }));
-          throw error;
+          
+          // Return a fallback response instead of throwing to keep LEO functional
+          const lastUserMessage = input.messages[input.messages.length - 1]?.content || '';
+          const fallbackResponses = [
+            "I'm experiencing some technical difficulties right now. Could you try rephrasing your question? 🔄",
+            "I'm having trouble connecting to my AI brain at the moment. Can you ask me again in a different way? 🤔",
+            "Something went wrong on my end. Let's try again - could you rephrase your question? 💡",
+            "I'm having a moment of confusion. Could you ask your question differently? 😊",
+          ];
+          
+          // Use a simple hash of the message to consistently pick a fallback
+          const fallbackIndex = lastUserMessage.length % fallbackResponses.length;
+          
+          return {
+            content: fallbackResponses[fallbackIndex] || "I'm having trouble connecting right now. Please try again! 🔄",
+          };
         }
       }),
     

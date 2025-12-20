@@ -177,7 +177,10 @@ export default function PageLoader() {
     }
 
     // Select a random loader from active loaders
-    const randomLoader = safeActiveLoaders[Math.floor(Math.random() * safeActiveLoaders.length)];
+    // Ensure safeActiveLoaders is valid before accessing
+    const randomLoader = safeActiveLoaders && safeActiveLoaders.length > 0 
+      ? safeActiveLoaders[Math.floor(Math.random() * safeActiveLoaders.length)]
+      : null;
     
     if (randomLoader && randomLoader.cssCode) {
       // Extract and inject CSS styles FIRST

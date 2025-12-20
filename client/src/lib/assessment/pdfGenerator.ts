@@ -5,8 +5,8 @@ import { EmailCaptureData } from '@/components/assessment/EmailCaptureModal';
 // Lazy load jsPDF only when needed - use string-based dynamic import to avoid Vite resolution
 async function loadJsPDF() {
   // Check if already loaded globally (from CDN)
-  if (typeof window !== 'undefined' && (window as any).jspdf) {
-    return (window as any).jspdf.jsPDF;
+  if (typeof window !== 'undefined' && window.jspdf) {
+    return window.jspdf.jsPDF;
   }
   
   try {
@@ -29,8 +29,7 @@ async function loadJsPDF() {
         script.onerror = () => reject(new Error('Failed to load jsPDF from CDN'));
         document.head.appendChild(script);
       });
-      // @ts-ignore - jsPDF loaded from CDN
-      return (window as any).jspdf.jsPDF;
+      return window.jspdf?.jsPDF ?? null;
     } catch (cdnError) {
       logger.tagged('PDFGenerator').warn('Failed to load jsPDF:', { npmError, cdnError });
       return null;

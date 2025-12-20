@@ -11,6 +11,7 @@ import { Link } from 'wouter';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { logger } from '@/lib/logger';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { ChatMessage, isValidChatMessage } from '@/types/localStorage';
 
 interface Message {
   role: 'user' | 'assistant' | 'system';

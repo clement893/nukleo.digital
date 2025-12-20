@@ -13,9 +13,9 @@ export default function GoogleAnalytics() {
     if (typeof window === 'undefined') return;
     
     // Ensure gtag function exists (it should be loaded from index.html)
-    if (!(window as any).gtag) {
+    if (!window.gtag) {
       window.dataLayer = window.dataLayer || [];
-      (window as any).gtag = function(...args: any[]) {
+      window.gtag = function(...args: unknown[]) {
         window.dataLayer.push(args);
       };
     }

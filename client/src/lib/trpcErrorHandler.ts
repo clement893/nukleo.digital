@@ -21,7 +21,7 @@ export function extractValidationErrors(error: unknown): Record<string, string> 
     return formattedErrors;
   }
 
-  const trpcError = error as TRPCClientError<any>;
+  const trpcError = error as TRPCClientError<unknown>;
 
   // Format 1: error.data is directly an array of Zod errors
   if (Array.isArray(trpcError.data)) {
@@ -88,7 +88,7 @@ export function getErrorMessage(error: unknown, defaultMessage: string = 'An err
     return defaultMessage;
   }
 
-  const trpcError = error as TRPCClientError<any>;
+  const trpcError = error as TRPCClientError<unknown>;
 
   // Try to get a meaningful error message
   if (trpcError.message && typeof trpcError.message === 'string') {

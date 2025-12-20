@@ -8,7 +8,7 @@ import { logger } from './logger';
 
 // Send metrics to Google Analytics
 function sendToAnalytics(metric: Metric) {
-  const gtag = (window as any).gtag;
+  const gtag = window.gtag;
   if (!gtag) return;
 
   // Send to Google Analytics

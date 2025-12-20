@@ -1,6 +1,6 @@
 import { Filter, AlertCircle } from 'lucide-react';
 import PageLayout from '@/components/PageLayout';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import SEO from '@/components/SEO';
 import StructuredData from '@/components/StructuredData';
 import Breadcrumb from '@/components/Breadcrumb';
@@ -29,10 +29,11 @@ export default function Resources() {
   }, [language]);
 
   // Helper to get array from translations using preloaded translations
-  const getArrayTranslation = (key: string): string[] => {
+  // Memoized to prevent unnecessary recalculations
+  const getArrayTranslation = useCallback((key: string): string[] => {
     try {
       const keys = key.split('.');
-      let value: any = translations;
+      let value: unknown = translations;
       
       // Navigate through nested keys
       for (const k of keys) {
@@ -47,7 +48,7 @@ export default function Resources() {
     } catch {
       return [];
     }
-  };
+  }, [translations]);
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -69,7 +70,8 @@ export default function Resources() {
     }
   };
 
-  const tools = [
+  // Memoize tools array to prevent recalculation on every render
+  const tools = useMemo(() => [
     {
       badge: t('resources.tools.aiReadiness.badge'),
       title: t('resources.tools.aiReadiness.title'),
@@ -94,17 +96,19 @@ export default function Resources() {
       link: getLocalizedPath('/ai-glossary'),
       buttonText: t('resources.tools.aiGlossary.buttonText')
     }
-  ];
+  ], [t, getArrayTranslation, getLocalizedPath]);
 
-  const categories = [
+  // Memoize categories array
+  const categories = useMemo(() => [
     { key: 'all', label: t('resources.filter.all') },
     { key: 'industryInsights', label: t('resources.filter.industryInsights') },
     { key: 'technicalGuide', label: t('resources.filter.technicalGuide') },
     { key: 'strategy', label: t('resources.filter.strategy') },
     { key: 'caseStudy', label: t('resources.filter.caseStudy') }
-  ];
+  ], [t]);
 
-  const resources = [
+  // Memoize resources array
+  const resources = useMemo(() => [
     {
       id: 'agentic-ai-playbook',
       category: 'technicalGuide',
@@ -145,11 +149,14 @@ export default function Resources() {
       readTime: t('resources.articles.roiInvestment.readTime') || '10 min',
       date: '2025-01-05'
     }
-  ].filter(resource => resource.title && resource.description && resource.title.trim() !== '' && resource.description.trim() !== ''); // Filter out empty resources
+  ].filter(resource => resource.title && resource.description && resource.title.trim() !== '' && resource.description.trim() !== ''), [t]);
 
-  const filteredResources = selectedCategory === 'all' 
-    ? resources 
-    : resources.filter(r => r.category === selectedCategory);
+  // Memoize filtered resources
+  const filteredResources = useMemo(() => {
+    return selectedCategory === 'all' 
+      ? resources 
+      : resources.filter(r => r.category === selectedCategory);
+  }, [selectedCategory, resources]);
 
   const resourcesCollectionSchema = {
     '@context': 'https://schema.org',

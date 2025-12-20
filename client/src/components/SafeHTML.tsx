@@ -90,6 +90,7 @@ export default function SafeHTML({
     }
   });
   
-  return <Tag ref={containerRef as any} id={id} className={className} style={style} {...htmlProps} />;
+  // Type assertion needed because ref types vary by tag
+  return <Tag ref={containerRef as never} id={id} className={className} style={style} {...htmlProps} />;
 }
 

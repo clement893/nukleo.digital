@@ -13,7 +13,8 @@ export default function TestimonialsCarousel() {
   const { data: testimonials = [], isLoading } = trpc.testimonials.getAll.useQuery({ language });
 
   // Sélectionner 6 témoignages pour le carrousel
-  const carouselTestimonials = testimonials.slice(0, 6);
+  const safeTestimonials = Array.isArray(testimonials) ? testimonials : [];
+  const carouselTestimonials = safeTestimonials.slice(0, 6);
 
   // Auto-play
   useEffect(() => {

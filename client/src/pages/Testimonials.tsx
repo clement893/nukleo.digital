@@ -14,7 +14,7 @@ export default function Testimonials() {
 
   // Create Review schema for testimonials
   const reviewSchema = useMemo(() => {
-    if (!testimonials || testimonials.length === 0) return null;
+    if (!testimonials || !Array.isArray(testimonials) || testimonials.length === 0) return null;
     
     const reviews = testimonials.map((testimonial, index) => ({
       author: testimonial.contact,
@@ -67,7 +67,7 @@ export default function Testimonials() {
               <div className="text-center py-20">
                 <p className="text-white/70">Loading testimonials...</p>
               </div>
-            ) : (
+            ) : testimonials && Array.isArray(testimonials) && testimonials.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {testimonials.map((testimonial, index) => (
                 <div
@@ -119,6 +119,10 @@ export default function Testimonials() {
                   </div>
                 </div>
                 ))}
+              </div>
+            ) : (
+              <div className="text-center py-20">
+                <p className="text-white/70">No testimonials available.</p>
               </div>
             )}
           </section>

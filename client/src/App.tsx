@@ -7,8 +7,8 @@ import PageLoader from "./components/PageLoader";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 // CRITICAL: Pre-import useLocalizedPath to ensure it's in the main chunk
-// Import side-effect to ensure module is bundled in main chunk
-import type {} from "./hooks/useLocalizedPath";
+// This import forces the module to be included in the main bundle
+import "./hooks/useLocalizedPath";
 import ScrollToTop from "./components/ScrollToTop";
 import ArrowBackground from "./components/ArrowBackground";
 import AnalyticsLoader from "./components/AnalyticsLoader";

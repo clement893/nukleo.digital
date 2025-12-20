@@ -25,7 +25,7 @@ import { getDb } from "../db";
 import postgres from "postgres";
 import { sql } from "drizzle-orm";
 import multer from "multer";
-import fs from "fs/promises";
+import { promises as fs } from "fs";
 import { existsSync, mkdirSync, readdirSync } from "fs";
 import { csrfTokenMiddleware, validateCSRF } from "./csrf";
 
@@ -789,7 +789,7 @@ async function startServer() {
       // CRITICAL: Verify that all referenced chunks exist before serving HTML
       // This prevents "Failed to fetch dynamically imported module" errors
       try {
-        const htmlContent = await fs.promises.readFile(indexPath, 'utf-8');
+        const htmlContent = await fs.readFile(indexPath, 'utf-8');
         const assetsJsPath = path.join(distPath, 'assets', 'js');
         
         if (existsSync(assetsJsPath)) {

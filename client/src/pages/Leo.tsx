@@ -61,6 +61,9 @@ export default function Leo() {
   };
 
   const [messages, setMessages] = useState<Message[]>(() => loadMessages());
+  
+  // Ensure messages is always an array to prevent .map() errors
+  const safeMessages = Array.isArray(messages) ? messages : [];
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
@@ -157,7 +160,7 @@ export default function Leo() {
   const getContextualSuggestions = (): string[] => {
     if (messages.length <= 1) return suggestionCategories.initial;
 
-    const lastMessages = messages.slice(-3).map(m => m.content.toLowerCase()).join(' ');
+    const lastMessages = safeMessages.slice(-3).map(m => m.content.toLowerCase()).join(' ');
 
     if (lastMessages.includes('roi') || lastMessages.includes('cost') || lastMessages.includes('budget') || lastMessages.includes('value')) {
       return suggestionCategories.roi;
@@ -233,7 +236,7 @@ export default function Leo() {
     
     if (messages.length <= 1) return categories.initial;
 
-    const lastMessages = messages.slice(-3).map(m => m.content.toLowerCase()).join(' ');
+    const lastMessages = safeMessages.slice(-3).map(m => m.content.toLowerCase()).join(' ');
 
     if (lastMessages.includes('roi') || lastMessages.includes('cost') || lastMessages.includes('budget') || lastMessages.includes('value')) {
       return categories.roi;
@@ -252,6 +255,9 @@ export default function Leo() {
   };
 
   const [suggestions, setSuggestions] = useState<string[]>(getContextualSuggestionsForMode(isExpertMode));
+  
+  // Ensure suggestions is always an array to prevent .map() errors
+  const safeSuggestions = Array.isArray(suggestions) ? suggestions : [];
 
   // Update suggestions when messages or expert mode change
   useEffect(() => {
@@ -334,7 +340,7 @@ export default function Leo() {
 
     try {
       const response = await chatMutation.mutateAsync({
-        messages: [...messages, userMessage].map((m) => ({
+        messages: [...safeMessages, userMessage].map((m) => ({
           role: m.role,
           content: m.content,
         })),
@@ -542,7 +548,7 @@ export default function Leo() {
       {/* Chat container */}
       <div className="flex-1 container pb-32 overflow-y-auto overflow-x-hidden" style={{ maxHeight: 'calc(100vh - 200px)', WebkitOverflowScrolling: 'touch' }}>
         <div className="max-w-3xl mx-auto space-y-8 py-4">
-          {messages.map((message, index) => (
+          {safeMessages.map((message, index) => (
             <div key={index}>
               {message.isEmailForm ? (
                 // Inline Email Form
@@ -715,7 +721,7 @@ export default function Leo() {
             <div className="mt-8 space-y-4">
               <p className="text-sm text-white/60 text-center">{t('leo.suggestionsPrompt')}</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {suggestions.map((suggestion, index) => (
+                {safeSuggestions.map((suggestion, index) => (
                   <button
                     key={index}
                     onClick={() => handleSuggestionClick(suggestion)}

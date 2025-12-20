@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import SEO from '@/components/SEO';
 import Breadcrumb from '@/components/Breadcrumb';
 import OptimizedImage from '@/components/OptimizedImage';
-import { Send, Mic, Mail, X, Menu } from 'lucide-react';
+import { Send, Mic, Mail, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { trpc } from '@/lib/trpc';
@@ -12,7 +12,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { logger } from '@/lib/logger';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 import { ChatMessage, isValidChatMessage } from '@/types/localStorage';
-import FullScreenMenu from '@/components/FullScreenMenu';
+import Header from '@/components/Header';
 
 interface Message {
   role: 'user' | 'assistant' | 'system';
@@ -29,7 +29,6 @@ export default function Leo() {
   const safeGetLocalizedPath = (getLocalizedPath && typeof getLocalizedPath === 'function') 
     ? getLocalizedPath 
     : ((path: string) => path); // Fallback function
-  const [menuOpen, setMenuOpen] = useState(false);
   const welcomeMessage = t('leo.welcomeMessage') || "I'm here to help architect your AI transformation. To begin, what should I call you?";
   
   // Load messages from localStorage on mount
@@ -489,54 +488,34 @@ export default function Leo() {
         keywords={t('leo.seoKeywords') || "AI chatbot, AI assistant, AI consultation, AI strategy, AI transformation help, AI implementation guide, free AI consultation, AI advisor"}
         ogImage="https://nukleodigital-production.up.railway.app/og-image.jpg"
       />
-      <FullScreenMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+      <Header />
       <div className="min-h-screen bg-gradient-to-br from-[oklch(0.35_0.15_300)] via-[oklch(0.40_0.15_320)] to-[oklch(0.35_0.15_340)] flex flex-col overflow-hidden">
-      {/* Header minimal */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-br from-[oklch(0.35_0.15_300)] via-[oklch(0.40_0.15_320)] to-[oklch(0.35_0.15_340)] backdrop-blur-md border-b border-white/10">
+      {/* Toolbar with Leo-specific actions - positioned below header */}
+      <div className="fixed top-20 sm:top-24 left-0 right-0 z-40 bg-gradient-to-br from-[oklch(0.35_0.15_300)] via-[oklch(0.40_0.15_320)] to-[oklch(0.35_0.15_340)] backdrop-blur-md border-b border-white/10 px-4 py-2">
         <div className="container">
-          <div className="flex items-center justify-between h-20">
-            {/* Logo */}
-            <Link href={safeGetLocalizedPath('/')}>
-              <img 
-                src="/Nukleo_blanc_RVB.svg" 
-                alt={t('alt.logo') || 'Logo Nukleo Digital - Agence de transformation IA'} 
-                width="120"
-                height="32"
-                fetchPriority="high"
-                loading="eager"
-                className="h-8 w-auto cursor-pointer"
-              />
-            </Link>
-
-            {/* Right side */}
-            <div className="flex items-center gap-2 sm:gap-4">
-              {/* Expert Mode Toggle - Hidden on mobile */}
-              <button
-                onClick={() => setIsExpertMode(!isExpertMode)}
-                className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all"
-                title={isExpertMode ? t('leo.switchToStandard') : t('leo.switchToExpert')}
-              >
-                <span className="text-xs font-medium">
-                  {isExpertMode ? `🔬 ${t('leo.expertMode')}` : `💡 ${t('leo.standardMode')}`}
-                </span>
-              </button>
-              {/* New Chat - Hidden on mobile */}
-              <Button
-                onClick={handleNewChat}
-                variant="outline"
-                className="hidden sm:flex bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white"
-              >
-                {t('leo.newChat')}
-              </Button>
-              {/* Start Project - Text hidden on mobile, icon only */}
-              <Link href={safeGetLocalizedPath('/start-project')}>
-                <Button className="rounded-full bg-white text-purple-900 hover:bg-white/90 font-bold px-4 sm:px-6">
-                  <span className="hidden sm:inline">{t('leo.startProject')}</span>
-                  <span className="sm:hidden">+</span>
-                </Button>
-              </Link>
-              <button
-                onClick={() => setMenuOpen(true)}
+          <div className="flex items-center justify-between gap-2 sm:gap-4">
+            {/* Left side - Expert Mode Toggle */}
+            <button
+              onClick={() => setIsExpertMode(!isExpertMode)}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all"
+              title={isExpertMode ? t('leo.switchToStandard') : t('leo.switchToExpert')}
+            >
+              <span className="text-xs font-medium">
+                {isExpertMode ? `🔬 ${t('leo.expertMode')}` : `💡 ${t('leo.standardMode')}`}
+              </span>
+            </button>
+            
+            {/* Right side - New Chat button */}
+            <Button
+              onClick={handleNewChat}
+              variant="outline"
+              className="bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white"
+            >
+              {t('leo.newChat')}
+            </Button>
+          </div>
+        </div>
+      </div>
                 className="text-white hover:text-white/80 transition-colors p-2"
                 aria-label="Open menu"
               >
@@ -548,7 +527,7 @@ export default function Leo() {
       </header>
 
       {/* Breadcrumb */}
-      <div className="container pt-24 pb-4">
+      <div className="container pt-32 sm:pt-36 pb-4">
         <Breadcrumb items={[{ name: t('nav.leo') || 'LEO AI Assistant', url: '/leo' }]} />
       </div>
 

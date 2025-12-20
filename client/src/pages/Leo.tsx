@@ -516,15 +516,6 @@ export default function Leo() {
           </div>
         </div>
       </div>
-                className="text-white hover:text-white/80 transition-colors p-2"
-                aria-label="Open menu"
-              >
-                <Menu className="w-6 h-6" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
 
       {/* Breadcrumb */}
       <div className="container pt-32 sm:pt-36 pb-4">

@@ -104,6 +104,9 @@ export default defineConfig({
             }
             // Router - keep in initial bundle for faster navigation
             // Don't split wouter - it's small and needed immediately
+            if (id.includes('wouter')) {
+              return 'vendor'; // Ensure wouter is in vendor chunk, not split
+            }
             // Markdown rendering (used in LEO) - lazy load
             if (id.includes('streamdown') || id.includes('react-markdown')) {
               return 'markdown-vendor';
@@ -153,6 +156,9 @@ export default defineConfig({
         },
       },
     },
+  },
+  optimizeDeps: {
+    include: ['wouter'], // Ensure wouter is pre-bundled and available
   },
   // Optimize CSS loading - defer non-critical CSS
   css: {

@@ -36,6 +36,9 @@ export function AITrendRadarVisualization({ data, onTechnologyClick }: AITrendRa
   const svgRef = useRef<SVGSVGElement>(null);
   const [selectedTech, setSelectedTech] = useState<RadarData | null>(null);
   const [hoveredTech, setHoveredTech] = useState<RadarData | null>(null);
+  
+  // Ensure data is always an array
+  const safeData = Array.isArray(data) ? data : [];
 
   // Radar dimensions
   const width = 900;
@@ -153,7 +156,7 @@ export function AITrendRadarVisualization({ data, onTechnologyClick }: AITrendRa
           <rect x={centerX} y={centerY} width={centerX} height={centerY} fill="rgba(34,197,94,0.05)" />
           
           {/* Technology bubbles - always visible with labels */}
-          {data.map((item) => {
+          {safeData.map((item) => {
             const { x, y } = scoreToCoords(item.position.maturityScore, item.position.impactScore);
             const quadrant = getQuadrant(item.position.maturityScore, item.position.impactScore);
             const isHovered = hoveredTech?.technology.id === item.technology.id;

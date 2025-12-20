@@ -82,9 +82,10 @@ export const loadersRouter = router({
 
   // Admin routes
   checkAll: adminProcedure.query(async () => {
-    const allLoaders = await loadersDb.getAllLoaders();
-    const safeLoaders = Array.isArray(allLoaders) ? allLoaders : [];
-    const results = safeLoaders.map(loader => {
+    try {
+      const allLoaders = await loadersDb.getAllLoaders();
+      const safeLoaders = Array.isArray(allLoaders) ? allLoaders : [];
+      const results = safeLoaders.map(loader => {
       const validation = validateLoaderHTML(loader.cssCode);
       return {
         id: loader.id,

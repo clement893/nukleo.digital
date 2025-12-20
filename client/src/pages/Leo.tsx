@@ -470,12 +470,8 @@ export default function Leo() {
       />
       <FullScreenMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
       <div className="min-h-screen bg-gradient-to-br from-[oklch(0.35_0.15_300)] via-[oklch(0.40_0.15_320)] to-[oklch(0.35_0.15_340)] flex flex-col overflow-hidden">
-      {/* Breadcrumb */}
-      <div className="container pt-24 pb-4">
-        <Breadcrumb items={[{ name: t('nav.leo') || 'LEO AI Assistant', url: '/leo' }]} />
-      </div>
       {/* Header minimal */}
-      <header className="fixed top-0 left-0 right-0 z-50">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-br from-[oklch(0.35_0.15_300)] via-[oklch(0.40_0.15_320)] to-[oklch(0.35_0.15_340)] backdrop-blur-md border-b border-white/10">
         <div className="container">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
@@ -492,27 +488,30 @@ export default function Leo() {
             </Link>
 
             {/* Right side */}
-            <div className="flex items-center gap-4">
-              {/* Expert Mode Toggle */}
+            <div className="flex items-center gap-2 sm:gap-4">
+              {/* Expert Mode Toggle - Hidden on mobile */}
               <button
                 onClick={() => setIsExpertMode(!isExpertMode)}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all"
+                className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all"
                 title={isExpertMode ? t('leo.switchToStandard') : t('leo.switchToExpert')}
               >
                 <span className="text-xs font-medium">
                   {isExpertMode ? `🔬 ${t('leo.expertMode')}` : `💡 ${t('leo.standardMode')}`}
                 </span>
               </button>
+              {/* New Chat - Hidden on mobile */}
               <Button
                 onClick={handleNewChat}
                 variant="outline"
-                className="bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white"
+                className="hidden sm:flex bg-white/10 border-white/20 text-white hover:bg-white/20 hover:text-white"
               >
                 {t('leo.newChat')}
               </Button>
+              {/* Start Project - Text hidden on mobile, icon only */}
               <Link href={getLocalizedPath('/start-project')}>
-                <Button className="rounded-full bg-white text-purple-900 hover:bg-white/90 font-bold px-6">
-                  {t('leo.startProject')}
+                <Button className="rounded-full bg-white text-purple-900 hover:bg-white/90 font-bold px-4 sm:px-6">
+                  <span className="hidden sm:inline">{t('leo.startProject')}</span>
+                  <span className="sm:hidden">+</span>
                 </Button>
               </Link>
               <button
@@ -529,13 +528,7 @@ export default function Leo() {
 
       {/* Breadcrumb */}
       <div className="container pt-24 pb-4">
-        <div className="flex items-center gap-2 text-sm text-white/60">
-          <Link href={getLocalizedPath('/')} className="hover:text-white/80 transition-colors">
-            {t('leo.home')}
-          </Link>
-          <span>/</span>
-          <span className="text-white/90">{t('leo.chatWithLeo')}</span>
-        </div>
+        <Breadcrumb items={[{ name: t('nav.leo') || 'LEO AI Assistant', url: '/leo' }]} />
       </div>
 
       {/* Status indicator */}
@@ -717,8 +710,8 @@ export default function Leo() {
             </div>
           )}
 
-          {/* Suggestions */}
-          {showSuggestions && messages.length === 2 && (
+          {/* Suggestions - Show when there are 2 or fewer messages, or when user hasn't interacted much */}
+          {showSuggestions && messages.length <= 3 && (
             <div className="mt-8 space-y-4">
               <p className="text-sm text-white/60 text-center">{t('leo.suggestionsPrompt')}</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -759,19 +752,26 @@ export default function Leo() {
                 onClick={handleSend}
                 disabled={isLoading || !input.trim() || showEmailForm}
                 className="text-white/60 hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                aria-label="Send message"
               >
                 <Send className="w-5 h-5" />
               </button>
-              <button className="text-white/60 hover:text-white transition-colors">
-                <Mic className="w-5 h-5" />
-              </button>
+              {/* Voice input - Coming soon */}
+              {/* <button 
+                className="text-white/60 hover:text-white transition-colors"
+                aria-label="Voice input (coming soon)"
+                disabled
+                title="Voice input coming soon"
+              >
+                <Mic className="w-5 h-5 opacity-50" />
+              </button> */}
             </div>
 
             {/* Footer links */}
             <div className="flex items-center justify-between mt-4 text-xs text-white/40">
-              <a href="#" className="hover:text-white/60 transition-colors uppercase tracking-wider">
+              <Link href={getLocalizedPath('/privacy')} className="hover:text-white/60 transition-colors uppercase tracking-wider">
                 {t('leo.privacyPolicy')}
-              </a>
+              </Link>
               <a href="mailto:hello@nukleo.com" className="hover:text-white/60 transition-colors uppercase tracking-wider">
                 hello@nukleo.com
               </a>

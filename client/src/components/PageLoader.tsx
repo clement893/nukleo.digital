@@ -95,7 +95,8 @@ export default function PageLoader() {
   });
 
   // Ensure activeLoaders is always an array to prevent .map() errors
-  const safeActiveLoaders = Array.isArray(activeLoaders) ? activeLoaders : [];
+  // Also handle undefined/null cases explicitly
+  const safeActiveLoaders = (activeLoaders && Array.isArray(activeLoaders)) ? activeLoaders : [];
 
   // Preload resources as soon as component mounts
   useEffect(() => {

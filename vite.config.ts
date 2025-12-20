@@ -64,9 +64,13 @@ export default defineConfig({
           return 'assets/[ext]/[name]-[hash][extname]';
         },
         manualChunks: (id) => {
-          // CRITICAL: Exclude wouter from splitting - it must stay in main chunk
-          // This ensures Link is always available for lazy-loaded components
+          // CRITICAL: Exclude wouter and useLocalizedPath from splitting - they must stay in main chunk
+          // This ensures Link and getLocalizedPath are always available for lazy-loaded components
           if (id.includes('wouter')) {
+            return; // Return undefined to keep in main chunk
+          }
+          // Force useLocalizedPath hook to stay in main chunk
+          if (id.includes('hooks/useLocalizedPath') || id.includes('useLocalizedPath')) {
             return; // Return undefined to keep in main chunk
           }
           
@@ -108,10 +112,7 @@ export default defineConfig({
             if (id.includes('framer-motion')) {
               return 'animation-vendor';
             }
-            // Hooks - ensure useLocalizedPath is available in vendor chunk
-            if (id.includes('useLocalizedPath') || id.includes('hooks/useLocalizedPath')) {
-              return 'vendor';
-            }
+            // useLocalizedPath is handled above - excluded from splitting
             // Markdown rendering (used in LEO) - lazy load
             if (id.includes('streamdown') || id.includes('react-markdown')) {
               return 'markdown-vendor';
@@ -128,10 +129,7 @@ export default defineConfig({
             return 'vendor';
           }
           
-          // Exclude hooks from splitting if they're used by lazy-loaded components
-          if (id.includes('hooks/useLocalizedPath')) {
-            return; // Keep in main chunk
-          }
+          // useLocalizedPath is already handled above
           // Split by page for better lazy loading - admin should NEVER be in initial bundle
           // Use more efficient string matching - CRITICAL: admin must be completely separate
           if (id.includes('/pages/admin/') || 
@@ -168,7 +166,11 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: ['wouter', '@/hooks/useLocalizedPath'], // Ensure wouter and useLocalizedPath are pre-bundled and available
+    include: [
+      'wouter', 
+      '@/hooks/useLocalizedPath',
+      'client/src/hooks/useLocalizedPath'
+    ], // Ensure wouter and useLocalizedPath are pre-bundled and available
   },
   // Optimize CSS loading - defer non-critical CSS
   css: {

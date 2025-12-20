@@ -44,10 +44,23 @@ export function lazyWithRetry<T extends ComponentType<any>>(
           // Store the current URL to reload to
           const currentUrl = window.location.href;
           
+          // Clear service worker cache if available
+          if ('serviceWorker' in navigator && navigator.serviceWorker.controller && 'caches' in window) {
+            window.caches.keys().then(cacheNames => {
+              cacheNames.forEach(cacheName => {
+                window.caches.delete(cacheName);
+              });
+            }).catch(() => {
+              // Ignore cache deletion errors
+            });
+          }
+          
           // Use a small delay to ensure the error is logged
           setTimeout(() => {
-            // Force a hard reload to bypass cache
-            window.location.href = currentUrl;
+            // Force a hard reload with cache bypass
+            // Add timestamp to force cache bypass
+            const separator = currentUrl.includes('?') ? '&' : '?';
+            window.location.href = `${currentUrl}${separator}_reload=${Date.now()}`;
           }, 100);
           
           // Return a promise that never resolves (page will reload)

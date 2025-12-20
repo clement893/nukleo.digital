@@ -46,11 +46,19 @@ export class EnhancedErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    // Check if this is a chunk loading error
+    const isChunkError = 
+      error instanceof TypeError &&
+      (error.message.includes('Failed to fetch dynamically imported module') ||
+       error.message.includes('Loading chunk') ||
+       error.message.includes('Loading CSS chunk') ||
+       error.message.includes('import()'));
+    
     // Log error
     logger.tagged('ErrorBoundary').error('Caught error:', error, errorInfo);
 
-    // Report to Sentry if available
-    if (typeof window !== 'undefined' && (window as any).Sentry) {
+    // Report to Sentry if available (but not for chunk errors to avoid noise)
+    if (typeof window !== 'undefined' && (window as any).Sentry && !isChunkError) {
       (window as any).Sentry.captureException(error, {
         contexts: {
           react: {
@@ -70,7 +78,31 @@ export class EnhancedErrorBoundary extends Component<Props, State> {
 
     this.setState({ errorInfo });
 
-    // Attempt automatic recovery if enabled
+    // For chunk loading errors, reload the page instead of attempting recovery
+    if (isChunkError) {
+      logger.tagged('ErrorBoundary').warn('Chunk loading error detected, reloading page...');
+      
+      // Clear service worker cache if available
+      if ('serviceWorker' in navigator && navigator.serviceWorker.controller && 'caches' in window) {
+        window.caches.keys().then(cacheNames => {
+          cacheNames.forEach(cacheName => {
+            window.caches.delete(cacheName);
+          });
+        }).catch(() => {
+          // Ignore cache deletion errors
+        });
+      }
+      
+      // Reload with cache bypass
+      setTimeout(() => {
+        const currentUrl = window.location.href;
+        const separator = currentUrl.includes('?') ? '&' : '?';
+        window.location.href = `${currentUrl.split('?')[0]}${separator}_reload=${Date.now()}`;
+      }, 500);
+      return;
+    }
+
+    // Attempt automatic recovery if enabled (for non-chunk errors)
     if (this.props.enableRecovery !== false) {
       this.attemptRecovery();
     }

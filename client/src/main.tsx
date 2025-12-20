@@ -105,29 +105,79 @@ root.render(
 // Global error handler for chunk loading failures
 // This catches any chunk loading errors that might not be handled by lazyWithRetry
 if (typeof window !== 'undefined') {
+  // Track reload attempts to prevent infinite loops
+  const MAX_RELOAD_ATTEMPTS = 3;
+  const RELOAD_KEY = 'nukleo_chunk_reload_attempts';
+  
   window.addEventListener('error', (event) => {
     const error = event.error || event.message;
+    const errorMessage = error?.message || event.message || '';
     const isChunkError = 
       error instanceof TypeError &&
-      (error.message?.includes('Failed to fetch dynamically imported module') ||
-       error.message?.includes('Loading chunk') ||
-       error.message?.includes('Loading CSS chunk') ||
-       event.message?.includes('Failed to fetch dynamically imported module') ||
-       event.message?.includes('Loading chunk') ||
-       event.message?.includes('Loading CSS chunk'));
+      (errorMessage.includes('Failed to fetch dynamically imported module') ||
+       errorMessage.includes('Loading chunk') ||
+       errorMessage.includes('Loading CSS chunk') ||
+       errorMessage.includes('import()') ||
+       errorMessage.includes('chunk'));
     
     if (isChunkError) {
+      // Check reload attempts
+      const attempts = parseInt(sessionStorage.getItem(RELOAD_KEY) || '0', 10);
+      
+      if (attempts >= MAX_RELOAD_ATTEMPTS) {
+        console.error('[Global Error Handler] Max reload attempts reached. Showing error page.');
+        sessionStorage.removeItem(RELOAD_KEY);
+        // Show a user-friendly error message
+        document.body.innerHTML = `
+          <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; text-align: center; font-family: system-ui;">
+            <div>
+              <h1 style="font-size: 24px; margin-bottom: 16px;">Une erreur s'est produite</h1>
+              <p style="margin-bottom: 24px; color: #666;">Le chargement de la page a échoué. Veuillez réessayer.</p>
+              <button onclick="window.location.reload()" style="padding: 12px 24px; background: #000; color: #fff; border: none; border-radius: 4px; cursor: pointer;">
+                Recharger la page
+              </button>
+            </div>
+          </div>
+        `;
+        return;
+      }
+      
       if (import.meta.env.DEV) {
         console.warn('[Global Error Handler] Chunk loading failed, reloading page...', error || event.message);
       }
+      
       event.preventDefault(); // Prevent default error handling
       
-      // Reload the page to get the latest HTML/chunks
+      // Increment reload attempts
+      sessionStorage.setItem(RELOAD_KEY, String(attempts + 1));
+      
+      // Clear service worker cache if available
+      if ('serviceWorker' in navigator && navigator.serviceWorker.controller && 'caches' in window) {
+        window.caches.keys().then(cacheNames => {
+          cacheNames.forEach(cacheName => {
+            window.caches.delete(cacheName);
+          });
+        }).catch(() => {
+          // Ignore cache deletion errors
+        });
+      }
+      
+      // Reload the page with cache bypass
       setTimeout(() => {
-        window.location.reload();
+        const currentUrl = window.location.href;
+        const separator = currentUrl.includes('?') ? '&' : '?';
+        window.location.href = `${currentUrl.split('?')[0]}${separator}_reload=${Date.now()}`;
       }, 100);
     }
   }, true); // Use capture phase to catch errors early
+  
+  // Reset reload attempts on successful page load
+  window.addEventListener('load', () => {
+    // Clear reload attempts after a successful load
+    setTimeout(() => {
+      sessionStorage.removeItem(RELOAD_KEY);
+    }, 1000);
+  });
 }
 
 // Optimize LCP - show inline SVG immediately if present

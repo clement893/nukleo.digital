@@ -55,5 +55,60 @@ describe('SafeHTML', () => {
     
     expect(DOMPurify.sanitize).toHaveBeenCalled();
   });
+
+  it('should apply style prop', () => {
+    const html = '<p>Test</p>';
+    const style = { color: 'red', fontSize: '16px' };
+    const { container } = render(<SafeHTML html={html} style={style} />);
+    
+    const element = container.querySelector('div');
+    expect(element).toHaveStyle({ color: 'red', fontSize: '16px' });
+  });
+
+  it('should apply id prop', () => {
+    const html = '<p>Test</p>';
+    const { container } = render(<SafeHTML html={html} id="test-id" />);
+    
+    expect(container.querySelector('#test-id')).toBeTruthy();
+  });
+
+  it('should allow scripts when allowScripts is true', () => {
+    const html = '<script>console.log("test")</script>';
+    
+    render(<SafeHTML html={html} allowScripts={true} />);
+    
+    expect(DOMPurify.sanitize).toHaveBeenCalledWith(
+      html,
+      expect.objectContaining({
+        ALLOWED_TAGS: expect.arrayContaining(['script']),
+      })
+    );
+  });
+
+  it('should handle empty html', () => {
+    const { container } = render(<SafeHTML html="" />);
+    
+    expect(container.querySelector('div')).toBeTruthy();
+  });
+
+  it('should handle data attributes', () => {
+    const html = '<p>Test</p>';
+    const { container } = render(
+      <SafeHTML html={html} data-testid="test-component" />
+    );
+    
+    const element = container.querySelector('[data-testid="test-component"]');
+    expect(element).toBeTruthy();
+  });
+
+  it('should handle aria attributes', () => {
+    const html = '<p>Test</p>';
+    const { container } = render(
+      <SafeHTML html={html} aria-label="Test label" />
+    );
+    
+    const element = container.querySelector('[aria-label="Test label"]');
+    expect(element).toBeTruthy();
+  });
 });
 

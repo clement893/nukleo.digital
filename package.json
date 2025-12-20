@@ -11,6 +11,11 @@
     "check": "tsc --noEmit",
     "format": "prettier --write .",
     "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
     "verify:ga": "node scripts/verify-ga-tag.js",
     "validate:translations": "node scripts/validate-translations.js",
     "verify:build": "node scripts/verify-build-chunks.js",
@@ -145,7 +150,14 @@
     "vite": "^7.1.9",
     "vite-plugin-bundle-analyzer": "^0.0.1",
     "vite-plugin-manus-runtime": "^0.0.56",
-    "vitest": "^2.1.9"
+    "vitest": "^2.1.9",
+    "@vitest/coverage-v8": "^2.1.9",
+    "@testing-library/react": "^16.1.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/user-event": "^14.5.2",
+    "jsdom": "^25.0.1",
+    "@playwright/test": "^1.48.0",
+    "@sentry/profiling-node": "^10.30.0"
   },
   "packageManager": "pnpm@10.4.1+sha512.c753b6c3ad7afa13af388fa6d808035a008e30ea9993f58c6663e2bc5ff21679aa834db094987129aa4d488b86df57f7b634981b2f827cdcacc698cc0cfb88af",
   "pnpm": {

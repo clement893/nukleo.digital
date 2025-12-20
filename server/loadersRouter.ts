@@ -86,14 +86,14 @@ export const loadersRouter = router({
       const allLoaders = await loadersDb.getAllLoaders();
       const safeLoaders = Array.isArray(allLoaders) ? allLoaders : [];
       const results = safeLoaders.map(loader => {
-      const validation = validateLoaderHTML(loader.cssCode);
-      return {
-        id: loader.id,
-        name: loader.name,
-        isActive: loader.isActive,
-        ...validation,
-      };
-    });
+        const validation = validateLoaderHTML(loader.cssCode);
+        return {
+          id: loader.id,
+          name: loader.name,
+          isActive: loader.isActive,
+          ...validation,
+        };
+      });
     
     const needsMigration = results.filter(r => !r.isValid || r.errors.length > 0 || r.warnings.length > 0);
     

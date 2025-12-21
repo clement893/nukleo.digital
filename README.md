@@ -5,87 +5,79 @@ A production-ready full-stack template with Next.js 16 frontend and FastAPI back
 ## 🎯 Features
 
 ### Frontend (Next.js 16)
-- ✅ Next.js 16 with App Router
-- ✅ React 19
-- ✅ TypeScript 5
-- ✅ Tailwind CSS 3
-- ✅ Zustand state management
-- ✅ JWT authentication
-- ✅ Responsive design
-- ✅ API integration
+- ✅ **Next.js 16** avec App Router et Turbopack
+- ✅ **React 19** avec Server Components
+- ✅ **TypeScript 5** avec configuration stricte
+- ✅ **Tailwind CSS 3** pour le styling
+- ✅ **Bibliothèque UI complète** (20+ composants ERP)
+- ✅ **Hooks réutilisables** (useForm, usePagination, useFilters, usePermissions)
+- ✅ **NextAuth.js v5** avec OAuth Google
+- ✅ **Middleware** de protection des routes
+- ✅ **Gestion d'erreurs** centralisée
+- ✅ **Logging structuré**
 
 ### Backend (FastAPI)
-- ✅ FastAPI web framework
-- ✅ SQLAlchemy ORM with async support
-- ✅ PostgreSQL database
-- ✅ JWT authentication
-- ✅ Redis caching
-- ✅ Celery for async tasks
-- ✅ Comprehensive test suite
-- ✅ Auto-generated API documentation
+- ✅ **FastAPI** avec OpenAPI/Swagger auto-généré
+- ✅ **Pydantic v2** pour validation des données
+- ✅ **SQLAlchemy async** pour ORM
+- ✅ **Alembic** pour migrations DB
+- ✅ **PostgreSQL** avec support async
+- ✅ **JWT authentication** avec refresh tokens
+- ✅ **Tests** avec pytest
+- ✅ **Logging** avec loguru
+- ✅ **Gestion d'erreurs** standardisée
 
-### DevOps
-- ✅ Docker & Docker Compose
-- ✅ Railway deployment ready
-- ✅ GitHub Actions CI/CD
-- ✅ Environment configuration
+### Types Partagés
+- ✅ **Package `@modele/types`** pour types partagés
+- ✅ **Génération automatique** TypeScript depuis Pydantic
+- ✅ **Synchronisation** frontend/backend automatique
+
+### DevOps & Outils
+- ✅ **Turborepo** pour monorepo optimisé
+- ✅ **pnpm workspaces** pour gestion des dépendances
+- ✅ **GitHub Actions** CI/CD
+- ✅ **Pre-commit hooks** avec Husky
+- ✅ **Docker & Docker Compose**
+- ✅ **Railway** deployment ready
+- ✅ **Générateur de code** (composants, pages, API)
+- ✅ **Scripts de migration** DB
 
 ## 🚀 Quick Start
 
+> 📖 **Guide complet disponible** : [GETTING_STARTED.md](./GETTING_STARTED.md)
+
 ### Prerequisites
 
-- Node.js 18+
-- Python 3.11+
-- PostgreSQL 14+
-- Redis 7+
-- Docker & Docker Compose (optional)
+- **Node.js** 22+ ([télécharger](https://nodejs.org/))
+- **pnpm** 9+ (`npm install -g pnpm`)
+- **Python** 3.11+ ([télécharger](https://www.python.org/downloads/))
+- **PostgreSQL** 14+ ([télécharger](https://www.postgresql.org/download/))
+- **Docker & Docker Compose** (optionnel)
 
-### Development Setup
-
-1. Clone the repository:
+### Installation Express
 
 ```bash
+# 1. Cloner le projet
 git clone https://github.com/clement893/MODELE-NEXTJS-FULLSTACK.git
 cd MODELE-NEXTJS-FULLSTACK
-```
 
-2. Install dependencies:
+# 2. Installer les dépendances
+pnpm install
 
-```bash
-npm install
-```
-
-3. Setup environment variables:
-
-```bash
-# Backend
+# 3. Configurer les variables d'environnement
 cp backend/.env.example backend/.env
-
-# Frontend
 cp apps/web/.env.example apps/web/.env.local
+# Éditer les fichiers .env avec vos valeurs
+
+# 4. Initialiser la base de données
+createdb modele_db
+cd backend && alembic upgrade head && cd ..
+
+# 5. Démarrer le projet
+npm run dev:full
 ```
 
-4. Start with Docker Compose:
-
-```bash
-docker-compose up
-```
-
-Or start manually:
-
-```bash
-# Terminal 1: Backend
-cd backend
-pip install -r requirements.txt
-uvicorn app.main:app --reload
-
-# Terminal 2: Frontend
-cd apps/web
-npm run dev
-```
-
-5. Access the application:
-
+**Accès :**
 - Frontend: http://localhost:3000
 - Backend API: http://localhost:8000
 - API Docs: http://localhost:8000/docs
@@ -257,10 +249,14 @@ celery -A app.celery_app events
 
 ## 📚 Documentation
 
-- [Backend Documentation](./backend/README.md)
-- [Frontend Documentation](./apps/web/README.md)
-- [API Documentation](http://localhost:8000/docs) (Swagger)
-- [ReDoc](http://localhost:8000/redoc)
+- 📖 [Guide de Démarrage Rapide](./GETTING_STARTED.md) - **Nouveau !**
+- 🔍 [Audit du Projet](./PROJECT_AUDIT.md) - Analyse complète
+- 🎨 [Documentation Backend](./backend/README.md)
+- ⚛️ [Documentation Frontend](./apps/web/README.md)
+- 🔐 [Authentification](./apps/web/AUTHENTICATION.md)
+- 🔄 [Génération de Types](./scripts/generate/types/README.md)
+- 📡 [API Documentation](http://localhost:8000/docs) (Swagger)
+- 📘 [ReDoc](http://localhost:8000/redoc)
 
 ## 🔐 Security
 

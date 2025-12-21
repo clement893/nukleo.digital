@@ -3,7 +3,7 @@
  * Shows loading UI while pages are loading
  */
 
-import { Loading } from '@/components/ui/Loading';
+import Loading from '@/components/ui/Loading';
 
 export default function GlobalLoading() {
   return (

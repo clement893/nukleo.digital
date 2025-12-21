@@ -64,7 +64,6 @@ export default function DataTableEnhanced<T extends Record<string, unknown>>({
   ...props
 }: DataTableEnhancedProps<T>) {
   const [selectedRows, setSelectedRows] = useState<Set<string | number>>(new Set());
-  const [showColumnMenu, setShowColumnMenu] = useState(false);
 
   const getRowKey = (row: T, index: number): string | number => {
     if (rowKey) return rowKey(row);

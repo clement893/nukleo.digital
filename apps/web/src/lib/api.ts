@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { handleApiError, isClientError, isNetworkError } from './errors/api';
 
 // Remove trailing slash from API URL to avoid double slashes
@@ -13,7 +13,7 @@ const apiClient = axios.create({
 
 // Add request interceptor to include auth token
 apiClient.interceptors.request.use(
-  (config: AxiosRequestConfig) => {
+  (config: InternalAxiosRequestConfig) => {
     if (typeof window !== 'undefined' && config.headers) {
       const token = localStorage.getItem('token');
       if (token) {

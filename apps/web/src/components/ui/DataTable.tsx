@@ -13,7 +13,7 @@ export interface Column<T> {
   key: string;
   label: string;
   sortable?: boolean;
-  render?: (value: any, row: T) => ReactNode;
+  render?: (value: unknown, row: T) => ReactNode;
   filterable?: boolean;
   filterType?: 'text' | 'select' | 'date' | 'number';
   filterOptions?: { label: string; value: string }[];
@@ -52,7 +52,7 @@ export default function DataTable<T extends Record<string, any>>({
   const [searchTerm, setSearchTerm] = useState('');
   const [sortColumn, setSortColumn] = useState<string | null>(null);
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
-  const [filters, setFilters] = useState<Record<string, any>>({});
+  const [filters, setFilters] = useState<Record<string, unknown>>({});
 
   // Filter data
   const filteredData = useMemo(() => {

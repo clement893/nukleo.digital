@@ -68,8 +68,8 @@ export function reportWebVitals(metric: {
   // En production, envoyer à votre service d'analytics
   if (process.env.NODE_ENV === 'production') {
     // Envoyer à Sentry si disponible
-    if (typeof window !== 'undefined' && (window as any).Sentry) {
-      (window as any).Sentry.metrics.distribution(metric.name.toLowerCase(), metric.value, {
+    if (typeof window !== 'undefined' && window.Sentry?.metrics) {
+      window.Sentry.metrics.distribution(metric.name.toLowerCase(), metric.value, {
         tags: {
           id: metric.id,
           label: metric.label,
@@ -78,8 +78,8 @@ export function reportWebVitals(metric: {
     }
 
     // Exemple: envoyer à Google Analytics
-    // if (typeof window !== 'undefined' && (window as any).gtag) {
-    //   (window as any).gtag('event', metric.name, {
+    // if (typeof window !== 'undefined' && window.gtag) {
+    //   window.gtag('event', metric.name, {
     //     value: Math.round(metric.value),
     //     event_category: 'Web Vitals',
     //     event_label: metric.id,
@@ -105,7 +105,7 @@ export function reportWebVitals(metric: {
 /**
  * Debounce function pour optimiser les appels fréquents
  */
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: unknown[]) => unknown>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => void {
@@ -127,7 +127,7 @@ export function debounce<T extends (...args: any[]) => any>(
 /**
  * Throttle function pour limiter la fréquence d'exécution
  */
-export function throttle<T extends (...args: any[]) => any>(
+export function throttle<T extends (...args: unknown[]) => unknown>(
   func: T,
   limit: number
 ): (...args: Parameters<T>) => void {

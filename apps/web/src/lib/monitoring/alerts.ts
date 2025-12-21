@@ -37,8 +37,8 @@ class AlertManager {
 
     // En production, envoyer à Sentry pour les alertes critiques
     if (process.env.NODE_ENV === 'production' && severity === 'critical') {
-      if (typeof window !== 'undefined' && (window as any).Sentry) {
-        (window as any).Sentry.captureMessage(title, {
+      if (typeof window !== 'undefined' && window.Sentry) {
+        window.Sentry.captureMessage(title, {
           level: 'error',
           tags: { alert: true },
           extra: { message },

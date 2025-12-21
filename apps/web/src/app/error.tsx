@@ -8,6 +8,8 @@
 import { useEffect } from 'react';
 import { ErrorDisplay } from '@/components/errors/ErrorDisplay';
 import { logger } from '@/lib/logger';
+import { InternalServerError } from '@/lib/errors';
+import type { AppError } from '@/lib/errors';
 
 interface ErrorProps {
   error: Error & { digest?: string };
@@ -17,18 +19,23 @@ interface ErrorProps {
 export default function Error({ error, reset }: ErrorProps) {
   useEffect(() => {
     // Log error
-    logger.error('Global error page', error, {
+    const isAppError = error instanceof AppError;
+    const appError = isAppError ? error : new InternalServerError(error.message);
+    logger.error('Global error page', appError, {
       digest: error.digest,
       stack: error.stack,
     });
   }, [error]);
 
+  const isAppError = error instanceof AppError;
+
   return (
     <ErrorDisplay
-      error={undefined}
+      error={isAppError ? error : undefined}
       onRetry={reset}
       onReset={() => window.location.href = '/'}
       showDetails={process.env.NODE_ENV === 'development'}
     />
   );
 }
+

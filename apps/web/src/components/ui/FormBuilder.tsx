@@ -25,13 +25,13 @@ export interface FormField {
     pattern?: RegExp;
     message?: string;
   };
-  defaultValue?: any;
+  defaultValue?: unknown;
   helperText?: string;
 }
 
 export interface FormBuilderProps {
   fields: FormField[];
-  onSubmit: (data: Record<string, any>) => void | Promise<void>;
+  onSubmit: (data: Record<string, unknown>) => void | Promise<void>;
   submitLabel?: string;
   className?: string;
   loading?: boolean;
@@ -44,8 +44,8 @@ export default function FormBuilder({
   className,
   loading = false,
 }: FormBuilderProps) {
-  const [formData, setFormData] = useState<Record<string, any>>(() => {
-    const initial: Record<string, any> = {};
+  const [formData, setFormData] = useState<Record<string, unknown>>(() => {
+    const initial: Record<string, unknown> = {};
     fields.forEach((field) => {
       initial[field.name] = field.defaultValue || (field.type === 'checkbox' ? false : '');
     });
@@ -55,7 +55,7 @@ export default function FormBuilder({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
 
-  const validateField = (field: FormField, value: any): string | null => {
+  const validateField = (field: FormField, value: unknown): string | null => {
     if (field.required && (!value || value === '')) {
       return `${field.label} est requis`;
     }

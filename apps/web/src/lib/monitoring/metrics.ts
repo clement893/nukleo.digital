@@ -57,11 +57,11 @@ class MetricsCollector {
     }
 
     // Client-side: collect browser metrics
-    const memory = (performance as any).memory
+    const memory = performance.memory
       ? {
-          used: (performance as any).memory.usedJSHeapSize,
-          total: (performance as any).memory.totalJSHeapSize,
-          limit: (performance as any).memory.jsHeapSizeLimit,
+          used: performance.memory.usedJSHeapSize,
+          total: performance.memory.totalJSHeapSize,
+          limit: performance.memory.jsHeapSizeLimit,
         }
       : null;
 

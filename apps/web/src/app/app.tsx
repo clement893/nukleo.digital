@@ -9,8 +9,6 @@ import { useEffect } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { reportWebVitals } from '@/lib/performance';
 import { logger } from '@/lib/logger';
-import { trackWebVital } from '@/lib/monitoring/metrics';
-import { alertManager } from '@/lib/monitoring/alerts';
 
 export function App({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -44,7 +42,6 @@ export function App({ children }: { children: React.ReactNode }) {
             label: 'largest-contentful-paint',
           });
           logger.performance('LCP', value, 's');
-          trackWebVital('LCP', value * 1000, 'ms');
         }
       });
       lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
@@ -52,16 +49,18 @@ export function App({ children }: { children: React.ReactNode }) {
       // FID - First Input Delay
       const fidObserver = new PerformanceObserver((list) => {
         const entries = list.getEntries();
-        entries.forEach((entry: any) => {
-          const value = entry.processingStart - entry.startTime;
-          reportWebVitals({
-            id: 'fid',
-            name: 'FID',
-            value: value / 1000,
-            label: 'first-input-delay',
-          });
-          logger.performance('FID', value / 1000, 's');
-          trackWebVital('FID', value, 'ms');
+        entries.forEach((entry) => {
+          const perfEntry = entry as PerformanceEventTiming;
+          if ('processingStart' in perfEntry && 'startTime' in perfEntry) {
+            const value = perfEntry.processingStart - perfEntry.startTime;
+            reportWebVitals({
+              id: 'fid',
+              name: 'FID',
+              value: value / 1000,
+              label: 'first-input-delay',
+            });
+            logger.performance('FID', value / 1000, 's');
+          }
         });
       });
       fidObserver.observe({ entryTypes: ['first-input'] });
@@ -69,10 +68,11 @@ export function App({ children }: { children: React.ReactNode }) {
       // CLS - Cumulative Layout Shift
       let clsValue = 0;
       const clsObserver = new PerformanceObserver((list) => {
-        const entries = list.getEntries() as any[];
+        const entries = list.getEntries();
         entries.forEach((entry) => {
-          if (!entry.hadRecentInput) {
-            clsValue += entry.value;
+          const layoutShiftEntry = entry as LayoutShift;
+          if (!layoutShiftEntry.hadRecentInput) {
+            clsValue += layoutShiftEntry.value;
           }
         });
         reportWebVitals({
@@ -82,17 +82,6 @@ export function App({ children }: { children: React.ReactNode }) {
           label: 'cumulative-layout-shift',
         });
         logger.performance('CLS', clsValue);
-        trackWebVital('CLS', clsValue);
-        
-        // Check for alerts
-        const latestMetric = {
-          name: 'CLS',
-          value: clsValue,
-          unit: '',
-          timestamp: new Date().toISOString(),
-          threshold: { warning: 0.1, critical: 0.25 },
-        };
-        alertManager.checkMetricThresholds(latestMetric);
       });
       clsObserver.observe({ entryTypes: ['layout-shift'] });
 

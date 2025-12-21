@@ -91,8 +91,8 @@ class Logger {
     // En production, envoyer à votre service de logging
     if (this.isProduction && level === 'error') {
       // Exemple: envoyer à Sentry, LogRocket, etc.
-      if (typeof window !== 'undefined' && (window as any).Sentry) {
-        (window as any).Sentry.captureException(error || new Error(message), {
+      if (typeof window !== 'undefined' && window.Sentry) {
+        window.Sentry.captureException(error || new Error(message), {
           contexts: {
             custom: sanitizedContext,
           },

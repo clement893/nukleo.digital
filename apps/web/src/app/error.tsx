@@ -18,17 +18,19 @@ interface ErrorProps {
 export default function Error({ error, reset }: ErrorProps) {
   useEffect(() => {
     // Log error
-    const appError =
-      error instanceof AppError ? error : new InternalServerError(error.message);
+    const isAppError = error instanceof AppError;
+    const appError = isAppError ? error : new InternalServerError(error.message);
     logger.error('Global error page', appError, {
       digest: error.digest,
       stack: error.stack,
     });
   }, [error]);
 
+  const isAppError = error instanceof AppError;
+
   return (
     <ErrorDisplay
-      error={error instanceof AppError ? error : undefined}
+      error={isAppError ? error : undefined}
       onRetry={reset}
       onReset={() => window.location.href = '/'}
       showDetails={process.env.NODE_ENV === 'development'}

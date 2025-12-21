@@ -108,28 +108,28 @@ export default function DataTable<T extends Record<string, any>>({
 
   const totalPages = Math.ceil(filteredData.length / pageSize);
 
-  const handleSort = (columnKey: string) => {
+  const handleSort = useCallback((columnKey: string) => {
     if (sortColumn === columnKey) {
       setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
     } else {
       setSortColumn(columnKey);
       setSortDirection('asc');
     }
-  };
+  }, [sortColumn, sortDirection]);
 
-  const handleFilterChange = (columnKey: string, value: any) => {
+  const handleFilterChange = useCallback((columnKey: string, value: any) => {
     setFilters((prev) => ({
       ...prev,
       [columnKey]: value,
     }));
     setCurrentPage(1);
-  };
+  }, []);
 
-  const clearFilters = () => {
+  const clearFilters = useCallback(() => {
     setFilters({});
     setSearchTerm('');
     setCurrentPage(1);
-  };
+  }, []);
 
   const filterableColumns = columns.filter((col) => col.filterable !== false);
 

@@ -36,7 +36,7 @@ export interface AppErrorType {
   stack?: string;
 }
 
-export interface ValidationError {
+export interface ValidationErrorDetail {
   field: string;
   message: string;
   code: string;
@@ -48,7 +48,7 @@ export interface ApiErrorResponse {
     code: ErrorCode;
     message: string;
     details?: Record<string, unknown>;
-    validationErrors?: ValidationError[];
+    validationErrors?: ValidationErrorDetail[];
   };
   timestamp: string;
 }

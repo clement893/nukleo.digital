@@ -48,8 +48,6 @@ export default function Modal({
   'aria-labelledby': ariaLabelledBy,
   'aria-describedby': ariaDescribedBy,
 }: ModalProps) {
-  const titleId = ariaLabelledBy || (title ? 'modal-title' : undefined);
-  const descriptionId = ariaDescribedBy;
   useEffect(() => {
     if (!isOpen || !closeOnEscape) return;
 

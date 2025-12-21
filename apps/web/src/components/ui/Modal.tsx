@@ -92,6 +92,10 @@ export default function Modal({
           className
         )}
         onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={ariaLabelledBy}
+        aria-describedby={ariaDescribedBy}
       >
         {/* Header */}
         {(title || showCloseButton) && (

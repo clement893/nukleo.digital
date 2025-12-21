@@ -8,12 +8,11 @@
 import { useState, useMemo, type ReactNode } from 'react';
 import { clsx } from 'clsx';
 import DataTable from './DataTable';
+import type { Column } from './DataTable';
 import Button from './Button';
 import Checkbox from './Checkbox';
-import type { Column } from './DataTable';
 import Dropdown from './Dropdown';
 import type { DropdownItem } from './Dropdown';
-import type { Column } from './DataTable';
 
 export interface BulkAction<T> {
   label: string;

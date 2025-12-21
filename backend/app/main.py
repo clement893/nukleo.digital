@@ -1,6 +1,7 @@
 """FastAPI application."""
 
 import os
+import traceback
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request, status
@@ -8,6 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 from starlette.exceptions import HTTPException as StarletteHTTPException
+from starlette.middleware.base import BaseHTTPMiddleware
 
 from app.database import init_db, close_db
 from app.api import auth, users, resources, upload, health
@@ -32,7 +34,7 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# CORS middleware
+# CORS middleware - MUST be added FIRST before any routers
 FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:3000")
 ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
 
@@ -51,9 +53,38 @@ ALLOWED_ORIGINS = [
 # Remove duplicates and empty strings
 ALLOWED_ORIGINS = list(set([origin for origin in ALLOWED_ORIGINS if origin]))
 
+
+# Custom middleware to ensure CORS headers are always added
+class CORSHeaderMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next):
+        origin = request.headers.get("origin")
+        
+        try:
+            response = await call_next(request)
+        except Exception as e:
+            # If an error occurs, create a response with CORS headers
+            response = JSONResponse(
+                status_code=500,
+                content={"detail": "Internal server error"},
+            )
+        
+        # Always add CORS headers if origin is Railway domain or in allowed list
+        if origin:
+            is_railway = any(origin.endswith(domain) for domain in [".railway.app", ".up.railway.app"])
+            if origin in ALLOWED_ORIGINS or is_railway:
+                response.headers["Access-Control-Allow-Origin"] = origin
+                response.headers["Access-Control-Allow-Credentials"] = "true"
+                response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS, PATCH"
+                response.headers["Access-Control-Allow-Headers"] = "*"
+                response.headers["Access-Control-Expose-Headers"] = "*"
+        
+        return response
+
+
+# Add custom CORS middleware FIRST
+app.add_middleware(CORSHeaderMiddleware)
+
 # Add CORS middleware with regex for Railway domains
-# The regex allows all Railway subdomains and localhost
-# IMPORTANT: CORS middleware must be added BEFORE routers to ensure headers are always sent
 app.add_middleware(
     CORSMiddleware,
     allow_origin_regex=r"https?://.*\.(railway\.app|up\.railway\.app)|http://localhost:\d+",
@@ -64,6 +95,7 @@ app.add_middleware(
     expose_headers=["*"],
     max_age=3600,
 )
+
 
 
 # Exception handlers to ensure CORS headers are always sent

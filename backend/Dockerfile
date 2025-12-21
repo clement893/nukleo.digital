@@ -17,12 +17,16 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code
 COPY . .
 
+# Copy and set permissions for entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 # Expose port
 EXPOSE 8000
 
-# Health check
+# Health check - will use PORT env var or default to 8000
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD python -c "import requests; requests.get('http://localhost:8000/health')"
+    CMD sh -c "python -c \"import requests; requests.get('http://localhost:${PORT:-8000}/health')\""
 
-# Start application
-CMD ["sh", "-c", "gunicorn -w 4 -b 0.0.0.0:${PORT:-8000} --timeout 120 app.main:app"]
+# Start application using entrypoint script
+ENTRYPOINT ["/entrypoint.sh"]

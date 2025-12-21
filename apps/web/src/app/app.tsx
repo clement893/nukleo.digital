@@ -95,6 +95,6 @@ export function App({ children }: { children: React.ReactNode }) {
     return undefined;
   }, []);
 
-  return <>{children}</>;
+  return (`n    <div className="flex flex-col min-h-screen">`n      <Header />`n      <main className="flex-1">`n        \{children\}`n      </main>`n      <Footer />`n    </div>`n  );
 }
 

@@ -202,10 +202,10 @@ export function ComponentGallery() {
       <Card title="Avatars et Tooltips">
         <div className="flex gap-4 items-center">
           <Tooltip content="Tooltip example">
-            <Avatar>JD</Avatar>
+            <Avatar name="JD" />
           </Tooltip>
           <Avatar src="https://i.pravatar.cc/150?img=1" />
-          <Avatar status="online">AB</Avatar>
+          <Avatar name="AB" status="online" />
         </div>
       </Card>
 

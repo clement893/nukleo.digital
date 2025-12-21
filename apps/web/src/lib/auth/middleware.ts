@@ -83,7 +83,7 @@ export async function optionalAuth(
 /**
  * Create authenticated API route handler wrapper
  */
-export function withAuth<T = unknown>(
+export function withAuth(
   handler: (request: NextRequest, context: { user: TokenPayload }) => Promise<Response>
 ) {
   return async (request: NextRequest): Promise<Response> => {

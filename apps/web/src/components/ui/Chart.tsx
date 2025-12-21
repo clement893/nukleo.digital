@@ -58,10 +58,6 @@ export default function Chart({
       label: point.label,
     }));
 
-    const pathData = points
-      .map((point, index) => `${index === 0 ? 'M' : 'L'} ${point.x} ${point.y}`)
-      .join(' ');
-
     return (
       <svg viewBox="0 0 100 100" className="w-full h-full">
         <polyline

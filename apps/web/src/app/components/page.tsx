@@ -5,7 +5,6 @@
 
 'use client';
 
-import { useState } from 'react';
 import { ThemeManager } from '@/components/theme/ThemeManager';
 import { ComponentGallery } from '@/components/theme/ComponentGallery';
 

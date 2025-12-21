@@ -49,8 +49,10 @@ export default function FileUploadWithPreview({
   };
 
   const removeFile = (index: number) => {
-    const newFiles = files.filter((_, i) => i !== index);
     const fileToRemove = files[index];
+    if (!fileToRemove) return;
+    
+    const newFiles = files.filter((_, i) => i !== index);
     setFiles(newFiles);
     
     // Remove preview

@@ -5,7 +5,7 @@
 
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import type { PerformanceMetric } from '@/lib/monitoring/types';
 import { metricsCollector } from '@/lib/monitoring/metrics';
 import Card from '@/components/ui/Card';
@@ -19,8 +19,29 @@ interface MetricsChartProps {
 
 export default function MetricsChart({ metricName, title, height = 200 }: MetricsChartProps) {
   const [metrics, setMetrics] = useState<PerformanceMetric[]>([]);
+  const elementRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Intersection Observer pour ne fetch que si visible
+  useEffect(() => {
+    if (!elementRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(elementRef.current);
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
+    // Ne fetch que si le composant est visible
+    if (!isVisible) return;
+
     const updateMetrics = () => {
       const latestMetrics = metricsCollector.getMetrics(metricName, 20);
       setMetrics(latestMetrics);
@@ -30,7 +51,7 @@ export default function MetricsChart({ metricName, title, height = 200 }: Metric
     const interval = setInterval(updateMetrics, 5000); // Update every 5s
 
     return () => clearInterval(interval);
-  }, [metricName]);
+  }, [metricName, isVisible]);
 
   const chartData = metrics.map((m) => ({
     label: new Date(m.timestamp).toLocaleTimeString(),
@@ -43,7 +64,7 @@ export default function MetricsChart({ metricName, title, height = 200 }: Metric
 
   return (
     <Card>
-      <div className="p-6">
+      <div ref={elementRef} className="p-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold">{title || metricName}</h3>
           {latestMetric && (

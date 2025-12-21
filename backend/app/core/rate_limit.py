@@ -10,12 +10,29 @@ from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 
 from app.core.config import settings
+from app.core.logging import logger
+
+# Déterminer le storage URI (Redis si disponible, sinon mémoire)
+def get_storage_uri() -> str:
+    """Get storage URI for rate limiter"""
+    if settings.REDIS_URL:
+        try:
+            # Vérifier que Redis est disponible
+            import redis
+            redis_client = redis.from_url(settings.REDIS_URL)
+            redis_client.ping()
+            logger.info("Using Redis for rate limiting")
+            return settings.REDIS_URL
+        except Exception as e:
+            logger.warning(f"Redis not available for rate limiting, using memory: {e}")
+            return "memory://"
+    return "memory://"
 
 # Initialiser le rate limiter
 limiter = Limiter(
     key_func=get_remote_address,
     default_limits=["1000/hour"],  # Limite par défaut
-    storage_uri="memory://",  # En mémoire (pour production, utiliser Redis)
+    storage_uri=get_storage_uri(),  # Redis si disponible, sinon mémoire
 )
 
 # Rate limits par endpoint

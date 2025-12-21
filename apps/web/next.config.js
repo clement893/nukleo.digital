@@ -79,6 +79,22 @@ const nextConfig = {
   
   // Headers de sécurité
   async headers() {
+    const isProduction = process.env.NODE_ENV === 'production';
+    
+    // CSP Policy - ajuster selon vos besoins
+    const cspPolicy = [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-eval' 'unsafe-inline'", // 'unsafe-eval' pour Next.js dev, retirer en prod
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: https:",
+      "font-src 'self' data:",
+      "connect-src 'self' https://api.sentry.io",
+      "frame-ancestors 'self'",
+      "base-uri 'self'",
+      "form-action 'self'",
+      "upgrade-insecure-requests",
+    ].join('; ');
+
     return [
       {
         source: '/:path*',
@@ -102,6 +118,19 @@ const nextConfig = {
           {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=()'
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: cspPolicy
+          },
+          // HSTS - seulement en production HTTPS
+          ...(isProduction ? [{
+            key: 'Strict-Transport-Security',
+            value: 'max-age=31536000; includeSubDomains; preload'
+          }] : []),
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block'
           },
         ],
       },

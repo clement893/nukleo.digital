@@ -5,7 +5,7 @@
 
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import type { HealthStatus } from '@/lib/monitoring/types';
 import { checkApplicationHealth } from '@/lib/monitoring/health';
 import Card from '@/components/ui/Card';
@@ -16,8 +16,29 @@ export default function HealthStatus() {
   const [health, setHealth] = useState<HealthStatus | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const elementRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Intersection Observer pour ne fetch que si visible
+  useEffect(() => {
+    if (!elementRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(elementRef.current);
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
+    // Ne fetch que si le composant est visible
+    if (!isVisible) return;
+
     const fetchHealth = async () => {
       try {
         setLoading(true);
@@ -35,7 +56,7 @@ export default function HealthStatus() {
     const interval = setInterval(fetchHealth, 30000); // Refresh every 30s
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isVisible]);
 
   if (loading) {
     return (
@@ -74,7 +95,7 @@ export default function HealthStatus() {
 
   return (
     <Card>
-      <div className="p-6">
+      <div ref={elementRef} className="p-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold">System Health</h3>
           <Badge

@@ -9,6 +9,52 @@ interface LogContext {
   [key: string]: unknown;
 }
 
+/**
+ * Sanitize sensitive data from logs
+ */
+function sanitizeData(data: unknown): unknown {
+  if (typeof data !== 'object' || data === null) {
+    return data;
+  }
+
+  if (Array.isArray(data)) {
+    return data.map(sanitizeData);
+  }
+
+  const sensitiveKeys = [
+    'password',
+    'secret',
+    'token',
+    'apiKey',
+    'api_key',
+    'accessToken',
+    'refreshToken',
+    'authorization',
+    'auth',
+    'creditCard',
+    'credit_card',
+    'ssn',
+    'socialSecurityNumber',
+  ];
+
+  const sanitized: Record<string, unknown> = {};
+  
+  for (const [key, value] of Object.entries(data)) {
+    const lowerKey = key.toLowerCase();
+    const isSensitive = sensitiveKeys.some(sensitive => lowerKey.includes(sensitive));
+    
+    if (isSensitive && typeof value === 'string') {
+      sanitized[key] = '[REDACTED]';
+    } else if (typeof value === 'object' && value !== null) {
+      sanitized[key] = sanitizeData(value);
+    } else {
+      sanitized[key] = value;
+    }
+  }
+  
+  return sanitized;
+}
+
 class Logger {
   private isDevelopment = process.env.NODE_ENV === 'development';
   private isProduction = process.env.NODE_ENV === 'production';
@@ -20,8 +66,11 @@ class Logger {
   }
 
   private log(level: LogLevel, message: string, context?: LogContext, error?: Error): void {
+    // Sanitize sensitive data before logging
+    const sanitizedContext = context ? sanitizeData(context) as LogContext : undefined;
+    
     if (this.isDevelopment) {
-      const formatted = this.formatMessage(level, message, context);
+      const formatted = this.formatMessage(level, message, sanitizedContext);
       
       switch (level) {
         case 'debug':
@@ -45,7 +94,7 @@ class Logger {
       if (typeof window !== 'undefined' && (window as any).Sentry) {
         (window as any).Sentry.captureException(error || new Error(message), {
           contexts: {
-            custom: context,
+            custom: sanitizedContext,
           },
         });
       }

@@ -5,7 +5,17 @@
 
 import { SignJWT, jwtVerify, type JWTPayload } from 'jose';
 
-const secret = new TextEncoder().encode(process.env.JWT_SECRET ?? 'default-secret-change-in-production');
+// JWT_SECRET must be set in environment variables
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET || JWT_SECRET === 'default-secret-change-in-production') {
+  throw new Error(
+    'JWT_SECRET environment variable is required and must not be the default value. ' +
+    'Please set a secure secret in your .env file. ' +
+    'Generate one with: openssl rand -base64 32'
+  );
+}
+
+const secret = new TextEncoder().encode(JWT_SECRET);
 
 export interface TokenPayload extends JWTPayload {
   userId: string;

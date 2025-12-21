@@ -276,7 +276,7 @@ export default function AITestPage() {
                     <textarea
                       value={msg.content}
                       onChange={(e) => updateMessage(index, e.target.value)}
-                      placeholder={${msg.role} message...}
+                      placeholder={`${msg.role} message...`}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
                       rows={2}
                     />

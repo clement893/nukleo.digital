@@ -1,6 +1,12 @@
+/**
+ * DatePicker Component
+ * Date input component
+ */
+
 'use client';
 
-import { InputHTMLAttributes, forwardRef } from 'react';
+import { forwardRef, type InputHTMLAttributes } from 'react';
+import { clsx } from 'clsx';
 import Input from './Input';
 
 interface DatePickerProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
@@ -8,7 +14,6 @@ interface DatePickerProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 't
   error?: string;
   helperText?: string;
   fullWidth?: boolean;
-  format?: 'date' | 'datetime-local' | 'month' | 'time' | 'week';
 }
 
 const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
@@ -17,9 +22,8 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       label,
       error,
       helperText,
-      fullWidth = false,
-      format = 'date',
       className,
+      fullWidth = false,
       ...props
     },
     ref
@@ -27,7 +31,7 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
     return (
       <Input
         ref={ref}
-        type={format}
+        type="date"
         label={label}
         error={error}
         helperText={helperText}
@@ -42,4 +46,3 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
 DatePicker.displayName = 'DatePicker';
 
 export default DatePicker;
-

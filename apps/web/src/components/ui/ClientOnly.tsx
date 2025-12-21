@@ -1,8 +1,18 @@
+/**
+ * ClientOnly Component
+ * Renders children only on client side to avoid hydration issues
+ */
+
 'use client';
 
-import { useEffect, useState, ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 
-export default function ClientOnly({ children }: { children: ReactNode }) {
+interface ClientOnlyProps {
+  children: ReactNode;
+  fallback?: ReactNode;
+}
+
+export function ClientOnly({ children, fallback = null }: ClientOnlyProps) {
   const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
@@ -10,9 +20,10 @@ export default function ClientOnly({ children }: { children: ReactNode }) {
   }, []);
 
   if (!hasMounted) {
-    return null;
+    return <>{fallback}</>;
   }
 
   return <>{children}</>;
 }
 
+export default ClientOnly;

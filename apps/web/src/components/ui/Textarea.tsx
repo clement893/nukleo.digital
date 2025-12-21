@@ -1,4 +1,11 @@
-import { TextareaHTMLAttributes, forwardRef } from 'react';
+/**
+ * Textarea Component
+ * Multi-line text input component
+ */
+
+'use client';
+
+import { forwardRef, type TextareaHTMLAttributes } from 'react';
 import { clsx } from 'clsx';
 
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -6,7 +13,8 @@ interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   error?: string;
   helperText?: string;
   fullWidth?: boolean;
-  resize?: boolean;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
 }
 
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
@@ -17,38 +25,62 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       helperText,
       className,
       fullWidth = false,
-      resize = true,
+      leftIcon,
+      rightIcon,
+      id,
       ...props
     },
     ref
   ) => {
+    const textareaId = id || `textarea-${Math.random().toString(36).substring(7)}`;
+
     return (
       <div className={clsx('flex flex-col', fullWidth && 'w-full')}>
         {label && (
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor={textareaId}
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >
             {label}
-            {props.required && <span className="text-red-500 ml-1">*</span>}
           </label>
         )}
-        <textarea
-          ref={ref}
-          className={clsx(
-            'w-full px-4 py-2 border rounded-lg transition-all duration-200',
-            'focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent',
-            'disabled:bg-gray-100 disabled:cursor-not-allowed',
-            error
-              ? 'border-red-500 focus:ring-red-500'
-              : 'border-gray-300',
-            !resize && 'resize-none',
-            className
+        <div className="relative">
+          {leftIcon && (
+            <div className="absolute left-3 top-3 text-gray-400 dark:text-gray-500">
+              {leftIcon}
+            </div>
           )}
-          {...props}
-        />
+          <textarea
+            ref={ref}
+            id={textareaId}
+            className={clsx(
+              'block w-full rounded-md border-gray-300 dark:border-gray-600',
+              'bg-white dark:bg-gray-700',
+              'text-gray-900 dark:text-gray-100',
+              'placeholder-gray-400 dark:placeholder-gray-500',
+              'shadow-sm focus:border-blue-500 focus:ring-blue-500',
+              'disabled:opacity-50 disabled:cursor-not-allowed',
+              'resize-y',
+              error && 'border-red-500 focus:border-red-500 focus:ring-red-500',
+              leftIcon && 'pl-10',
+              rightIcon && 'pr-10',
+              className
+            )}
+            {...props}
+          />
+          {rightIcon && (
+            <div className="absolute right-3 top-3 text-gray-400 dark:text-gray-500">
+              {rightIcon}
+            </div>
+          )}
+        </div>
         {error && (
-          <p className="mt-1 text-sm text-red-600">{error}</p>
+          <p className="mt-1 text-sm text-red-600 dark:text-red-400" role="alert">
+            {error}
+          </p>
         )}
         {helperText && !error && (
-          <p className="mt-1 text-sm text-gray-500">{helperText}</p>
+          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">{helperText}</p>
         )}
       </div>
     );
@@ -58,4 +90,3 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
 Textarea.displayName = 'Textarea';
 
 export default Textarea;
-

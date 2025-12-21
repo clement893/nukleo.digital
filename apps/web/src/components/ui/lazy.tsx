@@ -70,11 +70,11 @@ export const LazyAccordion = dynamic(
 export function createLazyComponent<T extends ComponentType<any>>(
   importFn: () => Promise<{ default: T }>,
   options?: {
-    loading?: (props?: { error?: Error; isLoading?: boolean; pastDelay?: boolean; retry?: () => void; timedOut?: boolean }) => ReactNode;
+    loading?: (props?: { error?: Error | null; isLoading?: boolean; pastDelay?: boolean; retry?: () => void; timedOut?: boolean }) => ReactNode;
     ssr?: boolean;
   }
 ) {
-  const loadingComponent = options?.loading ?? ((_props?: { error?: Error; isLoading?: boolean; pastDelay?: boolean; retry?: () => void; timedOut?: boolean }) => <Skeleton className="h-32 w-full" />);
+  const loadingComponent = options?.loading ?? ((_props?: { error?: Error | null; isLoading?: boolean; pastDelay?: boolean; retry?: () => void; timedOut?: boolean }) => <Skeleton className="h-32 w-full" />);
   return dynamic(importFn, {
     loading: loadingComponent,
     ssr: options?.ssr ?? true,

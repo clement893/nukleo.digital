@@ -21,7 +21,7 @@ export interface FormField {
 }
 
 export interface FormProps {
-  fields: FormField[];
+  fields?: FormField[];
   onSubmit: (data: Record<string, unknown>) => void | Promise<void>;
   initialValues?: Record<string, unknown>;
   children?: ReactNode;
@@ -48,20 +48,32 @@ export default function Form({
     const formData = new FormData(e.currentTarget);
     const data: Record<string, unknown> = {};
 
-    fields.forEach((field) => {
-      if (field.type === 'checkbox') {
-        data[field.name] = formData.get(field.name) === 'on';
-      } else {
-        data[field.name] = formData.get(field.name) ?? '';
+    if (fields && fields.length > 0) {
+      fields.forEach((field) => {
+        if (field.type === 'checkbox') {
+          data[field.name] = formData.get(field.name) === 'on';
+        } else {
+          data[field.name] = formData.get(field.name) ?? '';
+        }
+      });
+    } else {
+      // When using children with FormField, collect all form data
+      for (const [key, value] of formData.entries()) {
+        const input = e.currentTarget.elements.namedItem(key) as HTMLInputElement;
+        if (input?.type === 'checkbox') {
+          data[key] = input.checked;
+        } else {
+          data[key] = value;
+        }
       }
-    });
+    }
 
     await onSubmit(data);
   };
 
   return (
     <form onSubmit={handleSubmit} className={clsx('space-y-6', className)}>
-      {fields.map((field) => {
+      {fields && fields.map((field) => {
         const error = externalErrors[field.name];
         const value = initialValues[field.name] ?? '';
 

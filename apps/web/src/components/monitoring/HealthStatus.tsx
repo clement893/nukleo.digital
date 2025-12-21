@@ -99,7 +99,7 @@ export default function HealthStatus() {
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold">System Health</h3>
           <Badge
-            variant={health.status === 'healthy' ? 'success' : health.status === 'degraded' ? 'warning' : 'danger'}
+            variant={health.status === 'healthy' ? 'success' : health.status === 'degraded' ? 'warning' : 'error'}
           >
             {health.status.toUpperCase()}
           </Badge>

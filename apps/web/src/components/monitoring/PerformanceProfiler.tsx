@@ -96,7 +96,7 @@ export default function PerformanceProfiler() {
                     <Badge variant="warning">Slow</Badge>
                   )}
                   {duration > 3000 && (
-                    <Badge variant="danger">Critical</Badge>
+                    <Badge variant="error">Critical</Badge>
                   )}
                 </div>
               ))}

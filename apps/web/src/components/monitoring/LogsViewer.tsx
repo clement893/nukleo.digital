@@ -40,7 +40,7 @@ export default function LogsViewer() {
   const getLevelColor = (level: LogEntry['level']) => {
     switch (level) {
       case 'error':
-        return 'danger';
+        return 'error';
       case 'warn':
         return 'warning';
       case 'info':

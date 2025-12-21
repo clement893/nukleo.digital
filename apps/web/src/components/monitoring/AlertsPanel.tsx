@@ -37,18 +37,18 @@ export default function AlertsPanel() {
     setAlerts(alerts.filter(a => a.id !== alertId));
   };
 
-  const getSeverityColor = (severity: Alert['severity']) => {
+  const getSeverityColor = (severity: Alert['severity']): 'error' | 'warning' | 'info' | 'default' => {
     switch (severity) {
       case 'critical':
-        return 'danger';
+        return 'error';
       case 'error':
-        return 'danger';
+        return 'error';
       case 'warning':
         return 'warning';
       case 'info':
-        return 'primary';
+        return 'info';
       default:
-        return 'secondary';
+        return 'default';
     }
   };
 

@@ -41,7 +41,10 @@
     "analyze:build": "cd apps/web && pnpm analyze:build",
     "workspace:upgrade": "pnpm up -r -L",
     "workspace:check": "pnpm list --depth=0 -r",
-    "workspace:verify": "node scripts/check-workspace.js"
+    "workspace:verify": "node scripts/check-workspace.js",
+    "audit:security": "node scripts/audit-security.js",
+    "audit:performance": "node scripts/audit-performance.js",
+    "audit:all": "npm run audit:security && npm run audit:performance"
   },
   "workspaces": [
     "apps/*",

@@ -14,7 +14,6 @@ const nextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   productionBrowserSourceMaps: false,
-  output: 'standalone',
   
   // Images
   images: {

@@ -1,7 +1,8 @@
-﻿import type { Metadata, Viewport } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import SessionProvider from '@/components/providers/SessionProvider';
+import { ThemeProvider } from '@/contexts/ThemeContext';
 import { App } from './app';
 
 const inter = Inter({ 
@@ -32,11 +33,13 @@ export default function RootLayout({
   return (
     <html lang="fr" className={inter.variable}>
       <body className={inter.className}>
+        <ThemeProvider>
         <SessionProvider>
           <App>
             {children}
           </App>
         </SessionProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

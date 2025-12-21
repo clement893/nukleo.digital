@@ -8,7 +8,6 @@ import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/lib/store';
 import { authAPI, usersAPI } from '@/lib/api';
 import { handleApiError } from '@/lib/errors/api';
-import type { User } from '@modele/types';
 
 interface LoginCredentials {
   email: string;

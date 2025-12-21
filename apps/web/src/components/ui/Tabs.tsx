@@ -14,14 +14,12 @@ interface TabsProps {
   children: ReactNode;
   defaultTab?: string;
   className?: string;
-  variant?: 'default' | 'pills' | 'underline';
 }
 
 export function Tabs({
   children,
   defaultTab,
   className,
-  variant = 'default',
 }: TabsProps) {
   const [activeTab, setActiveTab] = useState(defaultTab || '');
 

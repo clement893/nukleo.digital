@@ -3,8 +3,6 @@
  * Protection contre les attaques Cross-Site Request Forgery
  */
 
-import { cookies } from 'next/headers';
-
 const CSRF_TOKEN_COOKIE = 'csrf-token';
 const CSRF_HEADER = 'X-CSRF-Token';
 

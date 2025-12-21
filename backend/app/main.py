@@ -28,6 +28,7 @@ from app.core.rate_limit import setup_rate_limiting
 from app.core.compression import CompressionMiddleware
 from app.core.cache_headers import CacheHeadersMiddleware
 from app.api.v1.router import api_router
+from app.api import email as email_router
 
 
 @asynccontextmanager
@@ -74,6 +75,9 @@ def create_app() -> FastAPI:
 
     # Include API router
     app.include_router(api_router, prefix=settings.API_V1_STR)
+    
+    # Include email router (separate from v1)
+    app.include_router(email_router.router)
 
     # Register exception handlers
     app.add_exception_handler(AppException, app_exception_handler)

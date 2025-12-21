@@ -1,6 +1,5 @@
-"""Email tasks."""
+"""Email tasks for Celery background processing."""
 
-import asyncio
 from app.celery_app import celery_app
 from app.services.email_service import EmailService
 
@@ -23,34 +22,111 @@ def send_email_task(self, to_email: str, subject: str, html_content: str, text_c
         raise self.retry(exc=exc, countdown=60)
 
 
-@celery_app.task
-def send_welcome_email(email: str, name: str):
-    """Send welcome email."""
-    email_service = EmailService()
-    if not email_service.is_configured():
-        return send_email_task.delay(
-            email,
-            f"Welcome {name}!",
-            f"<html><body><h1>Welcome {name}!</h1><p>Hello {name}, welcome to NukleoHUB!</p></body></html>",
-            f"Welcome {name}!\n\nHello {name}, welcome to NukleoHUB!"
-        )
-    
-    result = email_service.send_welcome_email(email, name)
-    return result
+@celery_app.task(bind=True, max_retries=3)
+def send_welcome_email_task(self, email: str, name: str, login_url: str = None):
+    """Send welcome email task."""
+    try:
+        email_service = EmailService()
+        if not email_service.is_configured():
+            return {"status": "skipped", "to": email, "reason": "SendGrid not configured"}
+        
+        result = email_service.send_welcome_email(email, name, login_url)
+        return result
+    except Exception as exc:
+        raise self.retry(exc=exc, countdown=60)
 
 
-@celery_app.task
-def send_password_reset_email(email: str, reset_token: str, name: str = "User"):
-    """Send password reset email."""
-    email_service = EmailService()
-    if not email_service.is_configured():
-        reset_url = f"http://localhost:3000/auth/reset-password?token={reset_token}"
-        return send_email_task.delay(
-            email,
-            "Password Reset Request",
-            f"<html><body><h1>Password Reset</h1><p>Click <a href='{reset_url}'>here</a> to reset your password.</p></body></html>",
-            f"Password Reset\n\nClick here to reset your password: {reset_url}"
+@celery_app.task(bind=True, max_retries=3)
+def send_password_reset_email_task(self, email: str, name: str, reset_token: str, reset_url: str = None):
+    """Send password reset email task."""
+    try:
+        email_service = EmailService()
+        if not email_service.is_configured():
+            return {"status": "skipped", "to": email, "reason": "SendGrid not configured"}
+        
+        result = email_service.send_password_reset_email(email, name, reset_token, reset_url)
+        return result
+    except Exception as exc:
+        raise self.retry(exc=exc, countdown=60)
+
+
+@celery_app.task(bind=True, max_retries=3)
+def send_verification_email_task(self, email: str, name: str, verification_token: str, verification_url: str = None):
+    """Send email verification task."""
+    try:
+        email_service = EmailService()
+        if not email_service.is_configured():
+            return {"status": "skipped", "to": email, "reason": "SendGrid not configured"}
+        
+        result = email_service.send_verification_email(email, name, verification_token, verification_url)
+        return result
+    except Exception as exc:
+        raise self.retry(exc=exc, countdown=60)
+
+
+@celery_app.task(bind=True, max_retries=3)
+def send_invoice_email_task(
+    self,
+    email: str,
+    name: str,
+    invoice_number: str,
+    invoice_date: str,
+    amount: float,
+    currency: str = "EUR",
+    invoice_url: str = None,
+    items: list = None,
+):
+    """Send invoice email task."""
+    try:
+        email_service = EmailService()
+        if not email_service.is_configured():
+            return {"status": "skipped", "to": email, "reason": "SendGrid not configured"}
+        
+        result = email_service.send_invoice_email(
+            email, name, invoice_number, invoice_date, amount, currency, invoice_url, items
         )
-    
-    result = email_service.send_password_reset_email(email, name, reset_token)
-    return result
+        return result
+    except Exception as exc:
+        raise self.retry(exc=exc, countdown=60)
+
+
+@celery_app.task(bind=True, max_retries=3)
+def send_subscription_created_email_task(self, email: str, name: str, plan_name: str, amount: float, currency: str = "EUR"):
+    """Send subscription created email task."""
+    try:
+        email_service = EmailService()
+        if not email_service.is_configured():
+            return {"status": "skipped", "to": email, "reason": "SendGrid not configured"}
+        
+        result = email_service.send_subscription_created_email(email, name, plan_name, amount, currency)
+        return result
+    except Exception as exc:
+        raise self.retry(exc=exc, countdown=60)
+
+
+@celery_app.task(bind=True, max_retries=3)
+def send_subscription_cancelled_email_task(self, email: str, name: str, plan_name: str, end_date: str):
+    """Send subscription cancelled email task."""
+    try:
+        email_service = EmailService()
+        if not email_service.is_configured():
+            return {"status": "skipped", "to": email, "reason": "SendGrid not configured"}
+        
+        result = email_service.send_subscription_cancelled_email(email, name, plan_name, end_date)
+        return result
+    except Exception as exc:
+        raise self.retry(exc=exc, countdown=60)
+
+
+@celery_app.task(bind=True, max_retries=3)
+def send_trial_ending_email_task(self, email: str, name: str, days_remaining: int, upgrade_url: str = None):
+    """Send trial ending soon email task."""
+    try:
+        email_service = EmailService()
+        if not email_service.is_configured():
+            return {"status": "skipped", "to": email, "reason": "SendGrid not configured"}
+        
+        result = email_service.send_trial_ending_email(email, name, days_remaining, upgrade_url)
+        return result
+    except Exception as exc:
+        raise self.retry(exc=exc, countdown=60)

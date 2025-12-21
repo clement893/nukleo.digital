@@ -5,6 +5,7 @@ from typing import List, Optional, Dict, Any
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail, Email, To, Content
 from sendgrid.helpers.mail.exceptions import SendGridException
+from app.services.email_templates import EmailTemplates
 
 
 class EmailService:
@@ -12,8 +13,8 @@ class EmailService:
 
     def __init__(self):
         self.api_key = os.getenv("SENDGRID_API_KEY")
-        self.from_email = os.getenv("SENDGRID_FROM_EMAIL", os.getenv("FROM_EMAIL", "hello@nukleo.digital"))
-        self.from_name = os.getenv("SENDGRID_FROM_NAME", os.getenv("FROM_NAME", "NukleoHUB"))
+        self.from_email = os.getenv("SENDGRID_FROM_EMAIL", os.getenv("FROM_EMAIL", "noreply@example.com"))
+        self.from_name = os.getenv("SENDGRID_FROM_NAME", os.getenv("FROM_NAME", "MODELE"))
 
         if not self.api_key:
             self.client = None
@@ -99,126 +100,93 @@ class EmailService:
         except SendGridException as e:
             raise RuntimeError(f"Failed to send email via SendGrid: {e}")
 
-    def send_welcome_email(self, to_email: str, name: str) -> Dict[str, Any]:
+    def send_welcome_email(self, to_email: str, name: str, login_url: Optional[str] = None) -> Dict[str, Any]:
         """Send a welcome email to a new user."""
-        subject = f"Welcome to {self.from_name}!"
-        html_content = f"""
-        <html>
-        <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-            <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-                <h1 style="color: #4F46E5;">Welcome to {self.from_name}!</h1>
-                <p>Hi {name},</p>
-                <p>Thank you for joining {self.from_name}! We're excited to have you on board.</p>
-                <p>If you have any questions, feel free to reach out to us.</p>
-                <p>Best regards,<br>The {self.from_name} Team</p>
-            </div>
-        </body>
-        </html>
-        """
-        text_content = f"""
-        Welcome to {self.from_name}!
-
-        Hi {name},
-
-        Thank you for joining {self.from_name}! We're excited to have you on board.
-
-        If you have any questions, feel free to reach out to us.
-
-        Best regards,
-        The {self.from_name} Team
-        """
-        return self.send_email(to_email, subject, html_content, text_content)
+        template = EmailTemplates.welcome(name, login_url)
+        return self.send_email(
+            to_email=to_email,
+            subject=template["subject"],
+            html_content=template["html"],
+            text_content=template["text"],
+        )
 
     def send_password_reset_email(
         self, to_email: str, name: str, reset_token: str, reset_url: Optional[str] = None
     ) -> Dict[str, Any]:
         """Send a password reset email."""
-        frontend_url = os.getenv("FRONTEND_URL", "http://localhost:3000")
-        if not reset_url:
-            reset_url = f"{frontend_url}/auth/reset-password?token={reset_token}"
-
-        subject = f"Password Reset Request - {self.from_name}"
-        html_content = f"""
-        <html>
-        <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-            <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-                <h1 style="color: #4F46E5;">Password Reset Request</h1>
-                <p>Hi {name},</p>
-                <p>We received a request to reset your password. Click the button below to reset it:</p>
-                <p style="text-align: center; margin: 30px 0;">
-                    <a href="{reset_url}" style="background-color: #4F46E5; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block;">
-                        Reset Password
-                    </a>
-                </p>
-                <p>Or copy and paste this link into your browser:</p>
-                <p style="word-break: break-all; color: #666;">{reset_url}</p>
-                <p>This link will expire in 1 hour.</p>
-                <p>If you didn't request this, please ignore this email.</p>
-                <p>Best regards,<br>The {self.from_name} Team</p>
-            </div>
-        </body>
-        </html>
-        """
-        text_content = f"""
-        Password Reset Request
-
-        Hi {name},
-
-        We received a request to reset your password. Use the link below to reset it:
-
-        {reset_url}
-
-        This link will expire in 1 hour.
-
-        If you didn't request this, please ignore this email.
-
-        Best regards,
-        The {self.from_name} Team
-        """
-        return self.send_email(to_email, subject, html_content, text_content)
+        template = EmailTemplates.password_reset(name, reset_token, reset_url)
+        return self.send_email(
+            to_email=to_email,
+            subject=template["subject"],
+            html_content=template["html"],
+            text_content=template["text"],
+        )
 
     def send_verification_email(
         self, to_email: str, name: str, verification_token: str, verification_url: Optional[str] = None
     ) -> Dict[str, Any]:
         """Send an email verification email."""
-        frontend_url = os.getenv("FRONTEND_URL", "http://localhost:3000")
-        if not verification_url:
-            verification_url = f"{frontend_url}/auth/verify-email?token={verification_token}"
+        template = EmailTemplates.email_verification(name, verification_token, verification_url)
+        return self.send_email(
+            to_email=to_email,
+            subject=template["subject"],
+            html_content=template["html"],
+            text_content=template["text"],
+        )
 
-        subject = f"Verify Your Email - {self.from_name}"
-        html_content = f"""
-        <html>
-        <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-            <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-                <h1 style="color: #4F46E5;">Verify Your Email</h1>
-                <p>Hi {name},</p>
-                <p>Please verify your email address by clicking the button below:</p>
-                <p style="text-align: center; margin: 30px 0;">
-                    <a href="{verification_url}" style="background-color: #4F46E5; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block;">
-                        Verify Email
-                    </a>
-                </p>
-                <p>Or copy and paste this link into your browser:</p>
-                <p style="word-break: break-all; color: #666;">{verification_url}</p>
-                <p>This link will expire in 24 hours.</p>
-                <p>Best regards,<br>The {self.from_name} Team</p>
-            </div>
-        </body>
-        </html>
-        """
-        text_content = f"""
-        Verify Your Email
+    def send_invoice_email(
+        self,
+        to_email: str,
+        name: str,
+        invoice_number: str,
+        invoice_date: str,
+        amount: float,
+        currency: str = "EUR",
+        invoice_url: Optional[str] = None,
+        items: Optional[list] = None,
+    ) -> Dict[str, Any]:
+        """Send an invoice email."""
+        template = EmailTemplates.invoice(name, invoice_number, invoice_date, amount, currency, invoice_url, items)
+        return self.send_email(
+            to_email=to_email,
+            subject=template["subject"],
+            html_content=template["html"],
+            text_content=template["text"],
+        )
 
-        Hi {name},
+    def send_subscription_created_email(
+        self, to_email: str, name: str, plan_name: str, amount: float, currency: str = "EUR"
+    ) -> Dict[str, Any]:
+        """Send subscription created email."""
+        template = EmailTemplates.subscription_created(name, plan_name, amount, currency)
+        return self.send_email(
+            to_email=to_email,
+            subject=template["subject"],
+            html_content=template["html"],
+            text_content=template["text"],
+        )
 
-        Please verify your email address by clicking the link below:
+    def send_subscription_cancelled_email(
+        self, to_email: str, name: str, plan_name: str, end_date: str
+    ) -> Dict[str, Any]:
+        """Send subscription cancelled email."""
+        template = EmailTemplates.subscription_cancelled(name, plan_name, end_date)
+        return self.send_email(
+            to_email=to_email,
+            subject=template["subject"],
+            html_content=template["html"],
+            text_content=template["text"],
+        )
 
-        {verification_url}
-
-        This link will expire in 24 hours.
-
-        Best regards,
-        The {self.from_name} Team
-        """
-        return self.send_email(to_email, subject, html_content, text_content)
+    def send_trial_ending_email(
+        self, to_email: str, name: str, days_remaining: int, upgrade_url: Optional[str] = None
+    ) -> Dict[str, Any]:
+        """Send trial ending soon email."""
+        template = EmailTemplates.trial_ending(name, days_remaining, upgrade_url)
+        return self.send_email(
+            to_email=to_email,
+            subject=template["subject"],
+            html_content=template["html"],
+            text_content=template["text"],
+        )
 

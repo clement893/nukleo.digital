@@ -220,17 +220,165 @@ async def send_welcome_email_endpoint(
     request_data: TestEmailRequest,
     current_user: User = Depends(get_current_user),
 ):
-    """Send a welcome email (example)."""
+    """Send a welcome email."""
+    from app.tasks.email_tasks import send_welcome_email_task
+    
     email_service = EmailService()
     
     # Extract name from email or use a default
     name = request_data.to_email.split("@")[0].replace(".", " ").title()
     
     try:
-        result = email_service.send_welcome_email(request_data.to_email, name)
-        return EmailResponse(**result)
-    except ValueError as e:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
-    except RuntimeError as e:
-        raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail=str(e))
+        # Use Celery task for async processing
+        task = send_welcome_email_task.delay(request_data.to_email, name)
+        return {
+            "status": "queued",
+            "task_id": task.id,
+            "to": request_data.to_email,
+            "message": "Welcome email queued for sending",
+        }
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+
+
+class InvoiceEmailRequest(BaseModel):
+    """Schema for invoice email request."""
+    to_email: EmailStr
+    name: str
+    invoice_number: str
+    invoice_date: str
+    amount: float
+    currency: str = "EUR"
+    invoice_url: Optional[str] = None
+    items: Optional[List[Dict[str, Any]]] = None
+
+
+@router.post("/invoice")
+async def send_invoice_email_endpoint(
+    request_data: InvoiceEmailRequest,
+    current_user: User = Depends(get_current_user),
+):
+    """Send an invoice email."""
+    from app.tasks.email_tasks import send_invoice_email_task
+    
+    try:
+        task = send_invoice_email_task.delay(
+            request_data.to_email,
+            request_data.name,
+            request_data.invoice_number,
+            request_data.invoice_date,
+            request_data.amount,
+            request_data.currency,
+            request_data.invoice_url,
+            request_data.items or [],
+        )
+        return {
+            "status": "queued",
+            "task_id": task.id,
+            "to": request_data.to_email,
+            "message": "Invoice email queued for sending",
+        }
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+
+
+class SubscriptionEmailRequest(BaseModel):
+    """Schema for subscription email request."""
+    to_email: EmailStr
+    name: str
+    plan_name: str
+    amount: float
+    currency: str = "EUR"
+
+
+@router.post("/subscription/created")
+async def send_subscription_created_email_endpoint(
+    request_data: SubscriptionEmailRequest,
+    current_user: User = Depends(get_current_user),
+):
+    """Send subscription created email."""
+    from app.tasks.email_tasks import send_subscription_created_email_task
+    
+    try:
+        task = send_subscription_created_email_task.delay(
+            request_data.to_email,
+            request_data.name,
+            request_data.plan_name,
+            request_data.amount,
+            request_data.currency,
+        )
+        return {
+            "status": "queued",
+            "task_id": task.id,
+            "to": request_data.to_email,
+            "message": "Subscription created email queued for sending",
+        }
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+
+
+class SubscriptionCancelledEmailRequest(BaseModel):
+    """Schema for subscription cancelled email request."""
+    to_email: EmailStr
+    name: str
+    plan_name: str
+    end_date: str
+
+
+@router.post("/subscription/cancelled")
+async def send_subscription_cancelled_email_endpoint(
+    request_data: SubscriptionCancelledEmailRequest,
+    current_user: User = Depends(get_current_user),
+):
+    """Send subscription cancelled email."""
+    from app.tasks.email_tasks import send_subscription_cancelled_email_task
+    
+    try:
+        task = send_subscription_cancelled_email_task.delay(
+            request_data.to_email,
+            request_data.name,
+            request_data.plan_name,
+            request_data.end_date,
+        )
+        return {
+            "status": "queued",
+            "task_id": task.id,
+            "to": request_data.to_email,
+            "message": "Subscription cancelled email queued for sending",
+        }
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+
+
+class TrialEndingEmailRequest(BaseModel):
+    """Schema for trial ending email request."""
+    to_email: EmailStr
+    name: str
+    days_remaining: int
+    upgrade_url: Optional[str] = None
+
+
+@router.post("/trial/ending")
+async def send_trial_ending_email_endpoint(
+    request_data: TrialEndingEmailRequest,
+    current_user: User = Depends(get_current_user),
+):
+    """Send trial ending soon email."""
+    from app.tasks.email_tasks import send_trial_ending_email_task
+    
+    try:
+        task = send_trial_ending_email_task.delay(
+            request_data.to_email,
+            request_data.name,
+            request_data.days_remaining,
+            request_data.upgrade_url,
+        )
+        return {
+            "status": "queued",
+            "task_id": task.id,
+            "to": request_data.to_email,
+            "message": "Trial ending email queued for sending",
+        }
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
 

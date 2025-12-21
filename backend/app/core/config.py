@@ -84,6 +84,20 @@ class Settings(BaseSettings):
         description="Redis connection URL for caching",
     )
 
+    # SendGrid Email Configuration
+    SENDGRID_API_KEY: str = Field(
+        default="",
+        description="SendGrid API key for sending emails",
+    )
+    SENDGRID_FROM_EMAIL: str = Field(
+        default="noreply@example.com",
+        description="Default sender email address",
+    )
+    SENDGRID_FROM_NAME: str = Field(
+        default="MODELE",
+        description="Default sender name",
+    )
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",

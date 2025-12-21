@@ -1,40 +1,53 @@
 /**
- * Global Error Page
- * Next.js error page for unhandled errors
+ * Global Error Boundary for Next.js App Router
+ * Catches errors in the app directory
  */
 
 'use client';
 
 import { useEffect } from 'react';
 import { ErrorDisplay } from '@/components/errors/ErrorDisplay';
-import { logger } from '@/lib/logger';
-import { AppError, InternalServerError } from '@/lib/errors/AppError';
+import Button from '@/components/ui/Button';
 
-interface ErrorProps {
+export default function Error({
+  error,
+  reset,
+}: {
   error: Error & { digest?: string };
   reset: () => void;
-}
-
-export default function Error({ error, reset }: ErrorProps) {
+}) {
   useEffect(() => {
-    // Log error
-    const isAppError = error instanceof AppError;
-    const appError = isAppError ? error : new InternalServerError(error.message);
-    logger.error('Global error page', appError, {
-      digest: error.digest,
-      stack: error.stack,
-    });
+    // Log error to error reporting service
+    console.error('Global error caught:', error);
+    
+    // TODO: Send to error tracking service (Sentry, etc.)
+    // if (process.env.NODE_ENV === 'production') {
+    //   Sentry.captureException(error);
+    // }
   }, [error]);
 
-  const isAppError = error instanceof AppError;
-
   return (
-    <ErrorDisplay
-      error={isAppError ? error : undefined}
-      onRetry={reset}
-      onReset={() => window.location.href = '/'}
-      showDetails={process.env.NODE_ENV === 'development'}
-    />
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4">
+      <div className="max-w-md w-full">
+        <ErrorDisplay
+          error={{
+            message: error.message || 'Une erreur inattendue s\'est produite',
+            statusCode: 500,
+            details: {
+              digest: error.digest,
+            },
+          }}
+          onReset={reset}
+        />
+        <div className="mt-6 flex gap-4 justify-center">
+          <Button onClick={reset} variant="primary">
+            Réessayer
+          </Button>
+          <Button onClick={() => window.location.href = '/'} variant="outline">
+            Retour à l'accueil
+          </Button>
+        </div>
+      </div>
+    </div>
   );
 }
-

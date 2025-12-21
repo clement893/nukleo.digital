@@ -44,7 +44,10 @@
     "workspace:verify": "node scripts/check-workspace.js",
     "audit:security": "node scripts/audit-security.js",
     "audit:performance": "node scripts/audit-performance.js",
-    "audit:all": "npm run audit:security && npm run audit:performance"
+    "audit:all": "npm run audit:security && npm run audit:performance",
+    "validate:env": "node scripts/validate-env.js",
+    "validate:env:backend": "node scripts/validate-env.js backend",
+    "validate:env:frontend": "node scripts/validate-env.js frontend"
   },
   "workspaces": [
     "apps/*",

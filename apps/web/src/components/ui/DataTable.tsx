@@ -8,7 +8,6 @@ import Button from './Button';
 import Pagination from './Pagination';
 import Dropdown from './Dropdown';
 import type { DropdownItem } from './Dropdown';
-import Badge from './Badge';
 
 export interface Column<T> {
   key: string;

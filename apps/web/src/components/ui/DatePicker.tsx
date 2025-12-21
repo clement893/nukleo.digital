@@ -6,7 +6,6 @@
 'use client';
 
 import { forwardRef, type InputHTMLAttributes } from 'react';
-import { clsx } from 'clsx';
 import Input from './Input';
 
 interface DatePickerProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {

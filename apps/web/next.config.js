@@ -1,4 +1,4 @@
-/** @type {import('next').NextConfig} */
+﻿/** @type {import('next').NextConfig} */
 // Sentry is optional - only use if package is installed
 let withSentryConfig = null;
 try {
@@ -10,10 +10,10 @@ try {
 
 const nextConfig = {
   // Optimisations de performance
-  compress: true,?
-  poweredByHeader: false,?
-  reactStrictMode: true,?
-  productionBrowserSourceMaps: false,?
+  compress: true,
+  poweredByHeader: false,
+  reactStrictMode: true,
+  productionBrowserSourceMaps: false,
   output: 'standalone',
   
   // Images
@@ -99,7 +99,7 @@ const nextConfig = {
     return config;
   },
   
-  // Headers de sécurité
+  // Headers de scurit
   async headers() {
     const isProduction = process.env.NODE_ENV === 'production';
     
@@ -146,7 +146,7 @@ const nextConfig = {
             value: cspPolicy
           },
           // HSTS - seulement en production HTTPS
-          ...(isProduction ? [{
+          ...(isProduction  [{
             key: 'Strict-Transport-Security',
             value: 'max-age=31536000; includeSubDomains; preload'
           }] : []),
@@ -159,12 +159,12 @@ const nextConfig = {
     ];
   },
   
-  // Redirects si nécessaire
+  // Redirects si ncessaire
   async redirects() {
     return [];
   },
   
-  // Rewrites si nécessaire
+  // Rewrites si ncessaire
   async rewrites() {
     return [];
   },

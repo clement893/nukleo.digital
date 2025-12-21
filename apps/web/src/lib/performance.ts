@@ -58,6 +58,13 @@ export function reportWebVitals(metric: {
   value: number;
   label: string;
 }) {
+  // Track dans le système de monitoring
+  if (typeof window !== 'undefined') {
+    import('@/lib/monitoring/metrics').then(({ trackWebVital }) => {
+      trackWebVital(metric.name, metric.value, metric.label.includes('ms') ? 'ms' : '');
+    });
+  }
+
   // En production, envoyer à votre service d'analytics
   if (process.env.NODE_ENV === 'production') {
     // Envoyer à Sentry si disponible

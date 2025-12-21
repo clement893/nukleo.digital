@@ -9,18 +9,16 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 60,
   },
   
   // Experimental features
   experimental: {
-    optimizePackageImports: ['@modele/types', 'clsx'],
+    optimizePackageImports: ['@modele/types', 'clsx', 'zod'],
   },
   
-  // Turbopack configuration (Next.js 16 default)
-  turbopack: {},
-  
-  // Webpack optimizations (fallback for --webpack flag)
-  webpack: (config, { isServer }) => {
+  // Webpack optimizations
+  webpack: (config, { isServer, dev }) => {
     // Optimisations pour le bundle
     if (!isServer) {
       config.optimization = {
@@ -30,14 +28,33 @@ const nextConfig = {
         splitChunks: {
           chunks: 'all',
           cacheGroups: {
+            default: false,
+            vendors: false,
+            // Vendor chunk
             vendor: {
               test: /[\\/]node_modules[\\/]/,
               name: 'vendors',
-              priority: 10,
+              priority: 20,
+              reuseExistingChunk: true,
             },
+            // Common chunk
             common: {
               minChunks: 2,
-              priority: 5,
+              priority: 10,
+              reuseExistingChunk: true,
+            },
+            // React chunk
+            react: {
+              test: /[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/,
+              name: 'react',
+              priority: 30,
+              reuseExistingChunk: true,
+            },
+            // Next.js chunk
+            nextjs: {
+              test: /[\\/]node_modules[\\/](next)[\\/]/,
+              name: 'nextjs',
+              priority: 30,
               reuseExistingChunk: true,
             },
           },
@@ -70,10 +87,32 @@ const nextConfig = {
             key: 'Referrer-Policy',
             value: 'origin-when-cross-origin'
           },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()'
+          },
         ],
       },
     ];
   },
+  
+  // Redirects si nécessaire
+  async redirects() {
+    return [];
+  },
+  
+  // Rewrites si nécessaire
+  async rewrites() {
+    return [];
+  },
 };
 
-module.exports = nextConfig;
+// Bundle Analyzer (optionnel)
+if (process.env.ANALYZE === 'true') {
+  const withBundleAnalyzer = require('@next/bundle-analyzer')({
+    enabled: true,
+  });
+  module.exports = withBundleAnalyzer(nextConfig);
+} else {
+  module.exports = nextConfig;
+}

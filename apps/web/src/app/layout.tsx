@@ -1,12 +1,19 @@
 import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
 import './globals.css';
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
-import { ThemeProvider } from '@/contexts/ThemeContext';
+import SessionProvider from '@/components/providers/SessionProvider';
+
+const inter = Inter({ 
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+});
 
 export const metadata: Metadata = {
   title: 'MODELE-NEXTJS-FULLSTACK',
-  description: 'Full-stack template with Next.js 16 and FastAPI',
+  description: 'Full-stack template with Next.js 16 frontend and FastAPI backend',
+  viewport: 'width=device-width, initial-scale=1',
+  themeColor: '#3B82F6',
 };
 
 export default function RootLayout({
@@ -15,13 +22,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" suppressHydrationWarning>
-      <body>
-        <ThemeProvider>
-          <Header />
+    <html lang="fr" className={inter.variable}>
+      <body className={inter.className}>
+        <SessionProvider>
           {children}
-          <Footer />
-        </ThemeProvider>
+        </SessionProvider>
       </body>
     </html>
   );

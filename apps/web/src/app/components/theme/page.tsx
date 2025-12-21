@@ -1,10 +1,13 @@
 'use client';
 
-import { Card, Button, Input, Badge, ThemeToggle, ThemeToggleWithIcon } from '@/components/ui';
+import { Card, Button, Input, Badge, ThemeToggle, ThemeToggleWithIcon, ClientOnly } from '@/components/ui';
 import { PageHeader, PageContainer, Section, ExampleCard } from '@/components/layout';
 import { useTheme } from '@/contexts/ThemeContext';
 
-export default function ThemePage() {
+// Force dynamic rendering to avoid SSR issues with useTheme
+export const dynamic = 'force-dynamic';
+
+function ThemePageContent() {
   const { theme, resolvedTheme, setTheme } = useTheme();
 
   return (
@@ -158,3 +161,10 @@ function MyComponent() {
   );
 }
 
+export default function ThemePage() {
+  return (
+    <ClientOnly>
+      <ThemePageContent />
+    </ClientOnly>
+  );
+}

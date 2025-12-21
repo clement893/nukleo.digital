@@ -49,3 +49,4 @@ export { default as Accordion } from './Accordion';
 
 // Theme
 export { default as ThemeToggle, ThemeToggleWithIcon } from './ThemeToggle';
+export { default as ClientOnly } from './ClientOnly';

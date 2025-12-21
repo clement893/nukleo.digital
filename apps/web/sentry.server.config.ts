@@ -3,9 +3,11 @@
  * Configuration pour le tracking d'erreurs côté serveur
  */
 
-import * as Sentry from '@sentry/nextjs';
-
-Sentry.init({
+// Sentry is optional - only initialize if package is installed
+try {
+  const Sentry = require('@sentry/nextjs');
+  
+  Sentry.init({
   dsn: process.env.SENTRY_DSN,
   
   // Ajuster la valeur de sample dans la production
@@ -19,5 +21,9 @@ Sentry.init({
     'ValidationError',
     'UnauthorizedError',
   ],
-});
+  });
+} catch (e) {
+  // Sentry not installed, skip initialization
+  console.log('Sentry not installed, skipping server configuration');
+}
 

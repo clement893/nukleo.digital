@@ -24,7 +24,6 @@ const nextConfig = {
   // Experimental features
   experimental: {
     optimizePackageImports: ['@modele/types', 'clsx', 'zod'],
-    instrumentationHook: true, // Pour Sentry
   },
   
   // Turbopack configuration (Next.js 16 default)

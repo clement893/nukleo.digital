@@ -3,9 +3,11 @@
  * Configuration pour le tracking d'erreurs côté client
  */
 
-import * as Sentry from '@sentry/nextjs';
-
-Sentry.init({
+// Sentry is optional - only initialize if package is installed
+try {
+  const Sentry = require('@sentry/nextjs');
+  
+  Sentry.init({
   dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
   
   // Ajuster la valeur de sample dans la production
@@ -47,5 +49,9 @@ Sentry.init({
       blockAllMedia: true,
     }),
   ],
-});
+  });
+} catch (e) {
+  // Sentry not installed, skip initialization
+  console.log('Sentry not installed, skipping client configuration');
+}
 

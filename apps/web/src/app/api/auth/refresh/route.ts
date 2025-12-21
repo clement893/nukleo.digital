@@ -4,7 +4,7 @@
  */
 
 import { NextResponse } from 'next/server';
-import { createAccessToken, verifyToken, type TokenPayload } from '@/lib/auth/jwt';
+import { createAccessToken, verifyToken } from '@/lib/auth/jwt';
 
 export async function POST(request: Request) {
   try {

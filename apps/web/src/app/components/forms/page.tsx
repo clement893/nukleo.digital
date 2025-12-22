@@ -84,49 +84,37 @@ export default function FormsPage() {
                   name="fullName"
                   label="Nom complet"
                   required
-                  render={({ field }) => (
-                    <Input {...field} placeholder="John Doe" />
-                  )}
+                  children={<Input name="fullName" placeholder="John Doe" />}
                 />
+
+
                 <FormField
                   name="email"
                   label="Email"
-                  type="email"
-                  required
-                  render={({ field }) => (
-                    <Input {...field} type="email" placeholder="john@example.com" />
-                  )}
+                  children={<Input name="email" type="email" placeholder="john@example.com" />}
                 />
                 <FormField
                   name="country"
                   label="Pays"
-                  required
-                  render={({ field }) => (
-                    <Select
-                      {...field}
-                      placeholder="Sélectionnez un pays"
-                      options={[
-                        { value: 'fr', label: 'France' },
-                        { value: 'us', label: 'États-Unis' },
-                        { value: 'uk', label: 'Royaume-Uni' },
-                      ]}
-                    />
-                  )}
+                  children={<Select name="country" placeholder="Sélectionnez un pays" options={[{ value: 'fr', label: 'France' }, { value: 'us', label: 'États-Unis' }, { value: 'uk', label: 'Royaume-Uni' }]} />}
                 />
+
+
+
+
+
+
+
                 <FormField
                   name="message"
                   label="Message"
-                  render={({ field }) => (
-                    <Textarea {...field} rows={4} placeholder="Votre message..." />
-                  )}
+                  children={<Textarea name="message" rows={4} placeholder="Votre message..." />}
                 />
                 <FormField
                   name="acceptTerms"
                   label="J'accepte les conditions"
                   required
-                  render={({ field }) => (
-                    <Checkbox {...field} checked={field.value} />
-                  )}
+                  children={<Checkbox name="acceptTerms" />}
                 />
                 <div className="flex gap-4">
                   <Button type="submit" variant="primary">Envoyer</Button>
@@ -178,3 +166,5 @@ export default function FormsPage() {
     </PageContainer>
   );
 }
+
+

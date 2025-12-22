@@ -134,7 +134,7 @@ export default function FeedbackPage() {
             </div>
             <div>
               <h4 className="text-sm font-semibold mb-4">Stepper avec erreur</h4>
-              <Stepper steps={[{ ...stepperSteps[0], error: true }, ...stepperSteps.slice(1)]} currentStep={0} />
+              <Stepper steps={[{ ...stepperSteps[0]!, error: true } as Step, ...stepperSteps.slice(1)]} currentStep={0} />
             </div>
           </div>
         </Section>

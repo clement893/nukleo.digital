@@ -8,9 +8,16 @@ import { getRequestConfig } from 'next-intl/server';
 
 // Supported locales
 export const locales = ['fr', 'en'] as const;
+export const supportedLocales = locales;
 export type Locale = (typeof locales)[number];
 
 export const defaultLocale: Locale = 'fr';
+
+// Locale display names
+export const localeNames: Record<Locale, string> = {
+  fr: 'Français',
+  en: 'English',
+};
 
 export default getRequestConfig(async ({ locale }) => {
   // Validate that the incoming `locale` parameter is valid

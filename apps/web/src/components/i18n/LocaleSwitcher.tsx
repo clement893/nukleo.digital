@@ -7,8 +7,7 @@
 
 import { useSwitchLocale, useLocale } from '@/lib/i18n/hooks';
 import { supportedLocales, localeNames } from '@/lib/i18n/config';
-import Dropdown from '@/components/ui/Dropdown';
-import type { DropdownItem } from '@/components/ui/Dropdown';
+import { Dropdown, type DropdownItem } from '@/components/ui';
 import { useRouter } from 'next/navigation';
 
 export default function LocaleSwitcher() {

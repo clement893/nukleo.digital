@@ -13,14 +13,6 @@ function DashboardContent() {
     router.push('/');
   };
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-xl text-gray-600">Loading...</div>
-      </div>
-    );
-  }
-
   return (
     <main className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       <nav className="bg-white shadow">

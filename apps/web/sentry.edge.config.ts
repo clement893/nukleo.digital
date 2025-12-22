@@ -1,11 +1,11 @@
+// @ts-nocheck - Sentry is optional and may not be installed
 /**
  * Sentry Edge Configuration
  * This file configures Sentry for Edge Runtime
  * Sentry is optional - this file will no-op if @sentry/nextjs is not installed
  */
 
-// @ts-nocheck - Sentry is optional and may not be installed
-let Sentry: typeof import('@sentry/nextjs') | null = null;
+let Sentry: any = null;
 
 try {
   // Construct module name dynamically to prevent webpack static analysis

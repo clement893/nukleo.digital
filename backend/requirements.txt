@@ -43,6 +43,7 @@ slowapi==0.1.9
 # Redis Cache
 redis==5.0.1
 hiredis==2.3.2
+msgpack==1.0.8
 
 # Email Service
 sendgrid==6.11.0

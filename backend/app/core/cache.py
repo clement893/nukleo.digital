@@ -1,12 +1,12 @@
 """
 Redis Cache Configuration
 Cache backend pour améliorer les performances
+Utilise MessagePack pour sérialisation binaire rapide
 """
 
 from typing import Optional, Any
 import json
-import gzip
-import base64
+import zlib
 from functools import wraps
 import hashlib
 
@@ -16,6 +16,13 @@ try:
 except ImportError:
     REDIS_AVAILABLE = False
     redis = None
+
+try:
+    import msgpack
+    MSGPACK_AVAILABLE = True
+except ImportError:
+    MSGPACK_AVAILABLE = False
+    msgpack = None
 
 from app.core.config import settings
 from app.core.logging import logger
@@ -27,15 +34,17 @@ class CacheBackend:
     def __init__(self):
         self.redis_client: Optional[redis.Redis] = None
         self.use_redis = REDIS_AVAILABLE and hasattr(settings, 'REDIS_URL')
+        self.use_msgpack = MSGPACK_AVAILABLE
         
         if self.use_redis and settings.REDIS_URL:
             try:
+                # Ne pas utiliser decode_responses=True car on stocke des bytes avec MessagePack
                 self.redis_client = redis.from_url(
                     settings.REDIS_URL,
                     encoding="utf-8",
-                    decode_responses=True
+                    decode_responses=False  # Important pour MessagePack
                 )
-                logger.info("Redis cache initialized")
+                logger.info(f"Redis cache initialized (MessagePack: {self.use_msgpack})")
             except Exception as e:
                 logger.warning(f"Failed to initialize Redis: {e}")
                 self.use_redis = False
@@ -47,37 +56,49 @@ class CacheBackend:
         
         try:
             value = await self.redis_client.get(key)
-            if value:
-                # Vérifier si compressé
-                if value.startswith("__compressed__"):
-                    encoded = value.replace("__compressed__", "")
-                    compressed = base64.b64decode(encoded)
-                    json_data = gzip.decompress(compressed).decode('utf-8')
+            if not value:
+                return None
+            
+            # Vérifier si compressé (préfixe binaire)
+            if value.startswith(b"zlib:"):
+                # Décompresser
+                compressed = value[len(b"zlib:"):]
+                decompressed = zlib.decompress(compressed)
+                # Désérialiser avec MessagePack ou JSON
+                if self.use_msgpack:
+                    return msgpack.unpackb(decompressed, raw=False)
                 else:
-                    json_data = value
-                
-                return json.loads(json_data)
+                    return json.loads(decompressed.decode('utf-8'))
+            else:
+                # Non compressé, désérialiser directement
+                if self.use_msgpack:
+                    return msgpack.unpackb(value, raw=False)
+                else:
+                    return json.loads(value.decode('utf-8'))
         except Exception as e:
             logger.error(f"Cache get error: {e}")
         return None
     
-    async def set(self, key: str, value: Any, expire: int = 300, compress: bool = False) -> bool:
-        """Stocker une valeur dans le cache avec compression optionnelle"""
+    async def set(self, key: str, value: Any, expire: int = 300, compress: bool = True) -> bool:
+        """Stocker une valeur dans le cache avec MessagePack et compression optionnelle"""
         if not self.use_redis or not self.redis_client:
             return False
         
         try:
-            # Sérialiser en JSON
-            json_data = json.dumps(value, default=str)
+            # Sérialiser avec MessagePack (plus rapide) ou JSON (fallback)
+            if self.use_msgpack:
+                serialized = msgpack.packb(value, default=str, use_bin_type=True)
+            else:
+                serialized = json.dumps(value, default=str).encode('utf-8')
             
             # Compresser si activé et si la valeur est grande (>1KB)
-            if compress and len(json_data) > 1024:
-                compressed = gzip.compress(json_data.encode('utf-8'))
-                encoded = base64.b64encode(compressed).decode('utf-8')
-                # Ajouter un préfixe pour indiquer la compression
-                final_value = f"__compressed__{encoded}"
+            if compress and len(serialized) > 1024:
+                compressed = zlib.compress(serialized)
+                # Ajouter un préfixe binaire pour indiquer la compression
+                final_value = b"zlib:" + compressed
+                logger.debug(f"Cache compressed: {key}, original: {len(serialized)}, compressed: {len(compressed)}")
             else:
-                final_value = json_data
+                final_value = serialized
             
             await self.redis_client.setex(key, expire, final_value)
             return True
@@ -161,8 +182,8 @@ def cached(expire: int = 300, key_prefix: str = ""):
             logger.debug(f"Cache miss: {cache_key_str}")
             result = await func(*args, **kwargs)
             
-            # Mettre en cache
-            await cache_backend.set(cache_key_str, result, expire)
+            # Mettre en cache (compression automatique si > 1KB)
+            await cache_backend.set(cache_key_str, result, expire, compress=True)
             
             return result
         

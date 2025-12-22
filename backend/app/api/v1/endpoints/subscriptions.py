@@ -8,6 +8,7 @@ from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.database import get_db
+from app.core.cache import cached
 from app.dependencies import (
     get_current_user,
     get_subscription_service,
@@ -29,12 +30,19 @@ router = APIRouter(prefix="/subscriptions", tags=["subscriptions"])
 
 
 @router.get("/plans", response_model=PlanListResponse)
+@cached(expire=3600, key_prefix="plans")  # Cache 1h car plans changent rarement
 async def list_plans(
     active_only: bool = Query(True, description="Only return active plans"),
+    skip: int = Query(0, ge=0, description="Number of records to skip"),
+    limit: int = Query(100, ge=1, le=1000, description="Maximum number of records"),
     subscription_service: SubscriptionService = Depends(get_subscription_service),
 ):
-    """List all available subscription plans"""
-    plans = await subscription_service.get_all_plans(active_only=active_only)
+    """List all available subscription plans with pagination"""
+    plans = await subscription_service.get_all_plans(
+        active_only=active_only,
+        skip=skip,
+        limit=limit
+    )
     
     return PlanListResponse(
         plans=[PlanResponse.model_validate(plan) for plan in plans],

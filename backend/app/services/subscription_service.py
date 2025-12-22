@@ -46,12 +46,17 @@ class SubscriptionService:
         result = await self.db.execute(query)
         return result.scalar_one_or_none()
 
-    async def get_all_plans(self, active_only: bool = True) -> List[Plan]:
-        """Get all plans, optionally filtered by active status"""
+    async def get_all_plans(
+        self, 
+        active_only: bool = True,
+        skip: int = 0,
+        limit: int = 100
+    ) -> List[Plan]:
+        """Get all plans with pagination, optionally filtered by active status"""
         query = select(Plan)
         if active_only:
             query = query.where(Plan.status == PlanStatus.ACTIVE)
-        query = query.order_by(Plan.amount.asc())
+        query = query.order_by(Plan.amount.asc()).offset(skip).limit(limit)
         
         result = await self.db.execute(query)
         return list(result.scalars().all())
@@ -90,7 +95,7 @@ class SubscriptionService:
             if current_period_end:
                 existing.current_period_end = current_period_end
             await self.db.commit()
-            await self.db.refresh(existing)
+            # Refresh non nécessaire, l'objet est déjà modifié en mémoire
             return existing
 
         plan = await self.get_plan(plan_id)
@@ -124,7 +129,7 @@ class SubscriptionService:
 
         self.db.add(subscription)
         await self.db.commit()
-        await self.db.refresh(subscription)
+        # Refresh non nécessaire si pas besoin de relations lazy-loaded immédiatement
 
         return subscription
 
@@ -162,7 +167,7 @@ class SubscriptionService:
             subscription.canceled_at = datetime.now(timezone.utc)
 
         await self.db.commit()
-        await self.db.refresh(subscription)
+        # Refresh non nécessaire, l'objet est déjà modifié en mémoire
 
         return subscription
 
@@ -183,7 +188,7 @@ class SubscriptionService:
             subscription.cancel_at_period_end = True
             subscription.canceled_at = datetime.now(timezone.utc)
             await self.db.commit()
-            await self.db.refresh(subscription)
+            # Refresh non nécessaire, l'objet est déjà modifié en mémoire
 
         return success
 
@@ -218,7 +223,7 @@ class SubscriptionService:
         if success:
             subscription.plan_id = new_plan_id
             await self.db.commit()
-            await self.db.refresh(subscription)
+            # Refresh non nécessaire, l'objet est déjà modifié en mémoire
             return subscription
 
         return None

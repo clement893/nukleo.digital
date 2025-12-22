@@ -1,17 +1,17 @@
 """
 HTTP Compression Middleware
-GZip compression for API responses
+GZip compression for API responses with streaming support for large responses
 """
 
 from fastapi import Request
-from fastapi.responses import Response
+from fastapi.responses import Response, StreamingResponse
 from starlette.middleware.base import BaseHTTPMiddleware
 import gzip
-from typing import Callable
+from typing import Callable, AsyncGenerator
 
 
 class CompressionMiddleware(BaseHTTPMiddleware):
-    """Middleware for GZip compression of responses"""
+    """Middleware for GZip compression of responses with streaming for large responses"""
 
     async def dispatch(self, request: Request, call_next: Callable) -> Response:
         # Check if client accepts gzip encoding
@@ -32,19 +32,47 @@ class CompressionMiddleware(BaseHTTPMiddleware):
                 
                 # Skip if already compressed or too small (compression overhead not worth it)
                 if len(body) > 1024:  # Only compress if > 1KB
-                    # Compress the body (level 6 = good balance between speed and size)
-                    compressed_body = gzip.compress(body, compresslevel=6)
-                    
-                    # Only use compressed version if it's actually smaller
-                    if len(compressed_body) < len(body):
-                        # Update response
-                        response.body = compressed_body
-                        response.headers["Content-Encoding"] = "gzip"
-                        response.headers["Content-Length"] = str(len(compressed_body))
+                    # For large responses (>100KB), use streaming compression
+                    if len(body) > 100 * 1024:
+                        # Streaming compression for large responses
+                        async def compress_stream() -> AsyncGenerator[bytes, None]:
+                            compressor = gzip.GzipFile(mode='wb', compresslevel=6)
+                            # Compress in chunks
+                            chunk_size = 8192
+                            for i in range(0, len(body), chunk_size):
+                                chunk = body[i:i + chunk_size]
+                                compressed_chunk = compressor.compress(chunk)
+                                if compressed_chunk:
+                                    yield compressed_chunk
+                            # Flush remaining data
+                            final = compressor.flush()
+                            if final:
+                                yield final
                         
-                        # Update Vary header if it exists
-                        vary = response.headers.get("Vary", "")
-                        if "Accept-Encoding" not in vary:
-                            response.headers["Vary"] = f"{vary}, Accept-Encoding".strip(", ")
+                        return StreamingResponse(
+                            compress_stream(),
+                            status_code=response.status_code,
+                            headers={
+                                **response.headers,
+                                "Content-Encoding": "gzip",
+                                "Vary": "Accept-Encoding",
+                            },
+                            media_type=content_type
+                        )
+                    else:
+                        # In-memory compression for smaller responses
+                        compressed_body = gzip.compress(body, compresslevel=6)
+                        
+                        # Only use compressed version if it's actually smaller
+                        if len(compressed_body) < len(body):
+                            # Update response
+                            response.body = compressed_body
+                            response.headers["Content-Encoding"] = "gzip"
+                            response.headers["Content-Length"] = str(len(compressed_body))
+                            
+                            # Update Vary header if it exists
+                            vary = response.headers.get("Vary", "")
+                            if "Accept-Encoding" not in vary:
+                                response.headers["Vary"] = f"{vary}, Accept-Encoding".strip(", ")
         
         return response

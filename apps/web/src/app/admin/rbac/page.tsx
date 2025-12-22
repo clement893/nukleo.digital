@@ -118,7 +118,7 @@ export default function RBACPage() {
     if (!acc[perm.category]) {
       acc[perm.category] = [];
     }
-    acc[perm.category].push(perm);
+    acc[perm.category]!.push(perm);
     return acc;
   }, {} as Record<string, Permission[]>);
 

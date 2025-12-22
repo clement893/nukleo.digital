@@ -1,0 +1,266 @@
+"""
+Teams Endpoints
+API endpoints for team management
+"""
+
+from typing import List
+from fastapi import APIRouter, Depends, HTTPException, status, Query
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.core.database import get_db
+from app.dependencies import get_current_user
+from app.dependencies.rbac import require_team_permission, require_team_owner, require_team_member
+from app.models import User
+from app.schemas.team import (
+    TeamCreate,
+    TeamUpdate,
+    TeamResponse,
+    TeamMemberAdd,
+    TeamMemberUpdate,
+    TeamMemberResponse,
+    TeamListResponse,
+)
+from app.services.team_service import TeamService
+
+router = APIRouter(prefix="/teams", tags=["teams"])
+
+
+@router.post("", response_model=TeamResponse, status_code=status.HTTP_201_CREATED)
+async def create_team(
+    team_data: TeamCreate,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Create a new team"""
+    team_service = TeamService(db)
+    
+    # Check if slug already exists
+    existing = await team_service.get_team_by_slug(team_data.slug)
+    if existing:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Team slug already exists",
+        )
+    
+    created_team = await team_service.create_team(
+        name=team_data.name,
+        slug=team_data.slug,
+        owner_id=current_user.id,
+        description=team_data.description,
+        settings=team_data.settings,
+    )
+    team = await team_service.get_team(created_team.id)
+    
+    # Convert to response format
+    team_dict = {
+        **team.__dict__,
+        "owner": {
+            "id": team.owner.id,
+            "email": team.owner.email,
+            "first_name": team.owner.first_name,
+            "last_name": team.owner.last_name,
+        } if team.owner else None,
+        "members": [TeamMemberResponse.model_validate(m) for m in team.members],
+    }
+    
+    return TeamResponse.model_validate(team_dict)
+
+
+@router.get("", response_model=TeamListResponse)
+async def list_teams(
+    skip: int = Query(0, ge=0),
+    limit: int = Query(100, ge=1, le=100),
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """List teams the user belongs to"""
+    team_service = TeamService(db)
+    teams = await team_service.get_user_teams(current_user.id)
+    
+    # Convert teams to response format
+    teams_response = []
+    for team in teams:
+        team_dict = {
+            **team.__dict__,
+            "owner": {
+                "id": team.owner.id,
+                "email": team.owner.email,
+                "first_name": team.owner.first_name,
+                "last_name": team.owner.last_name,
+            } if team.owner else None,
+            "members": [],
+        }
+        teams_response.append(TeamResponse.model_validate(team_dict))
+    
+    return TeamListResponse(teams=teams_response, total=len(teams_response))
+
+
+@router.get("/{team_id}", response_model=TeamResponse)
+async def get_team(
+    team_id: int,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Get a team by ID"""
+    await require_team_member(team_id, current_user, db)
+    
+    team_service = TeamService(db)
+    team = await team_service.get_team(team_id)
+    
+    if not team:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Team not found")
+    
+    # Convert to dict with owner and members
+    team_dict = {
+        **team.__dict__,
+        "owner": {
+            "id": team.owner.id,
+            "email": team.owner.email,
+            "first_name": team.owner.first_name,
+            "last_name": team.owner.last_name,
+        } if team.owner else None,
+        "members": [TeamMemberResponse.model_validate(m) for m in team.members],
+    }
+    
+    return TeamResponse.model_validate(team_dict)
+
+
+@router.put("/{team_id}", response_model=TeamResponse)
+async def update_team(
+    team_id: int,
+    team_data: TeamUpdate,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Update a team"""
+    await require_team_permission(team_id, "teams:update", current_user, db)
+    
+    team_service = TeamService(db)
+    team = await team_service.update_team(
+        team_id=team_id,
+        name=team_data.name,
+        description=team_data.description,
+        settings=team_data.settings,
+    )
+    
+    if not team:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Team not found")
+    
+    # Reload with relationships
+    team = await team_service.get_team(team_id)
+    team_dict = {
+        **team.__dict__,
+        "owner": {
+            "id": team.owner.id,
+            "email": team.owner.email,
+            "first_name": team.owner.first_name,
+            "last_name": team.owner.last_name,
+        } if team.owner else None,
+        "members": [TeamMemberResponse.model_validate(m) for m in team.members],
+    }
+    
+    return TeamResponse.model_validate(team_dict)
+
+
+@router.delete("/{team_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_team(
+    team_id: int,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Delete a team (soft delete)"""
+    await require_team_owner(team_id, current_user, db)
+    
+    team_service = TeamService(db)
+    success = await team_service.delete_team(team_id)
+    
+    if not success:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Team not found")
+    
+    return None
+
+
+@router.get("/{team_id}/members", response_model=List[TeamMemberResponse])
+async def list_team_members(
+    team_id: int,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """List all members of a team"""
+    await require_team_member(team_id, current_user, db)
+    
+    team_service = TeamService(db)
+    members = await team_service.get_team_members(team_id)
+    
+    return [TeamMemberResponse.model_validate(m) for m in members]
+
+
+@router.post("/{team_id}/members", response_model=TeamMemberResponse, status_code=status.HTTP_201_CREATED)
+async def add_team_member(
+    team_id: int,
+    member_data: TeamMemberAdd,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Add a member to a team"""
+    await require_team_permission(team_id, "teams:members:add", current_user, db)
+    
+    team_service = TeamService(db)
+    team_member = await team_service.add_member(
+        team_id=team_id,
+        user_id=member_data.user_id,
+        role_id=member_data.role_id,
+    )
+    
+    return TeamMemberResponse.model_validate(team_member)
+
+
+@router.put("/{team_id}/members/{user_id}", response_model=TeamMemberResponse)
+async def update_team_member(
+    team_id: int,
+    user_id: int,
+    member_data: TeamMemberUpdate,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Update a team member's role"""
+    await require_team_permission(team_id, "teams:members:update", current_user, db)
+    
+    team_service = TeamService(db)
+    team_member = await team_service.update_member_role(
+        team_id=team_id,
+        user_id=user_id,
+        role_id=member_data.role_id,
+    )
+    
+    if not team_member:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Team member not found")
+    
+    return TeamMemberResponse.model_validate(team_member)
+
+
+@router.delete("/{team_id}/members/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def remove_team_member(
+    team_id: int,
+    user_id: int,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Remove a member from a team"""
+    await require_team_permission(team_id, "teams:members:remove", current_user, db)
+    
+    # Cannot remove yourself
+    if user_id == current_user.id:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Cannot remove yourself from team",
+        )
+    
+    team_service = TeamService(db)
+    success = await team_service.remove_member(team_id, user_id)
+    
+    if not success:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Team member not found")
+    
+    return None
+

@@ -30,6 +30,7 @@
 import { useState } from 'react';
 import { emailAPI, type EmailResponse } from '@/lib/email/client';
 import { useToast } from '@/components/ui/ToastContainer';
+import type { ApiResponse } from '@modele/types';
 
 export function useEmail() {
   const [loading, setLoading] = useState(false);
@@ -43,7 +44,7 @@ export function useEmail() {
   ): Promise<EmailResponse | null> => {
     setLoading(true);
     try {
-      const response = await emailAPI.send({
+      const response: ApiResponse<EmailResponse> = await emailAPI.send({
         to_email: toEmail,
         subject,
         html_content: htmlContent,
@@ -53,7 +54,7 @@ export function useEmail() {
         message: 'Email envoyé avec succès',
         type: 'success',
       });
-      return response;
+      return response.data ?? null;
     } catch (error) {
       showToast({
         message: 'Erreur lors de l\'envoi de l\'email',
@@ -68,12 +69,12 @@ export function useEmail() {
   const sendWelcomeEmail = async (toEmail: string, name?: string): Promise<EmailResponse | null> => {
     setLoading(true);
     try {
-      const response = await emailAPI.sendWelcome(toEmail, name);
+      const response: ApiResponse<EmailResponse> = await emailAPI.sendWelcome(toEmail, name);
       showToast({
         message: 'Email de bienvenue envoyé',
         type: 'success',
       });
-      return response;
+      return response.data ?? null;
     } catch (error) {
       showToast({
         message: 'Erreur lors de l\'envoi de l\'email de bienvenue',
@@ -97,12 +98,12 @@ export function useEmail() {
   }): Promise<EmailResponse | null> => {
     setLoading(true);
     try {
-      const response = await emailAPI.sendInvoice(data);
+      const response: ApiResponse<EmailResponse> = await emailAPI.sendInvoice(data);
       showToast({
         message: 'Facture envoyée par email',
         type: 'success',
       });
-      return response;
+      return response.data ?? null;
     } catch (error) {
       showToast({
         message: 'Erreur lors de l\'envoi de la facture',
@@ -123,12 +124,12 @@ export function useEmail() {
   }): Promise<EmailResponse | null> => {
     setLoading(true);
     try {
-      const response = await emailAPI.sendSubscriptionCreated(data);
+      const response: ApiResponse<EmailResponse> = await emailAPI.sendSubscriptionCreated(data);
       showToast({
         message: 'Email d\'abonnement envoyé',
         type: 'success',
       });
-      return response;
+      return response.data ?? null;
     } catch (error) {
       showToast({
         message: 'Erreur lors de l\'envoi de l\'email d\'abonnement',
@@ -148,12 +149,12 @@ export function useEmail() {
   }): Promise<EmailResponse | null> => {
     setLoading(true);
     try {
-      const response = await emailAPI.sendTrialEnding(data);
+      const response: ApiResponse<EmailResponse> = await emailAPI.sendTrialEnding(data);
       showToast({
         message: 'Email d\'essai envoyé',
         type: 'success',
       });
-      return response;
+      return response.data ?? null;
     } catch (error) {
       showToast({
         message: 'Erreur lors de l\'envoi de l\'email',

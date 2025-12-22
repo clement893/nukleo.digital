@@ -9,6 +9,8 @@ export interface SitemapPage {
   description: string;
   priority?: number;
   changefreq?: 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never';
+  requiresAuth?: boolean; // Indique si la page nécessite une authentification
+  requiresAdmin?: boolean; // Indique si la page nécessite des droits administrateur
 }
 
 export interface SitemapCategory {
@@ -67,6 +69,7 @@ export const sitePages: Record<string, SitemapPage[]> = {
       description: 'Tableau de bord principal',
       priority: 0.9,
       changefreq: 'daily',
+      requiresAuth: true,
     },
   ],
   'Abonnements': [
@@ -76,6 +79,7 @@ export const sitePages: Record<string, SitemapPage[]> = {
       description: 'Page des plans et tarifs',
       priority: 0.9,
       changefreq: 'weekly',
+      requiresAuth: false, // Page publique
     },
     { 
       path: '/subscriptions', 
@@ -83,6 +87,7 @@ export const sitePages: Record<string, SitemapPage[]> = {
       description: 'Gestion des abonnements',
       priority: 0.8,
       changefreq: 'weekly',
+      requiresAuth: true,
     },
     { 
       path: '/subscriptions/success', 
@@ -90,6 +95,7 @@ export const sitePages: Record<string, SitemapPage[]> = {
       description: 'Confirmation d\'abonnement',
       priority: 0.6,
       changefreq: 'monthly',
+      requiresAuth: true,
     },
   ],
   'Administration': [
@@ -99,6 +105,8 @@ export const sitePages: Record<string, SitemapPage[]> = {
       description: 'Panneau d\'administration',
       priority: 0.7,
       changefreq: 'weekly',
+      requiresAuth: true,
+      requiresAdmin: true,
     },
     { 
       path: '/admin/teams', 
@@ -106,6 +114,8 @@ export const sitePages: Record<string, SitemapPage[]> = {
       description: 'Administration des équipes',
       priority: 0.7,
       changefreq: 'weekly',
+      requiresAuth: true,
+      requiresAdmin: true,
     },
     { 
       path: '/admin/invitations', 
@@ -113,6 +123,8 @@ export const sitePages: Record<string, SitemapPage[]> = {
       description: 'Gestion des invitations',
       priority: 0.7,
       changefreq: 'weekly',
+      requiresAuth: true,
+      requiresAdmin: true,
     },
     { 
       path: '/admin/rbac', 
@@ -120,6 +132,8 @@ export const sitePages: Record<string, SitemapPage[]> = {
       description: 'Gestion des rôles et permissions',
       priority: 0.7,
       changefreq: 'weekly',
+      requiresAuth: true,
+      requiresAdmin: true,
     },
   ],
   'Exemples': [
@@ -129,6 +143,7 @@ export const sitePages: Record<string, SitemapPage[]> = {
       description: 'Page d\'exemples',
       priority: 0.6,
       changefreq: 'monthly',
+      requiresAuth: false, // Page publique
     },
     { 
       path: '/examples/dashboard', 
@@ -136,6 +151,7 @@ export const sitePages: Record<string, SitemapPage[]> = {
       description: 'Exemple de tableau de bord',
       priority: 0.6,
       changefreq: 'monthly',
+      requiresAuth: false, // Page publique
     },
     { 
       path: '/examples/onboarding', 
@@ -143,6 +159,7 @@ export const sitePages: Record<string, SitemapPage[]> = {
       description: 'Exemple d\'onboarding',
       priority: 0.6,
       changefreq: 'monthly',
+      requiresAuth: false, // Page publique
     },
     { 
       path: '/examples/settings', 
@@ -150,6 +167,7 @@ export const sitePages: Record<string, SitemapPage[]> = {
       description: 'Exemple de paramètres',
       priority: 0.6,
       changefreq: 'monthly',
+      requiresAuth: false, // Page publique
     },
   ],
   'Outils': [
@@ -159,6 +177,7 @@ export const sitePages: Record<string, SitemapPage[]> = {
       description: 'Page de test pour l\'IA',
       priority: 0.5,
       changefreq: 'monthly',
+      requiresAuth: false, // Page publique
     },
     { 
       path: '/email/test', 
@@ -166,6 +185,7 @@ export const sitePages: Record<string, SitemapPage[]> = {
       description: 'Page de test pour les emails',
       priority: 0.5,
       changefreq: 'monthly',
+      requiresAuth: false, // Page publique
     },
     { 
       path: '/monitoring', 
@@ -173,6 +193,7 @@ export const sitePages: Record<string, SitemapPage[]> = {
       description: 'Page de monitoring',
       priority: 0.6,
       changefreq: 'weekly',
+      requiresAuth: false, // Page publique
     },
     { 
       path: '/docs', 
@@ -180,6 +201,7 @@ export const sitePages: Record<string, SitemapPage[]> = {
       description: 'Documentation du projet',
       priority: 0.8,
       changefreq: 'weekly',
+      requiresAuth: false, // Page publique
     },
   ],
 };

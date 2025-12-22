@@ -4,8 +4,10 @@ import { useState } from 'react';
 import { Sidebar, Tabs, TabList, Tab, TabPanels, TabPanel, Pagination, Button } from '@/components/ui';
 import { PageHeader, PageContainer, Section, PageNavigation } from '@/components/layout';
 
-// Disable SSR for this page to avoid CSS file issues during build
+// Disable static generation to avoid CSS file issues during build
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+export const dynamicParams = true;
 
 function NavigationPage() {
   const [currentPage, setCurrentPage] = useState(1);

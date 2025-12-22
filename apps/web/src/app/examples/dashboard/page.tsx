@@ -1,102 +1,135 @@
-/**
- * Dashboard Example
- * Exemple complet de dashboard SaaS avec tous les composants
- */
-
 'use client';
-import { StatsCard, DataTable, Chart, Badge, CommandPalette, useCommandPalette } from '@/components/ui';
-import type { Column, Command, ChartDataPoint } from '@/components/ui';
-import { PageHeader, PageContainer, Section } from '@/components/layout';
 
-const statsData = [
-  { title: 'Utilisateurs actifs', value: '12,345', change: { value: 12, type: 'increase' as const }, icon: '👥' },
-  { title: 'Revenus mensuels', value: '€45,678', change: { value: 8, type: 'increase' as const }, icon: '💰' },
-  { title: 'Commandes', value: '892', change: { value: 5, type: 'decrease' as const }, icon: '📦' },
-  { title: 'Taux de conversion', value: '3.2%', change: { value: 0.5, type: 'increase' as const }, icon: '📈' },
-];
+import Card from '@/components/ui/Card';
+import Badge from '@/components/ui/Badge';
+import Button from '@/components/ui/Button';
 
-const chartData: ChartDataPoint[] = [
-  { label: 'Jan', value: 120 },
-  { label: 'Fév', value: 150 },
-  { label: 'Mar', value: 130 },
-  { label: 'Avr', value: 180 },
-  { label: 'Mai', value: 200 },
-  { label: 'Juin', value: 170 },
-];
-
-type TableRow = {
-  id: number;
-  name: string;
-  email: string;
-  status: 'active' | 'inactive';
-  revenue: string;
-};
-
-const tableData: TableRow[] = [
-  { id: 1, name: 'John Doe', email: 'john@example.com', status: 'active', revenue: '€1,234' },
-  { id: 2, name: 'Jane Smith', email: 'jane@example.com', status: 'active', revenue: '€2,345' },
-  { id: 3, name: 'Bob Johnson', email: 'bob@example.com', status: 'inactive', revenue: '€567' },
-];
-
-const tableColumns: Column<TableRow>[] = [
-  { key: 'name', label: 'Nom', sortable: true },
-  { key: 'email', label: 'Email', sortable: true },
-  { 
-    key: 'status', 
-    label: 'Statut', 
-    render: (_value, row) => <Badge variant={row.status === 'active' ? 'success' : 'error'}>{row.status}</Badge>
-  },
-  { key: 'revenue', label: 'Revenus', sortable: true },
-];
-
-export default function DashboardExample() {
-  const commands: Command[] = [
-    { id: '1', label: 'Nouveau utilisateur', category: 'Actions', action: () => alert('Créer utilisateur') },
-    { id: '2', label: 'Paramètres', category: 'Navigation', action: () => alert('Paramètres') },
-  ];
-  const { isOpen, close } = useCommandPalette();
-
+export default function ExampleDashboardPage() {
   return (
-    <PageContainer>
-      <PageHeader
-        title="Dashboard"
-        description="Exemple complet de dashboard SaaS"
-        breadcrumbs={[{ label: 'Exemples', href: '/examples' }, { label: 'Dashboard' }]}
-      />
-
-      <div className="space-y-8">
-        {/* Stats Cards */}
-        <Section title="Statistiques">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {statsData.map((stat, index) => (
-              <StatsCard
-                key={index}
-                title={stat.title}
-                value={stat.value}
-                change={stat.change}
-                icon={<span className="text-2xl">{stat.icon}</span>}
-              />
-            ))}
-          </div>
-        </Section>
-
-        {/* Chart */}
-        <Section title="Évolution des Ventes">
-          <Chart data={chartData} type="line" title="Ventes mensuelles" />
-        </Section>
-
-        {/* Data Table */}
-        <Section title="Utilisateurs Récents">
-          <DataTable
-            data={tableData}
-            columns={tableColumns}
-            pageSize={10}
-          />
-        </Section>
+    <div className="container mx-auto px-4 py-12">
+      <div className="mb-8">
+        <h1 className="text-4xl font-bold text-gray-900 mb-2">Exemple Dashboard</h1>
+        <p className="text-gray-600">Un exemple de tableau de bord avec widgets et statistiques</p>
       </div>
 
-      <CommandPalette commands={commands} isOpen={isOpen} onClose={close} />
-    </PageContainer>
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <Card>
+          <div className="p-6">
+            <div className="text-sm text-gray-600 mb-1">Total Donateurs</div>
+            <div className="text-3xl font-bold text-gray-900">1,234</div>
+            <div className="text-sm text-green-600 mt-2">+12% ce mois</div>
+          </div>
+        </Card>
+        <Card>
+          <div className="p-6">
+            <div className="text-sm text-gray-600 mb-1">Campagnes Actives</div>
+            <div className="text-3xl font-bold text-gray-900">8</div>
+            <div className="text-sm text-blue-600 mt-2">3 nouvelles</div>
+          </div>
+        </Card>
+        <Card>
+          <div className="p-6">
+            <div className="text-sm text-gray-600 mb-1">Montant Collecté</div>
+            <div className="text-3xl font-bold text-gray-900">45,678€</div>
+            <div className="text-sm text-green-600 mt-2">+8% ce mois</div>
+          </div>
+        </Card>
+        <Card>
+          <div className="p-6">
+            <div className="text-sm text-gray-600 mb-1">Taux de Conversion</div>
+            <div className="text-3xl font-bold text-gray-900">3.2%</div>
+            <div className="text-sm text-purple-600 mt-2">+0.5% ce mois</div>
+          </div>
+        </Card>
+      </div>
+
+      {/* Recent Activity */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <Card>
+          <div className="p-6">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">Activité Récente</h2>
+            <div className="space-y-4">
+              {[
+                { name: 'Jean Dupont', action: 'a fait un don de', amount: '50€', time: 'Il y a 2 heures' },
+                { name: 'Marie Martin', action: 'a rejoint la campagne', campaign: 'Campagne Hiver', time: 'Il y a 5 heures' },
+                { name: 'Pierre Durand', action: 'a mis à jour son profil', time: 'Il y a 1 jour' },
+              ].map((activity, index) => (
+                <div key={index} className="flex items-start gap-3 pb-4 border-b border-gray-200 last:border-0">
+                  <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-blue-600 font-semibold">
+                      {activity.name.charAt(0)}
+                    </span>
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-gray-900">
+                      <span className="font-semibold">{activity.name}</span> {activity.action}{' '}
+                      {activity.amount && <span className="font-semibold text-green-600">{activity.amount}</span>}
+                      {activity.campaign && <span className="font-semibold">{activity.campaign}</span>}
+                    </p>
+                    <p className="text-sm text-gray-500">{activity.time}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Card>
+
+        <Card>
+          <div className="p-6">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">Campagnes en Cours</h2>
+            <div className="space-y-4">
+              {[
+                { name: 'Campagne Hiver 2024', progress: 75, amount: '30,000€', target: '40,000€' },
+                { name: 'Aide aux Familles', progress: 45, amount: '9,000€', target: '20,000€' },
+                { name: 'Éducation', progress: 90, amount: '18,000€', target: '20,000€' },
+              ].map((campaign, index) => (
+                <div key={index} className="pb-4 border-b border-gray-200 last:border-0">
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className="font-semibold text-gray-900">{campaign.name}</h3>
+                    <Badge variant="success">{campaign.progress}%</Badge>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
+                    <div
+                      className="bg-blue-600 h-2 rounded-full transition-all"
+                      style={{ width: `${campaign.progress}%` }}
+                    />
+                  </div>
+                  <div className="flex justify-between text-sm text-gray-600">
+                    <span>{campaign.amount} collectés</span>
+                    <span>Objectif: {campaign.target}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Card>
+      </div>
+
+      {/* Quick Actions */}
+      <Card>
+        <div className="p-6">
+          <h2 className="text-xl font-bold text-gray-900 mb-4">Actions Rapides</h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <Button variant="outline" className="h-20 flex flex-col items-center justify-center">
+              <span className="text-2xl mb-2">➕</span>
+              <span>Nouveau Donateur</span>
+            </Button>
+            <Button variant="outline" className="h-20 flex flex-col items-center justify-center">
+              <span className="text-2xl mb-2">📊</span>
+              <span>Nouvelle Campagne</span>
+            </Button>
+            <Button variant="outline" className="h-20 flex flex-col items-center justify-center">
+              <span className="text-2xl mb-2">📧</span>
+              <span>Envoyer Email</span>
+            </Button>
+            <Button variant="outline" className="h-20 flex flex-col items-center justify-center">
+              <span className="text-2xl mb-2">📄</span>
+              <span>Générer Rapport</span>
+            </Button>
+          </div>
+        </div>
+      </Card>
+    </div>
   );
 }
-

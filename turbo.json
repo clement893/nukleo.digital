@@ -62,12 +62,18 @@
       "outputs": [
         "coverage/**",
         ".test-results/**",
-        "playwright-report/**"
+        "playwright-report/**",
+        "htmlcov/**",
+        ".coverage",
+        "coverage.xml",
+        "coverage.json"
       ],
       "cache": true,
       "env": [
         "NODE_ENV",
-        "CI"
+        "CI",
+        "DATABASE_URL",
+        "TEST_DATABASE_URL"
       ]
     },
     "test:e2e": {

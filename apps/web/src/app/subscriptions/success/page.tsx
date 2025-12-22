@@ -1,108 +1,126 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
-import { Card, Button } from '@/components/ui';
-import { CheckCircle } from 'lucide-react';
-import { api } from '@/lib/api';
-import { logger } from '@/lib/logger';
-import { handleApiError } from '@/lib/errors/api';
+import { useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
+import { useAuthStore } from '@/lib/store';
+import Button from '@/components/ui/Button';
+import Card from '@/components/ui/Card';
 
 export default function SubscriptionSuccessPage() {
-  const searchParams = useSearchParams();
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  const verifySubscription = useCallback(async () => {
-    try {
-      // Wait a bit for webhook to process
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      const response = await api.get('/v1/subscriptions/me');
-      if (response.data) {
-        setIsLoading(false);
-      } else {
-        setError('Subscription not found. Please wait a moment and refresh.');
-        setIsLoading(false);
-      }
-    } catch (err) {
-      const appError = handleApiError(err);
-      if (appError.statusCode === 404) {
-        // Subscription might not be created yet, wait and retry
-        setTimeout(async () => {
-          try {
-            await api.get('/v1/subscriptions/me');
-            setIsLoading(false);
-          } catch (retryErr) {
-            const retryError = handleApiError(retryErr);
-            setError('Subscription verification failed. Please check your subscription status.');
-            logger.error('Subscription verification retry failed', retryError);
-            setIsLoading(false);
-          }
-        }, 3000);
-      } else {
-        setError('Failed to verify subscription');
-        logger.error('Failed to verify subscription', appError);
-        setIsLoading(false);
-      }
-    }
-  }, []);
+  const searchParams = useSearchParams();
+  const { isAuthenticated } = useAuthStore();
+  const [planName, setPlanName] = useState('');
+  const [billingPeriod, setBillingPeriod] = useState<'month' | 'year'>('month');
 
   useEffect(() => {
-    const sessionId = searchParams.get('session_id');
-    if (!sessionId) {
-      setError('Missing session ID');
-      setIsLoading(false);
+    if (!isAuthenticated()) {
+      router.push('/auth/login');
       return;
     }
 
-    verifySubscription();
-  }, [searchParams, verifySubscription]);
+    const plan = searchParams.get('plan');
+    const period = searchParams.get('period') as 'month' | 'year' | null;
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-          <p>Verifying your subscription...</p>
-        </div>
-      </div>
-    );
-  }
+    // Map plan IDs to names
+    const planNames: Record<string, string> = {
+      starter: 'Starter',
+      professional: 'Professional',
+      enterprise: 'Enterprise',
+    };
 
-  if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Card className="p-8 max-w-md">
-          <h1 className="text-2xl font-bold mb-4 text-red-600">Error</h1>
-          <p className="mb-6">{error}</p>
-          <Button onClick={() => router.push('/pricing')}>
-            Back to Pricing
-          </Button>
-        </Card>
-      </div>
-    );
+    setPlanName(planNames[plan || ''] || plan || '');
+    setBillingPeriod(period || 'month');
+  }, [isAuthenticated, router, searchParams]);
+
+  if (!isAuthenticated()) {
+    return null;
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <Card className="p-8 max-w-md text-center">
-        <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-        <h1 className="text-3xl font-bold mb-4">Subscription Successful!</h1>
-        <p className="text-gray-600 mb-6">
-          Your subscription has been activated. You can now access all premium features.
-        </p>
-        <div className="flex gap-4 justify-center">
-          <Button onClick={() => router.push('/dashboard')}>
-            Go to Dashboard
-          </Button>
-          <Button variant="outline" onClick={() => router.push('/subscriptions')}>
-            Manage Subscription
-          </Button>
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 flex items-center justify-center px-4">
+      <Card className="w-full max-w-2xl">
+        <div className="p-8 text-center">
+          {/* Success Icon */}
+          <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-6">
+            <svg
+              className="h-8 w-8 text-green-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          </div>
+
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            Abonnement confirmé !
+          </h1>
+          <p className="text-xl text-gray-600 mb-8">
+            Merci pour votre confiance. Votre abonnement <strong>{planName}</strong> est maintenant actif.
+          </p>
+
+          {/* Subscription Details */}
+          <div className="bg-gray-50 rounded-lg p-6 mb-8 text-left">
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">Détails de votre abonnement</h2>
+            <div className="space-y-2">
+              <div className="flex justify-between">
+                <span className="text-gray-600">Plan:</span>
+                <span className="font-medium text-gray-900">{planName}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-600">Période:</span>
+                <span className="font-medium text-gray-900">
+                  {billingPeriod === 'month' ? 'Mensuel' : 'Annuel'}
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-600">Statut:</span>
+                <span className="font-medium text-green-600">Actif</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Next Steps */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Prochaines étapes</h3>
+            <ul className="text-left space-y-2 text-gray-600">
+              <li className="flex items-start">
+                <span className="text-green-600 mr-2">✓</span>
+                <span>Vous pouvez maintenant accéder à toutes les fonctionnalités de votre plan</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-green-600 mr-2">✓</span>
+                <span>Un email de confirmation a été envoyé à votre adresse</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-green-600 mr-2">✓</span>
+                <span>Vous pouvez gérer votre abonnement depuis la page Mes Abonnements</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Actions */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/dashboard">
+              <Button>
+                Aller au tableau de bord
+              </Button>
+            </Link>
+            <Link href="/subscriptions">
+              <Button variant="outline">
+                Gérer mon abonnement
+              </Button>
+            </Link>
+          </div>
         </div>
       </Card>
     </div>
   );
 }
-

@@ -1,151 +1,324 @@
 'use client';
 
-import { useState, useCallback } from 'react';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import { Card, Button, Alert } from '@/components/ui';
-import { api } from '@/lib/api';
-import { Loader2 } from 'lucide-react';
-import { useSubscription } from '@/hooks/useSubscription';
-import { formatDate, formatPrice, formatInterval } from '@/utils/subscriptions';
-import { logger } from '@/lib/logger';
-import { handleApiError } from '@/lib/errors/api';
+import { useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
+import { useAuthStore } from '@/lib/store';
+import Button from '@/components/ui/Button';
+import Card from '@/components/ui/Card';
+import Badge from '@/components/ui/Badge';
+
+interface Subscription {
+  id: string;
+  plan_id: string;
+  plan_name: string;
+  status: 'active' | 'cancelled' | 'expired' | 'trial';
+  current_period_start: string;
+  current_period_end: string;
+  cancel_at_period_end: boolean;
+  amount: number;
+  currency: string;
+  billing_period: 'month' | 'year';
+}
+
+interface Payment {
+  id: string;
+  amount: number;
+  currency: string;
+  status: 'paid' | 'pending' | 'failed';
+  date: string;
+  invoice_url?: string;
+}
 
 export default function SubscriptionsPage() {
-  const { status: sessionStatus } = useSession();
   const router = useRouter();
-  const { subscription, isLoading, error, refresh } = useSubscription();
-  const [isCanceling, setIsCanceling] = useState(false);
-  const [actionError, setActionError] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+  const { isAuthenticated, user } = useAuthStore();
+  const [subscription, setSubscription] = useState<Subscription | null>(null);
+  const [payments, setPayments] = useState<Payment[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
-  if (sessionStatus === 'unauthenticated') {
-    router.push('/auth/signin');
-    return null;
-  }
-
-  const handleManageBilling = useCallback(async () => {
-    setActionError(null);
-    try {
-      const returnUrl = `${window.location.origin}/subscriptions`;
-      const response = await api.post('/v1/subscriptions/portal', null, {
-        params: { return_url: returnUrl },
-      });
-
-      if (response.data?.url) {
-        window.location.href = response.data.url;
-      } else {
-        throw new Error('No portal URL received');
-      }
-    } catch (err) {
-      const appError = handleApiError(err);
-      const errorMessage = appError.message || 'Failed to open billing portal';
-      setActionError(errorMessage);
-      logger.error('Failed to open billing portal', appError);
-    }
-  }, []);
-
-  const handleCancel = useCallback(async () => {
-    if (!confirm('Are you sure you want to cancel your subscription? It will remain active until the end of the billing period.')) {
+  useEffect(() => {
+    if (!isAuthenticated()) {
+      router.push('/auth/login');
       return;
     }
 
-    setIsCanceling(true);
-    setActionError(null);
-    try {
-      await api.post('/v1/subscriptions/cancel');
-      await refresh();
-    } catch (err) {
-      const appError = handleApiError(err);
-      const errorMessage = appError.message || 'Failed to cancel subscription';
-      setActionError(errorMessage);
-      logger.error('Failed to cancel subscription', appError);
-    } finally {
-      setIsCanceling(false);
+    // Check if coming from pricing page
+    const planId = searchParams.get('plan');
+    const period = searchParams.get('period') as 'month' | 'year' | null;
+    
+    if (planId && period) {
+      // Redirect to subscription creation flow
+      handleSubscribe(planId, period);
+    } else {
+      loadSubscription();
+      loadPayments();
     }
-  }, [refresh]);
+  }, [isAuthenticated, router, searchParams]);
 
-  if (sessionStatus === 'loading' || isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin" />
-      </div>
-    );
+  const loadSubscription = async () => {
+    try {
+      setLoading(true);
+      setError('');
+      // TODO: Replace with actual API call when backend is ready
+      // const response = await subscriptionsAPI.getCurrent();
+      // setSubscription(response.data);
+      
+      // Mock data for now
+      setSubscription({
+        id: '1',
+        plan_id: 'professional',
+        plan_name: 'Professional',
+        status: 'active',
+        current_period_start: '2024-01-01T00:00:00Z',
+        current_period_end: '2024-02-01T00:00:00Z',
+        cancel_at_period_end: false,
+        amount: 79,
+        currency: 'EUR',
+        billing_period: 'month',
+      });
+    } catch (err: any) {
+      setError(err.response?.data?.detail || err.message || 'Erreur lors du chargement');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const loadPayments = async () => {
+    try {
+      // TODO: Replace with actual API call
+      // const response = await subscriptionsAPI.getPayments();
+      // setPayments(response.data);
+      
+      // Mock data
+      setPayments([
+        {
+          id: '1',
+          amount: 79,
+          currency: 'EUR',
+          status: 'paid',
+          date: '2024-01-01T00:00:00Z',
+          invoice_url: '#',
+        },
+        {
+          id: '2',
+          amount: 79,
+          currency: 'EUR',
+          status: 'paid',
+          date: '2023-12-01T00:00:00Z',
+          invoice_url: '#',
+        },
+      ]);
+    } catch (err: any) {
+      console.error('Error loading payments:', err);
+    }
+  };
+
+  const handleSubscribe = async (planId: string, period: 'month' | 'year') => {
+    try {
+      // TODO: Replace with actual API call
+      // await subscriptionsAPI.create({ plan_id: planId, billing_period: period });
+      // Redirect to success page
+      router.push(`/subscriptions/success?plan=${planId}&period=${period}`);
+    } catch (err: any) {
+      setError(err.response?.data?.detail || 'Erreur lors de la souscription');
+    }
+  };
+
+  const handleCancelSubscription = async () => {
+    if (!confirm('Êtes-vous sûr de vouloir annuler votre abonnement ? Il restera actif jusqu\'à la fin de la période en cours.')) {
+      return;
+    }
+
+    try {
+      // TODO: Replace with actual API call
+      // await subscriptionsAPI.cancel();
+      await loadSubscription();
+    } catch (err: any) {
+      setError(err.response?.data?.detail || 'Erreur lors de l\'annulation');
+    }
+  };
+
+  const handleResumeSubscription = async () => {
+    try {
+      // TODO: Replace with actual API call
+      // await subscriptionsAPI.resume();
+      await loadSubscription();
+    } catch (err: any) {
+      setError(err.response?.data?.detail || 'Erreur lors de la reprise');
+    }
+  };
+
+  if (!isAuthenticated()) {
+    return null;
   }
 
-  if (!subscription) {
-    return (
-      <div className="container mx-auto px-4 py-16">
-        <Card className="p-8 max-w-2xl mx-auto text-center">
-          <h1 className="text-3xl font-bold mb-4">No Active Subscription</h1>
-          <p className="text-gray-600 mb-6">
-            You don't have an active subscription. Choose a plan to get started.
-          </p>
-          <Button onClick={() => router.push('/pricing')}>
-            View Plans
-          </Button>
-        </Card>
-      </div>
-    );
-  }
+  const getStatusBadge = (status: string) => {
+    const variants: Record<string, 'success' | 'error' | 'default'> = {
+      active: 'success',
+      cancelled: 'error',
+      expired: 'error',
+      trial: 'default',
+    };
+    return variants[status] || 'default';
+  };
+
+  const getStatusLabel = (status: string) => {
+    const labels: Record<string, string> = {
+      active: 'Actif',
+      cancelled: 'Annulé',
+      expired: 'Expiré',
+      trial: 'Essai',
+    };
+    return labels[status] || status;
+  };
 
   return (
-    <div className="container mx-auto px-4 py-16">
-      <h1 className="text-4xl font-bold mb-8">Subscription Management</h1>
+    <div className="container mx-auto px-4 py-12">
+      <div className="mb-8">
+        <h1 className="text-4xl font-bold text-gray-900 mb-2">Mes Abonnements</h1>
+        <p className="text-gray-600">Gérez votre abonnement et vos paiements</p>
+      </div>
 
-      {(error || actionError) && (
-        <Alert variant="error" className="mb-6">
-          {actionError || error}
-        </Alert>
+      {error && (
+        <div className="mb-4 rounded-lg bg-red-50 p-4 text-red-800">{error}</div>
       )}
 
-      <Card className="p-8 max-w-3xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div>
-            <h2 className="text-sm font-medium text-gray-500 mb-1">Current Plan</h2>
-            <p className="text-2xl font-bold">{subscription.plan.name}</p>
+      {loading ? (
+        <Card>
+          <div className="py-12 text-center">
+            <div className="text-gray-500">Chargement...</div>
           </div>
-          <div>
-            <h2 className="text-sm font-medium text-gray-500 mb-1">Status</h2>
-            <p className="text-2xl font-bold capitalize">{subscription.status}</p>
-          </div>
-          <div>
-            <h2 className="text-sm font-medium text-gray-500 mb-1">Price</h2>
-            <p className="text-2xl font-bold">
-              {formatPrice(subscription.plan.amount, subscription.plan.currency)}
-              {formatInterval(subscription.plan.interval)}
-            </p>
-          </div>
-          <div>
-            <h2 className="text-sm font-medium text-gray-500 mb-1">Next Billing Date</h2>
-            <p className="text-2xl font-bold">
-              {formatDate(subscription.current_period_end)}
-            </p>
-          </div>
-        </div>
+        </Card>
+      ) : subscription ? (
+        <>
+          {/* Current Subscription */}
+          <Card className="mb-8">
+            <div className="p-6">
+              <div className="flex justify-between items-start mb-6">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">{subscription.plan_name}</h2>
+                  <Badge variant={getStatusBadge(subscription.status)}>
+                    {getStatusLabel(subscription.status)}
+                  </Badge>
+                </div>
+                <div className="text-right">
+                  <div className="text-3xl font-bold text-gray-900">
+                    {subscription.amount}€
+                  </div>
+                  <div className="text-sm text-gray-600">
+                    /{subscription.billing_period === 'month' ? 'mois' : 'an'}
+                  </div>
+                </div>
+              </div>
 
-        {subscription.cancel_at_period_end && (
-          <Alert variant="warning" className="mb-6">
-            Your subscription will be canceled on {formatDate(subscription.current_period_end)}.
-            You can reactivate it before then.
-          </Alert>
-        )}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div>
+                  <div className="text-sm text-gray-600">Période actuelle</div>
+                  <div className="text-lg font-semibold text-gray-900">
+                    {new Date(subscription.current_period_start).toLocaleDateString('fr-FR')} - {new Date(subscription.current_period_end).toLocaleDateString('fr-FR')}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-sm text-gray-600">Prochain paiement</div>
+                  <div className="text-lg font-semibold text-gray-900">
+                    {new Date(subscription.current_period_end).toLocaleDateString('fr-FR')}
+                  </div>
+                </div>
+              </div>
 
-        <div className="flex gap-4">
-          <Button onClick={handleManageBilling}>
-            Manage Billing
-          </Button>
-          {!subscription.cancel_at_period_end && (
-            <Button
-              variant="outline"
-              onClick={handleCancel}
-              disabled={isCanceling}
-            >
-              {isCanceling ? 'Canceling...' : 'Cancel Subscription'}
-            </Button>
-          )}
-        </div>
-      </Card>
+              {subscription.cancel_at_period_end && (
+                <div className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                  <p className="text-yellow-800">
+                    Votre abonnement sera annulé le {new Date(subscription.current_period_end).toLocaleDateString('fr-FR')}.
+                  </p>
+                </div>
+              )}
+
+              <div className="flex gap-3">
+                {subscription.status === 'active' && !subscription.cancel_at_period_end && (
+                  <Button variant="outline" onClick={handleCancelSubscription} className="border-red-500 text-red-600 hover:bg-red-50">
+                    Annuler l'abonnement
+                  </Button>
+                )}
+                {subscription.cancel_at_period_end && (
+                  <Button onClick={handleResumeSubscription}>
+                    Reprendre l'abonnement
+                  </Button>
+                )}
+                <Link href="/pricing">
+                  <Button variant="outline">
+                    Changer de plan
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </Card>
+
+          {/* Payment History */}
+          <Card>
+            <div className="p-6">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Historique des paiements</h2>
+              {payments.length === 0 ? (
+                <p className="text-gray-600">Aucun paiement pour le moment</p>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b border-gray-200">
+                        <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Date</th>
+                        <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Montant</th>
+                        <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Statut</th>
+                        <th className="px-4 py-3 text-left text-sm font-medium text-gray-500">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200">
+                      {payments.map((payment) => (
+                        <tr key={payment.id}>
+                          <td className="px-4 py-3 text-sm text-gray-900">
+                            {new Date(payment.date).toLocaleDateString('fr-FR')}
+                          </td>
+                          <td className="px-4 py-3 text-sm font-medium text-gray-900">
+                            {payment.amount}€
+                          </td>
+                          <td className="px-4 py-3">
+                            <Badge variant={payment.status === 'paid' ? 'success' : payment.status === 'failed' ? 'error' : 'default'}>
+                              {payment.status === 'paid' ? 'Payé' : payment.status === 'pending' ? 'En attente' : 'Échoué'}
+                            </Badge>
+                          </td>
+                          <td className="px-4 py-3">
+                            {payment.invoice_url && (
+                              <a
+                                href={payment.invoice_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-blue-600 hover:underline text-sm"
+                              >
+                                Télécharger la facture
+                              </a>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+          </Card>
+        </>
+      ) : (
+        <Card>
+          <div className="py-12 text-center">
+            <p className="text-gray-600 mb-6">Vous n'avez pas d'abonnement actif</p>
+            <Link href="/pricing">
+              <Button>Voir les plans</Button>
+            </Link>
+          </div>
+        </Card>
+      )}
     </div>
   );
 }
-

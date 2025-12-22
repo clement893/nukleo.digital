@@ -1,86 +1,91 @@
-/**
- * Examples Index Page
- * Liste de tous les exemples SaaS
- */
-
 'use client';
 
 import Link from 'next/link';
-import { Card } from '@/components/ui';
-import { PageHeader, PageContainer } from '@/components/layout';
+import Card from '@/components/ui/Card';
+import Button from '@/components/ui/Button';
 
-const examples = [
-  {
-    title: 'Dashboard',
-    description: 'Dashboard complet avec statistiques, graphiques et tableaux',
-    href: '/examples/dashboard',
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-      </svg>
-    ),
-    color: 'bg-blue-500',
-  },
-  {
-    title: 'Paramètres',
-    description: 'Page de paramètres avec onglets et formulaires',
-    href: '/examples/settings',
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-      </svg>
-    ),
-    color: 'bg-purple-500',
-  },
-  {
-    title: 'Onboarding',
-    description: 'Flow d\'onboarding avec stepper et formulaires multi-étapes',
-    href: '/examples/onboarding',
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-      </svg>
-    ),
-    color: 'bg-green-500',
-  },
-];
+interface Example {
+  id: string;
+  title: string;
+  description: string;
+  href: string;
+  icon: string;
+  color: string;
+}
 
 export default function ExamplesPage() {
-  return (
-    <PageContainer>
-      <PageHeader
-        title="Exemples SaaS"
-        description="Exemples complets d'utilisation des composants dans des scénarios SaaS réels"
-        breadcrumbs={[{ label: 'Accueil', href: '/' }, { label: 'Exemples' }]}
-      />
+  const examples: Example[] = [
+    {
+      id: 'dashboard',
+      title: 'Exemple Dashboard',
+      description: 'Un exemple de tableau de bord avec widgets et statistiques',
+      href: '/examples/dashboard',
+      icon: '📊',
+      color: 'blue',
+    },
+    {
+      id: 'onboarding',
+      title: 'Exemple Onboarding',
+      description: 'Un flux d\'onboarding étape par étape pour les nouveaux utilisateurs',
+      href: '/examples/onboarding',
+      icon: '🚀',
+      color: 'green',
+    },
+    {
+      id: 'settings',
+      title: 'Exemple Paramètres',
+      description: 'Une page de paramètres complète avec différents types de configurations',
+      href: '/examples/settings',
+      icon: '⚙️',
+      color: 'purple',
+    },
+  ];
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+  return (
+    <div className="container mx-auto px-4 py-12">
+      <div className="mb-12 text-center">
+        <h1 className="text-5xl font-bold text-gray-900 mb-4">Exemples</h1>
+        <p className="text-xl text-gray-600">
+          Découvrez des exemples de pages et composants pour vous inspirer
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
         {examples.map((example) => (
-          <Link key={example.href} href={example.href}>
-            <Card className="h-full hover:shadow-lg transition-shadow cursor-pointer group">
-              <div className="p-6">
-                <div className={`${example.color} w-16 h-16 rounded-lg flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform`}>
-                  {example.icon}
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
-                  {example.title}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">
-                  {example.description}
-                </p>
-                <div className="mt-4 flex items-center text-primary-600 dark:text-primary-400 text-sm font-medium group-hover:translate-x-1 transition-transform">
+          <Link key={example.id} href={example.href}>
+            <Card className="h-full hover:shadow-xl transition-shadow cursor-pointer">
+              <div className="p-8 text-center">
+                <div className="text-6xl mb-4">{example.icon}</div>
+                <h2 className="text-2xl font-bold text-gray-900 mb-3">{example.title}</h2>
+                <p className="text-gray-600 mb-6">{example.description}</p>
+                <Button variant="outline" className="w-full">
                   Voir l'exemple
-                  <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
+                </Button>
               </div>
             </Card>
           </Link>
         ))}
       </div>
-    </PageContainer>
+
+      <div className="mt-16 max-w-3xl mx-auto">
+        <Card>
+          <div className="p-8 text-center">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              Besoin d'aide ?
+            </h2>
+            <p className="text-gray-600 mb-6">
+              Ces exemples sont conçus pour vous aider à comprendre comment utiliser les composants
+              et créer vos propres pages. N'hésitez pas à explorer le code source pour voir comment
+              ils sont implémentés.
+            </p>
+            <Link href="/docs">
+              <Button variant="outline">
+                Voir la documentation
+              </Button>
+            </Link>
+          </div>
+        </Card>
+      </div>
+    </div>
   );
 }
-

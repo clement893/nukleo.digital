@@ -1,6 +1,7 @@
 'use client';
 
-import { Table, TableHead, TableBody, TableRow, TableHeader, TableCell, EmptyState, StatsCard, Badge, Button } from '@/components/ui';
+import { Table, TableHead, TableBody, TableRow, TableHeader, TableCell, EmptyState, StatsCard, Badge, Button, DataTable, DataTableEnhanced } from '@/components/ui';
+import type { Column } from '@/components/ui';
 import { PageHeader, PageContainer, Section, PageNavigation } from '@/components/layout';
 
 const sampleData = [
@@ -78,6 +79,45 @@ export default function DataPage() {
           <div className="space-y-6">
             <EmptyState title="Aucun résultat trouvé" description="Essayez de modifier vos filtres de recherche pour trouver ce que vous cherchez." icon={<svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>} action={{ label: 'Réinitialiser les filtres', onClick: () => alert('Filtres réinitialisés') }} />
             <EmptyState title="Aucun élément créé" description="Commencez par créer votre premier élément pour voir apparaître des données ici." icon={<svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>} action={{ label: 'Créer un élément', onClick: () => alert('Création d\'un élément') }} />
+          </div>
+        </Section>
+
+        <Section title="DataTable">
+          <div className="space-y-6">
+            <div>
+              <h4 className="text-sm font-semibold mb-4">Tableau de données simple</h4>
+              <DataTable
+                data={sampleData}
+                columns={[
+                  { key: 'name', label: 'Nom', sortable: true },
+                  { key: 'email', label: 'Email', sortable: true },
+                  { key: 'role', label: 'Rôle' },
+                  { key: 'status', label: 'Statut' },
+                ]}
+                pageSize={10}
+              />
+            </div>
+          </div>
+        </Section>
+
+        <Section title="DataTableEnhanced">
+          <div className="space-y-6">
+            <div>
+              <h4 className="text-sm font-semibold mb-4">Tableau de données avancé</h4>
+              <DataTableEnhanced
+                data={sampleData}
+                columns={[
+                  { key: 'name', label: 'Nom', sortable: true },
+                  { key: 'email', label: 'Email', sortable: true },
+                  { key: 'role', label: 'Rôle', filterable: true },
+                  { key: 'status', label: 'Statut', filterable: true },
+                ]}
+                pageSize={10}
+                searchable
+                selectable
+                onSelectionChange={(selected) => console.log('Sélection:', selected)}
+              />
+            </div>
           </div>
         </Section>
       </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Input, Textarea, Select, Checkbox, Radio, Switch, DatePicker, FileUpload, Button } from '@/components/ui';
+import { Input, Textarea, Select, Checkbox, Radio, Switch, DatePicker, FileUpload, Button, Form, FormField } from '@/components/ui';
 import { PageHeader, PageContainer, Section, PageNavigation } from '@/components/layout';
 
 export default function FormsPage() {
@@ -66,6 +66,74 @@ export default function FormsPage() {
 
         <Section title="FileUpload">
           <FileUpload label="Téléverser des fichiers" accept="image/*" multiple maxSize={5} onFileSelect={(files) => console.log('Files selected:', files)} helperText="Formats acceptés : JPG, PNG, GIF. Taille max : 5MB" />
+        </Section>
+
+        <Section title="Form & FormField">
+          <div className="space-y-6">
+            <div>
+              <h4 className="text-sm font-semibold mb-4">Formulaire structuré avec Form</h4>
+              <Form
+                onSubmit={(data) => {
+                  console.log('Données du formulaire:', data);
+                  alert('Formulaire soumis avec succès !');
+                }}
+                className="space-y-4"
+              >
+                <FormField
+                  name="fullName"
+                  label="Nom complet"
+                  required
+                  render={({ field }) => (
+                    <Input {...field} placeholder="John Doe" />
+                  )}
+                />
+                <FormField
+                  name="email"
+                  label="Email"
+                  type="email"
+                  required
+                  render={({ field }) => (
+                    <Input {...field} type="email" placeholder="john@example.com" />
+                  )}
+                />
+                <FormField
+                  name="country"
+                  label="Pays"
+                  required
+                  render={({ field }) => (
+                    <Select
+                      {...field}
+                      placeholder="Sélectionnez un pays"
+                      options={[
+                        { value: 'fr', label: 'France' },
+                        { value: 'us', label: 'États-Unis' },
+                        { value: 'uk', label: 'Royaume-Uni' },
+                      ]}
+                    />
+                  )}
+                />
+                <FormField
+                  name="message"
+                  label="Message"
+                  render={({ field }) => (
+                    <Textarea {...field} rows={4} placeholder="Votre message..." />
+                  )}
+                />
+                <FormField
+                  name="acceptTerms"
+                  label="J'accepte les conditions"
+                  required
+                  render={({ field }) => (
+                    <Checkbox {...field} checked={field.value} />
+                  )}
+                />
+                <div className="flex gap-4">
+                  <Button type="submit" variant="primary">Envoyer</Button>
+                  <Button type="button" variant="outline">Annuler</Button>
+                </div>
+              </Form>
+            </div>
+          </div>
         </Section>
 
         <Section title="Exemple de formulaire complet">

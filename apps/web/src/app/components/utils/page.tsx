@@ -1,11 +1,58 @@
 'use client';
 
 import { useState } from 'react';
-import { Avatar, Tooltip, Dropdown, SearchBar, Accordion, Badge, Button } from '@/components/ui';
+import { Avatar, Tooltip, Dropdown, SearchBar, Accordion, Badge, Button, Autocomplete, TreeView } from '@/components/ui';
+import type { AutocompleteOption, TreeNode } from '@/components/ui';
 import { PageHeader, PageContainer, Section, PageNavigation } from '@/components/layout';
 
 export default function UtilsPage() {
   const [searchValue, setSearchValue] = useState('');
+
+  const autocompleteOptions: AutocompleteOption[] = [
+    { label: 'Paris', value: 'paris' },
+    { label: 'Lyon', value: 'lyon' },
+    { label: 'Marseille', value: 'marseille' },
+    { label: 'Toulouse', value: 'toulouse' },
+    { label: 'Nice', value: 'nice' },
+    { label: 'Nantes', value: 'nantes' },
+    { label: 'Strasbourg', value: 'strasbourg' },
+  ];
+
+  const treeNodes: TreeNode[] = [
+    {
+      id: '1',
+      label: 'Documents',
+      children: [
+        { id: '1-1', label: 'Rapport.pdf' },
+        { id: '1-2', label: 'Présentation.pptx' },
+        { id: '1-3', label: 'Budget.xlsx' },
+      ],
+    },
+    {
+      id: '2',
+      label: 'Images',
+      children: [
+        { id: '2-1', label: 'Photo1.jpg' },
+        { id: '2-2', label: 'Photo2.jpg' },
+        {
+          id: '2-3',
+          label: 'Sous-dossier',
+          children: [
+            { id: '2-3-1', label: 'Photo3.jpg' },
+            { id: '2-3-2', label: 'Photo4.jpg' },
+          ],
+        },
+      ],
+    },
+    {
+      id: '3',
+      label: 'Vidéos',
+      children: [
+        { id: '3-1', label: 'Video1.mp4' },
+        { id: '3-2', label: 'Video2.mp4' },
+      ],
+    },
+  ];
 
   const accordionItems = [
     { id: 'usage', title: 'Comment utiliser les composants ?', content: <p className="text-gray-600">Tous les composants sont disponibles via l'import depuis <code className="bg-gray-100 px-2 py-1 rounded">@/components/ui</code></p> },
@@ -67,6 +114,41 @@ export default function UtilsPage() {
             <Badge variant="warning">Warning</Badge>
             <Badge variant="error">Error</Badge>
             <Badge variant="info">Info</Badge>
+          </div>
+        </Section>
+
+        <Section title="Autocomplete">
+          <div className="space-y-4">
+            <div>
+              <h4 className="text-sm font-semibold mb-2">Recherche de ville</h4>
+              <Autocomplete
+                options={autocompleteOptions}
+                placeholder="Tapez pour rechercher une ville..."
+                minChars={0}
+                onSelect={(option) => console.log('Sélectionné:', option)}
+              />
+            </div>
+            <div>
+              <h4 className="text-sm font-semibold mb-2">Avec minimum de caractères</h4>
+              <Autocomplete
+                options={autocompleteOptions}
+                placeholder="Tapez au moins 2 caractères..."
+                minChars={2}
+              />
+            </div>
+          </div>
+        </Section>
+
+        <Section title="TreeView">
+          <div className="space-y-4">
+            <div>
+              <h4 className="text-sm font-semibold mb-2">Arborescence de fichiers</h4>
+              <TreeView nodes={treeNodes} />
+            </div>
+            <div>
+              <h4 className="text-sm font-semibold mb-2">Avec sélection multiple</h4>
+              <TreeView nodes={treeNodes} selectable multiple />
+            </div>
           </div>
         </Section>
       </div>

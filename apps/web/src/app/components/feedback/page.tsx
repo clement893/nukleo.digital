@@ -1,13 +1,22 @@
 'use client';
 
 import { useState } from 'react';
-import { Alert, Modal, Loading, Skeleton, Progress, Spinner, ToastContainer, useToast, Button } from '@/components/ui';
+import { Alert, Modal, Loading, Skeleton, Progress, Spinner, ToastContainer, useToast, Button, Drawer, Popover, Stepper, Input, Textarea } from '@/components/ui';
+import type { Step } from '@/components/ui';
 import { PageHeader, PageContainer, Section, PageNavigation } from '@/components/layout';
 
 export default function FeedbackPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [progress, setProgress] = useState(0);
   const { toasts, showToast } = useToast();
+
+  const stepperSteps: Step[] = [
+    { id: '1', label: 'Étape 1', description: 'Informations de base' },
+    { id: '2', label: 'Étape 2', description: 'Détails supplémentaires' },
+    { id: '3', label: 'Étape 3', description: 'Confirmation' },
+  ];
 
   const startProgress = () => {
     setProgress(0);
@@ -110,6 +119,68 @@ export default function FeedbackPage() {
               <Button onClick={() => showToast({ message: 'Information importante', type: 'info' })} variant="primary" size="sm">Toast Info</Button>
             </div>
             <p className="text-sm text-gray-600">Cliquez sur les boutons pour afficher des notifications toast.</p>
+          </div>
+        </Section>
+
+        <Section title="Stepper">
+          <div className="space-y-6">
+            <div>
+              <h4 className="text-sm font-semibold mb-4">Stepper horizontal</h4>
+              <Stepper steps={stepperSteps} currentStep={1} />
+            </div>
+            <div>
+              <h4 className="text-sm font-semibold mb-4">Stepper vertical</h4>
+              <Stepper steps={stepperSteps} currentStep={2} orientation="vertical" />
+            </div>
+            <div>
+              <h4 className="text-sm font-semibold mb-4">Stepper avec erreur</h4>
+              <Stepper steps={[{ ...stepperSteps[0], error: true }, ...stepperSteps.slice(1)]} currentStep={0} />
+            </div>
+          </div>
+        </Section>
+
+        <Section title="Drawer">
+          <div className="space-y-4">
+            <div className="flex gap-4 flex-wrap">
+              <Button onClick={() => setIsDrawerOpen(true)}>Ouvrir Drawer (droite)</Button>
+            </div>
+            <Drawer
+              isOpen={isDrawerOpen}
+              onClose={() => setIsDrawerOpen(false)}
+              title="Titre du Drawer"
+              position="right"
+            >
+              <div className="space-y-4">
+                <p>Ceci est le contenu du drawer. Il peut contenir n'importe quel élément.</p>
+                <Input label="Nom" placeholder="Entrez votre nom" />
+                <Textarea label="Description" placeholder="Entrez une description" rows={4} />
+                <div className="flex gap-2 justify-end pt-4">
+                  <Button variant="outline" onClick={() => setIsDrawerOpen(false)}>Annuler</Button>
+                  <Button variant="primary" onClick={() => setIsDrawerOpen(false)}>Confirmer</Button>
+                </div>
+              </div>
+            </Drawer>
+            <p className="text-sm text-gray-600">Le drawer s'ouvre depuis le côté droit de l'écran.</p>
+          </div>
+        </Section>
+
+        <Section title="Popover">
+          <div className="space-y-4">
+            <div className="flex gap-4 flex-wrap">
+              <Popover
+                trigger={<Button>Ouvrir Popover</Button>}
+                content={
+                  <div className="p-4 space-y-2">
+                    <h4 className="font-semibold">Titre du Popover</h4>
+                    <p className="text-sm text-gray-600">Ceci est le contenu du popover.</p>
+                    <Button size="sm" variant="primary">Action</Button>
+                  </div>
+                }
+                open={isPopoverOpen}
+                onOpenChange={setIsPopoverOpen}
+              />
+            </div>
+            <p className="text-sm text-gray-600">Le popover s'affiche près de l'élément déclencheur.</p>
           </div>
         </Section>
       </div>

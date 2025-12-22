@@ -47,14 +47,14 @@ export default function SettingsExample() {
                     <h4 className="font-medium">Notifications par email</h4>
                     <p className="text-sm text-gray-500">Recevoir des notifications par email</p>
                   </div>
-                  <Switch checked={notifications} onChange={setNotifications} />
+                  <Switch checked={notifications} onChange={(e) => setNotifications(e.target.checked)} />
                 </div>
                 <div className="flex items-center justify-between">
                   <div>
                     <h4 className="font-medium">Emails marketing</h4>
                     <p className="text-sm text-gray-500">Recevoir des offres et nouveautés</p>
                   </div>
-                  <Switch checked={marketing} onChange={setMarketing} />
+                  <Switch checked={marketing} onChange={(e) => setMarketing(e.target.checked)} />
                 </div>
               </Card>
             </TabPanel>

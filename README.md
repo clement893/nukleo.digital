@@ -132,16 +132,27 @@ MODELE-NEXTJS-FULLSTACK/
 
 ## 📚 Documentation
 
+### ⚡ Démarrage Rapide
+- [🚀 Démarrage en 5 Minutes](./docs/QUICK_START.md) - Guide ultra-rapide
+- [📚 Utilisation du Template](./TEMPLATE_USAGE.md) - Comment utiliser ce template
+- [🔄 Guide de Migration](./docs/MIGRATION_GUIDE.md) - Transformer le template en votre projet
+
 ### 📖 Guides Principaux
 - [🚀 Guide de Démarrage](./GETTING_STARTED.md) - Guide complet d'installation
-- [📚 Utilisation du Template](./TEMPLATE_USAGE.md) - Comment utiliser ce template
 - [🛠️ Guide de Développement](./docs/DEVELOPMENT.md) - Outils et workflows de développement
+- [🎨 Guide de Personnalisation](./docs/CUSTOMIZATION.md) - Personnaliser le template
 - [🧪 Guide des Tests](./docs/TESTING.md) - Comment écrire et exécuter les tests
 - [🔒 Sécurité](./docs/SECURITY.md) - Bonnes pratiques de sécurité
 - [🚀 Déploiement](./docs/DEPLOYMENT.md) - Guide de déploiement en production
+
+### 🔧 Configuration
 - [📧 Configuration SendGrid](./docs/SENDGRID_SETUP.md) - Configuration du service email
 - [💳 Configuration Stripe](./docs/STRIPE_SETUP.md) - Configuration des paiements
 - [🔐 Variables d'Environnement](./docs/ENV_VARIABLES.md) - Documentation complète des variables
+
+### 🆘 Support
+- [❓ FAQ](./docs/FAQ.md) - Questions fréquentes
+- [🔧 Dépannage](./docs/TROUBLESHOOTING.md) - Résolution des problèmes
 - [🤝 Contribuer](./CONTRIBUTING.md) - Guide de contribution
 
 ### 📋 Documentation Technique

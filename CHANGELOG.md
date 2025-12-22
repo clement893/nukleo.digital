@@ -102,6 +102,23 @@ et ce projet adhère à [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ---
 
+## [1.4.0] - 2025-12-22
+
+### Added
+- **CI/CD GitHub Actions** - Workflow complet avec tests et build automatiques
+- **Guide de Migration** - Guide complet pour transformer le template en projet
+- **Script post-install** - Vérification automatique après installation
+- **Guide Démarrage Rapide** - Installation en 5 minutes
+- **FAQ complète** - Réponses aux questions fréquentes
+- **Guide de Personnalisation** - Comment personnaliser le template
+- **Documentation utilisateur** - Analyse de ce qui manque pour les utilisateurs
+
+### Changed
+- **README amélioré** - Organisation de la documentation par catégories
+- **Documentation structurée** - Guides organisés par niveau (débutant, avancé)
+
+---
+
 ## [1.3.0] - 2025-12-22
 
 ### Added

@@ -36,31 +36,69 @@ const nextConfig = {
   turbopack: {},
   
   // Webpack optimizations (fallback for --webpack flag)
-  webpack: (config, { isServer, dev }) => {
+  webpack: (config, { isServer, dev, webpack }) => {
     // Ignore @sentry/nextjs if not installed to prevent build failures
-    const webpack = require('webpack');
     config.plugins.push(
       new webpack.IgnorePlugin({
         resourceRegExp: /^@sentry\/nextjs$/,
       })
     );
     
-    // Ignore CSS files that don't exist during build (like default-stylesheet.css)
-    // Also handle CSS imports more gracefully during server-side builds
+    // Handle CSS files that don't exist during build (like default-stylesheet.css)
     if (isServer) {
-      config.plugins.push(
-        new webpack.IgnorePlugin({
-          resourceRegExp: /default-stylesheet\.css$/,
-        })
-      );
-      
-      // Add a NormalModuleReplacementPlugin to handle missing CSS files
+      // Add a plugin to intercept and replace default-stylesheet.css imports
       config.plugins.push(
         new webpack.NormalModuleReplacementPlugin(
           /default-stylesheet\.css$/,
           require.resolve('./src/lib/empty-css.js')
         )
       );
+      
+      // Add a custom plugin to create the CSS file early in the build
+      config.plugins.push({
+        apply: (compiler) => {
+          // Create CSS file as early as possible
+          compiler.hooks.environment.tap('DefaultStylesheetPlugin', () => {
+            const path = require('path');
+            const fs = require('fs');
+            const outputPath = compiler.options.output.path || path.join(process.cwd(), '.next');
+            const cssDir = path.join(outputPath, 'browser');
+            const cssFile = path.join(cssDir, 'default-stylesheet.css');
+            
+            // Ensure directory exists and create empty CSS file
+            try {
+              if (!fs.existsSync(cssDir)) {
+                fs.mkdirSync(cssDir, { recursive: true });
+              }
+              // Always write the file to ensure it exists
+              fs.writeFileSync(cssFile, '', 'utf8');
+            } catch (e) {
+              // Log warning but don't fail the build
+              console.warn('Could not create default-stylesheet.css:', e.message);
+            }
+          });
+          
+          // Also try to create it before compilation
+          compiler.hooks.beforeCompile.tap('DefaultStylesheetPlugin', () => {
+            const path = require('path');
+            const fs = require('fs');
+            const outputPath = compiler.options.output.path || path.join(process.cwd(), '.next');
+            const cssDir = path.join(outputPath, 'browser');
+            const cssFile = path.join(cssDir, 'default-stylesheet.css');
+            
+            try {
+              if (!fs.existsSync(cssDir)) {
+                fs.mkdirSync(cssDir, { recursive: true });
+              }
+              if (!fs.existsSync(cssFile)) {
+                fs.writeFileSync(cssFile, '', 'utf8');
+              }
+            } catch (e) {
+              // Ignore errors
+            }
+          });
+        },
+      });
     }
     
     // Optimisations pour le bundle

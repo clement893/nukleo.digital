@@ -4,6 +4,10 @@ import { PageHeader, PageContainer, Section } from '@/components/layout';
 import { Card, Button, Badge } from '@/components/ui';
 import Link from 'next/link';
 
+// Note: Client Components are already dynamic by nature.
+// Route segment config (export const dynamic) only works in Server Components.
+// Client Components run on the client side, so they don't need this export.
+
 export default function AdminPage() {
   return (
     <PageContainer>
@@ -105,4 +109,3 @@ export default function AdminPage() {
     </PageContainer>
   );
 }
-

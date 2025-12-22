@@ -11,7 +11,7 @@ import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import Select from '@/components/ui/Select';
-import type { SelectOption } from '@/components/ui/Select';
+import { useToast } from '@/components/ui/ToastContainer';
 import { useThemeManager } from './hooks';
 import { themePresets, type ThemePresetName } from './presets';
 import { FONT_OPTIONS, BORDER_RADIUS_OPTIONS } from './constants';
@@ -47,6 +47,7 @@ function ColorInput({
 
 export function ThemeManager() {
   const { theme, updateColor, resetTheme, mounted } = useThemeManager();
+  const { showToast } = useToast();
   const [selectedPreset, setSelectedPreset] = useState<ThemePresetName>('default');
 
   const applyPreset = (presetName: ThemePresetName) => {
@@ -58,10 +59,20 @@ export function ThemeManager() {
     setSelectedPreset(presetName);
   };
 
-  const exportTheme = () => {
-    const themeJson = JSON.stringify(theme, null, 2);
-    navigator.clipboard.writeText(themeJson);
-    alert('Thème copié dans le presse-papiers !');
+  const exportTheme = async () => {
+    try {
+      const themeJson = JSON.stringify(theme, null, 2);
+      await navigator.clipboard.writeText(themeJson);
+      showToast({
+        message: 'Thème copié dans le presse-papiers !',
+        type: 'success',
+      });
+    } catch (error) {
+      showToast({
+        message: 'Erreur lors de la copie du thème',
+        type: 'error',
+      });
+    }
   };
 
   if (!mounted) {
@@ -109,7 +120,7 @@ export function ThemeManager() {
             Police principale (corps de texte)
           </label>
           <Select
-            options={FONT_OPTIONS as unknown as SelectOption[]}
+            options={FONT_OPTIONS}
             value={theme.fontFamily}
             onChange={(e) => updateColor('fontFamily', e.target.value)}
           />
@@ -117,7 +128,7 @@ export function ThemeManager() {
         <div>
           <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Police des titres</label>
           <Select
-            options={FONT_OPTIONS as unknown as SelectOption[]}
+            options={FONT_OPTIONS}
             value={theme.fontFamilyHeading}
             onChange={(e) => updateColor('fontFamilyHeading', e.target.value)}
           />
@@ -125,7 +136,7 @@ export function ThemeManager() {
         <div>
           <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Police des sous-titres</label>
           <Select
-            options={FONT_OPTIONS as unknown as SelectOption[]}
+            options={FONT_OPTIONS}
             value={theme.fontFamilySubheading}
             onChange={(e) => updateColor('fontFamilySubheading', e.target.value)}
           />
@@ -165,7 +176,7 @@ export function ThemeManager() {
         <div>
           <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1">Border Radius</label>
           <Select
-            options={BORDER_RADIUS_OPTIONS as unknown as SelectOption[]}
+            options={BORDER_RADIUS_OPTIONS}
             value={theme.borderRadius}
             onChange={(e) => updateColor('borderRadius', e.target.value)}
           />

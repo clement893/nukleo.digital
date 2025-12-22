@@ -3,6 +3,8 @@
  * Centralized theme configuration constants
  */
 
+import type { SelectOption } from '@/components/ui/Select';
+
 // Color constants
 export const COLORS = {
   BLUE_500: '#3B82F6',
@@ -26,7 +28,7 @@ export const COLORS = {
 } as const;
 
 // Font options
-export const FONT_OPTIONS = [
+export const FONT_OPTIONS: SelectOption[] = [
   { label: 'Inter', value: 'Inter' },
   { label: 'Roboto', value: 'Roboto' },
   { label: 'Open Sans', value: 'Open Sans' },
@@ -38,7 +40,7 @@ export const FONT_OPTIONS = [
 ];
 
 // Border radius options
-export const BORDER_RADIUS_OPTIONS = [
+export const BORDER_RADIUS_OPTIONS: SelectOption[] = [
   { label: 'Petit (0.25rem)', value: '0.25rem' },
   { label: 'Moyen (0.5rem)', value: '0.5rem' },
   { label: 'Grand (0.75rem)', value: '0.75rem' },

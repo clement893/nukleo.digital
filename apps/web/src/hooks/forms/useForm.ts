@@ -82,7 +82,7 @@ export function useForm<T extends Record<string, unknown>>(
         return null;
       } catch (error) {
         if (error instanceof z.ZodError) {
-          return error.errors[0]?.message ?? 'Invalid value';
+          return error.issues[0]?.message ?? 'Invalid value';
         }
         return 'Invalid value';
       }
@@ -99,7 +99,7 @@ export function useForm<T extends Record<string, unknown>>(
     } catch (error) {
       if (error instanceof z.ZodError) {
         const fieldErrors: Record<string, string> = {};
-        error.errors.forEach((err) => {
+        error.issues.forEach((err) => {
           const path = err.path[0] as string;
           if (path) {
             fieldErrors[path] = err.message;

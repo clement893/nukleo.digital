@@ -1,10 +1,27 @@
 'use client';
 
 import { useState } from 'react';
-import { Sidebar, Tabs, TabList, Tab, TabPanels, TabPanel, Pagination, Button } from '@/components/ui';
+import dynamicImport from 'next/dynamic';
 import { PageHeader, PageContainer, Section, PageNavigation } from '@/components/layout';
 
-export default function NavigationPage() {
+// Disable static generation to avoid CSS file issues during build
+// Using 'error' instead of 'force-dynamic' to prevent any static generation attempts
+export const dynamic = 'error';
+export const dynamicParams = true;
+export const runtime = 'nodejs';
+export const fetchCache = 'force-no-store';
+
+// Dynamically import components to avoid CSS issues during build
+const Sidebar = dynamicImport(() => import('@/components/ui/Sidebar').then(mod => ({ default: mod.default })), { ssr: false, loading: () => <div>Loading...</div> });
+const Tabs = dynamicImport(() => import('@/components/ui/Tabs').then(mod => ({ default: mod.default })), { ssr: false, loading: () => <div>Loading...</div> });
+const TabList = dynamicImport(() => import('@/components/ui/Tabs').then(mod => ({ default: mod.TabList })), { ssr: false });
+const Tab = dynamicImport(() => import('@/components/ui/Tabs').then(mod => ({ default: mod.Tab })), { ssr: false });
+const TabPanels = dynamicImport(() => import('@/components/ui/Tabs').then(mod => ({ default: mod.TabPanels })), { ssr: false });
+const TabPanel = dynamicImport(() => import('@/components/ui/Tabs').then(mod => ({ default: mod.TabPanel })), { ssr: false });
+const Pagination = dynamicImport(() => import('@/components/ui/Pagination').then(mod => ({ default: mod.default })), { ssr: false, loading: () => <div>Loading...</div> });
+const Button = dynamicImport(() => import('@/components/ui/Button').then(mod => ({ default: mod.default })), { ssr: false, loading: () => <div>Loading...</div> });
+
+function NavigationPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
@@ -68,3 +85,5 @@ export default function NavigationPage() {
     </PageContainer>
   );
 }
+
+export default NavigationPage;

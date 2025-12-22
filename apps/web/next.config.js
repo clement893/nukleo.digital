@@ -26,7 +26,7 @@ const nextConfig = {
   // Experimental features
   experimental: {
     optimizePackageImports: ['@modele/types', 'clsx', 'zod', '@brandbook/ui'],
-    optimizeCss: true,
+    optimizeCss: false, // Temporarily disabled due to CSS file errors during static generation
     serverActions: {
       bodySizeLimit: '2mb',
     },
@@ -44,6 +44,24 @@ const nextConfig = {
         resourceRegExp: /^@sentry\/nextjs$/,
       })
     );
+    
+    // Ignore CSS files that don't exist during build (like default-stylesheet.css)
+    // Also handle CSS imports more gracefully during server-side builds
+    if (isServer) {
+      config.plugins.push(
+        new webpack.IgnorePlugin({
+          resourceRegExp: /default-stylesheet\.css$/,
+        })
+      );
+      
+      // Add a NormalModuleReplacementPlugin to handle missing CSS files
+      config.plugins.push(
+        new webpack.NormalModuleReplacementPlugin(
+          /default-stylesheet\.css$/,
+          require.resolve('./src/lib/empty-css.js')
+        )
+      );
+    }
     
     // Optimisations pour le bundle
     if (!isServer) {

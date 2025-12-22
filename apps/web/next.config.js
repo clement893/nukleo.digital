@@ -46,6 +46,26 @@ const nextConfig = {
     
     // Handle CSS files that don't exist during build (like default-stylesheet.css)
     if (isServer) {
+      // Add a plugin to log what's trying to import default-stylesheet.css
+      config.plugins.push({
+        apply: (compiler) => {
+          compiler.hooks.normalModuleFactory.tap('CSSImportLogger', (nmf) => {
+            nmf.hooks.beforeResolve.tap('CSSImportLogger', (data) => {
+              if (data.request && data.request.includes('default-stylesheet.css')) {
+                console.error('🔍 Found import of default-stylesheet.css:');
+                console.error('  Request:', data.request);
+                console.error('  Context:', data.context);
+                console.error('  Issuer:', data.contextInfo?.issuer);
+                // Log the stack trace to see where it's coming from
+                if (data.contextInfo && data.contextInfo.issuer) {
+                  console.error('  Full context:', JSON.stringify(data.contextInfo, null, 2));
+                }
+              }
+            });
+          });
+        },
+      });
+      
       // Add a plugin to intercept and replace default-stylesheet.css imports
       config.plugins.push(
         new webpack.NormalModuleReplacementPlugin(

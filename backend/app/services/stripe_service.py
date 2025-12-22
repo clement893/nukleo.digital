@@ -114,31 +114,33 @@ class StripeService:
 
     async def create_portal_session(self, user: User, return_url: str) -> Dict[str, Any]:
         """Create Stripe customer portal session"""
+        customer_id = await self._get_customer_id_for_user(user.id)
+        if not customer_id:
+            raise ValueError("User has no Stripe customer ID")
+
         try:
-            # Get user's subscription to find customer ID
-            result = await self.db.execute(
-                select(Subscription)
-                .where(Subscription.user_id == user.id)
-                .where(Subscription.status == SubscriptionStatus.ACTIVE)
-                .limit(1)
-            )
-            subscription = result.scalar_one_or_none()
-
-            if not subscription or not subscription.stripe_customer_id:
-                raise ValueError("User has no active subscription")
-
             session = stripe.billing_portal.Session.create(
-                customer=subscription.stripe_customer_id,
+                customer=customer_id,
                 return_url=return_url,
             )
-
-            return {
-                "url": session.url,
-            }
-
+            return {"url": session.url}
         except stripe.error.StripeError as e:
-            logger.error(f"Stripe error creating portal session: {e}")
+            logger.error(f"Stripe error creating portal session for user {user.id}: {e}")
             raise
+
+    async def _get_customer_id_for_user(self, user_id: int) -> Optional[str]:
+        """Get Stripe customer ID for user from active subscription"""
+        result = await self.db.execute(
+            select(Subscription.stripe_customer_id)
+            .where(Subscription.user_id == user_id)
+            .where(Subscription.status.in_([
+                SubscriptionStatus.ACTIVE,
+                SubscriptionStatus.TRIALING,
+            ]))
+            .where(Subscription.stripe_customer_id.isnot(None))
+            .limit(1)
+        )
+        return result.scalar_one_or_none()
 
     async def cancel_subscription(self, subscription: Subscription) -> bool:
         """Cancel Stripe subscription"""

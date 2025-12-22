@@ -34,7 +34,7 @@ export interface DataTableProps<T> {
   loading?: boolean;
 }
 
-export default function DataTable<T extends Record<string, any>>({
+export default function DataTable<T extends Record<string, unknown>>({
   data,
   columns,
   pageSize = 10,

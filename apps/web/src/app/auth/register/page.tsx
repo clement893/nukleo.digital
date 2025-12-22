@@ -3,8 +3,14 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { AxiosError } from 'axios';
 import { authAPI } from '@/lib/api';
 import { useAuthStore } from '@/lib/store';
+
+interface ApiErrorResponse {
+  detail?: string;
+  message?: string;
+}
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -42,8 +48,9 @@ export default function RegisterPage() {
 
       login(user, access_token);
       router.push('/dashboard');
-    } catch (err: any) {
-      const message = err.response?.data?.detail || 'Registration failed';
+    } catch (err) {
+      const axiosError = err as AxiosError<ApiErrorResponse>;
+      const message = axiosError.response?.data?.detail || 'Registration failed';
       setLocalError(message);
       setError(message);
     } finally {

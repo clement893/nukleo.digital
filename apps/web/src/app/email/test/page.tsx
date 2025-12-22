@@ -2,8 +2,15 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { AxiosError } from 'axios';
 import { emailAPI } from '@/lib/api';
 import { useAuthStore } from '@/lib/store';
+import type { EmailResponse, EmailHealthResponse } from '@/lib/email/client';
+
+interface ApiErrorResponse {
+  detail?: string;
+  message?: string;
+}
 
 export default function EmailTestPage() {
   const router = useRouter();
@@ -13,10 +20,10 @@ export default function EmailTestPage() {
   const [htmlContent, setHtmlContent] = useState('');
   const [textContent, setTextContent] = useState('');
   const [emailType, setEmailType] = useState<'test' | 'welcome' | 'custom'>('test');
-  const [response, setResponse] = useState<any>(null);
+  const [response, setResponse] = useState<EmailResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const [healthStatus, setHealthStatus] = useState<any>(null);
+  const [healthStatus, setHealthStatus] = useState<EmailHealthResponse | null>(null);
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
 
   useEffect(() => {
@@ -41,13 +48,14 @@ export default function EmailTestPage() {
       const res = await emailAPI.health();
       setHealthStatus(res.data);
       setError('');
-    } catch (err: any) {
-      const errorMessage = err.response?.data?.detail || 'Failed to check health';
+    } catch (err) {
+      const axiosError = err as AxiosError<ApiErrorResponse>;
+      const errorMessage = axiosError.response?.data?.detail || 'Failed to check health';
       setError(errorMessage);
       setHealthStatus(null);
       
       // If authentication error, redirect to login
-      if (err.response?.status === 401) {
+      if (axiosError.response?.status === 401) {
         setTimeout(() => {
           router.push('/auth/login');
         }, 2000);
@@ -76,12 +84,13 @@ export default function EmailTestPage() {
     try {
       const res = await emailAPI.sendTest(toEmail);
       setResponse(res.data);
-    } catch (err: any) {
-      const errorMessage = err.response?.data?.detail || 'Failed to send email';
+    } catch (err) {
+      const axiosError = err as AxiosError<ApiErrorResponse>;
+      const errorMessage = axiosError.response?.data?.detail || 'Failed to send email';
       setError(errorMessage);
       
       // If authentication error, redirect to login
-      if (err.response?.status === 401) {
+      if (axiosError.response?.status === 401) {
         setTimeout(() => {
           router.push('/auth/login');
         }, 2000);
@@ -112,12 +121,13 @@ export default function EmailTestPage() {
     try {
       const res = await emailAPI.sendWelcome(toEmail);
       setResponse(res.data);
-    } catch (err: any) {
-      const errorMessage = err.response?.data?.detail || 'Failed to send email';
+    } catch (err) {
+      const axiosError = err as AxiosError<ApiErrorResponse>;
+      const errorMessage = axiosError.response?.data?.detail || 'Failed to send email';
       setError(errorMessage);
       
       // If authentication error, redirect to login
-      if (err.response?.status === 401) {
+      if (axiosError.response?.status === 401) {
         setTimeout(() => {
           router.push('/auth/login');
         }, 2000);
@@ -153,12 +163,13 @@ export default function EmailTestPage() {
         text_content: textContent || undefined,
       });
       setResponse(res.data);
-    } catch (err: any) {
-      const errorMessage = err.response?.data?.detail || 'Failed to send email';
+    } catch (err) {
+      const axiosError = err as AxiosError<ApiErrorResponse>;
+      const errorMessage = axiosError.response?.data?.detail || 'Failed to send email';
       setError(errorMessage);
       
       // If authentication error, redirect to login
-      if (err.response?.status === 401) {
+      if (axiosError.response?.status === 401) {
         setTimeout(() => {
           router.push('/auth/login');
         }, 2000);

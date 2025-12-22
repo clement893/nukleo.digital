@@ -3,8 +3,14 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { AxiosError } from 'axios';
 import { authAPI } from '@/lib/api';
 import { useAuthStore } from '@/lib/store';
+
+interface ApiErrorResponse {
+  detail?: string;
+  message?: string;
+}
 
 export default function LoginPage() {
   const router = useRouter();
@@ -25,8 +31,9 @@ export default function LoginPage() {
 
       login(user, access_token);
       router.push('/dashboard');
-    } catch (err: any) {
-      const message = err.response?.data?.detail || 'Login failed';
+    } catch (err) {
+      const axiosError = err as AxiosError<ApiErrorResponse>;
+      const message = axiosError.response?.data?.detail || 'Login failed';
       setLocalError(message);
       setError(message);
     } finally {
@@ -39,8 +46,9 @@ export default function LoginPage() {
       const response = await authAPI.getGoogleAuthUrl();
       const { auth_url } = response.data;
       window.location.href = auth_url;
-    } catch (err: any) {
-      const message = err.response?.data?.detail || 'Failed to initiate Google login';
+    } catch (err) {
+      const axiosError = err as AxiosError<ApiErrorResponse>;
+      const message = axiosError.response?.data?.detail || 'Failed to initiate Google login';
       setLocalError(message);
       setError(message);
     }

@@ -93,7 +93,7 @@ class InvoiceService:
                 invoice.metadata = json.dumps(metadata)
             
             await self.db.commit()
-            await self.db.refresh(invoice)
+            # Refresh non nécessaire, l'objet est déjà modifié en mémoire
             logger.info(f"Updated invoice {invoice.id} from Stripe invoice {stripe_invoice_id}")
             return invoice
         
@@ -116,7 +116,7 @@ class InvoiceService:
         
         self.db.add(invoice)
         await self.db.commit()
-        await self.db.refresh(invoice)
+        # Refresh non nécessaire si pas besoin de relations lazy-loaded immédiatement
         logger.info(f"Created invoice {invoice.id} from Stripe invoice {stripe_invoice_id}")
         return invoice
 
@@ -140,7 +140,7 @@ class InvoiceService:
             invoice.amount_paid = invoice.amount_due
         
         await self.db.commit()
-        await self.db.refresh(invoice)
+        # Refresh non nécessaire, l'objet est déjà modifié en mémoire
         return invoice
 
     async def get_invoice(self, invoice_id: int, include_subscription: bool = True) -> Optional[Invoice]:

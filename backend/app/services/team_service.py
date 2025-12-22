@@ -36,7 +36,7 @@ class TeamService:
         )
         self.db.add(team)
         await self.db.commit()
-        await self.db.refresh(team)
+        # Refresh non nécessaire car expire_on_commit=False dans database.py
 
         # Add owner as team member with admin role
         admin_role_result = await self.db.execute(
@@ -55,6 +55,7 @@ class TeamService:
         )
         self.db.add(team_member)
         await self.db.commit()
+        # Refresh non nécessaire, on retourne team qui est déjà en mémoire
 
         return team
 
@@ -77,8 +78,13 @@ class TeamService:
         )
         return result.scalar_one_or_none()
 
-    async def get_user_teams(self, user_id: int) -> List[Team]:
-        """Get all teams a user belongs to"""
+    async def get_user_teams(
+        self, 
+        user_id: int,
+        skip: int = 0,
+        limit: int = 50
+    ) -> List[Team]:
+        """Get all teams a user belongs to with pagination"""
         result = await self.db.execute(
             select(Team)
             .join(TeamMember, Team.id == TeamMember.team_id)
@@ -91,6 +97,8 @@ class TeamService:
                 selectinload(Team.members).selectinload(TeamMember.user),
                 selectinload(Team.members).selectinload(TeamMember.role)
             )
+            .offset(skip)
+            .limit(limit)
         )
         return list(result.scalars().all())
 
@@ -127,7 +135,7 @@ class TeamService:
         )
         self.db.add(team_member)
         await self.db.commit()
-        await self.db.refresh(team_member)
+        # Refresh non nécessaire si pas besoin de relations lazy-loaded
         return team_member
 
     async def update_member_role(
@@ -148,7 +156,7 @@ class TeamService:
 
         team_member.role_id = role_id
         await self.db.commit()
-        await self.db.refresh(team_member)
+        # Refresh non nécessaire, l'objet est déjà modifié en mémoire
         return team_member
 
     async def remove_member(self, team_id: int, user_id: int) -> bool:
@@ -208,7 +216,7 @@ class TeamService:
             team.settings = json.dumps(settings)
 
         await self.db.commit()
-        await self.db.refresh(team)
+        # Refresh non nécessaire, l'objet est déjà modifié en mémoire
         return team
 
     async def delete_team(self, team_id: int) -> bool:

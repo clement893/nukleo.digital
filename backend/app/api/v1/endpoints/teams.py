@@ -87,13 +87,13 @@ async def create_team(
 @router.get("", response_model=TeamListResponse)
 async def list_teams(
     skip: int = Query(0, ge=0),
-    limit: int = Query(100, ge=1, le=100),
+    limit: int = Query(50, ge=1, le=100),
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
-    """List teams the user belongs to"""
+    """List teams the user belongs to with pagination"""
     team_service = TeamService(db)
-    teams = await team_service.get_user_teams(current_user.id)
+    teams = await team_service.get_user_teams(current_user.id, skip=skip, limit=limit)
     
     # Convert teams to response format
     teams_response = []

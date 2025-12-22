@@ -1,12 +1,17 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense, useCallback } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useAuthStore } from '@/lib/store';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
+
+// Note: Client Components are already dynamic by nature.
+// Route segment config (export const dynamic) only works in Server Components.
+// Since this page uses useSearchParams (which requires dynamic rendering),
+// and it's a Client Component, it will be rendered dynamically automatically.
 
 interface Subscription {
   id: string;
@@ -30,7 +35,7 @@ interface Payment {
   invoice_url?: string;
 }
 
-export default function SubscriptionsPage() {
+function SubscriptionsContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { isAuthenticated, user } = useAuthStore();
@@ -39,26 +44,18 @@ export default function SubscriptionsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    if (!isAuthenticated()) {
-      router.push('/auth/login');
-      return;
+  const handleSubscribe = useCallback(async (planId: string, period: 'month' | 'year') => {
+    try {
+      // TODO: Replace with actual API call
+      // await subscriptionsAPI.create({ plan_id: planId, billing_period: period });
+      // Redirect to success page
+      router.push(`/subscriptions/success?plan=${planId}&period=${period}`);
+    } catch (err: any) {
+      setError(err.response?.data?.detail || 'Erreur lors de la souscription');
     }
+  }, [router]);
 
-    // Check if coming from pricing page
-    const planId = searchParams.get('plan');
-    const period = searchParams.get('period') as 'month' | 'year' | null;
-    
-    if (planId && period) {
-      // Redirect to subscription creation flow
-      handleSubscribe(planId, period);
-    } else {
-      loadSubscription();
-      loadPayments();
-    }
-  }, [isAuthenticated, router, searchParams]);
-
-  const loadSubscription = async () => {
+  const loadSubscription = useCallback(async () => {
     try {
       setLoading(true);
       setError('');
@@ -84,9 +81,9 @@ export default function SubscriptionsPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const loadPayments = async () => {
+  const loadPayments = useCallback(async () => {
     try {
       // TODO: Replace with actual API call
       // const response = await subscriptionsAPI.getPayments();
@@ -114,18 +111,26 @@ export default function SubscriptionsPage() {
     } catch (err: any) {
       console.error('Error loading payments:', err);
     }
-  };
+  }, []);
 
-  const handleSubscribe = async (planId: string, period: 'month' | 'year') => {
-    try {
-      // TODO: Replace with actual API call
-      // await subscriptionsAPI.create({ plan_id: planId, billing_period: period });
-      // Redirect to success page
-      router.push(`/subscriptions/success?plan=${planId}&period=${period}`);
-    } catch (err: any) {
-      setError(err.response?.data?.detail || 'Erreur lors de la souscription');
+  useEffect(() => {
+    if (!isAuthenticated()) {
+      router.push('/auth/login');
+      return;
     }
-  };
+
+    // Check if coming from pricing page
+    const planId = searchParams.get('plan');
+    const period = searchParams.get('period') as 'month' | 'year' | null;
+    
+    if (planId && period) {
+      // Redirect to subscription creation flow
+      handleSubscribe(planId, period);
+    } else {
+      loadSubscription();
+      loadPayments();
+    }
+  }, [isAuthenticated, router, searchParams, handleSubscribe, loadSubscription, loadPayments]);
 
   const handleCancelSubscription = async () => {
     if (!confirm('Êtes-vous sûr de vouloir annuler votre abonnement ? Il restera actif jusqu\'à la fin de la période en cours.')) {
@@ -320,5 +325,23 @@ export default function SubscriptionsPage() {
         </Card>
       )}
     </div>
+  );
+}
+
+export default function SubscriptionsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="container mx-auto px-4 py-12">
+          <Card>
+            <div className="py-12 text-center">
+              <div className="text-gray-500">Chargement...</div>
+            </div>
+          </Card>
+        </div>
+      }
+    >
+      <SubscriptionsContent />
+    </Suspense>
   );
 }

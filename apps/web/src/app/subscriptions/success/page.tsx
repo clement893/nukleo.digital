@@ -1,25 +1,25 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense, useCallback } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useAuthStore } from '@/lib/store';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 
-export default function SubscriptionSuccessPage() {
+// Note: Client Components are already dynamic by nature.
+// Route segment config (export const dynamic) only works in Server Components.
+// Since this page uses useSearchParams (which requires dynamic rendering),
+// and it's a Client Component, it will be rendered dynamically automatically.
+
+function SubscriptionSuccessContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { isAuthenticated } = useAuthStore();
   const [planName, setPlanName] = useState('');
   const [billingPeriod, setBillingPeriod] = useState<'month' | 'year'>('month');
 
-  useEffect(() => {
-    if (!isAuthenticated()) {
-      router.push('/auth/login');
-      return;
-    }
-
+  const initializeData = useCallback(() => {
     const plan = searchParams.get('plan');
     const period = searchParams.get('period') as 'month' | 'year' | null;
 
@@ -32,7 +32,16 @@ export default function SubscriptionSuccessPage() {
 
     setPlanName(planNames[plan || ''] || plan || '');
     setBillingPeriod(period || 'month');
-  }, [isAuthenticated, router, searchParams]);
+  }, [searchParams]);
+
+  useEffect(() => {
+    if (!isAuthenticated()) {
+      router.push('/auth/login');
+      return;
+    }
+
+    initializeData();
+  }, [isAuthenticated, router, initializeData]);
 
   if (!isAuthenticated()) {
     return null;
@@ -122,5 +131,24 @@ export default function SubscriptionSuccessPage() {
         </div>
       </Card>
     </div>
+  );
+}
+
+export default function SubscriptionSuccessPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 flex items-center justify-center px-4">
+          <Card className="w-full max-w-2xl">
+            <div className="p-8 text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto"></div>
+              <p className="mt-4 text-gray-600">Chargement...</p>
+            </div>
+          </Card>
+        </div>
+      }
+    >
+      <SubscriptionSuccessContent />
+    </Suspense>
   );
 }

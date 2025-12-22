@@ -16,9 +16,11 @@ export function createLazyComponent<T extends ComponentType<Record<string, unkno
   const LazyComponent = lazy(importFn);
 
   return function LazyWrapper(props: React.ComponentProps<T>) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const Component = LazyComponent as any;
     return (
       <Suspense fallback={fallback || <Spinner />}>
-        <LazyComponent {...props} />
+        <Component {...props} />
       </Suspense>
     );
   };
@@ -34,10 +36,12 @@ export function lazyLoad<T extends ComponentType<Record<string, unknown>>>(
   const LazyComponent = lazy(importFn);
 
   return function LazyWrapper(props: React.ComponentProps<T>) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const Component = LazyComponent as any;
     const fallback = LoadingComponent ? <LoadingComponent /> : <Spinner />;
     return (
       <Suspense fallback={fallback}>
-        <LazyComponent {...props} />
+        <Component {...props} />
       </Suspense>
     );
   };

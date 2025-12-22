@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { afterEach, vi, beforeAll, afterAll } from 'vitest';
+import { afterEach, afterAll, beforeAll, vi } from 'vitest';
 import { cleanup } from '@testing-library/react';
 import React from 'react';
 
@@ -20,9 +20,9 @@ vi.mock('next/navigation', () => ({
 
 // Mock Next.js Image component
 vi.mock('next/image', () => ({
-  default: (props: React.ComponentPropsWithoutRef<'img'>) => {
+  default: (props: any) => {
     // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-    return <img {...props} />;
+    return React.createElement('img', props);
   },
 }));
 
@@ -34,7 +34,7 @@ afterEach(() => {
 // Suppress console errors in tests (optional - comment out if you want to see them)
 const originalError = console.error;
 beforeAll(() => {
-  console.error = (...args: any[]) => {
+  console.error = (...args: unknown[]) => {
     if (
       typeof args[0] === 'string' &&
       (args[0].includes('Warning: ReactDOM.render') ||

@@ -24,9 +24,10 @@ export default function ExampleSettingsPage() {
     },
   });
 
-  const [activeTab, setActiveTab] = useState<'general' | 'notifications' | 'privacy' | 'security'>('general');
+  type TabId = 'general' | 'notifications' | 'privacy' | 'security';
+  const [activeTab, setActiveTab] = useState<TabId>('general');
 
-  const tabs = [
+  const tabs: Array<{ id: TabId; label: string }> = [
     { id: 'general', label: 'Général' },
     { id: 'notifications', label: 'Notifications' },
     { id: 'privacy', label: 'Confidentialité' },
@@ -49,7 +50,7 @@ export default function ExampleSettingsPage() {
                 {tabs.map((tab) => (
                   <button
                     key={tab.id}
-                    onClick={() => setActiveTab(tab.id as any)}
+                    onClick={() => setActiveTab(tab.id)}
                     className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
                       activeTab === tab.id
                         ? 'bg-blue-50 text-blue-600 font-semibold'

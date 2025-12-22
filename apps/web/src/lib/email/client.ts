@@ -26,6 +26,7 @@
  */
 
 import { apiClient } from '@/lib/api/client';
+import type { ApiResponse } from '@modele/types';
 
 export interface SendEmailRequest {
   to_email: string;
@@ -84,50 +85,50 @@ export const emailAPI = {
   /**
    * Send a custom email
    */
-  send: async (data: SendEmailRequest): Promise<EmailResponse> => {
-    return apiClient.post('/email/send', data);
+  send: async (data: SendEmailRequest): Promise<ApiResponse<EmailResponse>> => {
+    return apiClient.post<EmailResponse>('/email/send', data);
   },
 
   /**
    * Send a test email
    */
-  sendTest: async (toEmail: string): Promise<EmailResponse> => {
-    return apiClient.post('/email/test', { to_email: toEmail });
+  sendTest: async (toEmail: string): Promise<ApiResponse<EmailResponse>> => {
+    return apiClient.post<EmailResponse>('/email/test', { to_email: toEmail });
   },
 
   /**
    * Send welcome email
    */
-  sendWelcome: async (toEmail: string, name?: string): Promise<EmailResponse> => {
-    return apiClient.post('/email/welcome', { to_email: toEmail });
+  sendWelcome: async (toEmail: string, name?: string): Promise<ApiResponse<EmailResponse>> => {
+    return apiClient.post<EmailResponse>('/email/welcome', { to_email: toEmail });
   },
 
   /**
    * Send invoice email
    */
-  sendInvoice: async (data: InvoiceEmailRequest): Promise<EmailResponse> => {
-    return apiClient.post('/email/invoice', data);
+  sendInvoice: async (data: InvoiceEmailRequest): Promise<ApiResponse<EmailResponse>> => {
+    return apiClient.post<EmailResponse>('/email/invoice', data);
   },
 
   /**
    * Send subscription created email
    */
-  sendSubscriptionCreated: async (data: SubscriptionEmailRequest): Promise<EmailResponse> => {
-    return apiClient.post('/email/subscription/created', data);
+  sendSubscriptionCreated: async (data: SubscriptionEmailRequest): Promise<ApiResponse<EmailResponse>> => {
+    return apiClient.post<EmailResponse>('/email/subscription/created', data);
   },
 
   /**
    * Send subscription cancelled email
    */
-  sendSubscriptionCancelled: async (data: SubscriptionCancelledEmailRequest): Promise<EmailResponse> => {
-    return apiClient.post('/email/subscription/cancelled', data);
+  sendSubscriptionCancelled: async (data: SubscriptionCancelledEmailRequest): Promise<ApiResponse<EmailResponse>> => {
+    return apiClient.post<EmailResponse>('/email/subscription/cancelled', data);
   },
 
   /**
    * Send trial ending email
    */
-  sendTrialEnding: async (data: TrialEndingEmailRequest): Promise<EmailResponse> => {
-    return apiClient.post('/email/trial/ending', data);
+  sendTrialEnding: async (data: TrialEndingEmailRequest): Promise<ApiResponse<EmailResponse>> => {
+    return apiClient.post<EmailResponse>('/email/trial/ending', data);
   },
 
   /**

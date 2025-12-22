@@ -220,7 +220,7 @@ const TECH_STACK: readonly TechStackItem[] = [
  */
 export default function DocsPage() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4" lang="fr">
       <div className="max-w-6xl mx-auto">
         <header className="mb-8" role="banner">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">

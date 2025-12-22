@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Card, Button } from '@/components/ui';
 import { AlertTriangle } from 'lucide-react';
 import { logger } from '@/lib/logger';
@@ -18,6 +19,8 @@ export default function DocsError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const router = useRouter();
+
   useEffect(() => {
     // Log error to error tracking service
     logger.error('Documentation page error', error, {
@@ -25,6 +28,10 @@ export default function DocsError({
       component: 'DocsPage',
     });
   }, [error]);
+
+  const handleGoHome = () => {
+    router.push('/');
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center p-4">
@@ -47,7 +54,7 @@ export default function DocsError({
             <Button onClick={reset} variant="primary">
               Réessayer
             </Button>
-            <Button onClick={() => window.location.href = '/'} variant="outline">
+            <Button onClick={handleGoHome} variant="outline">
               Retour à l'accueil
             </Button>
           </div>

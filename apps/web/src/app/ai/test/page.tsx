@@ -145,16 +145,19 @@ export default function AITestPage() {
                 Check Status
               </button>
             </div>
-            {healthStatus && (
-              <div className="mt-2 text-sm">
-                <p>Configured: {healthStatus.configured ? 'Yes' : 'No'}</p>
-                <p>Model: {healthStatus.model ? String(healthStatus.model) : 'N/A'}</p>
-                <p>Available: {healthStatus.available ? 'Yes' : 'No'}</p>
-                {Boolean(healthStatus.error) && (
-                  <p className="text-red-600">Error: {String(healthStatus.error)}</p>
-                )}
-              </div>
-            )}
+            {healthStatus && (() => {
+              const hasError = healthStatus.error != null;
+              return (
+                <div className="mt-2 text-sm">
+                  <p>Configured: {healthStatus.configured ? 'Yes' : 'No'}</p>
+                  <p>Model: {healthStatus.model ? String(healthStatus.model) : 'N/A'}</p>
+                  <p>Available: {healthStatus.available ? 'Yes' : 'No'}</p>
+                  {hasError && (
+                    <p className="text-red-600">Error: {String(healthStatus.error)}</p>
+                  )}
+                </div>
+              );
+            })()}
           </div>
 
           {/* Mode Selection */}

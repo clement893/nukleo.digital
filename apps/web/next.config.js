@@ -37,6 +37,14 @@ const nextConfig = {
   
   // Webpack optimizations (fallback for --webpack flag)
   webpack: (config, { isServer, dev }) => {
+    // Ignore @sentry/nextjs if not installed to prevent build failures
+    const webpack = require('webpack');
+    config.plugins.push(
+      new webpack.IgnorePlugin({
+        resourceRegExp: /^@sentry\/nextjs$/,
+      })
+    );
+    
     // Optimisations pour le bundle
     if (!isServer) {
       config.optimization = {

@@ -7,7 +7,6 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { clsx } from 'clsx';
-import Button from './Button';
 import DOMPurify from 'isomorphic-dompurify';
 
 export interface RichTextEditorProps {

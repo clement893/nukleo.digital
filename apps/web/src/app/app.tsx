@@ -5,14 +5,14 @@
 
 'use client';
 
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { reportWebVitals } from '@/lib/performance';
 import { logger } from '@/lib/logger';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 
-export function App({ children }: { children: React.ReactNode }) {
+export const App = React.memo(({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const isInternalPage = pathname?.startsWith('/dashboard');
@@ -29,6 +29,8 @@ export function App({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     // Web Vitals monitoring
     if (typeof window !== 'undefined' && 'PerformanceObserver' in window) {
+      const observers: PerformanceObserver[] = [];
+      
       // LCP - Largest Contentful Paint
       const lcpObserver = new PerformanceObserver((list) => {
         const entries = list.getEntries();
@@ -48,6 +50,7 @@ export function App({ children }: { children: React.ReactNode }) {
         }
       });
       lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
+      observers.push(lcpObserver);
 
       // FID - First Input Delay
       const fidObserver = new PerformanceObserver((list) => {
@@ -67,6 +70,7 @@ export function App({ children }: { children: React.ReactNode }) {
         });
       });
       fidObserver.observe({ entryTypes: ['first-input'] });
+      observers.push(fidObserver);
 
       // CLS - Cumulative Layout Shift
       let clsValue = 0;
@@ -87,15 +91,16 @@ export function App({ children }: { children: React.ReactNode }) {
         logger.performance('CLS', clsValue);
       });
       clsObserver.observe({ entryTypes: ['layout-shift'] });
+      observers.push(clsObserver);
 
+      // Cleanup function - always return cleanup
       return () => {
-        lcpObserver.disconnect();
-        fidObserver.disconnect();
-        clsObserver.disconnect();
+        observers.forEach(observer => observer.disconnect());
       };
     }
-    // Return undefined if PerformanceObserver is not available
-    return undefined;
+    
+    // Return empty cleanup if PerformanceObserver not available
+    return () => {};
   }, []);
 
   // For internal pages (dashboard), don't show Header/Footer (handled by InternalLayout)
@@ -113,4 +118,6 @@ export function App({ children }: { children: React.ReactNode }) {
       <Footer />
     </div>
   );
-}
+});
+
+App.displayName = 'App';

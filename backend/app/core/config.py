@@ -98,6 +98,16 @@ class Settings(BaseSettings):
         description="Default sender name",
     )
 
+    # Database Connection Pool Configuration
+    DB_POOL_SIZE: int = Field(
+        default=10,
+        description="Database connection pool size",
+    )
+    DB_MAX_OVERFLOW: int = Field(
+        default=20,
+        description="Database connection pool max overflow",
+    )
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",

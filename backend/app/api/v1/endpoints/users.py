@@ -6,9 +6,11 @@ from typing import Annotated, List
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
+from sqlalchemy.orm import selectinload
 
 from app.core.database import get_db
-from app.core.cache import cached
+from app.core.cache import cached, invalidate_cache_pattern
 from app.models.user import User
 from app.schemas.user import User as UserSchema
 
@@ -33,7 +35,15 @@ async def get_users(
     Returns:
         List of users
     """
-    result = await db.execute(User.__table__.select().offset(skip).limit(limit))
+    result = await db.execute(
+        select(User)
+        .options(
+            selectinload(User.roles),
+            selectinload(User.team_memberships)
+        )
+        .offset(skip)
+        .limit(limit)
+    )
     users = result.scalars().all()
     return users
 
@@ -53,7 +63,14 @@ async def get_user(
     Returns:
         User information
     """
-    result = await db.execute(User.__table__.select().where(User.id == user_id))
+    result = await db.execute(
+        select(User)
+        .where(User.id == user_id)
+        .options(
+            selectinload(User.roles),
+            selectinload(User.team_memberships)
+        )
+    )
     user = result.scalar_one_or_none()
     if not user:
         raise HTTPException(

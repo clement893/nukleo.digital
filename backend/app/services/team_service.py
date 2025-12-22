@@ -86,6 +86,11 @@ class TeamService:
             .where(TeamMember.is_active == True)
             .where(Team.is_active == True)
             .distinct()
+            .options(
+                selectinload(Team.owner),
+                selectinload(Team.members).selectinload(TeamMember.user),
+                selectinload(Team.members).selectinload(TeamMember.role)
+            )
         )
         return list(result.scalars().all())
 

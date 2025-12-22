@@ -11,8 +11,8 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
-// Force dynamic rendering to avoid static generation issues with useSearchParams
-export const dynamic = 'force-dynamic';
+// Note: Removed force-dynamic to enable static generation for better performance
+// Use 'export const dynamic = "force-dynamic"' only on pages that need dynamic data
 
 export const metadata: Metadata = {
   title: 'MODELE-NEXTJS-FULLSTACK',

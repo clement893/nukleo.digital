@@ -132,8 +132,33 @@ def cached(expire: int = 300, key_prefix: str = ""):
             await cache_backend.set(cache_key_str, result, expire)
             
             return result
+        
+        # Ajouter méthode d'invalidation
+        async def invalidate(*args, **kwargs):
+            """Invalider le cache pour cette fonction avec les mêmes arguments"""
+            cache_key_str = f"{key_prefix}:{func.__name__}:{cache_key(*args, **kwargs)}"
+            await cache_backend.delete(cache_key_str)
+        
+        async def invalidate_all():
+            """Invalider tout le cache pour ce préfixe"""
+            pattern = f"{key_prefix}:{func.__name__}:*"
+            await cache_backend.clear_pattern(pattern)
+        
+        wrapper.invalidate = invalidate
+        wrapper.invalidate_all = invalidate_all
         return wrapper
     return decorator
+
+
+async def invalidate_cache_pattern(pattern: str) -> int:
+    """
+    Fonction utilitaire pour invalider le cache par pattern
+    
+    Usage:
+        await invalidate_cache_pattern("users:*")
+        await invalidate_cache_pattern("user:123:*")
+    """
+    return await cache_backend.clear_pattern(pattern)
 
 
 async def init_cache():

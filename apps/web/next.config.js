@@ -41,6 +41,8 @@ const nextConfig = {
     if (!isServer) {
       config.optimization = {
         ...config.optimization,
+        usedExports: true,
+        sideEffects: false, // Enable tree shaking if package.json allows
         moduleIds: 'deterministic',
         runtimeChunk: 'single',
         splitChunks: {

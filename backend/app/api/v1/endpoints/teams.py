@@ -8,6 +8,7 @@ from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.database import get_db
+from app.core.cache import invalidate_cache_pattern
 from app.dependencies import get_current_user
 from app.dependencies.rbac import require_team_permission, require_team_owner, require_team_member
 from app.models import User
@@ -170,6 +171,10 @@ async def update_team(
     if not team:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Team not found")
     
+    # Invalidate cache
+    await invalidate_cache_pattern("teams:*")
+    await invalidate_cache_pattern(f"team:{team_id}:*")
+    
     # Reload with relationships
     team = await team_service.get_team(team_id)
     team_dict = {
@@ -208,6 +213,10 @@ async def delete_team(
     
     if not success:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Team not found")
+    
+    # Invalidate cache
+    await invalidate_cache_pattern("teams:*")
+    await invalidate_cache_pattern(f"team:{team_id}:*")
     
     return None
 

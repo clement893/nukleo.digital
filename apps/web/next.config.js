@@ -45,6 +45,15 @@ const nextConfig = {
       })
     );
     
+    // Ignore CSS files that don't exist during build (like default-stylesheet.css)
+    if (isServer) {
+      config.plugins.push(
+        new webpack.IgnorePlugin({
+          resourceRegExp: /default-stylesheet\.css$/,
+        })
+      );
+    }
+    
     // Optimisations pour le bundle
     if (!isServer) {
       config.optimization = {

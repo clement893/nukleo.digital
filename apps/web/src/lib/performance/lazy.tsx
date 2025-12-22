@@ -4,7 +4,7 @@
  */
 
 import { ComponentType, lazy, Suspense } from 'react';
-import { Spinner } from '@/components/ui/Spinner';
+import Spinner from '@/components/ui/Spinner';
 
 /**
  * Create a lazy-loaded component with loading fallback

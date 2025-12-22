@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 import { useAuthStore } from '@/lib/store';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';

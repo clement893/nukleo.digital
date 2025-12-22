@@ -49,9 +49,7 @@ export default function ChartsPage() {
               type="line"
               data={lineChartData}
               title="Évolution des ventes"
-              height={300}
-              color="primary"
-            />
+              height={300} />
           </Card>
         </Section>
 
@@ -61,9 +59,7 @@ export default function ChartsPage() {
               type="bar"
               data={barChartData}
               title="Ventes hebdomadaires"
-              height={300}
-              color="secondary"
-            />
+              height={300} />
           </Card>
         </Section>
 
@@ -73,9 +69,7 @@ export default function ChartsPage() {
               type="area"
               data={areaChartData}
               title="Revenus trimestriels"
-              height={300}
-              color="info"
-            />
+              height={300} />
           </Card>
         </Section>
 
@@ -108,9 +102,7 @@ export default function ChartsPage() {
               type={selectedChart}
               data={lineChartData}
               title={`Graphique en ${selectedChart === 'line' ? 'ligne' : selectedChart === 'bar' ? 'barres' : 'aire'}`}
-              height={300}
-              color="primary"
-            />
+              height={300} />
           </Card>
         </Section>
 
@@ -140,9 +132,7 @@ const data: ChartDataPoint[] = [
   type="line"
   data={data}
   title="Mon graphique"
-  height={300}
-  color="primary"
-/>`}
+  height={300} />`}
                 </pre>
               </div>
             </div>

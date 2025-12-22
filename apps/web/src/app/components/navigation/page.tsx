@@ -4,7 +4,10 @@ import { useState } from 'react';
 import { Sidebar, Tabs, TabList, Tab, TabPanels, TabPanel, Pagination, Button } from '@/components/ui';
 import { PageHeader, PageContainer, Section, PageNavigation } from '@/components/layout';
 
-export default function NavigationPage() {
+// Disable SSR for this page to avoid CSS file issues during build
+export const dynamic = 'force-dynamic';
+
+function NavigationPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
@@ -68,3 +71,5 @@ export default function NavigationPage() {
     </PageContainer>
   );
 }
+
+export default NavigationPage;

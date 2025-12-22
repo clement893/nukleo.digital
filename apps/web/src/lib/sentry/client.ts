@@ -4,18 +4,27 @@
  * Sentry is optional - functions will no-op if @sentry/nextjs is not installed
  */
 
-// @ts-nocheck
-let Sentry: any = null;
+// Type definition for Sentry (optional dependency)
+type SentryType = {
+  init: (options: any) => void;
+  BrowserTracing: new (options?: any) => any;
+  Replay: new (options?: any) => any;
+  captureException: (error: Error, options?: any) => void;
+  captureMessage: (message: string, level?: string) => void;
+  setUser: (user: { id: string; email?: string; username?: string } | null) => void;
+};
+
+let Sentry: SentryType | null = null;
 
 // Lazy load Sentry to avoid webpack static analysis
-function loadSentry() {
+function loadSentry(): SentryType | null {
   if (Sentry !== null) return Sentry;
   
   try {
     // Construct module name dynamically to prevent webpack static analysis
     const moduleParts = ['@sentry', '/', 'nextjs'];
     const moduleName = moduleParts.join('');
-    // @ts-expect-error - Sentry is optional
+    // @ts-ignore - Sentry is optional, module may not exist
     Sentry = typeof require !== 'undefined' ? require(moduleName) : null;
   } catch {
     // Sentry not installed, continue without it
@@ -38,7 +47,7 @@ export function initSentry() {
       environment: process.env.NODE_ENV || 'development',
       tracesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
       debug: process.env.NODE_ENV === 'development',
-      beforeSend(event, hint) {
+      beforeSend(event: any, _hint?: any) {
         // Filter out sensitive data
         if (event.request) {
           delete event.request.cookies;
@@ -69,7 +78,7 @@ export function initSentry() {
           blockAllMedia: true,
         }),
       ],
-      beforeSend(event, hint) {
+      beforeSend(event: any, _hint?: any) {
         // Filter out sensitive data
         if (event.request) {
           delete event.request.cookies;

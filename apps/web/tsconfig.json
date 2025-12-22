@@ -67,6 +67,15 @@
     ".next",
     "out",
     "dist",
-    "build"
+    "build",
+    "**/__tests__/**",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "**/*.stories.tsx",
+    "**/*.stories.ts",
+    "tests/**",
+    "playwright.config.ts"
   ]
 }

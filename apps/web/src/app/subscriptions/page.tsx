@@ -8,6 +8,7 @@ import { getErrorMessage, getErrorDetail } from '@/lib/error-utils';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
+import ProtectedRoute from '@/components/auth/ProtectedRoute';
 
 // Note: Client Components are already dynamic by nature.
 // Route segment config (export const dynamic) only works in Server Components.
@@ -39,7 +40,6 @@ interface Payment {
 function SubscriptionsContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { isAuthenticated } = useAuthStore();
   const [subscription, setSubscription] = useState<Subscription | null>(null);
   const [payments, setPayments] = useState<Payment[]>([]);
   const [loading, setLoading] = useState(true);
@@ -329,7 +329,7 @@ function SubscriptionsContent() {
   );
 }
 
-export default function SubscriptionsPage() {
+function SubscriptionsPageContent() {
   return (
     <Suspense
       fallback={

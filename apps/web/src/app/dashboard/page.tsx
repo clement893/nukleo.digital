@@ -1,21 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/lib/store';
+import ProtectedRoute from '@/components/auth/ProtectedRoute';
 
-export default function DashboardPage() {
+function DashboardContent() {
   const router = useRouter();
-  const { user, isAuthenticated, logout } = useAuthStore();
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    if (!isAuthenticated()) {
-      router.push('/auth/login');
-    } else {
-      setIsLoading(false);
-    }
-  }, [isAuthenticated, router]);
+  const { user, logout } = useAuthStore();
 
   const handleLogout = () => {
     logout();
@@ -197,5 +188,13 @@ export default function DashboardPage() {
         </div>
       </div>
     </main>
+  );
+}
+
+export default function DashboardPage() {
+  return (
+    <ProtectedRoute>
+      <DashboardContent />
+    </ProtectedRoute>
   );
 }

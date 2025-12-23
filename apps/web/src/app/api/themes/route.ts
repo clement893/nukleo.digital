@@ -3,7 +3,6 @@
  * This allows server-side rendering and better security.
  */
 import { NextRequest, NextResponse } from 'next/server';
-import { getActiveTheme } from '@/lib/api/theme';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 

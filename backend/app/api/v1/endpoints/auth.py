@@ -438,13 +438,25 @@ async def google_oauth_callback(
             )
             
             # Determine frontend redirect URL
-            frontend_url = state or "https://modele-nextjs-fullstack-production-1e92.up.railway.app"
+            # If state is already a full URL (starts with http), use it directly
+            # Otherwise, construct the URL from state or use default
+            frontend_base = "https://modele-nextjs-fullstack-production-1e92.up.railway.app"
             
-            # Remove trailing slash and add token as query parameter
-            frontend_url = frontend_url.rstrip("/")
-            redirect_url = f"{frontend_url}/auth/callback?token={jwt_token}&type=google"
+            if state and state.startswith(("http://", "https://")):
+                # State is already a full URL, use it directly
+                frontend_url = state.rstrip("/")
+                redirect_url = f"{frontend_url}?token={jwt_token}&type=google"
+            elif state:
+                # State is a relative path (e.g., "/auth/callback")
+                # Ensure it starts with / and doesn't end with /
+                state_path = state if state.startswith("/") else f"/{state}"
+                state_path = state_path.rstrip("/")
+                redirect_url = f"{frontend_base}{state_path}?token={jwt_token}&type=google"
+            else:
+                # No state provided, use default callback URL
+                redirect_url = f"{frontend_base}/auth/callback?token={jwt_token}&type=google"
             
-            logger.info(f"Google OAuth successful for user {email}, redirecting to {frontend_url}")
+            logger.info(f"Google OAuth successful for user {email}, redirecting to {redirect_url}")
             
             return RedirectResponse(url=redirect_url)
             

@@ -24,6 +24,7 @@ function CallbackContent() {
     const refreshToken = searchParams.get('refresh_token');
 
     if (!accessToken) {
+      // Don't add redirect parameter to avoid loops
       router.push('/auth/login?error=No access token provided');
       return;
     }
@@ -48,6 +49,7 @@ function CallbackContent() {
     } catch (err) {
       const appError = handleApiError(err);
       logger.error('Failed to complete authentication', appError);
+      // Don't add redirect parameter to avoid loops
       router.push('/auth/login?error=Failed to get user info');
     }
   }, [searchParams, router, login]);

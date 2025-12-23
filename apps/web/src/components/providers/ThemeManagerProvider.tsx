@@ -13,7 +13,7 @@ import { useThemeManager } from '@/components/theme/hooks';
  * This component doesn't render anything, it just initializes the theme
  */
 export default function ThemeManagerProvider({ children }: { children: React.ReactNode }) {
-  const { mounted } = useThemeManager();
+  useThemeManager();
   
   // The hook automatically loads theme from localStorage and applies it
   // We just need to mount it globally so it runs on every page

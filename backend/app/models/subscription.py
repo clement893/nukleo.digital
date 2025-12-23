@@ -54,8 +54,8 @@ class Subscription(Base):
     trial_start = Column(DateTime(timezone=True), nullable=True)
     trial_end = Column(DateTime(timezone=True), nullable=True)
     
-    # Metadata
-    metadata = Column(Text, nullable=True)  # JSON string for additional data
+    # Metadata (renamed from 'metadata' to avoid SQLAlchemy reserved name conflict)
+    subscription_metadata = Column("metadata", Text, nullable=True)  # JSON string for additional data
     
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     updated_at = Column(

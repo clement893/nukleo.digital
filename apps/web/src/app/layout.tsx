@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import SessionProvider from '@/components/providers/SessionProvider';
 import QueryProvider from '@/components/providers/QueryProvider';
+import ThemeManagerProvider from '@/components/providers/ThemeManagerProvider';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import { App } from './app';
 
@@ -35,13 +36,15 @@ export default function RootLayout({
     <html lang="fr" className={inter.variable}>
       <body className={inter.className}>
         <ThemeProvider>
-          <QueryProvider>
-            <SessionProvider>
-              <App>
-                {children}
-              </App>
-            </SessionProvider>
-          </QueryProvider>
+          <ThemeManagerProvider>
+            <QueryProvider>
+              <SessionProvider>
+                <App>
+                  {children}
+                </App>
+              </SessionProvider>
+            </QueryProvider>
+          </ThemeManagerProvider>
         </ThemeProvider>
       </body>
     </html>

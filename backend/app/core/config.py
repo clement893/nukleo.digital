@@ -5,7 +5,7 @@ Uses Pydantic Settings for validation
 
 import os
 from functools import lru_cache
-from typing import List
+from typing import List, Union
 
 from pydantic import Field, PostgresDsn, field_validator, model_validator, field_serializer
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -28,68 +28,65 @@ class Settings(BaseSettings):
     PORT: int = 8000
     DEBUG: bool = False
 
-    # CORS - Will be parsed in model_validator
-    CORS_ORIGINS: List[str] = Field(
-        default=["http://localhost:3000", "http://localhost:3001"],
-        description="Allowed CORS origins",
+    # CORS - Accept string or list, will be converted to list
+    CORS_ORIGINS: Union[str, List[str]] = Field(
+        default="http://localhost:3000,http://localhost:3001",
+        description="Allowed CORS origins (comma-separated string or JSON array)",
     )
 
-    @model_validator(mode="before")
+    @field_validator("CORS_ORIGINS", mode="before")
     @classmethod
-    def parse_cors_origins(cls, data):
-        """Parse CORS_ORIGINS from environment variable before Pydantic parsing"""
+    def parse_cors_origins(cls, v):
+        """Parse CORS_ORIGINS from environment variable"""
         import json
         import os
         
-        # Handle both dict (from env) and other types
-        if isinstance(data, dict):
-            cors_value = data.get("CORS_ORIGINS")
-            
-            # If not set, use default based on environment
-            if cors_value is None:
-                env = os.getenv("ENVIRONMENT", "development")
-                if env == "production":
-                    data["CORS_ORIGINS"] = ["https://modele-nextjs-fullstack-production-1e92.up.railway.app"]
-                else:
-                    data["CORS_ORIGINS"] = ["http://localhost:3000", "http://localhost:3001"]
-                return data
-            
-            # If already a list, keep it
-            if isinstance(cors_value, list):
-                return data
-            
-            # If string, parse it
-            if isinstance(cors_value, str):
-                # Empty string - use default
-                if not cors_value.strip():
-                    env = os.getenv("ENVIRONMENT", "development")
-                    if env == "production":
-                        data["CORS_ORIGINS"] = ["https://modele-nextjs-fullstack-production-1e92.up.railway.app"]
-                    else:
-                        data["CORS_ORIGINS"] = ["http://localhost:3000", "http://localhost:3001"]
-                    return data
-                
-                # Try JSON first
-                try:
-                    parsed = json.loads(cors_value)
-                    if isinstance(parsed, list):
-                        data["CORS_ORIGINS"] = parsed
-                        return data
-                except (json.JSONDecodeError, ValueError):
-                    pass
-                
-                # Try comma-separated
-                if "," in cors_value:
-                    origins = [origin.strip() for origin in cors_value.split(",") if origin.strip()]
-                    if origins:
-                        data["CORS_ORIGINS"] = origins
-                        return data
-                
-                # Single string
-                data["CORS_ORIGINS"] = [cors_value.strip()]
-                return data
+        # If already a list, return as-is
+        if isinstance(v, list):
+            return v
         
-        return data
+        # If None or empty, use default based on environment
+        if not v or (isinstance(v, str) and not v.strip()):
+            env = os.getenv("ENVIRONMENT", "development")
+            if env == "production":
+                return ["https://modele-nextjs-fullstack-production-1e92.up.railway.app"]
+            return ["http://localhost:3000", "http://localhost:3001"]
+        
+        # If string, parse it
+        if isinstance(v, str):
+            # Try JSON first
+            try:
+                parsed = json.loads(v)
+                if isinstance(parsed, list):
+                    return parsed
+            except (json.JSONDecodeError, ValueError):
+                pass
+            
+            # Try comma-separated
+            if "," in v:
+                origins = [origin.strip() for origin in v.split(",") if origin.strip()]
+                if origins:
+                    return origins
+            
+            # Single string
+            if v.strip():
+                return [v.strip()]
+        
+        # Fallback
+        env = os.getenv("ENVIRONMENT", "development")
+        if env == "production":
+            return ["https://modele-nextjs-fullstack-production-1e92.up.railway.app"]
+        return ["http://localhost:3000", "http://localhost:3001"]
+
+    @field_validator("CORS_ORIGINS", mode="after")
+    @classmethod
+    def ensure_cors_origins_list(cls, v):
+        """Ensure CORS_ORIGINS is always a list"""
+        if isinstance(v, str):
+            return [v]
+        if isinstance(v, list):
+            return v
+        return ["http://localhost:3000", "http://localhost:3001"]
 
     # Database
     DATABASE_URL: PostgresDsn = Field(
@@ -215,15 +212,6 @@ class Settings(BaseSettings):
         env_file_encoding="utf-8",
         case_sensitive=True,
         extra="ignore",
-        # Disable automatic JSON parsing for complex types to handle CORS_ORIGINS manually
-        json_schema_extra={
-            "properties": {
-                "CORS_ORIGINS": {
-                    "type": "array",
-                    "items": {"type": "string"}
-                }
-            }
-        }
     )
 
 

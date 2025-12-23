@@ -256,9 +256,9 @@ async def get_google_auth_url(
 @router.get("/google/callback")
 async def google_oauth_callback(
     request: Request,
-    code: str = Query(..., description="Authorization code from Google"),
-    state: str = Query(None, description="State parameter (frontend redirect URL)"),
-    db: Annotated[AsyncSession, Depends(get_db)] = None,
+    code: Annotated[str, Query(description="Authorization code from Google")],
+    state: Annotated[str | None, Query(description="State parameter (frontend redirect URL)")] = None,
+    db: Annotated[AsyncSession, Depends(get_db)] = Depends(get_db),
 ):
     """
     Handle Google OAuth callback

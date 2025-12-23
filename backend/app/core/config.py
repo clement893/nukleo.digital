@@ -29,8 +29,17 @@ class Settings(BaseSettings):
     DEBUG: bool = False
 
     # CORS - Accept string or list, will be converted to list
+    # Use default_factory to detect environment at initialization time
     CORS_ORIGINS: Union[str, List[str]] = Field(
-        default="http://localhost:3000,http://localhost:3001",
+        default_factory=lambda: (
+            ["https://modele-nextjs-fullstack-production-1e92.up.railway.app"]
+            if (
+                os.getenv("ENVIRONMENT", "").lower() == "production" or
+                os.getenv("RAILWAY_ENVIRONMENT") is not None or
+                os.getenv("RAILWAY_SERVICE_NAME") is not None
+            )
+            else "http://localhost:3000,http://localhost:3001"
+        ),
         description="Allowed CORS origins (comma-separated string or JSON array)",
     )
 

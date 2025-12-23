@@ -43,7 +43,11 @@ export default function LoginPage() {
 
   const handleGoogleLogin = async () => {
     try {
-      const response = await authAPI.getGoogleAuthUrl();
+      // Get the frontend URL for redirect after authentication
+      const frontendUrl = typeof window !== 'undefined' ? window.location.origin : '';
+      const callbackUrl = `${frontendUrl}/auth/callback`;
+      
+      const response = await authAPI.getGoogleAuthUrl(callbackUrl);
       const { auth_url } = response.data;
       window.location.href = auth_url;
     } catch (err) {

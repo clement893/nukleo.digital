@@ -179,8 +179,9 @@ export const authAPI = {
   logout: () => {
     return apiClient.post('/v1/auth/logout');
   },
-  getGoogleAuthUrl: () => {
-    return apiClient.get('/v1/auth/google');
+  getGoogleAuthUrl: (redirectUrl?: string) => {
+    const params = redirectUrl ? { redirect: redirectUrl } : {};
+    return apiClient.get('/v1/auth/google', { params });
   },
 };
 

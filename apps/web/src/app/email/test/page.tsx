@@ -1,12 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { AxiosError } from 'axios';
 import { emailAPI } from '@/lib/api';
-import { useAuthStore } from '@/lib/store';
 import ProtectedRoute from '@/components/auth/ProtectedRoute';
-import { Button, Card, Input, Textarea, Alert, Badge, Loading, Tabs, TabList, Tab, TabPanels, TabPanel } from '@/components/ui';
+import { Button, Card, Input, Textarea, Alert, Badge, Tabs, TabList, Tab, Container } from '@/components/ui';
 import type { EmailResponse, EmailHealthResponse } from '@/lib/email/client';
 
 interface ApiErrorResponse {
@@ -16,7 +15,6 @@ interface ApiErrorResponse {
 
 function EmailTestContent() {
   const router = useRouter();
-  const { isAuthenticated } = useAuthStore();
   const [toEmail, setToEmail] = useState('');
   const [subject, setSubject] = useState('');
   const [htmlContent, setHtmlContent] = useState('');
@@ -151,13 +149,15 @@ function EmailTestContent() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 dark:from-gray-900 dark:to-gray-800 py-8 px-4">
-      <div className="max-w-4xl mx-auto space-y-6">
+    <main className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 dark:from-gray-900 dark:to-gray-800 py-8">
+      <Container maxWidth="xl" className="space-y-6">
         <Card title="Email Test Interface (SendGrid)">
           {/* Health Check */}
-          <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-            <div className="flex items-center justify-between mb-2">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">SendGrid Health Check</h2>
+          <Card title="SendGrid Health Check" className="mb-6">
+            <div className="flex items-center justify-between mb-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Verify SendGrid configuration and connection status
+              </p>
               <Button
                 variant="primary"
                 onClick={checkHealth}
@@ -168,25 +168,27 @@ function EmailTestContent() {
               </Button>
             </div>
             {healthStatus && (
-              <div className="mt-2 text-sm space-y-2">
+              <div className="mt-4 space-y-3">
                 <div className="flex items-center gap-2">
-                  <strong className="text-gray-700 dark:text-gray-300">Configured:</strong>
+                  <strong className="text-sm text-gray-700 dark:text-gray-300">Configured:</strong>
                   <Badge variant={healthStatus.configured ? 'success' : 'error'}>
                     {healthStatus.configured ? '✅ Yes' : '❌ No'}
                   </Badge>
                 </div>
-                <p className="text-gray-700 dark:text-gray-300">
-                  <strong>From Email:</strong> {healthStatus.from_email || 'N/A'}
-                </p>
-                <p className="text-gray-700 dark:text-gray-300">
-                  <strong>From Name:</strong> {healthStatus.from_name || 'N/A'}
-                </p>
-                <p className="text-gray-700 dark:text-gray-300">
-                  <strong>Status:</strong> {healthStatus.status || 'N/A'}
-                </p>
+                <div className="text-sm">
+                  <p className="text-gray-700 dark:text-gray-300">
+                    <strong>From Email:</strong> {healthStatus.from_email || 'N/A'}
+                  </p>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    <strong>From Name:</strong> {healthStatus.from_name || 'N/A'}
+                  </p>
+                  <p className="text-gray-700 dark:text-gray-300">
+                    <strong>Status:</strong> {healthStatus.status || 'N/A'}
+                  </p>
+                </div>
               </div>
             )}
-          </div>
+          </Card>
 
           {/* Email Type Selection */}
           <div className="mb-6">
@@ -322,7 +324,7 @@ function EmailTestContent() {
             </Alert>
           </div>
         </Card>
-      </div>
+      </Container>
     </main>
   );
 }

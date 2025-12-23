@@ -203,6 +203,8 @@ async def get_google_auth_url(
         Authorization URL for Google OAuth
     """
     try:
+        logger.info(f"Google OAuth request received, redirect: {redirect}")
+        
         if not settings.GOOGLE_CLIENT_ID:
             logger.warning("Google OAuth not configured: GOOGLE_CLIENT_ID missing")
             raise HTTPException(
@@ -216,8 +218,16 @@ async def get_google_auth_url(
             # Use BASE_URL from settings if available, otherwise construct from request
             if settings.BASE_URL:
                 backend_base_url = settings.BASE_URL.rstrip("/")
+                logger.info(f"Using BASE_URL from settings: {backend_base_url}")
             else:
-                backend_base_url = str(request.base_url).rstrip("/")
+                try:
+                    backend_base_url = str(request.base_url).rstrip("/")
+                    logger.info(f"Using request.base_url: {backend_base_url}")
+                except Exception as e:
+                    logger.error(f"Error getting base_url from request: {e}")
+                    # Fallback to hardcoded production URL
+                    backend_base_url = "https://modelebackend-production-0590.up.railway.app"
+                    logger.info(f"Using fallback base_url: {backend_base_url}")
             callback_uri = f"{backend_base_url}{settings.API_V1_STR}/auth/google/callback"
         
         logger.info(f"Google OAuth callback URI: {callback_uri}")

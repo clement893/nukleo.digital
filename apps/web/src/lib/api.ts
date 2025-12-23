@@ -187,7 +187,7 @@ export const authAPI = {
 
 export const usersAPI = {
   getMe: () => {
-    return apiClient.get('/users/me');
+    return apiClient.get('/v1/auth/me');
   },
   updateMe: (data: { name?: string; email?: string }) => {
     return apiClient.put('/users/me', data);

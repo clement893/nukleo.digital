@@ -23,7 +23,10 @@ function CallbackContent() {
     const accessToken = searchParams.get('token') || searchParams.get('access_token');
     const refreshToken = searchParams.get('refresh_token');
 
+    logger.info('Auth callback started', { hasToken: !!accessToken, hasRefreshToken: !!refreshToken });
+
     if (!accessToken) {
+      logger.error('No access token provided in callback URL');
       // Don't add redirect parameter to avoid loops
       router.push('/auth/login?error=No access token provided');
       return;
@@ -32,25 +35,37 @@ function CallbackContent() {
     try {
       // Store tokens securely using TokenStorage
       TokenStorage.setToken(accessToken);
+      logger.info('Token stored successfully');
+      
       if (refreshToken) {
         TokenStorage.setRefreshToken(refreshToken);
+        logger.info('Refresh token stored successfully');
       }
 
       // Fetch user info using API client
+      logger.info('Fetching user info from API...');
       const response = await usersAPI.getMe();
+      logger.info('User info received', { hasUser: !!response.data });
+      
       const user = response.data;
 
       if (user) {
+        logger.info('Logging in user', { userId: user.id, email: user.email });
         login(user, accessToken, refreshToken ?? undefined);
+        logger.info('Redirecting to dashboard');
         router.push('/dashboard');
       } else {
         throw new Error('No user data received');
       }
     } catch (err) {
       const appError = handleApiError(err);
-      logger.error('Failed to complete authentication', appError);
+      logger.error('Failed to complete authentication', appError, { 
+        errorMessage: appError.message,
+        errorCode: appError.code,
+        errorDetails: appError.details 
+      });
       // Don't add redirect parameter to avoid loops
-      router.push('/auth/login?error=Failed to get user info');
+      router.push(`/auth/login?error=${encodeURIComponent(appError.message || 'Failed to get user info')}`);
     }
   }, [searchParams, router, login]);
 

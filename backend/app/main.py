@@ -62,9 +62,6 @@ def create_app() -> FastAPI:
         lifespan=lifespan,
     )
 
-    # Rate Limiting
-    app = setup_rate_limiting(app)
-
     # CORS Middleware - MUST be added first to handle preflight requests
     # Ensure CORS_ORIGINS is a list
     from app.core.logging import logger
@@ -90,6 +87,9 @@ def create_app() -> FastAPI:
 
     # Cache Headers Middleware
     app.add_middleware(CacheHeadersMiddleware, default_max_age=300)
+
+    # Rate Limiting (after CORS to allow preflight requests)
+    app = setup_rate_limiting(app)
 
     # Include API router
     app.include_router(api_router, prefix=settings.API_V1_STR)

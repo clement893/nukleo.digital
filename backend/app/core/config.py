@@ -34,6 +34,41 @@ class Settings(BaseSettings):
         description="Allowed CORS origins",
     )
 
+    @field_validator("CORS_ORIGINS", mode="before")
+    @classmethod
+    def parse_cors_origins(cls, v):
+        """Parse CORS_ORIGINS from environment variable (JSON array or comma-separated string)"""
+        import json
+        import os
+        
+        # If it's already a list, return it
+        if isinstance(v, list):
+            return v
+        
+        # If it's a string, try to parse it
+        if isinstance(v, str):
+            # Try JSON first
+            try:
+                parsed = json.loads(v)
+                if isinstance(parsed, list):
+                    return parsed
+            except (json.JSONDecodeError, ValueError):
+                pass
+            
+            # Try comma-separated string
+            if "," in v:
+                return [origin.strip() for origin in v.split(",") if origin.strip()]
+            
+            # Single string
+            return [v.strip()] if v.strip() else []
+        
+        # Default fallback
+        env = os.getenv("ENVIRONMENT", "development")
+        if env == "production":
+            # In production, allow the frontend URL by default if not set
+            return ["https://modele-nextjs-fullstack-production-1e92.up.railway.app"]
+        return v
+
     # Database
     DATABASE_URL: PostgresDsn = Field(
         default="postgresql+asyncpg://user:password@localhost:5432/modele",
@@ -114,9 +149,9 @@ class Settings(BaseSettings):
             raise ValueError(f"Invalid email format: {v}")
         return v
 
-    @field_validator("DATABASE_URL", mode="before")
+    @field_validator("DATABASE_URL", mode="after")
     @classmethod
-    def validate_database_url(cls, v: str | PostgresDsn) -> str:
+    def validate_database_url(cls, v: str) -> str:
         """Validate DATABASE_URL is set in production"""
         import os
         env = os.getenv("ENVIRONMENT", "development")
@@ -127,9 +162,7 @@ class Settings(BaseSettings):
                     "DATABASE_URL must be set to a valid PostgreSQL connection string in production"
                 )
         
-        if isinstance(v, str):
-            return v
-        return str(v)
+        return v
 
     # Database Connection Pool Configuration
     DB_POOL_SIZE: int = Field(

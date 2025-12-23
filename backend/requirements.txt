@@ -24,4 +24,7 @@ email-validator>=2.1.0
 python-json-logger>=2.0.0
 slowapi>=0.1.9
 
+# Payment processing
+stripe>=7.0.0
+
 # Note: CORS is handled by FastAPI's CORSMiddleware (no separate package needed)

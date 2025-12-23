@@ -31,7 +31,8 @@ function getJwtSecret(): Uint8Array {
  * ```typescript
  * const payload = await verifyToken(token);
  * if (payload) {
- *   console.log('User ID:', payload.sub);
+ *   const { logger } = await import('@/lib/logger');
+ *   logger.debug('User authenticated', { userId: payload.sub });
  * }
  * ```
  */

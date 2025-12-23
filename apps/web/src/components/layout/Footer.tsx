@@ -62,7 +62,7 @@ export default function Footer() {
               </li>
               <li>
                 <a href="https://github.com/clement893/MODELE-NEXTJS-FULLSTACK/issues" target="_blank" className="hover:text-blue-400 transition">
-                  Signaler un bug
+                  Report a Bug
                 </a>
               </li>
             </ul>

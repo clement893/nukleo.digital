@@ -62,18 +62,33 @@ export default function TeamsPage() {
     try {
       setLoading(true);
       setError('');
-      // Note: Replace mock data with actual API call when backend endpoint is ready
-      // Example: const response = await teamsAPI.list();
-      //          setTeams(response.data);
+      const { teamsAPI } = await import('@/lib/api');
+      const response = await teamsAPI.list();
       
-      // Temporary mock data for development
-      setTeams([
-        { id: '1', name: 'Équipe Marketing', description: 'Gestion des campagnes marketing', member_count: 5, organization_id: '1', created_at: '2024-01-15' },
-        { id: '2', name: 'Équipe Donateurs', description: 'Gestion de la relation donateurs', member_count: 3, organization_id: '1', created_at: '2024-01-20' },
-        { id: '3', name: 'Équipe Technique', description: 'Développement et maintenance', member_count: 4, organization_id: '1', created_at: '2024-02-01' },
-      ]);
+      if (response.data) {
+        setTeams(response.data.map((team: {
+          id: string | number;
+          name: string;
+          description?: string;
+          member_count?: number;
+          organization_id?: string;
+          created_at: string;
+        }) => ({
+          id: String(team.id),
+          name: team.name,
+          description: team.description,
+          member_count: team.member_count || 0,
+          organization_id: team.organization_id || '',
+          created_at: team.created_at,
+        })));
+      }
     } catch (err: unknown) {
-      setError(getErrorDetail(err) || getErrorMessage(err, 'Erreur lors du chargement'));
+      // If API returns 404 or endpoint doesn't exist yet, use empty array
+      if (getErrorDetail(err)?.includes('404') || getErrorDetail(err)?.includes('not found')) {
+        setTeams([]);
+      } else {
+        setError(getErrorDetail(err) || getErrorMessage(err, 'Error loading teams'));
+      }
     } finally {
       setLoading(false);
     }
@@ -81,38 +96,58 @@ export default function TeamsPage() {
 
   const loadTeamMembers = async (teamId: string) => {
     try {
-      // TODO: Replace with actual API call
-      // const response = await teamsAPI.getMembers(teamId);
-      // setTeamMembers(response.data);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      void teamId; // Will be used when API is implemented
+      const { teamsAPI } = await import('@/lib/api');
+      const response = await teamsAPI.getMembers(teamId);
       
-      // Mock data
-      setTeamMembers([
-        { id: '1', user_id: '1', user_name: 'Jean Dupont', user_email: 'jean@example.com', role: 'Manager', joined_at: '2024-01-15' },
-        { id: '2', user_id: '2', user_name: 'Marie Martin', user_email: 'marie@example.com', role: 'Member', joined_at: '2024-01-16' },
-        { id: '3', user_id: '3', user_name: 'Pierre Durand', user_email: 'pierre@example.com', role: 'Member', joined_at: '2024-01-17' },
-      ]);
+      if (response.data) {
+        setTeamMembers(response.data.map((member: {
+          id: string | number;
+          user_id: string | number;
+          user_name?: string;
+          user_email?: string;
+          role: string;
+          joined_at: string;
+        }) => ({
+          id: String(member.id),
+          user_id: String(member.user_id),
+          user_name: member.user_name || 'Unknown User',
+          user_email: member.user_email || '',
+          role: member.role,
+          joined_at: member.joined_at,
+        })));
+      }
     } catch (err: unknown) {
-      console.error('Error loading team members:', err);
+      const { logger } = require('@/lib/logger');
+      // If API returns 404 or endpoint doesn't exist yet, use empty array
+      if (getErrorDetail(err)?.includes('404') || getErrorDetail(err)?.includes('not found')) {
+        setTeamMembers([]);
+      } else {
+        logger.error('Error loading team members', err as Error, { teamId });
+      }
     }
   };
 
   const handleCreateTeam = async () => {
     if (!newTeamName.trim()) {
-      setError('Le nom de l\'équipe est requis');
+      setError('Team name is required');
       return;
     }
 
     try {
-      // TODO: Replace with actual API call
-      // await teamsAPI.create({ name: newTeamName, description: newTeamDescription });
+      setLoading(true);
+      const { teamsAPI } = await import('@/lib/api');
+      await teamsAPI.create({
+        name: newTeamName,
+        description: newTeamDescription || undefined,
+      });
       await loadTeams();
       setShowCreateModal(false);
       setNewTeamName('');
       setNewTeamDescription('');
     } catch (err: unknown) {
-      setError(getErrorDetail(err) || getErrorMessage(err, 'Erreur lors de la création'));
+      setError(getErrorDetail(err) || getErrorMessage(err, 'Error creating team'));
+    } finally {
+      setLoading(false);
     }
   };
 

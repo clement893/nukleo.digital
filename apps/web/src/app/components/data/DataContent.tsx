@@ -19,16 +19,16 @@ export default function DataContent() {
   const [crudMode, setCrudMode] = useState<'create' | 'edit' | 'delete' | 'view'>('create');
 
   const kanbanColumns: KanbanColumn[] = [
-    { id: '1', title: 'À faire', status: 'todo', color: '#3B82F6' },
-    { id: '2', title: 'En cours', status: 'in-progress', color: '#F59E0B' },
-    { id: '3', title: 'Terminé', status: 'done', color: '#10B981' },
+    { id: '1', title: 'To Do', status: 'todo', color: '#3B82F6' },
+    { id: '2', title: 'In Progress', status: 'in-progress', color: '#F59E0B' },
+    { id: '3', title: 'Done', status: 'done', color: '#10B981' },
   ];
 
   const kanbanCards: KanbanCard[] = [
-    { id: '1', title: 'Tâche 1', description: 'Description de la tâche 1', status: 'todo', priority: 'high', assignee: 'John Doe' },
-    { id: '2', title: 'Tâche 2', description: 'Description de la tâche 2', status: 'todo', priority: 'medium', assignee: 'Jane Smith' },
-    { id: '3', title: 'Tâche 3', description: 'Description de la tâche 3', status: 'in-progress', priority: 'low', assignee: 'Bob Johnson' },
-    { id: '4', title: 'Tâche 4', description: 'Description de la tâche 4', status: 'done', priority: 'high', assignee: 'Alice Brown' },
+    { id: '1', title: 'Task 1', description: 'Task 1 description', status: 'todo', priority: 'high', assignee: 'John Doe' },
+    { id: '2', title: 'Task 2', description: 'Task 2 description', status: 'todo', priority: 'medium', assignee: 'Jane Smith' },
+    { id: '3', title: 'Task 3', description: 'Task 3 description', status: 'in-progress', priority: 'low', assignee: 'Bob Johnson' },
+    { id: '4', title: 'Task 4', description: 'Task 4 description', status: 'done', priority: 'high', assignee: 'Alice Brown' },
   ];
 
   const calendarEvents: CalendarEvent[] = [

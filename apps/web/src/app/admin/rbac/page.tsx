@@ -65,7 +65,7 @@ export default function RBACPage() {
         { id: '4', name: 'User', permissions: ['donateurs.read'], description: 'Accès en lecture seule' },
       ]);
     } catch (err: unknown) {
-      setError(getErrorDetail(err) || getErrorMessage(err, 'Erreur lors du chargement'));
+      setError(getErrorDetail(err) || getErrorMessage(err, 'Error loading permissions'));
     } finally {
       setLoading(false);
     }
@@ -89,13 +89,14 @@ export default function RBACPage() {
         { id: 'campagnes.write', name: 'Modifier campagnes', category: 'Campagnes', description: 'Créer et modifier des campagnes' },
       ]);
     } catch (err: unknown) {
-      console.error('Error loading permissions:', err);
+      const { logger } = require('@/lib/logger');
+      logger.error('Error loading permissions', err as Error);
     }
   };
 
   const handleCreateRole = async () => {
     if (!newRoleName.trim()) {
-      setError('Le nom du rôle est requis');
+      setError('Role name is required');
       return;
     }
 
@@ -107,7 +108,7 @@ export default function RBACPage() {
       setNewRoleName('');
       setNewRoleDescription('');
     } catch (err: unknown) {
-      setError(getErrorDetail(err) || getErrorMessage(err, 'Erreur lors de la création'));
+      setError(getErrorDetail(err) || getErrorMessage(err, 'Error creating role'));
     }
   };
 

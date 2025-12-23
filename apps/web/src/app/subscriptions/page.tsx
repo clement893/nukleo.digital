@@ -104,29 +104,35 @@ function SubscriptionsContent() {
 
   const loadPayments = useCallback(async () => {
     try {
-      // Note: Payment history endpoint may not be available yet
-      // This is a placeholder for when the backend implements it
-      // For now, we'll try to get payment info from subscription if available
-      const { logger } = await import('@/lib/logger');
-      logger.debug('Loading payment history');
+      const { subscriptionsAPI } = await import('@/lib/api');
+      const response = await subscriptionsAPI.getPayments();
       
-      // TODO: Implement when backend endpoint is ready
-      // const { subscriptionsAPI } = await import('@/lib/api');
-      // const response = await subscriptionsAPI.getPayments();
-      // setPayments(response.data.map(payment => ({
-      //   id: String(payment.id),
-      //   amount: payment.amount / 100,
-      //   currency: payment.currency.toUpperCase(),
-      //   status: payment.status.toLowerCase() as 'paid' | 'pending' | 'failed',
-      //   date: payment.created_at,
-      //   invoice_url: payment.invoice_url,
-      // })));
-      
-      // Empty array for now - will be populated when endpoint is ready
-      setPayments([]);
+      if (response.data) {
+        setPayments(response.data.map((payment: {
+          id: string | number;
+          amount: number;
+          currency: string;
+          status: string;
+          created_at: string;
+          invoice_url?: string;
+        }) => ({
+          id: String(payment.id),
+          amount: payment.amount / 100, // Convert from cents
+          currency: payment.currency.toUpperCase(),
+          status: payment.status.toLowerCase() as 'paid' | 'pending' | 'failed',
+          date: payment.created_at,
+          invoice_url: payment.invoice_url,
+        })));
+      }
     } catch (err: unknown) {
       const { logger } = await import('@/lib/logger');
-      logger.error('Error loading payments', err as Error, { context: 'subscriptions' });
+      // If API returns 404 or endpoint doesn't exist yet, use empty array
+      if (getErrorDetail(err)?.includes('404') || getErrorDetail(err)?.includes('not found')) {
+        setPayments([]);
+        logger.debug('Payment history endpoint not available yet');
+      } else {
+        logger.error('Error loading payments', err as Error, { context: 'subscriptions' });
+      }
     }
   }, []);
 

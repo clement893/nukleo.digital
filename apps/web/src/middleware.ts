@@ -95,7 +95,7 @@ export async function middleware(request: NextRequest) {
   return NextResponse.redirect(loginUrl);
 }
 
-// Configurer les routes sur lesquelles le middleware s'applique
+// Configure the routes on which the middleware applies
 export const config = {
   matcher: [
     /*

@@ -49,48 +49,39 @@ export default function InvitationsPage() {
     try {
       setLoading(true);
       setError('');
-      // Note: Replace mock data with actual API call when backend endpoint is ready
-      // Example: const response = await invitationsAPI.list();
-      //          setInvitations(response.data);
+      const { invitationsAPI } = await import('@/lib/api');
+      const response = await invitationsAPI.list();
       
-      // Temporary mock data for development
-      setInvitations([
-        {
-          id: '1',
-          email: 'nouveau@example.com',
-          role: 'user',
-          organization_id: '1',
-          organization_name: 'Organisation Test',
-          status: 'pending',
-          invited_by: 'Admin User',
-          invited_at: '2024-01-15T10:00:00Z',
-          expires_at: '2024-01-22T10:00:00Z',
-        },
-        {
-          id: '2',
-          email: 'manager@example.com',
-          role: 'manager',
-          organization_id: '1',
-          organization_name: 'Organisation Test',
-          status: 'accepted',
-          invited_by: 'Admin User',
-          invited_at: '2024-01-10T10:00:00Z',
-          expires_at: '2024-01-17T10:00:00Z',
-        },
-        {
-          id: '3',
-          email: 'expired@example.com',
-          role: 'user',
-          organization_id: '1',
-          organization_name: 'Organisation Test',
-          status: 'expired',
-          invited_by: 'Admin User',
-          invited_at: '2024-01-01T10:00:00Z',
-          expires_at: '2024-01-08T10:00:00Z',
-        },
-      ]);
+      if (response.data) {
+        setInvitations(response.data.map((invitation: {
+          id: string | number;
+          email: string;
+          role: string;
+          organization_id?: string;
+          organization_name?: string;
+          status: string;
+          invited_by?: string;
+          invited_at: string;
+          expires_at: string;
+        }) => ({
+          id: String(invitation.id),
+          email: invitation.email,
+          role: invitation.role,
+          organization_id: invitation.organization_id || '',
+          organization_name: invitation.organization_name || 'Unknown Organization',
+          status: invitation.status as 'pending' | 'accepted' | 'expired' | 'cancelled',
+          invited_by: invitation.invited_by || 'Unknown',
+          invited_at: invitation.invited_at,
+          expires_at: invitation.expires_at,
+        })));
+      }
     } catch (err: unknown) {
-      setError(getErrorDetail(err) || getErrorMessage(err, 'Erreur lors du chargement'));
+      // If API returns 404 or endpoint doesn't exist yet, use empty array
+      if (getErrorDetail(err)?.includes('404') || getErrorDetail(err)?.includes('not found')) {
+        setInvitations([]);
+      } else {
+        setError(getErrorDetail(err) || getErrorMessage(err, 'Error loading invitations'));
+      }
     } finally {
       setLoading(false);
     }
@@ -98,47 +89,55 @@ export default function InvitationsPage() {
 
   const handleCreateInvitation = async () => {
     if (!newInvitationEmail.trim()) {
-      setError('L\'email est requis');
+      setError('Email is required');
       return;
     }
 
     try {
-      // TODO: Replace with actual API call
-      // await invitationsAPI.create({ email: newInvitationEmail, role: newInvitationRole });
+      setLoading(true);
+      const { invitationsAPI } = await import('@/lib/api');
+      await invitationsAPI.create({
+        email: newInvitationEmail,
+        role: newInvitationRole,
+      });
       await loadInvitations();
       setShowCreateModal(false);
       setNewInvitationEmail('');
       setNewInvitationRole('user');
     } catch (err: unknown) {
-      setError(getErrorDetail(err) || getErrorMessage(err, 'Erreur lors de la création'));
+      setError(getErrorDetail(err) || getErrorMessage(err, 'Error creating invitation'));
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleCancelInvitation = async (invitationId: string) => {
-    if (!confirm('Êtes-vous sûr de vouloir annuler cette invitation ?')) {
+    if (!confirm('Are you sure you want to cancel this invitation?')) {
       return;
     }
 
     try {
-      // TODO: Replace with actual API call
-      // await invitationsAPI.cancel(invitationId);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      void invitationId; // Will be used when API is implemented
+      setLoading(true);
+      const { invitationsAPI } = await import('@/lib/api');
+      await invitationsAPI.cancel(invitationId);
       await loadInvitations();
     } catch (err: unknown) {
-      setError(getErrorDetail(err) || getErrorMessage(err, 'Erreur lors de l\'annulation'));
+      setError(getErrorDetail(err) || getErrorMessage(err, 'Error canceling invitation'));
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleResendInvitation = async (invitationId: string) => {
     try {
-      // TODO: Replace with actual API call
-      // await invitationsAPI.resend(invitationId);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      void invitationId; // Will be used when API is implemented
+      setLoading(true);
+      const { invitationsAPI } = await import('@/lib/api');
+      await invitationsAPI.resend(invitationId);
       await loadInvitations();
     } catch (err: unknown) {
-      setError(getErrorDetail(err) || getErrorMessage(err, 'Erreur lors de la réenvoi'));
+      setError(getErrorDetail(err) || getErrorMessage(err, 'Error resending invitation'));
+    } finally {
+      setLoading(false);
     }
   };
 

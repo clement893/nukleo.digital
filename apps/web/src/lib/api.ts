@@ -255,6 +255,60 @@ export const subscriptionsAPI = {
   upgradePlan: (planId: number) => {
     return apiClient.post(`/v1/subscriptions/upgrade/${planId}`);
   },
+  getPayments: () => {
+    return apiClient.get('/v1/subscriptions/payments');
+  },
+};
+
+export const teamsAPI = {
+  list: () => {
+    return apiClient.get('/v1/teams');
+  },
+  get: (teamId: string) => {
+    return apiClient.get(`/v1/teams/${teamId}`);
+  },
+  create: (data: { name: string; description?: string; organization_id?: string }) => {
+    return apiClient.post('/v1/teams', data);
+  },
+  update: (teamId: string, data: { name?: string; description?: string }) => {
+    return apiClient.put(`/v1/teams/${teamId}`, data);
+  },
+  delete: (teamId: string) => {
+    return apiClient.delete(`/v1/teams/${teamId}`);
+  },
+  getMembers: (teamId: string) => {
+    return apiClient.get(`/v1/teams/${teamId}/members`);
+  },
+  addMember: (teamId: string, data: { user_id: string; role: string }) => {
+    return apiClient.post(`/v1/teams/${teamId}/members`, data);
+  },
+  removeMember: (teamId: string, memberId: string) => {
+    return apiClient.delete(`/v1/teams/${teamId}/members/${memberId}`);
+  },
+  updateMemberRole: (teamId: string, memberId: string, role: string) => {
+    return apiClient.put(`/v1/teams/${teamId}/members/${memberId}`, { role });
+  },
+};
+
+export const invitationsAPI = {
+  list: (params?: { status?: string; organization_id?: string }) => {
+    return apiClient.get('/v1/invitations', { params });
+  },
+  get: (invitationId: string) => {
+    return apiClient.get(`/v1/invitations/${invitationId}`);
+  },
+  create: (data: { email: string; role: string; organization_id?: string }) => {
+    return apiClient.post('/v1/invitations', data);
+  },
+  cancel: (invitationId: string) => {
+    return apiClient.delete(`/v1/invitations/${invitationId}`);
+  },
+  resend: (invitationId: string) => {
+    return apiClient.post(`/v1/invitations/${invitationId}/resend`);
+  },
+  accept: (invitationId: string, token: string) => {
+    return apiClient.post(`/v1/invitations/${invitationId}/accept`, { token });
+  },
 };
 
 // Export default for backward compatibility

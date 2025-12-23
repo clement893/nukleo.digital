@@ -45,6 +45,15 @@ class Settings(BaseSettings):
         if isinstance(v, list):
             return v
         
+        # If it's None or empty, check environment
+        if not v:
+            env = os.getenv("ENVIRONMENT", "development")
+            if env == "production":
+                # In production, allow the frontend URL by default if not set
+                return ["https://modele-nextjs-fullstack-production-1e92.up.railway.app"]
+            # In development, return default
+            return ["http://localhost:3000", "http://localhost:3001"]
+        
         # If it's a string, try to parse it
         if isinstance(v, str):
             # Try JSON first
@@ -57,17 +66,19 @@ class Settings(BaseSettings):
             
             # Try comma-separated string
             if "," in v:
-                return [origin.strip() for origin in v.split(",") if origin.strip()]
+                origins = [origin.strip() for origin in v.split(",") if origin.strip()]
+                if origins:
+                    return origins
             
             # Single string
-            return [v.strip()] if v.strip() else []
+            if v.strip():
+                return [v.strip()]
         
-        # Default fallback
+        # Fallback to default
         env = os.getenv("ENVIRONMENT", "development")
         if env == "production":
-            # In production, allow the frontend URL by default if not set
             return ["https://modele-nextjs-fullstack-production-1e92.up.railway.app"]
-        return v
+        return ["http://localhost:3000", "http://localhost:3001"]
 
     # Database
     DATABASE_URL: PostgresDsn = Field(

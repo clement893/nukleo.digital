@@ -239,6 +239,20 @@ class Settings(BaseSettings):
         description="Stripe webhook secret for signature verification",
     )
 
+    # Google OAuth Configuration
+    GOOGLE_CLIENT_ID: str = Field(
+        default="",
+        description="Google OAuth client ID",
+    )
+    GOOGLE_CLIENT_SECRET: str = Field(
+        default="",
+        description="Google OAuth client secret",
+    )
+    GOOGLE_REDIRECT_URI: str = Field(
+        default="",
+        description="Google OAuth redirect URI",
+    )
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",

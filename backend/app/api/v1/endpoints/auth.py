@@ -182,3 +182,40 @@ async def get_current_user_info(
     """
     return current_user
 
+
+@router.get("/google")
+async def get_google_auth_url():
+    """
+    Get Google OAuth authorization URL
+    
+    Returns:
+        Authorization URL for Google OAuth
+    """
+    from urllib.parse import urlencode
+    from app.core.config import settings
+    
+    if not settings.GOOGLE_CLIENT_ID:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Google OAuth is not configured"
+        )
+    
+    # Build redirect URI - use the configured one or default to backend callback
+    redirect_uri = settings.GOOGLE_REDIRECT_URI or f"{settings.API_V1_STR}/auth/google/callback"
+    
+    # Google OAuth 2.0 authorization endpoint
+    base_url = "https://accounts.google.com/o/oauth2/v2/auth"
+    
+    params = {
+        "client_id": settings.GOOGLE_CLIENT_ID,
+        "redirect_uri": redirect_uri,
+        "response_type": "code",
+        "scope": "openid email profile",
+        "access_type": "offline",
+        "prompt": "consent",
+    }
+    
+    auth_url = f"{base_url}?{urlencode(params)}"
+    
+    return {"auth_url": auth_url}
+

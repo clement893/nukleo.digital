@@ -4,7 +4,7 @@ SQLAlchemy model for user roles
 """
 
 from datetime import datetime
-from sqlalchemy import Boolean, Column, DateTime, Integer, String, Text, func, Index
+from sqlalchemy import Boolean, Column, DateTime, Integer, String, Text, func, Index, ForeignKey
 from sqlalchemy.orm import relationship
 
 from app.core.database import Base
@@ -75,8 +75,8 @@ class RolePermission(Base):
     )
 
     id = Column(Integer, primary_key=True, index=True)
-    role_id = Column(Integer, nullable=False, index=True)
-    permission_id = Column(Integer, nullable=False, index=True)
+    role_id = Column(Integer, ForeignKey("roles.id", ondelete="CASCADE"), nullable=False, index=True)
+    permission_id = Column(Integer, ForeignKey("permissions.id", ondelete="CASCADE"), nullable=False, index=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
 
     # Relationships
@@ -97,8 +97,8 @@ class UserRole(Base):
     )
 
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, nullable=False, index=True)
-    role_id = Column(Integer, nullable=False, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    role_id = Column(Integer, ForeignKey("roles.id", ondelete="CASCADE"), nullable=False, index=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
 
     # Relationships

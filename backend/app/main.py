@@ -38,6 +38,12 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     # Startup
     await init_db()
     await init_cache()
+    from app.core.logging import logger
+    import os
+    logger.info(f"CORS Origins configured: {settings.CORS_ORIGINS}")
+    logger.info(f"ENVIRONMENT: {os.getenv('ENVIRONMENT', 'NOT SET')}")
+    logger.info(f"RAILWAY_ENVIRONMENT: {os.getenv('RAILWAY_ENVIRONMENT', 'NOT SET')}")
+    logger.info(f"RAILWAY_SERVICE_NAME: {os.getenv('RAILWAY_SERVICE_NAME', 'NOT SET')}")
     yield
     # Shutdown
     await close_cache()

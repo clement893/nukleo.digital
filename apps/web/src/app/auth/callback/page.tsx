@@ -19,7 +19,8 @@ function CallbackContent() {
   const { login } = useAuthStore();
 
   const handleAuthCallback = useCallback(async () => {
-    const accessToken = searchParams.get('access_token');
+    // Support both formats: token (from Google OAuth callback) and access_token/refresh_token
+    const accessToken = searchParams.get('token') || searchParams.get('access_token');
     const refreshToken = searchParams.get('refresh_token');
 
     if (!accessToken) {

@@ -28,7 +28,7 @@ export default function NavigationContent() {
 
   return (
     <PageContainer>
-      <PageHeader title="Composants de Navigation" description="Composants pour crÃ©er des interfaces de navigation intuitives" breadcrumbs={[{ label: 'Accueil', href: '/' }, { label: 'Composants', href: '/components' }, { label: 'Navigation' }]} />
+      <PageHeader title="Composants de Navigation" description="Composants pour créer des interfaces de navigation intuitives" breadcrumbs={[{ label: 'Accueil', href: '/' }, { label: 'Composants', href: '/components' }, { label: 'Navigation' }]} />
 
       <div className="space-y-8">
         <Section title="Breadcrumb" description="Fil d'Ariane pour la navigation">

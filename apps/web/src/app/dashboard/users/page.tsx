@@ -91,7 +91,7 @@ function UsersContent() {
     }
 
     if (!formData.password.trim()) {
-      setError('Le mot de passe est requis pour crÃ©er un utilisateur');
+      setError('Le mot de passe est requis pour créer un utilisateur');
       return;
     }
 
@@ -117,7 +117,7 @@ function UsersContent() {
       resetForm();
     } catch (err) {
       const appError = handleApiError(err);
-      setError(appError.message || 'Erreur lors de la crÃ©ation de l\'utilisateur');
+      setError(appError.message || 'Erreur lors de la création de l\'utilisateur');
     } finally {
       setLoading(false);
     }
@@ -269,7 +269,7 @@ function UsersContent() {
     },
     {
       key: 'role',
-      label: 'RÃ´le',
+      label: 'Rôle',
       sortable: true,
       render: (value) => (
         <Badge variant={getRoleBadge(String(value))}>
@@ -300,7 +300,7 @@ function UsersContent() {
     },
     {
       key: 'created_at',
-      label: 'CrÃ©Ã© le',
+      label: 'Créé le',
       sortable: true,
       render: (value) => (
         <span className="text-gray-600 dark:text-gray-400">
@@ -388,7 +388,7 @@ function UsersContent() {
                 pageSize={10}
                 searchable={true}
                 searchPlaceholder="Rechercher un utilisateur..."
-                emptyMessage="Aucun utilisateur trouvÃ©"
+                emptyMessage="Aucun utilisateur trouvé"
                 loading={loading}
               />
             </div>
@@ -401,7 +401,7 @@ function UsersContent() {
             <Card className="w-full max-w-md">
               <div className="p-6">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-                  CrÃ©er un nouvel utilisateur
+                  Créer un nouvel utilisateur
                 </h2>
                 <div className="space-y-4">
                   <div>
@@ -435,7 +435,7 @@ function UsersContent() {
                   </div>
                   <div>
                     <Select
-                      label="RÃ´le *"
+                      label="Rôle *"
                       value={formData.role}
                       onChange={(e) =>
                         setFormData({
@@ -462,7 +462,7 @@ function UsersContent() {
                       Annuler
                     </Button>
                     <Button onClick={handleCreateUser} loading={loading}>
-                      CrÃ©er
+                      Créer
                     </Button>
                   </div>
                 </div>
@@ -511,7 +511,7 @@ function UsersContent() {
                   </div>
                   <div>
                     <Select
-                      label="RÃ´le *"
+                      label="Rôle *"
                       value={formData.role}
                       onChange={(e) =>
                         setFormData({

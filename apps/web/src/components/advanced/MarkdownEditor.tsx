@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { clsx } from 'clsx';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
-import { FileText, Eye, EyeOff, Save, Download } from 'lucide-react';
+import { FileText, Save, Download } from 'lucide-react';
 import { logger } from '@/lib/logger';
 
 export interface MarkdownEditorProps {

@@ -246,6 +246,32 @@ export const resourcesAPI = {
   },
 };
 
+export const projectsAPI = {
+  list: () => {
+    return apiClient.get('/v1/projects');
+  },
+  get: (projectId: string) => {
+    return apiClient.get(`/v1/projects/${projectId}`);
+  },
+  create: (data: {
+    name: string;
+    description?: string;
+    status?: 'active' | 'archived' | 'completed';
+  }) => {
+    return apiClient.post('/v1/projects', data);
+  },
+  update: (projectId: number, data: {
+    name?: string;
+    description?: string;
+    status?: 'active' | 'archived' | 'completed';
+  }) => {
+    return apiClient.put(`/v1/projects/${projectId}`, data);
+  },
+  delete: (projectId: number) => {
+    return apiClient.delete(`/v1/projects/${projectId}`);
+  },
+};
+
 export const aiAPI = {
   health: () => {
     return apiClient.get('/ai/health');

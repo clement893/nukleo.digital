@@ -3,7 +3,7 @@
 // Force dynamic rendering to avoid prerendering issues
 export const dynamic = 'force-dynamic';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ProtectedRoute from '@/components/auth/ProtectedRoute';
 import Container from '@/components/ui/Container';
 import Button from '@/components/ui/Button';

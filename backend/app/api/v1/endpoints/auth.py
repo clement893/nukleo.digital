@@ -220,6 +220,127 @@ async def login(
     return Token(access_token=access_token, token_type="bearer")
 
 
+@router.post("/refresh", response_model=Token)
+@rate_limit_decorator("10/minute")
+async def refresh_token(
+    request: Request,
+    refresh_data: dict,
+    db: Annotated[AsyncSession, Depends(get_db)],
+) -> Token:
+    """
+    Refresh access token
+    
+    Accepts either:
+    - An expired access token (if still valid for refresh)
+    - A refresh token (if refresh tokens are implemented)
+    
+    Args:
+        refresh_data: Dict with either "token" (expired access token) or "refresh_token"
+        db: Database session
+        
+    Returns:
+        New access token
+    """
+    # Try to get token from refresh_data
+    token = refresh_data.get("token") or refresh_data.get("refresh_token") or refresh_data.get("access_token")
+    
+    if not token:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Token or refresh_token is required",
+        )
+    
+    try:
+        # Try to decode the token (even if expired, we can still read the payload)
+        # Use verify_exp=False to read expired tokens
+        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM], options={"verify_exp": False})
+        
+        # Verify token type
+        token_type = payload.get("type", "access")
+        if token_type not in ("access", "refresh"):
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid token type",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
+        
+        # Get user email from token
+        username = payload.get("sub")
+        if not username:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid token payload",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
+        
+        # Verify user still exists and is active
+        result = await db.execute(
+            select(User).where(User.email == username)
+        )
+        user = result.scalar_one_or_none()
+        
+        if not user:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="User not found",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
+        
+        if not user.is_active:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="User is not active",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
+        
+        # Create new access token
+        access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
+        access_token = create_access_token(
+            data={"sub": user.email, "type": "access"},
+            expires_delta=access_token_expires,
+        )
+        
+        logger.info(f"Token refreshed for user {user.email}")
+        
+        return Token(access_token=access_token, token_type="bearer")
+        
+    except jwt.ExpiredSignatureError:
+        # Token is expired, but we can still refresh it if user exists
+        # This allows refreshing expired tokens
+        try:
+            payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM], options={"verify_exp": False})
+            username = payload.get("sub")
+            if username:
+                result = await db.execute(
+                    select(User).where(User.email == username)
+                )
+                user = result.scalar_one_or_none()
+                if user and user.is_active:
+                    # Create new access token
+                    access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
+                    access_token = create_access_token(
+                        data={"sub": user.email, "type": "access"},
+                        expires_delta=access_token_expires,
+                    )
+                    logger.info(f"Expired token refreshed for user {user.email}")
+                    return Token(access_token=access_token, token_type="bearer")
+        except Exception:
+            pass
+        
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Token expired and cannot be refreshed",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    except jwt.JWTError as e:
+        logger.warning(f"JWT error during refresh: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid token",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+
 @router.get("/me", response_model=UserResponse)
 async def get_current_user_info(
     current_user: Annotated[User, Depends(get_current_user)],

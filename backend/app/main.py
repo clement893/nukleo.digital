@@ -106,8 +106,7 @@ def create_app() -> FastAPI:
     app.add_middleware(CacheHeadersMiddleware, default_max_age=300)
 
     # Rate Limiting (after CORS to allow preflight requests)
-    # Temporarily disabled to debug 502 errors
-    # app = setup_rate_limiting(app)
+    app = setup_rate_limiting(app)
 
     # Include API router
     app.include_router(api_router, prefix=settings.API_V1_STR)

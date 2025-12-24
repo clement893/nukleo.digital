@@ -54,6 +54,8 @@ RATE_LIMITS = {
     "api": {
         "/api/v1/users": "100/hour",
         "/api/v1/users/{user_id}": "200/hour",
+        "/api/v1/projects": "200/hour",
+        "/api/v1/projects/{project_id}": "300/hour",
     },
     "default": "1000/hour",
 }

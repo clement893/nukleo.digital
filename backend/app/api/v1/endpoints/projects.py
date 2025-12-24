@@ -10,6 +10,7 @@ from sqlalchemy import select, and_
 
 from app.core.database import get_db
 from app.core.cache import cached, invalidate_cache_pattern
+from app.core.rate_limit import rate_limit_decorator
 from app.dependencies import get_current_user
 from app.models.project import Project, ProjectStatus
 from app.models.user import User
@@ -19,6 +20,7 @@ router = APIRouter()
 
 
 @router.get("/", response_model=List[ProjectSchema])
+@rate_limit_decorator("200/hour")
 @cached(expire=300, key_prefix="projects")
 async def get_projects(
     db: Annotated[AsyncSession, Depends(get_db)],
@@ -91,6 +93,7 @@ async def get_project(
 
 
 @router.post("/", response_model=ProjectSchema, status_code=status.HTTP_201_CREATED)
+@rate_limit_decorator("30/hour")
 @invalidate_cache_pattern("projects:*")
 async def create_project(
     project_data: ProjectCreate,
@@ -123,6 +126,7 @@ async def create_project(
 
 
 @router.put("/{project_id}", response_model=ProjectSchema)
+@rate_limit_decorator("100/hour")
 @invalidate_cache_pattern("projects:*")
 @invalidate_cache_pattern("project:*")
 async def update_project(
@@ -171,6 +175,7 @@ async def update_project(
 
 
 @router.delete("/{project_id}", status_code=status.HTTP_204_NO_CONTENT)
+@rate_limit_decorator("50/hour")
 @invalidate_cache_pattern("projects:*")
 @invalidate_cache_pattern("project:*")
 async def delete_project(

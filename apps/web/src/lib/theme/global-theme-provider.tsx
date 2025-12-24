@@ -5,6 +5,7 @@
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { getActiveTheme } from '@/lib/api/theme';
+import { logger } from '@/lib/logger';
 import type { ThemeConfigResponse, ThemeConfig } from '@modele/types';
 
 interface GlobalThemeContextType {
@@ -37,7 +38,7 @@ export function GlobalThemeProvider({ children }: GlobalThemeProviderProps) {
     } catch (err) {
       const error = err instanceof Error ? err : new Error('Failed to load theme');
       setError(error);
-      console.error('Failed to fetch global theme:', error);
+      logger.error('Failed to fetch global theme', error);
     } finally {
       setIsLoading(false);
     }

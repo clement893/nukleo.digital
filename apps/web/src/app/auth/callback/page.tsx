@@ -26,18 +26,13 @@ function CallbackContent() {
     const accessToken = searchParams.get('token') || searchParams.get('access_token');
     const refreshToken = searchParams.get('refresh_token');
 
-    // Log to console for debugging (in addition to logger)
-    console.log('[Auth Callback] Started', { 
+    logger.info('Auth callback started', { 
       hasToken: !!accessToken, 
       hasRefreshToken: !!refreshToken,
-      tokenPreview: accessToken ? accessToken.substring(0, 20) + '...' : null,
       urlParams: Object.fromEntries(searchParams.entries())
     });
-    
-    logger.info('Auth callback started', { hasToken: !!accessToken, hasRefreshToken: !!refreshToken });
 
     if (!accessToken) {
-      console.error('[Auth Callback] No access token provided');
       logger.error('No access token provided in callback URL');
       // Don't add redirect parameter to avoid loops
       router.push('/auth/login?error=No access token provided');
@@ -46,14 +41,12 @@ function CallbackContent() {
 
     try {
       // Store tokens securely using TokenStorage (await to ensure it's stored before API calls)
-      console.log('[Auth Callback] Storing token...');
+      logger.debug('Storing token...');
       await TokenStorage.setToken(accessToken);
-      console.log('[Auth Callback] Token stored successfully');
       logger.info('Token stored successfully');
       
       if (refreshToken) {
         await TokenStorage.setRefreshToken(refreshToken);
-        console.log('[Auth Callback] Refresh token stored successfully');
         logger.info('Refresh token stored successfully');
       }
 
@@ -62,25 +55,22 @@ function CallbackContent() {
 
       // Verify token is stored
       const storedToken = TokenStorage.getToken();
-      console.log('[Auth Callback] Token verification:', { 
+      logger.debug('Token verification', { 
         hasStoredToken: !!storedToken,
         tokenMatches: storedToken === accessToken 
       });
 
       // Fetch user info using API client
-      console.log('[Auth Callback] Fetching user info from API...');
-      logger.info('Fetching user info from API...');
+      logger.debug('Fetching user info from API...');
       const response = await usersAPI.getMe();
-      console.log('[Auth Callback] User info received', { 
+      logger.info('User info received', { 
         hasUser: !!response.data,
         userEmail: response.data?.email 
       });
-      logger.info('User info received', { hasUser: !!response.data });
       
       const user = response.data;
 
       if (user) {
-        console.log('[Auth Callback] Logging in user', { userId: user.id, email: user.email });
         logger.info('Logging in user', { userId: user.id, email: user.email });
         
         // Ensure user object has the correct structure for the store
@@ -101,12 +91,11 @@ function CallbackContent() {
         
         // Verify login was successful
         const storedToken = TokenStorage.getToken();
-        console.log('[Auth Callback] Login verification:', {
+        logger.debug('Login verification', {
           tokenStored: !!storedToken,
           tokenMatches: storedToken === accessToken
         });
         
-        console.log('[Auth Callback] Redirecting to dashboard');
         logger.info('Redirecting to dashboard');
         
         // Small delay to ensure store is updated
@@ -117,14 +106,8 @@ function CallbackContent() {
         throw new Error('No user data received');
       }
     } catch (err) {
-      console.error('[Auth Callback] Error:', err);
       const appError = handleApiError(err);
-      console.error('[Auth Callback] App error details:', {
-        message: appError.message,
-        code: appError.code,
-        details: appError.details
-      });
-      logger.error('Failed to complete authentication', appError, { 
+      logger.error('Failed to complete authentication', appError instanceof Error ? appError : new Error(String(err)), { 
         errorMessage: appError.message,
         errorCode: appError.code,
         errorDetails: appError.details 

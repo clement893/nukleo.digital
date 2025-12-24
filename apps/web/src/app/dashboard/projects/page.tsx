@@ -14,16 +14,18 @@ import Alert from '@/components/ui/Alert';
 import Loading from '@/components/ui/Loading';
 import Select from '@/components/ui/Select';
 import DataTable, { type Column } from '@/components/ui/DataTable';
+import { projectsAPI } from '@/lib/api';
+import { handleApiError } from '@/lib/errors/api';
 import { Plus, Edit, Trash2 } from 'lucide-react';
 
 interface Project extends Record<string, unknown> {
-  id: string;
+  id: number;
   name: string;
-  description: string;
+  description: string | null;
   status: 'active' | 'archived' | 'completed';
   created_at: string;
   updated_at: string;
-  owner: string;
+  user_id: number;
 }
 
 function ProjectsContent() {
@@ -39,47 +41,16 @@ function ProjectsContent() {
     status: 'active' as 'active' | 'archived' | 'completed',
   });
 
-  // Mock data for demonstration
-  const mockProjects: Project[] = [
-    {
-      id: '1',
-      name: 'Projet Alpha',
-      description: 'Description du projet Alpha',
-      status: 'active',
-      created_at: '2024-01-15T10:00:00Z',
-      updated_at: '2024-12-20T14:30:00Z',
-      owner: 'John Doe',
-    },
-    {
-      id: '2',
-      name: 'Projet Beta',
-      description: 'Description du projet Beta',
-      status: 'completed',
-      created_at: '2024-02-10T09:00:00Z',
-      updated_at: '2024-11-30T16:00:00Z',
-      owner: 'Jane Smith',
-    },
-    {
-      id: '3',
-      name: 'Projet Gamma',
-      description: 'Description du projet Gamma',
-      status: 'archived',
-      created_at: '2024-03-05T11:00:00Z',
-      updated_at: '2024-10-15T12:00:00Z',
-      owner: 'Bob Johnson',
-    },
-  ];
-
-  // Load projects (mock for now)
+  // Load projects from API
   const loadProjects = async () => {
     setLoading(true);
     setError(null);
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      setProjects(mockProjects);
+      const response = await projectsAPI.list();
+      setProjects(response.data || []);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erreur lors du chargement des projets');
+      const appError = handleApiError(err);
+      setError(appError.message || 'Erreur lors du chargement des projets');
     } finally {
       setLoading(false);
     }
@@ -100,24 +71,18 @@ function ProjectsContent() {
     try {
       setLoading(true);
       setError(null);
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      
-      const newProject: Project = {
-        id: String(Date.now()),
+      const response = await projectsAPI.create({
         name: formData.name,
-        description: formData.description,
+        description: formData.description || undefined,
         status: formData.status,
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-        owner: 'Current User',
-      };
-
-      setProjects([...projects, newProject]);
+      });
+      
+      setProjects([...projects, response.data]);
       setShowCreateModal(false);
       resetForm();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erreur lors de la création du projet');
+      const appError = handleApiError(err);
+      setError(appError.message || 'Erreur lors de la création du projet');
     } finally {
       setLoading(false);
     }
@@ -132,33 +97,25 @@ function ProjectsContent() {
     try {
       setLoading(true);
       setError(null);
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      const response = await projectsAPI.update(selectedProject.id, {
+        name: formData.name,
+        description: formData.description || undefined,
+        status: formData.status,
+      });
       
-      const updatedProjects = projects.map((p) =>
-        p.id === selectedProject.id
-          ? {
-              ...p,
-              name: formData.name,
-              description: formData.description,
-              status: formData.status,
-              updated_at: new Date().toISOString(),
-            }
-          : p
-      );
-
-      setProjects(updatedProjects);
+      setProjects(projects.map((p) => (p.id === selectedProject.id ? response.data : p)));
       setShowEditModal(false);
       setSelectedProject(null);
       resetForm();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erreur lors de la modification du projet');
+      const appError = handleApiError(err);
+      setError(appError.message || 'Erreur lors de la modification du projet');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleDeleteProject = async (projectId: string) => {
+  const handleDeleteProject = async (projectId: number) => {
     if (!confirm('Êtes-vous sûr de vouloir supprimer ce projet ?')) {
       return;
     }
@@ -166,12 +123,12 @@ function ProjectsContent() {
     try {
       setLoading(true);
       setError(null);
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      await projectsAPI.delete(projectId);
       
       setProjects(projects.filter((p) => p.id !== projectId));
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erreur lors de la suppression du projet');
+      const appError = handleApiError(err);
+      setError(appError.message || 'Erreur lors de la suppression du projet');
     } finally {
       setLoading(false);
     }
@@ -225,7 +182,7 @@ function ProjectsContent() {
       sortable: true,
       render: (value) => (
         <span className="text-gray-600 dark:text-gray-400">
-          {String(value).length > 50 ? `${String(value).substring(0, 50)}...` : String(value)}
+          {value && String(value).length > 50 ? `${String(value).substring(0, 50)}...` : (value ? String(value) : '-')}
         </span>
       ),
     },
@@ -238,11 +195,6 @@ function ProjectsContent() {
           {getStatusLabel(String(value))}
         </Badge>
       ),
-    },
-    {
-      key: 'owner',
-      label: 'Propriétaire',
-      sortable: true,
     },
     {
       key: 'created_at',
@@ -353,7 +305,7 @@ function ProjectsContent() {
                   <div>
                     <Textarea
                       label="Description"
-                      value={formData.description}
+                      value={formData.description || ''}
                       onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                       placeholder="Description du projet..."
                       rows={4}
@@ -419,7 +371,7 @@ function ProjectsContent() {
                   <div>
                     <Textarea
                       label="Description"
-                      value={formData.description}
+                      value={formData.description || ''}
                       onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                       placeholder="Description du projet..."
                       rows={4}

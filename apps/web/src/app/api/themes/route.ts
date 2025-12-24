@@ -3,6 +3,7 @@
  * This allows server-side rendering and better security.
  */
 import { NextResponse } from 'next/server';
+import { logger } from '@/lib/logger';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
@@ -31,7 +32,7 @@ export async function GET() {
     const data = await response.json();
     return NextResponse.json(data);
   } catch (error) {
-    console.error('Error fetching active theme:', error);
+    logger.error('Error fetching active theme', error instanceof Error ? error : new Error(String(error)));
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

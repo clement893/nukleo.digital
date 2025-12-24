@@ -4,6 +4,7 @@ import { useEffect, useState, type ReactNode } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { useAuthStore } from '@/lib/store';
 import { TokenStorage } from '@/lib/auth/tokenStorage';
+import { logger } from '@/lib/logger';
 
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -31,15 +32,17 @@ export default function ProtectedRoute({ children, requireAdmin = false }: Prote
       const tokenFromStorage = typeof window !== 'undefined' ? TokenStorage.getToken() : null;
       const isAuth = isAuthenticated() || (tokenFromStorage && user);
       
-      console.log('[ProtectedRoute] Auth check:', {
-        isAuthenticated: isAuthenticated(),
-        hasToken: !!tokenFromStorage,
-        hasUser: !!user,
-        isAuth
-      });
+      if (process.env.NODE_ENV === 'development') {
+        logger.debug('ProtectedRoute auth check', {
+          isAuthenticated: isAuthenticated(),
+          hasToken: !!tokenFromStorage,
+          hasUser: !!user,
+          isAuth
+        });
+      }
       
       if (!isAuth) {
-        console.log('[ProtectedRoute] Not authenticated, redirecting to login');
+        logger.debug('Not authenticated, redirecting to login', { pathname });
         router.replace(`/auth/login?redirect=${encodeURIComponent(pathname)}`);
         return;
       }

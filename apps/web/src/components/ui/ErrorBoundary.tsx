@@ -46,9 +46,13 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
   }
 
   override componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    // Log error to console in development
-    if (process.env.NODE_ENV === 'development') {
-      console.error('ErrorBoundary caught an error:', error, errorInfo);
+    // Import logger dynamically to avoid SSR issues
+    if (typeof window !== 'undefined') {
+      import('@/lib/logger').then(({ logger }) => {
+        logger.error('ErrorBoundary caught an error', error, {
+          componentStack: errorInfo.componentStack,
+        });
+      });
     }
 
     // Call optional error handler

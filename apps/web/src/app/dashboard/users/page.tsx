@@ -13,10 +13,22 @@ import Alert from '@/components/ui/Alert';
 import Loading from '@/components/ui/Loading';
 import Select from '@/components/ui/Select';
 import DataTable, { type Column } from '@/components/ui/DataTable';
+import { usersAPI } from '@/lib/api';
+import { handleApiError } from '@/lib/errors/api';
 import { Plus, Edit, Trash2, Mail, Shield, User } from 'lucide-react';
 
+interface UserData extends Record<string, unknown> {
+  id: number;
+  email: string;
+  first_name: string | null;
+  last_name: string | null;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
 interface User extends Record<string, unknown> {
-  id: string;
+  id: number;
   email: string;
   name: string;
   role: 'admin' | 'user' | 'manager';
@@ -39,55 +51,28 @@ function UsersContent() {
     password: '',
   });
 
-  // Mock data for demonstration
-  const mockUsers: User[] = [
-    {
-      id: '1',
-      email: 'admin@example.com',
-      name: 'Admin User',
-      role: 'admin',
-      is_active: true,
-      created_at: '2024-01-15T10:00:00Z',
-      last_login: '2024-12-23T14:30:00Z',
-    },
-    {
-      id: '2',
-      email: 'manager@example.com',
-      name: 'Manager User',
-      role: 'manager',
-      is_active: true,
-      created_at: '2024-02-10T09:00:00Z',
-      last_login: '2024-12-22T16:00:00Z',
-    },
-    {
-      id: '3',
-      email: 'user@example.com',
-      name: 'Regular User',
-      role: 'user',
-      is_active: true,
-      created_at: '2024-03-05T11:00:00Z',
-      last_login: '2024-12-20T12:00:00Z',
-    },
-    {
-      id: '4',
-      email: 'inactive@example.com',
-      name: 'Inactive User',
-      role: 'user',
-      is_active: false,
-      created_at: '2024-01-20T10:00:00Z',
-    },
-  ];
-
-  // Load users (mock for now)
+  // Load users from API
   const loadUsers = async () => {
     setLoading(true);
     setError(null);
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      setUsers(mockUsers);
+      const response = await usersAPI.getUsers();
+      // Transform API response to match UI format
+      const transformedUsers: User[] = (response.data || []).map((userData: UserData) => ({
+        id: userData.id,
+        email: userData.email,
+        name: userData.first_name && userData.last_name
+          ? `${userData.first_name} ${userData.last_name}`
+          : userData.first_name || userData.last_name || userData.email,
+        role: 'user' as const, // Default role, can be enhanced with RBAC
+        is_active: userData.is_active,
+        created_at: userData.created_at,
+        updated_at: userData.updated_at,
+      }));
+      setUsers(transformedUsers);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erreur lors du chargement des utilisateurs');
+      const appError = handleApiError(err);
+      setError(appError.message || 'Erreur lors du chargement des utilisateurs');
     } finally {
       setLoading(false);
     }
@@ -169,7 +154,7 @@ function UsersContent() {
     }
   };
 
-  const handleDeleteUser = async (userId: string) => {
+  const handleDeleteUser = async (userId: number) => {
     if (!confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')) {
       return;
     }
@@ -177,12 +162,12 @@ function UsersContent() {
     try {
       setLoading(true);
       setError(null);
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      await usersAPI.deleteUser(String(userId));
       
       setUsers(users.filter((u) => u.id !== userId));
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erreur lors de la suppression de l\'utilisateur');
+      const appError = handleApiError(err);
+      setError(appError.message || 'Erreur lors de la suppression de l\'utilisateur');
     } finally {
       setLoading(false);
     }

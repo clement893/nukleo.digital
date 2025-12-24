@@ -4,6 +4,8 @@
  * Reports Core Web Vitals metrics for performance monitoring
  */
 
+import { logger } from '@/lib/logger';
+
 export interface WebVitalMetric {
   id: string;
   name: string;
@@ -19,9 +21,9 @@ export interface WebVitalMetric {
  * Can be extended to send to analytics services (Google Analytics, Vercel Analytics, etc.)
  */
 export function reportWebVitals(metric: WebVitalMetric) {
-  // Log to console in development
+  // Log performance metrics (development only)
   if (process.env.NODE_ENV === 'development') {
-    console.log('[Web Vitals]', metric.name, metric.value, metric.label);
+    logger.performance(metric.name, metric.value, metric.label);
   }
 
   // Send to analytics service (e.g., Vercel Analytics, Google Analytics)

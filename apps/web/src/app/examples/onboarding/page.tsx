@@ -35,7 +35,11 @@ export default function ExampleOnboardingPage() {
   };
 
   const handleSubmit = () => {
-    console.log('Onboarding completed:', formData);
+    // Log onboarding completion (development only)
+    if (process.env.NODE_ENV === 'development') {
+      const { logger } = require('@/lib/logger');
+      logger.info('Onboarding completed', { step: 3 });
+    }
     setCurrentStep(4);
   };
 

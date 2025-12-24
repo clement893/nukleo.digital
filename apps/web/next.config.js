@@ -22,7 +22,6 @@ const nextConfig = {
       'zod',
       'clsx',
     ],
-    instrumentationHook: true, // Enable instrumentation hook for environment validation
   },
 
   // Image optimization

@@ -38,7 +38,7 @@ export async function GET() {
 
     return response;
   } catch (error) {
-    logger.error('CSRF Token API Error', { error });
+    logger.error('CSRF Token API Error', error instanceof Error ? error : new Error(String(error)));
     return NextResponse.json(
       { error: 'Failed to generate CSRF token' },
       { status: 500 }

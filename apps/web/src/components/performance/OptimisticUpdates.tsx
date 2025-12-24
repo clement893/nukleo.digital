@@ -82,7 +82,7 @@ export default function OptimisticUpdates({ className }: OptimisticUpdatesProps)
       return updatedItem;
     },
     onError: (error, rollbackData) => {
-      logger.error('Update failed, rolling back', { error, rollbackData });
+      logger.error('Update failed, rolling back', error instanceof Error ? error : new Error(String(error)), { rollbackData });
       // Rollback would happen automatically
     },
     onSuccess: (data) => {

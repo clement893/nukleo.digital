@@ -48,7 +48,7 @@ function ThemeSettingsContent() {
           const status = await checkSuperAdminStatus(user.email, token);
           setIsSuperAdmin(status.is_superadmin);
         } catch (err) {
-          logger.error('Failed to check superadmin status', { error: err });
+          logger.error('Failed to check superadmin status', err instanceof Error ? err : new Error(String(err)));
           // Fallback to is_admin check if API fails
           setIsSuperAdmin(user?.is_admin || false);
         }

@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
 
     return response;
   } catch (error) {
-    logger.error('Token API Error setting tokens', { error });
+    logger.error('Token API Error setting tokens', error instanceof Error ? error : new Error(String(error)));
     return NextResponse.json(
       { error: 'Failed to set tokens' },
       { status: 500 }
@@ -82,7 +82,7 @@ export async function GET() {
       hasRefreshToken: hasRefreshToken,
     });
   } catch (error) {
-    logger.error('Token API Error checking tokens', { error });
+    logger.error('Token API Error checking tokens', error instanceof Error ? error : new Error(String(error)));
     return NextResponse.json(
       { error: 'Failed to check tokens' },
       { status: 500 }
@@ -105,7 +105,7 @@ export async function DELETE() {
 
     return response;
   } catch (error) {
-    logger.error('Token API Error removing tokens', { error });
+    logger.error('Token API Error removing tokens', error instanceof Error ? error : new Error(String(error)));
     return NextResponse.json(
       { error: 'Failed to remove tokens' },
       { status: 500 }

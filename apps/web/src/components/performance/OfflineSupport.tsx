@@ -84,7 +84,7 @@ export default function OfflineSupport({
       try {
         // Update status to syncing
         setSyncQueue(prev => prev.map(i => 
-          i.id === item.id ? { ...i, status: 'syncing' } : i
+          i.id === item.id ? { ...i, status: 'syncing' as const } : i
         ));
 
         // Simulate API call
@@ -92,8 +92,8 @@ export default function OfflineSupport({
 
         // Update status to synced
         setSyncQueue(prev => {
-          const updated = prev.map(i => 
-            i.id === item.id ? { ...i, status: 'synced' } : i
+          const updated: SyncItem[] = prev.map(i => 
+            i.id === item.id ? { ...i, status: 'synced' as const } : i
           );
           localStorage.setItem('offline_sync_queue', JSON.stringify(updated));
           return updated;
@@ -101,8 +101,8 @@ export default function OfflineSupport({
       } catch (error) {
         // Update status to failed
         setSyncQueue(prev => {
-          const updated = prev.map(i => 
-            i.id === item.id ? { ...i, status: 'failed' } : i
+          const updated: SyncItem[] = prev.map(i => 
+            i.id === item.id ? { ...i, status: 'failed' as const } : i
           );
           localStorage.setItem('offline_sync_queue', JSON.stringify(updated));
           return updated;

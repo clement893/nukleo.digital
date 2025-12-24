@@ -56,11 +56,30 @@ function CallbackContent() {
       });
 
       // Fetch user info using API client
-      logger.debug('Fetching user info from API...');
+      // Note: apiClient automatically injects token from TokenStorage
+      logger.debug('Fetching user info from API...', {
+        tokenLength: accessToken.length,
+        tokenPreview: `${accessToken.substring(0, 20)}...`
+      });
+      
+      // Ensure token is available for the API call
+      // The apiClient interceptor should pick it up from TokenStorage
+      const storedTokenBeforeCall = TokenStorage.getToken();
+      if (!storedTokenBeforeCall || storedTokenBeforeCall !== accessToken) {
+        logger.warn('Token mismatch before API call, re-storing...', {
+          storedTokenExists: !!storedTokenBeforeCall,
+          tokensMatch: storedTokenBeforeCall === accessToken
+        });
+        await TokenStorage.setToken(accessToken, refreshToken);
+        // Small delay to ensure token is available
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+      
       const response = await usersAPI.getMe();
       logger.info('User info received', { 
         hasUser: !!response.data,
-        userEmail: response.data?.email 
+        userEmail: response.data?.email,
+        status: response.status
       });
       
       const user = response.data;

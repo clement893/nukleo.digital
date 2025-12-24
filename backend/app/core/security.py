@@ -1,4 +1,4 @@
-"""Security and authentication utilities."""
+﻿"""Security and authentication utilities."""
 
 import os
 from datetime import datetime, timedelta, timezone
@@ -13,7 +13,19 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 def get_secret_key() -> str:
-    """Get SECRET_KEY from environment with validation."""
+    """
+    Get SECRET_KEY from environment with validation.
+    
+    Retrieves the secret key from environment variables and validates it.
+    In production, raises an error if SECRET_KEY is not set or is too short.
+    In development, uses a default key with a warning.
+    
+    Returns:
+        str: The secret key (minimum 32 characters)
+        
+    Raises:
+        ValueError: If SECRET_KEY is not set in production or is too short
+    """
     secret_key = os.getenv("SECRET_KEY")
     if not secret_key:
         env = os.getenv("ENVIRONMENT", "development")
@@ -84,7 +96,7 @@ def decode_token(token: str, token_type: str = "access") -> Optional[dict]:
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         
-        # Vérifier le type de token
+        # VÃ©rifier le type de token
         payload_token_type = payload.get("type")
         if payload_token_type != token_type:
             logger.warning(

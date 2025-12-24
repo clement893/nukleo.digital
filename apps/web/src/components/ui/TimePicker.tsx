@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useRef, useEffect } from 'react';
 import { clsx } from 'clsx';
@@ -179,7 +179,7 @@ export default function TimePicker({
             {format === '12h' && (
               <div className="flex flex-col">
                 <div className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-2 text-center">
-                  Période
+                  PÃ©riode
                 </div>
                 <div className="flex flex-col gap-1">
                   <button

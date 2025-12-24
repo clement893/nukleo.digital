@@ -188,6 +188,16 @@ export default function IntegrationComponentsContent() {
               onCreate={async (data) => {
                 logger.info('Webhook created:', { data });
                 await new Promise((resolve) => setTimeout(resolve, 1000));
+                return {
+                  id: `webhook-${Date.now()}`,
+                  name: data.name,
+                  url: data.url,
+                  events: data.events,
+                  active: true,
+                  createdAt: new Date().toISOString(),
+                  successCount: 0,
+                  failureCount: 0,
+                };
               }}
               onDelete={async (id) => {
                 logger.info('Webhook deleted:', { id });

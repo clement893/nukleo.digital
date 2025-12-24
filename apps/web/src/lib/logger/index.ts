@@ -86,6 +86,11 @@ class Logger {
     };
     this.log(LogLevel.ERROR, fullMessage, errorContext);
   }
+
+  performance(message: string, context?: LogContext): void {
+    // Performance logs are treated as INFO level
+    this.log(LogLevel.INFO, message, context);
+  }
 }
 
 export const logger = new Logger();

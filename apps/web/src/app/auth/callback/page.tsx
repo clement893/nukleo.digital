@@ -42,7 +42,7 @@ function CallbackContent() {
     try {
       // Store tokens securely using TokenStorage (await to ensure it's stored before API calls)
       logger.debug('Storing token...');
-      await TokenStorage.setToken(accessToken, refreshToken);
+      await TokenStorage.setToken(accessToken, refreshToken || undefined);
       logger.info('Tokens stored successfully');
 
       // Small delay to ensure token is available in sessionStorage

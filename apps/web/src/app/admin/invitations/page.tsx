@@ -1,10 +1,14 @@
 'use client';
 
 // Force dynamic rendering to avoid static generation
-// Note: For Client Components, dynamic is handled via useSearchParams or other dynamic hooks
-// But we still export these for Next.js to recognize this as a dynamic route
 export const dynamic = 'force-dynamic';
 export const dynamicParams = true;
+export const revalidate = 0;
+
+// Prevent static generation - return empty array to indicate no static paths
+export function generateStaticParams() {
+  return [];
+}
 
 import { useEffect, useState } from 'react';
 import { useAuthStore } from '@/lib/store';

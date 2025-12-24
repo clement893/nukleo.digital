@@ -40,10 +40,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" className={inter.variable}>
-      <head>
-        <PerformanceScripts />
-      </head>
       <body className={inter.className}>
+        <PerformanceScripts />
         <GlobalThemeProvider>
           <ThemeProvider>
             <ThemeManagerProvider>

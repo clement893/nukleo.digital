@@ -7,7 +7,7 @@ import { PageHeader, PageContainer, Section, PageNavigation } from '@/components
 import { logger } from '@/lib/logger';
 
 export default function FormsContent() {
-  const [formData, setFormData] = useState({ email: '', password: '', description: '', country: '', newsletter: false, plan: 'basic', notifications: true, birthdate: '', richText: '', time: '', sliderValue: 50, rangeValue: [20, 80] as [number, number], color: '#3B82F6', tags: [] as string[] });
+  const [formData, setFormData] = useState({ email: '', password: '', description: '', country: '', newsletter: false, plan: 'basic', notifications: true, birthdate: '', richText: '', time: '', sliderValue: 50, rangeValue: [20, 80] as [number, number], color: 'var(--color-primary-500)', tags: [] as string[] });
 
   return (
     <PageContainer>

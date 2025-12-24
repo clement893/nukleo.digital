@@ -10,6 +10,7 @@ import type { PerformanceMetric } from '@/lib/monitoring/types';
 import { metricsCollector } from '@/lib/monitoring/metrics';
 import Card from '@/components/ui/Card';
 import Chart from '@/components/ui/Chart';
+import { getChartColorByStatus } from '@/lib/theme/colors';
 
 interface MetricsChartProps {
   metricName: string;
@@ -102,17 +103,9 @@ export default function MetricsChart({ metricName, title, height = 200 }: Metric
   );
 }
 
+import { getChartColorByStatus } from '@/lib/theme/colors';
+
 function getMetricColor(metric: PerformanceMetric): string {
-  if (!metric.threshold) return '#3B82F6';
-
-  const { warning, critical } = metric.threshold;
-
-  if (critical && metric.value >= critical) {
-    return '#EF4444'; // Red
-  } else if (warning && metric.value >= warning) {
-    return '#F59E0B'; // Yellow
-  }
-
-  return '#10B981'; // Green
+  return getChartColorByStatus(metric.value, metric.threshold);
 }
 

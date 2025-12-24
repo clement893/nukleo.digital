@@ -11,6 +11,7 @@ import { alertManager } from '@/lib/monitoring/alerts';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
 import Button from '@/components/ui/Button';
+import { dangerColors, warningColors, primaryColors } from '@/lib/theme/colors';
 
 export default function AlertsPanel() {
   const [alerts, setAlerts] = useState<Alert[]>([]);
@@ -75,10 +76,10 @@ export default function AlertsPanel() {
                 style={{
                   borderLeftColor:
                     alert.severity === 'critical' || alert.severity === 'error'
-                      ? '#EF4444'
+                      ? dangerColors[500]()
                       : alert.severity === 'warning'
-                      ? '#F59E0B'
-                      : '#3B82F6',
+                      ? warningColors[500]()
+                      : primaryColors[500](),
                 }}
               >
                 <div className="flex items-start justify-between">

@@ -1,6 +1,7 @@
 'use client';
 
 import { clsx } from 'clsx';
+import { chartColors } from '@/lib/theme/colors';
 
 export interface ChartDataPoint {
   label: string;
@@ -63,7 +64,7 @@ export default function Chart({
         <polyline
           points={points.map((p) => `${p.x},${p.y}`).join(' ')}
           fill="none"
-          stroke={data[0]?.color || '#3B82F6'}
+          stroke={data[0]?.color || chartColors.default()}
           strokeWidth="2"
         />
         {points.map((point, index) => (
@@ -72,7 +73,7 @@ export default function Chart({
             cx={point.x}
             cy={point.y}
             r="2"
-            fill={data[index]?.color || '#3B82F6'}
+            fill={data[index]?.color || chartColors.default()}
           />
         ))}
       </svg>
@@ -137,13 +138,13 @@ export default function Chart({
       <svg viewBox="0 0 100 100" className="w-full h-full">
         <path
           d={pathData}
-          fill={data[0]?.color || '#3B82F6'}
+          fill={data[0]?.color || chartColors.default()}
           opacity="0.3"
         />
         <polyline
           points={points.map((p) => `${p.x},${p.y}`).join(' ')}
           fill="none"
-          stroke={data[0]?.color || '#3B82F6'}
+          stroke={data[0]?.color || chartColors.default()}
           strokeWidth="2"
         />
       </svg>

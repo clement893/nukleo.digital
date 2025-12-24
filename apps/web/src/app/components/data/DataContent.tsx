@@ -5,6 +5,7 @@ import { Table, TableHead, TableBody, TableRow, TableHeader, TableCell, EmptySta
 import type { KanbanCard, KanbanColumn, CalendarEvent } from '@/components/ui';
 import { PageHeader, PageContainer, Section, PageNavigation } from '@/components/layout';
 import { logger } from '@/lib/logger';
+import { getStatusColor } from '@/lib/theme/colors';
 
 const sampleData = [
   { id: 1, name: 'John Doe', email: 'john@example.com', role: 'Admin', status: 'active' },
@@ -19,9 +20,9 @@ export default function DataContent() {
   const [crudMode, setCrudMode] = useState<'create' | 'edit' | 'delete' | 'view'>('create');
 
   const kanbanColumns: KanbanColumn[] = [
-    { id: '1', title: 'To Do', status: 'todo', color: '#3B82F6' },
-    { id: '2', title: 'In Progress', status: 'in-progress', color: '#F59E0B' },
-    { id: '3', title: 'Done', status: 'done', color: '#10B981' },
+    { id: '1', title: 'To Do', status: 'todo', color: getStatusColor('todo') },
+    { id: '2', title: 'In Progress', status: 'in-progress', color: getStatusColor('in-progress') },
+    { id: '3', title: 'Done', status: 'done', color: getStatusColor('done') },
   ];
 
   const kanbanCards: KanbanCard[] = [
@@ -32,9 +33,9 @@ export default function DataContent() {
   ];
 
   const calendarEvents: CalendarEvent[] = [
-    { id: '1', title: 'Réunion équipe', date: new Date(), time: '10:00', color: '#3B82F6' },
-    { id: '2', title: 'Présentation client', date: new Date(Date.now() + 86400000), time: '14:00', color: '#10B981' },
-    { id: '3', title: 'Deadline projet', date: new Date(Date.now() + 172800000), time: '17:00', color: '#EF4444' },
+    { id: '1', title: 'Réunion équipe', date: new Date(), time: '10:00', color: getStatusColor('todo') },
+    { id: '2', title: 'Présentation client', date: new Date(Date.now() + 86400000), time: '14:00', color: getStatusColor('done') },
+    { id: '3', title: 'Deadline projet', date: new Date(Date.now() + 172800000), time: '17:00', color: getStatusColor('error') },
   ];
 
   return (

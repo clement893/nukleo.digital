@@ -67,6 +67,18 @@
   /* Custom blue color for light backgrounds - will be darker in dark mode */
   --color-blue-light: #B4D6FF;
   
+  /* Status colors - for use in components */
+  --color-status-todo: var(--color-primary-500);
+  --color-status-in-progress: var(--color-warning-500);
+  --color-status-done: var(--color-secondary-500);
+  --color-status-error: var(--color-danger-500);
+  
+  /* Chart default colors */
+  --color-chart-default: var(--color-primary-500);
+  --color-chart-success: var(--color-secondary-500);
+  --color-chart-warning: var(--color-warning-500);
+  --color-chart-danger: var(--color-danger-500);
+  
   --font-family: Inter, sans-serif;
   --font-family-heading: Inter, sans-serif;
   --font-family-subheading: Inter, sans-serif;
@@ -91,6 +103,18 @@
   --color-success: #10B981;
   --color-success-rgb: 16, 185, 129;
   --color-success-bg: #F0FDF4;
+  
+  /* Gray colors for backgrounds and borders */
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
 }
 
 /* Dark mode theme variables */
@@ -113,6 +137,18 @@
   
   /* Custom blue color - darker version for dark mode */
   --color-blue-light: #1e3a8a;
+  
+  /* Status colors - dark mode versions */
+  --color-status-todo: var(--color-primary-400);
+  --color-status-in-progress: var(--color-warning-400);
+  --color-status-done: var(--color-secondary-400);
+  --color-status-error: var(--color-danger-400);
+  
+  /* Chart default colors - dark mode */
+  --color-chart-default: var(--color-primary-400);
+  --color-chart-success: var(--color-secondary-400);
+  --color-chart-warning: var(--color-warning-400);
+  --color-chart-danger: var(--color-danger-400);
 }
 
 /* Apply theme variables to Tailwind classes using CSS custom properties */
@@ -275,8 +311,8 @@ html {
 }
 
 body {
-  background-color: #f9fafb;
-  color: #1f2937;
+  background-color: var(--color-gray-50, #f9fafb);
+  color: var(--color-text-body, #1f2937);
   font-family: var(--font-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -285,8 +321,8 @@ body {
 }
 
 .dark body {
-  background-color: #111827;
-  color: #f9fafb;
+  background-color: var(--color-gray-900, #111827);
+  color: var(--color-text-body, #f9fafb);
 }
 
 a {
@@ -307,28 +343,28 @@ button {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--color-gray-100, #f1f1f1);
 }
 
 .dark ::-webkit-scrollbar-track {
-  background: #1f2937;
+  background: var(--color-gray-800, #1f2937);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: var(--color-gray-500, #888);
   border-radius: 4px;
 }
 
 .dark ::-webkit-scrollbar-thumb {
-  background: #4b5563;
+  background: var(--color-gray-600, #4b5563);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: var(--color-gray-600, #555);
 }
 
 .dark ::-webkit-scrollbar-thumb:hover {
-  background: #6b7280;
+  background: var(--color-gray-500, #6b7280);
 }
 
 /* Animations */

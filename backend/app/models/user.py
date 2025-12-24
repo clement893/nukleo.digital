@@ -27,6 +27,7 @@ class User(Base):
     first_name = Column(String(100), nullable=True, index=True)  # For search
     last_name = Column(String(100), nullable=True, index=True)  # For search
     is_active = Column(Boolean, default=True, nullable=False, index=True)
+    theme_preference = Column(String(20), default='system', nullable=False)  # 'light', 'dark', or 'system'
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False, index=True)
     updated_at = Column(
         DateTime(timezone=True),

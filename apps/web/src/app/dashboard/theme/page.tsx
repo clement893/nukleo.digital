@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Card, Button, Badge } from '@/components/ui';
 import { PageHeader, PageContainer, Section } from '@/components/layout';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useAuthStore } from '@/lib/store';
 import { ThemeToggle, ThemeToggleWithIcon } from '@/components/ui';
 import { Palette, Moon, Sun, Monitor } from 'lucide-react';
 import { clsx } from 'clsx';

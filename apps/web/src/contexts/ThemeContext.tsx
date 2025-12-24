@@ -1,6 +1,8 @@
 'use client';
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import { useAuthStore } from '@/lib/store';
+import { getThemePreference, updateThemePreference } from '@/lib/api/userSettings';
 
 type Theme = 'light' | 'dark' | 'system';
 
@@ -17,15 +19,38 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<Theme>('system');
   const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('light');
   const [mounted, setMounted] = useState(false);
+  const { isAuthenticated, token } = useAuthStore();
 
   useEffect(() => {
     setMounted(true);
-    // Récupérer le thème depuis localStorage
-    const savedTheme = localStorage.getItem('theme') as Theme | null;
-    if (savedTheme) {
-      setThemeState(savedTheme);
-    }
-  }, []);
+    
+    // Load theme from database if user is authenticated
+    const loadThemeFromDB = async () => {
+      if (isAuthenticated() && token) {
+        try {
+          const response = await getThemePreference(token);
+          if (response.theme) {
+            setThemeState(response.theme as Theme);
+          }
+        } catch (error) {
+          console.error('Failed to load theme from database:', error);
+          // Fallback to localStorage if DB fails
+          const savedTheme = localStorage.getItem('theme') as Theme | null;
+          if (savedTheme) {
+            setThemeState(savedTheme);
+          }
+        }
+      } else {
+        // Fallback to localStorage if not authenticated
+        const savedTheme = localStorage.getItem('theme') as Theme | null;
+        if (savedTheme) {
+          setThemeState(savedTheme);
+        }
+      }
+    };
+
+    loadThemeFromDB();
+  }, [isAuthenticated, token]);
 
   useEffect(() => {
     if (!mounted) return;
@@ -47,9 +72,24 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     root.classList.remove('light', 'dark');
     root.classList.add(resolved);
 
-    // Sauvegarder dans localStorage
-    localStorage.setItem('theme', theme);
-  }, [theme, mounted]);
+    // Sauvegarder dans la base de données si authentifié, sinon localStorage
+    const saveTheme = async () => {
+      if (isAuthenticated() && token) {
+        try {
+          await updateThemePreference(theme, token);
+        } catch (error) {
+          console.error('Failed to save theme to database:', error);
+          // Fallback to localStorage if DB fails
+          localStorage.setItem('theme', theme);
+        }
+      } else {
+        // Fallback to localStorage if not authenticated
+        localStorage.setItem('theme', theme);
+      }
+    };
+
+    saveTheme();
+  }, [theme, mounted, isAuthenticated, token]);
 
   useEffect(() => {
     if (!mounted) return;

@@ -59,6 +59,7 @@ class UserResponse(BaseModel):
     first_name: Optional[str] = None
     last_name: Optional[str] = None
     is_active: bool
+    theme_preference: str = Field(default='system', description="Theme preference: 'light', 'dark', or 'system'")
     created_at: str
     updated_at: str
 

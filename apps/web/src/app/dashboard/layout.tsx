@@ -1,11 +1,147 @@
+'use client';
+
 // Force dynamic rendering for all dashboard pages
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
+
+import { useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import { useAuthStore } from '@/lib/store';
+import Sidebar from '@/components/ui/Sidebar';
+import Button from '@/components/ui/Button';
+import { 
+  LayoutDashboard, 
+  FolderKanban, 
+  Users, 
+  Settings, 
+  LogOut,
+  Menu,
+  X
+} from 'lucide-react';
+import { clsx } from 'clsx';
 
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  const pathname = usePathname();
+  const router = useRouter();
+  const { logout } = useAuthStore();
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleLogout = () => {
+    logout();
+    router.push('/');
+  };
+
+  const sidebarItems = [
+    {
+      label: 'Dashboard',
+      href: '/dashboard',
+      icon: <LayoutDashboard className="w-5 h-5" />,
+    },
+    {
+      label: 'Projets',
+      href: '/dashboard/projects',
+      icon: <FolderKanban className="w-5 h-5" />,
+    },
+    {
+      label: 'Utilisateurs',
+      href: '/dashboard/users',
+      icon: <Users className="w-5 h-5" />,
+    },
+    {
+      label: 'Paramètres',
+      href: '/dashboard/settings',
+      icon: <Settings className="w-5 h-5" />,
+    },
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 dark:from-gray-900 dark:to-gray-800">
+      {/* Mobile Header */}
+      <header className="lg:hidden bg-white dark:bg-gray-800 shadow border-b border-gray-200 dark:border-gray-700">
+        <div className="px-4 py-3 flex items-center justify-between">
+          <h1 className="text-xl font-bold text-gray-900 dark:text-white">Dashboard</h1>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </Button>
+            <Button variant="danger" size="sm" onClick={handleLogout}>
+              <LogOut className="w-4 h-4 mr-1" />
+              Logout
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile Sidebar Overlay */}
+      {mobileMenuOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* Mobile Sidebar */}
+      <aside
+        className={clsx(
+          'lg:hidden fixed top-0 left-0 h-full z-50 transform transition-transform duration-300',
+          mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+        )}
+      >
+        <Sidebar
+          items={sidebarItems}
+          currentPath={pathname}
+          className="h-full"
+        />
+      </aside>
+
+      {/* Desktop Layout */}
+      <div className="flex h-screen pt-0 lg:pt-0">
+        {/* Desktop Sidebar */}
+        <aside className="hidden lg:block">
+          <Sidebar
+            items={sidebarItems}
+            currentPath={pathname}
+            collapsed={sidebarCollapsed}
+            onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
+            className="h-screen sticky top-0"
+          />
+        </aside>
+
+        {/* Main Content */}
+        <div className="flex-1 flex flex-col min-w-0">
+          {/* Desktop Header */}
+          <header className="hidden lg:block bg-white dark:bg-gray-800 shadow border-b border-gray-200 dark:border-gray-700">
+            <div className="px-6 py-4 flex items-center justify-between">
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+                {pathname === '/dashboard' && 'Dashboard'}
+                {pathname === '/dashboard/projects' && 'Projets'}
+                {pathname === '/dashboard/users' && 'Utilisateurs'}
+                {pathname === '/dashboard/settings' && 'Paramètres'}
+              </h1>
+              <Button variant="danger" onClick={handleLogout}>
+                <LogOut className="w-4 h-4 mr-2" />
+                Logout
+              </Button>
+            </div>
+          </header>
+
+          {/* Page Content */}
+          <main className="flex-1 overflow-y-auto">
+            {children}
+          </main>
+        </div>
+      </div>
+    </div>
+  );
 }

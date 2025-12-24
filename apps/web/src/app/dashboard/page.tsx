@@ -16,19 +16,7 @@ function DashboardContent() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 dark:from-gray-900 dark:to-gray-800">
-      <nav className="bg-white dark:bg-gray-800 shadow">
-        <Container>
-          <div className="py-4 flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Dashboard</h1>
-            <Button variant="danger" onClick={handleLogout}>
-              Logout
-            </Button>
-          </div>
-        </Container>
-      </nav>
-
-      <Container className="py-12">
+    <Container className="py-8 lg:py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* User Profile Card */}
           <Card title="Your Profile">
@@ -164,8 +152,7 @@ function DashboardContent() {
             </Link>
           </div>
         </Card>
-      </Container>
-    </main>
+    </Container>
   );
 }
 

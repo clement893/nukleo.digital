@@ -2,19 +2,22 @@
 set -e
 
 # Use PORT from Railway environment, fallback to 3000
+# Next.js standalone mode automatically uses process.env.PORT
 PORT=${PORT:-3000}
 export PORT
 
+echo "Starting server on port $PORT..."
+
 # Check if we're in standalone mode (server.js exists in parent directory)
 if [ -f ../../server.js ]; then
-  echo "Starting in standalone mode on port $PORT..."
+  echo "Starting in standalone mode..."
   cd ../..
-  exec node server.js -p "$PORT" "$@"
+  exec node server.js "$@"
 elif [ -f server.js ]; then
-  echo "Starting in standalone mode (current directory) on port $PORT..."
-  exec node server.js -p "$PORT" "$@"
+  echo "Starting in standalone mode (current directory)..."
+  exec node server.js "$@"
 else
-  echo "Starting in development mode on port $PORT..."
+  echo "Starting in development mode..."
   exec next start -p "$PORT" "$@"
 fi
 

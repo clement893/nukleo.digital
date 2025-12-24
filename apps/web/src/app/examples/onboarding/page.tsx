@@ -141,23 +141,20 @@ export default function ExampleOnboardingPage() {
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {['Manager', 'Fundraiser', 'Administrator', 'Analyst'].map((role) => (
-                    <button
+                    <Button
                       key={role}
                       onClick={() => setFormData({ ...formData, role })}
-                      className={`p-4 border-2 rounded-lg text-left transition-colors ${
-                        formData.role === role
-                          ? 'border-blue-500 bg-blue-50'
-                          : 'border-gray-200 hover:border-gray-300'
-                      }`}
+                      variant={formData.role === role ? 'primary' : 'outline'}
+                      className="h-auto p-4 text-left"
                     >
-                      <div className="font-semibold text-gray-900 dark:text-gray-100">{role}</div>
-                      <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                      <div className="font-semibold">{role}</div>
+                      <div className="text-sm mt-1 opacity-80">
                         {role === 'Manager' && 'Gérer les équipes et les campagnes'}
                         {role === 'Fundraiser' && 'Collecter des fonds et gérer les donateurs'}
                         {role === 'Administrator' && 'Administrer la plateforme'}
                         {role === 'Analyst' && 'Analyser les données et générer des rapports'}
                       </div>
-                    </button>
+                    </Button>
                   ))}
                 </div>
               </div>

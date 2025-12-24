@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { PageHeader, PageContainer, Section } from '@/components/layout';
 import MFA from '@/components/auth/MFA';
 import SocialAuth from '@/components/auth/SocialAuth';
@@ -8,13 +7,10 @@ import type { SocialProvider } from '@/components/auth/SocialAuth';
 import Card from '@/components/ui/Card';
 
 export default function AuthComponentsContent() {
-  const [mfaCode, setMfaCode] = useState('');
-
   const handleMFAVerify = async (code: string) => {
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000));
     console.log('MFA Code verified:', code);
-    setMfaCode(code);
     // In real app, this would call your API
   };
 

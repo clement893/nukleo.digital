@@ -21,21 +21,49 @@ function getAuthToken(): string {
 /**
  * Get the currently active theme configuration.
  * Public endpoint - no authentication required.
+ * Returns default theme if backend is not available.
  */
 export async function getActiveTheme(): Promise<ThemeConfigResponse> {
-  const response = await fetch(`${API_URL}/api/v1/themes/active`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    cache: 'no-store', // Always fetch fresh theme
-  });
+  try {
+    // Create abort controller for timeout
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch active theme: ${response.statusText}`);
+    const response = await fetch(`${API_URL}/api/v1/themes/active`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      cache: 'no-store', // Always fetch fresh theme
+      signal: controller.signal,
+    });
+
+    clearTimeout(timeoutId);
+
+    if (!response.ok) {
+      // If backend returns error, return default theme
+      console.warn(`Failed to fetch active theme: ${response.statusText}. Using default theme.`);
+      return {
+        config: {
+          mode: 'system',
+        },
+      };
+    }
+
+    return response.json();
+  } catch (error) {
+    // Handle network errors (backend not available)
+    if (error instanceof Error && (error.name === 'AbortError' || error.message.includes('Failed to fetch'))) {
+      console.warn('Backend not available. Using default theme. Make sure the backend is running on', API_URL);
+      return {
+        config: {
+          mode: 'system',
+        },
+      };
+    }
+    // Re-throw other errors
+    throw error;
   }
-
-  return response.json();
 }
 
 /**

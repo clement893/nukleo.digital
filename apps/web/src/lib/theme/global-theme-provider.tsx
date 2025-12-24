@@ -37,8 +37,14 @@ export function GlobalThemeProvider({ children }: GlobalThemeProviderProps) {
       applyThemeConfig(activeTheme.config);
     } catch (err) {
       const error = err instanceof Error ? err : new Error('Failed to load theme');
-      setError(error);
-      logger.error('Failed to fetch global theme', error);
+      // Only log error if it's not a network error (backend not available)
+      if (!error.message.includes('Backend not available')) {
+        setError(error);
+        logger.error('Failed to fetch global theme', error);
+      } else {
+        // Backend not available - use default theme silently
+        logger.warn('Backend not available, using default theme');
+      }
     } finally {
       setIsLoading(false);
     }

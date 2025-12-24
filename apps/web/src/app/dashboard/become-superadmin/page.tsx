@@ -38,7 +38,13 @@ function BecomeSuperAdminContent() {
         window.location.reload();
       }, 2000);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erreur lors de la création du superadmin');
+      const errorMessage = err instanceof Error ? err.message : 'Erreur lors de la création du superadmin';
+      // Check if it's a connection error
+      if (errorMessage.includes('backend n\'est pas accessible') || errorMessage.includes('Failed to fetch')) {
+        setError(`${errorMessage}. Veuillez démarrer le serveur backend avant de continuer.`);
+      } else {
+        setError(errorMessage);
+      }
     } finally {
       setLoading(false);
     }
@@ -64,7 +70,13 @@ function BecomeSuperAdminContent() {
         }, 2000);
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erreur lors de la création du superadmin');
+      const errorMessage = err instanceof Error ? err.message : 'Erreur lors de la création du superadmin';
+      // Check if it's a connection error
+      if (errorMessage.includes('backend n\'est pas accessible') || errorMessage.includes('Failed to fetch')) {
+        setError(`${errorMessage}. Veuillez démarrer le serveur backend avant de continuer.`);
+      } else {
+        setError(errorMessage);
+      }
     } finally {
       setLoading(false);
     }
@@ -88,7 +100,12 @@ function BecomeSuperAdminContent() {
         setError(`L'utilisateur ${email} n'est pas superadmin`);
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erreur lors de la vérification');
+      const errorMessage = err instanceof Error ? err.message : 'Erreur lors de la vérification';
+      if (errorMessage.includes('backend n\'est pas accessible') || errorMessage.includes('Failed to fetch')) {
+        setError(`${errorMessage}. Veuillez démarrer le serveur backend avant de continuer.`);
+      } else {
+        setError(errorMessage);
+      }
       setIsSuperAdmin(null);
     } finally {
       setCheckingStatus(false);

@@ -29,21 +29,34 @@ export async function bootstrapSuperAdmin(
   email: string,
   bootstrapKey: string
 ): Promise<MakeSuperAdminResponse> {
-  const response = await fetch(`${API_URL}/api/v1/admin/bootstrap-superadmin`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Bootstrap-Key': bootstrapKey,
-    },
-    body: JSON.stringify({ email }),
-  });
+  try {
+    const response = await fetch(`${API_URL}/api/v1/admin/bootstrap-superadmin`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Bootstrap-Key': bootstrapKey,
+      },
+      body: JSON.stringify({ email }),
+      signal: (() => {
+        const controller = new AbortController();
+        setTimeout(() => controller.abort(), 10000); // 10 second timeout
+        return controller.signal;
+      })(),
+    });
 
-  if (!response.ok) {
-    const error = await response.json().catch(() => ({ detail: response.statusText }));
-    throw new Error(error.detail || `Failed to bootstrap superadmin: ${response.statusText}`);
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({ detail: response.statusText }));
+      throw new Error(error.detail || `Failed to bootstrap superadmin: ${response.statusText}`);
+    }
+
+    return response.json();
+  } catch (error) {
+    // Handle network errors
+    if (error instanceof Error && (error.name === 'AbortError' || error.message.includes('Failed to fetch'))) {
+      throw new Error(`Le backend n'est pas accessible. Assurez-vous que le serveur backend est démarré sur ${API_URL}`);
+    }
+    throw error;
   }
-
-  return response.json();
 }
 
 /**
@@ -54,22 +67,35 @@ export async function makeSuperAdmin(
   email: string,
   token?: string
 ): Promise<MakeSuperAdminResponse> {
-  const authToken = token || getAuthToken();
-  const response = await fetch(`${API_URL}/api/v1/admin/make-superadmin`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${authToken}`,
-    },
-    body: JSON.stringify({ email }),
-  });
+  try {
+    const authToken = token || getAuthToken();
+    const response = await fetch(`${API_URL}/api/v1/admin/make-superadmin`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      body: JSON.stringify({ email }),
+      signal: (() => {
+        const controller = new AbortController();
+        setTimeout(() => controller.abort(), 10000); // 10 second timeout
+        return controller.signal;
+      })(),
+    });
 
-  if (!response.ok) {
-    const error = await response.json().catch(() => ({ detail: response.statusText }));
-    throw new Error(error.detail || `Failed to make superadmin: ${response.statusText}`);
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({ detail: response.statusText }));
+      throw new Error(error.detail || `Failed to make superadmin: ${response.statusText}`);
+    }
+
+    return response.json();
+  } catch (error) {
+    // Handle network errors
+    if (error instanceof Error && (error.name === 'AbortError' || error.message.includes('Failed to fetch'))) {
+      throw new Error(`Le backend n'est pas accessible. Assurez-vous que le serveur backend est démarré sur ${API_URL}`);
+    }
+    throw error;
   }
-
-  return response.json();
 }
 
 /**
@@ -80,20 +106,33 @@ export async function checkSuperAdminStatus(
   email: string,
   token?: string
 ): Promise<{ is_superadmin: boolean }> {
-  const authToken = token || getAuthToken();
-  const response = await fetch(`${API_URL}/api/v1/admin/check-superadmin/${encodeURIComponent(email)}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${authToken}`,
-    },
-  });
+  try {
+    const authToken = token || getAuthToken();
+    const response = await fetch(`${API_URL}/api/v1/admin/check-superadmin/${encodeURIComponent(email)}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+      signal: (() => {
+        const controller = new AbortController();
+        setTimeout(() => controller.abort(), 10000); // 10 second timeout
+        return controller.signal;
+      })(),
+    });
 
-  if (!response.ok) {
-    const error = await response.json().catch(() => ({ detail: response.statusText }));
-    throw new Error(error.detail || `Failed to check superadmin status: ${response.statusText}`);
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({ detail: response.statusText }));
+      throw new Error(error.detail || `Failed to check superadmin status: ${response.statusText}`);
+    }
+
+    return response.json();
+  } catch (error) {
+    // Handle network errors
+    if (error instanceof Error && (error.name === 'AbortError' || error.message.includes('Failed to fetch'))) {
+      throw new Error(`Le backend n'est pas accessible. Assurez-vous que le serveur backend est démarré sur ${API_URL}`);
+    }
+    throw error;
   }
-
-  return response.json();
 }
 

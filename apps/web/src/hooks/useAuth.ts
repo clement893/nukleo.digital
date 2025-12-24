@@ -111,7 +111,8 @@ export function useAuth() {
 
       TokenStorage.setToken(access_token);
       if (newRefreshToken) {
-        TokenStorage.setRefreshToken(newRefreshToken);
+        const currentToken = TokenStorage.getToken();
+        await TokenStorage.setToken(currentToken || '', newRefreshToken);
       }
 
       useAuthStore.getState().setToken(access_token);

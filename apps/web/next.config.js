@@ -54,13 +54,19 @@ const nextConfig = {
     // ⚠️ SECURITY NOTE: CSP is relaxed in development (unsafe-inline/unsafe-eval)
     // This is acceptable for dev but should be tightened in production using nonces
     // See: https://nextjs.org/docs/advanced-features/security-headers
+    // Include both localhost (for dev) and production URL (for prod) in connect-src
+    const productionBackendUrl = 'https://modelebackend-production-0590.up.railway.app';
+    const connectSrcUrls = isProduction 
+      ? [`'self'`, apiUrl, productionBackendUrl, 'https://*.sentry.io', 'wss://*.sentry.io']
+      : [`'self'`, apiUrl, productionBackendUrl, 'http://localhost:8000', 'https://*.sentry.io', 'wss://*.sentry.io'];
+    
     const cspDirectives = [
       "default-src 'self'",
       "script-src 'self' 'unsafe-eval' 'unsafe-inline'", // Required for Next.js dev mode
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com", // Required for Tailwind CSS
       "font-src 'self' https://fonts.gstatic.com data:",
       "img-src 'self' data: https: blob:",
-      "connect-src 'self' " + apiUrl + " https://*.sentry.io wss://*.sentry.io",
+      "connect-src " + connectSrcUrls.join(' '),
       "frame-src 'none'",
       "object-src 'none'",
       "base-uri 'self'",

@@ -93,7 +93,7 @@ export default function PricingPage() {
               key={plan.id}
               plan={plan}
               billingPeriod={billingPeriod}
-              onSelect={(planId, period) => {
+              onSelect={(_planId, _period) => {
                 // Navigation is handled by the PricingCardSimple component
               }}
             />

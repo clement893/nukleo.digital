@@ -12,7 +12,6 @@ import Button from '@/components/ui/Button';
 import FileUploadWithPreview from '@/components/ui/FileUploadWithPreview';
 import Alert from '@/components/ui/Alert';
 import Badge from '@/components/ui/Badge';
-import Loading from '@/components/ui/Loading';
 import { Upload, CheckCircle, XCircle, File, Image, FileText } from 'lucide-react';
 
 interface UploadedFile {

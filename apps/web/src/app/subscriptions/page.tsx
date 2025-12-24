@@ -7,7 +7,6 @@ import { getErrorMessage, getErrorDetail } from '@/lib/error-utils';
 import { useMySubscription, useSubscriptionPayments, useCreateCheckoutSession, useCancelSubscription } from '@/lib/query/queries';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
-import Badge from '@/components/ui/Badge';
 import Alert from '@/components/ui/Alert';
 import Container from '@/components/ui/Container';
 import Loading from '@/components/ui/Loading';

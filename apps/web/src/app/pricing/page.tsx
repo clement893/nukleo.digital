@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
+import Container from '@/components/ui/Container';
 
 interface Plan {
   id: string;
@@ -83,37 +84,33 @@ export default function PricingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="container mx-auto px-4 py-16">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+      <Container className="py-16">
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-gray-900 mb-4">Tarifs</h1>
-          <p className="text-xl text-gray-600 mb-8">
+          <h1 className="text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">Tarifs</h1>
+          <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">
             Choisissez le plan qui correspond à vos besoins
           </p>
 
           {/* Billing Period Toggle */}
-          <div className="inline-flex items-center bg-white rounded-lg p-1 shadow-md">
-            <button
+          <div className="inline-flex items-center bg-white dark:bg-gray-800 rounded-lg p-1 shadow-md">
+            <Button
               onClick={() => setBillingPeriod('month')}
-              className={`px-6 py-2 rounded-md transition-colors ${
-                billingPeriod === 'month'
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-700 hover:bg-gray-100'
-              }`}
+              variant={billingPeriod === 'month' ? 'primary' : 'ghost'}
+              size="md"
+              className="px-6"
             >
               Mensuel
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={() => setBillingPeriod('year')}
-              className={`px-6 py-2 rounded-md transition-colors ${
-                billingPeriod === 'year'
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-700 hover:bg-gray-100'
-              }`}
+              variant={billingPeriod === 'year' ? 'primary' : 'ghost'}
+              size="md"
+              className="px-6"
             >
               Annuel
-              <Badge className="ml-2 bg-green-500">-20%</Badge>
-            </button>
+              <Badge variant="success" className="ml-2">-20%</Badge>
+            </Button>
           </div>
         </div>
 
@@ -131,15 +128,15 @@ export default function PricingPage() {
                 </div>
               )}
               <div className="p-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h2>
-                <p className="text-gray-600 mb-6">{plan.description}</p>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">{plan.name}</h2>
+                <p className="text-gray-600 dark:text-gray-400 mb-6">{plan.description}</p>
                 <div className="mb-6">
-                  <span className="text-4xl font-bold text-gray-900">
+                  <span className="text-4xl font-bold text-gray-900 dark:text-gray-100">
                     {billingPeriod === 'year' ? Math.round(calculatePrice(plan) / 12) : plan.price}€
                   </span>
-                  <span className="text-gray-600">/{billingPeriod === 'year' ? 'mois' : 'mois'}</span>
+                  <span className="text-gray-600 dark:text-gray-400">/{billingPeriod === 'year' ? 'mois' : 'mois'}</span>
                   {billingPeriod === 'year' && (
-                    <div className="text-sm text-gray-500 mt-1">
+                    <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">
                       {Math.round(calculatePrice(plan))}€/an
                     </div>
                   )}
@@ -168,7 +165,7 @@ export default function PricingPage() {
                           d="M5 13l4 4L19 7"
                         />
                       </svg>
-                      <span className="text-gray-700">{feature}</span>
+                      <span className="text-gray-700 dark:text-gray-300">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -179,43 +176,43 @@ export default function PricingPage() {
 
         {/* FAQ Section */}
         <div className="mt-16 max-w-3xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
+          <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-gray-100 mb-8">
             Questions fréquentes
           </h2>
           <div className="space-y-4">
             <Card>
               <div className="p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
                   Puis-je changer de plan à tout moment ?
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-gray-600 dark:text-gray-400">
                   Oui, vous pouvez mettre à niveau ou rétrograder votre plan à tout moment. Les changements prendront effet immédiatement.
                 </p>
               </div>
             </Card>
             <Card>
               <div className="p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
                   Y a-t-il un essai gratuit ?
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-gray-600 dark:text-gray-400">
                   Oui, tous les plans incluent un essai gratuit de 14 jours. Aucune carte de crédit requise.
                 </p>
               </div>
             </Card>
             <Card>
               <div className="p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
                   Quels modes de paiement acceptez-vous ?
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-gray-600 dark:text-gray-400">
                   Nous acceptons les cartes de crédit (Visa, Mastercard, American Express) et les virements bancaires pour les plans Enterprise.
                 </p>
               </div>
             </Card>
           </div>
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

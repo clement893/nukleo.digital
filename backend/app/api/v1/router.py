@@ -2,7 +2,7 @@
 API v1 router registration.
 """
 from fastapi import APIRouter
-from app.api.v1.endpoints import themes, projects
+from app.api.v1.endpoints import themes, projects, websocket
 
 api_router = APIRouter()
 
@@ -18,4 +18,10 @@ api_router.include_router(
     projects.router,
     prefix="/projects",
     tags=["projects"]
+)
+
+# Register WebSocket endpoints
+api_router.include_router(
+    websocket.router,
+    tags=["websocket"]
 )

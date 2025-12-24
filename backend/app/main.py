@@ -1,4 +1,4 @@
-﻿"""
+"""
 FastAPI Main Application
 Configured with OpenAPI/Swagger auto-generation
 """
@@ -27,8 +27,6 @@ from app.core.error_handler import (
 from app.core.rate_limit import setup_rate_limiting
 from app.core.compression import CompressionMiddleware
 from app.core.cache_headers import CacheHeadersMiddleware
-from app.core.security_headers import SecurityHeadersMiddleware
-from app.core.csrf import CSRFProtectionMiddleware
 from app.api.v1.router import api_router
 from app.api import email as email_router
 from app.api.webhooks import stripe as stripe_webhook_router
@@ -111,11 +109,14 @@ def create_app() -> FastAPI:
     # Cache Headers Middleware
     app.add_middleware(CacheHeadersMiddleware, default_max_age=300)
 
-    # CSRF Protection Middleware (after CORS, before auth)
-    app.add_middleware(CSRFProtectionMiddleware)
-
     # Rate Limiting (after CORS to allow preflight requests)
-    app = setup_rate_limiting(app)
+    # Can be disabled by setting DISABLE_RATE_LIMITING=true in environment
+    import os
+    if not os.getenv("DISABLE_RATE_LIMITING", "").lower() == "true":
+        app = setup_rate_limiting(app)
+        logger.info("Rate limiting enabled")
+    else:
+        logger.warning("Rate limiting is DISABLED - not recommended for production")
 
     # Include API router
     app.include_router(api_router, prefix=settings.API_V1_STR)

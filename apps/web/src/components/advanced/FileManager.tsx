@@ -11,7 +11,6 @@ import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Badge from '@/components/ui/Badge';
 import { Folder, File, Upload, Download, Trash2, MoreVertical, Search, Grid, List } from 'lucide-react';
-import { logger } from '@/lib/logger';
 import Dropdown from '@/components/ui/Dropdown';
 import type { DropdownItem } from '@/components/ui/Dropdown';
 

@@ -127,9 +127,11 @@ export default function CodeEditor({
                 variant="primary"
                 size="sm"
                 onClick={handleSave}
-                icon={<Save className="w-4 h-4" />}
               >
-                Save
+                <span className="flex items-center gap-2">
+                  <Save className="w-4 h-4" />
+                  Save
+                </span>
               </Button>
             )}
           </div>

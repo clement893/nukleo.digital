@@ -9,13 +9,20 @@ const nextConfig = {
   },
 
   // Webpack configuration
-  webpack: (config, { isServer }) => {
+  webpack: (config, { isServer, webpack }) => {
     // Handle missing CSS files during build
     if (!isServer) {
       config.resolve.alias = {
         ...config.resolve.alias,
         'default-stylesheet.css': require.resolve('./src/lib/empty-css.js'),
       };
+      
+      // Ignore missing CSS files during build
+      config.plugins.push(
+        new webpack.IgnorePlugin({
+          resourceRegExp: /^\.next\/browser\/default-stylesheet\.css$/,
+        })
+      );
     }
 
     // Bundle analyzer configuration

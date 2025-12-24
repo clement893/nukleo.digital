@@ -1,4 +1,4 @@
-"""
+﻿"""
 Teams Endpoints
 API endpoints for team management
 """
@@ -8,7 +8,7 @@ from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.database import get_db
-from app.core.cache import invalidate_cache_pattern
+from app.core.cache import cached, invalidate_cache_pattern, invalidate_cache_pattern_async
 from app.dependencies import get_current_user
 from app.dependencies.rbac import require_team_permission, require_team_owner, require_team_member
 from app.models import User
@@ -52,7 +52,7 @@ async def create_team(
     )
     
     # Invalidate cache after creation
-    await invalidate_cache_pattern("teams:*")
+    await invalidate_cache_pattern_async("teams:*")
     
     team = await team_service.get_team(created_team.id)
     if not team:
@@ -181,8 +181,8 @@ async def update_team(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Team not found")
     
     # Invalidate cache
-    await invalidate_cache_pattern("teams:*")
-    await invalidate_cache_pattern(f"team:{team_id}:*")
+    await invalidate_cache_pattern_async("teams:*")
+    await invalidate_cache_pattern_async(f"team:{team_id}:*")
     
     # Reload with relationships
     team = await team_service.get_team(team_id)
@@ -224,8 +224,8 @@ async def delete_team(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Team not found")
     
     # Invalidate cache
-    await invalidate_cache_pattern("teams:*")
-    await invalidate_cache_pattern(f"team:{team_id}:*")
+    await invalidate_cache_pattern_async("teams:*")
+    await invalidate_cache_pattern_async(f"team:{team_id}:*")
     
     return None
 
@@ -263,8 +263,8 @@ async def add_team_member(
     )
     
     # Invalidate cache after adding member
-    await invalidate_cache_pattern(f"team:{team_id}:*")
-    await invalidate_cache_pattern("teams:*")
+    await invalidate_cache_pattern_async(f"team:{team_id}:*")
+    await invalidate_cache_pattern_async("teams:*")
     
     return TeamMemberResponse.model_validate(team_member)
 
@@ -291,8 +291,8 @@ async def update_team_member(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Team member not found")
     
     # Invalidate cache after updating member
-    await invalidate_cache_pattern(f"team:{team_id}:*")
-    await invalidate_cache_pattern("teams:*")
+    await invalidate_cache_pattern_async(f"team:{team_id}:*")
+    await invalidate_cache_pattern_async("teams:*")
     
     return TeamMemberResponse.model_validate(team_member)
 
@@ -321,8 +321,8 @@ async def remove_team_member(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Team member not found")
     
     # Invalidate cache after removing member
-    await invalidate_cache_pattern(f"team:{team_id}:*")
-    await invalidate_cache_pattern("teams:*")
+    await invalidate_cache_pattern_async(f"team:{team_id}:*")
+    await invalidate_cache_pattern_async("teams:*")
     
     return None
 

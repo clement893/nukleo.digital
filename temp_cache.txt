@@ -204,32 +204,13 @@ def cached(expire: int = 300, key_prefix: str = ""):
     return decorator
 
 
-def invalidate_cache_pattern(pattern: str):
+async def invalidate_cache_pattern(pattern: str) -> int:
     """
-    DÃ©corateur pour invalider le cache par pattern aprÃ¨s l'exÃ©cution d'une fonction
+    Fonction utilitaire pour invalider le cache par pattern
     
     Usage:
-        @invalidate_cache_pattern("projects:*")
-        async def create_project(...):
-            ...
-    """
-    def decorator(func):
-        @wraps(func)
-        async def wrapper(*args, **kwargs):
-            result = await func(*args, **kwargs)
-            await cache_backend.clear_pattern(pattern)
-            return result
-        return wrapper
-    return decorator
-
-
-async def invalidate_cache_pattern_async(pattern: str) -> int:
-    """
-    Fonction utilitaire pour invalider le cache par pattern (version async)
-    
-    Usage:
-        await invalidate_cache_pattern_async("users:*")
-        await invalidate_cache_pattern_async("user:123:*")
+        await invalidate_cache_pattern("users:*")
+        await invalidate_cache_pattern("user:123:*")
     """
     return await cache_backend.clear_pattern(pattern)
 
@@ -247,5 +228,4 @@ async def close_cache():
     if cache_backend.redis_client:
         await cache_backend.redis_client.close()
         logger.info("Cache connections closed")
-
 

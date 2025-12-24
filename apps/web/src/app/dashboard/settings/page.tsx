@@ -146,9 +146,6 @@ function SettingsContent() {
     <div className="py-8">
       <Container>
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-            Paramètres
-          </h1>
           <p className="text-gray-700 dark:text-gray-300">
             Gérez vos préférences et paramètres de compte
           </p>

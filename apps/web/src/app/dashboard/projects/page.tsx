@@ -289,10 +289,7 @@ function ProjectsContent() {
       <Container>
         <div className="mb-8 flex justify-between items-center">
           <div>
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-              Projets
-            </h1>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-gray-700 dark:text-gray-300">
               Gérez vos projets et leurs statuts
             </p>
           </div>

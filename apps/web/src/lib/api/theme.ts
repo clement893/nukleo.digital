@@ -44,8 +44,18 @@ export async function getActiveTheme(): Promise<ThemeConfigResponse> {
       // If backend returns error, return default theme
       console.warn(`Failed to fetch active theme: ${response.statusText}. Using default theme.`);
       return {
+        id: 0,
+        name: 'default',
+        display_name: 'Default Theme',
         config: {
-          mode: 'system',
+          primary_color: '#3B82F6',
+          secondary_color: '#10B981',
+          danger_color: '#EF4444',
+          warning_color: '#F59E0B',
+          info_color: '#06B6D4',
+          success_color: '#10B981',
+          font_family: 'Inter',
+          border_radius: '0.5rem',
         },
       };
     }
@@ -56,8 +66,18 @@ export async function getActiveTheme(): Promise<ThemeConfigResponse> {
     if (error instanceof Error && (error.name === 'AbortError' || error.message.includes('Failed to fetch'))) {
       console.warn('Backend not available. Using default theme. Make sure the backend is running on', API_URL);
       return {
+        id: 0,
+        name: 'default',
+        display_name: 'Default Theme',
         config: {
-          mode: 'system',
+          primary_color: '#3B82F6',
+          secondary_color: '#10B981',
+          danger_color: '#EF4444',
+          warning_color: '#F59E0B',
+          info_color: '#06B6D4',
+          success_color: '#10B981',
+          font_family: 'Inter',
+          border_radius: '0.5rem',
         },
       };
     }

@@ -28,7 +28,7 @@ const getCookieOptions = (isProduction: boolean) => ({
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { accessToken, refreshToken, expiresIn, tokenType } = body;
+    const { accessToken, refreshToken, expiresIn } = body;
 
     if (!accessToken) {
       return NextResponse.json(

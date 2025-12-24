@@ -124,3 +124,4 @@ grep -r "as\s+any" apps/web/src --include="*.ts" --include="*.tsx"
 1. Supprimer les fichiers de backup
 2. Ajouter des règles ESLint pour prévenir l'utilisation future de `any`
 
+

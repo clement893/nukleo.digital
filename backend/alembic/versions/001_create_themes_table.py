@@ -43,3 +43,4 @@ def downgrade():
     op.drop_index(op.f('ix_themes_id'), table_name='themes')
     op.drop_table('themes')
 
+

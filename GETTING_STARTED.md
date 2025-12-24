@@ -82,8 +82,23 @@ NEXTAUTH_SECRET=your-secret-key-change-in-production
 GOOGLE_CLIENT_ID=your-google-client-id
 GOOGLE_CLIENT_SECRET=your-google-client-secret
 JWT_SECRET=your-jwt-secret
+
+# API Configuration
+# Development: http://localhost:8000
+# Production: Set this to your production backend URL (e.g., https://your-backend.railway.app)
+# ⚠️ IMPORTANT: NEXT_PUBLIC_API_URL MUST be set in production builds
 NEXT_PUBLIC_API_URL=http://localhost:8000
+
+# Optional: Fallback API URL for production (if NEXT_PUBLIC_API_URL is not set)
+# Useful for templates where the production URL is not known at build time
+# NEXT_PUBLIC_DEFAULT_API_URL=https://your-backend.railway.app
 ```
+
+**⚠️ Important for Production:**
+- `NEXT_PUBLIC_API_URL` is embedded at build time in Next.js
+- You MUST set `NEXT_PUBLIC_API_URL` before building for production
+- If not set, the app will fall back to `localhost:8000` (which won't work in production)
+- You can also set `NEXT_PUBLIC_DEFAULT_API_URL` as a fallback option
 
 ### 4. Initialize database
 

@@ -265,3 +265,4 @@ Pour plus de détails, consultez :
 
 **Félicitations !** Votre système de gestion des thèmes globaux est maintenant intégré ! 🎨
 
+

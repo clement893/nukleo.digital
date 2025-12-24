@@ -342,3 +342,4 @@ Le système de composants est **excellent** et **prêt pour le développement fu
 3. Ajouter Storybook (4-6 heures)
 4. Augmenter la couverture de tests (8-10 heures)
 
+

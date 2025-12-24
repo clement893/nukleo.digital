@@ -11,15 +11,31 @@ import type {
 
 /**
  * Get API URL with production fallback
- * Uses Railway production URL in production, localhost in development
+ * Uses NEXT_PUBLIC_API_URL or NEXT_PUBLIC_DEFAULT_API_URL, falls back to localhost in development
  */
 const getApiUrl = () => {
   const isProduction = process.env.NODE_ENV === 'production';
-  const defaultUrl = isProduction 
-    ? 'https://modelebackend-production-0590.up.railway.app'
-    : 'http://localhost:8000';
   
-  let url = (process.env.NEXT_PUBLIC_API_URL || defaultUrl).trim();
+  // Priority order: explicit API URL > default API URL > localhost (dev only)
+  let url = process.env.NEXT_PUBLIC_API_URL 
+    || process.env.NEXT_PUBLIC_DEFAULT_API_URL 
+    || (isProduction ? undefined : 'http://localhost:8000');
+  
+  // In production, NEXT_PUBLIC_API_URL should be set
+  if (isProduction && !url) {
+    console.error(
+      '[Theme API] ERROR: NEXT_PUBLIC_API_URL is not set in production. ' +
+      'Please set NEXT_PUBLIC_API_URL or NEXT_PUBLIC_DEFAULT_API_URL environment variable.'
+    );
+    url = 'http://localhost:8000'; // Fallback to prevent crashes
+  }
+  
+  // Default to localhost for development if nothing is set
+  if (!url) {
+    url = 'http://localhost:8000';
+  }
+  
+  url = url.trim();
   
   // If URL doesn't start with http:// or https://, add https://
   if (!url.startsWith('http://') && !url.startsWith('https://')) {

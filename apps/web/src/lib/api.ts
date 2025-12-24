@@ -20,27 +20,47 @@ import { logger } from '@/lib/logger';
 
 /**
  * API base URL with trailing slash removed to avoid double slashes
- * Uses Railway production URL in production, localhost in development
- * Automatically adds https:// if protocol is missing (for production)
  * 
- * Note: In Next.js, NEXT_PUBLIC_* vars are embedded at build time
- * Make sure NEXT_PUBLIC_API_URL is set before building for production
+ * Priority:
+ * 1. NEXT_PUBLIC_API_URL (explicit configuration)
+ * 2. NEXT_PUBLIC_DEFAULT_API_URL (fallback for production)
+ * 3. http://localhost:8000 (development fallback)
+ * 
+ * Note: In Next.js, NEXT_PUBLIC_* vars are embedded at build time.
+ * For production, NEXT_PUBLIC_API_URL MUST be set via environment variables.
+ * 
+ * Automatically adds https:// if protocol is missing (for production).
  */
 export const getApiUrl = () => {
   const isProduction = process.env.NODE_ENV === 'production';
-  const defaultUrl = isProduction 
-    ? 'https://modelebackend-production-0590.up.railway.app'
-    : 'http://localhost:8000';
   
-  // Get and trim the URL to remove any whitespace
-  let url = (process.env.NEXT_PUBLIC_API_URL || defaultUrl).trim();
+  // Priority order: explicit API URL > default API URL > localhost (dev only)
+  let url = process.env.NEXT_PUBLIC_API_URL 
+    || process.env.NEXT_PUBLIC_DEFAULT_API_URL 
+    || (isProduction ? undefined : 'http://localhost:8000');
+  
+  // In production, NEXT_PUBLIC_API_URL should be set
+  if (isProduction && !url) {
+    console.error(
+      '[API Client] ERROR: NEXT_PUBLIC_API_URL is not set in production. ' +
+      'Please set NEXT_PUBLIC_API_URL or NEXT_PUBLIC_DEFAULT_API_URL environment variable.'
+    );
+    // Fallback to localhost in production (should not happen, but prevents crashes)
+    url = 'http://localhost:8000';
+  }
+  
+  // Default to localhost for development if nothing is set
+  if (!url) {
+    url = 'http://localhost:8000';
+  }
+  
+  url = url.trim();
   
   // Log to help debug (only in browser, not SSR)
   if (typeof window !== 'undefined') {
     console.log('[API Client] NODE_ENV:', process.env.NODE_ENV);
-    console.log('[API Client] NEXT_PUBLIC_API_URL (raw):', process.env.NEXT_PUBLIC_API_URL);
-    console.log('[API Client] NEXT_PUBLIC_API_URL (trimmed):', url);
-    console.log('[API Client] Default URL:', defaultUrl);
+    console.log('[API Client] NEXT_PUBLIC_API_URL:', process.env.NEXT_PUBLIC_API_URL || '(not set)');
+    console.log('[API Client] NEXT_PUBLIC_DEFAULT_API_URL:', process.env.NEXT_PUBLIC_DEFAULT_API_URL || '(not set)');
     console.log('[API Client] Final API URL:', url);
   }
   

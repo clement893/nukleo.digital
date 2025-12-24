@@ -266,3 +266,4 @@ Le template dispose déjà d'une **excellente base de composants** (50+). Les co
 
 **Dernière mise à jour:** 24 Décembre 2024
 
+

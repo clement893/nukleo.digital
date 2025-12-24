@@ -186,3 +186,4 @@ curl http://localhost:8000/api/v1/themes/active
 
 **Le système est maintenant prêt à être utilisé !** 🎨
 
+

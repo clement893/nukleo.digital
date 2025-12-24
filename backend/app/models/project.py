@@ -49,3 +49,4 @@ class Project(Base):
     def __repr__(self) -> str:
         return f"<Project(id={self.id}, name={self.name}, status={self.status})>"
 
+

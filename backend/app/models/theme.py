@@ -36,3 +36,4 @@ class Theme(Base):
     def __repr__(self):
         return f"<Theme(id={self.id}, name='{self.name}', is_active={self.is_active})>"
 
+

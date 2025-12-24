@@ -209,3 +209,4 @@ export default function AdminThemesPage() {
 
 5. **Format JSON** : La configuration doit être un JSON valide. Le formulaire valide le JSON avant la soumission.
 
+

@@ -199,3 +199,4 @@ Pour chaque page à migrer :
 - [Guide d'amélioration](./COMPONENT_IMPROVEMENTS.md)
 - [Design Tokens](./tokens.ts)
 
+

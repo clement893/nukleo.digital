@@ -240,3 +240,4 @@ Le système de composants est **excellent** et prêt pour le développement. Les
 2. 🟡 Design tokens (impact sur la cohérence)
 3. 🟢 Storybook (impact sur la productivité)
 
+

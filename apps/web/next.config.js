@@ -34,13 +34,20 @@ const nextConfig = {
 
   // Headers for security
   async headers() {
-    // Use the same logic as getApiUrl() in theme.ts to determine API URL
+    // Use the same logic as getApiUrl() to determine API URL
     const isProduction = process.env.NODE_ENV === 'production';
-    const defaultUrl = isProduction 
-      ? 'https://modelebackend-production-0590.up.railway.app'
-      : 'http://localhost:8000';
     
-    let apiUrl = (process.env.NEXT_PUBLIC_API_URL || defaultUrl).trim();
+    // Priority order: explicit API URL > default API URL > localhost (dev only)
+    let apiUrl = process.env.NEXT_PUBLIC_API_URL 
+      || process.env.NEXT_PUBLIC_DEFAULT_API_URL 
+      || (isProduction ? undefined : 'http://localhost:8000');
+    
+    // Default to localhost for development if nothing is set
+    if (!apiUrl) {
+      apiUrl = 'http://localhost:8000';
+    }
+    
+    apiUrl = apiUrl.trim();
     
     // If URL doesn't start with http:// or https://, add https://
     if (!apiUrl.startsWith('http://') && !apiUrl.startsWith('https://')) {
@@ -54,11 +61,10 @@ const nextConfig = {
     // ⚠️ SECURITY NOTE: CSP is relaxed in development (unsafe-inline/unsafe-eval)
     // This is acceptable for dev but should be tightened in production using nonces
     // See: https://nextjs.org/docs/advanced-features/security-headers
-    // Include both localhost (for dev) and production URL (for prod) in connect-src
-    const productionBackendUrl = 'https://modelebackend-production-0590.up.railway.app';
+    // Include both localhost (for dev) and the configured API URL in connect-src
     const connectSrcUrls = isProduction 
-      ? [`'self'`, apiUrl, productionBackendUrl, 'https://*.sentry.io', 'wss://*.sentry.io']
-      : [`'self'`, apiUrl, productionBackendUrl, 'http://localhost:8000', 'https://*.sentry.io', 'wss://*.sentry.io'];
+      ? [`'self'`, apiUrl, 'https://*.sentry.io', 'wss://*.sentry.io']
+      : [`'self'`, apiUrl, 'http://localhost:8000', 'https://*.sentry.io', 'wss://*.sentry.io'];
     
     const cspDirectives = [
       "default-src 'self'",

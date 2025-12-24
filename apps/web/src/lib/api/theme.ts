@@ -9,11 +9,6 @@ import type {
   ThemeConfigResponse,
 } from '@modele/types';
 
-<<<<<<< HEAD
-import { getApiUrl } from '../api';
-
-const API_URL = getApiUrl().replace(/\/$/, '');
-=======
 /**
  * Get API URL with production fallback
  * Uses Railway production URL in production, localhost in development
@@ -35,7 +30,6 @@ const getApiUrl = () => {
 };
 
 const API_URL = getApiUrl();
->>>>>>> 8d6031c (fix: Improve theme loading with production backend support and graceful fallback)
 
 // Helper to get auth token
 import { TokenStorage } from '@/lib/auth/tokenStorage';
@@ -66,19 +60,11 @@ const DEFAULT_THEME_CONFIG: ThemeConfigResponse = {
 /**
  * Get the currently active theme configuration.
  * Public endpoint - no authentication required.
-<<<<<<< HEAD
- * Returns default theme if backend is not available.
- */
-export async function getActiveTheme(): Promise<ThemeConfigResponse> {
-  try {
-    // Create abort controller for timeout
-=======
  * Falls back to default theme if backend is unavailable.
  */
 export async function getActiveTheme(): Promise<ThemeConfigResponse> {
   try {
     // Create an AbortController for timeout
->>>>>>> 8d6031c (fix: Improve theme loading with production backend support and graceful fallback)
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
 
@@ -94,56 +80,13 @@ export async function getActiveTheme(): Promise<ThemeConfigResponse> {
     clearTimeout(timeoutId);
 
     if (!response.ok) {
-<<<<<<< HEAD
-      // If backend returns error, return default theme
-      console.warn(`Failed to fetch active theme: ${response.statusText}. Using default theme.`);
-      return {
-        id: 0,
-        name: 'default',
-        display_name: 'Default Theme',
-        config: {
-          primary_color: '#3B82F6',
-          secondary_color: '#10B981',
-          danger_color: '#EF4444',
-          warning_color: '#F59E0B',
-          info_color: '#06B6D4',
-          success_color: '#10B981',
-          font_family: 'Inter',
-          border_radius: '0.5rem',
-        },
-      };
-=======
       // If backend returns an error, use default theme
       console.warn(`Backend returned ${response.status}. Using default theme.`);
       return DEFAULT_THEME_CONFIG;
->>>>>>> 8d6031c (fix: Improve theme loading with production backend support and graceful fallback)
     }
 
     return response.json();
   } catch (error) {
-<<<<<<< HEAD
-    // Handle network errors (backend not available)
-    if (error instanceof Error && (error.name === 'AbortError' || error.message.includes('Failed to fetch'))) {
-      console.warn('Backend not available. Using default theme. Make sure the backend is running on', API_URL);
-      return {
-        id: 0,
-        name: 'default',
-        display_name: 'Default Theme',
-        config: {
-          primary_color: '#3B82F6',
-          secondary_color: '#10B981',
-          danger_color: '#EF4444',
-          warning_color: '#F59E0B',
-          info_color: '#06B6D4',
-          success_color: '#10B981',
-          font_family: 'Inter',
-          border_radius: '0.5rem',
-        },
-      };
-    }
-    // Re-throw other errors
-    throw error;
-=======
     // Handle network errors, timeouts, and connection refused
     if (error instanceof Error) {
       if (error.name === 'AbortError') {
@@ -156,7 +99,6 @@ export async function getActiveTheme(): Promise<ThemeConfigResponse> {
     }
     // Return default theme instead of throwing
     return DEFAULT_THEME_CONFIG;
->>>>>>> 8d6031c (fix: Improve theme loading with production backend support and graceful fallback)
   }
 }
 
@@ -312,31 +254,3 @@ export async function deleteTheme(
     throw new Error(error.detail || `Failed to delete theme: ${response.statusText}`);
   }
 }
-
-/**
- * Update the mode (light/dark/system) of the currently active theme.
- * Requires authentication and superadmin role.
- * This affects all users globally.
- */
-export async function updateActiveThemeMode(
-  mode: 'light' | 'dark' | 'system',
-  token?: string
-): Promise<ThemeConfigResponse> {
-  const authToken = token || getAuthToken();
-  const response = await fetch(`${API_URL}/api/v1/themes/active/mode`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${authToken}`,
-    },
-    body: JSON.stringify({ mode }),
-  });
-
-  if (!response.ok) {
-    const error = await response.json().catch(() => ({ detail: response.statusText }));
-    throw new Error(error.detail || `Failed to update theme mode: ${response.statusText}`);
-  }
-
-  return response.json();
-}
-

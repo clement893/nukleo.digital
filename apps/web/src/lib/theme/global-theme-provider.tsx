@@ -40,15 +40,6 @@ export function GlobalThemeProvider({ children }: GlobalThemeProviderProps) {
     } catch (err) {
       // This should rarely happen now since getActiveTheme returns default theme
       const error = err instanceof Error ? err : new Error('Failed to load theme');
-<<<<<<< HEAD
-      // Only log error if it's not a network error (backend not available)
-      if (!error.message.includes('Backend not available')) {
-        setError(error);
-        logger.error('Failed to fetch global theme', error);
-      } else {
-        // Backend not available - use default theme silently
-        logger.warn('Backend not available, using default theme');
-=======
       setError(error);
       logger.warn('Failed to fetch global theme, using default', error);
       // Still try to apply a basic default theme
@@ -58,7 +49,6 @@ export function GlobalThemeProvider({ children }: GlobalThemeProviderProps) {
       } catch {
         // If even that fails, just log and continue
         logger.error('Could not apply default theme');
->>>>>>> 8d6031c (fix: Improve theme loading with production backend support and graceful fallback)
       }
     } finally {
       setIsLoading(false);
@@ -203,4 +193,3 @@ export function useGlobalTheme() {
   }
   return context;
 }
-

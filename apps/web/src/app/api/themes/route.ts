@@ -4,11 +4,6 @@
  */
 import { NextResponse } from 'next/server';
 import { logger } from '@/lib/logger';
-<<<<<<< HEAD
-import { getApiUrl } from '@/lib/api';
-
-const API_URL = getApiUrl().replace(/\/$/, '');
-=======
 import type { ThemeConfigResponse } from '@modele/types';
 
 /**
@@ -51,7 +46,6 @@ const DEFAULT_THEME_CONFIG: ThemeConfigResponse = {
     border_radius: '0.5rem',
   },
 };
->>>>>>> 8d6031c (fix: Improve theme loading with production backend support and graceful fallback)
 
 /**
  * GET /api/themes/active
@@ -99,4 +93,3 @@ export async function GET() {
     return NextResponse.json(DEFAULT_THEME_CONFIG);
   }
 }
-

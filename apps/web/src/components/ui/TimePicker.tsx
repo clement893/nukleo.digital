@@ -63,7 +63,7 @@ export default function TimePicker({
 
     if (format === '12h') {
       const match = timeStr.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
-      if (!match) return null;
+      if (!match || !match[1] || !match[2] || !match[3]) return null;
       let hours = parseInt(match[1], 10);
       const minutes = parseInt(match[2], 10);
       const period = match[3].toUpperCase();

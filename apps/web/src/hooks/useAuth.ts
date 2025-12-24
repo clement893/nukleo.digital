@@ -37,10 +37,7 @@ export function useAuth() {
         const { access_token, refresh_token, user: userData } = response.data;
 
         // Store tokens securely
-        TokenStorage.setToken(access_token);
-        if (refresh_token) {
-          TokenStorage.setRefreshToken(refresh_token);
-        }
+        await TokenStorage.setToken(access_token, refresh_token);
 
         // Update store
         login(userData, access_token, refresh_token);
@@ -69,10 +66,7 @@ export function useAuth() {
         const loginResponse = await authAPI.login(data.email, data.password);
         const { access_token, refresh_token } = loginResponse.data;
 
-        TokenStorage.setToken(access_token);
-        if (refresh_token) {
-          TokenStorage.setRefreshToken(refresh_token);
-        }
+        await TokenStorage.setToken(access_token, refresh_token);
 
         login(userData, access_token);
         return { success: true, user: userData };

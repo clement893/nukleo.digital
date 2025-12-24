@@ -42,13 +42,8 @@ function CallbackContent() {
     try {
       // Store tokens securely using TokenStorage (await to ensure it's stored before API calls)
       logger.debug('Storing token...');
-      await TokenStorage.setToken(accessToken);
-      logger.info('Token stored successfully');
-      
-      if (refreshToken) {
-        await TokenStorage.setRefreshToken(refreshToken);
-        logger.info('Refresh token stored successfully');
-      }
+      await TokenStorage.setToken(accessToken, refreshToken);
+      logger.info('Tokens stored successfully');
 
       // Small delay to ensure token is available in sessionStorage
       await new Promise(resolve => setTimeout(resolve, 100));

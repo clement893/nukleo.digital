@@ -5,7 +5,6 @@ import { Card, Badge, Input, Button, ColorPicker } from '@/components/ui';
 import { PageHeader, PageContainer, Section } from '@/components/layout';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useAuthStore } from '@/lib/store';
-import { ThemeToggle, ThemeToggleWithIcon } from '@/components/ui';
 import { Palette, Moon, Sun, Monitor, Shield, AlertCircle, CheckCircle, Save, RefreshCw } from 'lucide-react';
 import { clsx } from 'clsx';
 import { getActiveTheme, updateActiveThemeMode, updateTheme } from '@/lib/api/theme';
@@ -471,35 +470,6 @@ function ThemeSettingsContent() {
           </Section>
         )}
 
-        {/* Quick Toggle - Read Only for Non-Admins */}
-        <Section title="Aperçu du Thème">
-          <Card>
-            <div className="space-y-4">
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                Composants de bascule rapide (lecture seule pour les utilisateurs non-admin):
-              </p>
-              <div className="flex flex-wrap gap-6 items-center">
-                <div className="flex items-center gap-3">
-                  <ThemeToggle />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">
-                    Toggle Simple
-                  </span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <ThemeToggleWithIcon />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">
-                    Toggle avec Icône
-                  </span>
-                </div>
-              </div>
-              {!isSuperAdmin && (
-                <p className="text-xs text-amber-600 dark:text-amber-400 mt-2">
-                  ⚠️ Ces composants sont en lecture seule. Seuls les superadmins peuvent modifier le thème global.
-                </p>
-              )}
-            </div>
-          </Card>
-        </Section>
 
         {/* Messages */}
         {error && (

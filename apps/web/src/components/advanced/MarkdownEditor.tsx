@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { clsx } from 'clsx';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
-import { Markdown, Eye, EyeOff, Save, Download } from 'lucide-react';
+import { FileText, Eye, EyeOff, Save, Download } from 'lucide-react';
 import { logger } from '@/lib/logger';
 
 export interface MarkdownEditorProps {
@@ -106,7 +106,7 @@ export default function MarkdownEditor({
         {/* Toolbar */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Markdown className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+            <FileText className="w-5 h-5 text-primary-600 dark:text-primary-400" />
             <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
               Markdown Editor
             </h3>
@@ -151,18 +151,22 @@ export default function MarkdownEditor({
               variant="outline"
               size="sm"
               onClick={handleDownload}
-              icon={<Download className="w-4 h-4" />}
             >
-              Download
+              <span className="flex items-center gap-2">
+                <Download className="w-4 h-4" />
+                Download
+              </span>
             </Button>
             {onSave && (
               <Button
                 variant="primary"
                 size="sm"
                 onClick={handleSave}
-                icon={<Save className="w-4 h-4" />}
               >
-                Save
+                <span className="flex items-center gap-2">
+                  <Save className="w-4 h-4" />
+                  Save
+                </span>
               </Button>
             )}
           </div>

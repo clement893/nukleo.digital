@@ -1,16 +1,15 @@
 'use client';
 
-import { Card, Button, Input, Badge, ThemeToggle, ThemeToggleWithIcon, ClientOnly } from '@/components/ui';
+import { Card, Input, Badge, ThemeToggle, ThemeToggleWithIcon, ClientOnly } from '@/components/ui';
 import { PageHeader, PageContainer, Section, ExampleCard } from '@/components/layout';
 import { useTheme } from '@/contexts/ThemeContext';
-import { ThemeManager } from '@/components/theme/ThemeManager';
 
 // Note: Client Components are already dynamic by nature.
 // Route segment config (export const dynamic) only works in Server Components.
 // Client Components run on the client side, so they don't need this export.
 
 function ThemePageContent() {
-  const { theme, resolvedTheme, setTheme } = useTheme();
+  const { theme, resolvedTheme } = useTheme();
 
   return (
     <PageContainer>
@@ -60,28 +59,14 @@ function ThemePageContent() {
                   {resolvedTheme}
                 </Badge>
               </div>
-              <div className="flex gap-2 pt-4">
-                <Button 
-                  size="sm" 
-                  variant={theme === 'light' ? 'primary' : 'outline'}
-                  onClick={() => setTheme('light')}
-                >
-                  Light
-                </Button>
-                <Button 
-                  size="sm" 
-                  variant={theme === 'dark' ? 'primary' : 'outline'}
-                  onClick={() => setTheme('dark')}
-                >
-                  Dark
-                </Button>
-                <Button 
-                  size="sm" 
-                  variant={theme === 'system' ? 'primary' : 'outline'}
-                  onClick={() => setTheme('system')}
-                >
-                  System
-                </Button>
+              <div className="pt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                <p className="text-sm text-blue-800 dark:text-blue-200">
+                  <strong>Note :</strong> Pour modifier votre thème, veuillez utiliser la page{' '}
+                  <a href="/dashboard/theme" className="underline font-semibold">
+                    Paramètres de Thème
+                  </a>{' '}
+                  dans le dashboard.
+                </p>
               </div>
             </div>
           </Card>
@@ -159,16 +144,28 @@ function MyComponent() {
           </Card>
         </Section>
 
-        {/* Gestionnaire de Couleurs */}
-        <Section title="Personnalisation des Couleurs">
-          <div className="max-w-2xl">
-            <ThemeManager />
-            <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
-              <p className="text-sm text-blue-800 dark:text-blue-200">
-                <strong>Note :</strong> Les modifications de couleurs s'appliquent immédiatement à tous les composants du site et sont sauvegardées automatiquement.
-              </p>
+        {/* Information about Theme Management */}
+        <Section title="Gestion du Thème">
+          <Card>
+            <div className="space-y-4 text-gray-700 dark:text-gray-300">
+              <div>
+                <h4 className="font-semibold mb-2">Gestion du Thème:</h4>
+                <p className="text-sm mb-4">
+                  Pour personnaliser votre thème (mode clair/sombre) et vos préférences, veuillez vous rendre sur la page{' '}
+                  <a href="/dashboard/theme" className="text-primary-600 dark:text-primary-400 underline font-semibold">
+                    Paramètres de Thème
+                  </a>{' '}
+                  dans le dashboard.
+                </p>
+                <p className="text-sm">
+                  Les administrateurs peuvent gérer les thèmes de la plateforme via la page{' '}
+                  <a href="/admin/themes" className="text-primary-600 dark:text-primary-400 underline font-semibold">
+                    Administration des Thèmes
+                  </a>.
+                </p>
+              </div>
             </div>
-          </div>
+          </Card>
         </Section>
       </div>
     </PageContainer>

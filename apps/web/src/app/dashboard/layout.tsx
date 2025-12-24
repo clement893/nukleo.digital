@@ -19,7 +19,8 @@ import {
   Settings, 
   LogOut,
   Menu,
-  X
+  X,
+  Palette
 } from 'lucide-react';
 import { clsx } from 'clsx';
 
@@ -56,6 +57,11 @@ function DashboardLayoutContent({
       icon: <Users className="w-5 h-5" />,
     },
     {
+      label: 'Thème',
+      href: '/dashboard/theme',
+      icon: <Palette className="w-5 h-5" />,
+    },
+    {
       label: 'Paramètres',
       href: '/dashboard/settings',
       icon: <Settings className="w-5 h-5" />,
@@ -67,10 +73,11 @@ function DashboardLayoutContent({
       {/* Mobile Header */}
       <header className="lg:hidden bg-white dark:bg-gray-800 shadow border-b border-gray-200 dark:border-gray-700">
         <div className="px-4 py-3 flex items-center justify-between">
-          <h1 className="text-xl font-bold text-gray-900 dark:text-white">
+              <h1 className="text-xl font-bold text-gray-900 dark:text-white">
             {pathname === '/dashboard' && 'Dashboard'}
             {pathname === '/dashboard/projects' && 'Projets'}
             {pathname === '/dashboard/users' && 'Utilisateurs'}
+            {pathname === '/dashboard/theme' && 'Thème'}
             {pathname === '/dashboard/settings' && 'Paramètres'}
           </h1>
           <div className="flex items-center gap-2">
@@ -137,6 +144,7 @@ function DashboardLayoutContent({
                 {pathname === '/dashboard' && 'Dashboard'}
                 {pathname === '/dashboard/projects' && 'Projets'}
                 {pathname === '/dashboard/users' && 'Utilisateurs'}
+                {pathname === '/dashboard/theme' && 'Thème'}
                 {pathname === '/dashboard/settings' && 'Paramètres'}
               </h1>
               <div className="flex items-center gap-3">

@@ -90,7 +90,7 @@ function UsersContent() {
       return;
     }
 
-    if (!formData.password.trim() && !selectedUser) {
+    if (!formData.password.trim()) {
       setError('Le mot de passe est requis pour créer un utilisateur');
       return;
     }
@@ -98,23 +98,16 @@ function UsersContent() {
     try {
       setLoading(true);
       setError(null);
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      
-      const newUser: User = {
-        id: String(Date.now()),
-        email: formData.email,
-        name: formData.name,
-        role: formData.role,
-        is_active: true,
-        created_at: new Date().toISOString(),
-      };
-
-      setUsers([...users, newUser]);
-      setShowCreateModal(false);
-      resetForm();
+      // TODO: Implement user creation endpoint in backend
+      // For now, show a message that this feature requires backend implementation
+      setError('La création d\'utilisateurs nécessite l\'implémentation de l\'endpoint backend. Veuillez utiliser l\'API directement.');
+      // await usersAPI.create({ ... });
+      // await loadUsers();
+      // setShowCreateModal(false);
+      // resetForm();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erreur lors de la création de l\'utilisateur');
+      const appError = handleApiError(err);
+      setError(appError.message || 'Erreur lors de la création de l\'utilisateur');
     } finally {
       setLoading(false);
     }
@@ -129,26 +122,23 @@ function UsersContent() {
     try {
       setLoading(true);
       setError(null);
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      
-      const updatedUsers = users.map((u) =>
-        u.id === selectedUser.id
-          ? {
-              ...u,
-              email: formData.email,
-              name: formData.name,
-              role: formData.role,
-            }
-          : u
-      );
-
-      setUsers(updatedUsers);
-      setShowEditModal(false);
-      setSelectedUser(null);
-      resetForm();
+      // TODO: Implement user update endpoint in backend
+      // For now, show a message that this feature requires backend implementation
+      setError('La modification d\'utilisateurs nécessite l\'implémentation de l\'endpoint backend. Veuillez utiliser l\'API directement.');
+      // Parse name into first_name and last_name
+      // const nameParts = formData.name.split(' ');
+      // await usersAPI.update(selectedUser.id, {
+      //   email: formData.email,
+      //   first_name: nameParts[0] || null,
+      //   last_name: nameParts.slice(1).join(' ') || null,
+      // });
+      // await loadUsers();
+      // setShowEditModal(false);
+      // setSelectedUser(null);
+      // resetForm();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erreur lors de la modification de l\'utilisateur');
+      const appError = handleApiError(err);
+      setError(appError.message || 'Erreur lors de la modification de l\'utilisateur');
     } finally {
       setLoading(false);
     }
@@ -177,16 +167,14 @@ function UsersContent() {
     try {
       setLoading(true);
       setError(null);
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      
-      const updatedUsers = users.map((u) =>
-        u.id === user.id ? { ...u, is_active: !u.is_active } : u
-      );
-
-      setUsers(updatedUsers);
+      // TODO: Implement user update endpoint in backend to toggle is_active
+      // For now, show a message that this feature requires backend implementation
+      setError('La modification du statut nécessite l\'implémentation de l\'endpoint backend. Veuillez utiliser l\'API directement.');
+      // await usersAPI.update(user.id, { is_active: !user.is_active });
+      // await loadUsers();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erreur lors de la modification du statut');
+      const appError = handleApiError(err);
+      setError(appError.message || 'Erreur lors de la modification du statut');
     } finally {
       setLoading(false);
     }

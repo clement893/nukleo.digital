@@ -31,12 +31,15 @@ function UploadContent() {
   const [success, setSuccess] = useState<string | null>(null);
 
   const handleFileSelect = (files: File[]) => {
+    console.log('Files selected:', files.length, files.map(f => f.name));
     setSelectedFiles(files);
     setError(null);
     setSuccess(null);
   };
 
   const handleUpload = async () => {
+    console.log('handleUpload called', { selectedFilesCount: selectedFiles.length });
+    
     if (selectedFiles.length === 0) {
       setError('Veuillez sélectionner au moins un fichier');
       return;
@@ -47,15 +50,19 @@ function UploadContent() {
     setSuccess(null);
 
     try {
+      console.log('Starting upload for', selectedFiles.length, 'files');
+      
       // Simulate S3 upload - Replace with actual API call
-      const uploadPromises = selectedFiles.map(async (file) => {
+      const uploadPromises = selectedFiles.map(async (file, index) => {
+        console.log(`Uploading file ${index + 1}/${selectedFiles.length}:`, file.name);
+        
         // Simulate upload delay
         await new Promise((resolve) => setTimeout(resolve, 1000 + Math.random() * 2000));
 
         // Simulate success/error (90% success rate)
         const success = Math.random() > 0.1;
 
-        return {
+        const result = {
           id: `file-${Date.now()}-${Math.random().toString(36).substring(7)}`,
           name: file.name,
           size: file.size,
@@ -64,13 +71,19 @@ function UploadContent() {
           uploadedAt: new Date().toISOString(),
           status: success ? ('success' as const) : ('error' as const),
         };
+        
+        console.log(`File ${file.name} upload ${success ? 'success' : 'failed'}`);
+        return result;
       });
 
       const results = await Promise.all(uploadPromises);
+      console.log('Upload completed:', results);
+      
       setUploadedFiles((prev) => [...prev, ...results]);
       setSelectedFiles([]);
       setSuccess(`${results.filter((r) => r.status === 'success').length} fichier(s) uploadé(s) avec succès`);
     } catch (err) {
+      console.error('Upload error:', err);
       setError(err instanceof Error ? err.message : 'Erreur lors de l\'upload des fichiers');
     } finally {
       setUploading(false);
@@ -165,26 +178,47 @@ function UploadContent() {
               </div>
             )}
 
-            <div className="flex gap-3">
-              <Button
-                onClick={handleUpload}
-                loading={uploading}
-                disabled={selectedFiles.length === 0 || uploading}
-              >
-                <span className="flex items-center gap-2">
-                  <Upload className="w-5 h-5" />
-                  {uploading ? 'Upload en cours...' : `Uploader ${selectedFiles.length} fichier(s)`}
-                </span>
-              </Button>
-              {selectedFiles.length > 0 && (
-                <Button
-                  variant="outline"
-                  onClick={() => setSelectedFiles([])}
-                  disabled={uploading}
-                >
-                  Effacer la sélection
-                </Button>
+            <div className="flex flex-col gap-3">
+              {selectedFiles.length === 0 && (
+                <p className="text-sm text-gray-500 dark:text-gray-400 italic">
+                  Sélectionnez des fichiers ci-dessus pour activer le bouton d'upload
+                </p>
               )}
+              <div className="flex gap-3">
+                <Button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Button clicked', { selectedFilesCount: selectedFiles.length, uploading, files: selectedFiles.map(f => f.name) });
+                    if (selectedFiles.length === 0) {
+                      setError('Veuillez sélectionner au moins un fichier avant de cliquer sur Uploader');
+                      return;
+                    }
+                    handleUpload();
+                  }}
+                  loading={uploading}
+                  disabled={selectedFiles.length === 0 || uploading}
+                  type="button"
+                >
+                  <span className="flex items-center gap-2">
+                    <Upload className="w-5 h-5" />
+                    {uploading ? 'Upload en cours...' : selectedFiles.length > 0 ? `Uploader ${selectedFiles.length} fichier(s)` : 'Sélectionnez des fichiers'}
+                  </span>
+                </Button>
+                {selectedFiles.length > 0 && (
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      console.log('Clearing selection');
+                      setSelectedFiles([]);
+                    }}
+                    disabled={uploading}
+                    type="button"
+                  >
+                    Effacer la sélection
+                  </Button>
+                )}
+              </div>
             </div>
           </div>
         </Card>

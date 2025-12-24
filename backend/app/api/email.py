@@ -1,5 +1,6 @@
 """Email endpoints using SendGrid."""
 
+import os
 from typing import Any, Dict, List, Optional
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel, EmailStr, Field
@@ -113,12 +114,12 @@ async def email_info():
             }
         },
         "how_to_use": {
-            "frontend": "Use the frontend at https://modeleweb-production.up.railway.app/email/test",
+            "frontend": f"Use the frontend at {os.getenv('FRONTEND_URL', 'http://localhost:3000')}/email/test",
             "api": "Use POST requests with Authorization header: Bearer <your-token>",
-            "get_token": "Login at https://modeleweb-production.up.railway.app/auth/login"
+            "get_token": f"Login at {os.getenv('FRONTEND_URL', 'http://localhost:3000')}/auth/login"
         },
         "example_curl": {
-            "test_email": 'curl -X POST "https://modelebackend-production.up.railway.app/api/email/test" \\\n  -H "Authorization: Bearer YOUR_TOKEN" \\\n  -H "Content-Type: application/json" \\\n  -d \'{"to_email": "your-email@example.com"}\''
+            "test_email": f'curl -X POST "{os.getenv("BASE_URL", "http://localhost:8000")}/api/email/test" \\\n  -H "Authorization: Bearer YOUR_TOKEN" \\\n  -H "Content-Type: application/json" \\\n  -d \'{{"to_email": "your-email@example.com"}}\''
         }
     }
 

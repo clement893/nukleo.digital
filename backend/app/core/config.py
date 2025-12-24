@@ -32,10 +32,21 @@ class Settings(BaseSettings):
         description="Base URL of the backend (for OAuth callbacks). If empty, will be constructed from request.",
     )
 
+<<<<<<< HEAD
     # CORS - Must be set via environment variable in production
     CORS_ORIGINS: Union[str, List[str]] = Field(
         default="",
         description="Comma-separated list of allowed CORS origins (required in production)"
+=======
+    # CORS - Accept string or list, will be converted to list
+    # Use environment variable CORS_ORIGINS or FRONTEND_URL, fallback to localhost for development
+    CORS_ORIGINS: Union[str, List[str]] = Field(
+        default_factory=lambda: (
+            os.getenv("CORS_ORIGINS", "") or
+            os.getenv("FRONTEND_URL", "http://localhost:3000")
+        ),
+        description="Allowed CORS origins (comma-separated string or JSON array). Set CORS_ORIGINS env var for multiple origins.",
+>>>>>>> 29b4315 (fix: remove hardcoded production URLs and replace with environment variables)
     )
 
     @field_validator("CORS_ORIGINS", mode="before")
@@ -58,9 +69,15 @@ class Settings(BaseSettings):
         
         # If None or empty, use default based on environment
         if not v or (isinstance(v, str) and not v.strip()):
+<<<<<<< HEAD
             if is_production:
                 raise ValueError("CORS_ORIGINS must be set in production via environment variable")
             return ["http://localhost:3000", "http://localhost:3001"]
+=======
+            # Try to get from FRONTEND_URL env var, fallback to localhost
+            frontend_url = os.getenv("FRONTEND_URL", "http://localhost:3000")
+            return [frontend_url]
+>>>>>>> 29b4315 (fix: remove hardcoded production URLs and replace with environment variables)
         
         # If string, parse it
         if isinstance(v, str):
@@ -82,10 +99,16 @@ class Settings(BaseSettings):
             if v.strip():
                 return [v.strip()]
         
+<<<<<<< HEAD
         # Fallback
         if is_production:
                 raise ValueError("CORS_ORIGINS must be set in production via environment variable")
         return ["http://localhost:3000", "http://localhost:3001"]
+=======
+        # Fallback - use FRONTEND_URL or default to localhost
+        frontend_url = os.getenv("FRONTEND_URL", "http://localhost:3000")
+        return [frontend_url]
+>>>>>>> 29b4315 (fix: remove hardcoded production URLs and replace with environment variables)
 
     @field_validator("CORS_ORIGINS", mode="after")
     @classmethod
@@ -104,6 +127,7 @@ class Settings(BaseSettings):
             # If it's still a string after parsing, convert to list
             if v.strip():
                 return [v.strip()]
+<<<<<<< HEAD
             # Empty string - use default based on environment
             if is_production:
                 raise ValueError("CORS_ORIGINS must be set in production via environment variable")
@@ -114,6 +138,16 @@ class Settings(BaseSettings):
         if is_production:
                 raise ValueError("CORS_ORIGINS must be set in production via environment variable")
         return ["http://localhost:3000", "http://localhost:3001"]
+=======
+            # Empty string - use FRONTEND_URL or default to localhost
+            frontend_url = os.getenv("FRONTEND_URL", "http://localhost:3000")
+            return [frontend_url]
+        if isinstance(v, list):
+            return v
+        # Fallback - use FRONTEND_URL or default to localhost
+        frontend_url = os.getenv("FRONTEND_URL", "http://localhost:3000")
+        return [frontend_url]
+>>>>>>> 29b4315 (fix: remove hardcoded production URLs and replace with environment variables)
 
     # Database
     DATABASE_URL: PostgresDsn = Field(

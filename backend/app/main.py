@@ -88,7 +88,11 @@ def create_app() -> FastAPI:
     if isinstance(cors_origins, str):
         cors_origins = [cors_origins]
     elif not isinstance(cors_origins, list):
-        cors_origins = ["https://modele-nextjs-fullstack-production-1e92.up.railway.app"]
+        # Fallback to FRONTEND_URL or localhost if CORS_ORIGINS is not properly configured
+        import os
+        frontend_url = os.getenv("FRONTEND_URL", "http://localhost:3000")
+        cors_origins = [frontend_url]
+        logger.warning(f"CORS_ORIGINS not properly configured, using FRONTEND_URL: {frontend_url}")
     
     logger.info(f"CORS Origins configured: {cors_origins}")
     
@@ -220,3 +224,4 @@ def create_app() -> FastAPI:
 
 
 app = create_app()
+

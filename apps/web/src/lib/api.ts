@@ -24,14 +24,12 @@ import { logger } from '@/lib/logger';
  * Automatically adds https:// if protocol is missing (for production)
  * 
  * Note: In Next.js, NEXT_PUBLIC_* vars are embedded at build time
- * Make sure NEXT_PUBLIC_API_URL is set before building
+ * Make sure NEXT_PUBLIC_API_URL is set before building for production
  */
 const getApiUrl = () => {
-  // In production, default to the known backend URL if not set
-  const isProduction = process.env.NODE_ENV === 'production';
-  const defaultUrl = isProduction 
-    ? 'https://modelebackend-production-0590.up.railway.app'
-    : 'http://localhost:8000';
+  // Use NEXT_PUBLIC_API_URL environment variable, fallback to localhost for development
+  // In production, NEXT_PUBLIC_API_URL must be set via environment variables
+  const defaultUrl = 'http://localhost:8000';
   
   // Get and trim the URL to remove any whitespace
   let url = (process.env.NEXT_PUBLIC_API_URL || defaultUrl).trim();

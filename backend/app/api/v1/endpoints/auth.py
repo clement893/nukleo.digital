@@ -289,9 +289,10 @@ async def get_google_auth_url(
                     logger.info(f"Using request.base_url: {backend_base_url}")
                 except Exception as e:
                     logger.error(f"Error getting base_url from request: {e}")
-                    # Fallback to hardcoded production URL
-                    backend_base_url = "https://modelebackend-production-0590.up.railway.app"
-                    logger.info(f"Using fallback base_url: {backend_base_url}")
+                    # Fallback to BASE_URL from settings or environment variable
+                    import os
+                    backend_base_url = os.getenv("BASE_URL", "http://localhost:8000")
+                    logger.warning(f"Using fallback base_url from environment: {backend_base_url}")
             callback_uri = f"{backend_base_url}{settings.API_V1_STR}/auth/google/callback"
         
         logger.info(f"Google OAuth callback URI: {callback_uri}")
@@ -468,8 +469,9 @@ async def google_oauth_callback(
             
             # Determine frontend redirect URL
             # If state is already a full URL (starts with http), use it directly
-            # Otherwise, construct the URL from state or use default
-            frontend_base = "https://modele-nextjs-fullstack-production-1e92.up.railway.app"
+            # Otherwise, construct the URL from state or use FRONTEND_URL from settings
+            import os
+            frontend_base = os.getenv("FRONTEND_URL", "http://localhost:3000")
             
             if state and state.startswith(("http://", "https://")):
                 # State is already a full URL, use it directly

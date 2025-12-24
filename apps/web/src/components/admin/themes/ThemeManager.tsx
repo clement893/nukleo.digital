@@ -113,7 +113,7 @@ export function ThemeManager({ authToken }: ThemeManagerProps) {
 
       {showCreateForm && (
         <ThemeForm
-          onSubmit={handleCreateTheme}
+          onSubmit={(data) => handleCreateTheme(data as ThemeCreate)}
           onCancel={() => setShowCreateForm(false)}
         />
       )}
@@ -182,7 +182,7 @@ export function ThemeManager({ authToken }: ThemeManagerProps) {
 
 interface ThemeFormProps {
   theme?: Theme;
-  onSubmit: (data: ThemeCreate | ThemeUpdate) => void;
+  onSubmit: (data: ThemeCreate | ThemeUpdate) => void | Promise<void>;
   onCancel: () => void;
 }
 
@@ -193,7 +193,6 @@ function ThemeForm({ theme, onSubmit, onCancel }: ThemeFormProps) {
   const [config, setConfig] = useState(
     JSON.stringify(theme?.config || {}, null, 2)
   );
-  const [isActive, setIsActive] = useState(theme?.is_active || false);
   const [configError, setConfigError] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -213,16 +212,14 @@ function ThemeForm({ theme, onSubmit, onCancel }: ThemeFormProps) {
         display_name: displayName,
         description: description || null,
         config: parsedConfig,
-        is_active: isActive,
-      });
+      } as ThemeUpdate);
     } else {
       onSubmit({
         name,
         display_name: displayName,
         description: description || null,
         config: parsedConfig,
-        is_active: isActive,
-      });
+      } as ThemeCreate);
     }
   };
 
@@ -282,18 +279,6 @@ function ThemeForm({ theme, onSubmit, onCancel }: ThemeFormProps) {
         )}
       </div>
 
-      <div className="flex items-center">
-        <input
-          type="checkbox"
-          id="isActive"
-          checked={isActive}
-          onChange={(e) => setIsActive(e.target.checked)}
-          className="mr-2"
-        />
-        <label htmlFor="isActive" className="text-sm">
-          Activate this theme immediately
-        </label>
-      </div>
 
       <div className="flex gap-2">
         <button

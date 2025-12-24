@@ -4,7 +4,6 @@
 export const dynamic = 'force-dynamic';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import ProtectedRoute from '@/components/auth/ProtectedRoute';
 import Container from '@/components/ui/Container';
 import Card from '@/components/ui/Card';
@@ -25,7 +24,6 @@ interface UploadedFile {
 }
 
 function UploadContent() {
-  const router = useRouter();
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
   const [uploading, setUploading] = useState(false);

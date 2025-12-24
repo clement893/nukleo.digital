@@ -35,7 +35,7 @@ export interface AnalyticsDashboardProps {
 
 export default function AnalyticsDashboard({
   metrics,
-  dateRange,
+  dateRange: _dateRange,
   onDateRangeChange,
   onExport,
   className,

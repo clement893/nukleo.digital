@@ -101,8 +101,8 @@ function UsersContent() {
       
       // Parse name into first_name and last_name
       const nameParts = formData.name.trim().split(' ');
-      const first_name = nameParts[0] || null;
-      const last_name = nameParts.slice(1).join(' ') || null;
+      const first_name = nameParts[0] || undefined;
+      const last_name = nameParts.slice(1).join(' ') || undefined;
       
       await usersAPI.createUser({
         email: formData.email.trim(),
@@ -135,13 +135,13 @@ function UsersContent() {
       
       // Parse name into first_name and last_name
       const nameParts = formData.name.trim().split(' ');
-      const first_name = nameParts[0] || null;
-      const last_name = nameParts.slice(1).join(' ') || null;
+      const first_name = nameParts[0] || undefined;
+      const last_name = nameParts.slice(1).join(' ') || undefined;
       
       const updateData: {
         email: string;
-        first_name: string | null;
-        last_name: string | null;
+        first_name?: string;
+        last_name?: string;
         password?: string;
       } = {
         email: formData.email.trim(),

@@ -7,7 +7,7 @@ import { TokenStorage } from '@/lib/auth/tokenStorage';
 import { checkSuperAdminStatus } from '@/lib/api/admin';
 import { logger } from '@/lib/logger';
 import { Card } from '@/components/ui';
-import { Shield, AlertCircle } from 'lucide-react';
+import { AlertCircle } from 'lucide-react';
 
 interface ProtectedSuperAdminRouteProps {
   children: ReactNode;

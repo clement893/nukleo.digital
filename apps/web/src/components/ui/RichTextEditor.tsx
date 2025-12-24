@@ -205,7 +205,7 @@ export default function RichTextEditor({
       <style jsx>{`
         [contenteditable][data-placeholder]:empty:before {
           content: attr(data-placeholder);
-          color: #9ca3af;
+          color: var(--color-text-secondary, #9ca3af);
           pointer-events: none;
         }
       `}</style>

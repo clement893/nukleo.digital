@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, Input, Badge, ThemeToggle, ThemeToggleWithIcon, ClientOnly } from '@/components/ui';
+import { Card, Input, Badge, Button, ThemeToggle, ThemeToggleWithIcon, ClientOnly } from '@/components/ui';
 import { PageHeader, PageContainer, Section, ExampleCard } from '@/components/layout';
 import { useTheme } from '@/contexts/ThemeContext';
 

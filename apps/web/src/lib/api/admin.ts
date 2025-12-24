@@ -134,53 +134,76 @@ export async function checkSuperAdminStatus(
       const { TokenStorage } = await import('@/lib/auth/tokenStorage');
       const refreshToken = TokenStorage.getRefreshToken();
       
-      if (refreshToken) {
-        try {
-          // Try to refresh the token
-          const refreshResponse = await fetch(`${API_URL}/api/v1/auth/refresh`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ refresh_token: refreshToken }),
-          });
+      // Try to refresh using the expired token itself
+      // The backend refresh endpoint can refresh expired tokens if user still exists
+      try {
+        // Try to refresh the token using the expired token
+        const refreshResponse = await fetch(`${API_URL}/api/v1/auth/refresh`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ token: authToken }),
+        });
 
-          if (refreshResponse.ok) {
-            const refreshData = await refreshResponse.json();
-            const newToken = refreshData.access_token || refreshData.accessToken;
-            const newRefreshToken = refreshData.refresh_token || refreshData.refreshToken;
-            
-            // Update token storage
-            await TokenStorage.setToken(newToken, newRefreshToken);
-            
-            // Update Zustand store if available
-            try {
-              const { useAuthStore } = await import('@/lib/store');
-              const store = useAuthStore.getState();
-              if (store.setRefreshToken && newRefreshToken) {
-                await store.setRefreshToken(newRefreshToken);
-              }
-              // Update token in store
-              useAuthStore.setState({ token: newToken });
-            } catch (storeError) {
-              // Store update failed, but continue with token refresh
-              console.warn('Failed to update auth store after token refresh:', storeError);
+        if (refreshResponse.ok) {
+          const refreshData = await refreshResponse.json();
+          const newToken = refreshData.access_token || refreshData.accessToken;
+          
+          // Update token storage
+          await TokenStorage.setToken(newToken, refreshToken || undefined);
+          
+          // Update Zustand store if available
+          try {
+            const { useAuthStore } = await import('@/lib/store');
+            // Update token in store
+            useAuthStore.setState({ token: newToken });
+            if (refreshToken && useAuthStore.getState().setRefreshToken) {
+              await useAuthStore.getState().setRefreshToken(refreshToken);
             }
-            
-            // Retry the original request with new token
-            authToken = newToken;
-            response = await makeRequest(authToken);
-          } else {
-            // Refresh failed, throw error
-            throw new Error('Token expired and refresh failed. Please log in again.');
+          } catch (storeError) {
+            // Store update failed, but continue with token refresh
+            console.warn('Failed to update auth store after token refresh:', storeError);
           }
-        } catch (refreshError) {
-          // Refresh failed, throw error
-          throw new Error('Token expired and refresh failed. Please log in again.');
+          
+          // Retry the original request with new token
+          authToken = newToken;
+          response = await makeRequest(authToken);
+        } else {
+          // Refresh failed, try with refresh token if available
+          if (refreshToken) {
+            const refreshTokenResponse = await fetch(`${API_URL}/api/v1/auth/refresh`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ refresh_token: refreshToken }),
+            });
+            
+            if (refreshTokenResponse.ok) {
+              const refreshData = await refreshTokenResponse.json();
+              const newToken = refreshData.access_token || refreshData.accessToken;
+              
+              await TokenStorage.setToken(newToken, refreshToken);
+              try {
+                const { useAuthStore } = await import('@/lib/store');
+                useAuthStore.setState({ token: newToken });
+              } catch (storeError) {
+                console.warn('Failed to update auth store:', storeError);
+              }
+              
+              authToken = newToken;
+              response = await makeRequest(authToken);
+            } else {
+              throw new Error('Token expired and refresh failed. Please log in again.');
+            }
+          } else {
+            throw new Error('Token expired. Please log in again.');
+          }
         }
-      } else {
-        // No refresh token available
-        throw new Error('Token expired. Please log in again.');
+      } catch (refreshError) {
+        // Refresh failed, throw error
+        throw new Error('Token expired and refresh failed. Please log in again.');
       }
     }
 

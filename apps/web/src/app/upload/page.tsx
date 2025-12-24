@@ -170,9 +170,11 @@ function UploadContent() {
                 onClick={handleUpload}
                 loading={uploading}
                 disabled={selectedFiles.length === 0 || uploading}
-                leftIcon={<Upload className="w-5 h-5" />}
               >
-                {uploading ? 'Upload en cours...' : `Uploader ${selectedFiles.length} fichier(s)`}
+                <span className="flex items-center gap-2">
+                  <Upload className="w-5 h-5" />
+                  {uploading ? 'Upload en cours...' : `Uploader ${selectedFiles.length} fichier(s)`}
+                </span>
               </Button>
               {selectedFiles.length > 0 && (
                 <Button

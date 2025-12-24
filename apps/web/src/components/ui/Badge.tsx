@@ -14,10 +14,10 @@ function Badge({
 }: BadgeProps) {
   const variants = {
     default: 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200',
-    success: 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300',
-    warning: 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300',
-    error: 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300',
-    info: 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300',
+    success: 'bg-success-100 dark:bg-success-900/30 text-success-800 dark:text-success-300',
+    warning: 'bg-warning-100 dark:bg-warning-900/30 text-warning-800 dark:text-warning-300',
+    error: 'bg-error-100 dark:bg-error-900/30 text-error-800 dark:text-error-300',
+    info: 'bg-info-100 dark:bg-info-900/30 text-info-800 dark:text-info-300',
   };
 
   return (

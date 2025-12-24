@@ -35,7 +35,9 @@ export default function Divider({
     return (
       <hr
         className={clsx(
-          'border-0 border-l border-gray-300 dark:border-gray-600',
+          'border-0 border-l',
+          'border-gray-300 dark:border-gray-600',
+          '[border-color:var(--color-border)]',
           variantClasses[variant],
           spacingClasses[spacing],
           'h-full',
@@ -53,16 +55,20 @@ export default function Divider({
       <div className={clsx('flex items-center', spacingClasses[spacing], className)}>
         <hr
           className={clsx(
-            'flex-1 border-0 border-t border-gray-300 dark:border-gray-600',
+            'flex-1 border-0 border-t',
+            'border-gray-300 dark:border-gray-600',
+            '[border-color:var(--color-border)]',
             variantClasses[variant]
           )}
           role="separator"
           aria-label={label}
         />
-        <span className="px-4 text-sm text-gray-500 dark:text-gray-400">{label}</span>
+        <span className="px-4 text-sm text-gray-500 dark:text-gray-400 [color:var(--color-text-secondary)]">{label}</span>
         <hr
           className={clsx(
-            'flex-1 border-0 border-t border-gray-300 dark:border-gray-600',
+            'flex-1 border-0 border-t',
+            'border-gray-300 dark:border-gray-600',
+            '[border-color:var(--color-border)]',
             variantClasses[variant]
           )}
           role="separator"
@@ -74,7 +80,9 @@ export default function Divider({
   return (
     <hr
       className={clsx(
-        'border-0 border-t border-gray-300 dark:border-gray-600',
+        'border-0 border-t',
+        'border-gray-300 dark:border-gray-600',
+        '[border-color:var(--color-border)]',
         variantClasses[variant],
         spacingClasses[spacing],
         className

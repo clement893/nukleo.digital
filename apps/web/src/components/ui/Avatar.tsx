@@ -28,10 +28,10 @@ const sizeClasses = {
 };
 
 const statusClasses = {
-  online: 'bg-green-500',
-  away: 'bg-yellow-500',
-  busy: 'bg-red-500',
-  offline: 'bg-gray-400',
+  online: 'bg-success-500 dark:bg-success-600',
+  away: 'bg-warning-500 dark:bg-warning-600',
+  busy: 'bg-error-500 dark:bg-error-600',
+  offline: 'bg-gray-400 dark:bg-gray-500',
 };
 
 const statusSizeClasses = {

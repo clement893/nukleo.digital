@@ -95,7 +95,7 @@ export default function Tabs({
           clsx(
             'px-4 py-2 text-sm font-medium border-b-2 transition-colors',
             isActive
-              ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+              ? 'border-primary-500 text-primary-600 dark:text-primary-400'
               : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
           ),
       },
@@ -105,7 +105,7 @@ export default function Tabs({
           clsx(
             'px-4 py-2 text-sm font-medium rounded-full transition-colors',
             isActive
-              ? 'bg-blue-600 text-white'
+              ? 'bg-primary-600 dark:bg-primary-500 text-white'
               : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
           ),
       },
@@ -115,9 +115,9 @@ export default function Tabs({
           clsx(
             'px-4 py-2 text-sm font-medium transition-colors relative',
             isActive
-              ? 'text-blue-600 dark:text-blue-400'
+              ? 'text-primary-600 dark:text-primary-400'
               : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300',
-            isActive && 'after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-blue-600'
+            isActive && 'after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary-600 dark:after:bg-primary-500'
           ),
       },
     };
@@ -145,7 +145,7 @@ export default function Tabs({
                   className={clsx(
                     'ml-1 px-2 py-0.5 text-xs rounded-full',
                     activeTab === tab.id
-                      ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300'
+                      ? 'bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300'
                       : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
                   )}
                 >
@@ -190,7 +190,7 @@ export function Tab({ children, value, disabled, className }: TabProps) {
       className={clsx(
         'px-4 py-2 text-sm font-medium border-b-2 transition-colors',
         isActive
-          ? 'border-blue-500 text-blue-600 dark:text-blue-400'
+          ? 'border-primary-500 text-primary-600 dark:text-primary-400'
           : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300',
         disabled && 'opacity-50 cursor-not-allowed',
         className

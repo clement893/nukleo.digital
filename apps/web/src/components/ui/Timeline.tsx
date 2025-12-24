@@ -28,9 +28,9 @@ const statusIcons = {
 
 const colorClasses = {
   primary: 'text-primary-600 dark:text-primary-400',
-  success: 'text-green-600 dark:text-green-400',
-  warning: 'text-yellow-600 dark:text-yellow-400',
-  error: 'text-red-600 dark:text-red-400',
+  success: 'text-success-600 dark:text-success-400',
+  warning: 'text-warning-600 dark:text-warning-400',
+  error: 'text-error-600 dark:text-error-400',
   default: 'text-gray-600 dark:text-gray-400',
 };
 

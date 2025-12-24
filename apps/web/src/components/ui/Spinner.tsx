@@ -18,8 +18,8 @@ export default function Spinner({
   };
 
   const colors = {
-    primary: 'border-blue-600 border-t-transparent',
-    secondary: 'border-gray-600 border-t-transparent',
+    primary: 'border-primary-600 dark:border-primary-500 border-t-transparent',
+    secondary: 'border-gray-600 dark:border-gray-500 border-t-transparent',
     white: 'border-white border-t-transparent',
   };
 

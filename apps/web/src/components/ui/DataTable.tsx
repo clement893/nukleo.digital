@@ -235,7 +235,7 @@ function DataTable<T extends Record<string, unknown>>({
               <TableRow>
                 <TableCell colSpan={columns.length + (actions ? 1 : 0)} className="text-center py-8">
                   <div className="flex items-center justify-center">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600 dark:border-primary-500"></div>
                     <span className="ml-2 text-gray-600 dark:text-gray-400">Chargement...</span>
                   </div>
                 </TableCell>

@@ -20,27 +20,27 @@ interface BannerProps {
 
 const variantStyles: Record<BannerVariant, { bg: string; border: string; text: string; icon: ReactNode }> = {
   info: {
-    bg: 'bg-blue-50 dark:bg-blue-900/20',
-    border: 'border-blue-200 dark:border-blue-800',
-    text: 'text-blue-800 dark:text-blue-200',
+    bg: 'bg-info-50 dark:bg-info-900/20',
+    border: 'border-info-200 dark:border-info-800',
+    text: 'text-info-800 dark:text-info-200',
     icon: <Info className="w-5 h-5" />,
   },
   success: {
-    bg: 'bg-green-50 dark:bg-green-900/20',
-    border: 'border-green-200 dark:border-green-800',
-    text: 'text-green-800 dark:text-green-200',
+    bg: 'bg-success-50 dark:bg-success-900/20',
+    border: 'border-success-200 dark:border-success-800',
+    text: 'text-success-800 dark:text-success-200',
     icon: <CheckCircle className="w-5 h-5" />,
   },
   warning: {
-    bg: 'bg-yellow-50 dark:bg-yellow-900/20',
-    border: 'border-yellow-200 dark:border-yellow-800',
-    text: 'text-yellow-800 dark:text-yellow-200',
+    bg: 'bg-warning-50 dark:bg-warning-900/20',
+    border: 'border-warning-200 dark:border-warning-800',
+    text: 'text-warning-800 dark:text-warning-200',
     icon: <AlertTriangle className="w-5 h-5" />,
   },
   error: {
-    bg: 'bg-red-50 dark:bg-red-900/20',
-    border: 'border-red-200 dark:border-red-800',
-    text: 'text-red-800 dark:text-red-200',
+    bg: 'bg-error-50 dark:bg-error-900/20',
+    border: 'border-error-200 dark:border-error-800',
+    text: 'text-error-800 dark:text-error-200',
     icon: <AlertCircle className="w-5 h-5" />,
   },
 };

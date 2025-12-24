@@ -113,9 +113,9 @@ export default function Pagination({
             onClick={() => onPageChange(pageNum)}
             className={clsx(
               'px-4 py-2 rounded-md text-sm font-medium',
-              'focus:outline-none focus:ring-2 focus:ring-blue-500',
+              'focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400',
               isActive
-                ? 'bg-blue-600 dark:bg-blue-500 text-white'
+                ? 'bg-primary-600 dark:bg-primary-500 text-white'
                 : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
             )}
             aria-label={`Page ${pageNum}`}

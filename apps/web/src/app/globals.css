@@ -133,7 +133,45 @@
   .bg-warning-500 { background-color: var(--color-warning-500) !important; }
   .bg-warning-600 { background-color: var(--color-warning-600) !important; }
   
+  /* Info colors */
+  .bg-info-50 { background-color: var(--color-info-50) !important; }
+  .bg-info-100 { background-color: var(--color-info-100) !important; }
+  .bg-info-200 { background-color: var(--color-info-200) !important; }
   .bg-info-500 { background-color: var(--color-info-500) !important; }
+  .bg-info-600 { background-color: var(--color-info-600) !important; }
+  .bg-info-700 { background-color: var(--color-info-700) !important; }
+  .bg-info-800 { background-color: var(--color-info-800) !important; }
+  .bg-info-900 { background-color: var(--color-info-900) !important; }
+  
+  /* Success colors (using secondary) */
+  .bg-success-50 { background-color: var(--color-secondary-50) !important; }
+  .bg-success-100 { background-color: var(--color-secondary-100) !important; }
+  .bg-success-200 { background-color: var(--color-secondary-200) !important; }
+  .bg-success-500 { background-color: var(--color-secondary-500) !important; }
+  .bg-success-600 { background-color: var(--color-secondary-600) !important; }
+  .bg-success-700 { background-color: var(--color-secondary-700) !important; }
+  .bg-success-800 { background-color: var(--color-secondary-800) !important; }
+  .bg-success-900 { background-color: var(--color-secondary-900) !important; }
+  
+  /* Warning colors */
+  .bg-warning-50 { background-color: var(--color-warning-50) !important; }
+  .bg-warning-100 { background-color: var(--color-warning-100) !important; }
+  .bg-warning-200 { background-color: var(--color-warning-200) !important; }
+  .bg-warning-500 { background-color: var(--color-warning-500) !important; }
+  .bg-warning-600 { background-color: var(--color-warning-600) !important; }
+  .bg-warning-700 { background-color: var(--color-warning-700) !important; }
+  .bg-warning-800 { background-color: var(--color-warning-800) !important; }
+  .bg-warning-900 { background-color: var(--color-warning-900) !important; }
+  
+  /* Error/Danger colors */
+  .bg-error-50 { background-color: var(--color-danger-50) !important; }
+  .bg-error-100 { background-color: var(--color-danger-100) !important; }
+  .bg-error-200 { background-color: var(--color-danger-200) !important; }
+  .bg-error-500 { background-color: var(--color-danger-500) !important; }
+  .bg-error-600 { background-color: var(--color-danger-600) !important; }
+  .bg-error-700 { background-color: var(--color-danger-700) !important; }
+  .bg-error-800 { background-color: var(--color-danger-800) !important; }
+  .bg-error-900 { background-color: var(--color-danger-900) !important; }
   
   .text-primary-500 { color: var(--color-primary-500) !important; }
   .text-primary-600 { color: var(--color-primary-600) !important; }
@@ -141,15 +179,49 @@
   
   .text-secondary-500 { color: var(--color-secondary-500) !important; }
   .text-danger-500 { color: var(--color-danger-500) !important; }
+  .text-danger-600 { color: var(--color-danger-600) !important; }
+  .text-danger-700 { color: var(--color-danger-700) !important; }
+  .text-danger-800 { color: var(--color-danger-800) !important; }
   .text-warning-500 { color: var(--color-warning-500) !important; }
+  .text-warning-600 { color: var(--color-warning-600) !important; }
+  .text-warning-700 { color: var(--color-warning-700) !important; }
+  .text-warning-800 { color: var(--color-warning-800) !important; }
   .text-info-500 { color: var(--color-info-500) !important; }
+  .text-info-600 { color: var(--color-info-600) !important; }
+  .text-info-700 { color: var(--color-info-700) !important; }
+  .text-info-800 { color: var(--color-info-800) !important; }
+  .text-success-500 { color: var(--color-secondary-500) !important; }
+  .text-success-600 { color: var(--color-secondary-600) !important; }
+  .text-success-700 { color: var(--color-secondary-700) !important; }
+  .text-success-800 { color: var(--color-secondary-800) !important; }
+  .text-error-500 { color: var(--color-danger-500) !important; }
+  .text-error-600 { color: var(--color-danger-600) !important; }
+  .text-error-700 { color: var(--color-danger-700) !important; }
+  .text-error-800 { color: var(--color-danger-800) !important; }
   
   .border-primary-500 { border-color: var(--color-primary-500) !important; }
   .border-primary-600 { border-color: var(--color-primary-600) !important; }
   .border-secondary-500 { border-color: var(--color-secondary-500) !important; }
   .border-danger-500 { border-color: var(--color-danger-500) !important; }
+  .border-danger-600 { border-color: var(--color-danger-600) !important; }
+  .border-danger-700 { border-color: var(--color-danger-700) !important; }
+  .border-danger-800 { border-color: var(--color-danger-800) !important; }
   .border-warning-500 { border-color: var(--color-warning-500) !important; }
+  .border-warning-600 { border-color: var(--color-warning-600) !important; }
+  .border-warning-700 { border-color: var(--color-warning-700) !important; }
+  .border-warning-800 { border-color: var(--color-warning-800) !important; }
   .border-info-500 { border-color: var(--color-info-500) !important; }
+  .border-info-600 { border-color: var(--color-info-600) !important; }
+  .border-info-700 { border-color: var(--color-info-700) !important; }
+  .border-info-800 { border-color: var(--color-info-800) !important; }
+  .border-success-500 { border-color: var(--color-secondary-500) !important; }
+  .border-success-600 { border-color: var(--color-secondary-600) !important; }
+  .border-success-700 { border-color: var(--color-secondary-700) !important; }
+  .border-success-800 { border-color: var(--color-secondary-800) !important; }
+  .border-error-500 { border-color: var(--color-danger-500) !important; }
+  .border-error-600 { border-color: var(--color-danger-600) !important; }
+  .border-error-700 { border-color: var(--color-danger-700) !important; }
+  .border-error-800 { border-color: var(--color-danger-800) !important; }
   
   .ring-primary-500 { --tw-ring-color: var(--color-primary-500) !important; }
   .ring-primary-400 { --tw-ring-color: var(--color-primary-400) !important; }

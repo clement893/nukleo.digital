@@ -39,8 +39,8 @@ export default function StatsCard({
                 className={clsx(
                   'text-sm font-medium',
                   change.type === 'increase'
-                    ? 'text-green-600 dark:text-green-400'
-                    : 'text-red-600 dark:text-red-400'
+                    ? 'text-success-600 dark:text-success-400'
+                    : 'text-error-600 dark:text-error-400'
                 )}
               >
                 {change.type === 'increase' ? '↑' : '↓'} {Math.abs(change.value)}%
@@ -55,7 +55,7 @@ export default function StatsCard({
           {trend && <div className="mt-2">{trend}</div>}
         </div>
         {icon && (
-          <div className="ml-4 flex-shrink-0 text-blue-600 dark:text-blue-400">
+          <div className="ml-4 flex-shrink-0 text-primary-600 dark:text-primary-400">
             {icon}
           </div>
         )}

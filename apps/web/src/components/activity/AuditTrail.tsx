@@ -302,8 +302,8 @@ export default function AuditTrail({
         </div>
 
         <DataTable
-          data={filteredEntries}
-          columns={columns}
+          data={filteredEntries as unknown as Record<string, unknown>[]}
+          columns={columns as unknown as Column<Record<string, unknown>>[]}
           pageSize={20}
           emptyMessage="No audit entries found"
         />

@@ -70,18 +70,6 @@ export class TokenStorage {
     return null;
   }
 
-  /**
-   * Set refresh token
-   * @deprecated Use setToken() with refreshToken parameter instead
-   */
-  static async setRefreshToken(token: string): Promise<void> {
-    const currentToken = this.getToken();
-    if (currentToken) {
-      await this.setToken(currentToken, token);
-    } else {
-      await this.setToken('', token);
-    }
-  }
 
   /**
    * Get refresh token

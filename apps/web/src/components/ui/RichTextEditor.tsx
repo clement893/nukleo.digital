@@ -37,26 +37,34 @@ export default function RichTextEditor({
   const editorRef = useRef<HTMLDivElement>(null);
   const [isFocused, setIsFocused] = useState(false);
 
+  // Enhanced XSS protection configuration
+  const sanitizeConfig = {
+    ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 'b', 'i', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'a', 'blockquote', 'code', 'pre'],
+    ALLOWED_ATTR: ['href', 'target', 'rel'],
+    ALLOW_DATA_ATTR: false,
+    // Additional security options
+    KEEP_CONTENT: true,
+    RETURN_DOM: false,
+    RETURN_DOM_FRAGMENT: false,
+    RETURN_TRUSTED_TYPE: false,
+    // Prevent dangerous protocols
+    FORBID_ATTR: ['onerror', 'onload', 'onclick', 'onmouseover', 'onfocus', 'onblur'],
+    // Sanitize URLs in href attributes
+    ALLOWED_URI_REGEXP: /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|sms|cid|xmpp|data):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i,
+  };
+
   useEffect(() => {
     if (editorRef.current && editorRef.current.innerHTML !== value) {
-      // Sanitize HTML before setting to prevent XSS
-      const sanitized = DOMPurify.sanitize(value, {
-        ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'a', 'blockquote'],
-        ALLOWED_ATTR: ['href', 'target', 'rel'],
-        ALLOW_DATA_ATTR: false,
-      });
+      // Enhanced sanitization with stricter XSS protection
+      const sanitized = DOMPurify.sanitize(value, sanitizeConfig);
       editorRef.current.innerHTML = sanitized;
     }
   }, [value]);
 
   const handleInput = () => {
     if (editorRef.current && onChange) {
-      // Sanitize HTML before returning to prevent XSS
-      const sanitized = DOMPurify.sanitize(editorRef.current.innerHTML, {
-        ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'a', 'blockquote'],
-        ALLOWED_ATTR: ['href', 'target', 'rel'],
-        ALLOW_DATA_ATTR: false,
-      });
+      // Enhanced sanitization with stricter XSS protection
+      const sanitized = DOMPurify.sanitize(editorRef.current.innerHTML, sanitizeConfig);
       onChange(sanitized);
     }
   };

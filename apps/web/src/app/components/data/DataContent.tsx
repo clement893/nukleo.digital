@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Table, TableHead, TableBody, TableRow, TableHeader, TableCell, EmptyState, StatsCard, Badge, Button, DataTable, DataTableEnhanced, KanbanBoard, Calendar, CRUDModal, ExportButton, Input, Timeline, List } from '@/components/ui';
-import type { KanbanCard, KanbanColumn, CalendarEvent } from '@/components/ui';
+import { Table, TableHead, TableBody, TableRow, TableHeader, TableCell, EmptyState, StatsCard, Badge, Button, DataTable, DataTableEnhanced, KanbanBoard, Calendar, CRUDModal, ExportButton, Input, Timeline, List, VirtualTable, DragDropList } from '@/components/ui';
+import type { KanbanCard, KanbanColumn, CalendarEvent, VirtualTableColumn, DragDropListItem } from '@/components/ui';
 import { PageHeader, PageContainer, Section, PageNavigation } from '@/components/layout';
 import { logger } from '@/lib/logger';
 import { getStatusColor } from '@/lib/theme/colors';
@@ -293,6 +293,71 @@ export default function DataContent() {
                 variant="divided"
               />
             </div>
+          </div>
+        </Section>
+
+        <Section title="Virtual Table - Large Datasets">
+          <div className="space-y-4">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              Table avec défilement virtuel pour gérer efficacement de grands ensembles de données (10,000+ lignes).
+            </p>
+            <VirtualTable
+              data={Array.from({ length: 10000 }, (_, i) => ({
+                id: i + 1,
+                name: `User ${i + 1}`,
+                email: `user${i + 1}@example.com`,
+                role: ['Admin', 'User', 'Moderator'][i % 3],
+                status: ['active', 'inactive', 'pending'][i % 3],
+              }))}
+              columns={[
+                { key: 'id', label: 'ID', sortable: true, width: 80 },
+                { key: 'name', label: 'Name', sortable: true },
+                { key: 'email', label: 'Email', sortable: true },
+                { key: 'role', label: 'Role', sortable: true },
+                {
+                  key: 'status',
+                  label: 'Status',
+                  sortable: true,
+                  render: (value) => (
+                    <Badge variant={value === 'active' ? 'success' : value === 'pending' ? 'warning' : 'error'}>
+                      {value}
+                    </Badge>
+                  ),
+                },
+              ]}
+              height={400}
+              rowHeight={50}
+              onRowClick={(row) => logger.debug('Row clicked', { row })}
+            />
+          </div>
+        </Section>
+
+        <Section title="Drag & Drop List">
+          <div className="space-y-4">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              Liste avec fonctionnalité de glisser-déposer pour réorganiser les éléments.
+            </p>
+            <DragDropList
+              items={[
+                { id: '1', content: <div className="flex items-center gap-2"><Badge>Task 1</Badge><span>Complete user authentication</span></div> },
+                { id: '2', content: <div className="flex items-center gap-2"><Badge>Task 2</Badge><span>Implement dashboard layout</span></div> },
+                { id: '3', content: <div className="flex items-center gap-2"><Badge>Task 3</Badge><span>Add data visualization</span></div> },
+                { id: '4', content: <div className="flex items-center gap-2"><Badge>Task 4</Badge><span>Write unit tests</span></div> },
+                { id: '5', content: <div className="flex items-center gap-2"><Badge>Task 5</Badge><span>Deploy to production</span></div> },
+              ]}
+              onReorder={(newOrder) => {
+                logger.debug('List reordered', { newOrder });
+                alert(`List reordered! New order: ${newOrder.map((item) => item.id).join(', ')}`);
+              }}
+              renderItem={(item, index) => (
+                <div className="flex items-center justify-between w-full">
+                  <div className="flex items-center gap-3">
+                    <span className="text-sm text-gray-500 dark:text-gray-400">#{index + 1}</span>
+                    {item.content}
+                  </div>
+                </div>
+              )}
+            />
           </div>
         </Section>
       </div>

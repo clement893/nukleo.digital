@@ -2,7 +2,7 @@
 API v1 router registration.
 """
 from fastapi import APIRouter
-from app.api.v1.endpoints import themes, projects, websocket, admin, auth
+from app.api.v1.endpoints import themes, projects, websocket, admin, auth, two_factor
 
 api_router = APIRouter()
 
@@ -11,6 +11,13 @@ api_router.include_router(
     auth.router,
     prefix="/auth",
     tags=["auth"]
+)
+
+# Register 2FA endpoints
+api_router.include_router(
+    two_factor.router,
+    prefix="/auth/2fa",
+    tags=["2fa"]
 )
 
 # Register theme endpoints

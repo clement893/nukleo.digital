@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Chart, Card, Button } from '@/components/ui';
-import type { ChartDataPoint } from '@/components/ui';
+import { Chart, AdvancedCharts, Card, Button } from '@/components/ui';
+import type { ChartDataPoint, ScatterDataPoint, RadarDataPoint } from '@/components/ui';
 import { PageHeader, PageContainer, Section, PageNavigation } from '@/components/layout';
 
 const lineChartData: ChartDataPoint[] = [
@@ -106,6 +106,92 @@ export default function ChartsContent() {
           </Card>
         </Section>
 
+        <Section title="Advanced Charts - Scatter">
+          <Card>
+            <AdvancedCharts
+              type="scatter"
+              data={[
+                { x: 10, y: 20, label: 'Point 1' },
+                { x: 15, y: 30, label: 'Point 2' },
+                { x: 20, y: 25, label: 'Point 3' },
+                { x: 25, y: 40, label: 'Point 4' },
+                { x: 30, y: 35, label: 'Point 5' },
+                { x: 35, y: 50, label: 'Point 6' },
+              ]}
+              title="Scatter Chart - Correlation Analysis"
+              height={300}
+            />
+          </Card>
+        </Section>
+
+        <Section title="Advanced Charts - Radar">
+          <Card>
+            <AdvancedCharts
+              type="radar"
+              data={[
+                { label: 'Speed', value: 80, maxValue: 100 },
+                { label: 'Reliability', value: 90, maxValue: 100 },
+                { label: 'Comfort', value: 70, maxValue: 100 },
+                { label: 'Safety', value: 95, maxValue: 100 },
+                { label: 'Efficiency', value: 85, maxValue: 100 },
+              ]}
+              title="Radar Chart - Performance Metrics"
+              height={300}
+            />
+          </Card>
+        </Section>
+
+        <Section title="Advanced Charts - Donut">
+          <Card>
+            <AdvancedCharts
+              type="donut"
+              data={[
+                { label: 'Desktop', value: 45, color: 'var(--color-primary-500)' },
+                { label: 'Mobile', value: 30, color: 'var(--color-secondary-500)' },
+                { label: 'Tablet', value: 15, color: 'var(--color-warning-500)' },
+                { label: 'Other', value: 10, color: 'var(--color-gray-500)' },
+              ]}
+              title="Donut Chart - Device Distribution"
+              height={300}
+              innerRadius={0.6}
+            />
+          </Card>
+        </Section>
+
+        <Section title="Advanced Charts - Gauge">
+          <Card>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <AdvancedCharts
+                type="gauge"
+                data={[]}
+                title="CPU Usage"
+                height={200}
+                min={0}
+                max={100}
+                value={65}
+              />
+              <AdvancedCharts
+                type="gauge"
+                data={[]}
+                title="Memory Usage"
+                height={200}
+                min={0}
+                max={100}
+                value={45}
+              />
+              <AdvancedCharts
+                type="gauge"
+                data={[]}
+                title="Disk Usage"
+                height={200}
+                min={0}
+                max={100}
+                value={80}
+              />
+            </div>
+          </Card>
+        </Section>
+
         <Section title="Informations">
           <Card>
             <div className="space-y-4 text-gray-700 dark:text-gray-300">
@@ -115,24 +201,33 @@ export default function ChartsContent() {
                   <li><strong>Line:</strong> Graphique en ligne pour visualiser des tendances</li>
                   <li><strong>Bar:</strong> Graphique en barres pour comparer des valeurs</li>
                   <li><strong>Area:</strong> Graphique en aire pour montrer l'évolution cumulée</li>
+                  <li><strong>Scatter:</strong> Graphique de dispersion pour analyser les corrélations</li>
+                  <li><strong>Radar:</strong> Graphique radar pour comparer plusieurs métriques</li>
+                  <li><strong>Donut:</strong> Graphique en donut pour visualiser des proportions</li>
+                  <li><strong>Gauge:</strong> Graphique jauge pour afficher des valeurs dans une plage</li>
                 </ul>
               </div>
               <div>
                 <h4 className="font-semibold mb-2">Utilisation:</h4>
                 <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg text-sm overflow-x-auto">
-{`import { Chart } from '@/components/ui';
-import type { ChartDataPoint } from '@/components/ui';
+{`import { Chart, AdvancedCharts } from '@/components/ui';
+import type { ChartDataPoint, ScatterDataPoint } from '@/components/ui';
 
+// Basic chart
 const data: ChartDataPoint[] = [
   { label: 'Jan', value: 65 },
   { label: 'Fév', value: 59 },
 ];
 
-<Chart
-  type="line"
-  data={data}
-  title="Mon graphique"
-  height={300} />`}
+<Chart type="line" data={data} title="Mon graphique" height={300} />
+
+// Advanced scatter chart
+const scatterData: ScatterDataPoint[] = [
+  { x: 10, y: 20, label: 'Point 1' },
+  { x: 15, y: 30, label: 'Point 2' },
+];
+
+<AdvancedCharts type="scatter" data={scatterData} height={300} />`}
                 </pre>
               </div>
             </div>

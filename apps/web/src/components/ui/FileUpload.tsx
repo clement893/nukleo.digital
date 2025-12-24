@@ -13,11 +13,16 @@ interface FileUploadProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 't
   error?: string;
   helperText?: string;
   fullWidth?: boolean;
-  accept?: string;
+  accept?: string; // MIME types, e.g., "image/*", "application/pdf"
+  allowedTypes?: string[]; // Specific file extensions, e.g., [".jpg", ".png", ".pdf"]
   multiple?: boolean;
   maxSize?: number; // Max file size in MB
+  minSize?: number; // Min file size in MB
+  maxFiles?: number; // Max number of files (for multiple uploads)
+  validateContent?: boolean; // Validate file content (magic bytes)
   onFileChange?: (files: FileList | null) => void;
   onFileSelect?: (files: File[]) => void; // Alternative callback that receives File[]
+  onValidationError?: (error: string) => void; // Callback for validation errors
 }
 
 const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(
@@ -42,21 +47,136 @@ const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(
     const [fileName, setFileName] = useState<string>('');
     const fileId = id || `file-${Math.random().toString(36).substring(7)}`;
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // File validation utilities
+    const validateFileType = (file: File, accept?: string, allowedTypes?: string[]): boolean => {
+      if (!accept && !allowedTypes) return true;
+
+      // Check MIME type
+      if (accept) {
+        const acceptTypes = accept.split(',').map(t => t.trim());
+        const fileType = file.type;
+        const fileName = file.name.toLowerCase();
+        
+        const matchesAccept = acceptTypes.some(pattern => {
+          if (pattern.endsWith('/*')) {
+            // Wildcard pattern like "image/*"
+            const baseType = pattern.slice(0, -2);
+            return fileType.startsWith(baseType);
+          } else if (pattern.startsWith('.')) {
+            // Extension pattern like ".jpg"
+            return fileName.endsWith(pattern.toLowerCase());
+          } else {
+            // Full MIME type
+            return fileType === pattern;
+          }
+        });
+
+        if (!matchesAccept) return false;
+      }
+
+      // Check allowed extensions
+      if (allowedTypes && allowedTypes.length > 0) {
+        const fileName = file.name.toLowerCase();
+        const matchesExtension = allowedTypes.some(ext => {
+          const normalizedExt = ext.startsWith('.') ? ext : `.${ext}`;
+          return fileName.endsWith(normalizedExt.toLowerCase());
+        });
+        if (!matchesExtension) return false;
+      }
+
+      return true;
+    };
+
+    const validateFileSize = (file: File, minSize?: number, maxSize?: number): boolean => {
+      const fileSizeMB = file.size / (1024 * 1024);
+      
+      if (minSize && fileSizeMB < minSize) return false;
+      if (maxSize && fileSizeMB > maxSize) return false;
+      
+      return true;
+    };
+
+    const validateFileContent = async (file: File): Promise<boolean> => {
+      // Basic magic bytes validation for common file types
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const arrayBuffer = e.target?.result as ArrayBuffer;
+          const bytes = new Uint8Array(arrayBuffer.slice(0, 4));
+          
+          // Check magic bytes for common file types
+          const magicBytes: Record<string, number[][]> = {
+            'image/jpeg': [[0xFF, 0xD8, 0xFF]],
+            'image/png': [[0x89, 0x50, 0x4E, 0x47]],
+            'image/gif': [[0x47, 0x49, 0x46, 0x38]],
+            'application/pdf': [[0x25, 0x50, 0x44, 0x46]],
+          };
+
+          const expectedBytes = magicBytes[file.type];
+          if (expectedBytes) {
+            const matches = expectedBytes.some(pattern => {
+              return pattern.every((byte, index) => bytes[index] === byte);
+            });
+            resolve(matches);
+          } else {
+            // If we don't have magic bytes for this type, allow it
+            resolve(true);
+          }
+        };
+        reader.onerror = () => resolve(false);
+        reader.readAsArrayBuffer(file.slice(0, 4));
+      });
+    };
+
+    const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
       const files = e.target.files;
       if (files && files.length > 0) {
-        // Validate file sizes if maxSize is provided
-        if (maxSize) {
-          const maxSizeBytes = maxSize * 1024 * 1024; // Convert MB to bytes
-          const fileArray = Array.from(files);
-          const oversizedFiles = fileArray.filter(file => file.size > maxSizeBytes);
-          
-          if (oversizedFiles.length > 0) {
-            setFileName(`Erreur: ${oversizedFiles.length} fichier(s) trop volumineux (>${maxSize}MB)`);
-            return;
+        const fileArray = Array.from(files);
+        const errors: string[] = [];
+
+        // Validate number of files
+        if (maxFiles && fileArray.length > maxFiles) {
+          errors.push(`Maximum ${maxFiles} file(s) allowed`);
+        }
+
+        // Validate each file
+        for (const file of fileArray) {
+          // Validate file type
+          if (!validateFileType(file, accept, props.allowedTypes)) {
+            errors.push(`${file.name}: Invalid file type`);
+            continue;
+          }
+
+          // Validate file size
+          if (!validateFileSize(file, props.minSize, maxSize)) {
+            const sizeError = maxSize && file.size > maxSize * 1024 * 1024
+              ? `too large (max ${maxSize}MB)`
+              : `too small (min ${props.minSize}MB)`;
+            errors.push(`${file.name}: File ${sizeError}`);
+            continue;
+          }
+
+          // Validate file content (magic bytes)
+          if (props.validateContent) {
+            const isValidContent = await validateFileContent(file);
+            if (!isValidContent) {
+              errors.push(`${file.name}: Invalid file content`);
+              continue;
+            }
           }
         }
-        
+
+        // If there are validation errors, show them and return
+        if (errors.length > 0) {
+          const errorMessage = errors.join(', ');
+          setFileName(`Erreur: ${errorMessage}`);
+          props.onValidationError?.(errorMessage);
+          // Clear the input
+          e.target.value = '';
+          return;
+        }
+
+        // All validations passed
         if (multiple) {
           setFileName(`${files.length} fichier(s) sélectionné(s)`);
         } else {
@@ -65,7 +185,7 @@ const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(
         
         // Call onFileSelect with File[] if provided
         if (onFileSelect) {
-          onFileSelect(Array.from(files));
+          onFileSelect(fileArray);
         }
       } else {
         setFileName('');

@@ -28,6 +28,8 @@ from app.core.error_handler import (
 from app.core.rate_limit import setup_rate_limiting
 from app.core.compression import CompressionMiddleware
 from app.core.cache_headers import CacheHeadersMiddleware
+from app.core.csrf import CSRFMiddleware
+from app.core.request_limits import RequestSizeLimitMiddleware
 from app.api.v1.router import api_router
 from app.api import email as email_router
 from app.api.webhooks import stripe as stripe_webhook_router
@@ -111,6 +113,27 @@ def create_app() -> FastAPI:
 
     # Cache Headers Middleware
     app.add_middleware(CacheHeadersMiddleware, default_max_age=300)
+
+    # Request Size Limits Middleware (before CSRF to prevent large request processing)
+    app.add_middleware(
+        RequestSizeLimitMiddleware,
+        default_limit=10 * 1024 * 1024,  # 10 MB default
+        json_limit=1 * 1024 * 1024,  # 1 MB for JSON
+        file_upload_limit=50 * 1024 * 1024,  # 50 MB for file uploads
+    )
+
+    # CSRF Protection Middleware (after CORS, before routes)
+    # Skip CSRF for webhooks and public endpoints
+    import os
+    if not os.getenv("DISABLE_CSRF", "").lower() == "true":
+        app.add_middleware(
+            CSRFMiddleware,
+            secret_key=settings.SECRET_KEY,
+            cookie_name="csrf_token",
+        )
+        logger.info("CSRF protection enabled")
+    else:
+        logger.warning("CSRF protection is DISABLED - not recommended for production")
 
     # Rate Limiting (after CORS to allow preflight requests)
     # Can be disabled by setting DISABLE_RATE_LIMITING=true in environment

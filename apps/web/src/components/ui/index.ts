@@ -84,6 +84,8 @@ export { default as Spinner } from './Spinner';
 // Chart Components
 export { default as Chart } from './Chart';
 export type { ChartProps, ChartDataPoint } from './Chart';
+export { default as AdvancedCharts } from './AdvancedCharts';
+export type { AdvancedChartProps, ScatterDataPoint, RadarDataPoint } from './AdvancedCharts';
 
 // Avatar Components (if exists)
 export { default as Avatar, AvatarImage, AvatarFallback } from './Avatar';
@@ -110,6 +112,14 @@ export type { TreeViewProps, TreeNode } from './TreeView';
 // Advanced Components
 export { default as KanbanBoard } from './KanbanBoard';
 export type { KanbanBoardProps, KanbanCard, KanbanColumn } from './KanbanBoard';
+export { default as VirtualTable } from './VirtualTable';
+export type { VirtualTableProps, VirtualTableColumn } from './VirtualTable';
+export { default as DragDropList } from './DragDropList';
+export type { DragDropListProps, DragDropListItem } from './DragDropList';
+export { default as VideoPlayer } from './VideoPlayer';
+export type { VideoPlayerProps } from './VideoPlayer';
+export { default as AudioPlayer } from './AudioPlayer';
+export type { AudioPlayerProps } from './AudioPlayer';
 export { default as FormBuilder } from './FormBuilder';
 export type { FormBuilderProps, FormField as FormBuilderField, FieldType } from './FormBuilder';
 export { default as Calendar } from './Calendar';

@@ -221,7 +221,7 @@ async def login(
 
 
 @router.post("/refresh", response_model=Token)
-@rate_limit_decorator("10/minute")
+@rate_limit_decorator("10/minute")  # Rate limit: 10 requests per minute
 async def refresh_token(
     request: Request,
     refresh_data: RefreshTokenRequest,

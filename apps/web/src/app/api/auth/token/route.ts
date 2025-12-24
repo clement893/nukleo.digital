@@ -1,108 +1,113 @@
 /**
- * Token Cookie Management API Route
+ * Token Management API Route
+ * Handles httpOnly cookie-based token storage
  * 
- * This route handles setting and clearing authentication tokens
- * as httpOnly cookies for enhanced security.
- * 
- * Note: This is a server-side API route that can set httpOnly cookies
- * which are not accessible to JavaScript, preventing XSS attacks.
+ * Security: Tokens are stored in httpOnly cookies (not accessible to JavaScript)
  */
 
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 
-const TOKEN_COOKIE_NAME = 'auth-token';
-const REFRESH_TOKEN_COOKIE_NAME = 'refresh-token';
-const COOKIE_MAX_AGE = 60 * 60 * 24 * 7; // 7 days
-const REFRESH_COOKIE_MAX_AGE = 60 * 60 * 24 * 30; // 30 days
+const ACCESS_TOKEN_COOKIE = 'access_token';
+const REFRESH_TOKEN_COOKIE = 'refresh_token';
+const CSRF_TOKEN_COOKIE = 'csrf_token';
+
+// Cookie options for production
+const getCookieOptions = (isProduction: boolean) => ({
+  httpOnly: true, // Not accessible to JavaScript (XSS protection)
+  secure: isProduction, // HTTPS only in production
+  sameSite: 'strict' as const, // CSRF protection
+  path: '/',
+  maxAge: 60 * 60 * 24 * 7, // 7 days
+});
 
 /**
- * Set authentication tokens as httpOnly cookies
  * POST /api/auth/token
+ * Set tokens in httpOnly cookies
  */
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { token, refreshToken } = body;
+    const { accessToken, refreshToken, expiresIn, tokenType } = body;
 
-    if (!token) {
+    if (!accessToken) {
       return NextResponse.json(
-        { error: 'Token is required' },
+        { error: 'Access token is required' },
         { status: 400 }
       );
     }
 
-    const cookieStore = await cookies();
-    
+    const isProduction = process.env.NODE_ENV === 'production';
+    const cookieOptions = getCookieOptions(isProduction);
+
+    const response = NextResponse.json({ success: true });
+
     // Set access token cookie
-    cookieStore.set(TOKEN_COOKIE_NAME, token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      maxAge: COOKIE_MAX_AGE,
-      path: '/',
+    response.cookies.set(ACCESS_TOKEN_COOKIE, accessToken, {
+      ...cookieOptions,
+      maxAge: expiresIn || 60 * 60, // Default 1 hour
     });
 
     // Set refresh token cookie if provided
     if (refreshToken) {
-      cookieStore.set(REFRESH_TOKEN_COOKIE_NAME, refreshToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax',
-        maxAge: REFRESH_COOKIE_MAX_AGE,
-        path: '/',
+      response.cookies.set(REFRESH_TOKEN_COOKIE, refreshToken, {
+        ...cookieOptions,
+        maxAge: 60 * 60 * 24 * 30, // 30 days
       });
     }
 
-    return NextResponse.json({ success: true });
+    return response;
   } catch (error) {
+    console.error('[Token API] Error setting tokens:', error);
     return NextResponse.json(
-      { error: 'Failed to set token' },
+      { error: 'Failed to set tokens' },
       { status: 500 }
     );
   }
 }
 
 /**
- * Clear authentication tokens
- * DELETE /api/auth/token
- */
-export async function DELETE() {
-  try {
-    const cookieStore = await cookies();
-    
-    cookieStore.delete(TOKEN_COOKIE_NAME);
-    cookieStore.delete(REFRESH_TOKEN_COOKIE_NAME);
-
-    return NextResponse.json({ success: true });
-  } catch (error) {
-    return NextResponse.json(
-      { error: 'Failed to clear tokens' },
-      { status: 500 }
-    );
-  }
-}
-
-/**
- * Get token status (without exposing the actual token)
  * GET /api/auth/token
+ * Check if tokens exist (without exposing them)
  */
 export async function GET() {
   try {
     const cookieStore = await cookies();
-    const token = cookieStore.get(TOKEN_COOKIE_NAME);
-    const refreshToken = cookieStore.get(REFRESH_TOKEN_COOKIE_NAME);
+    const hasAccessToken = cookieStore.has(ACCESS_TOKEN_COOKIE);
+    const hasRefreshToken = cookieStore.has(REFRESH_TOKEN_COOKIE);
 
     return NextResponse.json({
-      hasToken: !!token,
-      hasRefreshToken: !!refreshToken,
+      hasToken: hasAccessToken,
+      hasRefreshToken: hasRefreshToken,
     });
   } catch (error) {
+    console.error('[Token API] Error checking tokens:', error);
     return NextResponse.json(
-      { error: 'Failed to get token status' },
+      { error: 'Failed to check tokens' },
       { status: 500 }
     );
   }
 }
 
+/**
+ * DELETE /api/auth/token
+ * Remove all tokens (logout)
+ */
+export async function DELETE() {
+  try {
+    const response = NextResponse.json({ success: true });
 
+    // Clear all token cookies
+    response.cookies.delete(ACCESS_TOKEN_COOKIE);
+    response.cookies.delete(REFRESH_TOKEN_COOKIE);
+    response.cookies.delete(CSRF_TOKEN_COOKIE);
+
+    return response;
+  } catch (error) {
+    console.error('[Token API] Error removing tokens:', error);
+    return NextResponse.json(
+      { error: 'Failed to remove tokens' },
+      { status: 500 }
+    );
+  }
+}

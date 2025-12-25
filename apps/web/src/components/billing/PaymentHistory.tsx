@@ -13,7 +13,7 @@ import DataTable from '@/components/ui/DataTable';
 import type { Column } from '@/components/ui/DataTable';
 import { Download, CheckCircle, XCircle, Clock, Filter } from 'lucide-react';
 
-export interface Payment {
+export interface Payment extends Record<string, unknown> {
   id: string;
   date: string;
   amount: number;
@@ -22,7 +22,6 @@ export interface Payment {
   description: string;
   paymentMethod: string;
   transactionId?: string;
-  [key: string]: unknown;
 }
 
 export interface PaymentHistoryProps {

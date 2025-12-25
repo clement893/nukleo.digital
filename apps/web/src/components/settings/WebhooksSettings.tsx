@@ -58,7 +58,7 @@ export default function WebhooksSettings({
   className,
 }: WebhooksSettingsProps) {
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const [editingWebhook, setEditingWebhook] = useState<Webhook | null>(null);
+  const [_editingWebhook, setEditingWebhook] = useState<Webhook | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     url: '',

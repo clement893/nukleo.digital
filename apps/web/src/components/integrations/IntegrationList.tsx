@@ -258,9 +258,11 @@ export default function IntegrationList({
                     variant="ghost"
                     size="sm"
                     onClick={() => window.open(integration.websiteUrl, '_blank')}
-                    icon={<ExternalLink className="w-4 h-4" />}
                   >
-                    Learn More
+                    <span className="flex items-center gap-2">
+                      <ExternalLink className="w-4 h-4" />
+                      Learn More
+                    </span>
                   </Button>
                 )}
               </div>

@@ -1,7 +1,7 @@
 import { Card, Badge } from '@/components/ui';
 import DataTable, { type Column } from '@/components/ui/DataTable';
 
-interface Payment {
+interface Payment extends Record<string, unknown> {
   id: string;
   amount: number;
   currency: string;

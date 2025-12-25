@@ -77,8 +77,11 @@ export default function InvoiceViewer({
       {/* Header Actions */}
       <div className="flex items-center justify-between">
         {onBack && (
-          <Button variant="ghost" onClick={onBack} icon={<ArrowLeft className="w-4 h-4" />}>
-            Back to Invoices
+          <Button variant="ghost" onClick={onBack}>
+            <span className="flex items-center gap-2">
+              <ArrowLeft className="w-4 h-4" />
+              Back to Invoices
+            </span>
           </Button>
         )}
         <div className="flex items-center gap-2">

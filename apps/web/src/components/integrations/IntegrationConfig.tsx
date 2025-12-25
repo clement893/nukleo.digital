@@ -135,8 +135,11 @@ export default function IntegrationConfig({
             </div>
           </div>
           {onCancel && (
-            <Button variant="ghost" size="sm" onClick={onCancel} icon={<X className="w-4 h-4" />}>
-              Cancel
+            <Button variant="ghost" size="sm" onClick={onCancel}>
+              <span className="flex items-center gap-2">
+                <X className="w-4 h-4" />
+                Cancel
+              </span>
             </Button>
           )}
         </div>

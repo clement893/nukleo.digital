@@ -5,7 +5,7 @@
 
 'use client';
 
-import React, { Component, ErrorInfo, ReactNode } from 'react';
+import { Component, ErrorInfo, ReactNode } from 'react';
 import * as Sentry from '@sentry/nextjs';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';

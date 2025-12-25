@@ -7,7 +7,6 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { clsx } from 'clsx';
-import Input from '@/components/ui/Input';
 import Avatar from '@/components/ui/Avatar';
 import Badge from '@/components/ui/Badge';
 import { AtSign, X } from 'lucide-react';

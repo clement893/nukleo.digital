@@ -18,6 +18,41 @@ export interface PerformanceDashboardProps {
   refreshInterval?: number;
 }
 
+// Browser API type extensions
+interface LayoutShiftEntry extends PerformanceEntry {
+  value: number;
+  hadRecentInput: boolean;
+  sources: LayoutShiftAttribution[];
+}
+
+interface LayoutShiftAttribution {
+  node?: Node;
+  previousRect: DOMRectReadOnly;
+  currentRect: DOMRectReadOnly;
+}
+
+interface PerformanceMemory {
+  usedJSHeapSize: number;
+  totalJSHeapSize: number;
+  jsHeapSizeLimit: number;
+}
+
+interface NetworkInformation {
+  effectiveType: string;
+  downlink: number;
+  rtt: number;
+}
+
+interface PerformanceWithMemory extends Performance {
+  memory?: PerformanceMemory;
+}
+
+interface NavigatorWithConnection extends Navigator {
+  connection?: NetworkInformation;
+  mozConnection?: NetworkInformation;
+  webkitConnection?: NetworkInformation;
+}
+
 interface PerformanceMetrics {
   lcp: number; // Largest Contentful Paint
   fid: number; // First Input Delay
@@ -68,9 +103,11 @@ const PerformanceDashboardComponent = memo(function PerformanceDashboard({
       const perfEntries = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[];
       if (perfEntries.length > 0) {
         const nav = perfEntries[0];
-        newMetrics.ttfb = nav.responseStart - nav.requestStart;
-        newMetrics.fcp = nav.domContentLoadedEventEnd - nav.fetchStart;
-        newMetrics.tti = nav.domInteractive - nav.fetchStart;
+        if (nav) {
+          newMetrics.ttfb = nav.responseStart - nav.requestStart;
+          newMetrics.fcp = nav.domContentLoadedEventEnd - nav.fetchStart;
+          newMetrics.tti = nav.domInteractive - nav.fetchStart;
+        }
       }
 
       // Get paint timing
@@ -87,8 +124,9 @@ const PerformanceDashboardComponent = memo(function PerformanceDashboard({
           const observer = new PerformanceObserver((list) => {
             let clsValue = 0;
             for (const entry of list.getEntries()) {
-              if (!(entry as any).hadRecentInput) {
-                clsValue += (entry as any).value;
+              const layoutShiftEntry = entry as LayoutShiftEntry;
+              if (!layoutShiftEntry.hadRecentInput) {
+                clsValue += layoutShiftEntry.value;
               }
             }
             newMetrics.cls = clsValue;
@@ -101,17 +139,19 @@ const PerformanceDashboardComponent = memo(function PerformanceDashboard({
     }
 
     // Get memory info if available
-    if ('memory' in performance) {
+    const perfWithMemory = performance as PerformanceWithMemory;
+    if (perfWithMemory.memory) {
       newMetrics.memory = {
-        usedJSHeapSize: (performance as any).memory.usedJSHeapSize / 1048576, // Convert to MB
-        totalJSHeapSize: (performance as any).memory.totalJSHeapSize / 1048576,
-        jsHeapSizeLimit: (performance as any).memory.jsHeapSizeLimit / 1048576,
+        usedJSHeapSize: perfWithMemory.memory.usedJSHeapSize / 1048576, // Convert to MB
+        totalJSHeapSize: perfWithMemory.memory.totalJSHeapSize / 1048576,
+        jsHeapSizeLimit: perfWithMemory.memory.jsHeapSizeLimit / 1048576,
       };
     }
 
     // Get network info if available
+    const navWithConnection = navigator as NavigatorWithConnection;
     if ('connection' in navigator) {
-      const conn = (navigator as any).connection || (navigator as any).mozConnection || (navigator as any).webkitConnection;
+      const conn = navWithConnection.connection || navWithConnection.mozConnection || navWithConnection.webkitConnection;
       if (conn) {
         newMetrics.network = {
           effectiveType: conn.effectiveType || 'unknown',

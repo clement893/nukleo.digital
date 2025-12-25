@@ -278,9 +278,11 @@ export default function Comments({
                 size="sm"
                 onClick={() => handleReply(comment.id)}
                 loading={loading}
-                icon={<Send className="w-3 h-3" />}
               >
-                Reply
+                <span className="flex items-center gap-2">
+                  <Send className="w-3 h-3" />
+                  Reply
+                </span>
               </Button>
               <Button
                 variant="ghost"
@@ -343,9 +345,11 @@ export default function Comments({
                     size="sm"
                     loading={loading}
                     disabled={!newComment.trim()}
-                    icon={<Send className="w-4 h-4" />}
                   >
-                    Post Comment
+                    <span className="flex items-center gap-2">
+                      <Send className="w-4 h-4" />
+                      Post Comment
+                    </span>
                   </Button>
                 </div>
               </div>

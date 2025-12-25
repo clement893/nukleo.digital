@@ -36,8 +36,13 @@ const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(
       accept,
       multiple = false,
       maxSize,
+      maxFiles,
+      allowedTypes,
+      minSize,
+      validateContent,
       onFileChange,
       onFileSelect,
+      onValidationError,
       id,
       onChange,
       ...props
@@ -142,22 +147,22 @@ const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(
         // Validate each file
         for (const file of fileArray) {
           // Validate file type
-          if (!validateFileType(file, accept, props.allowedTypes)) {
+          if (!validateFileType(file, accept, allowedTypes)) {
             errors.push(`${file.name}: Invalid file type`);
             continue;
           }
 
           // Validate file size
-          if (!validateFileSize(file, props.minSize, maxSize)) {
+          if (!validateFileSize(file, minSize, maxSize)) {
             const sizeError = maxSize && file.size > maxSize * 1024 * 1024
               ? `too large (max ${maxSize}MB)`
-              : `too small (min ${props.minSize}MB)`;
+              : `too small (min ${minSize}MB)`;
             errors.push(`${file.name}: File ${sizeError}`);
             continue;
           }
 
           // Validate file content (magic bytes)
-          if (props.validateContent) {
+          if (validateContent) {
             const isValidContent = await validateFileContent(file);
             if (!isValidContent) {
               errors.push(`${file.name}: Invalid file content`);
@@ -170,7 +175,7 @@ const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(
         if (errors.length > 0) {
           const errorMessage = errors.join(', ');
           setFileName(`Erreur: ${errorMessage}`);
-          props.onValidationError?.(errorMessage);
+          onValidationError?.(errorMessage);
           // Clear the input
           e.target.value = '';
           return;

@@ -9,7 +9,7 @@ import { useState, useRef, useEffect } from 'react';
 import { clsx } from 'clsx';
 import Avatar from '@/components/ui/Avatar';
 import Badge from '@/components/ui/Badge';
-import { AtSign, X } from 'lucide-react';
+import { AtSign } from 'lucide-react';
 
 export interface User {
   id: string;

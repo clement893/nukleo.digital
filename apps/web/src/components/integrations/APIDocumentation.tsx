@@ -182,7 +182,7 @@ export default function APIDocumentation({
         <div className="mb-6 flex items-center gap-2 flex-wrap">
           <span className="text-sm text-gray-600 dark:text-gray-400">Tags:</span>
           {uniqueTags.map((tag) => (
-            <Badge key={tag} variant="info" size="sm">
+            <Badge key={tag} variant="info">
               {tag}
             </Badge>
           ))}

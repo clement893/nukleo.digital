@@ -118,24 +118,6 @@ export default function OfflineSupport({
     }
   }, [isOnline, syncQueue, syncQueueToServer]);
 
-  const addToSyncQueue = (action: string, data: any) => {
-    const newItem: SyncItem = {
-      id: `sync-${Date.now()}-${Math.random()}`,
-      action,
-      data,
-      timestamp: Date.now(),
-      status: 'pending',
-    };
-
-    const updatedQueue = [...syncQueue, newItem];
-    setSyncQueue(updatedQueue);
-    localStorage.setItem('offline_sync_queue', JSON.stringify(updatedQueue));
-
-    if (isOnline) {
-      syncQueueToServer();
-    }
-  };
-
   const clearSyncedItems = () => {
     const filtered = syncQueue.filter(item => item.status !== 'synced');
     setSyncQueue(filtered);

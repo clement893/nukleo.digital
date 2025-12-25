@@ -10,7 +10,7 @@ import { clsx } from 'clsx';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
 import Button from '@/components/ui/Button';
-import { Bell, Check, X, Filter, MarkAllRead } from 'lucide-react';
+import { Bell, Check, X } from 'lucide-react';
 import Avatar from '@/components/ui/Avatar';
 
 export interface Notification {

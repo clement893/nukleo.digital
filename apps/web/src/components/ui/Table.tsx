@@ -4,11 +4,12 @@ import { clsx } from 'clsx';
 interface TableProps {
   children: ReactNode;
   className?: string;
+  style?: React.CSSProperties;
 }
 
-export function Table({ children, className }: TableProps) {
+export function Table({ children, className, style }: TableProps) {
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto" style={style}>
       <table
         className={clsx(
           'min-w-full divide-y divide-gray-200 dark:divide-gray-700',
@@ -24,11 +25,12 @@ export function Table({ children, className }: TableProps) {
 interface TableHeadProps {
   children: ReactNode;
   className?: string;
+  style?: React.CSSProperties;
 }
 
-export function TableHead({ children, className }: TableHeadProps) {
+export function TableHead({ children, className, style }: TableHeadProps) {
   return (
-    <thead className={clsx('bg-gray-50 dark:bg-gray-800', className)}>
+    <thead className={clsx('bg-gray-50 dark:bg-gray-800', className)} style={style}>
       {children}
     </thead>
   );

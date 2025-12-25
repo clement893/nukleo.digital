@@ -101,7 +101,7 @@ export default function Mentions({
     while ((match = mentionRegex.exec(newValue)) !== null) {
       const userName = match[1];
       if (!userName) continue;
-      const user = users.find((u) => u.name.toLowerCase() === userName.toLowerCase());
+      const user = users.find((u) => u.name.toLowerCase() === (userName as string).toLowerCase());
       if (user) {
         mentions.push({
           userId: user.id,

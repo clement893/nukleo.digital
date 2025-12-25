@@ -13,7 +13,7 @@ import Input from '@/components/ui/Input';
 import Switch from '@/components/ui/Switch';
 import Select from '@/components/ui/Select';
 import type { SelectOption } from '@/components/ui/Select';
-import { Save, CreditCard, Bell, FileText, Globe } from 'lucide-react';
+import { Save, Bell, FileText } from 'lucide-react';
 
 export interface BillingSettingsProps {
   settings?: {
@@ -267,9 +267,11 @@ export default function BillingSettings({
             type="submit"
             variant="primary"
             loading={loading}
-            icon={<Save className="w-4 h-4" />}
           >
-            Save Settings
+            <span className="flex items-center gap-2">
+              <Save className="w-4 h-4" />
+              Save Settings
+            </span>
           </Button>
         </div>
       </form>

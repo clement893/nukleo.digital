@@ -131,7 +131,7 @@ export default function APIDocumentation({
       setTimeout(() => setCopiedCode(null), 2000);
       logger.info('Code copied to clipboard');
     } catch (error) {
-      logger.error('Failed to copy to clipboard', error);
+      logger.error('Failed to copy to clipboard', error instanceof Error ? error : undefined);
     }
   };
 

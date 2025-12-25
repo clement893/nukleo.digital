@@ -196,16 +196,16 @@ export default function TriggerManager({
                     variant="ghost"
                     size="sm"
                     onClick={() => logger.info('Edit trigger:', { id: trigger.id })}
-                    icon={<Edit className="w-4 h-4" />}
                   >
+                    <Edit className="w-4 h-4 mr-2" />
                     Edit
                   </Button>
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={() => handleDelete(trigger.id)}
-                    icon={<Trash2 className="w-4 h-4" />}
                   >
+                    <Trash2 className="w-4 h-4 mr-2" />
                     Delete
                   </Button>
                 </div>

@@ -277,8 +277,8 @@ export default function OrganizationSettings({
             type="submit"
             variant="primary"
             loading={loading}
-            icon={<Save className="w-4 h-4" />}
           >
+            <Save className="w-4 h-4 mr-2" />
             Save Settings
           </Button>
         </div>

@@ -147,8 +147,8 @@ export default function SecuritySettings({
               <Button
                 variant={formData.twoFactorEnabled ? 'danger' : 'primary'}
                 onClick={handleToggle2FA}
-                icon={<Smartphone className="w-4 h-4" />}
               >
+                <Smartphone className="w-4 h-4 mr-2" />
                 {formData.twoFactorEnabled ? 'Disable 2FA' : 'Enable 2FA'}
               </Button>
             </div>
@@ -245,8 +245,8 @@ export default function SecuritySettings({
             type="submit"
             variant="primary"
             loading={loading}
-            icon={<Save className="w-4 h-4" />}
           >
+            <Save className="w-4 h-4 mr-2" />
             Save Security Settings
           </Button>
         </div>

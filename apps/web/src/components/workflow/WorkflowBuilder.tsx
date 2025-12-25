@@ -167,8 +167,8 @@ export default function WorkflowBuilder({
               <Button
                 variant="outline"
                 onClick={() => onTest(formData)}
-                icon={<Play className="w-4 h-4" />}
               >
+                <Play className="w-4 h-4 mr-2" />
                 Test
               </Button>
             )}
@@ -176,8 +176,8 @@ export default function WorkflowBuilder({
               variant="primary"
               onClick={handleSave}
               loading={loading}
-              icon={<Save className="w-4 h-4" />}
             >
+              <Save className="w-4 h-4 mr-2" />
               Save Workflow
             </Button>
           </div>
@@ -209,8 +209,8 @@ export default function WorkflowBuilder({
               <Button
                 variant="primary"
                 onClick={() => handleAddNode('trigger')}
-                icon={<Plus className="w-4 h-4" />}
               >
+                <Plus className="w-4 h-4 mr-2" />
                 Add Trigger
               </Button>
             </div>
@@ -243,8 +243,9 @@ export default function WorkflowBuilder({
                         e.stopPropagation();
                         handleDeleteNode(node.id);
                       }}
-                      icon={<Trash2 className="w-4 h-4" />}
-                    />
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
                   </div>
                 </div>
               ))}
@@ -259,24 +260,24 @@ export default function WorkflowBuilder({
             variant="outline"
             size="sm"
             onClick={() => handleAddNode('trigger')}
-            icon={<Plus className="w-4 h-4" />}
           >
+            <Plus className="w-4 h-4 mr-2" />
             Trigger
           </Button>
           <Button
             variant="outline"
             size="sm"
             onClick={() => handleAddNode('action')}
-            icon={<Plus className="w-4 h-4" />}
           >
+            <Plus className="w-4 h-4 mr-2" />
             Action
           </Button>
           <Button
             variant="outline"
             size="sm"
             onClick={() => handleAddNode('condition')}
-            icon={<Plus className="w-4 h-4" />}
           >
+            <Plus className="w-4 h-4 mr-2" />
             Condition
           </Button>
         </div>

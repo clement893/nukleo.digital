@@ -120,8 +120,8 @@ export default function WebhooksSettings({
           <Button
             variant="primary"
             onClick={() => setShowCreateModal(true)}
-            icon={<Plus className="w-4 h-4" />}
           >
+            <Plus className="w-4 h-4 mr-2" />
             Create Webhook
           </Button>
         </div>
@@ -145,7 +145,8 @@ export default function WebhooksSettings({
                         {webhook.name}
                       </span>
                       {webhook.active ? (
-                        <Badge variant="success" icon={<CheckCircle className="w-3 h-3" />}>
+                        <Badge variant="success">
+                          <CheckCircle className="w-3 h-3 mr-1" />
                           Active
                         </Badge>
                       ) : (
@@ -187,16 +188,16 @@ export default function WebhooksSettings({
                       variant="ghost"
                       size="sm"
                       onClick={() => setEditingWebhook(webhook)}
-                      icon={<Edit className="w-4 h-4" />}
                     >
+                      <Edit className="w-4 h-4 mr-2" />
                       Edit
                     </Button>
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => handleDelete(webhook.id)}
-                      icon={<Trash2 className="w-4 h-4" />}
                     >
+                      <Trash2 className="w-4 h-4 mr-2" />
                       Delete
                     </Button>
                   </div>

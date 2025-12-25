@@ -228,8 +228,8 @@ export default function PrivacySettings({
                 <Button
                   variant="danger"
                   onClick={() => setShowDeleteModal(true)}
-                  icon={<Trash2 className="w-4 h-4" />}
                 >
+                  <Trash2 className="w-4 h-4 mr-2" />
                   Delete Account
                 </Button>
               </div>
@@ -250,8 +250,8 @@ export default function PrivacySettings({
             type="submit"
             variant="primary"
             loading={loading}
-            icon={<Save className="w-4 h-4" />}
           >
+            <Save className="w-4 h-4 mr-2" />
             Save Privacy Settings
           </Button>
         </div>

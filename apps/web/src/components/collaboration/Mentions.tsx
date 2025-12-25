@@ -97,7 +97,6 @@ export default function Mentions({
     const mentionRegex = /@(\w+)/g;
     const mentions: Mention[] = [];
     let match;
-    let position = 0;
 
     while ((match = mentionRegex.exec(newValue)) !== null) {
       const userName = match[1];

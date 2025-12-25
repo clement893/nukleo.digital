@@ -8,7 +8,7 @@ export interface VirtualTableColumn<T> {
   key: keyof T | string;
   label: string;
   sortable?: boolean;
-  render?: (value: any, row: T, index: number) => React.ReactNode;
+  render?: (value: T[keyof T] | undefined, row: T, index: number) => React.ReactNode;
   width?: number | string;
 }
 
@@ -22,7 +22,7 @@ export interface VirtualTableProps<T> {
   emptyMessage?: string;
 }
 
-export default function VirtualTable<T extends Record<string, any>>({
+export default function VirtualTable<T extends Record<string, unknown>>({
   data,
   columns,
   height = 400,

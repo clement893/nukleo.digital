@@ -102,7 +102,6 @@ export default function PaymentHistory({
     );
   }, []);
 
-  // @ts-ignore - columns is used in JSX but TypeScript doesn't recognize it
   const columns = useMemo<Column<Payment>[]>(() => [
     {
       key: 'date',

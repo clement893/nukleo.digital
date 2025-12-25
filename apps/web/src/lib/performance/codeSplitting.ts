@@ -6,13 +6,15 @@
 import { ComponentType, lazy, Suspense } from 'react';
 import dynamic from 'next/dynamic';
 
+type ComponentProps = Record<string, unknown>;
+
 /**
  * Create a lazy-loaded component with loading fallback
  */
-export function createLazyComponent<T extends ComponentType<any>>(
+export function createLazyComponent<T extends ComponentType<ComponentProps>>(
   importFn: () => Promise<{ default: T }>,
   options?: {
-    loading?: ComponentType;
+    loading?: ComponentType<ComponentProps>;
     ssr?: boolean;
   }
 ) {
@@ -25,11 +27,11 @@ export function createLazyComponent<T extends ComponentType<any>>(
 /**
  * Lazy load a component with Suspense boundary
  */
-export function withSuspense<T extends ComponentType<any>>(
+export function withSuspense<T extends ComponentType<ComponentProps>>(
   Component: T,
   fallback?: React.ReactNode
 ) {
-  return function SuspenseWrapper(props: any) {
+  return function SuspenseWrapper(props: React.ComponentProps<T>) {
     return (
       <Suspense fallback={fallback || <div>Loading...</div>}>
         <Component {...props} />
@@ -42,7 +44,7 @@ export function withSuspense<T extends ComponentType<any>>(
  * Route-based code splitting helper
  * Splits code by route for better performance
  */
-export function routeSplit<T extends ComponentType<any>>(
+export function routeSplit<T extends ComponentType<ComponentProps>>(
   importFn: () => Promise<{ default: T }>,
   routeName: string
 ) {
@@ -59,7 +61,9 @@ export function routeSplit<T extends ComponentType<any>>(
 /**
  * Preload a component for faster subsequent loads
  */
-export function preloadComponent(importFn: () => Promise<any>) {
+export function preloadComponent(
+  importFn: () => Promise<{ default: ComponentType<ComponentProps> }>
+) {
   if (typeof window !== 'undefined') {
     // Preload on next idle time
     if ('requestIdleCallback' in window) {

@@ -130,9 +130,11 @@ export default function NotificationCenter({
               variant="ghost"
               size="sm"
               onClick={handleMarkAllAsRead}
-              icon={<MarkAllRead className="w-4 h-4" />}
             >
-              Mark All Read
+              <span className="flex items-center gap-2">
+                <Check className="w-4 h-4" />
+                Mark All Read
+              </span>
             </Button>
           )}
         </div>

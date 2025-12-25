@@ -12,7 +12,7 @@ import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Badge from '@/components/ui/Badge';
 import Switch from '@/components/ui/Switch';
-import { Plus, Webhook, Trash2, Edit, CheckCircle, XCircle, Activity } from 'lucide-react';
+import { Plus, Webhook, Trash2, Edit, CheckCircle, Activity } from 'lucide-react';
 import Modal from '@/components/ui/Modal';
 import { logger } from '@/lib/logger';
 

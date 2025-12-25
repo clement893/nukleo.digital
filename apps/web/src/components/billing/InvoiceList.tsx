@@ -23,6 +23,7 @@ export interface Invoice {
   currency: string;
   status: 'paid' | 'pending' | 'overdue' | 'cancelled';
   description?: string;
+  [key: string]: unknown;
 }
 
 export interface InvoiceListProps {

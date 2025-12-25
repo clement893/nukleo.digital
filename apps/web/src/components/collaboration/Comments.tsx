@@ -9,7 +9,6 @@ import { useState } from 'react';
 import { clsx } from 'clsx';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
-import Input from '@/components/ui/Input';
 import Avatar from '@/components/ui/Avatar';
 import Badge from '@/components/ui/Badge';
 import { Send, Reply, MoreVertical, Heart, ThumbsUp, Flag } from 'lucide-react';

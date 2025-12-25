@@ -343,7 +343,7 @@ export default function APIDocumentation({
                                 {response.description}
                               </span>
                             </div>
-                            {response.example && (
+                            {response.example != null && (
                               <pre className="text-xs bg-gray-100 dark:bg-gray-900 p-2 rounded overflow-x-auto">
                                 <code>{JSON.stringify(response.example, null, 2)}</code>
                               </pre>

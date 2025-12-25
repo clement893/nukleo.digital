@@ -224,7 +224,7 @@ export default function APIDocumentation({
                 {endpoint.tags && endpoint.tags.length > 0 && (
                   <div className="flex items-center gap-1">
                     {endpoint.tags.map((tag) => (
-                      <Badge key={tag} variant="default" size="sm">
+                      <Badge key={tag} variant="default">
                         {tag}
                       </Badge>
                     ))}

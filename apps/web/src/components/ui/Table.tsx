@@ -84,6 +84,7 @@ interface TableHeaderProps {
   sortable?: boolean;
   sortDirection?: 'asc' | 'desc' | null;
   onSort?: () => void;
+  style?: React.CSSProperties;
 }
 
 export function TableHeader({
@@ -92,6 +93,7 @@ export function TableHeader({
   sortable = false,
   sortDirection,
   onSort,
+  style,
 }: TableHeaderProps) {
   return (
     <th
@@ -101,6 +103,7 @@ export function TableHeader({
         className
       )}
       onClick={sortable ? onSort : undefined}
+      style={style}
     >
       <div className="flex items-center space-x-1">
         <span>{children}</span>

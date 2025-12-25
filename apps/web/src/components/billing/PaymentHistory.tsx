@@ -22,6 +22,7 @@ export interface Payment {
   description: string;
   paymentMethod: string;
   transactionId?: string;
+  [key: string]: unknown;
 }
 
 export interface PaymentHistoryProps {

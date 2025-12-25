@@ -10,7 +10,6 @@ import { clsx } from 'clsx';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
-import Switch from '@/components/ui/Switch';
 import Badge from '@/components/ui/Badge';
 import { Save, X, CheckCircle, AlertCircle, Key, Link as LinkIcon } from 'lucide-react';
 import Avatar from '@/components/ui/Avatar';

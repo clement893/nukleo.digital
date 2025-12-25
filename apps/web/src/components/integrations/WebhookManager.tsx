@@ -187,7 +187,7 @@ export default function WebhookManager({
                     </div>
                     <div className="flex items-center gap-2 flex-wrap">
                       {webhook.events.map((event) => (
-                        <Badge key={event} variant="info" size="sm">
+                        <Badge key={event} variant="info">
                           {event}
                         </Badge>
                       ))}

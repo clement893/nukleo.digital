@@ -81,16 +81,22 @@ export default function IntegrationList({
     switch (status) {
       case 'connected':
         return (
-          <Badge variant="success" icon={<CheckCircle className="w-3 h-3" />}>
-            Connected
+          <Badge variant="success">
+            <span className="flex items-center gap-1">
+              <CheckCircle className="w-3 h-3" />
+              Connected
+            </span>
           </Badge>
         );
       case 'pending':
         return <Badge variant="warning">Pending</Badge>;
       case 'disconnected':
         return (
-          <Badge variant="error" icon={<XCircle className="w-3 h-3" />}>
-            Disconnected
+          <Badge variant="error">
+            <span className="flex items-center gap-1">
+              <XCircle className="w-3 h-3" />
+              Disconnected
+            </span>
           </Badge>
         );
       default:

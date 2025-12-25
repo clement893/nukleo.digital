@@ -92,9 +92,9 @@ export default function VirtualTable<T extends Record<string, unknown>>({
               <TableHeader
                 key={String(column.key)}
                 sortable={column.sortable}
-                sorted={sortColumn === column.key ? sortDirection : undefined}
+                sortDirection={sortColumn === column.key ? sortDirection : null}
                 onSort={column.sortable ? () => handleSort(column.key) : undefined}
-                style={column.width ? { width: column.width } : undefined}
+                className={column.width ? `w-[${column.width}]` : undefined}
               >
                 {column.label}
               </TableHeader>

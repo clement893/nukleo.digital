@@ -53,7 +53,7 @@ export default function DragDropList({
     if (draggedItem === null) return;
 
     const draggedIndex = items.findIndex((item) => item.id === draggedItem);
-    if (draggedIndex === dropIndex) {
+    if (draggedIndex === -1 || draggedIndex === dropIndex) {
       setDragOverIndex(null);
       setDraggedItem(null);
       return;
@@ -61,6 +61,11 @@ export default function DragDropList({
 
     const newItems = [...items];
     const [removed] = newItems.splice(draggedIndex, 1);
+    if (!removed) {
+      setDragOverIndex(null);
+      setDraggedItem(null);
+      return;
+    }
     newItems.splice(dropIndex, 0, removed);
 
     setItems(newItems);

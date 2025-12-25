@@ -84,7 +84,6 @@ const apiClient = axios.create({
 
 /**
  * Request interceptor: Automatically adds JWT token to Authorization header
- * and applies rate limiting
  * Only runs in browser environment (not SSR)
  */
 apiClient.interceptors.request.use(

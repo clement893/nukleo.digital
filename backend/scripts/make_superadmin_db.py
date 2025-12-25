@@ -105,8 +105,15 @@ if __name__ == "__main__":
     if len(sys.argv) >= 3:
         database_url = sys.argv[2]
     else:
-        # Use the provided database URL
-        database_url = "postgresql://postgres:bTRLXBaKUIQoowlcuBgVfBYoqSwkhzRA@crossover.proxy.rlwy.net:59208/railway"
+        # Try to get from environment variable
+        import os
+        database_url = os.getenv('DATABASE_URL')
+        if not database_url:
+            print("❌ DATABASE_URL not set. Please set it as environment variable or pass as argument:")
+            print("   export DATABASE_URL='postgresql://user:password@host:port/database'")
+            print("   OR")
+            print("   python make_superadmin_db.py email@example.com postgresql://user:password@host:port/database")
+            sys.exit(1)
     
     print(f"🔧 Making user '{email}' superadmin...")
     print(f"📊 Database: {database_url.split('@')[1] if '@' in database_url else 'local'}\n")

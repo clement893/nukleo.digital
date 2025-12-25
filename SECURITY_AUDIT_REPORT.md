@@ -75,7 +75,7 @@ The codebase demonstrates good security practices with proper implementation of 
 
 **Issue:**
 - CSP uses `'unsafe-inline'` and `'unsafe-eval'` in development
-- Hardcoded backend URL in CSP (`modelebackend-production-0590.up.railway.app`)
+- ⚠️ **FIXED**: Hardcoded backend URLs have been removed - now uses environment variables
 
 **Recommendation:**
 ```javascript
@@ -171,9 +171,12 @@ const uploadPromises = selectedFiles.map(async (file, index) => {
 
 **Current Code:**
 ```typescript
-// Hardcoded fallback URL
-url = 'https://modelebackend-production-0590.up.railway.app';
-console.warn('[API Client] NEXT_PUBLIC_API_URL not set...');
+// ⚠️ FIXED: No longer uses hardcoded fallback URL
+// Now fails safely if NEXT_PUBLIC_API_URL is not set
+if (!url && isProduction) {
+  console.error('[API Client] CRITICAL: NEXT_PUBLIC_API_URL is not set...');
+  url = undefined; // Fail safely instead of using hardcoded URL
+}
 ```
 
 **Recommendations:**

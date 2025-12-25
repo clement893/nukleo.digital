@@ -3,8 +3,29 @@
 
 $ErrorActionPreference = "Stop"
 
-$databaseUrl = "postgresql://postgres:bTRLXBaKUIQoowlcuBgVfBYoqSwkhzRA@crossover.proxy.rlwy.net:59208/railway"
-$email = "clement@nukleo.com"
+# Get database URL from environment variable or command line argument
+$databaseUrl = $env:DATABASE_URL
+if (-not $databaseUrl -and $args.Count -ge 1) {
+    $databaseUrl = $args[0]
+}
+if (-not $databaseUrl) {
+    Write-Host "❌ DATABASE_URL not set. Please set it as environment variable or pass as argument:" -ForegroundColor Red
+    Write-Host "   `$env:DATABASE_URL = 'postgresql://user:password@host:port/database'" -ForegroundColor Yellow
+    Write-Host "   OR" -ForegroundColor Yellow
+    Write-Host "   .\make_superadmin_powershell.ps1 'postgresql://user:password@host:port/database'" -ForegroundColor Yellow
+    exit 1
+}
+
+# Get email from environment variable or command line argument
+$email = $env:SUPERADMIN_EMAIL
+if (-not $email -and $args.Count -ge 2) {
+    $email = $args[1]
+}
+if (-not $email) {
+    $email = "clement@nukleo.com"  # Default email - change as needed
+    Write-Host "⚠️  Using default email: $email" -ForegroundColor Yellow
+    Write-Host "   Set SUPERADMIN_EMAIL environment variable or pass as second argument to use different email" -ForegroundColor Gray
+}
 
 # Parse connection string
 if ($databaseUrl -match "postgresql://([^:]+):([^@]+)@([^:]+):(\d+)/(.+)") {

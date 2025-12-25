@@ -17,11 +17,12 @@ const getApiUrl = () => {
   let url = process.env.NEXT_PUBLIC_API_URL 
     || process.env.NEXT_PUBLIC_DEFAULT_API_URL;
   
-  // Smart fallback for production: use Railway backend URL if available
+  // Smart fallback for production: NEXT_PUBLIC_API_URL must be set
   if (!url && isProduction) {
-    // Fallback for Railway deployments - NEXT_PUBLIC_API_URL should be set properly
-    url = 'https://modelebackend-production-0590.up.railway.app';
-    logger.warn('NEXT_PUBLIC_API_URL not set at build time. Using fallback URL. Please set NEXT_PUBLIC_API_URL in Railway environment variables before building.');
+    // This should never happen - NEXT_PUBLIC_API_URL must be configured
+    logger.error('CRITICAL: NEXT_PUBLIC_API_URL is not set at build time. Please set NEXT_PUBLIC_API_URL in Railway environment variables before building. Application may not work correctly.');
+    // Do not use hardcoded fallback - fail safely
+    url = undefined;
   }
   
   // Default to localhost for development if nothing is set

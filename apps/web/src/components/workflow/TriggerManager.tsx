@@ -54,7 +54,7 @@ const triggerTypeColors: Record<Trigger['type'], ColorVariant> = {
 
 export default function TriggerManager({
   triggers = [],
-  onCreate,
+  onCreate: _onCreate,
   onUpdate: _onUpdate,
   onDelete,
   onToggle,

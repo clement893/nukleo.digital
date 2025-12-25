@@ -1,8 +1,31 @@
-# PowerShell script to make clement@nukleo.com superadmin
+# PowerShell script to make a user superadmin
 # Requires psql to be installed and in PATH
+# Usage: $env:DATABASE_URL='postgresql://...'; $env:SUPERADMIN_EMAIL='email@example.com'; .\make_superadmin.ps1
+# OR: .\make_superadmin.ps1 'postgresql://...' 'email@example.com'
 
-$databaseUrl = "postgresql://postgres:bTRLXBaKUIQoowlcuBgVfBYoqSwkhzRA@crossover.proxy.rlwy.net:59208/railway"
-$email = "clement@nukleo.com"
+# Get database URL from environment variable or command line argument
+$databaseUrl = $env:DATABASE_URL
+if (-not $databaseUrl -and $args.Count -ge 1) {
+    $databaseUrl = $args[0]
+}
+if (-not $databaseUrl) {
+    Write-Host "❌ DATABASE_URL not set. Please set it as environment variable or pass as argument:" -ForegroundColor Red
+    Write-Host "   `$env:DATABASE_URL = 'postgresql://user:password@host:port/database'" -ForegroundColor Yellow
+    Write-Host "   OR" -ForegroundColor Yellow
+    Write-Host "   .\make_superadmin.ps1 'postgresql://user:password@host:port/database' 'email@example.com'" -ForegroundColor Yellow
+    exit 1
+}
+
+# Get email from environment variable or command line argument
+$email = $env:SUPERADMIN_EMAIL
+if (-not $email -and $args.Count -ge 2) {
+    $email = $args[1]
+}
+if (-not $email) {
+    $email = "clement@nukleo.com"  # Default email - change as needed
+    Write-Host "⚠️  Using default email: $email" -ForegroundColor Yellow
+    Write-Host "   Set SUPERADMIN_EMAIL environment variable or pass as second argument to use different email" -ForegroundColor Gray
+}
 
 Write-Host "🔧 Making '$email' superadmin..." -ForegroundColor Cyan
 Write-Host ""

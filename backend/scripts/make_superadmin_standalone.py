@@ -18,10 +18,29 @@ except ImportError:
 
 
 async def make_superadmin():
-    """Make clement@nukleo.com superadmin"""
+    """Make a user superadmin"""
+    import os
+    import sys
     
-    database_url = "postgresql://postgres:bTRLXBaKUIQoowlcuBgVfBYoqSwkhzRA@crossover.proxy.rlwy.net:59208/railway"
-    email = "clement@nukleo.com"
+    # Get database URL from environment variable or command line argument
+    database_url = os.getenv('DATABASE_URL')
+    if not database_url and len(sys.argv) >= 2:
+        database_url = sys.argv[1]
+    if not database_url:
+        print("❌ DATABASE_URL not set. Please set it as environment variable or pass as argument:")
+        print("   export DATABASE_URL='postgresql://user:password@host:port/database'")
+        print("   OR")
+        print("   python make_superadmin_standalone.py postgresql://user:password@host:port/database email@example.com")
+        sys.exit(1)
+    
+    # Get email from environment variable or command line argument
+    email = os.getenv('SUPERADMIN_EMAIL')
+    if not email and len(sys.argv) >= 3:
+        email = sys.argv[2]
+    if not email:
+        email = "clement@nukleo.com"  # Default email - change as needed
+        print(f"⚠️  Using default email: {email}")
+        print("   Set SUPERADMIN_EMAIL environment variable or pass as second argument to use different email")
     
     try:
         print(f"🔧 Connecting to database...")

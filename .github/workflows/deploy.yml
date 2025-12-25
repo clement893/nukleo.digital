@@ -1,35 +1,164 @@
-name: Deploy to Railway
+name: Deploy
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - production
+          - staging
+
+env:
+  PNPM_VERSION: 9.15.9
+  NODE_VERSION: 20.x
 
 jobs:
-  deploy:
-    name: Deploy to Railway
+  deploy-frontend:
+    name: Deploy Frontend
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    
+    environment: ${{ github.event.inputs.environment || 'production' }}
     steps:
-      - uses: actions/checkout@v4
-      
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
-          version: 9
-      
+          version: ${{ env.PNPM_VERSION }}
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: ${{ env.NODE_VERSION }}
           cache: 'pnpm'
-      
-      - name: Install Railway CLI
-        run: npm install -g @railway/cli
-      
-      - name: Deploy to Railway
-        run: railway up
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Deploy Frontend to Railway
+        uses: bervProject/railway-deploy@v1.0.0
+        with:
+          railway_token: ${{ secrets.RAILWAY_TOKEN }}
+          service: ${{ secrets.RAILWAY_FRONTEND_SERVICE_ID }}
+          detach: false
+
+      # Deploy to AWS S3 + CloudFront
+      # - name: Configure AWS credentials
+      #   uses: aws-actions/configure-aws-credentials@v4
+      #   with:
+      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     aws-region: us-east-1
+      #
+      # - name: Deploy to S3
+      #   run: |
+      #     aws s3 sync apps/web/out s3://${{ secrets.S3_BUCKET_NAME }} --delete
+      #
+      # - name: Invalidate CloudFront cache
+      #   run: |
+      #     aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
+
+  deploy-backend:
+    name: Deploy Backend
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment || 'production' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy Backend to Railway
+        uses: bervProject/railway-deploy@v1.0.0
+        with:
+          railway_token: ${{ secrets.RAILWAY_TOKEN }}
+          service: ${{ secrets.RAILWAY_BACKEND_SERVICE_ID }}
+          detach: false
+
+      # Alternative: Deploy to other platforms
+      # Uncomment and configure as needed
+
+      # Deploy to Heroku
+      # - name: Deploy to Heroku
+      #   uses: akhileshns/heroku-deploy@v3.13.15
+      #   if: env.HEROKU_API_KEY != ''
+      #   with:
+      #     heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+      #     heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+      #     heroku_email: ${{ secrets.HEROKU_EMAIL }}
+      #     appdir: "./backend"
+
+      # Deploy to AWS Elastic Beanstalk
+      # - name: Configure AWS credentials
+      #   uses: aws-actions/configure-aws-credentials@v4
+      #   with:
+      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     aws-region: us-east-1
+      #
+      # - name: Deploy to Elastic Beanstalk
+      #   uses: einaregilsson/beanstalk-deploy@v22
+      #   with:
+      #     aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     application_name: ${{ secrets.EB_APPLICATION_NAME }}
+      #     environment_name: ${{ secrets.EB_ENVIRONMENT_NAME }}
+      #     version_label: ${{ github.sha }}
+      #     region: us-east-1
+      #     deployment_package: backend.zip
+
+      # Deploy to Docker Hub / Container Registry
+      # - name: Set up Docker Buildx
+      #   uses: docker/setup-buildx-action@v3
+      #
+      # - name: Login to Docker Hub
+      #   uses: docker/login-action@v3
+      #   with:
+      #     username: ${{ secrets.DOCKER_USERNAME }}
+      #     password: ${{ secrets.DOCKER_PASSWORD }}
+      #
+      # - name: Build and push Docker image
+      #   uses: docker/build-push-action@v5
+      #   with:
+      #     context: ./backend
+      #     push: true
+      #     tags: ${{ secrets.DOCKER_USERNAME }}/backend:${{ github.sha }}
+      #     cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/backend:buildcache
+      #     cache-to: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/backend:buildcache,mode=max
+
+  notify:
+    name: Notify Deployment
+    runs-on: ubuntu-latest
+    needs: [deploy-frontend, deploy-backend]
+    if: always()
+    steps:
+      - name: Deployment Status
+        run: |
+          if [ "${{ needs.deploy-frontend.result }}" == "success" ] && [ "${{ needs.deploy-backend.result }}" == "success" ]; then
+            echo "✅ Deployment successful"
+          else
+            echo "❌ Deployment failed"
+            exit 1
+          fi
+
+      # Uncomment to send Slack notification
+      # - name: Send Slack notification
+      #   uses: 8398a7/action-slack@v3
+      #   with:
+      #     status: ${{ job.status }}
+      #     text: 'Deployment to ${{ github.event.inputs.environment || "production" }} completed'
+      #     webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+      #   if: always()
+
+      # Uncomment to send Discord notification
+      # - name: Send Discord notification
+      #   uses: sarisia/actions-status-discord@v1
+      #   with:
+      #     webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      #     title: 'Deployment Status'
+      #     description: 'Deployment to ${{ github.event.inputs.environment || "production" }}'
+      #   if: always()

@@ -1,8 +1,24 @@
-// Node.js script to make clement@nukleo.com superadmin
+// Node.js script to make a user superadmin
+// Usage: DATABASE_URL=postgresql://... SUPERADMIN_EMAIL=email@example.com node make_superadmin_node.js
+// OR: node make_superadmin_node.js postgresql://... email@example.com
 const { Client } = require('pg');
 
-const databaseUrl = 'postgresql://postgres:bTRLXBaKUIQoowlcuBgVfBYoqSwkhzRA@crossover.proxy.rlwy.net:59208/railway';
-const email = 'clement@nukleo.com';
+// Get database URL from environment variable or command line argument
+const databaseUrl = process.env.DATABASE_URL || process.argv[2];
+if (!databaseUrl) {
+  console.error('❌ DATABASE_URL not set. Please set it as environment variable or pass as argument:');
+  console.error('   DATABASE_URL=postgresql://user:password@host:port/database node make_superadmin_node.js');
+  console.error('   OR');
+  console.error('   node make_superadmin_node.js postgresql://user:password@host:port/database email@example.com');
+  process.exit(1);
+}
+
+// Get email from environment variable or command line argument
+const email = process.env.SUPERADMIN_EMAIL || process.argv[3] || 'clement@nukleo.com';
+if (!process.env.SUPERADMIN_EMAIL && !process.argv[3]) {
+  console.warn(`⚠️  Using default email: ${email}`);
+  console.warn('   Set SUPERADMIN_EMAIL environment variable or pass as second argument to use different email');
+}
 
 async function makeSuperAdmin() {
   const client = new Client({

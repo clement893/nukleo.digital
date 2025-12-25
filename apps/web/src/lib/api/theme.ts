@@ -25,13 +25,15 @@ const getApiUrl = () => {
     const hostname = window.location.hostname;
     // If running on Railway, try to infer backend URL
     if (hostname.includes('railway.app')) {
-      // Try common Railway backend URL pattern
-      // This is a fallback - NEXT_PUBLIC_API_URL should be set properly
-      url = 'https://modelebackend-production-0590.up.railway.app';
-      console.warn(
-        '[Theme API] NEXT_PUBLIC_API_URL not set at build time. ' +
-        'Using fallback URL. Please set NEXT_PUBLIC_API_URL in Railway environment variables before building.'
+      // This fallback should not be used - NEXT_PUBLIC_API_URL must be set
+      // If we reach here, it means NEXT_PUBLIC_API_URL was not configured
+      console.error(
+        '[Theme API] CRITICAL: NEXT_PUBLIC_API_URL is not set at build time. ' +
+        'Please set NEXT_PUBLIC_API_URL in Railway environment variables before building. ' +
+        'Application may not work correctly without this variable.'
       );
+      // Do not use hardcoded fallback - fail safely
+      url = undefined;
     }
   }
   
